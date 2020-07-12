@@ -5,17 +5,28 @@ import { Sketchplanation } from '../components/Sketchplanation'
 
 const Home = ({ sketchplanations }) => {
   return (
-    <div className='sketchplanations'>
-      {sketchplanations.results.map((sketchplanation) => (
-        <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} />
-      ))}
+    <div className='sketchplanations-wrapper'>
+      <div className='sketchplanations'>
+        {sketchplanations.results.map((sketchplanation) => (
+          <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} />
+        ))}
+        {sketchplanations.results.map((sketchplanation) => (
+          <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} />
+        ))}
+        {sketchplanations.results.map((sketchplanation) => (
+          <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} />
+        ))}
+        {sketchplanations.results.map((sketchplanation) => (
+          <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} />
+        ))}
+      </div>
     </div>
   )
 }
 
 Home.getInitialProps = async (context) => {
   const sketchplanations = await client.query(Prismic.Predicates.at('document.type', 'sketch'), {
-    orderings: '[my.sketchplanation.date desc]',
+    orderings: '[my.sketch.published_at desc]',
   })
 
   return { sketchplanations }

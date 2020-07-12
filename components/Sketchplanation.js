@@ -1,22 +1,39 @@
 import React from 'react'
 import { RichText } from 'prismic-reactjs'
 import { omit } from 'ramda'
+import Shiitake from 'shiitake'
+import Link from 'next/link'
 
 export const Sketchplanation = ({ sketchplanation }) => {
-  const { image, title, body } = sketchplanation.data
+  const {
+    data: { image, title, body, published_at },
+    uid,
+  } = sketchplanation
   return (
     <div className='root'>
       <pre>{JSON.stringify(omit(['data'], sketchplanation))}</pre>
-      <pre>{JSON.stringify(sketchplanation.data)}</pre>
+      <pre>{JSON.stringify(sketchplanation.data, null, 2)}</pre>
+      <pre>published_at: {published_at}</pre>
       <img src={image.url} alt={image.alt} width={image.width} height={image.height} />
-      <h1>{title}</h1>
-      <div className='body'>
-        <RichText render={body} />
+      <div className='content'>
+        <h1>{title}</h1>
+        <div className='body'>
+          <Shiitake lines={3} throttleRate={200}>
+            {RichText.asText(body)}
+          </Shiitake>
+          <Link href={`/${uid}`}>Read more…</Link>
+          {/* <RichText render={body} /> */}
+        </div>
       </div>
       <style jsx>{`
         .root {
-          @apply p-6 mx-auto;
-          max-width: 640px;
+          max-width: 800px;
+        }
+
+        @screen sm {
+          .root {
+            @apply px-6;
+          }
         }
 
         img {
@@ -24,14 +41,24 @@ export const Sketchplanation = ({ sketchplanation }) => {
           box-shadow: 0 2.3rem 1rem -2rem #e2dcc5;
         }
 
-        h1 {
-          @apply text-2xl mb-3 mx-auto;
+        .content {
+          @apply px-6 mx-auto;
           max-width: 460px;
+        }
+
+        @screen sm {
+          .content {
+            @apply px-0;
+          }
+        }
+
+        h1 {
+          @apply text-3xl mb-3 mx-auto;
+          font-weight: 300;
         }
 
         .body {
           @apply mx-auto;
-          max-width: 460px;
         }
 
         .body :global(p + p) {

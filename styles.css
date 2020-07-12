@@ -29,7 +29,7 @@ h6 {
 pre {
   padding: 1rem;
   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
-  font-size: 14px;
+  font-size: 10px;
   white-space: pre-wrap;
   color: #8ae8fc;
   background-color: #282a36;
@@ -37,14 +37,27 @@ pre {
   @apply hidden;
 }
 
-.sketchplanations > * + * {
-  @apply mt-12;
+.sketchplanations {
+  @apply flex flex-wrap justify-center py-6;
+}
+
+@screen lg {
+  .sketchplanations {
+    @apply py-12;
+  }
+}
+
+.sketchplanations > * {
+  @apply p-12;
 }
 
 .header {
-  /* @apply flex flex-wrap items-center justify-between p-6 -m-2; */
   @apply text-center;
   background-color: #fff;
+}
+
+.headroom-wrapper {
+  overflow: hidden;
 }
 
 .headroom {
@@ -103,3 +116,7 @@ nav > * {
 .patreon {
   @apply fixed bottom-0 right-0;
 }
+
+/* * {
+  outline: solid thin rgba(255, 0, 0, 0.05);
+} */
