@@ -4,25 +4,35 @@ import { omit } from 'ramda'
 import Shiitake from 'shiitake'
 import Link from 'next/link'
 
-export const Sketchplanation = ({ sketchplanation }) => {
+export const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
   const {
     data: { image, title, body, published_at },
     uid,
   } = sketchplanation
   return (
     <div className='root'>
-      <pre>{JSON.stringify(omit(['data'], sketchplanation))}</pre>
-      <pre>{JSON.stringify(sketchplanation.data, null, 2)}</pre>
-      <pre>published_at: {published_at}</pre>
-      <img src={image.url} alt={image.alt} width={image.width} height={image.height} />
+      {/* <pre>{JSON.stringify(omit(['data'], sketchplanation))}</pre> */}
+      {/* <pre>{JSON.stringify(sketchplanation.data, null, 2)}</pre> */}
+      {/* <pre>published_at: {published_at}</pre> */}
+      <Link href={`/${uid}`}>
+        <a>
+          <img src={image.url} alt={image.alt} width={image.width} height={image.height} />
+        </a>
+      </Link>
       <div className='content'>
         <h1>{title}</h1>
         <div className='body'>
-          <Shiitake lines={3} throttleRate={200}>
-            {RichText.asText(body)}
-          </Shiitake>
-          <Link href={`/${uid}`}>Read more…</Link>
-          {/* <RichText render={body} /> */}
+          {fullPost && <RichText render={body} />}
+          {!fullPost && (
+            <>
+              <Shiitake lines={3} throttleRate={200}>
+                {RichText.asText(body)}
+              </Shiitake>
+              <Link href={`/${uid}`}>
+                <a>Read more…</a>
+              </Link>
+            </>
+          )}
         </div>
       </div>
       <style jsx>{`

@@ -34,7 +34,7 @@ pre {
   color: #8ae8fc;
   background-color: #282a36;
   line-height: 1.4;
-  @apply hidden;
+  /* @apply hidden; */
 }
 
 .sketchplanations {

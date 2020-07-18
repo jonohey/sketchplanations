@@ -12,6 +12,13 @@ export default function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <title>{pageTitle}</title>
+        <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
+        <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
+        <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
+        <link rel='manifest' href='/site.webmanifest' />
+        <link rel='mask-icon' href='/safari-pinned-tab.svg' color='#000000' />
+        <meta name='msapplication-TileColor' content='#fbf8de' />
+        <meta name='theme-color' content='#fbf8de' />
         <meta name='viewport' content='width = device-width, initial-scale = 1, minimum-scale = 1' />
         <meta property='og:title' content={pageTitle} key='title' />
         <link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap' rel='stylesheet' />
@@ -20,8 +27,8 @@ export default function MyApp({ Component, pageProps }) {
         <div className='header'>
           <div className='inline-flex flex-col sm:flex-row items-center justify-center lg:justify-start flex-wrap lg:flex-no-wrap -m-1 sm:-m-3 flex-grow'>
             <div className='p-1 sm:p-3'>
-              <Link href='/' className='ident'>
-                <a>
+              <Link href='/'>
+                <a className='ident'>
                   <img className='ident__svg' src='/logo.svg' alt='Sketchplanations' />
                 </a>
               </Link>
