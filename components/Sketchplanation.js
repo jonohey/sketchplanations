@@ -38,6 +38,7 @@ export const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
       <style jsx>{`
         .root {
           max-width: 800px;
+          @apply px-0;
         }
 
         @screen sm {

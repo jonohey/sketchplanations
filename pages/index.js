@@ -6,6 +6,10 @@ import { Sketchplanation } from '../components/Sketchplanation'
 const Home = ({ sketchplanations }) => {
   return (
     <div className='sketchplanations-wrapper'>
+      <div className='masthead'>
+        <img src='/logo.svg' alt='Sketchplanations' />
+        <p className='sm:text-lg'>Explaining one thing a week in a sketch</p>
+      </div>
       <div className='sketchplanations'>
         {sketchplanations.results.map((sketchplanation) => (
           <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} />

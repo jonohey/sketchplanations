@@ -85,8 +85,15 @@ pre {
 }
 
 .ident__svg {
-  width: 260px;
+  width: 50vw;
   height: auto;
+}
+
+@screen sm {
+  .ident__svg {
+    width: 260px;
+    height: auto;
+  }
 }
 
 .slogan {
@@ -119,4 +126,19 @@ nav > * {
 
 /* * {
   outline: solid thin rgba(255, 0, 0, 0.05);
+} */
+
+.masthead {
+  max-width: 600px;
+  @apply mt-12 mx-auto px-8 flex flex-col items-center text-center;
+}
+
+.masthead > * + * {
+  @apply mt-6;
+}
+
+/* @screen sm {
+  .masthead {
+    @apply px-6;
+  }
 } */
