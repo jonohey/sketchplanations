@@ -22,6 +22,11 @@ export default function MyApp({ Component, pageProps }) {
         <meta name='viewport' content='width = device-width, initial-scale = 1, minimum-scale = 1' />
         <meta property='og:title' content={pageTitle} key='title' />
         <link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap' rel='stylesheet' />
+        <link
+          rel='stylesheet'
+          type='text/css'
+          href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css'
+        />
       </Head>
       <Headroom>
         <div className='header'>
@@ -50,6 +55,25 @@ export default function MyApp({ Component, pageProps }) {
         <img width={108.5} height={25.5} src='https://c5.patreon.com/external/logo/become_a_patron_button.png' />
       </a> */}
       <style jsx>{``}</style>
+      <script src='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js' />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#000"
+    },
+    "button": {
+      "background": "#fbf8de"
+    }
+  },
+  "theme": "classic",
+  "content": {
+    "message": "Sketchplanations uses cookies to ensure you get the best experience."
+  }
+})`,
+        }}
+      />
     </>
   )
 }
