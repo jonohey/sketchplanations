@@ -130,7 +130,7 @@ nav > * {
 
 .masthead {
   max-width: 600px;
-  @apply mt-12 mx-auto px-8 flex flex-col items-center text-center;
+  @apply mt-6 mx-auto px-8 flex flex-col items-center text-center;
 }
 
 .masthead > * + * {
@@ -142,3 +142,7 @@ nav > * {
     @apply px-6;
   }
 } */
+
+.headroom--unfixed {
+  opacity: 0;
+}

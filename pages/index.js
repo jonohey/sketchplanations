@@ -9,12 +9,23 @@ const Home = ({ sketchplanations }) => {
       <div className='masthead'>
         <img src='/logo.svg' alt='Sketchplanations' />
         <p className='sm:text-lg'>Explaining one thing a week in a sketch</p>
+        <nav className='whitespace-no-wrap'>
+          <a href=''>About</a>
+          <a href=''>Archive</a>
+          <a href=''>Patreon</a>
+          <a href=''>Subscribe</a>
+        </nav>
       </div>
       <div className='sketchplanations'>
         {sketchplanations.results.map((sketchplanation) => (
           <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} />
         ))}
       </div>
+      <style jsx>{`
+        nav a:hover {
+          text-decoration: underline;
+        }
+      `}</style>
     </div>
   )
 }
