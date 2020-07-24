@@ -30,7 +30,7 @@ const Home = ({ sketchplanations }) => {
 
 Home.getInitialProps = async (context) => {
   const sketchplanations = await client.query(Prismic.Predicates.at('document.type', 'sketch'), {
-    orderings: '[my.sketch.published_at desc]',
+    orderings: '[my.sketchplanation.published_at desc]',
   })
 
   return { sketchplanations }

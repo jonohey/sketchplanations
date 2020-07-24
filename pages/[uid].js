@@ -15,7 +15,7 @@ const Post = ({ sketchplanation }) => {
 }
 
 Post.getInitialProps = async ({ query: { uid } }) => {
-  const sketchplanation = await client.getByUID('sketch', 'test')
+  const sketchplanation = await client.getByUID('sketchplanation', 'test')
   // const sketchplanation = query
 
   return { sketchplanation }
