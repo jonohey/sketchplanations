@@ -14,22 +14,13 @@ const Home = ({ sketchplanations }) => {
         {sketchplanations.results.map((sketchplanation) => (
           <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} />
         ))}
-        {sketchplanations.results.map((sketchplanation) => (
-          <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} />
-        ))}
-        {sketchplanations.results.map((sketchplanation) => (
-          <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} />
-        ))}
-        {sketchplanations.results.map((sketchplanation) => (
-          <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} />
-        ))}
       </div>
     </div>
   )
 }
 
 Home.getInitialProps = async (context) => {
-  const sketchplanations = await client.query(Prismic.Predicates.at('document.type', 'sketch'), {
+  const sketchplanations = await client.query(Prismic.Predicates.at('document.type', 'sketchplanation'), {
     orderings: '[my.sketchplanation.published_at desc]',
   })
 
