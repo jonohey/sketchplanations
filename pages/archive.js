@@ -1,18 +1,31 @@
 import React from 'react'
 import Prismic from 'prismic-javascript'
+import Link from 'next/link'
 import { client } from '../prismic-configuration'
 import { Sketchplanation } from '../components/Sketchplanation'
 
 const Archive = ({ sketchplanations, tags }) => {
   return (
-    <>
-      <pre>{JSON.stringify(sketchplanations, null, 2)}</pre>
-      <ul>
-        {tags.results.map((tag) => (
-          <li key='tag.id'>{tag.data.identifier}</li>
-        ))}
-      </ul>
-    </>
+    <div className='flex'>
+      <div className='w-1/2'>
+        <h2>Sketchplanations</h2>
+        <ul>
+          {sketchplanations.results.map((sketchplanation) => (
+            <li key={sketchplanation.id}>{sketchplanation.data.title}</li>
+          ))}
+        </ul>
+      </div>
+      <div className='w-1/2'>
+        <h3>Tags</h3>
+        <ul>
+          {tags.results.map((tag) => (
+            <li key={tag.id}>
+              <Link href={`/tags/${tag.data.identifier}`}>{tag.data.identifier}</Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   )
 }
 
