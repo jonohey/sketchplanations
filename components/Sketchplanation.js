@@ -11,9 +11,6 @@ export const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
   } = sketchplanation
   return (
     <div className='root'>
-      {/* <pre>{JSON.stringify(omit(['data'], sketchplanation))}</pre> */}
-      {/* <pre>{JSON.stringify(sketchplanation.data, null, 2)}</pre> */}
-      {/* <pre>published_at: {published_at}</pre> */}
       <Link href={`/${uid}`}>
         <a>
           <img src={image.url} alt={image.alt} width={image.width} height={image.height} />
