@@ -59,21 +59,29 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
       <script
         dangerouslySetInnerHTML={{
           __html: `window.cookieconsent.initialise({
-  "palette": {
-    "popup": {
-      "background": "#000"
-    },
-    "button": {
-      "background": "#fbf8de"
-    }
-  },
-  "theme": "classic",
-  "content": {
-    "message": "Sketchplanations uses cookies to ensure you get the best experience."
-  }
-})`,
+            "palette": {
+              "popup": {
+                "background": "#000"
+              },
+              "button": {
+                "background": "#fbf8de"
+              }
+            },
+            "theme": "classic",
+            "content": {
+              "message": "Sketchplanations uses cookies to ensure you get the best experience."
+            }
+          })`,
         }}
       />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.prismic = {
+            endpoint: 'https://sketchplanations.cdn.prismic.io/api/v2'
+          };`,
+        }}
+      />
+      <script type='text/javascript' src='https://static.cdn.prismic.io/prismic.min.js?new=true'></script>
     </>
   )
 }

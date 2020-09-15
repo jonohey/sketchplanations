@@ -14,7 +14,13 @@ export const apiEndpoint = 'https://sketchplanations.prismic.io/api/v2'
 // Modify as your project grows to handle any new routes you've made
 export const linkResolver = (doc) => {
   if (doc.type === 'sketchplanation') {
-    return `/blog/${doc.uid}`
+    return `/${doc.uid}`
+  } else if (doc.type === 'about') {
+    return '/about'
+  } else if (doc.type === 'licence') {
+    return '/licence'
+  } else if (doc.type === 'thanks') {
+    return '/thanks'
   }
   return '/'
 }
