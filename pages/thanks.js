@@ -1,17 +1,17 @@
 import { client } from '../prismic-configuration'
 import { Sketchplanation } from '../components/Sketchplanation'
 
-const Post = ({ document }) => {
+const Thanks = ({ document }) => {
   return (
     <>
-      <pre>sketchplanation:{JSON.stringify(document, null, 2)}</pre>
+      <pre>{JSON.stringify(document, null, 2)}</pre>
     </>
   )
 }
 
-Post.getInitialProps = async ({ query: { uid } }) => {
+Thanks.getInitialProps = async ({ query: { uid } }) => {
   const document = await client.getSingle('thanks')
   return { document }
 }
 
-export default Post
+export default Thanks
