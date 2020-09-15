@@ -10,8 +10,8 @@ const Home = ({ sketchplanations }) => {
         <img src='/logo.svg' alt='Sketchplanations' />
         <p className='sm:text-lg'>Explaining one thing a week in a sketch</p>
         <nav className='whitespace-no-wrap'>
-          <a href=''>About</a>
-          <a href=''>Archive</a>
+          <a href='/about'>About</a>
+          <a href='/archive'>Archive</a>
           <a href=''>Patreon</a>
           <a href=''>Subscribe</a>
         </nav>
