@@ -31,7 +31,7 @@ const Archive = ({ sketchplanations, tags }) => {
 
 Archive.getInitialProps = async (context) => {
   const sketchplanations = await client.query(Prismic.Predicates.at('document.type', 'sketchplanation'), {
-    orderings: '[my.sketchplanation.published_at desc]',
+    orderings: '[my.sketchplanation.published_at asc]',
     pageSize: 100,
   })
 
