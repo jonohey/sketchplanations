@@ -145,4 +145,5 @@ nav > * {
 
 .headroom--unfixed {
   opacity: 0;
+  pointer-events: none;
 }
