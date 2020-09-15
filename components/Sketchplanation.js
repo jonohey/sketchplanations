@@ -13,7 +13,12 @@ export const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
     <div className='root'>
       <Link href={`/${uid}`}>
         <a>
-          <img src={image.url} alt={image.alt} width={image.width} height={image.height} />
+          <img
+            src={image.url}
+            alt={image.alt || `${title} - Sketchplanations`}
+            width={image.width}
+            height={image.height}
+          />
         </a>
       </Link>
       <div className='content'>
