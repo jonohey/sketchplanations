@@ -2,11 +2,16 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+Clone this repo locally and then run
 
 ```bash
-npm run dev
-# or
+yarn
+```
+to install all the required packages from the yarn package manager.
+
+Then, run the development server:
+
+```bash
 yarn dev
 ```
 
