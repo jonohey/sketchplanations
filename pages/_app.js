@@ -43,8 +43,8 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
             </div>
           </div>
           <nav className='whitespace-no-wrap'>
-            <a href=''>About</a>
-            <a href=''>Archive</a>
+            <Link href='/about'>About</Link>
+            <Link href='/archive'>Archive</Link>
             <a href=''>Patreon</a>
             <a href=''>Subscribe</a>
           </nav>
