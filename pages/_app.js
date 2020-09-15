@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import '../styles.css'
 
-export default function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps, router: { route } }) {
   const pageTitle = 'Sketchplanations - A weekly explanation in a sketch'
 
   return (
@@ -28,7 +28,7 @@ export default function MyApp({ Component, pageProps }) {
           href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css'
         />
       </Head>
-      <Headroom>
+      <Headroom className={route === '/' && 'hide-when-unfixed'}>
         <div className='header'>
           <div className='inline-flex flex-col sm:flex-row items-center justify-center lg:justify-start flex-wrap lg:flex-no-wrap -m-1 sm:-m-3 flex-grow'>
             <div className='p-1 sm:p-3'>
