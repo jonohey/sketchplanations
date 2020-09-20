@@ -16,6 +16,7 @@
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-headroom": "^3.0.0",
+    "react-photo-gallery": "^8.0.0",
     "shiitake": "^3.0.2"
   },
   "devDependencies": {

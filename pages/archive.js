@@ -2,6 +2,7 @@ import React from 'react'
 import Prismic from 'prismic-javascript'
 import Link from 'next/link'
 import { client } from 'prismic-configuration'
+import Gallery from 'react-photo-gallery'
 
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
 
@@ -13,44 +14,69 @@ const Archive = ({ sketchplanations, tags }) => {
 
   const tagsWithCounts = tags.map((tag) => {
     const identifier = tag.data.identifier
+    const slug = tag.slugs[0]
     return {
       tag: identifier,
-      count: countOccurrences(tagsFromSketchplanations, identifier),
+      slug,
+      count: countOccurrences(tagsFromSketchplanations, slug),
     }
   })
 
+  const images = sketchplanations.map(({ data: { image: { url, dimensions: { width, height } } } }) => ({
+    src: `${url}?w=960`,
+    width,
+    height,
+  }))
+
   return (
     <>
-      {/* <pre>{JSON.stringify(tagsFromSketchplanations, null, 2)}</pre> */}
-      {/* <pre>{JSON.stringify(tagsWithCounts, null, 2)}</pre> */}
-      <div className='flex'>
-        <div className='w-1/2'>
-          <h2>Sketchplanations</h2>
-          <ul>
+      <div className='gallery'>
+        <Gallery photos={images} direction='row' margin={10} targetRowHeight={400} />
+      </div>
+      {/* <pre>{JSON.stringify(images, null, 2)}</pre> */}
+      {/* <div className='flex'>
+        <div className='p-8'>
+          <ul className='sps'>
             {sketchplanations.map((sketchplanation) => (
               <li key={sketchplanation.id}>
-                {sketchplanation.data.title}
-                <img width={250} src={`${sketchplanation.data.image.url}&w=500`} />
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className='w-1/2'>
-          <h3>Tags</h3>
-          <ul>
-            {tagsWithCounts.map(({ tag, count }) => (
-              <li key={tag}>
-                <Link href={`/tags/${tag}`}>
-                  <>
-                    {tag} <b>{count}</b>
-                  </>
+                <Link href={`/${sketchplanation.uid}`}>
+                  <a>
+                    <img width={250} src={`${sketchplanation.data.image.url}&w=500`} alt={sketchplanation.data.title} />
+                  </a>
                 </Link>
               </li>
             ))}
           </ul>
         </div>
-      </div>
+        <div className='p-8'>
+          <ul>
+            {tagsWithCounts.map(({ tag, count }) => (
+              <li key={tag}>
+                <Link href={`/tags/${tag}`}>
+                  <a className='flex justify-between'>
+                    {tag} <b>{count}</b>
+                  </a>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div> */}
       <style jsx>{`
+        .gallery {
+          margin: 10px;
+        }
+        .sps {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin: -0.5rem;
+        }
+
+        .sps > * {
+          padding: 0.5rem;
+        }
+
         b {
           font-weight: 600;
         }
@@ -79,10 +105,11 @@ const queryAll = async (predicates, options = {}) => {
   return sketchplanations
 }
 
-Archive.getInitialProps = async (context) => {
+Archive.getInitialProps = async () => {
   const sketchplanations = await queryAll(Prismic.Predicates.at('document.type', 'sketchplanation'), {
     orderings: '[my.sketchplanation.published_at desc]',
   })
+
   const tags = await queryAll(Prismic.Predicates.at('document.type', 'tag'), {
     orderings: '[my.tag.identifier]',
   })
