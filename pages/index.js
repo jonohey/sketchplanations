@@ -1,7 +1,7 @@
 import React from 'react'
 import Prismic from 'prismic-javascript'
 import { client } from '../prismic-configuration'
-import { Sketchplanation } from '../components/Sketchplanation'
+import { Sketchplanation } from 'components'
 
 const Home = ({ sketchplanations }) => {
   return (

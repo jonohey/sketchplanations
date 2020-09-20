@@ -4,7 +4,7 @@ import { omit } from 'ramda'
 import Shiitake from 'shiitake'
 import Link from 'next/link'
 
-export const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
+const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
   const {
     data: { image, title, body, published_at },
     uid,
