@@ -81,7 +81,10 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
           };`,
         }}
       />
-      <script type='text/javascript' src='https://static.cdn.prismic.io/prismic.min.js?new=true'></script>
+      <script
+        type='text/javascript'
+        src='https://static.cdn.prismic.io/prismic.min.js?repo=sketchplanations.prismic.io&new=true'
+      ></script>
     </>
   )
 }
