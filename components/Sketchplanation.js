@@ -1,12 +1,11 @@
 import React from 'react'
 import { RichText } from 'prismic-reactjs'
-import { omit } from 'ramda'
 import Shiitake from 'shiitake'
 import Link from 'next/link'
 
 const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
   const {
-    data: { image, title, body, published_at },
+    data: { image, title, body },
     uid,
   } = sketchplanation
   return (

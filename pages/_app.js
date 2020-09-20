@@ -3,7 +3,7 @@ import React from 'react'
 import Headroom from 'react-headroom'
 import Link from 'next/link'
 
-import '../styles.css'
+import 'styles.css'
 
 export default function MyApp({ Component, pageProps, router: { route } }) {
   const pageTitle = 'Sketchplanations - A weekly explanation in a sketch'

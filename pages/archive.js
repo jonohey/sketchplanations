@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Prismic from 'prismic-javascript'
 import Link from 'next/link'
 import { client } from 'prismic-configuration'
-import Sketchplanation from 'components'
 
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
 

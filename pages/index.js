@@ -1,6 +1,6 @@
 import React from 'react'
 import Prismic from 'prismic-javascript'
-import { client } from '../prismic-configuration'
+import { client } from 'prismic-configuration'
 import { Sketchplanation } from 'components'
 
 const Home = ({ sketchplanations }) => {
@@ -30,7 +30,7 @@ const Home = ({ sketchplanations }) => {
   )
 }
 
-Home.getInitialProps = async (context) => {
+Home.getInitialProps = async () => {
   const sketchplanations = await client.query(Prismic.Predicates.at('document.type', 'sketchplanation'), {
     orderings: '[my.sketchplanation.published_at desc]',
     pageSize: 100,

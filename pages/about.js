@@ -1,5 +1,5 @@
-import { client } from '../prismic-configuration'
-import { Sketchplanation } from '../components/Sketchplanation'
+import React from 'react'
+import { client } from 'prismic-configuration'
 
 const About = ({ document }) => {
   return (
@@ -9,7 +9,7 @@ const About = ({ document }) => {
   )
 }
 
-About.getInitialProps = async ({ query: { uid } }) => {
+About.getInitialProps = async () => {
   const document = await client.getSingle('about')
   return { document }
 }

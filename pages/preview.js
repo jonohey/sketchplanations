@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { client, linkResolver } from '../prismic-configuration'
-import { Sketchplanation } from '../components/Sketchplanation'
+import { client, linkResolver } from 'prismic-configuration'
 
 const Preview = ({ token }) => {
   const router = useRouter()

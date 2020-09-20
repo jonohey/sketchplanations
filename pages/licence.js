@@ -1,5 +1,5 @@
-import { client } from '../prismic-configuration'
-import { Sketchplanation } from '../components/Sketchplanation'
+import React from 'react'
+import { client } from 'prismic-configuration'
 
 const Post = ({ document }) => {
   return (
@@ -9,7 +9,7 @@ const Post = ({ document }) => {
   )
 }
 
-Post.getInitialProps = async ({ query: { uid } }) => {
+Post.getInitialProps = async () => {
   const document = await client.getSingle('licence')
   return { document }
 }
