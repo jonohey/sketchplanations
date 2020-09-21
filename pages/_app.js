@@ -21,6 +21,8 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         <meta name='theme-color' content='#fbf8de' />
         <meta name='viewport' content='width = device-width, initial-scale = 1, minimum-scale = 1' />
         <meta property='og:title' content={pageTitle} key='title' />
+        <meta property='og:site_name' content='Sketchplanations' />
+        <meta name='twitter:site' content='@sketchplanator' />
         <link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap' rel='stylesheet' />
         <link
           rel='stylesheet'
