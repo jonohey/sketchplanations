@@ -3,6 +3,8 @@ import { RichText } from 'prismic-reactjs'
 import Shiitake from 'shiitake'
 import Link from 'next/link'
 
+import { SocialSharing } from 'components'
+
 const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
   const {
     data: { image, title, body },
@@ -35,6 +37,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
             </>
           )}
         </div>
+        <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />
       </div>
       <style jsx>{`
         .root {
