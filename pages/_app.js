@@ -23,6 +23,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         <meta property='og:title' content={pageTitle} key='title' />
         <meta property='og:site_name' content='Sketchplanations' />
         <meta name='twitter:site' content='@sketchplanator' />
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap' rel='stylesheet' />
         <link
           rel='stylesheet'
