@@ -12,8 +12,8 @@ const Home = ({ sketchplanations }) => {
         <nav className='whitespace-no-wrap'>
           <a href='/about'>About</a>
           <a href='/archive'>Archive</a>
-          <a href=''>Patreon</a>
-          <a href=''>Subscribe</a>
+          <a href='https://www.patreon.com/sketchplanations'>Patreon</a>
+          <a href='https://sketchplanations.us7.list-manage.com/subscribe?u=9cb0e0c4f7192ab482322d4f9&id=a5a82e1a38'>Subscribe</a>
         </nav>
       </div>
       <div className='sketchplanations'>
