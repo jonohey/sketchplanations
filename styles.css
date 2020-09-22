@@ -147,3 +147,11 @@ nav > * {
   opacity: 0;
   pointer-events: none;
 }
+
+/* Mailchimp */
+#mc_embed_signup {
+  background: #fff;
+  clear: left;
+  font: 16px 'Open Sans', sans-serif;
+  width: 375px;
+}

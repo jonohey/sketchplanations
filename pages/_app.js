@@ -32,6 +32,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
           type='text/css'
           href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css'
         />
+        <link href='//cdn-images.mailchimp.com/embedcode/classic-10_7.css' rel='stylesheet' type='text/css' />
       </Head>
       <Headroom className={route === '/' && 'hide-when-unfixed'}>
         <div className='header'>
@@ -92,6 +93,17 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         type='text/javascript'
         src='https://static.cdn.prismic.io/prismic.min.js?repo=sketchplanations.prismic.io&new=true'
       ></script>
+      <script
+        type='text/javascript'
+        src='//downloads.mailchimp.com/js/signup-forms/popup/embed.js'
+        data-dojo-config='usePlainJson: true, isDebug: false'
+      ></script>
+      <script
+        type='text/javascript'
+        dangerouslySetInnerHTML={{
+          __html: `require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us7.list-manage.com","uuid":"9cb0e0c4f7192ab482322d4f9","lid":"a5a82e1a38"}) })`,
+        }}
+      />
     </>
   )
 }
