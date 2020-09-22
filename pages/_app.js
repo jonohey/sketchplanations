@@ -33,7 +33,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         />
         <link href='//cdn-images.mailchimp.com/embedcode/classic-10_7.css' rel='stylesheet' type='text/css' />
       </Head>
-      <Headroom className={route === '/' && 'hide-when-unfixed'}>
+      <Headroom className={route === '/' ? 'hide-when-unfixed' : ''}>
         <div className='header'>
           <div className='inline-flex flex-col sm:flex-row items-center justify-center lg:justify-start flex-wrap lg:flex-no-wrap -m-1 sm:-m-3 flex-grow'>
             <div className='p-1 sm:p-3'>
