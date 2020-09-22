@@ -21,7 +21,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         <meta name='msapplication-TileColor' content='#fbf8de' />
         <meta name='theme-color' content='#fbf8de' />
         <meta name='viewport' content='width = device-width, initial-scale = 1, minimum-scale = 1' />
-        <meta property='og:title' content={pageTitle} key='title' />
+        <meta property='og:title' content={pageTitle()} key='title' />
         <meta property='og:site_name' content='Sketchplanations' />
         <meta name='twitter:site' content='@sketchplanator' />
         <link rel='preconnect' href='https://fonts.googleapis.com' />
