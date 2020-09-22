@@ -1,7 +1,7 @@
 import React from 'react'
 import { client } from 'prismic-configuration'
 
-const Post = ({ document }) => {
+const Privacy = ({ document }) => {
   return (
     <>
       <pre>sketchplanation:{JSON.stringify(document, null, 2)}</pre>
@@ -9,9 +9,9 @@ const Post = ({ document }) => {
   )
 }
 
-Post.getInitialProps = async () => {
+Privacy.getInitialProps = async () => {
   const document = await client.getSingle('privacy')
   return { document }
 }
 
-export default Post
+export default Privacy

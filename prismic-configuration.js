@@ -21,6 +21,8 @@ export const linkResolver = (doc) => {
     return '/licence'
   } else if (doc.type === 'thanks') {
     return '/thanks'
+  } else if (doc.type === 'privacy') {
+    return '/privacy'
   }
   return '/'
 }
