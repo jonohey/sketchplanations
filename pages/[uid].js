@@ -3,6 +3,7 @@ import { client } from 'prismic-configuration'
 import { RichText } from 'prismic-reactjs'
 import { Sketchplanation } from 'components'
 import Head from 'next/head'
+import { pageTitle } from 'helpers'
 
 const Post = ({ sketchplanation }) => {
   const {
@@ -13,6 +14,7 @@ const Post = ({ sketchplanation }) => {
   return (
     <>
       <Head>
+        <title>{pageTitle(title)}</title>
         <meta property='og:title' content={title} />
         <meta property='og:description' content={RichText.asText(body)} />
         <meta property='og:image' content={`${image.url}&w=1200`} />

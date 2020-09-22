@@ -4,16 +4,15 @@ import Head from 'next/head'
 import React from 'react'
 import Headroom from 'react-headroom'
 import Link from 'next/link'
+import { pageTitle } from 'helpers'
 
 import 'styles.css'
 
 export default function MyApp({ Component, pageProps, router: { route } }) {
-  const pageTitle = 'Sketchplanations - A weekly explanation in a sketch'
-
   return (
     <>
       <Head>
-        <title>{pageTitle}</title>
+        <title>{pageTitle()}</title>
         <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
         <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
         <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
