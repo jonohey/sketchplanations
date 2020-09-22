@@ -1,3 +1,5 @@
+import 'lazysizes'
+import 'lazysizes/plugins/attrchange/ls.attrchange'
 import Head from 'next/head'
 import React from 'react'
 import Headroom from 'react-headroom'

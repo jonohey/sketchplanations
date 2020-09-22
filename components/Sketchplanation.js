@@ -2,6 +2,7 @@ import React from 'react'
 import { RichText } from 'prismic-reactjs'
 import Shiitake from 'shiitake'
 import Link from 'next/link'
+import Imgix from 'react-imgix'
 
 import { SocialSharing } from 'components'
 
@@ -13,20 +14,31 @@ const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
   return (
     <div className='root'>
       <Link href={`/${uid}`}>
-        <a>
-          <img
+        <a className='image'>
+          <Imgix
+            className='lazyload'
             src={image.url}
-            alt={image.alt || `${title} - Sketchplanations`}
+            attributeConfig={{
+              src: 'data-src',
+              srcSet: 'data-srcset',
+              sizes: 'data-sizes',
+            }}
+            htmlAttributes={{
+              src: `${image.url}&blur=200&px=16`,
+            }}
             width={image.width}
             height={image.height}
+            alt={image.alt || `${title} - Sketchplanations`}
+            sizes='(min-width: 848px) 800px, (min-width: 640px) calc(100vw - 3rem), 100w'
           />
         </a>
       </Link>
       <div className='content'>
         <h1>{title}</h1>
         <div className='body'>
-          {fullPost && <RichText render={body} />}
-          {!fullPost && (
+          {fullPost ? (
+            <RichText render={body} />
+          ) : (
             <>
               <Shiitake lines={3} throttleRate={200}>
                 {RichText.asText(body)}
@@ -51,8 +63,8 @@ const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
           }
         }
 
-        img {
-          @apply mb-10;
+        .image {
+          @apply block mb-10;
           box-shadow: 0 2.3rem 1rem -2rem #e2dcc5;
         }
 
