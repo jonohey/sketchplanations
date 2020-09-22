@@ -93,10 +93,10 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
           };`,
         }}
       />
-      <script
+      {/* <script
         type='text/javascript'
         src='https://static.cdn.prismic.io/prismic.min.js?repo=sketchplanations.prismic.io&new=true'
-      ></script>
+      ></script> */}
       <script
         type='text/javascript'
         src='//downloads.mailchimp.com/js/signup-forms/popup/embed.js'
