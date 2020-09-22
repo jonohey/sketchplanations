@@ -1,17 +1,14 @@
 import React from 'react'
+import { Page } from 'components'
 import { client } from 'prismic-configuration'
 
-const About = ({ document }) => {
-  return (
-    <>
-      <pre>{JSON.stringify(document, null, 2)}</pre>
-    </>
-  )
+const Privacy = ({ document }) => {
+  return <Page document={document} />
 }
 
-About.getInitialProps = async () => {
+Privacy.getInitialProps = async () => {
   const document = await client.getSingle('about')
   return { document }
 }
 
-export default About
+export default Privacy

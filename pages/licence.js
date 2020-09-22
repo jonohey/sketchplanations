@@ -1,17 +1,14 @@
 import React from 'react'
+import { Page } from 'components'
 import { client } from 'prismic-configuration'
 
-const Post = ({ document }) => {
-  return (
-    <>
-      <pre>sketchplanation:{JSON.stringify(document, null, 2)}</pre>
-    </>
-  )
+const Privacy = ({ document }) => {
+  return <Page document={document} />
 }
 
-Post.getInitialProps = async () => {
+Privacy.getInitialProps = async () => {
   const document = await client.getSingle('licence')
   return { document }
 }
 
-export default Post
+export default Privacy

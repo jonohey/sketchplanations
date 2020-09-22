@@ -1,12 +1,9 @@
 import React from 'react'
+import { Page } from 'components'
 import { client } from 'prismic-configuration'
 
 const Privacy = ({ document }) => {
-  return (
-    <>
-      <pre>sketchplanation:{JSON.stringify(document, null, 2)}</pre>
-    </>
-  )
+  return <Page document={document} />
 }
 
 Privacy.getInitialProps = async () => {
