@@ -25,6 +25,8 @@ const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
             }}
             htmlAttributes={{
               src: `${image.url}&blur=200&px=16`,
+              width: image.width,
+              height: image.height,
             }}
             width={image.width}
             height={image.height}
@@ -66,6 +68,10 @@ const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
         .image {
           @apply block mb-10;
           box-shadow: 0 2.3rem 1rem -2rem #e2dcc5;
+        }
+
+        .image > :global(img) {
+          @apply w-full h-auto;
         }
 
         .content {
