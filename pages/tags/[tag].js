@@ -1,3 +1,4 @@
+import React from 'react'
 import Prismic from 'prismic-javascript'
 import Link from 'next/link'
 import { client } from '../../prismic-configuration'
@@ -9,7 +10,9 @@ const Tag = ({ tag, sketchplanations }) => {
       <ul>
         {sketchplanations.results.map((sketchplanation) => (
           <li key={sketchplanation.id}>
-            <Link href={`/${sketchplanation.uid}`}>{sketchplanation.data.title}</Link>
+            <Link href={`/${sketchplanation.uid}`}>
+              <a>{sketchplanation.data.title}</a>
+            </Link>
           </li>
         ))}
       </ul>
