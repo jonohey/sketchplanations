@@ -4,7 +4,9 @@ import Head from 'next/head'
 import React from 'react'
 import Headroom from 'react-headroom'
 import Link from 'next/link'
+import NextNprogress from 'nextjs-progressbar'
 import { pageTitle } from 'helpers'
+import { Navigation } from 'components'
 
 import 'styles.css'
 
@@ -33,6 +35,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         />
         <link href='//cdn-images.mailchimp.com/embedcode/classic-10_7.css' rel='stylesheet' type='text/css' />
       </Head>
+      <NextNprogress color='#1253B5' options={{ showSpinner: false }} />
       <Headroom className={route === '/' ? 'hide-when-unfixed' : ''}>
         <div className='header'>
           <div className='inline-flex flex-col sm:flex-row items-center justify-center lg:justify-start flex-wrap lg:flex-no-wrap -m-1 sm:-m-3 flex-grow'>
@@ -47,18 +50,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
               <p className='slogan'>Explaining one thing a week in a sketch</p>
             </div>
           </div>
-          <nav className='whitespace-no-wrap'>
-            <Link href='/about'>
-              <a>About</a>
-            </Link>
-            <Link href='/archive'>
-              <a>Archive</a>
-            </Link>
-            <a href='https://www.patreon.com/sketchplanations'>Patreon</a>
-            <a href='https://sketchplanations.us7.list-manage.com/subscribe?u=9cb0e0c4f7192ab482322d4f9&id=a5a82e1a38'>
-              Subscribe
-            </a>
-          </nav>
+          <Navigation />
         </div>
       </Headroom>
       <Component {...pageProps} />

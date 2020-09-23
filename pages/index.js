@@ -1,20 +1,16 @@
 import React from 'react'
 import Prismic from 'prismic-javascript'
+import Link from 'next/link'
 import { client } from 'prismic-configuration'
-import { Sketchplanation } from 'components'
+import { Sketchplanation, Navigation } from 'components'
 
 const Home = ({ sketchplanations }) => {
   return (
-    <div className='sketchplanations-wrapper'>
+    <div>
       <div className='masthead'>
         <img src='/logo.svg' alt='Sketchplanations' />
         <p className='sm:text-lg'>Explaining one thing a week in a sketch</p>
-        <nav className='whitespace-no-wrap'>
-          <a href='/about'>About</a>
-          <a href='/archive'>Archive</a>
-          <a href='https://www.patreon.com/sketchplanations'>Patreon</a>
-          <a href='https://sketchplanations.us7.list-manage.com/subscribe?u=9cb0e0c4f7192ab482322d4f9&id=a5a82e1a38'>Subscribe</a>
-        </nav>
+        <Navigation />
       </div>
       <div className='sketchplanations'>
         {sketchplanations.results.map((sketchplanation) => (

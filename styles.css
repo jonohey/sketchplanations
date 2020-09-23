@@ -38,17 +38,17 @@ pre {
 }
 
 .sketchplanations {
-  @apply flex flex-wrap justify-center py-6;
+  @apply flex flex-wrap justify-center pb-6;
 }
 
 @screen lg {
   .sketchplanations {
-    @apply py-12;
+    @apply pb-12;
   }
 }
 
 .sketchplanations > * {
-  @apply p-12;
+  @apply p-10;
 }
 
 .header {
@@ -61,7 +61,7 @@ pre {
 }
 
 .headroom {
-  border-bottom: solid 1px rgba(0, 0, 0, 0.03);
+  border-bottom: solid 1px rgba(0, 0, 0, 0.04);
   box-shadow: 0 2.3rem 1rem -2rem rgba(0, 0, 0, 0);
 }
 
@@ -106,20 +106,6 @@ pre {
   }
 }
 
-nav {
-  @apply -mx-4 -mt-5;
-}
-
-@screen lg {
-  nav {
-    @apply mt-0;
-  }
-}
-
-nav > * {
-  @apply p-3 px-4 text-blue;
-}
-
 .patreon {
   @apply fixed bottom-0 right-0;
 }
@@ -130,7 +116,7 @@ nav > * {
 
 .masthead {
   max-width: 600px;
-  @apply mt-6 mx-auto px-8 flex flex-col items-center text-center;
+  @apply mt-8 mx-auto px-8 flex flex-col items-center text-center;
 }
 
 .masthead > * + * {
@@ -144,8 +130,7 @@ nav > * {
 } */
 
 .hide-when-unfixed .headroom--unfixed {
-  opacity: 0;
-  pointer-events: none;
+  display: none;
 }
 
 /* Mailchimp */

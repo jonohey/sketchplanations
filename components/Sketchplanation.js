@@ -24,7 +24,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
               sizes: 'data-sizes',
             }}
             htmlAttributes={{
-              src: `${image.url}&blur=200&px=16`,
+              src: `${image.url}&w=800&blur=200&px=16`,
               width: image.width,
               height: image.height,
             }}
@@ -51,7 +51,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
             </>
           )}
         </div>
-        <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />
+        {fullPost && <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />}
       </div>
       <style jsx>{`
         .root {

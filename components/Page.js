@@ -57,7 +57,7 @@ const Page = ({
           }
 
           h1 {
-            @apply text-3xl mb-6 mx-auto;
+            @apply text-3xl mb-10 mx-auto text-center;
             font-weight: 300;
           }
 
