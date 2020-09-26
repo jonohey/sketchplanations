@@ -61,7 +61,13 @@ const Archive = ({ sketchplanations }) => {
       </div>
       <style jsx>{`
         .gallery {
-          margin: 16px;
+          margin: -16px;
+        }
+
+        @screen sm {
+          .gallery {
+            margin: 16px;
+          }
         }
       `}</style>
     </>
