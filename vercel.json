@@ -1,6 +1,61 @@
 {
   "redirects": [
     {
+      "source": "/post/630439800088985600/the-4-horsemen-of-relationship-apocalypse-john",
+      "destination": "/the-4-horsemen-of-relationship-apocalypse",
+      "permanent": false
+    },
+    {
+      "source": "/post/629720029941940224/if-this-isnt-nice-i-dont-know-what-is-some",
+      "destination": "/if-this-isnt-nice-i-dont-know-what-is",
+      "permanent": false
+    },
+    {
+      "source": "/post/629156877095354368/states-of-matter-a-school-science-refresher-the",
+      "destination": "/states-of-matter",
+      "permanent": false
+    },
+    {
+      "source": "/post/628492702058708992/solvitur-ambulando-this-phrase-from-the-greek",
+      "destination": "/solvitur-ambulando",
+      "permanent": false
+    },
+    {
+      "source": "/post/627908946043240448/nurse-log-in-some-forests-where-the-trees-grow",
+      "destination": "/nurse-log",
+      "permanent": false
+    },
+    {
+      "source": "/post/627278460331737088/manager-time-maker-time-in-manager-time-a-day",
+      "destination": "/manager-time-maker-time",
+      "permanent": false
+    },
+    {
+      "source": "/post/626604091842379776/forcing-function-forcing-functions-are-a-super",
+      "destination": "/forcing-function",
+      "permanent": false
+    },
+    {
+      "source": "/post/625980171437195264/the-bs-asymmetry-principle-also-known-as",
+      "destination": "/the-bs-asymmetry-principle",
+      "permanent": false
+    },
+    {
+      "source": "/post/625320161058144256/raci-this-acronym-acts-as-a-handy-checklist-to",
+      "destination": "/raci",
+      "permanent": false
+    },
+    {
+      "source": "/post/624738335375671297/schadenfreude-ah-that-satisfying-superior-at",
+      "destination": "/schadenfreude",
+      "permanent": false
+    },
+    {
+      "source": "/post/624100557832978432/survivorship-bias-so-the-story-goes-as-told-by",
+      "destination": "/survivorship-bias-silent-evidence",
+      "permanent": false
+    },
+    {
       "source": "/post/623356353771110400/finishing-lines-just-remember-that-finishing",
       "destination": "/finishing-lines",
       "permanent": false
@@ -1545,7 +1600,10 @@
       "destination": "/how-to-make-irish-coffee",
       "permanent": false
     },
-    { "source": "/post/81935185381/thunder-clouds", "destination": "/thunder-clouds", "permanent": false },
+    { "source": "/post/81935185381/thunder-clouds",
+      "destination": "/thunder-clouds",
+      "permanent": false
+    },
     {
       "source": "/post/81825142840/measures-of-central-tendency-mean-median-mode",
       "destination": "/measures-of-central-tendency-mean-median-mode",
@@ -1746,7 +1804,10 @@
       "destination": "/the-stroop-test",
       "permanent": false
     },
-    { "source": "/post/77854317490/circular-breathing-hard", "destination": "/circular-breathing", "permanent": false },
+    { "source": "/post/77854317490/circular-breathing-hard",
+      "destination": "/circular-breathing",
+      "permanent": false
+    },
     {
       "source": "/post/77752098636/debts-vicious-cycle-hat-tip-avraham-byers",
       "destination": "/debts-vicious-cycle",
@@ -1804,7 +1865,7 @@
     },
     {
       "source": "/post/76578540546/chindogu-unuseless-inventions-invented-by-the",
-      "destination": "/chindogu",
+      "destination": "/chindogu-unuseless-inventions",
       "permanent": false
     },
     {
@@ -1892,7 +1953,10 @@
       "destination": "/lenticular-clouds",
       "permanent": false
     },
-    { "source": "/post/74666781370/framing", "destination": "/framing", "permanent": false },
+    { "source": "/post/74666781370/framing",
+      "destination": "/framing",
+      "permanent": false
+    },
     {
       "source": "/post/74610796896/the-content-is-the-interface-sam-moreau-user",
       "destination": "/the-content-is-the-interface",
@@ -2258,7 +2322,10 @@
       "destination": "/make-art-like-duchamp",
       "permanent": false
     },
-    { "source": "/post/66918563703/make-art-like-warhol", "destination": "/make-art-like-warhol", "permanent": false },
+    { "source": "/post/66918563703/make-art-like-warhol",
+      "destination": "/make-art-like-warhol",
+      "permanent": false
+    },
     {
       "source": "/post/66824819675/make-art-like-john-cage-most-famously-know-for",
       "destination": "/make-art-like-john-cage",
@@ -2474,7 +2541,10 @@
       "destination": "/store-whiteboard-pens-with-the-nib-down",
       "permanent": false
     },
-    { "source": "/post/62758789193/the-law-of-lockers", "destination": "/the-law-of-lockers", "permanent": false },
+    { "source": "/post/62758789193/the-law-of-lockers",
+      "destination": "/the-law-of-lockers",
+      "permanent": false
+    },
     {
       "source": "/post/62667149195/plug-computing-i-love-the-idea-that-the-computer",
       "destination": "/plug-computing",
@@ -2545,7 +2615,10 @@
       "destination": "/london-dog-size",
       "permanent": false
     },
-    { "source": "/post/61355581968/be-nice-to-tourists", "destination": "/be-nice-to-tourists", "permanent": false },
+    { "source": "/post/61355581968/be-nice-to-tourists",
+      "destination": "/be-nice-to-tourists",
+      "permanent": false
+    },
     {
       "source": "/post/61249752387/5-user-tests-finds-85-problems-classic-rule-of",
       "destination": "/5-user-tests-finds-85-percent-problems",
@@ -2621,7 +2694,10 @@
       "destination": "/palindromes-and-semordnilap",
       "permanent": false
     },
-    { "source": "/post/59814196233/the-best-number-8008135", "destination": "/the-best-number", "permanent": false },
+    { "source": "/post/59814196233/the-best-number-8008135",
+      "destination": "/the-best-number",
+      "permanent": false
+    },
     {
       "source": "/post/59721223670/omit-unnecessary-words-two-and-a-half-words-of",
       "destination": "/omit-unnecessary-words",
@@ -2937,7 +3013,10 @@
       "destination": "/adjust-your-daily-caffeine-intake",
       "permanent": false
     },
-    { "source": "/post/54175606234/control-a-cue-ball", "destination": "/control-a-cue-ball", "permanent": false },
+    { "source": "/post/54175606234/control-a-cue-ball",
+      "destination": "/control-a-cue-ball",
+      "permanent": false
+    },
     {
       "source": "/post/54045943957/on-parenting-childhood-is-not-a-race-insights",
       "destination": "/on-parenting-childhood-is-not-a-race",
@@ -3063,7 +3142,10 @@
       "destination": "/organise-veg-in-the-fridge",
       "permanent": false
     },
-    { "source": "/post/53045200799/affect-effect", "destination": "/affect-effect", "permanent": false },
+    { "source": "/post/53045200799/affect-effect",
+      "destination": "/affect-effect",
+      "permanent": false
+    },
     {
       "source": "/post/53044867440/be-stubborn-on-vision-be-flexible-on-details",
       "destination": "/be-stubborn-on-vision-be-flexible-on-details",
@@ -3254,7 +3336,10 @@
       "destination": "/decorate-a-christmas-tree",
       "permanent": false
     },
-    { "source": "/post/53020704128/accept-compliments", "destination": "/accept-compliments", "permanent": false },
+    { "source": "/post/53020704128/accept-compliments",
+      "destination": "/accept-compliments",
+      "permanent": false
+    },
     {
       "source": "/post/53020673629/how-to-play-reverse-pool-really-a-surprisingly",
       "destination": "/how-to-play-reverse-pool",
