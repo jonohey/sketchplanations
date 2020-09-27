@@ -70,7 +70,11 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         {fullPost && <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />}
         {fullPost && (
           <p className='coffee'>
-            Enjoying Sketchplanations? <a href='https://www.buymeacoffee.com/sketchplanator'>Buy me a coffee</a>.
+            Enjoying Sketchplanations?{' '}
+            <a href='https://www.buymeacoffee.com/sketchplanator' target='_blank' rel='noreferrer'>
+              Buy me a coffee
+            </a>
+            .
           </p>
         )}
       </div>
