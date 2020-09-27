@@ -11,6 +11,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
     data: { image, title, body },
     uid,
   } = sketchplanation
+
   return (
     <div className='root'>
       <Link href={`/${uid}`}>
@@ -24,7 +25,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
               sizes: 'data-sizes',
             }}
             htmlAttributes={{
-              src: `${image.url}&w=800&blur=200&px=16`,
+              src: `${image.url}&w=1600&blur=200&px=32`,
               width: image.width,
               height: image.height,
             }}
