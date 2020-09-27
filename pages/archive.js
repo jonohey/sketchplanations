@@ -97,12 +97,12 @@ const queryAll = async (predicates, options = {}) => {
   return sketchplanations
 }
 
-Archive.getInitialProps = async () => {
+export async function getStaticProps() {
   const sketchplanations = await queryAll(Prismic.Predicates.at('document.type', 'sketchplanation'), {
     orderings: '[my.sketchplanation.published_at desc]',
   })
 
-  return { sketchplanations }
+  return { props: { sketchplanations } }
 }
 
 export default Archive

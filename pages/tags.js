@@ -80,7 +80,7 @@ const queryAll = async (predicates, options = {}) => {
   return sketchplanations
 }
 
-Tags.getInitialProps = async () => {
+export async function getStaticProps() {
   const sketchplanations = await queryAll(Prismic.Predicates.at('document.type', 'sketchplanation'), {
     orderings: '[my.sketchplanation.published_at desc]',
   })
@@ -89,7 +89,7 @@ Tags.getInitialProps = async () => {
     orderings: '[my.tag.identifier]',
   })
 
-  return { sketchplanations, tags }
+  return { props: { sketchplanations, tags } }
 }
 
 export default Tags
