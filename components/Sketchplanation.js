@@ -106,12 +106,32 @@ const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
           @apply mx-auto;
         }
 
-        .body :global(p + p) {
+        .body :global(> * + *) {
           margin-top: 1.4em;
+        }
+
+        .body :global(b),
+        .body :global(strong) {
+          @apply font-semibold;
+        }
+
+        .body :global(i),
+        .body :global(em) {
+          @apply italic;
         }
 
         .body :global(a) {
           @apply text-bright-red;
+        }
+
+        .body :global(ul li) {
+          list-style: outside disc;
+          margin-left: 1.75rem;
+        }
+
+        .body :global(ol li) {
+          list-style: outside decimal;
+          margin-left: 1.75rem;
         }
 
         .tags {
@@ -119,7 +139,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
         }
 
         .tags a {
-          @apply inline-block relative mx-2 text-sm whitespace-no-wrap;
+          @apply inline-block mx-2 text-sm whitespace-no-wrap;
           transition: all 0.1s ease-out;
           color: #888;
         }
