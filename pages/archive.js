@@ -61,11 +61,15 @@ const Archive = ({ sketchplanations }) => {
       </div>
       <style jsx>{`
         .gallery {
+          overflow: hidden;
+        }
+
+        .gallery :global(.react-photo-gallery--gallery) {
           margin: -16px;
         }
 
         @screen sm {
-          .gallery {
+          .gallery :global(.react-photo-gallery--gallery) {
             margin: 16px;
           }
         }
