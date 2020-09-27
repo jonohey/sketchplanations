@@ -6,7 +6,7 @@ import Imgix from 'react-imgix'
 
 import { SocialSharing } from 'components'
 
-const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
+const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = false }) => {
   const {
     data: { image, title, body },
     uid,
@@ -32,26 +32,30 @@ const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
             width={image.width}
             height={image.height}
             alt={image.alt || `${title} - Sketchplanations`}
-            sizes='(min-width: 848px) 800px, (min-width: 640px) calc(100vw - 3rem), 100w'
+            sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
           />
         </a>
       </Link>
       <div className='content'>
-        <h1>{title}</h1>
-        <div className='body'>
-          {fullPost ? (
-            <RichText render={body} />
-          ) : (
-            <>
-              <Shiitake lines={3} throttleRate={200}>
-                {RichText.asText(body)}
-              </Shiitake>
-              <Link href={`/${uid}`}>
-                <a>Read more…</a>
-              </Link>
-            </>
-          )}
-        </div>
+        {!hideContent && (
+          <>
+            <h1>{title}</h1>
+            <div className='body'>
+              {fullPost ? (
+                <RichText render={body} />
+              ) : (
+                <>
+                  <Shiitake lines={3} throttleRate={200}>
+                    {RichText.asText(body)}
+                  </Shiitake>
+                  <Link href={`/${uid}`}>
+                    <a>Read more…</a>
+                  </Link>
+                </>
+              )}
+            </div>
+          </>
+        )}
         {fullPost && (
           <ul className='tags'>
             {sketchplanation.data.tags.map((tag) => (
@@ -64,10 +68,15 @@ const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
           </ul>
         )}
         {fullPost && <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />}
+        {fullPost && (
+          <p className='coffee'>
+            Enjoying Sketchplanations? <a href='https://www.buymeacoffee.com/sketchplanator'>Buy me a coffee</a>.
+          </p>
+        )}
       </div>
       <style jsx>{`
         .root {
-          max-width: 800px;
+          max-width: 600px;
           @apply px-0;
         }
 
@@ -145,6 +154,14 @@ const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
         }
 
         .tags a:hover {
+          @apply text-bright-red;
+        }
+
+        .coffee {
+          @apply mt-10;
+        }
+
+        .coffee a {
           @apply text-bright-red;
         }
       `}</style>

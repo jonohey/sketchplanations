@@ -26,14 +26,18 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
       <div className='sketchplanations'>
         <Sketchplanation sketchplanation={sketchplanation} fullPost />
       </div>
-      <h2 className='similar-header'>Want more? Try these…</h2>
-      <div className='similar'>
-        {similarSketchplanations.results.map((sketchplanation) => (
-          <div key={sketchplanation.id}>
-            <Sketchplanation sketchplanation={sketchplanation} />
+      {similarSketchplanations.results.length && (
+        <>
+          <h2 className='similar-header'>Want more? Try these…</h2>
+          <div className='similar'>
+            {similarSketchplanations.results.map((sketchplanation) => (
+              <div key={sketchplanation.id}>
+                <Sketchplanation sketchplanation={sketchplanation} hideContent />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
       <style jsx>{`
         .similar-header {
           @apply mb-10 text-center;
@@ -79,7 +83,7 @@ Post.getInitialProps = async ({ query: { uid } }) => {
   const sketchplanation = await client.getByUID('sketchplanation', uid)
   const similarSketchplanations = await client.query(
     [Prismic.Predicates.at('document.type', 'sketchplanation'), Prismic.Predicates.similar(sketchplanation.id, 3)],
-    { pageSize: 3 }
+    { pageSize: 6 }
   )
 
   return { sketchplanation, similarSketchplanations }
