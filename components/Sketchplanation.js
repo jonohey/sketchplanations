@@ -52,6 +52,17 @@ const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
             </>
           )}
         </div>
+        {fullPost && (
+          <ul className='tags'>
+            {sketchplanation.data.tags.map((tag) => (
+              <li key={tag.id}>
+                <Link key={tag} href={`/tags/${tag.tag.slug}`}>
+                  <a>{tag.tag.slug.replace(/-/, ' ')}</a>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
         {fullPost && <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />}
       </div>
       <style jsx>{`
@@ -100,6 +111,20 @@ const Sketchplanation = ({ sketchplanation, fullPost = false }) => {
         }
 
         .body :global(a) {
+          @apply text-bright-red;
+        }
+
+        .tags {
+          @apply flex flex-wrap -mx-2 mt-10 mb-10;
+        }
+
+        .tags a {
+          @apply inline-block relative mx-2 text-sm whitespace-no-wrap;
+          transition: all 0.1s ease-out;
+          color: #888;
+        }
+
+        .tags a:hover {
           @apply text-bright-red;
         }
       `}</style>
