@@ -1,9 +1,9 @@
 {
-  "routes": [
+  "redirects": [
     {
-      "src": "/foo",
-      "status": 302,
-      "headers": { "Location": "/archive" }
+      "source": "/foo",
+      "destination": "/archive",
+      "permanent": false
     }
   ]
 }
