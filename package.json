@@ -19,6 +19,7 @@
     "react-dom": "^16.13.0",
     "react-headroom": "^3.0.0",
     "react-imgix": "^9.0.2",
+    "react-infinite-scroll-component": "^5.1.0",
     "react-photo-gallery": "^8.0.0",
     "shiitake": "^3.0.2"
   },
