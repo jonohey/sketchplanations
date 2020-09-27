@@ -40,7 +40,7 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
         }
 
         .similar {
-          @apply flex flex-wrap px-6 pt-10 pb-20;
+          @apply flex flex-wrap justify-center px-6 pt-10 pb-20;
           border-top: solid 1px rgba(0, 0, 0, 0.04);
           box-shadow: 0 -2.3rem 1rem -2rem rgba(0, 0, 0, 0.03);
         }
@@ -77,7 +77,10 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
 
 Post.getInitialProps = async ({ query: { uid } }) => {
   const sketchplanation = await client.getByUID('sketchplanation', uid)
-  const similarSketchplanations = await client.query(Prismic.Predicates.similar(sketchplanation.id, 3), { pageSize: 3 })
+  const similarSketchplanations = await client.query(
+    [Prismic.Predicates.at('document.type', 'sketchplanation'), Prismic.Predicates.similar(sketchplanation.id, 3)],
+    { pageSize: 3 }
+  )
 
   return { sketchplanation, similarSketchplanations }
 }
