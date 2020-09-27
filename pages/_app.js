@@ -34,6 +34,16 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
           href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css'
         />
         <link href='//cdn-images.mailchimp.com/embedcode/classic-10_7.css' rel='stylesheet' type='text/css' />
+        <script async src='https://www.googletagmanager.com/gtag/js?id=UA-72222206-1'></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-41793508-1');`,
+          }}
+        />
       </Head>
       <NextNprogress color='#1253B5' options={{ showSpinner: false }} />
       <Headroom className={route === '/' ? 'hide-when-unfixed' : ''}>
