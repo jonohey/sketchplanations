@@ -76,6 +76,14 @@ const Tag = ({ tag, sketchplanations }) => {
           .gallery {
             margin: 16px;
           }
+
+          .gallery :global(img) {
+            max-width: 570px;
+          }
+
+          .gallery :global(.react-photo-gallery--gallery > *) {
+            justify-content: center;
+          }
         `}
       </style>
     </>
