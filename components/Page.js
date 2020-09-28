@@ -4,6 +4,7 @@ import { linkResolver } from 'prismic-configuration'
 import Imgix from 'react-imgix'
 
 const Text = ({ slice }) => RichText.render(slice.primary.content, linkResolver)
+
 const Photo = ({
   slice: {
     primary: { photo },
@@ -29,9 +30,12 @@ const Photo = ({
   />
 )
 
+const Html = ({ slice }) => <div dangerouslySetInnerHTML={{ __html: RichText.asText(slice.primary.html) }} />
+
 const sliceTypesToComponent = {
   text: Text,
   photo: Photo,
+  html: Html,
 }
 
 const Page = ({
