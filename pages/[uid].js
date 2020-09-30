@@ -26,7 +26,7 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
       <div className='sketchplanations'>
         <Sketchplanation sketchplanation={sketchplanation} fullPost />
       </div>
-      {similarSketchplanations.results.length && (
+      {similarSketchplanations.results.length > 0 && (
         <>
           <h2 className='similar-header'>Want more? Try these…</h2>
           <div className='similar'>
