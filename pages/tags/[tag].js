@@ -65,7 +65,7 @@ const Tag = ({ tag, sketchplanations }) => {
       <style jsx>
         {`
           .root {
-            @apply pt-8 pb-20 px-6 mx-auto;
+            @apply pt-8 pb-20 mx-auto;
           }
 
           h1 {
@@ -73,8 +73,14 @@ const Tag = ({ tag, sketchplanations }) => {
             font-weight: 300;
           }
 
-          .gallery {
-            margin: 16px;
+          .gallery :global(.react-photo-gallery--gallery) {
+            margin: -16px;
+          }
+
+          @screen sm {
+            .gallery :global(.react-photo-gallery--gallery) {
+              margin: 16px;
+            }
           }
 
           .gallery :global(img) {
