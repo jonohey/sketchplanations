@@ -58,8 +58,8 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         )}
         {fullPost && (
           <ul className='tags'>
-            {sketchplanation.data.tags.map((tag) => (
-              <li key={tag.id}>
+            {sketchplanation.data.tags.map((tag, index) => (
+              <li key={index}>
                 <Link key={tag} href={`/tags/${tag.tag.slug}`}>
                   <a>{tag.tag.slug.replace(/-/, ' ')}</a>
                 </Link>
