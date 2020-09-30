@@ -113,8 +113,19 @@ const queryAll = async (predicates, options = {}) => {
   return sketchplanations
 }
 
-Tag.getInitialProps = async ({ query: { tag } }) => {
-  // const tagDoc = await client.getByUID('tag', tag)
+export async function getStaticPaths() {
+  const tags = await queryAll(Prismic.Predicates.at('document.type', 'tag'))
+  const tagPaths = tags.map((tag) => ({ params: { tag: tag.slugs[0] } }))
+
+  console.log('tagPaths', tagPaths)
+
+  return {
+    paths: tagPaths,
+    fallback: true, // or false
+  }
+}
+
+export async function getStaticProps({ params: { tag } }) {
   const tagDocs = await client.query(Prismic.Predicates.at('my.tag.identifier', tag.replace(/-/, ' ')), {
     pageSize: 1,
   })
@@ -131,7 +142,7 @@ Tag.getInitialProps = async ({ query: { tag } }) => {
     }
   )
 
-  return { tag: tagDoc, sketchplanations }
+  return { props: { tag: tagDoc, sketchplanations } }
 }
 
 export default Tag
