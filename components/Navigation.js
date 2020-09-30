@@ -34,7 +34,7 @@ const Navigation = () => {
         @screen lg {
           :global(.headroom--pinned) nav,
           :global(.headroom--unfixed) nav {
-            @apply mt-0 pb-0;
+            @apply pb-0;
           }
         }
 
