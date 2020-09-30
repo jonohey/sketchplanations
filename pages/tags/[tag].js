@@ -71,6 +71,10 @@ const Tag = ({ tag, sketchplanations }) => {
             @apply pt-8 pb-20 mx-auto;
           }
 
+          .gallery {
+            @apply overflow-hidden;
+          }
+
           .gallery :global(.react-photo-gallery--gallery) {
             margin: -16px;
           }

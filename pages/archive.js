@@ -61,7 +61,7 @@ const Archive = ({ sketchplanations }) => {
       </div>
       <style jsx>{`
         .gallery {
-          overflow: hidden;
+          @apply overflow-hidden;
         }
 
         .gallery :global(.react-photo-gallery--gallery) {
