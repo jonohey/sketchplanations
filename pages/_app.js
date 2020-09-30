@@ -64,10 +64,6 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         </div>
       </Headroom>
       <Component {...pageProps} />
-      {/* <a href='' className='patreon'>
-        <img width={108.5} height={25.5} src='https://c5.patreon.com/external/logo/become_a_patron_button.png' />
-      </a> */}
-      <style jsx>{``}</style>
       <script src='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js' />
       <script
         dangerouslySetInnerHTML={{
