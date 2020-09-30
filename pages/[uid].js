@@ -16,7 +16,7 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
     <>
       <Head>
         <title>{pageTitle(title)}</title>
-        <meta property='og:title' content={title} />
+        <meta key='og:title' property='og:title' content={title} />
         <meta property='og:description' content={RichText.asText(body)} />
         <meta property='og:image' content={`${image.url}&w=1200`} />
         <meta property='og:url' content={`https://sketchplanations.vercel.app/${uid}`} />
