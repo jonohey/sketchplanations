@@ -5,27 +5,27 @@ import { client } from '../../prismic-configuration'
 import Gallery from 'react-photo-gallery'
 import Imgix from 'react-imgix'
 import { TextHeader } from 'components'
+import { useRouter } from 'next/router'
 
 const Tag = ({ tag, sketchplanations }) => {
-  const images = sketchplanations.map(
-    ({
-      uid,
-      data: {
-        title,
-        image: {
-          url,
-          alt,
-          dimensions: { width, height },
-        },
-      },
-    }) => ({
+  const router = useRouter()
+
+  if (router.isFallback) {
+    return <div>Loading…</div>
+  }
+
+  let images
+  try {
+    images = sketchplanations.map(({ uid, data: { title, image: { url, alt, dimensions: { width, height } } } }) => ({
       src: url,
       width,
       height,
       alt: alt || `${title} - Sketchplanations`,
       uid,
-    })
-  )
+    }))
+  } catch {
+    console.log('sketchplanations', sketchplanations)
+  }
 
   const renderImage = ({ photo }) => {
     return (
@@ -117,18 +117,24 @@ export async function getStaticPaths() {
   const tags = await queryAll(Prismic.Predicates.at('document.type', 'tag'))
   const tagPaths = tags.map((tag) => ({ params: { tag: tag.slugs[0] } }))
 
-  console.log('tagPaths', tagPaths)
-
   return {
     paths: tagPaths,
-    fallback: true, // or false
+    fallback: true,
   }
 }
 
 export async function getStaticProps({ params: { tag } }) {
-  const tagDocs = await client.query(Prismic.Predicates.at('my.tag.identifier', tag.replace(/-/, ' ')), {
+  const tagIdentifer = tag.replace(/-/g, ' ')
+  let tagDocs = await client.query(Prismic.Predicates.at('my.tag.identifier', tagIdentifer), {
     pageSize: 1,
   })
+
+  // The tag probably has a - in it
+  if (tagDocs.total_results_size === 0) {
+    tagDocs = await client.query(Prismic.Predicates.at('my.tag.identifier', tag), {
+      pageSize: 1,
+    })
+  }
 
   const tagDoc = tagDocs?.results[0]
 
