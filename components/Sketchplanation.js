@@ -4,7 +4,7 @@ import Shiitake from 'shiitake'
 import Link from 'next/link'
 import Imgix from 'react-imgix'
 
-import { SocialSharing } from 'components'
+import { SocialSharing, TextHeader } from 'components'
 
 const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = false }) => {
   const {
@@ -39,7 +39,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
       <div className='content'>
         {!hideContent && (
           <>
-            <h1>{title}</h1>
+            <TextHeader>{title}</TextHeader>
             <div className='body'>
               {fullPost ? (
                 <RichText render={body} />
@@ -108,11 +108,6 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
           .content {
             @apply px-0;
           }
-        }
-
-        h1 {
-          @apply text-3xl mb-3 mx-auto;
-          font-weight: 300;
         }
 
         .body {

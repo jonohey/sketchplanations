@@ -2,6 +2,7 @@ import React from 'react'
 import { RichText } from 'prismic-reactjs'
 import { linkResolver } from 'prismic-configuration'
 import Imgix from 'react-imgix'
+import { TextHeader } from 'components'
 
 const Text = ({ slice }) => RichText.render(slice.primary.content, linkResolver)
 
@@ -46,7 +47,7 @@ const Page = ({
   return (
     <>
       <div className='root'>
-        <h1>{title}</h1>
+        <TextHeader>{title}</TextHeader>
         <div className='body'>
           {body.map((slice, index) =>
             React.createElement(sliceTypesToComponent[slice.slice_type], { key: index, slice })
@@ -58,11 +59,6 @@ const Page = ({
           .root {
             max-width: 800px;
             @apply pt-8 pb-20 px-6 mx-auto;
-          }
-
-          h1 {
-            @apply text-3xl mb-10 mx-auto text-center;
-            font-weight: 300;
           }
 
           .body :global(> * + *) {

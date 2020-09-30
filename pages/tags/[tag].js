@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { client } from '../../prismic-configuration'
 import Gallery from 'react-photo-gallery'
 import Imgix from 'react-imgix'
+import { TextHeader } from 'components'
 
 const Tag = ({ tag, sketchplanations }) => {
   const images = sketchplanations.map(
@@ -57,7 +58,9 @@ const Tag = ({ tag, sketchplanations }) => {
   return (
     <>
       <div className='root'>
-        <h1>{tag.slugs[0]}</h1>
+        <TextHeader className='text-center'>
+          Sketchplanations tagged with <b>{tag.slugs[0]}</b>
+        </TextHeader>
         <div className='gallery'>
           <Gallery photos={images} direction='row' margin={16} targetRowHeight={400} renderImage={renderImage} />
         </div>
@@ -66,11 +69,6 @@ const Tag = ({ tag, sketchplanations }) => {
         {`
           .root {
             @apply pt-8 pb-20 mx-auto;
-          }
-
-          h1 {
-            @apply text-3xl mb-10 mx-auto text-center;
-            font-weight: 300;
           }
 
           .gallery :global(.react-photo-gallery--gallery) {
