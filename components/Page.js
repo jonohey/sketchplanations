@@ -43,6 +43,7 @@ const Page = ({
   document: {
     data: { title, body },
   },
+  children,
 }) => {
   return (
     <>
@@ -52,6 +53,7 @@ const Page = ({
           {body.map((slice, index) =>
             React.createElement(sliceTypesToComponent[slice.slice_type], { key: index, slice })
           )}
+          {children}
         </div>
       </div>
       <style jsx>
