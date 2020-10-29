@@ -72,9 +72,8 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
           <p className='coffee'>
             Enjoying Sketchplanations?{' '}
             <a href='https://www.buymeacoffee.com/sketchplanator' target='_blank' rel='noreferrer'>
-              Buy me a coffee
+              <img src='/bmc.svg' alt='Buy Me A Coffee' />
             </a>
-            .
           </p>
         )}
       </div>
@@ -157,11 +156,13 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         }
 
         .coffee {
-          @apply mt-10;
+          @apply mt-20 flex flex-col items-center;
         }
 
-        .coffee a {
-          @apply text-bright-red;
+        .coffee img {
+          @apply inline-block mt-4;
+          width: 170px;
+          height: auto;
         }
       `}</style>
     </div>
