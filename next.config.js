@@ -2,8 +2,8 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/post/:slug*/amp',
-        destination: '/post/:slug',
+        source: '/post/:id/:slug/amp',
+        destination: '/post/:id/:slug',
       },
     ]
   },
