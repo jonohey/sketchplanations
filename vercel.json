@@ -4965,7 +4965,7 @@
       "destination": "/how-to-make-irish-coffee",
       "permanent": true
     },
-    { "source": "/post/81935185381/thunder-clouds", "destination": "/thunder-clouds", "permanent": true / amp },
+    { "source": "/post/81935185381/thunder-clouds/amp", "destination": "/thunder-clouds", "permanent": true },
     {
       "source": "/post/81825142840/measures-of-central-tendency-mean-median-mode/amp",
       "destination": "/measures-of-central-tendency-mean-median-mode",
@@ -5167,9 +5167,9 @@
       "permanent": true
     },
     {
-      "source": "/post/77854317490/circular-breathing-hard",
+      "source": "/post/77854317490/circular-breathing-hard/amp",
       "destination": "/circular-breathing",
-      "permanent": true / amp
+      "permanent": true
     },
     {
       "source": "/post/77752098636/debts-vicious-cycle-hat-tip-avraham-byers/amp",
@@ -5316,7 +5316,7 @@
       "destination": "/lenticular-clouds",
       "permanent": true
     },
-    { "source": "/post/74666781370/framing", "destination": "/framing", "permanent": true / amp },
+    { "source": "/post/74666781370/framing/amp", "destination": "/framing", "permanent": true },
     {
       "source": "/post/74610796896/the-content-is-the-interface-sam-moreau-user/amp",
       "destination": "/the-content-is-the-interface",
@@ -5683,9 +5683,9 @@
       "permanent": true
     },
     {
-      "source": "/post/66918563703/make-art-like-warhol",
+      "source": "/post/66918563703/make-art-like-warhol/amp",
       "destination": "/make-art-like-warhol",
-      "permanent": true / amp
+      "permanent": true
     },
     {
       "source": "/post/66824819675/make-art-like-john-cage-most-famously-know-for/amp",
@@ -5902,7 +5902,7 @@
       "destination": "/store-whiteboard-pens-with-the-nib-down",
       "permanent": true
     },
-    { "source": "/post/62758789193/the-law-of-lockers", "destination": "/the-law-of-lockers", "permanent": true / amp },
+    { "source": "/post/62758789193/the-law-of-lockers/amp", "destination": "/the-law-of-lockers", "permanent": true },
     {
       "source": "/post/62667149195/plug-computing-i-love-the-idea-that-the-computer/amp",
       "destination": "/plug-computing",
@@ -5973,11 +5973,7 @@
       "destination": "/london-dog-size",
       "permanent": true
     },
-    {
-      "source": "/post/61355581968/be-nice-to-tourists",
-      "destination": "/be-nice-to-tourists",
-      "permanent": true / amp
-    },
+    { "source": "/post/61355581968/be-nice-to-tourists/amp", "destination": "/be-nice-to-tourists", "permanent": true },
     {
       "source": "/post/61249752387/5-user-tests-finds-85-problems-classic-rule-of/amp",
       "destination": "/5-user-tests-finds-85-percent-problems",
@@ -6053,11 +6049,7 @@
       "destination": "/palindromes-and-semordnilap",
       "permanent": true
     },
-    {
-      "source": "/post/59814196233/the-best-number-8008135",
-      "destination": "/the-best-number",
-      "permanent": true / amp
-    },
+    { "source": "/post/59814196233/the-best-number-8008135/amp", "destination": "/the-best-number", "permanent": true },
     {
       "source": "/post/59721223670/omit-unnecessary-words-two-and-a-half-words-of/amp",
       "destination": "/omit-unnecessary-words",
@@ -6373,7 +6365,7 @@
       "destination": "/adjust-your-daily-caffeine-intake",
       "permanent": true
     },
-    { "source": "/post/54175606234/control-a-cue-ball", "destination": "/control-a-cue-ball", "permanent": true / amp },
+    { "source": "/post/54175606234/control-a-cue-ball/amp", "destination": "/control-a-cue-ball", "permanent": true },
     {
       "source": "/post/54045943957/on-parenting-childhood-is-not-a-race-insights/amp",
       "destination": "/on-parenting-childhood-is-not-a-race",
@@ -6504,7 +6496,7 @@
       "destination": "/organise-veg-in-the-fridge",
       "permanent": true
     },
-    { "source": "/post/53045200799/affect-effect", "destination": "/affect-effect", "permanent": true / amp },
+    { "source": "/post/53045200799/affect-effect/amp", "destination": "/affect-effect", "permanent": true },
     {
       "source": "/post/53044867440/be-stubborn-on-vision-be-flexible-on-details/amp",
       "destination": "/be-stubborn-on-vision-be-flexible-on-details",
@@ -6695,7 +6687,7 @@
       "destination": "/decorate-a-christmas-tree",
       "permanent": true
     },
-    { "source": "/post/53020704128/accept-compliments", "destination": "/accept-compliments", "permanent": true / amp },
+    { "source": "/post/53020704128/accept-compliments/amp", "destination": "/accept-compliments", "permanent": true },
     {
       "source": "/post/53020673629/how-to-play-reverse-pool-really-a-surprisingly/amp",
       "destination": "/how-to-play-reverse-pool",
