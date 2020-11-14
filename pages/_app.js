@@ -75,6 +75,9 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         </div>
       </Headroom>
       <Component {...pageProps} />
+      <a className='coffee' href='https://www.buymeacoffee.com/sketchplanator' target='_blank' rel='noreferrer'>
+        <img src='/bmc.svg' alt='Buy Me A Coffee' />
+      </a>
       <script src='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js' />
       <script
         dangerouslySetInnerHTML={{

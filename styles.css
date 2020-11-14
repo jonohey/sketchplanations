@@ -140,3 +140,13 @@ pre {
   font: 16px 'Open Sans', sans-serif;
   width: 375px;
 }
+
+.coffee {
+  @apply fixed z-10 bottom-0 left-0 mb-4 ml-4 flex flex-col items-center py-3 px-4 bg-white shadow-lg rounded;
+}
+
+.coffee img {
+  @apply inline-block;
+  width: 140px;
+  height: auto;
+}
