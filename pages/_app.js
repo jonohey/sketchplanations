@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/react'
+import { Integrations } from '@sentry/tracing'
 import 'lazysizes'
 import 'lazysizes/plugins/attrchange/ls.attrchange'
 import Head from 'next/head'
@@ -9,6 +11,15 @@ import { pageTitle } from 'helpers'
 import { Navigation } from 'components'
 
 import 'styles.css'
+
+if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
+  Sentry.init({
+    enabled: process.env.NODE_ENV === 'production',
+    dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+    integrations: [new Integrations.BrowserTracing()],
+    tracesSampleRate: 1.0,
+  })
+}
 
 export default function MyApp({ Component, pageProps, router: { route } }) {
   return (
