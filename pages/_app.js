@@ -107,6 +107,49 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         type='text/javascript'
         src='https://static.cdn.prismic.io/prismic.min.js?repo=sketchplanations.prismic.io&new=true'
       ></script> */}
+      <data
+        id='mj-w-res-data'
+        data-token='c22b46d3910462e818bab7baf57bfd7a'
+        className='mj-w-data'
+        data-apikey='5y2N'
+        data-w-id='Gbk'
+        data-lang='en_US'
+        data-base='https://app.mailjet.com'
+        data-width='640'
+        data-height='265'
+        data-statics='statics'
+      ></data>
+      <script type='text/javascript' src='https://app.mailjet.com/statics/js/widget.modal.js'></script>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+          function setCookie(name,value,days) {
+            if (days) {
+              var date = new Date();
+              date.setTime(date.getTime()+(days*24*60*60*1000));
+              var expires = "; expires="+date.toGMTString();
+            }
+            else var expires = "";
+            document.cookie = name+"="+value+expires+"; path=/";
+          }
+          function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+              var c = ca[i];
+              while (c.charAt(0)==' ') c = c.substring(1,c.length);
+              if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
+          }
+          setTimeout(function(){
+            if (!getCookie('mjPopinShown')) {
+              setCookie("mjPopinShown", true, 1);
+              mjOpenPopin(document.createEvent('Event'), document.getElementById('mj-w-res-data'));
+            }
+          }, 5000);`,
+        }}
+      />
     </>
   )
 }
