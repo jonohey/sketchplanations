@@ -109,7 +109,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
       ></script> */}
       <data
         id='mj-w-res-data'
-        data-token='c22b46d3910462e818bab7baf57bfd7a'
+        data-token='cfe73bca0f162347a7cb4a1f7dc73ab5'
         className='mj-w-data'
         data-apikey='5y2N'
         data-w-id='Gbk'
