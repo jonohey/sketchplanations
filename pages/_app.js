@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/react'
+import { Integrations } from '@sentry/tracing'
 import 'lazysizes'
 import 'lazysizes/plugins/attrchange/ls.attrchange'
 import Head from 'next/head'
@@ -9,6 +11,15 @@ import { pageTitle } from 'helpers'
 import { Navigation } from 'components'
 
 import 'styles.css'
+
+if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
+  Sentry.init({
+    enabled: process.env.NODE_ENV === 'production',
+    dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+    integrations: [new Integrations.BrowserTracing()],
+    tracesSampleRate: 1.0,
+  })
+}
 
 export default function MyApp({ Component, pageProps, router: { route } }) {
   return (
@@ -63,6 +74,9 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         </div>
       </Headroom>
       <Component {...pageProps} />
+      <a className='coffee' href='https://www.buymeacoffee.com/sketchplanator' target='_blank' rel='noreferrer'>
+        <img src='/bmc.svg' alt='Buy Me A Coffee' />
+      </a>
       <script src='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js' />
       <script
         dangerouslySetInnerHTML={{

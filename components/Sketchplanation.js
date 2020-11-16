@@ -68,15 +68,6 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
           </ul>
         )}
         {fullPost && <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />}
-        {fullPost && (
-          <p className='coffee'>
-            Enjoying Sketchplanations?{' '}
-            <a href='https://www.buymeacoffee.com/sketchplanator' target='_blank' rel='noreferrer'>
-              Buy me a coffee
-            </a>
-            .
-          </p>
-        )}
       </div>
       <style jsx>{`
         .root {
@@ -153,14 +144,6 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         }
 
         .tags a:hover {
-          @apply text-bright-red;
-        }
-
-        .coffee {
-          @apply mt-10;
-        }
-
-        .coffee a {
           @apply text-bright-red;
         }
       `}</style>

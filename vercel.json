@@ -3105,7 +3105,12 @@
     },
     {
       "source": "/post/53045551911/connect-with-a-colleague-through-affinities",
-      "destination": "/connect-with-a-colleague-through-affinities",
+      "destination": "/affinities",
+      "permanent": true
+    },
+    {
+      "source": "/connect-with-a-colleague-through-affinities",
+      "destination": "/affinities",
       "permanent": true
     },
     {
