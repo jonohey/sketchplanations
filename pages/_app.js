@@ -44,7 +44,6 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
           type='text/css'
           href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css'
         />
-        <link href='//cdn-images.mailchimp.com/embedcode/classic-10_7.css' rel='stylesheet' type='text/css' />
         <script async src='https://www.googletagmanager.com/gtag/js?id=UA-72222206-1'></script>
         <script
           dangerouslySetInnerHTML={{
@@ -108,15 +107,47 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         type='text/javascript'
         src='https://static.cdn.prismic.io/prismic.min.js?repo=sketchplanations.prismic.io&new=true'
       ></script> */}
+      <data
+        id='mj-w-res-data'
+        data-token='cfe73bca0f162347a7cb4a1f7dc73ab5'
+        className='mj-w-data'
+        data-apikey='5y2N'
+        data-w-id='Gbk'
+        data-lang='en_US'
+        data-base='https://app.mailjet.com'
+        data-width='640'
+        data-height='265'
+        data-statics='statics'
+      ></data>
+      <script type='text/javascript' src='https://app.mailjet.com/statics/js/widget.modal.js'></script>
       <script
-        type='text/javascript'
-        src='//downloads.mailchimp.com/js/signup-forms/popup/embed.js'
-        data-dojo-config='usePlainJson: true, isDebug: false'
-      ></script>
-      <script
-        type='text/javascript'
         dangerouslySetInnerHTML={{
-          __html: `require(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us7.list-manage.com","uuid":"9cb0e0c4f7192ab482322d4f9","lid":"a5a82e1a38"}) })`,
+          __html: `
+          function setCookie(name,value,days) {
+            if (days) {
+              var date = new Date();
+              date.setTime(date.getTime()+(days*24*60*60*1000));
+              var expires = "; expires="+date.toGMTString();
+            }
+            else var expires = "";
+            document.cookie = name+"="+value+expires+"; path=/";
+          }
+          function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+              var c = ca[i];
+              while (c.charAt(0)==' ') c = c.substring(1,c.length);
+              if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
+          }
+          setTimeout(function(){
+            if (!getCookie('mjPopinShown')) {
+              setCookie("mjPopinShown", true, 1);
+              mjOpenPopin(document.createEvent('Event'), document.getElementById('mj-w-res-data'));
+            }
+          }, 15000);`,
         }}
       />
     </>

@@ -17,13 +17,9 @@ const Navigation = () => {
         <a href='https://www.patreon.com/sketchplanations' target='_blank' rel='noreferrer'>
           Patreon
         </a>
-        <a
-          href='https://sketchplanations.us7.list-manage.com/subscribe?u=9cb0e0c4f7192ab482322d4f9&id=a5a82e1a38'
-          target='_blank'
-          rel='noreferrer'
-        >
-          Subscribe
-        </a>
+        <Link href='/subscribe'>
+          <a>Subscribe</a>
+        </Link>
       </nav>
       <style jsx>{`
         :global(.headroom--pinned) nav,
