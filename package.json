@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node generateSitemap.js",
     "start": "next start"
   },
   "dependencies": {
     "@sentry/react": "^5.27.4",
     "@sentry/tracing": "^5.27.4",
+    "globby": "^11.0.1",
     "lazysizes": "^5.2.2",
     "next": "^9.3.3",
     "nextjs-progressbar": "^0.0.6",
