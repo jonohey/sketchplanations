@@ -35,7 +35,7 @@ async function generateSitemap() {
     orderings: '[my.tag.identifier]',
   })
 
-  const lastSketchPubDate = sketchplanations[sketchplanations.length - 1].last_publication_date
+  const lastSketchPubDate = new Date(sketchplanations[sketchplanations.length - 1].last_publication_date)
 
   const pages = await globby([
     'pages/**/*.js',
@@ -53,7 +53,7 @@ async function generateSitemap() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://sketchplanations.com/</loc>
-    <lastmod>${lastSketchPubDate}</lastmod>
+    <lastmod>${lastSketchPubDate.toISOString()}</lastmod>
     <priority>1.00</priority>
   </url>
 ${sketchplanations
@@ -61,7 +61,7 @@ ${sketchplanations
     return `
   <url>
     <loc>${`https://sketchplanations.com/${sketchplanation.uid}`}</loc>
-    <lastmod>${sketchplanation.last_publication_date}</lastmod>
+    <lastmod>${new Date(sketchplanation.last_publication_date).toISOString()}</lastmod>
     <priority>0.80</priority>
   </url>`
   })
@@ -71,7 +71,7 @@ ${tags
     return `
   <url>
     <loc>${`https://sketchplanations.com/tags/${tag.data.identifier}`}</loc>
-    <lastmod>${tag.last_publication_date}</lastmod>
+    <lastmod>${new Date(tag.last_publication_date).toISOString()}</lastmod>
     <priority>0.64</priority>
   </url>`
   })
