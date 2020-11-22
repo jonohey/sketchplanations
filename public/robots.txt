@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sketchplanations.com/sitemap.xml
