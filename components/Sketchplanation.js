@@ -42,7 +42,10 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
             <TextHeader>{title}</TextHeader>
             <div className='body'>
               {fullPost ? (
-                <RichText render={body} />
+                <>
+                  <PayWhatYouWant />
+                  <RichText render={body} />
+                </>
               ) : (
                 <>
                   <Shiitake lines={3} throttleRate={200}>

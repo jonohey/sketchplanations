@@ -8,10 +8,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "@magic-ext/oauth": "^0.7.0",
     "@sentry/react": "^5.27.4",
     "@sentry/tracing": "^5.27.4",
+    "@stripe/react-stripe-js": "^1.1.2",
+    "@stripe/stripe-js": "^1.11.0",
     "globby": "^11.0.1",
     "lazysizes": "^5.2.2",
+    "magic-sdk": "^4.0.0",
     "next": "^9.3.3",
     "nextjs-progressbar": "^0.0.6",
     "postcss-flexbugs-fixes": "^4.2.1",
@@ -19,12 +23,14 @@
     "prismic-reactjs": "^1.3.1",
     "ramda": "^0.27.0",
     "react": "^16.13.0",
+    "react-currency-input-field": "^2.7.0",
     "react-dom": "^16.13.0",
     "react-headroom": "^3.0.0",
     "react-imgix": "^9.0.2",
     "react-infinite-scroll-component": "^5.1.0",
     "react-photo-gallery": "^8.0.0",
-    "shiitake": "^3.0.2"
+    "shiitake": "^3.0.2",
+    "stripe": "^8.127.0"
   },
   "devDependencies": {
     "eslint": "^7.9.0",

@@ -9,6 +9,8 @@ import Link from 'next/link'
 import NextNprogress from 'nextjs-progressbar'
 import { pageTitle } from 'helpers'
 import { Navigation } from 'components'
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 
 import 'styles.css'
 
@@ -21,9 +23,21 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
   })
 }
 
+const stripePromise = loadStripe(
+  'pk_test_51HHbylFCZUVebsQF043GAgIN89pPv8msh5nCin7pJGhAUma2s5AmvKBdQFF8iM3qFm2P85xCYI8QSS5vCEunlY3R0039ahWg4V'
+)
+
+const ELEMENTS_OPTIONS = {
+  fonts: [
+    {
+      cssSrc: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap',
+    },
+  ],
+}
+
 export default function MyApp({ Component, pageProps, router: { route } }) {
   return (
-    <>
+    <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
       <Head>
         <title>{pageTitle()}</title>
         <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
@@ -38,6 +52,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         <meta property='og:site_name' content='Sketchplanations' />
         <meta name='twitter:site' content='@sketchplanator' />
         <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link rel='preconnect' href='https://js.stripe.com' />
         <link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap' rel='stylesheet' />
         <link
           rel='stylesheet'
@@ -150,6 +165,6 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
           }, 15000);`,
         }}
       />
-    </>
+    </Elements>
   )
 }
