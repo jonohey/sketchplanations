@@ -4,7 +4,7 @@ import Shiitake from 'shiitake'
 import Link from 'next/link'
 import Imgix from 'react-imgix'
 
-import { SocialSharing, TextHeader } from 'components'
+import { SocialSharing, TextHeader, PayWhatYouWant } from 'components'
 
 const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = false }) => {
   const {
@@ -42,10 +42,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
             <TextHeader>{title}</TextHeader>
             <div className='body'>
               {fullPost ? (
-                <>
-                  <PayWhatYouWant />
-                  <RichText render={body} />
-                </>
+                <RichText render={body} />
               ) : (
                 <>
                   <Shiitake lines={3} throttleRate={200}>
@@ -60,17 +57,22 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
           </>
         )}
         {fullPost && (
-          <ul className='tags'>
-            {sketchplanation.data.tags.map((tag, index) => (
-              <li key={index}>
-                <Link key={tag} href={`/tags/${tag.tag.slug}`}>
-                  <a>{tag.tag.slug.replace(/-/, ' ')}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <>
+            <ul className='tags'>
+              {sketchplanation.data.tags.map((tag, index) => (
+                <li key={index}>
+                  <Link key={tag} href={`/tags/${tag.tag.slug}`}>
+                    <a>{tag.tag.slug.replace(/-/, ' ')}</a>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />
+            <div className='pwyw'>
+              <PayWhatYouWant />
+            </div>
+          </>
         )}
-        {fullPost && <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />}
       </div>
       <style jsx>{`
         .root {
@@ -148,6 +150,10 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
 
         .tags a:hover {
           @apply text-bright-red;
+        }
+
+        .pwyw {
+          @apply mt-10;
         }
       `}</style>
     </div>
