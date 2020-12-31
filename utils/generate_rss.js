@@ -59,7 +59,7 @@ async function generateRSS() {
     },
   }
 
-  const doc = create(obj)
+  const doc = create({ encoding: 'UTF-8' }, obj)
   const xml = doc.end()
   fs.writeFileSync('public/rss', xml)
 }
