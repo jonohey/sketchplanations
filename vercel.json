@@ -1,4 +1,15 @@
 {
+  "headers": [
+    {
+      "source": "/rss",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/rss+xml"
+        }
+      ]
+    }
+  ],
   "redirects": [
     {
       "source": "/post/630439800088985600/the-4-horsemen-of-relationship-apocalypse-john",

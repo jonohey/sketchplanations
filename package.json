@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node generateSitemap.js",
+    "build": "next build && node utils/generate_sitemap.js && node utils/generate_rss.js",
     "start": "next start"
   },
   "dependencies": {
@@ -33,7 +33,9 @@
     "eslint-plugin-react": "^7.20.6",
     "now": "^19.1.2",
     "postcss-preset-env": "^6.7.0",
+    "prismic-dom": "^2.2.4",
     "styled-jsx-plugin-postcss": "^2.0.1",
-    "tailwindcss": "^1.4.6"
+    "tailwindcss": "^1.4.6",
+    "xmlbuilder2": "^2.4.0"
   }
 }

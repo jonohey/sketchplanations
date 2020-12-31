@@ -1,28 +1,7 @@
 const fs = require('fs')
 const globby = require('globby')
-
 const Prismic = require('prismic-javascript')
-const apiEndpoint = 'https://sketchplanations.prismic.io/api/v2'
-const client = Prismic.client(apiEndpoint)
-
-const queryAll = async (predicates, options = {}) => {
-  let page = 1
-  let hasNextPage = true
-  const documents = []
-
-  do {
-    let response = await client.query(predicates, {
-      ...options,
-      pageSize: 100,
-      page,
-    })
-    documents.push(...response.results)
-    page++
-    hasNextPage = page <= response.total_pages
-  } while (hasNextPage)
-
-  return documents
-}
+const { queryAll } = require('../helpers')
 
 async function generateSitemap() {
   const sketchplanations = await queryAll(Prismic.Predicates.at('document.type', 'sketchplanation'), {
