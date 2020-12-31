@@ -16,8 +16,6 @@ async function generateRSS() {
     orderings: '[my.sketchplanation.published_at desc]',
   })
 
-  // console.log(sketchplanations[0])
-
   const items = sketchplanations.map(
     ({
       uid,
