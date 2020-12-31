@@ -1,3 +1,4 @@
+const { create } = require('xmlbuilder2')
 const fs = require('fs')
 const globby = require('globby')
 const Prismic = require('prismic-javascript')
@@ -28,46 +29,52 @@ async function generateSitemap() {
     '!pages/thanks.js',
   ])
 
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://sketchplanations.com/</loc>
-    <lastmod>${lastSketchPubDate.toISOString()}</lastmod>
-    <priority>1.00</priority>
-  </url>
-${sketchplanations
-  .map((sketchplanation) => {
-    return `
-  <url>
-    <loc>${`https://sketchplanations.com/${sketchplanation.uid}`}</loc>
-    <lastmod>${new Date(sketchplanation.last_publication_date).toISOString()}</lastmod>
-    <priority>0.80</priority>
-  </url>`
-  })
-  .join('')}
-${tags
-  .map((tag) => {
-    return `
-  <url>
-    <loc>${`https://sketchplanations.com/tags/${tag.data.identifier}`}</loc>
-    <lastmod>${new Date(tag.last_publication_date).toISOString()}</lastmod>
-    <priority>0.64</priority>
-  </url>`
-  })
-  .join('')}
-${pages
-  .map((page) => {
-    const path = page.replace('pages', '').replace('.js', '')
-    return `
-  <url>
-    <loc>${`https://sketchplanations.com${path}`}</loc>
-    <priority>0.64</priority>
-  </url>`
-  })
-  .join('')}
-</urlset>`
+  const urls = []
 
-  fs.writeFileSync('public/sitemap.xml', sitemap)
+  // Home page
+  urls.push({
+    loc: 'https://sketchplanations.com/',
+    lastmod: lastSketchPubDate.toISOString(),
+    priority: '1.00',
+  })
+
+  // Sketchplanations
+  sketchplanations.map((sketchplanation) => {
+    urls.push({
+      loc: `https://sketchplanations.com/${sketchplanation.uid}`,
+      lastmod: new Date(sketchplanation.last_publication_date).toISOString(),
+      priority: '0.80',
+    })
+  })
+
+  // Tags
+  tags.map((tag) => {
+    urls.push({
+      loc: `https://sketchplanations.com/tags/${tag.data.identifier}`,
+      lastmod: new Date(tag.last_publication_date).toISOString(),
+      priority: '0.64',
+    })
+  })
+
+  // Pages
+  pages.map((page) => {
+    const path = page.replace('pages', '').replace('.js', '')
+    urls.push({
+      loc: `https://sketchplanations.com${path}`,
+      priority: '0.64',
+    })
+  })
+
+  const obj = {
+    urlset: {
+      '@xmlns': 'http://www.sitemaps.org/schemas/sitemap/0.9',
+      url: urls,
+    },
+  }
+
+  const doc = create({ encoding: 'UTF-8' }, obj)
+  const xml = doc.end({ prettyPrint: true })
+  fs.writeFileSync('public/sitemap.xml', xml)
 }
 
 generateSitemap()
