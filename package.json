@@ -8,7 +8,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@magic-ext/oauth": "^0.7.0",
     "@prismicio/client": "^4.0.0",
     "@sentry/react": "^5.27.4",
     "@sentry/tracing": "^5.27.4",
@@ -16,7 +15,6 @@
     "@stripe/stripe-js": "^1.11.0",
     "globby": "^11.0.1",
     "lazysizes": "^5.2.2",
-    "magic-sdk": "^4.0.0",
     "next": "^9.3.3",
     "nextjs-progressbar": "^0.0.6",
     "postcss-flexbugs-fixes": "^4.2.1",
