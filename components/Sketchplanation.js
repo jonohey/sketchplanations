@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { RichText } from 'prismic-reactjs'
 import Shiitake from 'shiitake'
 import Link from 'next/link'
 import Imgix from 'react-imgix'
 
-import { SocialSharing, TextHeader, PayWhatYouWant } from 'components'
+import { SocialSharing, TextHeader, PayWhatYouWant, Modal } from 'components'
 
 const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = false }) => {
+  const [pwywModalOpen, setPwywModalOpen] = useState(false)
   const {
     data: { image, title, body },
     uid,
@@ -68,9 +69,14 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
               ))}
             </ul>
             <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />
-            <div className='pwyw'>
-              <PayWhatYouWant />
-            </div>
+            <button className='pwyw-button' type='button' onClick={() => setPwywModalOpen(true)}>
+              Download high-quality image
+            </button>
+            <Modal show={pwywModalOpen} onHide={() => setPwywModalOpen(false)}>
+              <div className='pwyw'>
+                <PayWhatYouWant sketchplanationUid={sketchplanation.uid} />
+              </div>
+            </Modal>
           </>
         )}
       </div>
@@ -153,7 +159,16 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         }
 
         .pwyw {
-          @apply mt-10;
+          @apply p-8;
+        }
+
+        .pwyw-button {
+          @apply mt-10 text-sm;
+          color: #888;
+        }
+
+        .pwyw-button:hover {
+          @apply text-bright-red;
         }
       `}</style>
     </div>

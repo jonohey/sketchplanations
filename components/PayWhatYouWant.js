@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import Link from 'next/link'
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
-import CurrencyInput, { formatValue } from 'react-currency-input-field'
+import CurrencyInput from 'react-currency-input-field'
 
 const CARD_OPTIONS = {
   iconStyle: 'solid',
@@ -16,10 +17,14 @@ const CARD_OPTIONS = {
   },
 }
 
-const PayWhatYouWant = () => {
+const presetAmounts = [2, 5, 10, 20, 50, 100, null]
+
+const PayWhatYouWant = ({ sketchplanationUid }) => {
   const stripe = useStripe()
   const elements = useElements()
-  const [amount, setAmount] = useState(2)
+  const [free, setFree] = useState(false)
+  const [amount, setAmount] = useState(20)
+  const [customAmount, setCustomAmount] = useState(null)
   const [error, setError] = useState(null)
   const [cardComplete, setCardComplete] = useState(false)
   const [processing, setProcessing] = useState(false)
@@ -27,6 +32,10 @@ const PayWhatYouWant = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    const stripeAmount = parseFloat(customAmount || amount)
+
+    if (isNaN(stripeAmount)) return alert('Oops, did you name your own price?')
+    if (stripeAmount < 0.3) return alert('Sorry, the amount must be at least £0.30')
 
     if (!stripe || !elements) return
     if (error) return elements.getElement('card').focus()
@@ -34,7 +43,7 @@ const PayWhatYouWant = () => {
 
     const cardElement = elements.getElement(CardElement)
 
-    const response = await fetch('/api/pi', {
+    const response = await fetch(`/api/pi?amount=${stripeAmount}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -43,20 +52,23 @@ const PayWhatYouWant = () => {
 
     const data = await response.json()
 
-    console.log('data.clientSecret', data.clientSecret)
+    try {
+      const payload = await stripe.confirmCardPayment(data.clientSecret, {
+        payment_method: {
+          card: cardElement,
+        },
+      })
 
-    const payload = await stripe.confirmCardPayment(data.clientSecret, {
-      payment_method: {
-        card: cardElement,
-      },
-    })
+      setProcessing(false)
 
-    setProcessing(false)
-
-    if (payload.error) {
-      setError(payload.error)
-    } else {
-      setPaymentIntent(payload.paymentIntent)
+      if (payload.error) {
+        setError(payload.error)
+      } else {
+        setPaymentIntent(payload.paymentIntent)
+      }
+    } catch (e) {
+      setProcessing(false)
+      console.error(e)
     }
   }
 
@@ -68,52 +80,90 @@ const PayWhatYouWant = () => {
   return (
     <>
       <div>
-        {/* <h2>Pay what you want 🙂</h2> */}
-        <p>
-          If you’d like to use this sketchplanation in a presentation, on your website, to download and print out etc.
-          you can download the high-res file here. Payment is optional but is greatly appreciated. Thank you! 🙂
-        </p>
-        {paymentIntent ? (
-          <pre>{JSON.stringify(paymentIntent, null, 2)}</pre>
+        <h2>Download high-quality image</h2>
+        {free || paymentIntent ? (
+          <>
+            <p>Thank you. You can download the high-quality image using the following link:</p>
+            <p>
+              <a href={`/api/dl?uid=${sketchplanationUid}`} download rel='noreferrer' target='_blank'>
+                https://sketchplanations.com/api/dl?uid={sketchplanationUid}
+              </a>
+            </p>
+          </>
         ) : (
-          <form className='form' onSubmit={handleSubmit}>
-            <div>{error && error.message}</div>
-            <div>
-              <div className='amountInput'>
-                <CurrencyInput
-                  prefix='£'
-                  placeholder='e.g. £2'
-                  defaultValue={amount}
-                  allowDecimals={true}
-                  decimalsLimit={2}
-                  allowNegativeValue={false}
-                  turnOffAbbreviations={true}
-                  onChange={(value) => setAmount(value)}
-                />
+          <>
+            <p>
+              You’re free to use sketchplanations in your articles or presentations as you wish. Please spread the word!
+              (see{' '}
+              <Link href='/licence'>
+                <a>licence</a>
+              </Link>
+              ) If it’s useful to you please consider paying a small amount to help keep it going.
+            </p>
+            <p>Jono</p>
+            <form className='form' onSubmit={handleSubmit}>
+              <div>{error && error.message}</div>
+              <div>
+                <div className='amount-options'>
+                  {presetAmounts.map((presetAmount) => (
+                    <label key={presetAmount}>
+                      <input
+                        type='radio'
+                        name='amount'
+                        value={amount}
+                        checked={presetAmount === amount}
+                        onChange={() => setAmount(presetAmount)}
+                      />
+                      <span>{presetAmount ? `£${presetAmount}` : 'Other'}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div>
-              <div className='cardInput'>
-                <CardElement options={CARD_OPTIONS} onChange={handleCardElementChange} />
+              {!amount && (
+                <div>
+                  <div className='amount-input'>
+                    <CurrencyInput
+                      prefix='£'
+                      placeholder='Name your own price (min. £0.30)'
+                      defaultValue={customAmount || ''}
+                      allowDecimals={true}
+                      decimalsLimit={2}
+                      allowNegativeValue={false}
+                      turnOffAbbreviations={true}
+                      onChange={(value) => setCustomAmount(value)}
+                    />
+                  </div>
+                </div>
+              )}
+              <div>
+                <div className='cardInput'>
+                  <CardElement options={CARD_OPTIONS} onChange={handleCardElementChange} />
+                </div>
               </div>
-            </div>
-            <div>
-              <button className='payButton' type='submit' disabled={processing || !stripe}>
-                {processing
-                  ? 'Processing…'
-                  : `Download high-res file for ${formatValue({ value: amount, prefix: '£' })}`}
-              </button>
-              <button className='freeButton' type='button'>
-                No thanks, I just want to download it
-              </button>
-            </div>
-          </form>
+              <div>
+                <button className='pay-button' type='submit' disabled={processing || !stripe}>
+                  {processing ? 'Processing…' : 'Pay and download'}
+                </button>
+                <button className='free-button' type='button' onClick={() => setFree(true)}>
+                  Download for free
+                </button>
+              </div>
+            </form>
+          </>
         )}
       </div>
       <style jsx>
         {`
           h2 {
-            @apply m-0 mb-2 text-lg;
+            @apply m-0 mb-3 text-lg;
+          }
+
+          p + p {
+            @apply mt-2;
+          }
+
+          a {
+            @apply text-bright-red;
           }
 
           .form {
@@ -124,22 +174,50 @@ const PayWhatYouWant = () => {
             @apply p-2;
           }
 
-          .amountInput :global(input),
+          .amount-input :global(input),
           .cardInput :global(.StripeElement) {
             @apply block py-2 px-4 w-full bg-white rounded border outline-none;
           }
 
-          .amountInput :global(input:focus),
+          .amount-input :global(input:focus),
           .cardInput :global(.StripeElement--focus) {
             @apply border-blue;
           }
 
-          .payButton {
-            @apply block py-2 px-4 w-full bg-blue text-white rounded;
+          .pay-button {
+            @apply block mt-3 py-2 px-4 w-full bg-blue text-white rounded;
           }
 
-          .freeButton {
-            @apply block mt-4 w-full text-sm;
+          .free-button {
+            @apply block mt-4 py-2 px-4 w-full rounded;
+            color: #777;
+            border: solid 1px #eee;
+          }
+
+          .amount-options {
+            @apply flex flex-wrap justify-center -m-1 mt-0;
+          }
+
+          label {
+            @apply relative p-1;
+          }
+
+          @screen sm {
+            label {
+              @apply flex-grow;
+            }
+          }
+
+          label > input {
+            @apply absolute top-0 left-0 w-full h-full appearance-none opacity-0;
+          }
+
+          label > span {
+            @apply block text-center py-2 px-4 bg-white rounded border;
+          }
+
+          label > input:checked + span {
+            @apply bg-bright-red text-white border-bright-red;
           }
         `}
       </style>

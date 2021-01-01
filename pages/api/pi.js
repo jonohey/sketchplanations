@@ -3,8 +3,10 @@ const stripe = require('stripe')(
 )
 
 export default async (req, res) => {
+  const amount = parseFloat(req.query.amount) * 100
+
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: 1000,
+    amount,
     currency: 'gbp',
   })
 

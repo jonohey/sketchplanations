@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@magic-ext/oauth": "^0.7.0",
+    "@prismicio/client": "^4.0.0",
     "@sentry/react": "^5.27.4",
     "@sentry/tracing": "^5.27.4",
     "@stripe/react-stripe-js": "^1.1.2",
@@ -28,6 +29,7 @@
     "react-headroom": "^3.0.0",
     "react-imgix": "^9.0.2",
     "react-infinite-scroll-component": "^5.1.0",
+    "react-overlays": "^0.9.3",
     "react-photo-gallery": "^8.0.0",
     "shiitake": "^3.0.2",
     "stripe": "^8.127.0"
