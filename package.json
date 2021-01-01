@@ -39,6 +39,7 @@
     "eslint-plugin-react": "^7.20.6",
     "now": "^19.1.2",
     "postcss-preset-env": "^6.7.0",
+    "request": "^2.88.2",
     "styled-jsx-plugin-postcss": "^2.0.1",
     "tailwindcss": "^1.4.6"
   }

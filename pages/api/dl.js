@@ -1,4 +1,4 @@
-const http = require('http')
+const request = require('request')
 const Prismic = require('@prismicio/client')
 export const apiEndpoint = 'https://sketchplanations.prismic.io/api/v2'
 
@@ -20,7 +20,7 @@ export default async (req, res) => {
   res.setHeader('content-disposition', 'attachment; filename=' + filename)
 
   try {
-    const data = await http.get(imageUrl)
+    const data = await request.get(imageUrl)
     res.send(data)
   } catch (e) {
     res.status(404)
