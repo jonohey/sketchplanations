@@ -4,6 +4,17 @@ const Prismic = require('prismic-javascript')
 const PrismicDOM = require('prismic-dom')
 const { queryAll } = require('../helpers')
 
+const pubDate = (date) => {
+  date = new Date(date)
+
+  const pieces = date.toString().split(' '),
+    offsetTime = pieces[5].match(/[-+]\d{4}/),
+    offset = offsetTime ? offsetTime : pieces[5],
+    parts = [pieces[0] + ',', pieces[2], pieces[1], pieces[3], pieces[4], offset]
+
+  return parts.join(' ')
+}
+
 async function generateRSS() {
   const sketchplanations = await queryAll(Prismic.Predicates.at('document.type', 'sketchplanation'), {
     fetch: [
@@ -32,7 +43,7 @@ async function generateRSS() {
       return {
         guid: url,
         title,
-        pubDate: new Date(published_at).toUTCString(),
+        pubDate: pubDate(published_at),
         link: url,
         description: {
           $: html,
