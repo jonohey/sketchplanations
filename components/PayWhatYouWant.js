@@ -83,7 +83,9 @@ const PayWhatYouWant = ({ sketchplanationUid }) => {
         <h2>Download highest-quality image</h2>
         {free || paymentIntent ? (
           <>
-            <p>{paymentIntent && 'Thank you. '}You can download the highest-quality image below:</p>
+            <p>
+              {paymentIntent && 'Thank you. '}You can download the highest-quality version I have of the sketch below:
+            </p>
             <p>
               <a href={`/api/dl?uid=${sketchplanationUid}`} download rel='noreferrer' target='_blank'>
                 https://sketchplanations.com/api/dl?uid={sketchplanationUid}
