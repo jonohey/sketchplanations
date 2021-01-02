@@ -70,7 +70,10 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
             </ul>
             <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />
             <button className='pwyw-button' type='button' onClick={() => setPwywModalOpen(true)}>
-              Download high-quality image
+              <svg width='14' height='19' xmlns='http://www.w3.org/2000/svg'>
+                <path d='M11.951 7.095L7.757 11.29V0H6.243v11.29L2.05 7.095.979 8.166 7 14.187l6.022-6.021-1.07-1.07zM0 16.964h14v1.513H0v-1.513z' />
+              </svg>
+              Download highest-quality image
             </button>
             <Modal show={pwywModalOpen} onHide={() => setPwywModalOpen(false)}>
               <div className='pwyw'>
@@ -169,6 +172,11 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
 
         .pwyw-button:hover {
           @apply text-bright-red;
+        }
+
+        .pwyw-button > svg {
+          @apply inline-block mr-3;
+          fill: currentColor;
         }
       `}</style>
     </div>
