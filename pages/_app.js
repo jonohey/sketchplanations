@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import 'lazysizes'
@@ -9,8 +10,48 @@ import Link from 'next/link'
 import NextNprogress from 'nextjs-progressbar'
 import { pageTitle } from 'helpers'
 import { Navigation } from 'components'
-
+import { Elements } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 import 'styles.css'
+
+const polyfillDownloadAttr = () => {
+  const downloadAttributeSupport = 'download' in document.createElement('a')
+  const msSaveBlob = typeof window.navigator.msSaveBlob !== 'undefined'
+
+  if (!downloadAttributeSupport && msSaveBlob) {
+    document.addEventListener('click', (evt) => {
+      const { target } = evt
+      const { tagName } = target
+
+      if (tagName === 'A' && target.hasAttribute('download')) {
+        evt.preventDefault()
+
+        const { href } = target
+        const fileName = new URL(href).pathname.split('/').pop()
+
+        const xhr = new XMLHttpRequest()
+
+        xhr.open('GET', href)
+
+        xhr.responseType = 'blob'
+
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState !== 4) {
+            return
+          }
+
+          if (xhr.status === 200) {
+            window.navigator.msSaveBlob(xhr.response, fileName)
+          } else {
+            console.error('download-attribute-polyfill:', xhr.status, xhr.statusText)
+          }
+        }
+
+        xhr.send()
+      }
+    })
+  }
+}
 
 if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
   Sentry.init({
@@ -21,9 +62,25 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
   })
 }
 
+const stripePromise = loadStripe(
+  'pk_test_51HHbylFCZUVebsQF043GAgIN89pPv8msh5nCin7pJGhAUma2s5AmvKBdQFF8iM3qFm2P85xCYI8QSS5vCEunlY3R0039ahWg4V'
+)
+
+const ELEMENTS_OPTIONS = {
+  fonts: [
+    {
+      cssSrc: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap',
+    },
+  ],
+}
+
 export default function MyApp({ Component, pageProps, router: { route } }) {
+  useEffect(() => {
+    polyfillDownloadAttr()
+  }, [])
+
   return (
-    <>
+    <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
       <Head>
         <title>{pageTitle()}</title>
         <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
@@ -38,6 +95,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         <meta property='og:site_name' content='Sketchplanations' />
         <meta name='twitter:site' content='@sketchplanator' />
         <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link rel='preconnect' href='https://js.stripe.com' />
         <link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap' rel='stylesheet' />
         <link
           rel='stylesheet'
@@ -150,6 +208,6 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
           }, 15000);`,
         }}
       />
-    </>
+    </Elements>
   )
 }

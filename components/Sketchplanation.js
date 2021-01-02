@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { RichText } from 'prismic-reactjs'
 import Shiitake from 'shiitake'
 import Link from 'next/link'
 import Imgix from 'react-imgix'
 
-import { SocialSharing, TextHeader } from 'components'
+import { SocialSharing, TextHeader, PayWhatYouWant, Modal } from 'components'
 
 const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = false }) => {
+  const [pwywModalOpen, setPwywModalOpen] = useState(false)
   const {
     data: { image, title, body },
     uid,
@@ -57,17 +58,30 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
           </>
         )}
         {fullPost && (
-          <ul className='tags'>
-            {sketchplanation.data.tags.map((tag, index) => (
-              <li key={index}>
-                <Link key={tag} href={`/tags/${tag.tag.slug}`}>
-                  <a>{tag.tag.slug.replace(/-/, ' ')}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <>
+            <ul className='tags'>
+              {sketchplanation.data.tags.map((tag, index) => (
+                <li key={index}>
+                  <Link key={tag} href={`/tags/${tag.tag.slug}`}>
+                    <a>{tag.tag.slug.replace(/-/, ' ')}</a>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />
+            <button className='pwyw-button' type='button' onClick={() => setPwywModalOpen(true)}>
+              <svg width='14' height='19' xmlns='http://www.w3.org/2000/svg'>
+                <path d='M11.951 7.095L7.757 11.29V0H6.243v11.29L2.05 7.095.979 8.166 7 14.187l6.022-6.021-1.07-1.07zM0 16.964h14v1.513H0v-1.513z' />
+              </svg>
+              Download highest-quality image
+            </button>
+            <Modal show={pwywModalOpen} onHide={() => setPwywModalOpen(false)}>
+              <div className='pwyw'>
+                <PayWhatYouWant sketchplanationUid={sketchplanation.uid} />
+              </div>
+            </Modal>
+          </>
         )}
-        {fullPost && <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />}
       </div>
       <style jsx>{`
         .root {
@@ -145,6 +159,24 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
 
         .tags a:hover {
           @apply text-bright-red;
+        }
+
+        .pwyw {
+          @apply p-8;
+        }
+
+        .pwyw-button {
+          @apply mt-10 text-sm;
+          color: #888;
+        }
+
+        .pwyw-button:hover {
+          @apply text-bright-red;
+        }
+
+        .pwyw-button > svg {
+          @apply inline-block mr-3;
+          fill: currentColor;
         }
       `}</style>
     </div>
