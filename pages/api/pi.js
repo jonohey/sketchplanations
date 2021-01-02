@@ -1,6 +1,4 @@
-const stripe = require('stripe')(
-  'sk_test_51HHbylFCZUVebsQFLWH2yzmr25p8QphCk66uM8UP9uz66VssDniTrvN7TfcRHvVyMjyL8PPTU2N8KJv9stoTBxbP001KKPzudF'
-)
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 export default async (req, res) => {
   const amount = parseFloat(req.query.amount) * 100
