@@ -102,7 +102,6 @@ const PayWhatYouWant = ({ sketchplanationUid }) => {
             </p>
             <p>Jono</p>
             <form className='form' onSubmit={handleSubmit}>
-              <div>{error && error.message}</div>
               <div>
                 <div className='amount-options'>
                   {presetAmounts.map((presetAmount) => (
@@ -139,6 +138,7 @@ const PayWhatYouWant = ({ sketchplanationUid }) => {
                 <div className='cardInput'>
                   <CardElement options={CARD_OPTIONS} onChange={handleCardElementChange} />
                 </div>
+                {error && <div className='error'>{error.message}</div>}
               </div>
               <div>
                 <button className='pay-button' type='submit' disabled={processing || !stripe}>
@@ -218,6 +218,11 @@ const PayWhatYouWant = ({ sketchplanationUid }) => {
 
           label > input:checked + span {
             @apply bg-bright-red text-white border-bright-red;
+          }
+
+          .error {
+            @apply mt-2;
+            color: #eb1c26;
           }
         `}
       </style>
