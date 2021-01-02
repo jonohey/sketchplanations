@@ -1,4 +1,4 @@
-import Prismic from 'prismic-javascript'
+import Prismic from '@prismicio/client'
 
 // -- Prismic API endpoint
 // Determines which repository to query and fetch data from
