@@ -62,9 +62,7 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
   })
 }
 
-const stripePromise = loadStripe(
-  'pk_test_51HHbylFCZUVebsQF043GAgIN89pPv8msh5nCin7pJGhAUma2s5AmvKBdQFF8iM3qFm2P85xCYI8QSS5vCEunlY3R0039ahWg4V'
-)
+const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY)
 
 const ELEMENTS_OPTIONS = {
   fonts: [
