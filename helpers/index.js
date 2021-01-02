@@ -8,7 +8,6 @@ exports.pageTitle = (title) => {
 
 const Prismic = require('prismic-javascript')
 const apiEndpoint = 'https://sketchplanations.prismic.io/api/v2'
-const client = Prismic.client(apiEndpoint)
 
 exports.queryAll = async (predicates, options = {}) => {
   let page = 1
@@ -16,6 +15,7 @@ exports.queryAll = async (predicates, options = {}) => {
   const documents = []
 
   do {
+    const client = await Prismic.api(apiEndpoint)
     let response = await client.query(predicates, {
       ...options,
       pageSize: 100,
