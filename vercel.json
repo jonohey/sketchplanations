@@ -16,6 +16,11 @@
   ],
   "redirects": [
     {
+      "source": "/styleguide",
+      "destination": "https://company-208276.frontify.com/d/iATaeFQL51Lv",
+      "permanent": false
+    },
+    {
       "source": "/post/630439800088985600/the-4-horsemen-of-relationship-apocalypse-john",
       "destination": "/the-4-horsemen-of-relationship-apocalypse",
       "permanent": true
@@ -697,7 +702,12 @@
     },
     {
       "source": "/post/170990724031/the-oxford-comma-the-oxford-comma-is-the-comma",
-      "destination": "/the-oxford-comma",
+      "destination": "/oxford-comma",
+      "permanent": true
+    },
+    {
+      "source": "/the-oxford-comma",
+      "destination": "/oxford-comma",
       "permanent": true
     },
     {
@@ -737,7 +747,12 @@
     },
     {
       "source": "/post/168945254629/origins-of-boxing-day-id-idly-wondered-all-my",
-      "destination": "/origins-of-boxing-day",
+      "destination": "/boxing-day",
+      "permanent": true
+    },
+    {
+      "source": "/origins-of-boxing-day",
+      "destination": "/boxing-day",
       "permanent": true
     },
     {
@@ -1187,7 +1202,12 @@
     },
     {
       "source": "/post/140766928257/know-your-dashes-the-hyphen-en-dash-and-em-dash",
-      "destination": "/know-your-dashes-the-hyphen-en-dash-and-em-dash",
+      "destination": "/know-your-dashes",
+      "permanent": true
+    },
+    {
+      "source": "/know-your-dashes-the-hyphen-en-dash-and-em-dash",
+      "destination": "/know-your-dashes",
       "permanent": true
     },
     {
