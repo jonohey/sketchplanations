@@ -19,12 +19,13 @@ const CARD_OPTIONS = {
 
 const presetAmounts = [2, 5, 10, 20, 50, 100, null]
 
-const PayWhatYouWant = ({ sketchplanationUid }) => {
+const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [free, setFree] = useState(false)
   const [amount, setAmount] = useState(20)
   const [customAmount, setCustomAmount] = useState(null)
+  const [customerEmail, setCustomerEmail] = useState('')
   const [error, setError] = useState(null)
   const [cardComplete, setCardComplete] = useState(false)
   const [processing, setProcessing] = useState(false)
@@ -43,30 +44,41 @@ const PayWhatYouWant = ({ sketchplanationUid }) => {
 
     const cardElement = elements.getElement(CardElement)
 
-    const response = await fetch(`/api/pi?amount=${stripeAmount}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-
-    const data = await response.json()
-
     try {
-      const payload = await stripe.confirmCardPayment(data.clientSecret, {
-        payment_method: {
-          card: cardElement,
+      const response = await fetch(`/api/pi`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
+        body: JSON.stringify({
+          amount: stripeAmount,
+          sketchplanationTitle,
+          customerEmail,
+        }),
       })
 
-      setProcessing(false)
+      const data = await response.json()
 
-      if (payload.error) {
-        setError(payload.error)
-      } else {
-        setPaymentIntent(payload.paymentIntent)
+      try {
+        const payload = await stripe.confirmCardPayment(data.clientSecret, {
+          payment_method: {
+            card: cardElement,
+          },
+        })
+
+        setProcessing(false)
+
+        if (payload.error) {
+          setError(payload.error)
+        } else {
+          setPaymentIntent(payload.paymentIntent)
+        }
+      } catch (e) {
+        setProcessing(false)
+        console.error(e)
       }
     } catch (e) {
+      setError('Sorry, something went wrong')
       setProcessing(false)
       console.error(e)
     }
@@ -143,6 +155,15 @@ const PayWhatYouWant = ({ sketchplanationUid }) => {
                 {error && <div className='error'>{error.message}</div>}
               </div>
               <div>
+                <input
+                  className='email-input'
+                  type='text'
+                  placeholder='Your email address'
+                  value={customerEmail}
+                  onChange={(e) => setCustomerEmail(e.target.value)}
+                />
+              </div>
+              <div>
                 <button className='pay-button' type='submit' disabled={processing || !stripe}>
                   {processing ? 'Processing…' : 'Pay and download'}
                 </button>
@@ -182,11 +203,13 @@ const PayWhatYouWant = ({ sketchplanationUid }) => {
           }
 
           .amount-input :global(input),
+          .email-input,
           .cardInput :global(.StripeElement) {
             @apply block py-2 px-4 w-full bg-white rounded border outline-none;
           }
 
           .amount-input :global(input:focus),
+          .email-input:focus,
           .cardInput :global(.StripeElement--focus) {
             @apply border-blue;
           }

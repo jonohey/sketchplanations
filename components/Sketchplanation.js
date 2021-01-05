@@ -77,7 +77,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
             </button>
             <Modal show={pwywModalOpen} onHide={() => setPwywModalOpen(false)}>
               <div className='pwyw'>
-                <PayWhatYouWant sketchplanationUid={sketchplanation.uid} />
+                <PayWhatYouWant sketchplanationUid={sketchplanation.uid} sketchplanationTitle={title} />
               </div>
             </Modal>
           </>
