@@ -21,6 +21,26 @@
       "permanent": false
     },
     {
+      "source": "/wonder",
+      "destination": "https://www.wonder.me/r?id=1dc76a0d-73b0-46f1-a711-acd502af7633",
+      "permanent": false
+    },
+    {
+      "source": "/sketchplanator",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/sketchplanations",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/browse",
+      "destination": "/tags",
+      "permanent": false
+    },
+    {
       "source": "/post/630439800088985600/the-4-horsemen-of-relationship-apocalypse-john",
       "destination": "/the-4-horsemen-of-relationship-apocalypse",
       "permanent": true
@@ -242,7 +262,12 @@
     },
     {
       "source": "/post/189257202946/autumn-leaves-and-the-compounds-that-cause-their",
-      "destination": "/autumn-leaves-and-the-compounds-that-cause-their-colours",
+      "destination": "/autumn-leaves",
+      "permanent": true
+    },
+    {
+      "source": "/autumn-leaves-and-the-compounds-that-cause-their-colours",
+      "destination": "/autumn-leaves",
       "permanent": true
     },
     {
@@ -942,7 +967,12 @@
     },
     {
       "source": "/post/159345600861/orthogaphic-projection-a-handy-technique-for",
-      "destination": "/orthogaphic-projection",
+      "destination": "/orthographic-projection",
+      "permanent": true
+    },
+    {
+      "source": "/orthogaphic-projection",
+      "destination": "/orthographic-projection",
       "permanent": true
     },
     {
@@ -1302,7 +1332,12 @@
     },
     {
       "source": "/post/132104714016/how-do-barnacles-move-anyway-well-the-barnacles",
-      "destination": "/how-do-barnacles-move-anyway",
+      "destination": "/how-do-barnacles-move",
+      "permanent": true
+    },
+    {
+      "source": "/how-do-barnacles-move-anyway",
+      "destination": "/how-do-barnacles-move",
       "permanent": true
     },
     {
@@ -1537,7 +1572,12 @@
     },
     {
       "source": "/post/104480293317/whats-the-difference-between-a-dolphin-and-a",
-      "destination": "/whats-the-difference-between-a-dolphin-and-a-porpoise",
+      "destination": "/dolphin-porpoise",
+      "permanent": true
+    },
+    {
+      "source": "/whats-the-difference-between-a-dolphin-and-a-porpoise",
+      "destination": "/dolphin-porpoise",
       "permanent": true
     },
     {
@@ -1833,10 +1873,18 @@
     },
     {
       "source": "/post/77955695292/the-stroop-test-one-of-my-favourite",
-      "destination": "/the-stroop-test",
+      "destination": "/stroop-test",
       "permanent": true
     },
-    { "source": "/post/77854317490/circular-breathing-hard", "destination": "/circular-breathing", "permanent": true },
+    {
+      "source": "/the-stroop-test",
+      "destination": "/stroop-test",
+      "permanent": true
+    },
+    { "source": "/post/77854317490/circular-breathing-hard",
+      "destination": "/circular-breathing",
+      "permanent": true
+    },
     {
       "source": "/post/77752098636/debts-vicious-cycle-hat-tip-avraham-byers",
       "destination": "/debts-vicious-cycle",
@@ -3019,7 +3067,12 @@
     },
     {
       "source": "/post/54214791081/learn-the-kano-model-i-regularly-find-the-kano",
-      "destination": "/learn-the-kano-model",
+      "destination": "/kano-model",
+      "permanent": true
+    },
+    {
+      "source": "/learn-the-kano-model",
+      "destination": "/kano-model",
       "permanent": true
     },
     {
