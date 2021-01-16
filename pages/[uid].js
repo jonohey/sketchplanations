@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Prismic from 'prismic-javascript'
 import { client } from 'prismic-configuration'
 import { RichText } from 'prismic-reactjs'
-import { Sketchplanation } from 'components'
+import { Sketchplanation, PrevNextSketchplanation } from 'components'
 import Head from 'next/head'
 import { pageTitle } from 'helpers'
 
@@ -10,7 +10,36 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
   const {
     data: { image, title, body },
     uid,
+    id,
   } = sketchplanation
+
+  const [previousSketchplanation, setPreviousSketchplanation] = useState(null)
+  const [nextSketchplanation, setNextSketchplanation] = useState(null)
+
+  const fetchPreviousAndNext = async () => {
+    setPreviousSketchplanation(
+      (
+        await client.query(Prismic.Predicates.at('document.type', 'sketchplanation'), {
+          pageSize: 1,
+          after: id,
+          orderings: '[my.sketchplanation.published_at desc]',
+        })
+      ).results[0]
+    )
+    setNextSketchplanation(
+      (
+        await client.query(Prismic.Predicates.at('document.type', 'sketchplanation'), {
+          pageSize: 1,
+          after: id,
+          orderings: '[my.sketchplanation.published_at]',
+        })
+      ).results[0]
+    )
+  }
+
+  useEffect(() => {
+    fetchPreviousAndNext()
+  }, [])
 
   return (
     <>
@@ -25,6 +54,14 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
       </Head>
       <div className='sketchplanations'>
         <Sketchplanation sketchplanation={sketchplanation} fullPost />
+      </div>
+      <div className='prevnext'>
+        <div>
+          <PrevNextSketchplanation kind='next' sketchplanation={nextSketchplanation} />
+        </div>
+        <div>
+          <PrevNextSketchplanation kind='previous' sketchplanation={previousSketchplanation} />
+        </div>
       </div>
       {similarSketchplanations.results.length > 0 && (
         <>
@@ -73,6 +110,16 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
           .similar > * {
             @apply w-1/3;
           }
+        }
+
+        .prevnext {
+          @apply mx-auto px-6 pb-16;
+          max-width: 600px;
+          box-sizing: border-box;
+        }
+
+        .prevnext > * + * {
+          @apply mt-8;
         }
       `}</style>
     </>
