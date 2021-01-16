@@ -97,6 +97,7 @@ const Search = ({ ssrResults, ssrSearchCalled }) => {
             placeholder='Type to search…'
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            autoFocus={true}
           />
           <button className={`submit-button ${query && query !== '' && 'is-active'}`} type='submit'>
             {isSearching ? (
