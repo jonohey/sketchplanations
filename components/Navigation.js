@@ -14,6 +14,9 @@ const Navigation = () => {
         <Link href='/tags'>
           <a>Tags</a>
         </Link>
+        <Link href='/search'>
+          <a>Search</a>
+        </Link>
         <a href='https://www.patreon.com/sketchplanations' target='_blank' rel='noreferrer'>
           Patreon
         </a>
@@ -24,7 +27,7 @@ const Navigation = () => {
       <style jsx>{`
         :global(.headroom--pinned) nav,
         :global(.headroom--unfixed) nav {
-          @apply -mt-4 pb-4;
+          @apply -mt-3 pb-4;
         }
 
         @screen lg {
