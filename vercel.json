@@ -2082,6 +2082,11 @@
       "permanent": true
     },
     {
+      "source": "/zopa",
+      "destination": "/zopa-zone-of-possible-agreement",
+      "permanent": true
+    },
+    {
       "source": "/post/73561399785/the-law-of-diminishing-brownies-you-will-have",
       "destination": "/the-law-of-diminishing-brownies",
       "permanent": true
@@ -2604,6 +2609,11 @@
     },
     {
       "source": "/post/62942306085/zone-of-proximal-development-what-a-child-can-do",
+      "destination": "/zone-of-proximal-development",
+      "permanent": true
+    },
+    {
+      "source": "/zpd",
       "destination": "/zone-of-proximal-development",
       "permanent": true
     },
