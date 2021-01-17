@@ -38,11 +38,11 @@ const Navigation = () => {
         }
 
         nav {
-          @apply -mx-4;
+          @apply -my-1 -mx-4 flex flex-wrap justify-center;
         }
 
         nav > * {
-          @apply py-3 px-2 text-blue text-sm;
+          @apply py-1 px-2 text-blue text-sm;
         }
 
         @screen sm {
