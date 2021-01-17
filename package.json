@@ -25,6 +25,7 @@
     "react-currency-input-field": "^2.7.0",
     "react-dom": "^16.13.0",
     "react-headroom": "^3.0.0",
+    "react-hotkeys-hook": "^3.0.3",
     "react-imgix": "^9.0.2",
     "react-infinite-scroll-component": "^5.1.0",
     "react-overlays": "^0.9.3",
@@ -39,8 +40,8 @@
     "eslint-plugin-react": "^7.20.6",
     "now": "^19.1.2",
     "postcss-preset-env": "^6.7.0",
-    "request": "^2.88.2",
     "prismic-dom": "^2.2.4",
+    "request": "^2.88.2",
     "styled-jsx-plugin-postcss": "^2.0.1",
     "tailwindcss": "^1.4.6",
     "xmlbuilder2": "^2.4.0"
