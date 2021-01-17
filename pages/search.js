@@ -51,7 +51,7 @@ const Search = ({ ssrResults, ssrSearchCalled }) => {
     const searchResults = await executeSearch(query)
     router.replace({
       pathname: '/search',
-      query: { q: encodeURI(query) },
+      query: { q: query },
     })
     setSearchCalled(true)
     setImages(mapResultsToImages(searchResults))
