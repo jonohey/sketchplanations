@@ -7,11 +7,24 @@ import Imgix from 'react-imgix'
 import Gallery from 'react-photo-gallery'
 import { TextHeader } from 'components'
 
-const executeSearch = async (query) => {
+const executeSketchplanationsSearch = async (query) => {
   if (!query || query === '') return []
 
   const { results } = await client.query(
     [Prismic.Predicates.at('document.type', 'sketchplanation'), Prismic.Predicates.fulltext('document', query)],
+    {
+      pageSize: 100,
+    }
+  )
+
+  return results
+}
+
+const executeTagsSearch = async (query) => {
+  if (!query || query === '') return []
+
+  const { results } = await client.query(
+    [Prismic.Predicates.at('document.type', 'tag'), Prismic.Predicates.fulltext('document', query)],
     {
       pageSize: 100,
     }
@@ -35,12 +48,13 @@ const mapResultsToImages = (results) => {
   }
 }
 
-const Search = ({ ssrResults, ssrSearchCalled }) => {
+const Search = ({ ssrSketchplanations, ssrTags, ssrSearchCalled }) => {
   const router = useRouter()
   const [searchCalled, setSearchCalled] = useState(ssrSearchCalled)
   const [isSearching, setIsSearching] = useState(false)
   const [query, setQuery] = useState(router?.query?.q || '')
-  const [images, setImages] = useState(ssrResults ? mapResultsToImages(ssrResults) : [])
+  const [images, setImages] = useState(ssrSketchplanations ? mapResultsToImages(ssrSketchplanations) : [])
+  const [tags, setTags] = useState(ssrTags || [])
 
   const runSearch = async (e) => {
     e.preventDefault()
@@ -48,14 +62,19 @@ const Search = ({ ssrResults, ssrSearchCalled }) => {
     if (!query || query === '') return
 
     setIsSearching(true)
-    const searchResults = await executeSearch(query)
+
+    const sketchplanationsResults = await executeSketchplanationsSearch(query)
+    const tagsResults = await executeTagsSearch(query)
+
+    setSearchCalled(true)
+    setImages(mapResultsToImages(sketchplanationsResults))
+    setTags(tagsResults)
+    setIsSearching(false)
+
     router.replace({
       pathname: '/search',
       query: { q: query },
     })
-    setSearchCalled(true)
-    setImages(mapResultsToImages(searchResults))
-    setIsSearching(false)
   }
 
   const renderImage = ({ photo }) => {
@@ -89,7 +108,6 @@ const Search = ({ ssrResults, ssrSearchCalled }) => {
   return (
     <>
       <div className='root'>
-        {/* <TextHeader className='text-center'>Search results</TextHeader> */}
         <form className='search-form' onSubmit={runSearch}>
           <input
             className='query-input'
@@ -116,12 +134,22 @@ const Search = ({ ssrResults, ssrSearchCalled }) => {
             )}
           </button>
         </form>
-        {searchCalled && images.length > 0 && (
-          <div className='gallery'>
-            <Gallery photos={images} direction='row' margin={16} targetRowHeight={400} renderImage={renderImage} />
-          </div>
+        {searchCalled && (images.length > 0 || tags.length > 0) && (
+          <>
+            <div className='tags'>
+              <span>Matching tags:</span>
+              {tags.map(({ data: { identifier: tag }, slugs }) => (
+                <Link key={tag} href={`/tags/${slugs[0]}`}>
+                  <a>{tag}</a>
+                </Link>
+              ))}
+            </div>
+            <div className='gallery'>
+              <Gallery photos={images} direction='row' margin={16} targetRowHeight={400} renderImage={renderImage} />
+            </div>
+          </>
         )}
-        {searchCalled && images.length === 0 && (
+        {searchCalled && images.length === 0 && tags.length === 0 && (
           <div className='no-results'>
             <TextHeader className='text-center'>No results</TextHeader>
           </div>
@@ -227,6 +255,40 @@ const Search = ({ ssrResults, ssrSearchCalled }) => {
             @apply text-blue;
             animation: spin 1s linear infinite;
           }
+
+          .tags {
+            @apply flex flex-wrap justify-center p-6 pb-0;
+          }
+
+          .tags > span {
+            @apply relative py-2 m-2 rounded-full text-sm;
+          }
+
+          @screen sm {
+            .tags > span {
+              @apply text-base;
+            }
+          }
+
+          .tags a {
+            @apply relative py-2 px-4 m-2 rounded-full border text-sm;
+            transition: all 0.1s ease-out;
+          }
+
+          @screen sm {
+            .tags a {
+              @apply text-base;
+            }
+          }
+
+          .tags b {
+            @apply text-xs;
+            opacity: 0.5;
+          }
+
+          .tags a:hover {
+            @apply bg-bright-red text-white border-bright-red shadow;
+          }
         `}
       </style>
     </>
@@ -234,9 +296,11 @@ const Search = ({ ssrResults, ssrSearchCalled }) => {
 }
 
 Search.getInitialProps = async ({ query }) => {
-  const results = await executeSearch(query.q)
+  const ssrSearchCalled = query?.q ? true : false
+  const ssrSketchplanations = await executeSketchplanationsSearch(query.q)
+  const ssrTags = await executeTagsSearch(query.q)
 
-  return { ssrResults: results, ssrSearchCalled: query?.q ? true : false }
+  return { ssrSketchplanations, ssrTags, ssrSearchCalled }
 }
 
 export default Search
