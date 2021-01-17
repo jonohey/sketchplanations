@@ -52,7 +52,7 @@ pre {
 }
 
 .header {
-  @apply text-center;
+  @apply text-center .overflow-hidden;
   background-color: #fff;
 }
 
@@ -70,7 +70,7 @@ pre {
   box-shadow: 0 2.3rem 1rem -2rem rgba(0, 0, 0, 0.2);
 }
 
-@screen lg {
+@screen xl {
   .header {
     @apply flex items-center justify-center px-6;
   }
