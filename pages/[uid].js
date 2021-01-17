@@ -65,7 +65,7 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
       </div>
       {similarSketchplanations.results.length > 0 && (
         <>
-          <h2 className='similar-header'>Want more? Try these…</h2>
+          <h2 className='similar-header'>Keep exploring</h2>
           <div className='similar'>
             {similarSketchplanations.results.map((sketchplanation) => (
               <div key={sketchplanation.id}>
