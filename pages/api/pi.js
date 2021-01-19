@@ -9,7 +9,7 @@ export default async (req, res) => {
     currency: 'gbp',
     description: ['PWYW', sketchplanationTitle, customerEmail].filter((x) => x && x !== '').join(' - '),
     metadata: {
-      'Sketchplantion title': sketchplanationTitle,
+      'Sketchplanation title': sketchplanationTitle,
       'Customer email': customerEmail,
     },
   }
