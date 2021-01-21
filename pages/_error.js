@@ -7,7 +7,7 @@ const Error = () => {
       <div className='content'>
         <img className='block mx-auto mt-8' src='/error.png' alt='Error' width={640} height={542.5} />
         <p className='contact-me text-center mx-auto mt-1 px-10'>
-          You weren’t supposed to see this. Sorry. I'd be really grateful to know how you got here so I can fix it. I’m
+          Maybe try to <a href='/search'>search Sketchplanations</a>? Please let me know if a link is wrong so I can fix it for others. I’m
           at <a href='mailto:jono.hey@gmail.com'>jono.hey@gmail.com</a>
         </p>
       </div>
