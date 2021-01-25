@@ -4177,7 +4177,7 @@ jest-worker@24.9.0:
     merge-stream "^2.0.0"
     supports-color "^6.1.0"
 
-js-base64@^2.3.2:
+js-base64@~2.6.0:
   version "2.6.4"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.6.4.tgz#f4e686c5de1ea1f867dbcad3d46d969428df98c4"
   integrity sha512-pZe//GGmwJndub7ZghVHz7vjb2LgC1m8B07Au3eYqeqv9emhESByMXxaEgkUkEqJe87oBbSniGYoQNIBklc7IQ==
@@ -6221,12 +6221,12 @@ react-hotkeys-hook@^3.0.3:
   dependencies:
     hotkeys-js "3.8.1"
 
-react-imgix@^9.0.2:
-  version "9.0.2"
-  resolved "https://registry.yarnpkg.com/react-imgix/-/react-imgix-9.0.2.tgz#85cf6eddc68c144e5b07111a9219df7bbd9b96c6"
-  integrity sha512-8LQYRbbzb4MGZdJkflq75bevJHtN9/xlzoa+QfeCiLu31Ko5ovxje7wxiQdHyhI0JxIR8Z2GVnZT1qrvK3K8ZA==
+react-imgix@^9.0.3:
+  version "9.0.3"
+  resolved "https://registry.yarnpkg.com/react-imgix/-/react-imgix-9.0.3.tgz#b9099013d0d03ffa7b02a7ff3394d4fb360fa1ca"
+  integrity sha512-cSK3z7njg8eiWwEx+XhGUcwmjUMSe/OvzedyLhmuEXb9ASMjqJM8c6vegmrJ6qXHElWw1UOH7BwfoQn7IXiYVw==
   dependencies:
-    js-base64 "^2.3.2"
+    js-base64 "~2.6.0"
     react-measure "^2.3.0"
     shallowequal "^1.1.0"
     warning "^4.0.1"
