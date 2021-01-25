@@ -37,7 +37,7 @@
     "eslint": "^7.9.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react": "^7.22.0",
     "now": "^19.1.2",
     "postcss-preset-env": "^6.7.0",
     "prismic-dom": "^2.2.4",
