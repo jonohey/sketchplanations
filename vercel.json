@@ -656,6 +656,11 @@
       "permanent": true
     },
     {
+      "source": "/the-effect-effect-dot",
+      "destination": "/the-effect-effect",
+      "permanent": true
+    },
+    {
       "source": "/post/174250388911/the-third-teacher-i-love-this-concept-of-the",
       "destination": "/the-third-teacher",
       "permanent": true
@@ -682,7 +687,12 @@
     },
     {
       "source": "/post/173170554411/the-virtuous-cycles-of-amazon-and-uber",
-      "destination": "/the-virtuous-cycles-of-amazon-and-uber",
+      "destination": "/virtuous-cycle",
+      "permanent": true
+    },
+    {
+      "source": "/the-virtuous-cycles-of-amazon-and-uber",
+      "destination": "/virtuous-cycle",
       "permanent": true
     },
     {
@@ -1152,7 +1162,12 @@
     },
     {
       "source": "/post/146720668266/respect-sleep-one-of-the-best-virtuous-circles",
-      "destination": "/respect-sleep",
+      "destination": "/exercise-and-sleep",
+      "permanent": true
+    },
+    {
+      "source": "/respect-sleep",
+      "destination": "/exercise-and-sleep",
       "permanent": true
     },
     {
@@ -1282,7 +1297,12 @@
     },
     {
       "source": "/post/136829431001/venomous-poisonous-whats-the-difference",
-      "destination": "/venomous-poisonous-whats-the-difference",
+      "destination": "/venomous-poisonous",
+      "permanent": true
+    },
+    {
+      "source": "/venomous-poisonous-whats-the-difference",
+      "destination": "/venomous-poisonous",
       "permanent": true
     },
     {
@@ -1427,7 +1447,12 @@
     },
     {
       "source": "/post/122359453568/quotiquette-the-etiquette-of-quoting-the-best",
-      "destination": "/quotiquette-the-etiquette-of-quoting",
+      "destination": "/quotiquette",
+      "permanent": true
+    },
+    {
+      "source": "/quotiquette-the-etiquette-of-quoting",
+      "destination": "/quotiquette",
       "permanent": true
     },
     {
@@ -1597,7 +1622,12 @@
     },
     {
       "source": "/post/102124859821/whats-the-difference-between-a-crocodile-and-an",
-      "destination": "/whats-the-difference-between-a-crocodile-and-an-alligator",
+      "destination": "/crocodile-alligator",
+      "permanent": true
+    },
+    {
+      "source": "/whats-the-difference-between-a-crocodile-and-an-alligator",
+      "destination": "/crocodile-alligator",
       "permanent": true
     },
     {
@@ -1607,7 +1637,12 @@
     },
     {
       "source": "/post/100937411868/whats-the-difference-between-a-tortoise-and-a",
-      "destination": "/whats-the-difference-between-a-tortoise-and-a-turtle",
+      "destination": "/tortoise-turtle",
+      "permanent": true
+    },
+    {
+      "source": "/whats-the-difference-between-a-tortoise-and-a-turtle",
+      "destination": "/tortoise-turtle",
       "permanent": true
     },
     {
@@ -1798,7 +1833,12 @@
     },
     {
       "source": "/post/79507636455/think-cradle-to-cradle-from-michael-braungart",
-      "destination": "/think-cradle-to-cradle",
+      "destination": "/cradle-to-cradle",
+      "permanent": true
+    },
+    {
+      "source": "/think-cradle-to-cradle",
+      "destination": "/cradle-to-cradle",
       "permanent": true
     },
     {
