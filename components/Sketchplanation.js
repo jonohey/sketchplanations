@@ -29,10 +29,10 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
               src: `${image.url}&w=1600&blur=200&px=32`,
               width: image.width,
               height: image.height,
+              alt: image.alt || `${title} - Sketchplanations`,
             }}
             width={image.width}
             height={image.height}
-            alt={image.alt || `${title} - Sketchplanations`}
             sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
           />
         </a>
