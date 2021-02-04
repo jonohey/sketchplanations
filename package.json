@@ -31,7 +31,7 @@
     "react-overlays": "^0.9.3",
     "react-photo-gallery": "^8.0.0",
     "shiitake": "^3.0.2",
-    "stripe": "^8.127.0"
+    "stripe": "^8.133.0"
   },
   "devDependencies": {
     "eslint": "^7.9.0",
