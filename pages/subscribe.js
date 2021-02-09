@@ -11,7 +11,7 @@ const Subscribe = ({ document }) => {
         scrolling='no'
         marginHeight='0'
         marginWidth='0'
-        src='https://app.mailjet.com/widget/iframe/5y2N/FyE'
+        src='https://app.mailjet.com/widget/iframe/5y2N/Hd2'
         width='100%'
       ></iframe>
       <script type='text/javascript' src='https://app.mailjet.com/statics/js/iframeResizer.min.js'></script>
