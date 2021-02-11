@@ -147,7 +147,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
             },
             "theme": "classic",
             "content": {
-              "message": "Sketchplanations uses cookies to ensure you get the best experience."
+              "message": "FYI I use a few standard cookies just like everyone else."
             }
           })`,
         }}
@@ -165,10 +165,10 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
       ></script> */}
       <data
         id='mj-w-res-data'
-        data-token='cfe73bca0f162347a7cb4a1f7dc73ab5'
+        data-token='315e14d9ae7c37e364c63a69336f6d48'
         className='mj-w-data'
         data-apikey='5y2N'
-        data-w-id='Gbk'
+        data-w-id='Hd2'
         data-lang='en_US'
         data-base='https://app.mailjet.com'
         data-width='640'
