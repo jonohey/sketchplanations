@@ -147,7 +147,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
             },
             "theme": "classic",
             "content": {
-              "message": "I use a few standard cookies just like everyone else."
+              "message": "FYI I use a few standard cookies just like everyone else."
             }
           })`,
         }}
