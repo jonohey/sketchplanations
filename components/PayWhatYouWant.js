@@ -17,13 +17,13 @@ const CARD_OPTIONS = {
   },
 }
 
-const presetAmounts = [2, 5, 10, 20, 50, 100, null]
+const presetAmounts = [2, 5, 10, 20, 50, null]
 
 const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
   const stripe = useStripe()
   const elements = useElements()
   const [free, setFree] = useState(false)
-  const [amount, setAmount] = useState(20)
+  const [amount, setAmount] = useState(10)
   const [customAmount, setCustomAmount] = useState(null)
   const [customerEmail, setCustomerEmail] = useState('')
   const [error, setError] = useState(null)
