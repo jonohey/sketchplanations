@@ -17,12 +17,15 @@ const Navigation = () => {
         <Link href='/search'>
           <a>Search</a>
         </Link>
-        <a href='https://www.patreon.com/sketchplanations' target='_blank' rel='noreferrer'>
-          Patreon
-        </a>
         <Link href='/subscribe'>
           <a>Subscribe</a>
         </Link>
+        <a href='https://www.patreon.com/sketchplanations' target='_blank' rel='noreferrer'>
+          Patreon
+        </a>
+        <a href='https://www.redbubble.com/people/sketchplanator/shop' target='_blank' rel='noreferrer'>
+          Shop
+        </a>
       </nav>
       <style jsx>{`
         :global(.headroom--pinned) nav,
@@ -38,7 +41,7 @@ const Navigation = () => {
         }
 
         nav {
-          @apply -my-1 -mx-4 flex flex-wrap justify-center;
+          @apply -mx-2 flex flex-wrap justify-center;
         }
 
         nav > * {
@@ -47,7 +50,7 @@ const Navigation = () => {
 
         @screen sm {
           nav > * {
-            @apply py-3 px-4 text-blue text-base;
+            @apply py-3 px-3 text-blue text-base;
           }
         }
 
