@@ -41,7 +41,7 @@ const Navigation = () => {
         }
 
         nav {
-          @apply -mx-4 flex flex-wrap justify-center;
+          @apply -mx-2 flex flex-wrap justify-center;
         }
 
         nav > * {
