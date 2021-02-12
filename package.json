@@ -27,7 +27,7 @@
     "react-headroom": "^3.1.0",
     "react-hotkeys-hook": "^3.0.3",
     "react-imgix": "^9.0.3",
-    "react-infinite-scroll-component": "^5.1.0",
+    "react-infinite-scroll-component": "^6.0.0",
     "react-overlays": "^0.9.3",
     "react-photo-gallery": "^8.0.0",
     "shiitake": "^3.0.2",
