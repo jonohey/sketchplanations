@@ -6488,10 +6488,10 @@ rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-currency-input-field@^2.7.0:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/react-currency-input-field/-/react-currency-input-field-2.7.1.tgz#79a9e45ac40a8890824500d07c4d70715158c353"
-  integrity sha512-0E7/4KGeMD6h/ebDRnPvfGMLSW/JH+0/LUtWcFv9xOAEurcbNk0Igr6G4TUxctLP/m96sxWuHbGqGJgpDgoYfA==
+react-currency-input-field@^3.2.5:
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/react-currency-input-field/-/react-currency-input-field-3.2.5.tgz#39bc1ee50922ae9fcbb2843711e550ab5e5ae097"
+  integrity sha512-Q+JEz3Ianc8QRRG3S/ZNwPLIBcYz2+MYE5wtOylO77EElArHSLrCpptho/m6a1kxUUl3GBsdEM87rgQrNuXlTg==
 
 react-dom@^16.13.0:
   version "16.14.0"
