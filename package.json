@@ -28,7 +28,7 @@
     "react-hotkeys-hook": "^3.1.0",
     "react-imgix": "^9.0.3",
     "react-infinite-scroll-component": "^6.0.0",
-    "react-overlays": "^0.9.3",
+    "react-overlays": "^4.1.1",
     "react-photo-gallery": "^8.0.0",
     "shiitake": "^3.0.2",
     "stripe": "^8.127.0"
