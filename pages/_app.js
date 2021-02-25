@@ -89,6 +89,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         <meta name='msapplication-TileColor' content='#fbf8de' />
         <meta name='theme-color' content='#fbf8de' />
         <meta name='viewport' content='width = device-width, initial-scale = 1, minimum-scale = 1' />
+        <meta http-equiv='content-language' content='en-gb' />
         <meta key='og:title' property='og:title' content={pageTitle()} />
         <meta property='og:site_name' content='Sketchplanations' />
         <meta name='twitter:site' content='@sketchplanator' />
