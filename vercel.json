@@ -1242,7 +1242,12 @@
     },
     {
       "source": "/post/141219272261/an-americano-and-a-long-black-the-difference",
-      "destination": "/an-americano-and-a-long-black-the-difference",
+      "destination": "/americano-long-black",
+      "permanent": true
+    },
+    {
+      "source": "/an-americano-and-a-long-black-the-difference",
+      "destination": "/americano-long-black",
       "permanent": true
     },
     {
@@ -1422,7 +1427,12 @@
     },
     {
       "source": "/post/125376035406/how-to-tell-a-centipede-from-a-millipede-a",
-      "destination": "/how-to-tell-a-centipede-from-a-millipede",
+      "destination": "/centipede-millipede",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-tell-a-centipede-from-a-millipede",
+      "destination": "/centipede-millipede",
       "permanent": true
     },
     {
@@ -1697,7 +1707,12 @@
     },
     {
       "source": "/post/83450471103/sharing-is-taking-a-risk-increases-quality",
-      "destination": "/sharing",
+      "destination": "/sharing-your-work",
+      "permanent": true
+    },
+    {
+      "source": "/sharing",
+      "destination": "/sharing-your-work",
       "permanent": true
     },
     {
@@ -1723,12 +1738,22 @@
     },
     {
       "source": "/post/81628133110/surfing-breaks-beach-reef-and-point",
-      "destination": "/surfing-breaks-beach-reef-and-point",
+      "destination": "/surfing-breaks",
+      "permanent": true
+    },
+    {
+      "source": "/surfing-breaks-beach-reef-and-point",
+      "destination": "/surfing-breaks",
       "permanent": true
     },
     {
       "source": "/post/81531693526/learn-kind-words-first-in-new-countries-theyll",
-      "destination": "/learn-kind-words-first-in-new-countries",
+      "destination": "/learn-kind-words-first",
+      "permanent": true
+    },
+    {
+      "source": "/learn-kind-words-first-in-new-countries",
+      "destination": "/learn-kind-words-first",
       "permanent": true
     },
     {
@@ -2093,7 +2118,12 @@
     },
     {
       "source": "/post/74223656886/u-shaped-and-v-shaped-valleys-v-shaped-formed",
-      "destination": "/u-shaped-and-v-shaped-valleys",
+      "destination": "/shapes-of-valleys",
+      "permanent": true
+    },
+    {
+      "source": "/u-shaped-and-v-shaped-valleys",
+      "destination": "/shapes-of-valleys",
       "permanent": true
     },
     {
@@ -2378,7 +2408,12 @@
     },
     {
       "source": "/post/68212170394/there-are-22-trillion-combinations-of-an-8",
-      "destination": "/there-are-2-trillion-combinations-of-an-8-character-password",
+      "destination": "/combinations-of-an-8-character-password",
+      "permanent": true
+    },
+    {
+      "source": "/there-are-2-trillion-combinations-of-an-8-character-password",
+      "destination": "/combinations-of-an-8-character-password",
       "permanent": true
     },
     {
@@ -2469,7 +2504,17 @@
     },
     {
       "source": "/post/66324078349/pollution-is-highly-localized-take-the-back",
-      "destination": "/pollution-is-highly-localized-take-the-back-streets",
+      "destination": "/take-the-back-streets",
+      "permanent": true
+    },
+    {
+      "source": "/pollution-is-highly-localized-take-the-back-streets",
+      "destination": "/take-the-back-streets",
+      "permanent": true
+    },
+    {
+      "source": "/pollution-is-highly-localized",
+      "destination": "/take-the-back-streets",
       "permanent": true
     },
     {
@@ -2574,7 +2619,12 @@
     },
     {
       "source": "/post/64337685235/a-new-angle-on-sharing-ive-always-been-somewhat",
-      "destination": "/a-new-angle-on-sharing",
+      "destination": "/share-by-default",
+      "permanent": true
+    },
+    {
+      "source": "/a-new-angle-on-sharing",
+      "destination": "/share-by-default",
       "permanent": true
     },
     {
@@ -2609,7 +2659,12 @@
     },
     {
       "source": "/post/63683791803/clear-the-fog-with-a-redeye",
-      "destination": "/clear-the-fog-with-a-redeye",
+      "destination": "/redeye",
+      "permanent": true
+    },
+    {
+      "source": "/clear-the-fog-with-a-redeye",
+      "destination": "/redeye",
       "permanent": true
     },
     {
@@ -2801,7 +2856,12 @@
     },
     {
       "source": "/post/60021366738/the-3rd-place-i-know-about-third-places-thanks",
-      "destination": "/the-3rd-place",
+      "destination": "/the-third-place",
+      "permanent": true
+    },
+    {
+      "source": "/the-3rd-place",
+      "destination": "/the-third-place",
       "permanent": true
     },
     {
@@ -3130,10 +3190,17 @@
       "destination": "/adjust-your-daily-caffeine-intake",
       "permanent": true
     },
-    { "source": "/post/54175606234/control-a-cue-ball", "destination": "/control-a-cue-ball", "permanent": true },
+    { "source": "/post/54175606234/control-a-cue-ball",
+      "destination": "/control-a-cue-ball",
+      "permanent": true },
     {
       "source": "/post/54045943957/on-parenting-childhood-is-not-a-race-insights",
-      "destination": "/on-parenting-childhood-is-not-a-race",
+      "destination": "/childhood-is-not-a-race",
+      "permanent": true
+    },
+    {
+      "source": "/on-parenting-childhood-is-not-a-race",
+      "destination": "/childhood-is-not-a-race",
       "permanent": true
     },
     {
