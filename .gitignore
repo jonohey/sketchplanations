@@ -29,3 +29,5 @@ yarn-error.log*
 .env
 .env.build
 /public/sitemap.xml
+
+.vercel
