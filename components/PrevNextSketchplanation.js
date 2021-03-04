@@ -8,11 +8,10 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
   const keyboardKey = kind === 'next' ? 'j' : 'k'
   const secondaryKeyboardKey = kind === 'next' ? 'left' : 'right'
   const router = useRouter()
-
-  if (!sketchplanation) return null
-
   useHotkeys(keyboardKey, () => router.push(`/${sketchplanation?.uid}`))
   useHotkeys(secondaryKeyboardKey, () => router.push(`/${sketchplanation?.uid}`))
+
+  if (!sketchplanation) return null
 
   const {
     data: { image, title },
