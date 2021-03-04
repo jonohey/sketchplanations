@@ -13,30 +13,38 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
     uid,
   } = sketchplanation
 
+  const renderImage = () => {
+    return (
+      <Imgix
+        className='lazyload'
+        src={image.url}
+        attributeConfig={{
+          src: 'data-src',
+          srcSet: 'data-srcset',
+          sizes: 'data-sizes',
+        }}
+        htmlAttributes={{
+          src: `${image.url}&w=1600&blur=200&px=32`,
+          width: image.width,
+          height: image.height,
+          alt: image.alt || `${title} - Sketchplanations`,
+        }}
+        width={image.width}
+        height={image.height}
+        sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
+      />
+    )
+  }
+
   return (
     <div className='root'>
-      <Link href={`/${uid}`}>
-        <a className='image'>
-          <Imgix
-            className='lazyload'
-            src={image.url}
-            attributeConfig={{
-              src: 'data-src',
-              srcSet: 'data-srcset',
-              sizes: 'data-sizes',
-            }}
-            htmlAttributes={{
-              src: `${image.url}&w=1600&blur=200&px=32`,
-              width: image.width,
-              height: image.height,
-              alt: image.alt || `${title} - Sketchplanations`,
-            }}
-            width={image.width}
-            height={image.height}
-            sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
-          />
-        </a>
-      </Link>
+      {fullPost ? (
+        <div className='image'>{renderImage()}</div>
+      ) : (
+        <Link href={`/${uid}`}>
+          <a className='image'>{renderImage()}</a>
+        </Link>
+      )}
       <div className='content'>
         {!hideContent && (
           <>
