@@ -41,7 +41,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
       {fullPost ? (
         <div className='image'>{renderImage()}</div>
       ) : (
-        <Link href={`/${uid}`}>
+        <Link href='/[uid]' as={`/${uid}`}>
           <a className='image'>{renderImage()}</a>
         </Link>
       )}
