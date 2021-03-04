@@ -24,7 +24,7 @@ const Navigation = () => {
           Patreon
         </a>
         <a href='https://www.redbubble.com/people/sketchplanator/shop' target='_blank' rel='noreferrer'>
-          Shop
+          Prints
         </a>
       </nav>
       <style jsx>{`
