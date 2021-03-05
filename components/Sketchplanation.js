@@ -4,7 +4,13 @@ import Shiitake from 'shiitake'
 import Link from 'next/link'
 import Imgix from 'react-imgix'
 
-import { SocialSharing, TextHeader, PayWhatYouWant, Modal } from 'components'
+// import { SocialSharing, TextHeader, PayWhatYouWant, Modal } from 'components'
+
+import dynamic from 'next/dynamic'
+const SocialSharing = dynamic(() => import('./SocialSharing'))
+const TextHeader = dynamic(() => import('./TextHeader'))
+const PayWhatYouWant = dynamic(() => import('./PayWhatYouWant'))
+const Modal = dynamic(() => import('./Modal'))
 
 const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = false }) => {
   const [pwywModalOpen, setPwywModalOpen] = useState(false)
@@ -14,9 +20,14 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
   } = sketchplanation
 
   const renderImage = () => {
+    const { width, height } = image.dimensions
+    const heightRatio = width / height
+    const adjustedWidth = 1600
+    const adjustedheight = adjustedWidth * heightRatio
+
     return (
       <Imgix
-        className='lazyload'
+        className='lazyload image'
         src={image.url}
         attributeConfig={{
           src: 'data-src',
@@ -25,12 +36,12 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         }}
         htmlAttributes={{
           src: `${image.url}&w=1600&blur=200&px=32`,
-          width: image.width,
-          height: image.height,
+          width: adjustedWidth,
+          height: adjustedheight,
           alt: image.alt || `${title} - Sketchplanations`,
         }}
-        width={image.width}
-        height={image.height}
+        width={adjustedWidth}
+        height={adjustedheight}
         sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
       />
     )
@@ -185,6 +196,10 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         .pwyw-button > svg {
           @apply inline-block mr-3;
           fill: currentColor;
+        }
+
+        .image {
+          @apply bg-paper;
         }
       `}</style>
     </div>

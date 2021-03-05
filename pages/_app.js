@@ -96,9 +96,19 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         <meta key='og:title' property='og:title' content={pageTitle()} />
         <meta property='og:site_name' content='Sketchplanations' />
         <meta name='twitter:site' content='@sketchplanator' />
-        <link rel='preconnect' href='https://fonts.googleapis.com' />
-        <link rel='preconnect' href='https://js.stripe.com' />
-        <link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap' rel='stylesheet' />
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+        <link rel='preconnect' href='https://js.stripe.com' crossorigin />
+        <link
+          rel='preload'
+          as='style'
+          href='https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap'
+        />
+        <link
+          href='https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap'
+          rel='stylesheet'
+          media='print'
+          onLoad="this.media='all'"
+        />
         <link
           rel='stylesheet'
           type='text/css'
@@ -122,7 +132,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
             <div className='p-1 sm:p-3'>
               <Link href='/'>
                 <a className='ident'>
-                  <img className='ident__svg' src='/logo.svg' alt='Sketchplanations' />
+                  <img className='ident__svg' src='/logo.svg' width='300' height='47' alt='Sketchplanations' />
                 </a>
               </Link>
             </div>
@@ -135,7 +145,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
       </Headroom>
       <Component {...pageProps} />
       <a className='coffee' href='https://www.buymeacoffee.com/sketchplanator' target='_blank' rel='noreferrer'>
-        <img src='/bmc.svg' alt='Buy Me A Coffee' />
+        <img src='/bmc.svg' width='4169' height='913' alt='Buy Me A Coffee' />
       </a>
       <script src='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js' />
       <script

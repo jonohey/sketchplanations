@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react'
 import Prismic from 'prismic-javascript'
 import { client } from 'prismic-configuration'
 import { RichText } from 'prismic-reactjs'
-import { Sketchplanation, PrevNextSketchplanation } from 'components'
+// import { Sketchplanation, PrevNextSketchplanation } from 'components'
 import Head from 'next/head'
 import { pageTitle } from 'helpers'
+import dynamic from 'next/dynamic'
+
+const Sketchplanation = dynamic(() => import('../components/Sketchplanation'))
+const PrevNextSketchplanation = dynamic(() => import('../components/PrevNextSketchplanation'))
 
 const Post = ({ sketchplanation, similarSketchplanations }) => {
   const {
