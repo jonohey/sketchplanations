@@ -29,7 +29,7 @@ const Tag = ({ tag, sketchplanations }) => {
 
   const renderImage = ({ photo }) => {
     return (
-      <Link href='/[uid]' as={`/${photo.uid}`}>
+      <Link href={`/${photo.uid}`}>
         <a>
           <Imgix
             className='lazyload'
