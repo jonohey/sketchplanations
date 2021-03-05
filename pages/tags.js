@@ -25,7 +25,7 @@ const Tags = ({ sketchplanations, tags }) => {
     <>
       <div className='tags'>
         {tagsWithCounts.map(({ tag, slug, count }) => (
-          <Link key={tag} href={`/tags/${slug}`}>
+          <Link key={tag} href='/tags/[tag]' as={`/tags/${slug}`}>
             <a>
               {tag} <b>{count}</b>
             </a>

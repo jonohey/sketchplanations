@@ -20,7 +20,7 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
 
   return (
     <>
-      <Link href={`/${uid}`}>
+      <Link href='/[uid]' as={`/${uid}`}>
         <a className='image'>
           <div className='caret-wrapper'>
             <svg

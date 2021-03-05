@@ -28,7 +28,7 @@ const Archive = ({ sketchplanations }) => {
 
   const renderImage = ({ photo }) => {
     return (
-      <Link href={`/${photo.uid}`} key={photo.uid}>
+      <Link href='/[uid]' as={`/${photo.uid}`} key={photo.uid}>
         <a>
           <Imgix
             className='lazyload'

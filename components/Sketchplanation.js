@@ -57,7 +57,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
                   <Shiitake lines={3} throttleRate={200}>
                     {RichText.asText(body)}
                   </Shiitake>
-                  <Link href={`/${uid}`}>
+                  <Link href='/[uid]' as={`/${uid}`}>
                     <a>Read more…</a>
                   </Link>
                 </>
@@ -70,7 +70,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
             <ul className='tags'>
               {sketchplanation.data.tags.map((tag, index) => (
                 <li key={index}>
-                  <Link key={tag} href={`/tags/${tag.tag.slug}`}>
+                  <Link key={tag} href='/tags/[tag]' as={`/tags/${tag.tag.slug}`}>
                     <a>{tag.tag.slug.replace(/-/, ' ')}</a>
                   </Link>
                 </li>

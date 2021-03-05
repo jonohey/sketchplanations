@@ -79,7 +79,7 @@ const Search = ({ ssrSketchplanations, ssrTags, ssrSearchCalled }) => {
 
   const renderImage = ({ photo }) => {
     return (
-      <Link key={photo.uid} href={`/${photo.uid}`}>
+      <Link key={photo.uid} href='/[uid]' as={`/${photo.uid}`}>
         <a>
           <Imgix
             className='lazyload'
@@ -139,7 +139,7 @@ const Search = ({ ssrSketchplanations, ssrTags, ssrSearchCalled }) => {
             <div className='tags'>
               <span>Matching tags:</span>
               {tags.map(({ data: { identifier: tag }, slugs }) => (
-                <Link key={tag} href={`/tags/${slugs[0]}`}>
+                <Link key={tag} href='/tags/[tag]' as={`/tags/${slugs[0]}`}>
                   <a>{tag}</a>
                 </Link>
               ))}
