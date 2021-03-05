@@ -207,7 +207,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
               setCookie("mjPopinShown", true, 1);
               mjOpenPopin(document.createEvent('Event'), document.getElementById('mj-w-res-data'));
             }
-          }, 1000);`,
+          }, 15000);`,
         }}
       />
     </Elements>
