@@ -145,7 +145,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
       </Headroom>
       <Component {...pageProps} />
       <a className='coffee' href='https://www.buymeacoffee.com/sketchplanator' target='_blank' rel='noreferrer'>
-        <img src='/bmc.svg' alt='Buy Me A Coffee' />
+        <img src='/bmc.svg' width='4169' height='913' alt='Buy Me A Coffee' />
       </a>
       <script src='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js' />
       <script
