@@ -5,7 +5,7 @@ module.exports = {
   },
   images: {
     loader: 'imgix',
-    path: 'https://images.prismic.io/sketchplanations/',
+    path: '',
     domains: ['images.prismic.io'],
   },
   webpack: (config, { isServer }) => {
