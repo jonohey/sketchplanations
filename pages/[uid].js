@@ -39,7 +39,7 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
 
   useEffect(() => {
     fetchPreviousAndNext()
-  }, [])
+  }, [sketchplanation])
 
   return (
     <>

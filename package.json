@@ -1,5 +1,5 @@
 {
-  "name": "nextjs",
+  "name": "sketchplanations",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,7 +15,7 @@
     "@stripe/stripe-js": "^1.11.0",
     "globby": "^11.0.2",
     "lazysizes": "^5.2.2",
-    "next": "9.3.3",
+    "next": "^10.0.7",
     "nextjs-progressbar": "^0.0.7",
     "postcss-flexbugs-fixes": "^4.2.1",
     "prismic-javascript": "^3.0.2",

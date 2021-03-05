@@ -8,8 +8,11 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
   const keyboardKey = kind === 'next' ? 'j' : 'k'
   const secondaryKeyboardKey = kind === 'next' ? 'left' : 'right'
   const router = useRouter()
-  useHotkeys(keyboardKey, () => router.push(`/${sketchplanation?.uid}`))
-  useHotkeys(secondaryKeyboardKey, () => router.push(`/${sketchplanation?.uid}`))
+
+  const navigate = () => router.push(`/${sketchplanation?.uid}`)
+
+  useHotkeys(keyboardKey, navigate, {}, [sketchplanation])
+  useHotkeys(secondaryKeyboardKey, navigate, {}, [sketchplanation])
 
   if (!sketchplanation) return null
 
@@ -20,7 +23,7 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
 
   return (
     <>
-      <Link href='/[uid]' as={`/${uid}`}>
+      <Link href={`/${uid}`}>
         <a className='image'>
           <div className='caret-wrapper'>
             <svg
