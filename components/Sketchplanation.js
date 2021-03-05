@@ -31,12 +31,12 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         }}
         htmlAttributes={{
           src: `${image.url}&w=1600&blur=200&px=32`,
-          width: image.width,
-          height: image.height,
+          width: image.dimensions.width,
+          height: image.dimensions.height,
           alt: image.alt || `${title} - Sketchplanations`,
         }}
-        width={image.width}
-        height={image.height}
+        width={image.dimensions.width}
+        height={image.dimensions.height}
         sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
       />
     )
