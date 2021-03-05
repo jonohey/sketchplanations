@@ -4,6 +4,8 @@ module.exports = {
     defaultLocale: 'en-GB',
   },
   images: {
+    loader: 'imgix',
+    path: 'https://images.prismic.io/sketchplanations/',
     domains: ['images.prismic.io'],
   },
   webpack: (config, { isServer }) => {
