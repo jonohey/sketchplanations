@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { RichText } from 'prismic-reactjs'
 import Shiitake from 'shiitake'
 import Link from 'next/link'
-import Image from 'next/image'
+import Imgix from 'react-imgix'
 
 // import { SocialSharing, TextHeader, PayWhatYouWant, Modal } from 'components'
 
@@ -21,14 +21,27 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
 
   const renderImage = () => {
     const { width, height } = image.dimensions
+    const heightRatio = width / height
+    const adjustedWidth = 1600
+    const adjustedheight = adjustedWidth * heightRatio
 
     return (
-      <Image
-        className='image'
+      <Imgix
+        className='lazyload image'
         src={image.url}
-        alt={image.alt || `${title} - Sketchplanations`}
-        width={width}
-        height={height}
+        attributeConfig={{
+          src: 'data-src',
+          srcSet: 'data-srcset',
+          sizes: 'data-sizes',
+        }}
+        htmlAttributes={{
+          src: `${image.url}&w=1600&blur=200&px=32`,
+          width: adjustedWidth,
+          height: adjustedheight,
+          alt: image.alt || `${title} - Sketchplanations`,
+        }}
+        width={adjustedWidth}
+        height={adjustedheight}
         sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
       />
     )
