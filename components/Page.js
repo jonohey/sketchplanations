@@ -78,7 +78,7 @@ const Page = ({
           }
 
           .body :global(a) {
-            @apply text-bright-red;
+            @apply text-blue;
           }
 
           .body :global(ul li) {

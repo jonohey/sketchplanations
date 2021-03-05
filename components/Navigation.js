@@ -55,7 +55,7 @@ const Navigation = () => {
         }
 
         .selected {
-          @apply text-bright-red;
+          @apply text-blue;
         }
       `}</style>
     </>

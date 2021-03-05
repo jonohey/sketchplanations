@@ -142,7 +142,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         }
 
         .body :global(a) {
-          @apply text-bright-red;
+          @apply text-blue;
         }
 
         .body :global(ul li) {
@@ -166,7 +166,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         }
 
         .tags a:hover {
-          @apply text-bright-red;
+          @apply text-blue;
         }
 
         .pwyw {
@@ -179,7 +179,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         }
 
         .pwyw-button:hover {
-          @apply text-bright-red;
+          @apply text-blue;
         }
 
         .pwyw-button > svg {

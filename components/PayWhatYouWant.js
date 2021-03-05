@@ -191,7 +191,7 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
           }
 
           a {
-            @apply text-bright-red;
+            @apply text-blue;
           }
 
           .form {
