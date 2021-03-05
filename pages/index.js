@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 import Prismic from 'prismic-javascript'
 import { client } from 'prismic-configuration'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { Sketchplanation, Navigation } from 'components'
+// import { Sketchplanation, Navigation } from 'components'
+import dynamic from 'next/dynamic'
+
+const Sketchplanation = dynamic(() => import('../components/Sketchplanation'))
+const Navigation = dynamic(() => import('../components/Navigation'))
 
 const Home = ({ sketchplanations }) => {
   const [page, setPage] = useState(2)
@@ -23,7 +27,7 @@ const Home = ({ sketchplanations }) => {
   return (
     <div>
       <div className='masthead'>
-        <img src='/logo.svg' alt='Sketchplanations' />
+        <img src='/logo.svg' width='300' height='47' alt='Sketchplanations' />
         <p className='sm:text-lg'>Explaining one thing a week in a sketch</p>
         <Navigation />
       </div>

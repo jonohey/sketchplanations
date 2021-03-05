@@ -122,7 +122,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
             <div className='p-1 sm:p-3'>
               <Link href='/'>
                 <a className='ident'>
-                  <img className='ident__svg' src='/logo.svg' alt='Sketchplanations' />
+                  <img className='ident__svg' src='/logo.svg' width='300' height='47' alt='Sketchplanations' />
                 </a>
               </Link>
             </div>

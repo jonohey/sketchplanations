@@ -4,7 +4,13 @@ import Shiitake from 'shiitake'
 import Link from 'next/link'
 import Imgix from 'react-imgix'
 
-import { SocialSharing, TextHeader, PayWhatYouWant, Modal } from 'components'
+// import { SocialSharing, TextHeader, PayWhatYouWant, Modal } from 'components'
+
+import dynamic from 'next/dynamic'
+const SocialSharing = dynamic(() => import('./SocialSharing'))
+const TextHeader = dynamic(() => import('./TextHeader'))
+const PayWhatYouWant = dynamic(() => import('./PayWhatYouWant'))
+const Modal = dynamic(() => import('./Modal'))
 
 const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = false }) => {
   const [pwywModalOpen, setPwywModalOpen] = useState(false)
