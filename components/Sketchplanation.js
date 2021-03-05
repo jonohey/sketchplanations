@@ -20,6 +20,10 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
   } = sketchplanation
 
   const renderImage = () => {
+    const { width, height } = image.dimensions
+    const heightRatio = width / height
+    const adjustedHeight = 1600 * heightRatio
+
     return (
       <Imgix
         className='lazyload'
@@ -31,10 +35,12 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         }}
         htmlAttributes={{
           src: `${image.url}&w=1600&blur=200&px=32`,
-          width: image.dimensions.width,
-          height: image.dimensions.height,
+          width: width,
+          height: adjustedHeight,
           alt: image.alt || `${title} - Sketchplanations`,
         }}
+        width={width}
+        height={adjustedHeight}
         sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
       />
     )
