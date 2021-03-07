@@ -158,7 +158,7 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
                 <input
                   className='email-input'
                   type='text'
-                  placeholder='Your email address'
+                  placeholder='Your email address - for receipt'
                   value={customerEmail}
                   onChange={(e) => setCustomerEmail(e.target.value)}
                 />

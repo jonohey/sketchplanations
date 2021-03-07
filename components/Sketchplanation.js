@@ -78,16 +78,6 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         )}
         {fullPost && (
           <>
-            <ul className='tags'>
-              {sketchplanation.data.tags.map((tag, index) => (
-                <li key={index}>
-                  <Link key={tag} href={`/tags/${tag.tag.slug}`}>
-                    <a>{tag.tag.slug.replace(/-/, ' ')}</a>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />
             <button className='pwyw-button' type='button' onClick={() => setPwywModalOpen(true)}>
               <svg width='14' height='19' xmlns='http://www.w3.org/2000/svg'>
                 <path d='M11.951 7.095L7.757 11.29V0H6.243v11.29L2.05 7.095.979 8.166 7 14.187l6.022-6.021-1.07-1.07zM0 16.964h14v1.513H0v-1.513z' />
@@ -99,6 +89,16 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
                 <PayWhatYouWant sketchplanationUid={sketchplanation.uid} sketchplanationTitle={title} />
               </div>
             </Modal>
+            <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />
+            <ul className='tags'>
+              {sketchplanation.data.tags.map((tag, index) => (
+                <li key={index}>
+                  <Link key={tag} href={`/tags/${tag.tag.slug}`}>
+                    <a>{tag.tag.slug.replace(/-/, ' ')}</a>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </>
         )}
       </div>
