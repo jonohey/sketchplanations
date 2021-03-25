@@ -23,6 +23,8 @@ export const linkResolver = (doc) => {
     return '/thanks'
   } else if (doc.type === 'privacy') {
     return '/privacy'
+  } else if (doc.type === 'wisdom') {
+    return '/wisdom'
   }
   return '/'
 }
