@@ -24,6 +24,7 @@
     "react": "^16.13.0",
     "react-currency-input-field": "^3.3.0",
     "react-dom": "^16.13.0",
+    "react-gtm-module": "^2.0.11",
     "react-headroom": "^3.1.0",
     "react-hotkeys-hook": "^3.1.0",
     "react-imgix": "^9.0.3",

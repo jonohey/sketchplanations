@@ -12,6 +12,7 @@ import { pageTitle } from 'helpers'
 import { Navigation } from 'components'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
+import TagManager from 'react-gtm-module'
 import 'styles.css'
 
 const polyfillDownloadAttr = () => {
@@ -78,6 +79,7 @@ const ELEMENTS_OPTIONS = {
 export default function MyApp({ Component, pageProps, router: { route } }) {
   useEffect(() => {
     polyfillDownloadAttr()
+    TagManager.initialize({ gtmId: 'GTM-WNS3LG4' })
   }, [])
 
   return (
@@ -112,16 +114,6 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
           rel='stylesheet'
           type='text/css'
           href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css'
-        />
-        <script async src='https://www.googletagmanager.com/gtag/js?id=UA-72222206-1'></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'UA-41793508-1');`,
-          }}
         />
       </Head>
       <NextNprogress color='#1253B5' options={{ showSpinner: false }} />
