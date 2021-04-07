@@ -17,4 +17,13 @@ module.exports = {
 
     return config
   },
+  async redirects() {
+    return [
+      {
+        source: '/styleguide',
+        destination: 'https://company-208276.frontify.com/d/iATaeFQL51Lv',
+        permanent: false,
+      },
+    ]
+  },
 }
