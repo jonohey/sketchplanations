@@ -1,4 +1,3 @@
-import React from 'react'
 import { Modal as ROModal } from 'react-overlays'
 
 const Modal = ({ children, onHide, ...props }) => {

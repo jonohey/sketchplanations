@@ -1,4 +1,3 @@
-import React from 'react'
 
 const SocialSharing = ({ handle, title, text }) => {
   const url = `https://sketchplanations.vercel.app/${handle}`

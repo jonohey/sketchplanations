@@ -1,4 +1,3 @@
-import React from 'react'
 import Prismic from 'prismic-javascript'
 import Link from 'next/link'
 import { client } from 'prismic-configuration'

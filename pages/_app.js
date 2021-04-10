@@ -4,7 +4,6 @@ import { Integrations } from '@sentry/tracing'
 import 'lazysizes'
 import 'lazysizes/plugins/attrchange/ls.attrchange'
 import Head from 'next/head'
-import React from 'react'
 import Headroom from 'react-headroom'
 import Link from 'next/link'
 import NextNprogress from 'nextjs-progressbar'
@@ -97,8 +96,8 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         <meta key='og:title' property='og:title' content={pageTitle()} />
         <meta property='og:site_name' content='Sketchplanations' />
         <meta name='twitter:site' content='@sketchplanator' />
-        <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
-        <link rel='preconnect' href='https://js.stripe.com' crossorigin />
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin />
+        <link rel='preconnect' href='https://js.stripe.com' crossOrigin />
         <link
           rel='preload'
           as='style'

@@ -1,4 +1,4 @@
-import React from 'react'
+import { cloneElement } from 'react'
 import { default as NextLink } from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -10,7 +10,7 @@ const Link = ({ href, children }) => {
     className = `${className} selected`
   }
 
-  return <NextLink href={href}>{React.cloneElement(children, { className })}</NextLink>
+  return <NextLink href={href}>{cloneElement(children, { className })}</NextLink>
 }
 
 export default Link

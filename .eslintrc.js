@@ -17,4 +17,12 @@ module.exports = {
     'react/prop-types': 0,
   },
   settings: { 'import/core-modules': ['styled-jsx/css'] },
+  presets: [
+    [
+      '@babel/preset-react',
+      {
+        runtime: 'automatic',
+      },
+    ],
+  ],
 }

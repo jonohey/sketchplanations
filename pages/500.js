@@ -1,4 +1,3 @@
-import React from 'react'
 
 const Error = () => {
   return (
@@ -14,7 +13,7 @@ const Error = () => {
         </p>
       </div>
       <style jsx>{`
-        
+
         .help-text {
           max-width: 600px;
           width: 100%;

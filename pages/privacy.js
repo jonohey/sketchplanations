@@ -1,4 +1,3 @@
-import React from 'react'
 import { Page } from 'components'
 import { client } from 'prismic-configuration'
 
