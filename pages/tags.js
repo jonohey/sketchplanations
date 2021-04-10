@@ -8,14 +8,12 @@ const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 :
 
 const sortByCountDesc = compose(reverse, sortBy(prop('count')))
 
-const Tags = ({ tagsWithCounts }) => {
-  const [view, setView] = useState('alphabetical')
-
-  const sortedTagsWithCounts = view === 'frequency' ? sortByCountDesc(tagsWithCounts) : tagsWithCounts
+const Tags = ({ tagsByName, tagsByCount }) => {
+  const [sort, setSort] = useState('name')
 
   return (
     <>
-      {/* <div onChange={(e) => setView(e.target.value)}>
+      {/* <div onChange={(e) => setSort(e.target.value)}>
         <label>
           <input type='radio' name='view' value='alphabetical' checked={view === 'alphabetical'} /> A-Z
         </label>
@@ -23,15 +21,15 @@ const Tags = ({ tagsWithCounts }) => {
           <input type='radio' name='view' value='frequency' checked={view === 'frequency'} /> Frequency
         </label>
       </div> */}
-      <button type='button' onClick={() => setView('alphabetical')}>
+      <button type='button' onClick={() => setSort('name')}>
         A-Z
       </button>
-      <button type='button' onClick={() => setView('frequency')}>
+      <button type='button' onClick={() => setSort('count')}>
         Frequency
       </button>
       <div className='tags'>
-        {sortedTagsWithCounts.map(({ tag, slug, count }) => (
-          <Link key={tag} href={`/tags/${slug}`}>
+        {(sort === 'name' ? tagsByName : tagsByCount).map(({ tag, slug, count }) => (
+          <Link key={slug} href={`/tags/${slug}`}>
             <a>
               {tag} <b>{count}</b>
             </a>
@@ -100,7 +98,7 @@ export async function getStaticProps() {
     .flat()
     .filter((tag) => tag)
 
-  const tagsWithCounts = tags
+  const tagsByName = tags
     .map((tag) => {
       const identifier = tag.data.identifier
       const slug = tag.slugs[0]
@@ -112,7 +110,9 @@ export async function getStaticProps() {
     })
     .filter((tag) => tag.count > 0)
 
-  return { props: { tagsWithCounts } }
+  const tagsByCount = sortByCountDesc(tagsByName)
+
+  return { props: { tagsByName, tagsByCount } }
 }
 
 export default Tags
