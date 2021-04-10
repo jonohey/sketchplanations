@@ -1,29 +1,36 @@
+import { useState } from 'react'
+import { compose, sortBy, prop, reverse } from 'ramda'
 import Prismic from 'prismic-javascript'
 import Link from 'next/link'
 import { client } from 'prismic-configuration'
 
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
 
-const Tags = ({ sketchplanations, tags }) => {
-  const tagsFromSketchplanations = sketchplanations
-    .map((sketchplanation) => sketchplanation.data.tags.map((tag) => tag.tag.slug))
-    .flat()
-    .filter((tag) => tag)
+const sortByCountDesc = compose(reverse, sortBy(prop('count')))
 
-  const tagsWithCounts = tags.map((tag) => {
-    const identifier = tag.data.identifier
-    const slug = tag.slugs[0]
-    return {
-      tag: identifier,
-      slug,
-      count: countOccurrences(tagsFromSketchplanations, slug),
-    }
-  })
+const Tags = ({ tagsWithCounts }) => {
+  const [view, setView] = useState('alphabetical')
+
+  const sortedTagsWithCounts = view === 'frequency' ? sortByCountDesc(tagsWithCounts) : tagsWithCounts
 
   return (
     <>
+      {/* <div onChange={(e) => setView(e.target.value)}>
+        <label>
+          <input type='radio' name='view' value='alphabetical' checked={view === 'alphabetical'} /> A-Z
+        </label>
+        <label>
+          <input type='radio' name='view' value='frequency' checked={view === 'frequency'} /> Frequency
+        </label>
+      </div> */}
+      <button type='button' onClick={() => setView('alphabetical')}>
+        A-Z
+      </button>
+      <button type='button' onClick={() => setView('frequency')}>
+        Frequency
+      </button>
       <div className='tags'>
-        {tagsWithCounts.map(({ tag, slug, count }) => (
+        {sortedTagsWithCounts.map(({ tag, slug, count }) => (
           <Link key={tag} href={`/tags/${slug}`}>
             <a>
               {tag} <b>{count}</b>
@@ -88,7 +95,24 @@ export async function getStaticProps() {
     orderings: '[my.tag.identifier]',
   })
 
-  return { props: { sketchplanations, tags } }
+  const tagsFromSketchplanations = sketchplanations
+    .map((sketchplanation) => sketchplanation.data.tags.map((tag) => tag.tag.slug))
+    .flat()
+    .filter((tag) => tag)
+
+  const tagsWithCounts = tags
+    .map((tag) => {
+      const identifier = tag.data.identifier
+      const slug = tag.slugs[0]
+      return {
+        tag: identifier,
+        slug,
+        count: countOccurrences(tagsFromSketchplanations, slug),
+      }
+    })
+    .filter((tag) => tag.count > 0)
+
+  return { props: { tagsWithCounts } }
 }
 
 export default Tags
