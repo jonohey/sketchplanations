@@ -64,6 +64,10 @@ const Page = ({
             @apply pt-8 pb-20 px-6 mx-auto;
           }
 
+          .body {
+            @apply block;
+          }
+
           .body :global(> * + *) {
             margin-top: 1.4em;
           }
