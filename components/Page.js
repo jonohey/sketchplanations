@@ -1,3 +1,4 @@
+import { createElement } from 'react'
 import { RichText } from 'prismic-reactjs'
 import { linkResolver } from 'prismic-configuration'
 import Imgix from 'react-imgix'
