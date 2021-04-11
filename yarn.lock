@@ -1671,6 +1671,11 @@ fast-levenshtein@^2.0.6:
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
 
+fast-sort@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/fast-sort/-/fast-sort-3.0.1.tgz#428f0154784df8ee124d9067747630416a3498cc"
+  integrity sha512-fTokJ4ik5WOIcEU9kDONOlJ+w9X50fhtmWAHJprX3tOqFwn4eJHVj1wr0FnfZBnCxGsHSif9yPcEzAKuP9gI/A==
+
 fastq@^1.6.0:
   version "1.10.1"
   resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.10.1.tgz#8b8f2ac8bf3632d67afcd65dac248d5fdc45385e"
@@ -3812,6 +3817,11 @@ react-transition-group@^2.2.1:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
+
+react-use-cookie@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-use-cookie/-/react-use-cookie-1.2.1.tgz#c14690217bd9f1e17c5cca0921653feb1ef48719"
+  integrity sha512-3StMDEL5TbwfX0KqbgtNcC+FD7hSE2DZpgvxz1jXrwBS2gsnb2W8EgkJoVgu+MxjFMKrW4wDBuGlf/jXLXb2cQ==
 
 react@17.0.2:
   version "17.0.2"

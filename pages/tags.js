@@ -1,42 +1,77 @@
-import { useState } from 'react'
-import { compose, sortBy, prop, reverse } from 'ramda'
 import Prismic from 'prismic-javascript'
 import Link from 'next/link'
 import { client } from 'prismic-configuration'
+import { sort } from 'fast-sort'
+import useCookie from 'react-use-cookie'
 
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
 
-const sortByCountDesc = compose(reverse, sortBy(prop('count')))
+const SortButton = ({ children, ...props }) => (
+  <>
+    <button {...props}>{children}</button>
+    <style jsx>{`
+      button {
+        @apply relative py-2 px-4 border text-sm;
+        color: ${props.active ? '#fff' : 'inherit'};
+        border-color: ${props.active ? '#1253B5' : '#e2e8f0'};
+        background-color: ${props.active ? '#1253B5' : '#fff'};
+      }
+    `}</style>
+  </>
+)
 
 const Tags = ({ tagsByName, tagsByCount }) => {
-  const [sort, setSort] = useState('name')
+  const [sort, setSort] = useCookie('tagsSort', 'name')
 
   return (
     <>
-      {/* <div onChange={(e) => setSort(e.target.value)}>
-        <label>
-          <input type='radio' name='view' value='alphabetical' checked={view === 'alphabetical'} /> A-Z
-        </label>
-        <label>
-          <input type='radio' name='view' value='frequency' checked={view === 'frequency'} /> Frequency
-        </label>
-      </div> */}
-      <button type='button' onClick={() => setSort('name')}>
-        A-Z
-      </button>
-      <button type='button' onClick={() => setSort('count')}>
-        Frequency
-      </button>
-      <div className='tags'>
-        {(sort === 'name' ? tagsByName : tagsByCount).map(({ tag, slug, count }) => (
-          <Link key={slug} href={`/tags/${slug}`}>
-            <a>
-              {tag} <b>{count}</b>
-            </a>
-          </Link>
-        ))}
+      <div className='sort-buttons'>
+        <SortButton className='sort-button' active={sort === 'name'} type='button' onClick={() => setSort('name')}>
+          A-Z
+        </SortButton>
+        <SortButton className='sort-button' active={sort === 'count'} type='button' onClick={() => setSort('count')}>
+          Frequency
+        </SortButton>
       </div>
+      {sort === 'name' && (
+        <div className='tags'>
+          {tagsByName.map(({ tag, slug, count }) => (
+            <Link key={slug} href={`/tags/${slug}`}>
+              <a>
+                {tag} <b>{count}</b>
+              </a>
+            </Link>
+          ))}
+        </div>
+      )}
+      {sort === 'count' && (
+        <div className='tags'>
+          {tagsByCount.map(({ tag, slug, count }) => (
+            <Link key={slug} href={`/tags/${slug}`}>
+              <a>
+                {tag} <b>{count}</b>
+              </a>
+            </Link>
+          ))}
+        </div>
+      )}
       <style jsx>{`
+        .sort-buttons {
+          @apply flex justify-end pt-6 px-6;
+        }
+
+        .sort-buttons :global(> *:first-child) {
+          @apply rounded-l-md;
+        }
+
+        .sort-buttons :global(> *:last-child) {
+          @apply rounded-r-md;
+        }
+
+        .sort-buttons :global(> * + *) {
+          margin-left: -1px;
+        }
+
         .tags {
           @apply flex flex-wrap justify-center p-6 pb-20;
         }
@@ -110,7 +145,7 @@ export async function getStaticProps() {
     })
     .filter((tag) => tag.count > 0)
 
-  const tagsByCount = sortByCountDesc(tagsByName)
+  const tagsByCount = sort(tagsByName).desc((tag) => tag.count)
 
   return { props: { tagsByName, tagsByCount } }
 }
