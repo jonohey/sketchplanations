@@ -53,9 +53,7 @@ const Page = ({
       <div className='root'>
         <TextHeader>{title}</TextHeader>
         <div className='body'>
-          {body.map((slice, index) =>
-            React.createElement(sliceTypesToComponent[slice.slice_type], { key: index, slice })
-          )}
+          {body.map((slice, index) => createElement(sliceTypesToComponent[slice.slice_type], { key: index, slice }))}
           {children}
         </div>
       </div>
