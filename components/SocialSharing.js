@@ -4,7 +4,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 const SocialSharing = ({ handle, title, text }) => {
   const [copied, setCopied] = useState(false)
 
-  const url = `https://sketchplanations.vercel.app/${handle}`
+  const url = `https://sketchplanations.com/${handle}`
   const facebookUrl = `https://facebook.com/sharer/sharer.php?u=${url}`
   const twitterUrl = `https://twitter.com/intent/tweet/?text=${title}&url=${url}`
   const linkedInUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}&summary=${text}&source=${url}`
