@@ -8,7 +8,7 @@ import Headroom from 'react-headroom'
 import Link from 'next/link'
 import NextNprogress from 'nextjs-progressbar'
 import { pageTitle } from 'helpers'
-import { Navigation } from 'components'
+import { NavigationBar, Footer } from 'components'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import TagManager from 'react-gtm-module'
@@ -115,28 +115,16 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
           href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css'
         />
       </Head>
-      <NextNprogress color='#1253B5' options={{ showSpinner: false }} />
-      <Headroom className={route === '/' ? 'hide-when-unfixed' : ''}>
-        <div className='header'>
-          <div className='inline-flex flex-col sm:flex-row items-center justify-center lg:justify-start flex-wrap lg:flex-no-wrap -m-1 sm:-m-3 flex-grow'>
-            <div className='p-1 sm:p-3'>
-              <Link href='/'>
-                <a className='ident'>
-                  <img className='ident__svg' src='/logo.svg' width='300' height='47' alt='Sketchplanations' />
-                </a>
-              </Link>
-            </div>
-            <div className='p-1 sm:p-3'>
-              <p className='slogan'>Explaining one thing a week in a sketch</p>
-            </div>
-          </div>
-          <Navigation />
+      <NextNprogress color='#ba3c3e' options={{ showSpinner: false }} />
+      <div className='flex flex-col min-h-screen'>
+        <Headroom className={route === '/' ? 'hide-when-unfixed' : ''}>
+          <NavigationBar />
+        </Headroom>
+        <Component {...pageProps} />
+        <div className='mt-auto'>
+          <Footer />
         </div>
-      </Headroom>
-      <Component {...pageProps} />
-      <a className='coffee' href='https://www.buymeacoffee.com/sketchplanator' target='_blank' rel='noreferrer'>
-        <img src='/bmc.svg' width='4169' height='913' alt='Buy Me A Coffee' />
-      </a>
+      </div>
       <script src='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js' />
       <script
         dangerouslySetInnerHTML={{

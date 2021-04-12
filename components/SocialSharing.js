@@ -102,13 +102,12 @@ const SocialSharing = ({ handle, title, text }) => {
       </div>
       <style jsx>{`
         .share-buttons {
-          display: flex;
-          width: 100%;
-          margin: 1.5rem -0.25rem -0.25rem;
+          @apply w-full flex flex-wrap justify-center;
+          margin: -0.5rem;
         }
 
         .share-buttons > * {
-          margin: 0.25rem;
+          margin: 0.5rem;
         }
 
         .share-button__link {
@@ -120,10 +119,16 @@ const SocialSharing = ({ handle, title, text }) => {
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: 5px;
+           {
+            /* border-radius: 5px;
           transition: 0.2s ease-out;
           padding: 0.5em 0.75em;
-          font-size: 0.75rem;
+          font-size: 0.75rem; */
+          }
+          @apply text-sm;
+          background: transparent !important;
+          color: black !important;
+          white-space: nowrap;
         }
 
         .share-button__icon svg {
@@ -144,7 +149,10 @@ const SocialSharing = ({ handle, title, text }) => {
         }
 
         .share-button--twitter:hover {
-          background-color: #2795e9;
+           {
+            /* background-color: #2795e9; */
+          }
+          color: #2795e9 !important;
         }
 
         .share-button--facebook {

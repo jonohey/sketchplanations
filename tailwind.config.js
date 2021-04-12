@@ -9,11 +9,14 @@ module.exports = {
     },
     extend: {
       colors: {
-        black: '#222',
+        black: '#010101',
         paper: '#fbf8de',
-        red: '#BA3C3E',
-        'bright-red': '#FD4C2B',
-        blue: '#1253B5',
+        'paper-dark': '#ebe7d0',
+        'paper-darker': '#e1dec7',
+        'paper-darkest': '#bcb5a5',
+        red: '#ba3c3e',
+        'bright-red': '#fd4c2b',
+        blue: '#1253b5',
       },
     },
   },

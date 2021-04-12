@@ -4,18 +4,10 @@
 @tailwind screens;
 
 body {
-  /* @apply bg-paper; */
-  /* @apply pb-6 px-3; */
   font-family: 'Inter', sans-serif;
   font-weight: 300;
   color: #222;
 }
-
-/* @screen sm {
-  body {
-    @apply pb-12 px-6;
-  }
-} */
 
 h1,
 h2,
@@ -52,8 +44,7 @@ pre {
 }
 
 .header {
-  @apply text-center .overflow-hidden;
-  background-color: #fff;
+  @apply text-center overflow-hidden bg-white;
 }
 
 .headroom-wrapper {
@@ -61,40 +52,33 @@ pre {
 }
 
 .headroom {
-  border-bottom: solid 1px rgba(0, 0, 0, 0.04);
-  box-shadow: 0 2.3rem 1rem -2rem rgba(0, 0, 0, 0);
+  /* border-bottom: solid 1px rgba(0, 0, 0, 0.04); */
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0);
 }
 
 .headroom--pinned {
-  border-bottom-color: rgba(0, 0, 0, 0);
-  box-shadow: 0 2.3rem 1rem -2rem rgba(0, 0, 0, 0.2);
+  /* border-bottom-color: rgba(0, 0, 0, 0); */
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.1);
 }
 
-@screen xl {
+/* @screen md {
   .header {
-    @apply flex items-center justify-center px-6;
+    @apply flex items-center justify-center;
   }
-}
 
-.header > * {
+  .header > *:first-child {
+    @apply pl-4;
+  }
+
+  .header nav > *:last-child {
+    outline: solid thin blue;
+    @apply pr-4 !important;
+  }
+} */
+
+/* .header > * {
   @apply p-3;
-}
-
-.ident {
-  @apply block my-0 mx-auto;
-}
-
-.ident__svg {
-  width: 50vw;
-  height: auto;
-}
-
-@screen sm {
-  .ident__svg {
-    width: 260px;
-    height: auto;
-  }
-}
+} */
 
 .slogan {
   @apply whitespace-no-wrap hidden;
@@ -139,14 +123,4 @@ pre {
   clear: left;
   font: 16px 'Open Sans', sans-serif;
   width: 375px;
-}
-
-.coffee {
-  @apply fixed z-10 bottom-0 left-0 mb-4 ml-4 flex flex-col items-center py-3 px-4 bg-white shadow-lg rounded;
-}
-
-.coffee img {
-  @apply inline-block;
-  width: 140px;
-  height: auto;
 }

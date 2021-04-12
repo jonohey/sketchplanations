@@ -24,7 +24,7 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
     <>
       <Link href={`/${uid}`}>
         <a className='image'>
-          <div className='caret-wrapper'>
+          {/* <div className='caret-wrapper'>
             <svg
               className='caret'
               viewBox='0 0 24 24'
@@ -34,6 +34,13 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
             >
               <path d='M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z' />
             </svg>
+          </div> */}
+          <div className='info'>
+            {/* <span className='title'>{title}</span> */}
+            <span className='title'>{kind === 'previous' ? 'Previous' : 'Next'}</span>
+            <div className='keyboard-shortcuts'>
+              <kbd className='keyboard-key'>{keyboardKey}</kbd>
+            </div>
           </div>
           <Imgix
             className='lazyload'
@@ -53,36 +60,28 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
             alt={image.alt || `${title} - Sketchplanations`}
             sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
           />
-          <div className='info'>
-            <span className='title'>{title}</span>
-            <div className='keyboard-shortcuts'>
-              <kbd className='keyboard-key'>{keyboardKey}</kbd>
-            </div>
-          </div>
         </a>
       </Link>
       <style jsx>{`
         .image {
-          @apply p-2 flex items-center border rounded-lg overflow-hidden shadow;
-          flex-direction: ${kind === 'next' ? 'row' : 'row-reverse'};
-          text-align: ${kind === 'next' ? 'left' : 'right'};
+          @apply flex flex-col text-center;
         }
 
         .image :global(img) {
-          @apply flex-none m-2;
-          width: 20%;
-          max-width: 140px;
+          @apply w-full max-w-xs;
+          box-shadow: 0 2.3rem 1rem -2rem #e2dcc5;
         }
 
-        @screen sm {
+         {
+          /* @screen sm {
           .image :global(img) {
             width: 38%;
           }
+        } */
         }
 
         .info {
-          @apply items-center px-2;
-          flex-direction: ${kind === 'previous' ? 'row' : 'row-reverse'};
+          @apply mb-4 flex items-center justify-center flex-row;
         }
 
         .label {
@@ -100,7 +99,7 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
         }
 
         .caret-wrapper {
-          @apply flex-none m-2;
+          @apply flex-none items-center;
           width: 1rem;
           transform: ${kind === 'next' ? 'rotate(180deg)' : 'none'};
         }
@@ -110,14 +109,13 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
         }
 
         .keyboard-shortcuts {
-          @apply mt-2;
+          @apply mx-2;
         }
 
         .keyboard-key {
-          @apply inline-flex items-center justify-center border rounded text-sm font-sans uppercase;
+          @apply inline-flex items-center justify-center border border-paper-dark rounded text-sm font-sans uppercase text-paper-darkest;
           width: 1.5rem;
           height: 1.5rem;
-          color: #a9b1ba;
         }
       `}</style>
     </>

@@ -48,64 +48,74 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
   }
 
   return (
-    <div className='root'>
-      {fullPost ? (
-        <div className='image'>{renderImage()}</div>
-      ) : (
-        <Link href={`/${uid}`}>
-          <a className='image'>{renderImage()}</a>
-        </Link>
-      )}
-      <div className='content'>
-        {!hideContent && (
-          <>
-            <TextHeader>{title}</TextHeader>
-            <div className='body'>
-              {fullPost ? (
-                <RichText render={body} />
-              ) : (
-                <>
-                  <Shiitake lines={3} throttleRate={200}>
-                    {RichText.asText(body)}
-                  </Shiitake>
-                  <Link href={`/${uid}`}>
-                    <a>Read more…</a>
-                  </Link>
-                </>
-              )}
-            </div>
-          </>
+    <>
+      <div className='root'>
+        {fullPost ? (
+          <div className='image'>{renderImage()}</div>
+        ) : (
+          <Link href={`/${uid}`}>
+            <a className='image'>{renderImage()}</a>
+          </Link>
         )}
-        {fullPost && (
-          <>
+        <div className='content'>
+          {!hideContent && (
+            <>
+              <TextHeader>{title}</TextHeader>
+              <div className='body'>
+                {fullPost ? (
+                  <RichText render={body} />
+                ) : (
+                  <>
+                    <Shiitake lines={3} throttleRate={200}>
+                      {RichText.asText(body)}
+                    </Shiitake>
+                    <Link href={`/${uid}`}>
+                      <a>Read more…</a>
+                    </Link>
+                  </>
+                )}
+              </div>
+            </>
+          )}
+          {fullPost && (
+            <div className='mt-8'>
+              <ul className='tags'>
+                {sketchplanation.data.tags.map((tag, index) => (
+                  <li key={index}>
+                    <Link key={tag} href={`/tags/${tag.tag.slug}`}>
+                      <a>{tag.tag.slug.replace(/-/, ' ')}</a>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+      {fullPost && (
+        <div className='meta'>
+          <div className='w-full grid gap-4 grid-cols-1 place-content-center'>
             <button className='pwyw-button' type='button' onClick={() => setPwywModalOpen(true)}>
               <svg width='14' height='19' xmlns='http://www.w3.org/2000/svg'>
                 <path d='M11.951 7.095L7.757 11.29V0H6.243v11.29L2.05 7.095.979 8.166 7 14.187l6.022-6.021-1.07-1.07zM0 16.964h14v1.513H0v-1.513z' />
               </svg>
-              Download highest-quality image
+              Download this sketchplanation
             </button>
+          </div>
+          <div className='w-full grid gap-4 grid-cols-1 place-content-center'>
             <Modal show={pwywModalOpen} onHide={() => setPwywModalOpen(false)}>
               <div className='pwyw'>
                 <PayWhatYouWant sketchplanationUid={sketchplanation.uid} sketchplanationTitle={title} />
               </div>
             </Modal>
             <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />
-            <ul className='tags'>
-              {sketchplanation.data.tags.map((tag, index) => (
-                <li key={index}>
-                  <Link key={tag} href={`/tags/${tag.tag.slug}`}>
-                    <a>{tag.tag.slug.replace(/-/, ' ')}</a>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
-      </div>
+          </div>
+        </div>
+      )}
       <style jsx>{`
         .root {
           max-width: 600px;
-          @apply px-0;
+          @apply px-0 mx-auto;
         }
 
         @screen sm {
@@ -167,17 +177,15 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         }
 
         .tags {
-          @apply flex flex-wrap -mx-2 mt-10 mb-10;
+          @apply flex flex-wrap -mx-2;
         }
 
         .tags a {
-          @apply inline-block mx-2 text-sm whitespace-no-wrap;
-          transition: all 0.1s ease-out;
-          color: #888;
+          @apply relative block py-2 px-4 m-2 rounded-full border text-sm;
         }
 
         .tags a:hover {
-          @apply text-blue;
+          @apply text-bright-red;
         }
 
         .pwyw {
@@ -185,8 +193,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         }
 
         .pwyw-button {
-          @apply mt-10 text-sm;
-          color: #888;
+          @apply text-sm;
         }
 
         .pwyw-button:hover {
@@ -201,8 +208,41 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         .image {
           @apply bg-paper;
         }
+
+        .meta {
+          @apply relative border-t py-8 px-12 mt-16 grid grid-cols-1 gap-16;
+          border-color: rgba(0, 0, 0, 0.05);
+        }
+
+        @screen sm {
+          .meta {
+            @apply grid-cols-2;
+          }
+        }
+
+        .meta::before {
+          content: '';
+          @apply absolute mx-6;
+          top: 50%;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        @screen sm {
+          .meta::before {
+            @apply my-6 mx-0;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            right: auto;
+            width: 1px;
+            height: auto;
+          }
+        }
       `}</style>
-    </div>
+    </>
   )
 }
 

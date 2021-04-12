@@ -31,3 +31,6 @@ yarn-error.log*
 /public/sitemap.xml
 
 .vercel
+data/*
+!data/.gitkeep
+/uids.json

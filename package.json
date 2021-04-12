@@ -38,6 +38,7 @@
     "stripe": "^8.142.0"
   },
   "devDependencies": {
+    "@svgr/webpack": "^5.5.0",
     "eslint": "^7.24.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.3.1",

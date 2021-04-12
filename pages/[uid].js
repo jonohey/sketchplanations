@@ -56,9 +56,7 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:image:alt' content={title} />
       </Head>
-      <div className='sketchplanations'>
-        <Sketchplanation sketchplanation={sketchplanation} fullPost />
-      </div>
+      <Sketchplanation sketchplanation={sketchplanation} fullPost />
       <div className='prevnext'>
         <div>
           <PrevNextSketchplanation kind='next' sketchplanation={nextSketchplanation} />
@@ -67,7 +65,7 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
           <PrevNextSketchplanation kind='previous' sketchplanation={previousSketchplanation} />
         </div>
       </div>
-      {similarSketchplanations.results.length > 0 && (
+      {/* {similarSketchplanations.results.length > 0 && (
         <>
           <h2 className='similar-header'>Keep exploring</h2>
           <div className='similar'>
@@ -78,7 +76,7 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
             ))}
           </div>
         </>
-      )}
+      )} */}
       <style jsx>{`
         .similar-header {
           @apply mb-10 text-center;
@@ -117,13 +115,14 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
         }
 
         .prevnext {
-          @apply mx-auto px-6 pb-16;
-          max-width: 600px;
-          box-sizing: border-box;
+          @apply relative bg-paper grid grid-cols-2 place-items-center gap-16 py-12 px-6 border-t border-b border-paper-dark;
         }
 
-        .prevnext > * + * {
-          @apply mt-8;
+        .prevnext::before {
+          content: '';
+          @apply absolute top-0 bottom-0 bg-paper-dark;
+          left: 50%;
+          width: 1px;
         }
       `}</style>
     </>
