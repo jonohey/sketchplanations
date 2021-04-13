@@ -7,7 +7,7 @@ import { client } from 'prismic-configuration'
 const randomArrayItem = (array) => array[Math.floor(Math.random() * array.length)]
 
 const getUids = () => {
-  const filepath = path.join(process.cwd(), '/public/uids.json')
+  const filepath = path.join(process.cwd(), 'public/uids.json')
   return fs.readFileSync(filepath)
 }
 
