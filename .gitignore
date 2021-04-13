@@ -35,3 +35,4 @@ data/*
 !data/.gitkeep
 /uids.json
 /public/rss
+/public/uids.json

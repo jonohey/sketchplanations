@@ -12,7 +12,6 @@ async function generateUidsJson() {
   const uids = sketchplanations.map((doc) => doc.uid)
 
   const filepath = path.join(process.cwd(), 'public/uids.json')
-  console.log('filepath', filepath)
   fs.writeFileSync(filepath, JSON.stringify(uids))
 }
 
