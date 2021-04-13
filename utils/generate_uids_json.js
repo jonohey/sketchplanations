@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require('path')
 const Prismic = require('prismic-javascript')
 const PrismicDOM = require('prismic-dom')
 const { queryAll } = require('../helpers')
@@ -10,7 +11,9 @@ async function generateUidsJson() {
 
   const uids = sketchplanations.map((doc) => doc.uid)
 
-  fs.writeFileSync('data/uids.json', JSON.stringify(uids))
+  const filepath = path.join(process.cwd(), 'data/uids.json')
+  console.log('filepath', filepath)
+  fs.writeFileSync(filepath, JSON.stringify(uids))
 }
 
-generateUidsJson()
+module.exports = generateUidsJson

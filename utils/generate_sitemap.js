@@ -77,4 +77,4 @@ async function generateSitemap() {
   fs.writeFileSync('public/sitemap.xml', xml)
 }
 
-generateSitemap()
+module.exports = generateSitemap
