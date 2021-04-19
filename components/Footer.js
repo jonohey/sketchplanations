@@ -5,7 +5,7 @@ import BMC from '../public/bmc.svg'
 const NavigationBar = () => {
   return (
     <>
-      <div className='py-20 px-16 bg-black text-white'>
+      <div className='root py-24 px-16 bg-white text-black'>
         <Link href='/'>
           <a className='ident'>
             <Logo className='ident__svg' width='300' height='47' alt='Sketchplanations' />
@@ -15,8 +15,8 @@ const NavigationBar = () => {
           <div>
             <div className='pb-8 max-w-lg'>
               <p>
-                Hello 👋&nbsp;&nbsp;&nbsp;I'm Jono and I've been explaining a new concept each week with the help of a
-                sketch since 2013.
+                Hello 👋&nbsp;I'm Jono and I've been explaining a new concept each week with the help of a sketch since
+                2013.
               </p>
               <p className='mt-3'>
                 There are ones about <a href='/tags/physics'>physics</a>, <a href='/tags/psychology'>psychology</a>,{' '}
@@ -30,30 +30,30 @@ const NavigationBar = () => {
             </a>
           </div>
           <div className='ml-auto flex'>
-            <nav className='grid grid-cols-3 gap-16'>
+            <nav className='grid grid-cols-2 gap-16'>
               <div className='grid gap-2 place-content-start'>
-                <Link href='/about'>
-                  <a>About</a>
-                </Link>
+                <span className='font-semibold'>Explore</span>
                 <Link href='/archive'>
                   <a>Archive</a>
                 </Link>
-                <Link href='/tags'>
-                  <a>Tags</a>
-                </Link>
-              </div>
-              <div className='grid gap-2 place-content-start'>
-                <Link href='/subscribe'>
-                  <a>Subscribe</a>
-                </Link>
                 <Link href='/api/random'>
                   <a>Random</a>
+                </Link>
+                <Link href='/tags'>
+                  <a>Tags</a>
                 </Link>
                 <Link href='/search'>
                   <a>Search</a>
                 </Link>
               </div>
               <div className='grid gap-2 place-content-start'>
+                <span className='font-semibold'>Follow</span>
+                <Link href='/subscribe'>
+                  <a>Subscribe</a>
+                </Link>
+                <Link href='/about'>
+                  <a>About</a>
+                </Link>
                 <a href='https://www.patreon.com/sketchplanations' target='_blank' rel='noreferrer'>
                   Patreon
                 </a>
@@ -66,6 +66,15 @@ const NavigationBar = () => {
         </div>
       </div>
       <style jsx>{`
+        .root {
+           {
+            /* box-shadow: inset 0 0 50px 10px rgba(255, 255, 255, 0.1); */
+          }
+           {
+            /* background: #35363a; */
+          }
+        }
+
         .ident {
           @apply block mb-8;
         }

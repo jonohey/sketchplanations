@@ -115,7 +115,10 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
         }
 
         .prevnext {
-          @apply relative bg-paper grid grid-cols-2 place-items-center gap-16 py-12 px-6 border-t border-b border-paper-dark;
+          @apply relative bg-paper grid grid-cols-2 place-items-center gap-16 pt-6 px-6 border-t border-b border-paper-dark;
+          background-color: rgba(0, 0, 0, 0.03);
+          border-color: rgba(0, 0, 0, 0.04);
+          box-shadow: inset 0 0 50px 10px #fff;
         }
 
         .prevnext::before {
@@ -123,6 +126,7 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
           @apply absolute top-0 bottom-0 bg-paper-dark;
           left: 50%;
           width: 1px;
+          background-color: rgba(0, 0, 0, 0.04);
         }
       `}</style>
     </>

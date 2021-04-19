@@ -121,6 +121,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         @screen sm {
           .root {
             @apply px-6;
+            ${fullPost && 'margin-top: 4rem'}
           }
         }
 

@@ -64,7 +64,9 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
       </Link>
       <style jsx>{`
         .image {
-          @apply flex flex-col text-center;
+          @apply flex flex-col text-center overflow-hidden;
+          height: 30vw;
+          max-height: 10rem;
         }
 
         .image :global(img) {

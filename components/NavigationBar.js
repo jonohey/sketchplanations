@@ -5,17 +5,21 @@ import { Navigation } from 'components'
 const NavigationBar = () => {
   return (
     <>
-      <div className='px-6 py-2 flex bg-white z-10'>
+      <div className='root px-6 py-2 flex flex-col sm:flex-row bg-white z-10 border-b'>
         <Link href='/'>
           <a className='ident'>
             <img className='ident__svg' src='/logo.svg' width='300' height='47' alt='Sketchplanations' />
           </a>
         </Link>
-        <div className='ml-auto flex'>
+        <div className='mb-3 sm:mb-0 sm:ml-auto flex justify-center'>
           <Navigation />
         </div>
       </div>
       <style jsx>{`
+        .root {
+          border-color: rgba(0, 0, 0, 0.04);
+        }
+
         .ident {
           @apply py-4 flex justify-center;
         }

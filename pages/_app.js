@@ -120,7 +120,9 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         <Headroom className={route === '/' ? 'hide-when-unfixed' : ''}>
           <NavigationBar />
         </Headroom>
-        <Component {...pageProps} />
+        <div className='bg-white'>
+          <Component {...pageProps} />
+        </div>
         <div className='mt-auto'>
           <Footer />
         </div>

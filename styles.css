@@ -7,6 +7,7 @@ body {
   font-family: 'Inter', sans-serif;
   font-weight: 300;
   color: #222;
+  background: #35363a;
 }
 
 h1,
@@ -48,12 +49,8 @@ pre {
 }
 
 .headroom-wrapper {
-  overflow: hidden;
-}
-
-.headroom {
-  /* border-bottom: solid 1px rgba(0, 0, 0, 0.04); */
-  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0);
+  position: relative;
+  /* overflow: hidden; */
 }
 
 .headroom--pinned {
