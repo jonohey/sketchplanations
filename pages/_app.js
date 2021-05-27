@@ -127,7 +127,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
               </Link>
             </div>
             <div className='p-1 sm:p-3'>
-              <p className='slogan'>Explaining one thing a week in a sketch</p>
+              <p className='slogan'>Explaining the world one sketch at a time</p>
             </div>
           </div>
           <Navigation />

@@ -28,7 +28,7 @@ const Home = ({ sketchplanations }) => {
     <div>
       <div className='masthead'>
         <img src='/logo.svg' width='300' height='47' alt='Sketchplanations' />
-        <p className='sm:text-lg'>Explaining one thing a week in a sketch</p>
+        <p className='sm:text-lg'>Explaining the world one sketch at a time</p>
         <Navigation />
       </div>
       <InfiniteScroll

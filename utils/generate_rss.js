@@ -64,7 +64,7 @@ async function generateRSS() {
         },
         title: 'Sketchplanations',
         link: 'https://sketchplanations.com/',
-        description: 'Explaining one thing a week in a sketch',
+        description: 'Explaining the world one sketch at a time',
         item: items,
       },
     },
