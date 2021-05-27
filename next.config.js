@@ -17,6 +17,23 @@ module.exports = {
 
     return config
   },
+  async headers() {
+    return [
+      {
+        source: '/rss',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/rss+xml',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600',
+          },
+        ],
+      },
+    ]
+  },
   async redirects() {
     return [
       {
