@@ -169,10 +169,10 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
       ></script> */}
       <data
         id='mj-w-res-data'
-        data-token='c7faf26e5a424aa232653ef355138504'
+        data-token='ac96f122b8e9e435f901384e1f8de579'
         className='mj-w-data'
         data-apikey='5y2N'
-        data-w-id='Gbk'
+        data-w-id='Hd2'
         data-lang='en_US'
         data-base='https://app.mailjet.com'
         data-width='640'
