@@ -72,6 +72,11 @@ module.exports = {
         permanent: false,
       },
       {
+        source: '/microadventures',
+        destination: '/microadventure',
+        permanent: true,
+      },
+      {
         source: '/post/630439800088985600/the-4-horsemen-of-relationship-apocalypse-john',
         destination: '/the-4-horsemen-of-relationship-apocalypse',
         permanent: true,
@@ -638,11 +643,31 @@ module.exports = {
       },
       {
         source: '/post/176600863626/what-drives-us-autonomy-mastery-purpose-in',
-        destination: '/what-drives-us-autonomy-mastery-purpose',
+        destination: '/autonomy-mastery-purpose',
+        permanent: true,
+      },
+      {
+        source: '/what-drives-us-autonomy-mastery-purpose',
+        destination: '/autonomy-mastery-purpose',
+        permanent: true,
+      },
+      {
+        source: '/what-drives-us',
+        destination: '/autonomy-mastery-purpose',
+        permanent: true,
+      },
+      {
+        source: '/drive',
+        destination: '/autonomy-mastery-purpose',
         permanent: true,
       },
       {
         source: '/post/176383242141/second-cousins-once-removed-even-when-youve',
+        destination: '/second-cousins-once-removed',
+        permanent: true,
+      },
+      {
+        source: '/second-cousins',
         destination: '/second-cousins-once-removed',
         permanent: true,
       },
@@ -663,6 +688,11 @@ module.exports = {
       },
       {
         source: '/post/175416370891/how-owls-necks-turn-so-far-round-owls-are',
+        destination: '/how-owls-necks-turn-so-far-round',
+        permanent: true,
+      },
+      {
+        source: '/owls-necks',
         destination: '/how-owls-necks-turn-so-far-round',
         permanent: true,
       },
@@ -733,7 +763,12 @@ module.exports = {
       },
       {
         source: '/post/172700064866/what-is-a-blue-moon-a-full-moon-that-hits-twice',
-        destination: '/what-is-a-blue-moon',
+        destination: '/blue-moon',
+        permanent: true,
+      },
+      {
+        source: '/what-is-a-blue-moon',
+        destination: '/blue-moon',
         permanent: true,
       },
       {
@@ -1022,6 +1057,11 @@ module.exports = {
         permanent: true,
       },
       {
+        source: '/release-strategy',
+        destination: '/a-release-strategy-for-happier-customers-sooner',
+        permanent: true,
+      },
+      {
         source: '/post/158829619366/the-goldilocks-zone-the-range-around-a-star',
         destination: '/the-goldilocks-zone',
         permanent: true,
@@ -1048,6 +1088,11 @@ module.exports = {
       },
       {
         source: '/post/157359153856/how-to-speak-plainly-by-pooh-bear-with-two',
+        destination: '/how-to-speak-plainly-by-pooh-bear',
+        permanent: true,
+      },
+      {
+        source: '/speak-plainly',
         destination: '/how-to-speak-plainly-by-pooh-bear',
         permanent: true,
       },
@@ -1478,6 +1523,16 @@ module.exports = {
       },
       {
         source: '/post/123628390491/the-fifth-fuel-energy-efficiency-the-cheapest',
+        destination: '/the-fifth-fuel-energy-efficiency',
+        permanent: true,
+      },
+      {
+        source: '/energy-efficiency',
+        destination: '/the-fifth-fuel-energy-efficiency',
+        permanent: true,
+      },
+      {
+        source: '/the-fifth-fuel',
         destination: '/the-fifth-fuel-energy-efficiency',
         permanent: true,
       },
@@ -2123,7 +2178,9 @@ module.exports = {
         destination: '/lenticular-clouds',
         permanent: true,
       },
-      { source: '/post/74666781370/framing', destination: '/framing', permanent: true },
+      { source: '/post/74666781370/framing',
+        destination: '/framing',
+        permanent: true },
       {
         source: '/post/74610796896/the-content-is-the-interface-sam-moreau-user',
         destination: '/the-content-is-the-interface',
@@ -2597,6 +2654,11 @@ module.exports = {
         permanent: true,
       },
       {
+        source: '/maslow',
+        destination: '/maslows-hierarchy-of-needs',
+        permanent: true,
+      },
+      {
         source: '/post/65288250729/rules-of-thumb-for-remaining-daylight-in',
         destination: '/rules-of-thumb-for-remaining-daylight',
         permanent: true,
@@ -2746,7 +2808,9 @@ module.exports = {
         destination: '/store-whiteboard-pens-with-the-nib-down',
         permanent: true,
       },
-      { source: '/post/62758789193/the-law-of-lockers', destination: '/the-law-of-lockers', permanent: true },
+      { source: '/post/62758789193/the-law-of-lockers',
+        destination: '/the-law-of-lockers',
+        permanent: true },
       {
         source: '/post/62667149195/plug-computing-i-love-the-idea-that-the-computer',
         destination: '/plug-computing',
@@ -2817,7 +2881,10 @@ module.exports = {
         destination: '/london-dog-size',
         permanent: true,
       },
-      { source: '/post/61355581968/be-nice-to-tourists', destination: '/be-nice-to-tourists', permanent: true },
+      { source: '/post/61355581968/be-nice-to-tourists',
+        destination: '/be-nice-to-tourists',
+        permanent: true
+      },
       {
         source: '/post/61249752387/5-user-tests-finds-85-problems-classic-rule-of',
         destination: '/5-user-tests-finds-85-percent-problems',
@@ -2835,12 +2902,22 @@ module.exports = {
       },
       {
         source: '/post/60973882933/second-rule-of-improv-be-spontaneous-i-was',
-        destination: '/second-rule-of-improv-be-spontaneous',
+        destination: '/be-spontaneous',
+        permanent: true,
+      },
+      {
+        source: '/second-rule-of-improv-be-spontaneous',
+        destination: '/be-spontaneous',
         permanent: true,
       },
       {
         source: '/post/60883386143/first-rule-of-improv-accept-offers-the-general',
-        destination: '/first-rule-of-improv-accept-offers',
+        destination: '/accept-offers',
+        permanent: true,
+      },
+      {
+        source: '/first-rule-of-improv-accept-offers',
+        destination: '/accept-offers',
         permanent: true,
       },
       {
@@ -2870,7 +2947,12 @@ module.exports = {
       },
       {
         source: '/post/60308893361/roger-martins-knowledge-funnel-from-the-design',
-        destination: '/roger-martins-knowledge-funnel',
+        destination: '/knowledge-funnel',
+        permanent: true,
+      },
+      {
+        source: '/roger-martins-knowledge-funnel',
+        destination: '/knowledge-funnel',
         permanent: true,
       },
       {
