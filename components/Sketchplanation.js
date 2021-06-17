@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
 import { RichText } from 'prismic-reactjs'
-import Shiitake from 'shiitake'
-import Link from 'next/link'
+import { sort } from 'fast-sort'
 import Imgix from 'react-imgix'
+import Link from 'next/link'
+import React, { useState } from 'react'
+import Shiitake from 'shiitake'
 
 // import { SocialSharing, TextHeader, PayWhatYouWant, Modal } from 'components'
 
@@ -12,6 +13,34 @@ const TextHeader = dynamic(() => import('./TextHeader'))
 const PayWhatYouWant = dynamic(() => import('./PayWhatYouWant'))
 const Modal = dynamic(() => import('./Modal'))
 
+const renderImage = ({ image, title }) => {
+  const { width, height } = image.dimensions
+  const heightRatio = width / height
+  const adjustedWidth = 1600
+  const adjustedheight = adjustedWidth * heightRatio
+
+  return (
+    <Imgix
+      className='lazyload image'
+      src={image.url}
+      attributeConfig={{
+        src: 'data-src',
+        srcSet: 'data-srcset',
+        sizes: 'data-sizes',
+      }}
+      htmlAttributes={{
+        src: `${image.url}&w=1600&blur=200&px=32`,
+        width: adjustedWidth,
+        height: adjustedheight,
+        alt: image.alt || `${title} - Sketchplanations`,
+      }}
+      width={adjustedWidth}
+      height={adjustedheight}
+      sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
+    />
+  )
+}
+
 const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = false }) => {
   const [pwywModalOpen, setPwywModalOpen] = useState(false)
   const {
@@ -19,41 +48,15 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
     uid,
   } = sketchplanation
 
-  const renderImage = () => {
-    const { width, height } = image.dimensions
-    const heightRatio = width / height
-    const adjustedWidth = 1600
-    const adjustedheight = adjustedWidth * heightRatio
-
-    return (
-      <Imgix
-        className='lazyload image'
-        src={image.url}
-        attributeConfig={{
-          src: 'data-src',
-          srcSet: 'data-srcset',
-          sizes: 'data-sizes',
-        }}
-        htmlAttributes={{
-          src: `${image.url}&w=1600&blur=200&px=32`,
-          width: adjustedWidth,
-          height: adjustedheight,
-          alt: image.alt || `${title} - Sketchplanations`,
-        }}
-        width={adjustedWidth}
-        height={adjustedheight}
-        sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
-      />
-    )
-  }
+  const tags = sort(sketchplanation.data.tags).asc()
 
   return (
     <div className='root'>
       {fullPost ? (
-        <div className='image'>{renderImage()}</div>
+        <div className='image'>{renderImage({ image, title })}</div>
       ) : (
         <Link href={`/${uid}`}>
-          <a className='image'>{renderImage()}</a>
+          <a className='image'>{renderImage({ image, title })}</a>
         </Link>
       )}
       <div className='content'>
@@ -91,7 +94,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
             </Modal>
             <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />
             <ul className='tags'>
-              {sketchplanation.data.tags.map((tag, index) => (
+              {tags.map((tag, index) => (
                 <li key={index}>
                   <Link key={tag} href={`/tags/${tag.tag.slug}`}>
                     <a>{tag.tag.slug.replace(/-/, ' ')}</a>
