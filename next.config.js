@@ -52,6 +52,16 @@ module.exports = {
         permanent: false,
       },
       {
+        source: '/shop',
+        destination: 'https://www.redbubble.com/people/sketchplanator/shop?asc=u',
+        permanent: false,
+      },
+      {
+        source: '/prints',
+        destination: 'https://www.redbubble.com/people/sketchplanator/shop?asc=u',
+        permanent: false,
+      },
+      {
         source: '/sketchplanations',
         destination: '/',
         permanent: false,

@@ -22,7 +22,7 @@ const Navigation = () => {
         <a href='https://www.patreon.com/sketchplanations' target='_blank' rel='noreferrer'>
           Patreon
         </a>
-        <a href='https://www.redbubble.com/people/sketchplanator/shop' target='_blank' rel='noreferrer'>
+        <a href='https://www.redbubble.com/people/sketchplanator/shop?asc=u' target='_blank' rel='noreferrer'>
           Prints
         </a>
       </nav>
