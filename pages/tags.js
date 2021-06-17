@@ -1,40 +1,40 @@
-import Prismic from 'prismic-javascript'
-import Link from 'next/link'
+import { ButtonGroup } from 'components'
 import { client } from 'prismic-configuration'
 import { sort } from 'fast-sort'
-import useCookie from 'react-use-cookie'
+import { useCookie } from 'next-cookie'
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import Prismic from 'prismic-javascript'
+
+const sortByOptions = [
+  { label: 'A-Z', value: 'name' },
+  { label: 'Frequency', value: 'count' },
+]
 
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
 
-const SortButton = ({ children, ...props }) => (
-  <>
-    <button {...props}>{children}</button>
-    <style jsx>{`
-      button {
-        @apply relative py-2 px-4 border text-sm;
-        color: ${props.active ? '#fff' : 'inherit'};
-        border-color: ${props.active ? '#1253B5' : '#e2e8f0'};
-        background-color: ${props.active ? '#1253B5' : '#fff'};
-      }
-    `}</style>
-  </>
-)
+const cookieName = 'tagsSortBy'
 
 const Tags = ({ tagsByName, tagsByCount }) => {
-  const [sort, setSort] = useCookie('tagsSort', 'name')
+  const cookie = useCookie()
+  const [sortBy, setSortBy] = useState(null)
+
+  const handleSortByChange = (newSortBy) => {
+    setSortBy(newSortBy)
+    cookie.set(cookieName, newSortBy)
+  }
+
+  useEffect(() => {
+    setSortBy(cookie.get(cookieName) || 'name')
+  }, [])
 
   return (
     <>
-      <div className='sort-buttons'>
-        <SortButton className='sort-button' active={sort === 'name'} type='button' onClick={() => setSort('name')}>
-          A-Z
-        </SortButton>
-        <SortButton className='sort-button' active={sort === 'count'} type='button' onClick={() => setSort('count')}>
-          Frequency
-        </SortButton>
-      </div>
-      {sort === 'name' && (
-        <div className='tags'>
+      <div>
+        <div className='sort-buttons'>
+          <ButtonGroup label='Sort by' onChange={handleSortByChange} options={sortByOptions} value={sortBy} />
+        </div>
+        <div className='tags tags-by-name'>
           {tagsByName.map(({ tag, slug, count }) => (
             <Link key={slug} href={`/tags/${slug}`}>
               <a>
@@ -43,9 +43,7 @@ const Tags = ({ tagsByName, tagsByCount }) => {
             </Link>
           ))}
         </div>
-      )}
-      {sort === 'count' && (
-        <div className='tags'>
+        <div className='tags tags-by-count'>
           {tagsByCount.map(({ tag, slug, count }) => (
             <Link key={slug} href={`/tags/${slug}`}>
               <a>
@@ -54,22 +52,10 @@ const Tags = ({ tagsByName, tagsByCount }) => {
             </Link>
           ))}
         </div>
-      )}
+      </div>
       <style jsx>{`
         .sort-buttons {
-          @apply flex justify-end pt-6 px-6;
-        }
-
-        .sort-buttons :global(> *:first-child) {
-          @apply rounded-l-md;
-        }
-
-        .sort-buttons :global(> *:last-child) {
-          @apply rounded-r-md;
-        }
-
-        .sort-buttons :global(> * + *) {
-          margin-left: -1px;
+          @apply flex justify-center pt-6 px-6;
         }
 
         .tags {
@@ -94,6 +80,14 @@ const Tags = ({ tagsByName, tagsByCount }) => {
 
         .tags a:hover {
           @apply bg-bright-red text-white border-bright-red shadow;
+        }
+
+        .tags-by-name {
+          display: ${sortBy === 'name' ? 'flex' : 'none'};
+        }
+
+        .tags-by-count {
+          display: ${sortBy === 'count' ? 'flex' : 'none'};
         }
       `}</style>
     </>
