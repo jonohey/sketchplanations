@@ -1263,7 +1263,12 @@ module.exports = {
       },
       {
         source: '/post/145326922161/rewrite-to-avoid-click-here-i-find-myself-linking',
-        destination: '/rewrite-to-avoid-click-here',
+        destination: '/click-here',
+        permanent: true,
+      },
+      {
+        source: '/rewrite-to-avoid-click-here',
+        destination: '/click-here',
         permanent: true,
       },
       {
