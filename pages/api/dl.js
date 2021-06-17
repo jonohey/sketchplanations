@@ -18,6 +18,7 @@ export default async (req, res) => {
   const filename = `sketchplanations-${uid}.${extension}`
 
   res.setHeader('content-disposition', 'attachment; filename=' + filename)
+  res.setHeader('X-Robots-Tag', 'noindex')
 
   try {
     const data = await request.get(imageUrl)

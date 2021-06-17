@@ -18,5 +18,7 @@ export default async (req, res) => {
 
   const paymentIntent = await stripe.paymentIntents.create(piAttrs)
 
+  res.setHeader('X-Robots-Tag', 'noindex')
+
   res.json({ clientSecret: paymentIntent.client_secret })
 }
