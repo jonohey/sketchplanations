@@ -2922,7 +2922,12 @@ module.exports = {
       },
       {
         source: '/post/60793113737/peel-a-post-it-so-it-doesnt-fall-down-pull-flat',
-        destination: '/peel-a-post-it-so-it-doesnt-fall-down',
+        destination: '/peel-a-post-it',
+        permanent: true,
+      },
+      {
+        source: '/peel-a-post-it-so-it-doesnt-fall-down',
+        destination: '/peel-a-post-it',
         permanent: true,
       },
       {
@@ -2957,7 +2962,12 @@ module.exports = {
       },
       {
         source: '/post/60218052501/want-to-compose-just-sit-down-without-any-music',
-        destination: '/want-to-compose-just-sit-down-without-any-music',
+        destination: '/compose',
+        permanent: true,
+      },
+      {
+        source: '/want-to-compose-just-sit-down-without-any-music',
+        destination: '/compose',
         permanent: true,
       },
       {
