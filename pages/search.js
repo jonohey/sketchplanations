@@ -35,13 +35,25 @@ const executeTagsSearch = async (query) => {
 
 const mapResultsToImages = (results) => {
   try {
-    return results.map(({ uid, data: { title, image: { url, alt, dimensions: { width, height } } } }) => ({
-      src: url,
-      width,
-      height,
-      alt: alt || `${title} - Sketchplanations`,
-      uid,
-    }))
+    return results.map(
+      ({
+        uid,
+        data: {
+          title,
+          image: {
+            url,
+            alt,
+            dimensions: { width, height },
+          },
+        },
+      }) => ({
+        src: url,
+        width,
+        height,
+        alt: alt || `${title} - Sketchplanations`,
+        uid,
+      })
+    )
   } catch {
     console.log('Something went wrong:', results)
     return []
@@ -136,14 +148,16 @@ const Search = ({ ssrSketchplanations, ssrTags, ssrSearchCalled }) => {
         </form>
         {searchCalled && (images.length > 0 || tags.length > 0) && (
           <>
-            <div className='tags'>
-              <span>Matching tags:</span>
-              {tags.map(({ data: { identifier: tag }, slugs }) => (
-                <Link key={tag} href={`/tags/${slugs[0]}`}>
-                  <a>{tag}</a>
-                </Link>
-              ))}
-            </div>
+            {tags.length > 0 && (
+              <div className='tags'>
+                <span>Matching tags:</span>
+                {tags.map(({ data: { identifier: tag }, slugs }) => (
+                  <Link key={tag} href={`/tags/${slugs[0]}`}>
+                    <a>{tag}</a>
+                  </Link>
+                ))}
+              </div>
+            )}
             <div className='gallery'>
               <Gallery photos={images} direction='row' margin={16} targetRowHeight={400} renderImage={renderImage} />
             </div>
