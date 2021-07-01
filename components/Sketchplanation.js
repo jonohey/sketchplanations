@@ -81,27 +81,35 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         )}
         {fullPost && (
           <>
-            <button className='pwyw-button' type='button' onClick={() => setPwywModalOpen(true)}>
-              <svg width='14' height='19' xmlns='http://www.w3.org/2000/svg'>
-                <path d='M11.951 7.095L7.757 11.29V0H6.243v11.29L2.05 7.095.979 8.166 7 14.187l6.022-6.021-1.07-1.07zM0 16.964h14v1.513H0v-1.513z' />
-              </svg>
-              Download highest-quality image
-            </button>
-            <Modal show={pwywModalOpen} onHide={() => setPwywModalOpen(false)}>
-              <div className='pwyw'>
-                <PayWhatYouWant sketchplanationUid={sketchplanation.uid} sketchplanationTitle={title} />
+            <div className='after-post'>
+              <div className='licence-note bg-gray-100'>
+                <p>
+                  You're welcome to use and share this image and text for non-commercial purposes with attribution. Go wild!<br/>
+                  <a href='/licence' target='_blank' className='licence-link'>See licence</a>
+                </p>
               </div>
-            </Modal>
-            <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />
-            <ul className='tags'>
-              {tags.map((tag, index) => (
-                <li key={index}>
-                  <Link key={tag} href={`/tags/${tag.tag.slug}`}>
-                    <a>{tag.tag.slug.replace(/-/, ' ')}</a>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+              <button className='pwyw-button' type='button' onClick={() => setPwywModalOpen(true)}>
+                <svg width='14' height='19' xmlns='http://www.w3.org/2000/svg'>
+                  <path d='M11.951 7.095L7.757 11.29V0H6.243v11.29L2.05 7.095.979 8.166 7 14.187l6.022-6.021-1.07-1.07zM0 16.964h14v1.513H0v-1.513z' />
+                </svg>
+                Download highest-quality image
+              </button>
+              <Modal show={pwywModalOpen} onHide={() => setPwywModalOpen(false)}>
+                <div className='pwyw'>
+                  <PayWhatYouWant sketchplanationUid={sketchplanation.uid} sketchplanationTitle={title} />
+                </div>
+              </Modal>
+              <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />
+              <ul className='tags'>
+                {tags.map((tag, index) => (
+                  <li key={index}>
+                    <Link key={tag} href={`/tags/${tag.tag.slug}`}>
+                      <a>{tag.tag.slug.replace(/-/, ' ')}</a>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </>
         )}
       </div>
@@ -183,12 +191,24 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
           @apply text-blue;
         }
 
+        .after-post {
+          @apply mt-10;
+        }
+
+        .licence-note {
+          @apply p-5;
+        }
+
+        .licence-link {
+          @apply text-blue;
+        }
+
         .pwyw {
           @apply p-8;
         }
 
         .pwyw-button {
-          @apply mt-10 text-sm;
+          @apply mt-4 text-sm;
           color: #888;
         }
 
