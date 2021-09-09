@@ -103,6 +103,7 @@ const SocialSharing = ({ handle, title, text }) => {
       <style jsx>{`
         .share-buttons {
           display: flex;
+          flex-wrap: wrap;
           width: 100%;
           margin: 1.5rem -0.25rem -0.25rem;
         }
