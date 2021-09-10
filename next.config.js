@@ -2183,9 +2183,7 @@ module.exports = {
         destination: '/lenticular-clouds',
         permanent: true,
       },
-      { source: '/post/74666781370/framing',
-        destination: '/framing',
-        permanent: true },
+      { source: '/post/74666781370/framing', destination: '/framing', permanent: true },
       {
         source: '/post/74610796896/the-content-is-the-interface-sam-moreau-user',
         destination: '/the-content-is-the-interface',
@@ -2813,9 +2811,7 @@ module.exports = {
         destination: '/store-whiteboard-pens-with-the-nib-down',
         permanent: true,
       },
-      { source: '/post/62758789193/the-law-of-lockers',
-        destination: '/the-law-of-lockers',
-        permanent: true },
+      { source: '/post/62758789193/the-law-of-lockers', destination: '/the-law-of-lockers', permanent: true },
       {
         source: '/post/62667149195/plug-computing-i-love-the-idea-that-the-computer',
         destination: '/plug-computing',
@@ -2886,10 +2882,7 @@ module.exports = {
         destination: '/london-dog-size',
         permanent: true,
       },
-      { source: '/post/61355581968/be-nice-to-tourists',
-        destination: '/be-nice-to-tourists',
-        permanent: true
-      },
+      { source: '/post/61355581968/be-nice-to-tourists', destination: '/be-nice-to-tourists', permanent: true },
       {
         source: '/post/61249752387/5-user-tests-finds-85-problems-classic-rule-of',
         destination: '/5-user-tests-finds-85-percent-problems',
