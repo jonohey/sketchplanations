@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import Prismic from 'prismic-javascript'
 import { client } from 'prismic-configuration'
 import { RichText } from 'prismic-reactjs'
-// import { Sketchplanation, PrevNextSketchplanation } from 'components'
 import Head from 'next/head'
-import { pageTitle } from 'helpers'
+import Link from 'next/link'
 import dynamic from 'next/dynamic'
+
+import { pageTitle } from 'helpers'
 
 const Sketchplanation = dynamic(() => import('../components/Sketchplanation'))
 const PrevNextSketchplanation = dynamic(() => import('../components/PrevNextSketchplanation'))
@@ -35,47 +36,45 @@ const SketchplanationPage = ({
       </Head>
       <div className='prev-next-header'>
         {nextSketchplanation ? (
-          <a
-            href={`/${nextSketchplanation?.uid}`}
-            className='prev-next-header__previous'
-            title={nextSketchplanation?.data?.title}
-          >
-            <div className='caret-wrapper'>
-              <svg
-                className='caret -rotate-180'
-                viewBox='0 0 24 24'
-                xmlns='http://www.w3.org/2000/svg'
-                fillRule='evenodd'
-                clipRule='evenodd'
-              >
-                <path d='M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z' />
-              </svg>
-            </div>
-            <span>Previous</span>
-          </a>
+          <Link href={`/${nextSketchplanation?.uid}`}>
+            <a className='prev-next-header__previous' title={nextSketchplanation?.data?.title}>
+              <div className='caret-wrapper'>
+                <svg
+                  className='caret -rotate-180'
+                  viewBox='0 0 24 24'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fillRule='evenodd'
+                  clipRule='evenodd'
+                >
+                  <path d='M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z' />
+                </svg>
+              </div>
+              <span>Previous</span>
+            </a>
+          </Link>
         ) : (
           <span />
         )}
-        <a href='/api/random'>Random</a>
+        <Link href='/api/random'>
+          <a>Random</a>
+        </Link>
         {previousSketchplanation ? (
-          <a
-            href={`/${previousSketchplanation?.uid}`}
-            className='prev-next-header__next'
-            title={previousSketchplanation?.data?.title}
-          >
-            <div className='caret-wrapper'>
-              <svg
-                className='caret'
-                viewBox='0 0 24 24'
-                xmlns='http://www.w3.org/2000/svg'
-                fillRule='evenodd'
-                clipRule='evenodd'
-              >
-                <path d='M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z' />
-              </svg>
-            </div>
-            <span>Next</span>
-          </a>
+          <Link href={`/${previousSketchplanation?.uid}`}>
+            <a className='prev-next-header__next' title={previousSketchplanation?.data?.title}>
+              <div className='caret-wrapper'>
+                <svg
+                  className='caret'
+                  viewBox='0 0 24 24'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fillRule='evenodd'
+                  clipRule='evenodd'
+                >
+                  <path d='M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z' />
+                </svg>
+              </div>
+              <span>Next</span>
+            </a>
+          </Link>
         ) : (
           <span />
         )}
