@@ -264,12 +264,12 @@ const queryAll = async (predicates, options = {}) => {
 export async function getStaticPaths() {
   const sketchplanations = await queryAll(Prismic.Predicates.at('document.type', 'sketchplanation'))
   const sketchplanationsPaths = sketchplanations.map((sketchplanation) => ({
-    params: { uid: sketchplanation.slugs[0] },
+    params: { uid: sketchplanation.uid },
   }))
 
   return {
     paths: sketchplanationsPaths,
-    fallback: true,
+    fallback: false,
   }
 }
 
