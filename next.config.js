@@ -1,8 +1,8 @@
 module.exports = {
-  i18n: {
-    locales: ['en-GB'],
-    defaultLocale: 'en-GB',
-  },
+  // i18n: {
+  //   locales: ['en-GB'],
+  //   defaultLocale: 'en-GB',
+  // },
   images: {
     loader: 'imgix',
     path: '',
