@@ -38,17 +38,18 @@
     "stripe": "^8.142.0"
   },
   "devDependencies": {
+    "autoprefixer": "^10.3.4",
     "eslint": "^7.24.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.23.2",
     "now": "^21.0.1",
-    "postcss": "^8.2.9",
+    "postcss": "^8.3.6",
     "postcss-preset-env": "^6.7.0",
     "prismic-dom": "^2.2.5",
     "request": "^2.88.2",
     "styled-jsx-plugin-postcss": "^4.0.1",
-    "tailwindcss": "^1.4.6",
+    "tailwindcss": "^2.2.14",
     "xmlbuilder2": "^2.4.1"
   }
 }
