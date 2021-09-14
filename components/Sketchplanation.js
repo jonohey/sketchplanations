@@ -84,8 +84,12 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
             <div className='after-post'>
               <div className='licence-note bg-gray-100'>
                 <p>
-                  You're welcome to use and share this image and text for non-commercial purposes with attribution. Go wild!<br/>
-                  <a href='/licence' target='_blank' className='licence-link'>See licence</a>
+                  You're welcome to use and share this image and text for non-commercial purposes with attribution. Go
+                  wild!
+                  <br />
+                  <a href='/licence' target='_blank' className='licence-link'>
+                    See licence
+                  </a>
                 </p>
               </div>
               <button className='pwyw-button' type='button' onClick={() => setPwywModalOpen(true)}>
@@ -182,7 +186,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         }
 
         .tags a {
-          @apply inline-block mx-2 text-sm whitespace-no-wrap;
+          @apply inline-block mx-2 text-sm whitespace-nowrap;
           transition: all 0.1s ease-out;
           color: #888;
         }

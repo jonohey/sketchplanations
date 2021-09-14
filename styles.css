@@ -52,7 +52,7 @@ pre {
 }
 
 .header {
-  @apply text-center .overflow-hidden;
+  @apply text-center overflow-hidden;
   background-color: #fff;
 }
 
@@ -97,7 +97,7 @@ pre {
 }
 
 .slogan {
-  @apply whitespace-no-wrap hidden;
+  @apply whitespace-nowrap hidden;
 }
 
 @screen sm {

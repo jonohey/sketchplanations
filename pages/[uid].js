@@ -2,48 +2,26 @@ import React, { useState, useEffect } from 'react'
 import Prismic from 'prismic-javascript'
 import { client } from 'prismic-configuration'
 import { RichText } from 'prismic-reactjs'
-// import { Sketchplanation, PrevNextSketchplanation } from 'components'
 import Head from 'next/head'
-import { pageTitle } from 'helpers'
+import Link from 'next/link'
 import dynamic from 'next/dynamic'
+
+import { pageTitle } from 'helpers'
 
 const Sketchplanation = dynamic(() => import('../components/Sketchplanation'))
 const PrevNextSketchplanation = dynamic(() => import('../components/PrevNextSketchplanation'))
 
-const Post = ({ sketchplanation, similarSketchplanations }) => {
+const SketchplanationPage = ({
+  sketchplanation,
+  previousSketchplanation,
+  nextSketchplanation,
+  similarSketchplanations,
+}) => {
   const {
     data: { image, title, body },
     uid,
     id,
   } = sketchplanation
-
-  const [previousSketchplanation, setPreviousSketchplanation] = useState(null)
-  const [nextSketchplanation, setNextSketchplanation] = useState(null)
-
-  const fetchPreviousAndNext = async () => {
-    setPreviousSketchplanation(
-      (
-        await client.query(Prismic.Predicates.at('document.type', 'sketchplanation'), {
-          pageSize: 1,
-          after: id,
-          orderings: '[my.sketchplanation.published_at desc]',
-        })
-      ).results[0]
-    )
-    setNextSketchplanation(
-      (
-        await client.query(Prismic.Predicates.at('document.type', 'sketchplanation'), {
-          pageSize: 1,
-          after: id,
-          orderings: '[my.sketchplanation.published_at]',
-        })
-      ).results[0]
-    )
-  }
-
-  useEffect(() => {
-    fetchPreviousAndNext()
-  }, [sketchplanation])
 
   return (
     <>
@@ -56,10 +34,55 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:image:alt' content={title} />
       </Head>
-      <div className='sketchplanations'>
+      <div className='prev-next-header'>
+        {nextSketchplanation ? (
+          <Link href={`/${nextSketchplanation?.uid}`}>
+            <a className='prev-next-header__previous' title={nextSketchplanation?.data?.title}>
+              <div className='caret-wrapper'>
+                <svg
+                  className='caret -rotate-180'
+                  viewBox='0 0 24 24'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fillRule='evenodd'
+                  clipRule='evenodd'
+                >
+                  <path d='M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z' />
+                </svg>
+              </div>
+              <span>Previous</span>
+            </a>
+          </Link>
+        ) : (
+          <span />
+        )}
+        <Link href='/api/random'>
+          <a>Random</a>
+        </Link>
+        {previousSketchplanation ? (
+          <Link href={`/${previousSketchplanation?.uid}`}>
+            <a className='prev-next-header__next' title={previousSketchplanation?.data?.title}>
+              <div className='caret-wrapper'>
+                <svg
+                  className='caret'
+                  viewBox='0 0 24 24'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fillRule='evenodd'
+                  clipRule='evenodd'
+                >
+                  <path d='M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z' />
+                </svg>
+              </div>
+              <span>Next</span>
+            </a>
+          </Link>
+        ) : (
+          <span />
+        )}
+      </div>
+      <div className='sketchplanation'>
         <Sketchplanation sketchplanation={sketchplanation} fullPost />
       </div>
-      <div className='prevnext'>
+      <div className='prev-next-footer'>
         <div>
           <PrevNextSketchplanation kind='next' sketchplanation={nextSketchplanation} />
         </div>
@@ -80,6 +103,16 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
         </>
       )}
       <style jsx>{`
+        .sketchplanation {
+          @apply flex flex-wrap justify-center pb-6;
+        }
+
+        @screen lg {
+          .sketchplanation {
+            @apply pb-12;
+          }
+        }
+
         .similar-header {
           @apply mb-10 text-center;
         }
@@ -116,13 +149,62 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
           }
         }
 
-        .prevnext {
+        .prev-next-header {
+          @apply mx-auto px-3 text-sm;
+          display: grid;
+          place-items: center;
+          grid-template-columns: 1fr auto 1fr;
+          max-width: 600px;
+          box-sizing: border-box;
+        }
+
+        .prev-next-header__previous {
+          @apply w-full flex items-center;
+        }
+        .prev-next-header__next {
+          @apply w-full flex flex-row-reverse items-center;
+        }
+
+        .prev-next-header > * {
+          @apply py-2;
+        }
+        .prev-next-header > *:nth-child(2) {
+          @apply px-3;
+        }
+
+        .caret-wrapper {
+          @apply flex-none m-2;
+          @apply inline-flex items-center justify-center border rounded text-sm font-sans uppercase;
+          width: 1.5rem;
+          height: 1.5rem;
+          color: #a9b1ba;
+        }
+
+        .caret {
+          width: 0.5rem;
+        }
+
+        .caret * {
+          fill: #000;
+        }
+
+        @screen sm {
+          .prev-next-header {
+            @apply px-6 text-base;
+          }
+        }
+
+        .prev-next-header a {
+          @apply text-blue;
+        }
+
+        .prev-next-footer {
           @apply mx-auto px-6 pb-16;
           max-width: 600px;
           box-sizing: border-box;
         }
 
-        .prevnext > * + * {
+        .prev-next-footer > * + * {
           @apply mt-8;
         }
       `}</style>
@@ -130,14 +212,64 @@ const Post = ({ sketchplanation, similarSketchplanations }) => {
   )
 }
 
-Post.getInitialProps = async ({ query: { uid } }) => {
+export async function getStaticProps({ params: { uid } }) {
   const sketchplanation = await client.getByUID('sketchplanation', uid)
+
   const similarSketchplanations = await client.query(
     [Prismic.Predicates.at('document.type', 'sketchplanation'), Prismic.Predicates.similar(sketchplanation.id, 3)],
     { pageSize: 6 }
   )
 
-  return { sketchplanation, similarSketchplanations }
+  const previousSketchplanation =
+    (
+      await client.query(Prismic.Predicates.at('document.type', 'sketchplanation'), {
+        pageSize: 1,
+        after: sketchplanation.id,
+        orderings: '[my.sketchplanation.published_at desc]',
+      })
+    )?.results?.[0] || null
+
+  const nextSketchplanation =
+    (
+      await client.query(Prismic.Predicates.at('document.type', 'sketchplanation'), {
+        pageSize: 1,
+        after: sketchplanation.id,
+        orderings: '[my.sketchplanation.published_at]',
+      })
+    )?.results?.[0] || null
+
+  return { props: { sketchplanation, previousSketchplanation, nextSketchplanation, similarSketchplanations } }
 }
 
-export default Post
+const queryAll = async (predicates, options = {}) => {
+  let page = 1
+  let hasNextPage = true
+  const documents = []
+
+  do {
+    let response = await client.query(predicates, {
+      ...options,
+      pageSize: 100,
+      page,
+    })
+    documents.push(...response.results)
+    page++
+    hasNextPage = page <= response.total_pages
+  } while (hasNextPage)
+
+  return documents
+}
+
+export async function getStaticPaths() {
+  const sketchplanations = await queryAll(Prismic.Predicates.at('document.type', 'sketchplanation'))
+  const sketchplanationsPaths = sketchplanations.map((sketchplanation) => ({
+    params: { uid: sketchplanation.uid },
+  }))
+
+  return {
+    paths: sketchplanationsPaths,
+    fallback: false,
+  }
+}
+
+export default SketchplanationPage
