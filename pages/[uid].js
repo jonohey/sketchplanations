@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import Prismic from 'prismic-javascript'
-import { client } from 'config/prismic'
+import React from 'react'
 import { RichText } from 'prismic-reactjs'
 import Head from 'next/head'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 
+import { client, Predicates } from 'services/prismic'
 import { pageTitle, queryAll } from 'helpers'
 
 const Sketchplanation = dynamic(() => import('../components/Sketchplanation'))
@@ -20,7 +19,6 @@ const SketchplanationPage = ({
   const {
     data: { image, title, body },
     uid,
-    id,
   } = sketchplanation
 
   return (
@@ -216,13 +214,13 @@ export async function getStaticProps({ params: { uid } }) {
   const sketchplanation = await client.getByUID('sketchplanation', uid)
 
   const similarSketchplanations = await client.query(
-    [Prismic.Predicates.at('document.type', 'sketchplanation'), Prismic.Predicates.similar(sketchplanation.id, 3)],
+    [Predicates.at('document.type', 'sketchplanation'), Predicates.similar(sketchplanation.id, 3)],
     { pageSize: 6 }
   )
 
   const previousSketchplanation =
     (
-      await client.query(Prismic.Predicates.at('document.type', 'sketchplanation'), {
+      await client.query(Predicates.at('document.type', 'sketchplanation'), {
         pageSize: 1,
         after: sketchplanation.id,
         orderings: '[my.sketchplanation.published_at desc]',
@@ -231,7 +229,7 @@ export async function getStaticProps({ params: { uid } }) {
 
   const nextSketchplanation =
     (
-      await client.query(Prismic.Predicates.at('document.type', 'sketchplanation'), {
+      await client.query(Predicates.at('document.type', 'sketchplanation'), {
         pageSize: 1,
         after: sketchplanation.id,
         orderings: '[my.sketchplanation.published_at]',
@@ -242,7 +240,7 @@ export async function getStaticProps({ params: { uid } }) {
 }
 
 export async function getStaticPaths() {
-  const sketchplanations = await queryAll(Prismic.Predicates.at('document.type', 'sketchplanation'))
+  const sketchplanations = await queryAll(Predicates.at('document.type', 'sketchplanation'))
   const sketchplanationsPaths = sketchplanations.map((sketchplanation) => ({
     params: { uid: sketchplanation.uid },
   }))

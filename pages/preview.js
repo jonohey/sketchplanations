@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { client, linkResolver } from 'config/prismic'
+import { client, linkResolver } from 'services/prismic'
 
 const Preview = ({ token }) => {
   const router = useRouter()

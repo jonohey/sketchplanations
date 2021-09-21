@@ -15,14 +15,7 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'react/prop-types': 0,
+    'react/react-in-jsx-scope': 'off',
   },
   settings: { 'import/core-modules': ['styled-jsx/css'] },
-  presets: [
-    [
-      '@babel/preset-react',
-      {
-        runtime: 'automatic',
-      },
-    ],
-  ],
 }

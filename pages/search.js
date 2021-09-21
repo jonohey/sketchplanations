@@ -1,37 +1,11 @@
-import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import Prismic from 'prismic-javascript'
-import { client } from 'config/prismic'
-import Link from 'next/link'
-import Imgix from 'react-imgix'
 import Gallery from 'react-photo-gallery'
+import Imgix from 'react-imgix'
+import Link from 'next/link'
+import React, { useState } from 'react'
+
+import { searchSketchplanations, searchTags } from 'helpers'
 import { TextHeader } from 'components'
-
-const executeSketchplanationsSearch = async (query) => {
-  if (!query || query === '') return []
-
-  const { results } = await client.query(
-    [Prismic.Predicates.at('document.type', 'sketchplanation'), Prismic.Predicates.fulltext('document', query)],
-    {
-      pageSize: 100,
-    }
-  )
-
-  return results
-}
-
-const executeTagsSearch = async (query) => {
-  if (!query || query === '') return []
-
-  const { results } = await client.query(
-    [Prismic.Predicates.at('document.type', 'tag'), Prismic.Predicates.fulltext('document', query)],
-    {
-      pageSize: 100,
-    }
-  )
-
-  return results
-}
 
 const mapResultsToImages = (results) => {
   try {
@@ -75,8 +49,8 @@ const Search = ({ ssrSketchplanations, ssrTags, ssrSearchCalled }) => {
 
     setIsSearching(true)
 
-    const sketchplanationsResults = await executeSketchplanationsSearch(query)
-    const tagsResults = await executeTagsSearch(query)
+    const sketchplanationsResults = await searchSketchplanations(query)
+    const tagsResults = await searchTags(query)
 
     setSearchCalled(true)
     setImages(mapResultsToImages(sketchplanationsResults))
@@ -311,8 +285,8 @@ const Search = ({ ssrSketchplanations, ssrTags, ssrSearchCalled }) => {
 
 Search.getInitialProps = async ({ query }) => {
   const ssrSearchCalled = query?.q ? true : false
-  const ssrSketchplanations = await executeSketchplanationsSearch(query.q)
-  const ssrTags = await executeTagsSearch(query.q)
+  const ssrSketchplanations = await searchSketchplanations(query.q)
+  const ssrTags = await searchTags(query.q)
 
   return { ssrSketchplanations, ssrTags, ssrSearchCalled }
 }

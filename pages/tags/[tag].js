@@ -2,9 +2,8 @@ import { useRouter } from 'next/router'
 import Gallery from 'react-photo-gallery'
 import Imgix from 'react-imgix'
 import Link from 'next/link'
-import Prismic from 'prismic-javascript'
 
-import { client } from 'config/prismic'
+import { client, Predicates } from 'services/prismic'
 import { queryAll } from 'helpers'
 import { TextHeader } from 'components'
 
@@ -112,7 +111,7 @@ const Tag = ({ tag, sketchplanations }) => {
 }
 
 export async function getStaticPaths() {
-  const tags = await queryAll(Prismic.Predicates.at('document.type', 'tag'))
+  const tags = await queryAll(Predicates.at('document.type', 'tag'))
   const tagPaths = tags.map((tag) => ({ params: { tag: tag.slugs[0] } }))
 
   return {
@@ -123,13 +122,13 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { tag } }) {
   const tagIdentifer = tag.replace(/-/g, ' ')
-  let tagDocs = await client.query(Prismic.Predicates.at('my.tag.identifier', tagIdentifer), {
+  let tagDocs = await client.query(Predicates.at('my.tag.identifier', tagIdentifer), {
     pageSize: 1,
   })
 
   // The tag probably has a - in it
   if (tagDocs.total_results_size === 0) {
-    tagDocs = await client.query(Prismic.Predicates.at('my.tag.identifier', tag), {
+    tagDocs = await client.query(Predicates.at('my.tag.identifier', tag), {
       pageSize: 1,
     })
   }
@@ -137,10 +136,7 @@ export async function getStaticProps({ params: { tag } }) {
   const tagDoc = tagDocs?.results[0]
 
   const sketchplanations = await queryAll(
-    [
-      Prismic.Predicates.at('document.type', 'sketchplanation'),
-      Prismic.Predicates.at('my.sketchplanation.tags.tag', tagDoc.id),
-    ],
+    [Predicates.at('document.type', 'sketchplanation'), Predicates.at('my.sketchplanation.tags.tag', tagDoc.id)],
     {
       orderings: '[my.sketchplanation.published_at desc]',
     }

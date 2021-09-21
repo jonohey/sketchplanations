@@ -1,8 +1,8 @@
 const { create } = require('xmlbuilder2')
 const fs = require('fs')
-const Prismic = require('prismic-javascript')
+const Prismic = require('@prismicio/client')
 const PrismicDOM = require('prismic-dom')
-const { queryAll } = require('../helpers')
+const { queryAll } = require('./helpers')
 
 const pubDate = (date) => {
   date = new Date(date)

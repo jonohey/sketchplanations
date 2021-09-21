@@ -1,9 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 
-import Prismic from 'prismic-javascript'
-import { client } from 'config/prismic'
-
 const randomArrayItem = (array) => array[Math.floor(Math.random() * array.length)]
 
 const getUids = () => {

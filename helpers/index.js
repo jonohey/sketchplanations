@@ -1,21 +1,28 @@
+import { Predicates, client } from 'services/prismic'
+
 const defaultPageTitle = 'Sketchplanations - A weekly explanation in a sketch'
 
-exports.pageTitle = (title) => {
-  if (!title) return defaultPageTitle
+const search = async (documentType, query) => {
+  if (!query || query === '') return []
 
-  return `${title} - Sketchplanations`
+  const { results } = await client.query(
+    [Predicates.at('document.type', documentType), Predicates.fulltext('document', query)],
+    { pageSize: 100 }
+  )
+
+  return results
 }
 
-const Prismic = require('prismic-javascript')
-const apiEndpoint = 'https://sketchplanations.prismic.io/api/v2'
+export const searchSketchplanations = async (query) => await search('sketchplanation', query)
 
-exports.queryAll = async (predicates, options = {}) => {
+export const searchTags = async (query) => await search('tag', query)
+
+export const queryAll = async (predicates, options = {}) => {
   let page = 1
   let hasNextPage = true
   const documents = []
 
   do {
-    const client = await Prismic.api(apiEndpoint)
     let response = await client.query(predicates, {
       ...options,
       pageSize: 100,
@@ -27,4 +34,10 @@ exports.queryAll = async (predicates, options = {}) => {
   } while (hasNextPage)
 
   return documents
+}
+
+export const pageTitle = (title) => {
+  if (!title) return defaultPageTitle
+
+  return `${title} - Sketchplanations`
 }

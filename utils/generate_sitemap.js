@@ -1,8 +1,8 @@
 const { create } = require('xmlbuilder2')
 const fs = require('fs')
 const globby = require('globby')
-const Prismic = require('prismic-javascript')
-const { queryAll } = require('../helpers')
+const Prismic = require('@prismicio/client')
+const { queryAll } = require('./helpers')
 
 async function generateSitemap() {
   const sketchplanations = await queryAll(Prismic.Predicates.at('document.type', 'sketchplanation'), {

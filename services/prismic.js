@@ -41,3 +41,5 @@ export const hrefResolver = (doc) => {
 // Connects to the given repository to facilitate data queries
 // export const client = Prismic.client(apiEndpoint, { accessToken })
 export const client = Prismic.client(apiEndpoint)
+
+export const Predicates = Prismic.Predicates

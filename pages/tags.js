@@ -1,10 +1,9 @@
 import { sort } from 'fast-sort'
 import Link from 'next/link'
-import Prismic from 'prismic-javascript'
 import useCookie from 'react-use-cookie'
 
-import { client } from 'config/prismic'
-import { queryAll } from 'config/prismic'
+import { Predicates } from 'services/prismic'
+import { queryAll } from 'helpers'
 
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
 
@@ -103,11 +102,11 @@ const Tags = ({ tagsByName, tagsByCount }) => {
 }
 
 export async function getStaticProps() {
-  const sketchplanations = await queryAll(Prismic.Predicates.at('document.type', 'sketchplanation'), {
+  const sketchplanations = await queryAll(Predicates.at('document.type', 'sketchplanation'), {
     orderings: '[my.sketchplanation.published_at desc]',
   })
 
-  const tags = await queryAll(Prismic.Predicates.at('document.type', 'tag'), {
+  const tags = await queryAll(Predicates.at('document.type', 'tag'), {
     orderings: '[my.tag.identifier]',
   })
 

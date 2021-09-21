@@ -3,7 +3,7 @@ import { RichText } from 'prismic-reactjs'
 import dynamic from 'next/dynamic'
 import Imgix from 'react-imgix'
 
-import { linkResolver } from 'config/prismic'
+import { linkResolver } from 'services/prismic'
 
 const TextHeader = dynamic(() => import('./TextHeader'))
 
