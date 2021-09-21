@@ -4,6 +4,7 @@ import Imgix from 'react-imgix'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import Shiitake from 'shiitake'
+import TextLoop from 'react-text-loop'
 
 // import { SocialSharing, TextHeader, PayWhatYouWant, Modal } from 'components'
 
@@ -44,7 +45,7 @@ const renderImage = ({ image, title }) => {
 const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = false }) => {
   const [pwywModalOpen, setPwywModalOpen] = useState(false)
   const {
-    data: { image, title, body },
+    data: { image, title, body, redbubble_link_url },
     uid,
   } = sketchplanation
 
@@ -81,6 +82,19 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         )}
         {fullPost && (
           <>
+            {redbubble_link_url && (
+              <a className='text-blue' href={redbubble_link_url} target='_blank' rel='noreferrer'>
+                Order{' '}
+                <TextLoop>
+                  <span>print</span>
+                  <span>sticker</span>
+                  <span>postcard</span>
+                  <span>poster</span>
+                  <span>greeting card</span>
+                  <span>magnet</span>
+                </TextLoop>
+              </a>
+            )}
             <div className='after-post'>
               <div className='licence-note bg-gray-100'>
                 <p>
