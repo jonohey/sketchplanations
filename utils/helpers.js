@@ -1,4 +1,4 @@
-const { client } = require('services/prismic')
+const { client } = require('../services/prismic')
 
 exports.queryAll = async (predicates, options = {}) => {
   let page = 1
