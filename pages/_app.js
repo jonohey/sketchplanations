@@ -96,8 +96,8 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         <meta key='og:title' property='og:title' content={pageTitle()} />
         <meta property='og:site_name' content='Sketchplanations' />
         <meta name='twitter:site' content='@sketchplanator' />
-        <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin />
-        <link rel='preconnect' href='https://js.stripe.com' crossOrigin />
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='true' />
+        <link rel='preconnect' href='https://js.stripe.com' crossOrigin='true' />
         <link
           rel='preload'
           as='style'
