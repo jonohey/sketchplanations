@@ -1,5 +1,5 @@
 import { Page } from 'components'
-import { client } from 'prismic-configuration'
+import { client } from 'config/prismic'
 
 const Privacy = ({ document }) => {
   return <Page document={document} />

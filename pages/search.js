@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Prismic from 'prismic-javascript'
-import { client } from 'prismic-configuration'
+import { client } from 'config/prismic'
 import Link from 'next/link'
 import Imgix from 'react-imgix'
 import Gallery from 'react-photo-gallery'

@@ -1,10 +1,12 @@
-import Prismic from 'prismic-javascript'
-import Link from 'next/link'
-import { client } from '../../prismic-configuration'
+import { useRouter } from 'next/router'
 import Gallery from 'react-photo-gallery'
 import Imgix from 'react-imgix'
+import Link from 'next/link'
+import Prismic from 'prismic-javascript'
+
+import { client } from 'config/prismic'
+import { queryAll } from 'helpers'
 import { TextHeader } from 'components'
-import { useRouter } from 'next/router'
 
 const Tag = ({ tag, sketchplanations }) => {
   const router = useRouter()
@@ -15,13 +17,25 @@ const Tag = ({ tag, sketchplanations }) => {
 
   let images
   try {
-    images = sketchplanations.map(({ uid, data: { title, image: { url, alt, dimensions: { width, height } } } }) => ({
-      src: url,
-      width,
-      height,
-      alt: alt || `${title} - Sketchplanations`,
-      uid,
-    }))
+    images = sketchplanations.map(
+      ({
+        uid,
+        data: {
+          title,
+          image: {
+            url,
+            alt,
+            dimensions: { width, height },
+          },
+        },
+      }) => ({
+        src: url,
+        width,
+        height,
+        alt: alt || `${title} - Sketchplanations`,
+        uid,
+      })
+    )
   } catch {
     console.log('sketchplanations', sketchplanations)
   }
@@ -95,25 +109,6 @@ const Tag = ({ tag, sketchplanations }) => {
       </style>
     </>
   )
-}
-
-const queryAll = async (predicates, options = {}) => {
-  let page = 1
-  let hasNextPage = true
-  const sketchplanations = []
-
-  do {
-    let response = await client.query(predicates, {
-      ...options,
-      pageSize: 100,
-      page,
-    })
-    sketchplanations.push(...response.results)
-    page++
-    hasNextPage = page <= response.total_pages
-  } while (hasNextPage)
-
-  return sketchplanations
 }
 
 export async function getStaticPaths() {

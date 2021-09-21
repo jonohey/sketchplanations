@@ -1,8 +1,10 @@
-import Prismic from 'prismic-javascript'
-import Link from 'next/link'
-import { client } from 'prismic-configuration'
 import Gallery from 'react-photo-gallery'
 import Imgix from 'react-imgix'
+import Link from 'next/link'
+import Prismic from 'prismic-javascript'
+
+import { client } from 'config/prismic'
+import { queryAll } from 'helpers'
 
 const Archive = ({ sketchplanations }) => {
   const images = sketchplanations.map(
@@ -75,25 +77,6 @@ const Archive = ({ sketchplanations }) => {
       `}</style>
     </>
   )
-}
-
-const queryAll = async (predicates, options = {}) => {
-  let page = 1
-  let hasNextPage = true
-  const sketchplanations = []
-
-  do {
-    let response = await client.query(predicates, {
-      ...options,
-      pageSize: 100,
-      page,
-    })
-    sketchplanations.push(...response.results)
-    page++
-    hasNextPage = page <= response.total_pages
-  } while (hasNextPage)
-
-  return sketchplanations
 }
 
 export async function getStaticProps() {

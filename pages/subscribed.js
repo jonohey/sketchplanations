@@ -1,5 +1,5 @@
 import { Page } from 'components'
-import { client } from 'prismic-configuration'
+import { client } from 'config/prismic'
 
 const Subscribed = ({ document }) => {
   return <Page document={document} />

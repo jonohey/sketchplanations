@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import Prismic from 'prismic-javascript'
-import { client } from 'prismic-configuration'
+import { client } from 'config/prismic'
 import { RichText } from 'prismic-reactjs'
 import Head from 'next/head'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 
-import { pageTitle } from 'helpers'
+import { pageTitle, queryAll } from 'helpers'
 
 const Sketchplanation = dynamic(() => import('../components/Sketchplanation'))
 const PrevNextSketchplanation = dynamic(() => import('../components/PrevNextSketchplanation'))
@@ -239,25 +239,6 @@ export async function getStaticProps({ params: { uid } }) {
     )?.results?.[0] || null
 
   return { props: { sketchplanation, previousSketchplanation, nextSketchplanation, similarSketchplanations } }
-}
-
-const queryAll = async (predicates, options = {}) => {
-  let page = 1
-  let hasNextPage = true
-  const documents = []
-
-  do {
-    let response = await client.query(predicates, {
-      ...options,
-      pageSize: 100,
-      page,
-    })
-    documents.push(...response.results)
-    page++
-    hasNextPage = page <= response.total_pages
-  } while (hasNextPage)
-
-  return documents
 }
 
 export async function getStaticPaths() {

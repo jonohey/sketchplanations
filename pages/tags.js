@@ -1,8 +1,10 @@
-import Prismic from 'prismic-javascript'
-import Link from 'next/link'
-import { client } from 'prismic-configuration'
 import { sort } from 'fast-sort'
+import Link from 'next/link'
+import Prismic from 'prismic-javascript'
 import useCookie from 'react-use-cookie'
+
+import { client } from 'config/prismic'
+import { queryAll } from 'config/prismic'
 
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
 
@@ -98,25 +100,6 @@ const Tags = ({ tagsByName, tagsByCount }) => {
       `}</style>
     </>
   )
-}
-
-const queryAll = async (predicates, options = {}) => {
-  let page = 1
-  let hasNextPage = true
-  const sketchplanations = []
-
-  do {
-    let response = await client.query(predicates, {
-      ...options,
-      pageSize: 100,
-      page,
-    })
-    sketchplanations.push(...response.results)
-    page++
-    hasNextPage = page <= response.total_pages
-  } while (hasNextPage)
-
-  return sketchplanations
 }
 
 export async function getStaticProps() {

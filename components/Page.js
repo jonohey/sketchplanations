@@ -1,10 +1,10 @@
 import { createElement } from 'react'
 import { RichText } from 'prismic-reactjs'
-import { linkResolver } from 'prismic-configuration'
-import Imgix from 'react-imgix'
-// import { TextHeader } from 'components'
-
 import dynamic from 'next/dynamic'
+import Imgix from 'react-imgix'
+
+import { linkResolver } from 'config/prismic'
+
 const TextHeader = dynamic(() => import('./TextHeader'))
 
 const Text = ({ slice }) => RichText.render(slice.primary.content, linkResolver)

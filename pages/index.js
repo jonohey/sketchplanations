@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Prismic from 'prismic-javascript'
-import { client } from 'prismic-configuration'
+import { client } from 'config/prismic'
 import InfiniteScroll from 'react-infinite-scroll-component'
 // import { Sketchplanation, Navigation } from 'components'
 import dynamic from 'next/dynamic'
