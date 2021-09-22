@@ -1,3 +1,5 @@
+import { either, isEmpty, isNil, complement } from 'ramda'
+
 import { Predicates, client } from 'services/prismic'
 
 const defaultPageTitle = 'Sketchplanations - A weekly explanation in a sketch'
@@ -41,3 +43,7 @@ export const pageTitle = (title) => {
 
   return `${title} - Sketchplanations`
 }
+
+export const isBlank = either(isEmpty, isNil)
+
+export const isPresent = complement(isBlank)

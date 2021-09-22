@@ -50,53 +50,54 @@ const Page = ({
 }) => {
   return (
     <>
-      <div className='root'>
+      <div className='page-root'>
         <TextHeader>{title}</TextHeader>
-        <div className='body'>
+        <div className='page-body'>
           {body.map((slice, index) => createElement(sliceTypesToComponent[slice.slice_type], { key: index, slice }))}
           {children}
         </div>
       </div>
-      <style jsx>
+      <style jsx global>
         {`
-          .root {
+          .page-root {
             max-width: 800px;
             @apply pt-8 pb-20 px-6 mx-auto;
           }
 
-          .body {
-            @apply block;
+          .page-body {
+            @apply block mx-auto;
+            max-width: 800px;
           }
 
-          .body :global(> * + *) {
+          .page-body > * + * {
             margin-top: 1.4em;
           }
 
-          .body :global(b),
-          .body :global(strong) {
+          .page-body b,
+          .page-body strong {
             @apply font-semibold;
           }
 
-          .body :global(i),
-          .body :global(em) {
+          .page-body i,
+          .page-body em {
             @apply italic;
           }
 
-          .body :global(a) {
+          .page-body a {
             @apply text-blue;
           }
 
-          .body :global(ul li) {
+          .page-body ul li {
             list-style: outside disc;
             margin-left: 1.75rem;
           }
 
-          .body :global(ol li) {
+          .page-body ol li {
             list-style: outside decimal;
             margin-left: 1.75rem;
           }
 
-          .body :global(img) {
+          .page-body img {
             @apply my-10;
           }
         `}

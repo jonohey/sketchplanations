@@ -6,6 +6,7 @@
 body {
   /* @apply bg-paper; */
   /* @apply pb-6 px-3; */
+  @apply antialiased;
   font-family: 'Inter', sans-serif;
   font-weight: 300;
   color: #222;
@@ -52,59 +53,52 @@ pre {
 }
 
 .header {
-  @apply text-center overflow-hidden;
+  @apply sticky grid grid-flow-col-dense gap-x-6 top-0 items-center justify-between  px-6 bg-blue z-50;
   background-color: #fff;
 }
 
-.headroom-wrapper {
-  overflow: hidden;
+.ident {
+  @apply block;
 }
 
-.headroom {
-  border-bottom: solid 1px rgba(0, 0, 0, 0.04);
-  box-shadow: 0 2.3rem 1rem -2rem rgba(0, 0, 0, 0);
+/* @screen md {
+  .ident {
+    @apply py-4;
+  }
+} */
+
+.ident__svg {
+  @apply block;
+  width: 100%;
+  height: 100%;
+  max-height: 2rem;
 }
 
-.headroom--pinned {
-  border-bottom-color: rgba(0, 0, 0, 0);
-  box-shadow: 0 2.3rem 1rem -2rem rgba(0, 0, 0, 0.2);
-}
-
-@screen xl {
-  .header {
-    @apply flex items-center justify-center px-6;
+/* @screen xs {
+  .ident__svg {
+    @apply block;
   }
 }
 
-.header > * {
-  @apply p-3;
+.ident__svg--small {
+  @apply block;
+  width: 100%;
+  height: 100%;
+  max-height: 2rem;
 }
 
-.ident {
-  @apply block my-0 mx-auto;
-}
+@screen xs {
+  .ident__svg--small {
+    @apply hidden;
+  }
+} */
 
-.ident__svg {
-  width: 50vw;
-  height: auto;
-}
-
-@screen sm {
+/* @screen sm {
   .ident__svg {
     width: 260px;
     height: auto;
   }
-}
-
-.slogan {
-  @apply whitespace-nowrap hidden;
-}
-
-@screen sm {
-  .slogan {
-    @apply block;
-  }
-}
+} */
 
 .patreon {
   @apply fixed bottom-0 right-0;
@@ -115,19 +109,8 @@ pre {
 } */
 
 .masthead {
-  max-width: 600px;
-  @apply mt-8 mx-auto px-8 flex flex-col items-center text-center;
+  @apply mx-auto mt-6 px-8 flex flex-col items-center text-center text-gray-400;
 }
-
-.masthead > * + * {
-  @apply mt-6;
-}
-
-/* @screen sm {
-  .masthead {
-    @apply px-6;
-  }
-} */
 
 .hide-when-unfixed .headroom--unfixed {
   display: none;
@@ -149,4 +132,40 @@ pre {
   @apply inline-block;
   width: 140px;
   height: auto;
+}
+
+.page {
+  @apply block;
+}
+
+.page > * + * {
+  margin-top: 1.4em;
+}
+
+.page b,
+.page strong {
+  @apply font-semibold;
+}
+
+.page i,
+.page em {
+  @apply italic;
+}
+
+.page a {
+  @apply text-blue;
+}
+
+.page ul li {
+  list-style: outside disc;
+  margin-left: 1.75rem;
+}
+
+.page ol li {
+  list-style: outside decimal;
+  margin-left: 1.75rem;
+}
+
+.page img {
+  @apply my-10;
 }

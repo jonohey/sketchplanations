@@ -4,9 +4,7 @@ import { Integrations } from '@sentry/tracing'
 import 'lazysizes'
 import 'lazysizes/plugins/attrchange/ls.attrchange'
 import Head from 'next/head'
-import Headroom from 'react-headroom'
 import Link from 'next/link'
-import NextNprogress from 'nextjs-progressbar'
 import { pageTitle } from 'helpers'
 import { Navigation } from 'components'
 import { Elements } from '@stripe/react-stripe-js'
@@ -115,24 +113,18 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
           href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css'
         />
       </Head>
-      <NextNprogress color='#1253B5' options={{ showSpinner: false }} />
-      <Headroom className={route === '/' ? 'hide-when-unfixed' : ''}>
-        <div className='header'>
-          <div className='inline-flex flex-col sm:flex-row items-center justify-center lg:justify-start flex-wrap lg:flex-no-wrap -m-1 sm:-m-3 flex-grow'>
-            <div className='p-1 sm:p-3'>
-              <Link href='/'>
-                <a className='ident'>
-                  <img className='ident__svg' src='/logo.svg' width='300' height='47' alt='Sketchplanations' />
-                </a>
-              </Link>
-            </div>
-            <div className='p-1 sm:p-3'>
-              <p className='slogan'>Explaining the world one sketch at a time</p>
-            </div>
-          </div>
-          <Navigation />
-        </div>
-      </Headroom>
+      <div className='header'>
+        <Link href='/'>
+          <a className='ident'>
+            <picture>
+              <source srcSet='/logo-small.svg 100w' media='(max-width: 479px)' />
+              <source srcSet='/logo.svg 100w' media='(min-width: 480px)' />
+              <img src='/logo.svg' className='ident__svg' alt='Sketchplanations' />
+            </picture>
+          </a>
+        </Link>
+        <Navigation />
+      </div>
       <Component {...pageProps} />
       <a className='coffee' href='https://www.buymeacoffee.com/sketchplanator' target='_blank' rel='noreferrer'>
         <img src='/bmc.svg' width='4169' height='913' alt='Buy Me A Coffee' />

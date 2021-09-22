@@ -7,54 +7,54 @@ const Navigation = () => {
         <Link href='/about'>
           <a>About</a>
         </Link>
-        <Link href='/archive'>
-          <a>Archive</a>
+        <Link href='/explore'>
+          <a>Explore</a>
         </Link>
-        <Link href='/tags'>
-          <a>Tags</a>
-        </Link>
-        <Link href='/search'>
-          <a>Search</a>
-        </Link>
-        <Link href='/subscribe'>
+        <Link href='/subscribe' className='big-screen'>
           <a>Subscribe</a>
         </Link>
-        <a href='https://www.patreon.com/sketchplanations' target='_blank' rel='noreferrer'>
-          Patreon
-        </a>
-        <a href='https://www.redbubble.com/people/sketchplanator/shop?asc=u' target='_blank' rel='noreferrer'>
+        <a
+          href='https://www.redbubble.com/people/sketchplanator/shop?asc=u'
+          target='_blank'
+          rel='noreferrer'
+          className='big-screen'
+        >
           Prints
         </a>
       </nav>
       <style jsx>{`
-        :global(.headroom--pinned) nav,
-        :global(.headroom--unfixed) nav {
-          @apply -mt-3 pb-4;
+        nav {
+          @apply flex justify-center -mx-2;
         }
 
-        @screen lg {
-          :global(.headroom--pinned) nav,
-          :global(.headroom--unfixed) nav {
-            @apply pb-0;
+        @screen sm {
+          nav {
+            @apply -mx-3;
           }
         }
 
-        nav {
-          @apply -mx-2 flex flex-wrap justify-center;
-        }
-
         nav > * {
-          @apply py-1 px-2 text-blue text-sm;
+          @apply py-4 px-2;
         }
 
         @screen sm {
           nav > * {
-            @apply py-3 px-3 text-blue text-base;
+            @apply px-3;
           }
         }
 
         .selected {
-          @apply text-blue;
+          @apply text-gray-400;
+        }
+
+        .big-screen {
+          @apply hidden;
+        }
+
+        @screen sm {
+          .big-screen {
+            @apply block;
+          }
         }
       `}</style>
     </>

@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 
 import { client, Predicates } from 'services/prismic'
 
-const Navigation = dynamic(() => import('../components/Navigation'))
 const Sketchplanation = dynamic(() => import('../components/Sketchplanation'))
 
 const Home = ({ sketchplanations }) => {
@@ -26,9 +25,7 @@ const Home = ({ sketchplanations }) => {
   return (
     <div>
       <div className='masthead'>
-        <img src='/logo.svg' width='300' height='47' alt='Sketchplanations' />
         <p className='sm:text-lg'>Explaining the world one sketch at a time</p>
-        <Navigation />
       </div>
       <InfiniteScroll
         dataLength={results.length}
