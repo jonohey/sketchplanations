@@ -100,6 +100,10 @@ const Page = ({
           .page-body img {
             @apply my-10;
           }
+
+          .page-body p {
+            @apply max-w-prose;
+          }
         `}
       </style>
     </>

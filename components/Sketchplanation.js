@@ -63,7 +63,15 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
       <div className='content'>
         {!hideContent && (
           <>
-            <TextHeader>{title}</TextHeader>
+            {fullPost ? (
+              <TextHeader>{title}</TextHeader>
+            ) : (
+              <Link href={`/${uid}`}>
+                <a>
+                  <TextHeader>{title}</TextHeader>
+                </a>
+              </Link>
+            )}
             <div className='body'>
               {fullPost ? (
                 <RichText render={body} />
@@ -219,7 +227,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         }
 
         .licence-note {
-          @apply p-5 bg-bgDarker rounded;
+          @apply p-5 bg-bgHighlight rounded;
         }
 
         .licence-link {

@@ -1,44 +1,71 @@
+import { RoughNotation } from 'react-rough-notation'
+import { useRouter } from 'next/router'
+
 import { Link } from 'components'
 
+const roughNotiationProps = {
+  iterations: 1,
+  animationDuration: 200,
+  animationDelay: 50,
+  padding: 3,
+  type: 'underline',
+}
+
 const Navigation = () => {
+  const router = useRouter()
+
+  const isSelected = (path) => router.pathname === path
+
   return (
     <>
-      <nav>
-        <Link href='/about'>
-          <a>About</a>
+      <nav className='root'>
+        <Link href='/about' className='item'>
+          <a>
+            <RoughNotation show={isSelected('/about')} {...roughNotiationProps}>
+              About
+            </RoughNotation>
+          </a>
         </Link>
-        <Link href='/explore'>
-          <a>Explore</a>
+        <Link href='/explore' className='item'>
+          <a>
+            <RoughNotation show={isSelected('/explore')} {...roughNotiationProps}>
+              Explore
+            </RoughNotation>
+          </a>
         </Link>
-        <Link href='/subscribe' className='big-screen'>
-          <a>Subscribe</a>
+        <Link href='/subscribe' className='item big-screen'>
+          <a>
+            <RoughNotation show={isSelected('/subscribe')} {...roughNotiationProps}>
+              Subscribe
+            </RoughNotation>
+          </a>
         </Link>
         <a
           href='https://www.redbubble.com/people/sketchplanator/shop?asc=u'
           target='_blank'
           rel='noreferrer'
-          className='big-screen'
+          className='item big-screen'
         >
           Prints
         </a>
       </nav>
       <style jsx>{`
-        nav {
-          @apply flex justify-center -mx-2;
+        .root {
+          @apply relative flex justify-center -mx-2;
         }
 
         @screen sm {
-          nav {
+          .root {
             @apply -mx-3;
           }
         }
 
-        nav > * {
-          @apply py-4 px-2;
+        .root :global(a) {
+          @apply relative flex items-center py-4 px-2 overflow-hidden;
         }
 
         @screen sm {
-          nav > * {
+          .root :global(a) {
             @apply px-3;
           }
         }

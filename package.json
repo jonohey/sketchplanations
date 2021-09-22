@@ -33,6 +33,7 @@
     "react-infinite-scroll-component": "^6.0.0",
     "react-overlays": "^0.9.3",
     "react-photo-gallery": "^8.0.0",
+    "react-rough-notation": "^1.0.1",
     "react-text-loop": "^2.3.0",
     "react-use-cookie": "^1.2.1",
     "shiitake": "^3.0.2",

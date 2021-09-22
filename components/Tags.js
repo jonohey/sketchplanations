@@ -29,7 +29,7 @@ const Tags = ({ tags }) => {
           }
 
           .tags a {
-            @apply relative py-2 px-4 m-2 rounded-full border text-sm;
+            @apply relative py-2 px-4 m-2 rounded-full border border-border text-sm;
             transition: all 0.1s ease-out;
           }
 

@@ -21,6 +21,7 @@ module.exports = {
         bg: 'var(--color-bg)',
         bgTransparent: 'var(--color-bgTransparent)',
         bgDarker: 'var(--color-bgDarker)',
+        bgHighlight: 'var(--color-bgHighlight)',
         border: 'var(--color-border)',
         inputBg: 'var(--color-inputBg)',
         inputBorder: 'var(--color-inputBorder)',

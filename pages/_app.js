@@ -94,19 +94,10 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         <meta key='og:title' property='og:title' content={pageTitle()} />
         <meta property='og:site_name' content='Sketchplanations' />
         <meta name='twitter:site' content='@sketchplanator' />
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='true' />
         <link rel='preconnect' href='https://js.stripe.com' crossOrigin='true' />
-        <link
-          rel='preload'
-          as='style'
-          href='https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap'
-        />
-        <link
-          href='https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap'
-          rel='stylesheet'
-          media='print'
-          onLoad="this.media='all'"
-        />
+        <link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap' rel='stylesheet' />
         <link
           rel='stylesheet'
           type='text/css'

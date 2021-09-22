@@ -18,7 +18,7 @@ const Header = () => {
       </div>
       <style jsx>{`
         .root {
-          @apply sticky grid grid-flow-col-dense gap-x-6 top-0 items-center justify-between px-6 z-50 border-b border-border;
+          @apply sticky grid grid-flow-col-dense gap-x-6 top-0 items-center justify-between px-6 z-50;
           background-color: var(--color-bgTransparent);
           backdrop-filter: saturate(180%) blur(5px);
         }

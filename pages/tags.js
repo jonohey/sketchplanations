@@ -12,10 +12,9 @@ const SortButton = ({ children, ...props }) => (
     <button {...props}>{children}</button>
     <style jsx>{`
       button {
-        @apply relative py-2 px-4 border text-sm;
-        color: ${props.active ? '#fff' : 'inherit'};
-        border-color: ${props.active ? '#1253B5' : '#e2e8f0'};
-        background-color: ${props.active ? '#1253B5' : '#fff'};
+        @apply relative py-1 px-4 border text-sm;
+        border-color: ${props.active ? 'var(--color-brightRed)' : 'var(--color-inputBg)'};
+        background-color: ${props.active ? 'var(--color-brightRed)' : 'var(--color-inputBg)'};
       }
     `}</style>
   </>
@@ -58,7 +57,7 @@ const Tags = ({ tagsByName, tagsByCount }) => {
       )}
       <style jsx>{`
         .sort-buttons {
-          @apply flex justify-end pt-6 px-6;
+          @apply flex justify-center pt-6 px-6;
         }
 
         .sort-buttons :global(> *:first-child) {
@@ -78,7 +77,7 @@ const Tags = ({ tagsByName, tagsByCount }) => {
         }
 
         .tags a {
-          @apply relative py-2 px-4 m-2 rounded-full border text-sm;
+          @apply relative py-2 px-4 m-2 rounded-full border border-border text-sm;
           transition: all 0.1s ease-out;
         }
 
