@@ -12,27 +12,23 @@ const SearchForm = ({ value, isBusy = false, onChange = () => {}, onReset = () =
           onChange={(e) => onChange(e.target.value)}
           autoFocus={true}
         />
-        <button onClick={onReset} className={`submit-button ${isPresent(value) && 'is-active'}`} type='button'>
-          {isBusy ? (
-            <svg className='search-loading-icon' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
-              <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4'></circle>
-              <path
-                className='opacity-75'
-                fill='currentColor'
-                d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
-              ></path>
+        {isBusy && (
+          <div className='loading-indicator'>
+            <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
+              <path d='M0 11c.511-6.158 5.685-11 12-11s11.489 4.842 12 11h-2.009c-.506-5.046-4.793-9-9.991-9s-9.485 3.954-9.991 9h-2.009zm21.991 2c-.506 5.046-4.793 9-9.991 9s-9.485-3.954-9.991-9h-2.009c.511 6.158 5.685 11 12 11s11.489-4.842 12-11h-2.009z' />
             </svg>
-          ) : (
-            <svg className='clear-icon' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
-              <path d='M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z' />
-            </svg>
-          )}
+          </div>
+        )}
+        <button onClick={onReset} className={`reset-button ${isPresent(value) && 'is-active'}`} type='button'>
+          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+            <path d='M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z' />
+          </svg>
         </button>
       </div>
       <style jsx>
         {`
           .root {
-            @apply mx-auto px-4 mb-6 flex flex-row;
+            @apply relative mx-auto px-4 mb-6 flex flex-row;
             max-width: 28rem;
           }
 
@@ -53,36 +49,33 @@ const SearchForm = ({ value, isBusy = false, onChange = () => {}, onReset = () =
           }
 
           .query-input:focus,
-          .query-input:focus ~ .submit-button {
+          .query-input:focus ~ .reset-button {
             @apply border-blue;
           }
 
-          .submit-button {
-            @apply px-4 text-black border border-l-0 rounded-lg rounded-l-none;
+          .reset-button {
+            @apply px-4 border border-l-0 rounded-lg rounded-l-none;
           }
 
           @screen sm {
-            .submit-button {
+            .reset-button {
               @apply px-6 rounded-full rounded-l-none;
             }
           }
 
-          .query-input:focus ~ .submit-button.is-active {
-            @apply text-blue;
+          .reset-button.is-active {
+            color: #777;
           }
 
-          .submit-button svg {
-            width: 1rem;
-            height: auto;
-          }
-
-          .clear-icon {
+          .reset-button svg {
+            width: 14px;
+            height: 14px;
             fill: currentColor;
             opacity: 0;
             transition: opacity 0.2s;
           }
 
-          .query-input:focus ~ .submit-button.is-active > .clear-icon {
+          .reset-button.is-active svg {
             opacity: 1;
           }
 
@@ -95,8 +88,20 @@ const SearchForm = ({ value, isBusy = false, onChange = () => {}, onReset = () =
             }
           }
 
-          .search-loading-icon {
-            @apply text-blue;
+          .loading-indicator {
+            @apply absolute top-0 right-12 h-full flex items-center;
+          }
+
+          @screen sm {
+            .loading-indicator {
+              @apply right-14;
+            }
+          }
+
+          .loading-indicator svg {
+            width: 18px;
+            height: 18px;
+            fill: #aaa;
             animation: spin 1s linear infinite;
           }
         `}

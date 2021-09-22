@@ -4,7 +4,8 @@ import Gallery from 'react-photo-gallery'
 import Link from 'next/link'
 
 import { Predicates } from 'services/prismic'
-import { queryAll, isBlank, searchSketchplanations, searchTags } from 'helpers'
+import { queryAll, isBlank, searchSketchplanations, searchTags, isPresent } from 'helpers'
+import useDebouncedValue from 'hooks/useDebouncedValue'
 import SearchForm from 'components/SearchForm'
 import SketchplanationGalleryPhoto from 'components/SketchplanationGalleryPhoto'
 import Tags from 'components/Tags'
@@ -19,18 +20,21 @@ const Explore = ({ initialSketchplanations }) => {
   const [tagResults, setTagResults] = useState(null)
   const [isSearching, setIsSearching] = useState(false)
 
+  const debouncedSearchQuery = useDebouncedValue(searchQuery, 500)
+
   const photos = useGalleryPhotos(sketchplanationResults || initialSketchplanations)
 
   useEffect(() => {
     if (!isReady) return
 
+    setIsSearching(isPresent(query?.q))
     setSearchQuery(query?.q || '')
   }, [isReady])
 
   useEffect(() => {
     if (!isReady) return
 
-    if (isBlank(searchQuery)) {
+    if (isBlank(debouncedSearchQuery)) {
       setSketchplanationResults(null)
       setTagResults(null)
 
@@ -39,21 +43,21 @@ const Explore = ({ initialSketchplanations }) => {
       })
     }
 
-    if (query.q !== searchQuery)
+    if (query.q !== debouncedSearchQuery)
       router.replace({
         pathname: '/explore',
-        query: { q: encodeURI(searchQuery) },
+        query: { q: encodeURI(debouncedSearchQuery) },
       })
 
     const search = async () => {
       setIsSearching(true)
-      setSketchplanationResults(await searchSketchplanations(searchQuery))
-      setTagResults(await searchTags(searchQuery))
+      setSketchplanationResults(await searchSketchplanations(debouncedSearchQuery))
+      setTagResults(await searchTags(debouncedSearchQuery))
       setIsSearching(false)
     }
 
     search()
-  }, [searchQuery])
+  }, [debouncedSearchQuery])
 
   return (
     <>
@@ -74,13 +78,15 @@ const Explore = ({ initialSketchplanations }) => {
         </div>
         <Tags tags={tagResults} />
         <div className='gallery'>
-          <Gallery
-            photos={photos}
-            direction='row'
-            margin={16}
-            targetRowHeight={400}
-            renderImage={SketchplanationGalleryPhoto}
-          />
+          {isReady && !isSearching && (
+            <Gallery
+              photos={photos}
+              direction='row'
+              margin={16}
+              targetRowHeight={400}
+              renderImage={SketchplanationGalleryPhoto}
+            />
+          )}
         </div>
       </div>
       <style jsx>{`
