@@ -19,6 +19,7 @@ module.exports = {
         brightRed: 'var(--color-brightRed)',
         blue: 'var(--color-blue)',
         bg: 'var(--color-bg)',
+        bgTransparent: 'var(--color-bgTransparent)',
         bgDarker: 'var(--color-bgDarker)',
         border: 'var(--color-border)',
         inputBg: 'var(--color-inputBg)',
