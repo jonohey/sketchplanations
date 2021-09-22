@@ -84,7 +84,7 @@ const Page = ({
           }
 
           .page-body a {
-            @apply text-blue;
+            color: var(--color-blue);
           }
 
           .page-body ul li {

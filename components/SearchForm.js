@@ -5,7 +5,7 @@ const SearchForm = ({ value, isBusy = false, onChange = () => {}, onReset = () =
     <>
       <div className='root'>
         <input
-          className='query-input'
+          className='input'
           type='text'
           placeholder='Type to search…'
           value={value}
@@ -38,23 +38,23 @@ const SearchForm = ({ value, isBusy = false, onChange = () => {}, onReset = () =
             }
           }
 
-          .query-input {
-            @apply block py-2 px-4 w-full bg-white border border-r-0 outline-none flex-grow rounded-lg rounded-r-none;
+          .input {
+            @apply block py-2 px-4 w-full bg-inputBg border border-inputBorder border-r-0 outline-none flex-grow rounded-lg rounded-r-none;
           }
 
           @screen sm {
-            .query-input {
+            .input {
               @apply py-3 px-6 text-lg rounded-full rounded-r-none;
             }
           }
 
-          .query-input:focus,
-          .query-input:focus ~ .reset-button {
+          .input:focus,
+          .input:focus ~ .reset-button {
             @apply border-blue;
           }
 
           .reset-button {
-            @apply px-4 border border-l-0 rounded-lg rounded-l-none;
+            @apply px-4 bg-inputBg border border-inputBorder border-l-0 rounded-lg rounded-l-none pointer-events-none;
           }
 
           @screen sm {
@@ -64,6 +64,7 @@ const SearchForm = ({ value, isBusy = false, onChange = () => {}, onReset = () =
           }
 
           .reset-button.is-active {
+            @apply pointer-events-auto;
             color: #777;
           }
 

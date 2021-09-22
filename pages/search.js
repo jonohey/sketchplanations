@@ -275,7 +275,7 @@ const Search = ({ ssrSketchplanations, ssrTags, ssrSearchCalled }) => {
           }
 
           .tags a:hover {
-            @apply bg-bright-red text-white border-bright-red shadow;
+            @apply bg-brightRed text-white border-brightRed shadow;
           }
         `}
       </style>

@@ -255,7 +255,7 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
           }
 
           label > input:checked + span {
-            @apply bg-bright-red text-white border-bright-red;
+            @apply bg-brightRed text-white border-brightRed;
           }
 
           .error {

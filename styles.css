@@ -1,22 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@tailwind screens;
 
-body {
-  /* @apply bg-paper; */
-  /* @apply pb-6 px-3; */
-  @apply antialiased;
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  color: #222;
+:root {
+  --color-black: #222;
+  --color-paper: #fbf8de;
+  --color-paperDarker: #e2dcc5;
+  --color-red: #ba3c3e;
+  --color-brightRed: #fd4c2b;
+  --color-blue: #1253b5;
+  --color-bg: #fff;
+  --color-bgDarker: #f5f5f5;
+  --color-border: #e5e7eb;
+  --color-inputBg: #fff;
+  --color-inputBorder: #e5e7eb;
+  --color-subduedText: #888;
 }
 
-/* @screen sm {
-  body {
-    @apply pb-12 px-6;
+@screen dark {
+  :root {
+    --color-black: #fcfcfc;
+    --color-paper: #fbf8de;
+    --color-paperDarker: #27282b;
+    --color-red: #ba3c3e;
+    --color-brightRed: #fd4c2b;
+    --color-blue: #6aa0f0;
+    --color-bg: #35363a;
+    --color-bgDarker: #44454b;
+    --color-border: #575960;
+    --color-inputBg: #202124;
+    --color-inputBorder: #35363a;
+    --color-subduedText: #999;
   }
-} */
+}
+
+body {
+  @apply antialiased bg-bg text-black;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+}
 
 h1,
 h2,
@@ -52,68 +74,8 @@ pre {
   @apply p-10;
 }
 
-.header {
-  @apply sticky grid grid-flow-col-dense gap-x-6 top-0 items-center justify-between  px-6 bg-blue z-50;
-  background-color: #fff;
-}
-
-.ident {
-  @apply block;
-}
-
-/* @screen md {
-  .ident {
-    @apply py-4;
-  }
-} */
-
-.ident__svg {
-  @apply block;
-  width: 100%;
-  height: 100%;
-  max-height: 2rem;
-}
-
-/* @screen xs {
-  .ident__svg {
-    @apply block;
-  }
-}
-
-.ident__svg--small {
-  @apply block;
-  width: 100%;
-  height: 100%;
-  max-height: 2rem;
-}
-
-@screen xs {
-  .ident__svg--small {
-    @apply hidden;
-  }
-} */
-
-/* @screen sm {
-  .ident__svg {
-    width: 260px;
-    height: auto;
-  }
-} */
-
 .patreon {
   @apply fixed bottom-0 right-0;
-}
-
-/* * {
-  outline: solid thin rgba(255, 0, 0, 0.05);
-} */
-
-.masthead {
-  @apply mx-auto mt-6 px-8 flex flex-col items-center text-center text-gray-400;
-}
-
-.hide-when-unfixed .headroom--unfixed {
-  display: none;
 }
 
 /* Mailchimp */
@@ -130,42 +92,6 @@ pre {
 
 .coffee img {
   @apply inline-block;
-  width: 140px;
+  width: 120px;
   height: auto;
-}
-
-.page {
-  @apply block;
-}
-
-.page > * + * {
-  margin-top: 1.4em;
-}
-
-.page b,
-.page strong {
-  @apply font-semibold;
-}
-
-.page i,
-.page em {
-  @apply italic;
-}
-
-.page a {
-  @apply text-blue;
-}
-
-.page ul li {
-  list-style: outside disc;
-  margin-left: 1.75rem;
-}
-
-.page ol li {
-  list-style: outside decimal;
-  margin-left: 1.75rem;
-}
-
-.page img {
-  @apply my-10;
 }

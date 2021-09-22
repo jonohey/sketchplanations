@@ -88,7 +88,7 @@ const SketchplanationPage = ({
           <PrevNextSketchplanation kind='previous' sketchplanation={previousSketchplanation} />
         </div>
       </div>
-      {similarSketchplanations.results.length > 0 && (
+      {/* {similarSketchplanations.results.length > 0 && (
         <>
           <h2 className='similar-header'>Keep exploring</h2>
           <div className='similar'>
@@ -99,7 +99,7 @@ const SketchplanationPage = ({
             ))}
           </div>
         </>
-      )}
+      )} */}
       <style jsx>{`
         .sketchplanation {
           @apply flex flex-wrap justify-center pb-6;
@@ -172,7 +172,7 @@ const SketchplanationPage = ({
 
         .caret-wrapper {
           @apply flex-none m-2;
-          @apply inline-flex items-center justify-center border rounded text-sm font-sans uppercase;
+          @apply inline-flex items-center justify-center border border-border rounded text-sm font-sans uppercase;
           width: 1.5rem;
           height: 1.5rem;
           color: #a9b1ba;
@@ -183,7 +183,7 @@ const SketchplanationPage = ({
         }
 
         .caret * {
-          fill: #000;
+          fill: currentColor;
         }
 
         @screen sm {
@@ -202,8 +202,21 @@ const SketchplanationPage = ({
           box-sizing: border-box;
         }
 
+        @screen lg {
+          .prev-next-footer {
+            @apply grid grid-cols-2 gap-x-6;
+            max-width: none;
+          }
+        }
+
         .prev-next-footer > * + * {
           @apply mt-8;
+        }
+
+        @screen lg {
+          .prev-next-footer > * + * {
+            @apply mt-0;
+          }
         }
       `}</style>
     </>

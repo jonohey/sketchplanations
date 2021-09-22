@@ -1,16 +1,16 @@
-import { useEffect } from 'react'
-import * as Sentry from '@sentry/react'
-import { Integrations } from '@sentry/tracing'
 import 'lazysizes'
 import 'lazysizes/plugins/attrchange/ls.attrchange'
-import Head from 'next/head'
-import Link from 'next/link'
-import { pageTitle } from 'helpers'
-import { Navigation } from 'components'
-import { Elements } from '@stripe/react-stripe-js'
-import { loadStripe } from '@stripe/stripe-js'
-import TagManager from 'react-gtm-module'
 import 'styles.css'
+import { Elements } from '@stripe/react-stripe-js'
+import { Integrations } from '@sentry/tracing'
+import { loadStripe } from '@stripe/stripe-js'
+import { useEffect } from 'react'
+import * as Sentry from '@sentry/react'
+import Head from 'next/head'
+import TagManager from 'react-gtm-module'
+
+import { pageTitle } from 'helpers'
+import Header from 'components/Header'
 
 const polyfillDownloadAttr = () => {
   const downloadAttributeSupport = 'download' in document.createElement('a')
@@ -113,18 +113,7 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
           href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css'
         />
       </Head>
-      <div className='header'>
-        <Link href='/'>
-          <a className='ident'>
-            <picture>
-              <source srcSet='/logo-small.svg 100w' media='(max-width: 479px)' />
-              <source srcSet='/logo.svg 100w' media='(min-width: 480px)' />
-              <img src='/logo.svg' className='ident__svg' alt='Sketchplanations' />
-            </picture>
-          </a>
-        </Link>
-        <Navigation />
-      </div>
+      <Header />
       <Component {...pageProps} />
       <a className='coffee' href='https://www.buymeacoffee.com/sketchplanator' target='_blank' rel='noreferrer'>
         <img src='/bmc.svg' width='4169' height='913' alt='Buy Me A Coffee' />

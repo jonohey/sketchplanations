@@ -70,10 +70,10 @@ const Explore = ({ initialSketchplanations }) => {
         />
         <div className='links'>
           <Link href='/api/random'>
-            <a>Random</a>
+            <a className='link'>Random</a>
           </Link>
           <Link href='/tags'>
-            <a>Explore by tag</a>
+            <a className='link'>Explore by tag</a>
           </Link>
         </div>
         <Tags tags={tagResults} />
@@ -118,7 +118,7 @@ const Explore = ({ initialSketchplanations }) => {
           }
         }
 
-        .links a {
+        .link {
           @apply text-blue;
         }
       `}</style>

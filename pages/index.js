@@ -34,7 +34,7 @@ const Home = ({ sketchplanations }) => {
         loader={
           <div className='loading'>
             Loading more…{' '}
-            <svg viewBox='0 0 38 38' xmlns='http://www.w3.org/2000/svg' stroke='#000'>
+            <svg viewBox='0 0 38 38' xmlns='http://www.w3.org/2000/svg'>
               <g transform='translate(1 1)' strokeWidth='2' fill='none' fillRule='evenodd'>
                 <path d='M36 18c0-9.94-8.06-18-18-18'>
                   <animateTransform
@@ -63,7 +63,7 @@ const Home = ({ sketchplanations }) => {
         }
 
         .loading {
-          @apply flex mx-auto pb-20 items-center justify-center;
+          @apply flex mx-auto pb-20 items-center justify-center text-white;
           max-width: 460px;
         }
 
@@ -71,6 +71,11 @@ const Home = ({ sketchplanations }) => {
           @apply ml-4;
           width: 20px;
           height: 20px;
+          stroke: currentColor;
+        }
+
+        .masthead {
+          @apply mx-auto mt-6 px-8 flex flex-col items-center text-center text-gray-400;
         }
       `}</style>
     </div>
