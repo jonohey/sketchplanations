@@ -102,7 +102,7 @@ const Sketchplanations = ({ Component, pageProps }) => {
         <link rel='mask-icon' href='/safari-pinned-tab.svg' color='#000000' />
         <meta name='msapplication-TileColor' content='#fbf8de' />
         <meta name='theme-color' content='#fff' />
-        <meta name="theme-color" content="#35363a" media="(prefers-color-scheme: dark)">
+        <meta name='theme-color' content='#35363a' media='(prefers-color-scheme: dark)' />
         <meta name='viewport' content='width = device-width, initial-scale = 1, minimum-scale = 1' />
         <meta key='og:title' property='og:title' content={pageTitle()} />
         <meta property='og:site_name' content='Sketchplanations' />
