@@ -2,6 +2,7 @@ import { createElement } from 'react'
 import { RichText } from 'prismic-reactjs'
 import dynamic from 'next/dynamic'
 import Imgix from 'react-imgix'
+import cn from 'classnames'
 
 import { linkResolver } from 'services/prismic'
 
@@ -46,11 +47,12 @@ const Page = ({
   document: {
     data: { title, body },
   },
+  inline = false,
   children,
 }) => {
   return (
     <>
-      <div className='page-root'>
+      <div className={cn('page-root', { 'page-root--inline': inline })}>
         <TextHeader>{title}</TextHeader>
         <div className='page-body'>
           {body.map((slice, index) => createElement(sliceTypesToComponent[slice.slice_type], { key: index, slice }))}
@@ -61,7 +63,17 @@ const Page = ({
         {`
           .page-root {
             max-width: 800px;
-            @apply pt-8 pb-20 px-6 mx-auto;
+            @apply relative pt-8 pb-20 px-6 mx-auto;
+          }
+
+          @screen sm {
+            .page-root {
+              @apply px-12;
+            }
+          }
+
+          .page-root--inline {
+            @apply pb-0 px-6;
           }
 
           .page-body {

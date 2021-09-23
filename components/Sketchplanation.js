@@ -158,7 +158,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
 
         .image {
           @apply block mb-10;
-          box-shadow: 0 2.3rem 1rem -2rem var(--color-paperDarker);
+          box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow);
         }
 
         .image > :global(img) {

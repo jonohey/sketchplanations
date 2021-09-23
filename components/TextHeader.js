@@ -8,7 +8,15 @@ const TextHeader = ({ as = 'h1', children, ...props }) => {
         {createElement(
           as,
           props,
-          <RoughNotation show iterations={1} animationDuration={500} animationDelay={250} strokeWidth={2}>
+          <RoughNotation
+            show
+            iterations={1}
+            animationDuration={500}
+            animationDelay={250}
+            strokeWidth={2}
+            multiline
+            padding={3}
+          >
             {children}
           </RoughNotation>
         )}

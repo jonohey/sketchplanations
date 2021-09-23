@@ -4,13 +4,15 @@ import 'styles.css'
 import { Elements } from '@stripe/react-stripe-js'
 import { Integrations } from '@sentry/tracing'
 import { loadStripe } from '@stripe/stripe-js'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { useScrollPercentage } from 'react-scroll-percentage'
 import * as Sentry from '@sentry/react'
 import Head from 'next/head'
 import TagManager from 'react-gtm-module'
 
 import { pageTitle } from 'helpers'
 import Header from 'components/Header'
+import SubscribeModal from 'components/SubscribeModal'
 
 const polyfillDownloadAttr = () => {
   const downloadAttributeSupport = 'download' in document.createElement('a')
@@ -73,11 +75,21 @@ const ELEMENTS_OPTIONS = {
   ],
 }
 
-export default function MyApp({ Component, pageProps, router: { route } }) {
+const Sketchplanations = ({ Component, pageProps }) => {
+  const [ref, percentage] = useScrollPercentage()
+  const [scrolled, setScrolled] = useState(false)
+  const [subscribeModalDismissed, setSubscribeModalDismissed] = useState(false)
+
   useEffect(() => {
     polyfillDownloadAttr()
     TagManager.initialize({ gtmId: 'GTM-WNS3LG4' })
   }, [])
+
+  useEffect(() => {
+    if (scrolled) return
+
+    setScrolled(percentage > 0.5)
+  }, [percentage])
 
   return (
     <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
@@ -105,8 +117,17 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         />
       </Head>
       <Header />
-      <Component {...pageProps} />
-      <a className='coffee' href='https://www.buymeacoffee.com/sketchplanator' target='_blank' rel='noreferrer'>
+      <div ref={ref}>
+        <Component {...pageProps} />
+      </div>
+      <SubscribeModal show={!subscribeModalDismissed && scrolled} onHide={() => setSubscribeModalDismissed(true)} />
+      <a
+        className='coffee'
+        data-visible={scrolled}
+        href='https://www.buymeacoffee.com/sketchplanator'
+        target='_blank'
+        rel='noreferrer'
+      >
         <img src='/bmc.svg' width='4169' height='913' alt='Buy Me A Coffee' />
       </a>
       <script src='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js' />
@@ -131,13 +152,13 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
       <script
         dangerouslySetInnerHTML={{
           __html: `window.prismic = {
-            endpoint: 'https://sketchplanations.cdn.prismic.io/api/v2'
+            endpoint: 'https://Sketchplanations.cdn.prismic.io/api/v2'
           };`,
         }}
       />
       {/* <script
         type='text/javascript'
-        src='https://static.cdn.prismic.io/prismic.min.js?repo=sketchplanations.prismic.io&new=true'
+        src='https://static.cdn.prismic.io/prismic.min.js?repo=Sketchplanations.prismic.io&new=true'
       ></script> */}
       <data
         id='mj-w-res-data'
@@ -185,3 +206,5 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
     </Elements>
   )
 }
+
+export default Sketchplanations

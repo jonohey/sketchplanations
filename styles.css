@@ -3,9 +3,11 @@
 @tailwind utilities;
 
 :root {
+  --color-shadow: rgba(0, 0, 0, 0.05);
   --color-black: #222;
   --color-paper: #fbf8de;
   --color-paperDarker: #e2dcc5;
+  --color-sketchShadow: #e2dcc5;
   --color-red: #ba3c3e;
   --color-brightRed: #fd4c2b;
   --color-blue: #1253b5;
@@ -23,7 +25,8 @@
   :root {
     --color-black: #fcfcfc;
     --color-paper: #fbf8de;
-    --color-paperDarker: #27282b;
+    --color-paperDarker: #e2dcc5;
+    --color-sketchShadow: #27282b;
     --color-red: #ba3c3e;
     --color-brightRed: #fd4c2b;
     --color-blue: #6aa0f0;
@@ -36,6 +39,10 @@
     --color-inputBorder: #35363a;
     --color-subduedText: #999;
   }
+}
+
+html {
+  @apply bg-bg;
 }
 
 body {
@@ -92,6 +99,12 @@ pre {
 
 .coffee {
   @apply fixed z-10 bottom-0 left-0 mb-4 ml-4 flex flex-col items-center py-3 px-4 bg-white shadow-lg rounded;
+  transform: translateY(150%);
+  transition: transform 0.2s ease-out;
+}
+
+.coffee[data-visible='true'] {
+  transform: translateY(0);
 }
 
 .coffee img {

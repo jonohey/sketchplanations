@@ -15,6 +15,7 @@ module.exports = {
       colors: {
         black: 'var(--color-black)',
         paper: 'var(--color-paper)',
+        paperDarker: 'var(--color-paperDarker)',
         red: 'var(--color-red)',
         brightRed: 'var(--color-brightRed)',
         blue: 'var(--color-blue)',
