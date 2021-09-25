@@ -33,7 +33,7 @@ const Navigation = () => {
             </RoughNotation>
           </a>
         </Link>
-        <Link href='/subscribe' className='item big-screen'>
+        <Link href='/subscribe' className='item gt-sm-screen'>
           <a>
             <RoughNotation show={isSelected('/subscribe')} {...roughNotiationProps}>
               Subscribe
@@ -44,7 +44,7 @@ const Navigation = () => {
           href='https://www.redbubble.com/people/sketchplanator/shop?asc=u'
           target='_blank'
           rel='noreferrer'
-          className='item big-screen'
+          className='item gt-xxs-screen'
         >
           Prints
         </a>
@@ -74,12 +74,22 @@ const Navigation = () => {
           @apply text-gray-400;
         }
 
-        .big-screen {
+        .item.gt-xxs-screen {
+          @apply hidden;
+        }
+
+        @screen xxs {
+          .item.gt-xxs-screen {
+            @apply block;
+          }
+        }
+
+        .item.gt-sm-screen {
           @apply hidden;
         }
 
         @screen sm {
-          .big-screen {
+          .item.gt-sm-screen {
             @apply block;
           }
         }
