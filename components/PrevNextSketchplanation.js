@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Imgix from 'react-imgix'
 import { useHotkeys } from 'react-hotkeys-hook'
+import { isPresent } from 'helpers'
 
 const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
   const keyboardKey = kind === 'next' ? 'j' : 'k'
@@ -47,10 +48,10 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
               src: `${image.url}&w=400&blur=200&px=32`,
               width: image.width,
               height: image.height,
+              alt: isPresent(image.alt) ? image.alt : `${title} - Sketchplanations`,
             }}
             width={image.width}
             height={image.height}
-            alt={image.alt || `${title} - Sketchplanations`}
             sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
           />
           <div className='info'>

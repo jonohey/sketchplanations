@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 
+import { setCookie } from 'helpers'
 import { client } from 'services/prismic'
 import { Page } from 'components'
 import Modal from 'components/Modal'
 
 const SubscribeModal = ({ show, onHide = () => {} }) => {
+  const [email, setEmail] = useState('')
   const [subscribeModalDocument, setSubscribeModalDocument] = useState(null)
   const [subscribedModalDocument, setSubscribedModalDocument] = useState(null)
 
@@ -20,8 +22,20 @@ const SubscribeModal = ({ show, onHide = () => {} }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    await fetch(`/api/subscribe`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+      }),
+    })
+
     const doc = await client.getSingle('subscribed')
     setSubscribedModalDocument(doc)
+
+    setCookie('mjPopinShown', true)
   }
 
   return (
@@ -39,6 +53,8 @@ const SubscribeModal = ({ show, onHide = () => {} }) => {
               autoFocus
               autoComplete='email'
               pattern='.+@.+'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <button className='button' type='submit'>
               Subscribe

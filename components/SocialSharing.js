@@ -141,6 +141,7 @@ const SocialSharing = ({ handle, title, text }) => {
         }
 
         .share-button--twitter {
+          color: #14171a;
           background-color: #55acee;
         }
 

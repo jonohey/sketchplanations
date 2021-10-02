@@ -213,7 +213,7 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
           .amount-input :global(input),
           .email-input,
           .cardInput :global(.StripeElement) {
-            @apply block py-2 px-4 w-full bg-white rounded border outline-none;
+            @apply block py-2 px-4 w-full bg-inputBg rounded border border-inputBorder outline-none;
           }
 
           .amount-input :global(input:focus),
@@ -223,13 +223,11 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
           }
 
           .pay-button {
-            @apply block mt-3 py-2 px-4 w-full bg-blue text-white rounded;
+            @apply block mt-3 py-2 px-4 w-full bg-buttonBg text-white rounded;
           }
 
           .free-button {
-            @apply block mt-4 py-2 px-4 w-full rounded;
-            color: #777;
-            border: solid 1px #eee;
+            @apply block mt-4 py-2 px-4 w-full rounded text-subduedText border border-border;
           }
 
           .amount-options {
@@ -251,7 +249,7 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
           }
 
           label > span {
-            @apply block text-center py-2 px-4 bg-white rounded border;
+            @apply block text-center py-2 px-4 bg-inputBg rounded border border-inputBorder;
           }
 
           label > input:checked + span {
@@ -274,7 +272,7 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
           }
 
           .stripe-climate span {
-            @apply text-sm text-gray-600;
+            @apply text-sm text-subduedText;
           }
 
           .stripe-climate b {
@@ -282,7 +280,7 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
           }
 
           .powered-by-stripe {
-            @apply block -mb-2 ml-auto text-gray-500 fill-current;
+            @apply block -mb-2 ml-auto text-subduedText fill-current;
             width: 150px;
             height: auto;
           }

@@ -231,7 +231,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         }
 
         .licence-link {
-          color: var(--color-blue);
+          @apply text-blueLight;
         }
 
         .pwyw {
