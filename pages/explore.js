@@ -75,6 +75,9 @@ const Explore = ({ initialSketchplanations }) => {
           <Link href='/tags'>
             <a className='link'>Explore by tag</a>
           </Link>
+          <Link href='/archive'>
+            <a className='link'>Archive</a>
+          </Link>
         </div>
         <Tags tags={tagResults} />
         <div className='gallery'>
