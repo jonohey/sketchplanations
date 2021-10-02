@@ -63,7 +63,15 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
       <div className='content'>
         {!hideContent && (
           <>
-            <TextHeader>{title}</TextHeader>
+            {fullPost ? (
+              <TextHeader>{title}</TextHeader>
+            ) : (
+              <Link href={`/${uid}`}>
+                <a>
+                  <TextHeader>{title}</TextHeader>
+                </a>
+              </Link>
+            )}
             <div className='body'>
               {fullPost ? (
                 <RichText render={body} />
@@ -82,23 +90,10 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         )}
         {fullPost && (
           <>
-            {redbubble_link_url && (
-              <a className='text-blue' href={redbubble_link_url} target='_blank' rel='noreferrer'>
-                Order{' '}
-                <TextLoop>
-                  <span>print</span>
-                  <span>sticker</span>
-                  <span>postcard</span>
-                  <span>poster</span>
-                  <span>greeting card</span>
-                  <span>magnet</span>
-                </TextLoop>
-              </a>
-            )}
             <div className='after-post'>
-              <div className='licence-note bg-gray-100'>
+              <div className='licence-note'>
                 <p>
-                  You're welcome to use and share this image and text for non-commercial purposes with attribution. Go
+                  You’re welcome to use and share this image and text for non-commercial purposes with attribution. Go
                   wild!
                   <br />
                   <a href='/licence' target='_blank' className='licence-link'>
@@ -106,6 +101,24 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
                   </a>
                 </p>
               </div>
+              {redbubble_link_url && (
+                <div className='mt-6'>
+                  <a className='redbubble' href={redbubble_link_url} target='_blank' rel='noreferrer'>
+                    <svg width='19' height='19' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+                      <path d='M24 3l-.743 2h-1.929l-3.474 12h-13.239l-4.615-11h16.812l-.564 2h-13.24l2.937 7h10.428l3.432-12h4.195zm-15.5 15c-.828 0-1.5.672-1.5 1.5 0 .829.672 1.5 1.5 1.5s1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm6.9-7-1.9 7c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5z' />
+                    </svg>
+                    <span>Order as a </span>
+                    <TextLoop>
+                      <span>print</span>
+                      <span>sticker</span>
+                      <span>postcard</span>
+                      <span>poster</span>
+                      <span>greeting card</span>
+                      <span>magnet</span>
+                    </TextLoop>
+                  </a>
+                </div>
+              )}
               <button className='pwyw-button' type='button' onClick={() => setPwywModalOpen(true)}>
                 <svg width='14' height='19' xmlns='http://www.w3.org/2000/svg'>
                   <path d='M11.951 7.095L7.757 11.29V0H6.243v11.29L2.05 7.095.979 8.166 7 14.187l6.022-6.021-1.07-1.07zM0 16.964h14v1.513H0v-1.513z' />
@@ -145,7 +158,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
 
         .image {
           @apply block mb-10;
-          box-shadow: 0 2.3rem 1rem -2rem #e2dcc5;
+          box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow);
         }
 
         .image > :global(img) {
@@ -202,11 +215,11 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         .tags a {
           @apply inline-block mx-2 text-sm whitespace-nowrap;
           transition: all 0.1s ease-out;
-          color: #888;
+          color: var(--color-subduedText);
         }
 
         .tags a:hover {
-          @apply text-blue;
+          color: var(--color-blue);
         }
 
         .after-post {
@@ -214,11 +227,11 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         }
 
         .licence-note {
-          @apply p-5;
+          @apply p-5 bg-bgHighlight rounded;
         }
 
         .licence-link {
-          @apply text-blue;
+          @apply text-blueLight;
         }
 
         .pwyw {
@@ -226,15 +239,28 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         }
 
         .pwyw-button {
-          @apply mt-4 text-sm;
-          color: #888;
+          @apply mt-6;
+          color: var(--color-subduedText);
         }
 
         .pwyw-button:hover {
-          @apply text-blue;
+          color: var(--color-blue);
         }
 
         .pwyw-button > svg {
+          @apply inline-block mr-3;
+          fill: currentColor;
+        }
+
+        .redbubble {
+          color: var(--color-subduedText);
+        }
+
+        .redbubble:hover {
+          color: var(--color-blue);
+        }
+
+        .redbubble > svg {
           @apply inline-block mr-3;
           fill: currentColor;
         }

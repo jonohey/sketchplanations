@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Imgix from 'react-imgix'
 import { useHotkeys } from 'react-hotkeys-hook'
+import { isPresent } from 'helpers'
 
 const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
   const keyboardKey = kind === 'next' ? 'j' : 'k'
@@ -47,10 +48,10 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
               src: `${image.url}&w=400&blur=200&px=32`,
               width: image.width,
               height: image.height,
+              alt: isPresent(image.alt) ? image.alt : `${title} - Sketchplanations`,
             }}
             width={image.width}
             height={image.height}
-            alt={image.alt || `${title} - Sketchplanations`}
             sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
           />
           <div className='info'>
@@ -63,7 +64,7 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
       </Link>
       <style jsx>{`
         .image {
-          @apply p-2 flex items-center border rounded-lg overflow-hidden shadow;
+          @apply p-2 flex items-center border border-border rounded-lg overflow-hidden shadow;
           flex-direction: ${kind === 'next' ? 'row' : 'row-reverse'};
           text-align: ${kind === 'next' ? 'left' : 'right'};
         }
@@ -106,7 +107,7 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
         }
 
         .caret * {
-          fill: #000;
+          fill: currentColor;
         }
 
         .keyboard-shortcuts {
@@ -114,10 +115,10 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
         }
 
         .keyboard-key {
-          @apply inline-flex items-center justify-center border rounded text-sm font-sans uppercase;
+          @apply inline-flex items-center justify-center border border-border rounded text-sm font-sans uppercase;
           width: 1.5rem;
           height: 1.5rem;
-          color: #a9b1ba;
+          color: var(--color-subduedText);
         }
       `}</style>
     </>

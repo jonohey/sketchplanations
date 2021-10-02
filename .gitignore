@@ -33,3 +33,4 @@ yarn-error.log*
 .vercel
 data/*
 !data/.gitkeep
+/public/rss

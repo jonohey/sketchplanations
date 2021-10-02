@@ -141,6 +141,7 @@ const SocialSharing = ({ handle, title, text }) => {
         }
 
         .share-button--twitter {
+          color: #14171a;
           background-color: #55acee;
         }
 
@@ -214,7 +215,7 @@ const SocialSharing = ({ handle, title, text }) => {
 
         .share-button--copylink:hover,
         .share-button--copylink:active {
-          @apply bg-bright-red border-bright-red;
+          @apply bg-brightRed border-brightRed;
         }
       `}</style>
     </>

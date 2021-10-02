@@ -2,6 +2,7 @@ import { createElement } from 'react'
 import { RichText } from 'prismic-reactjs'
 import dynamic from 'next/dynamic'
 import Imgix from 'react-imgix'
+import cn from 'classnames'
 
 import { linkResolver } from 'services/prismic'
 
@@ -46,58 +47,74 @@ const Page = ({
   document: {
     data: { title, body },
   },
+  inline = false,
   children,
 }) => {
   return (
     <>
-      <div className='root'>
+      <div className={cn('page-root', { 'page-root--inline': inline })}>
         <TextHeader>{title}</TextHeader>
-        <div className='body'>
+        <div className='page-body'>
           {body.map((slice, index) => createElement(sliceTypesToComponent[slice.slice_type], { key: index, slice }))}
           {children}
         </div>
       </div>
-      <style jsx>
+      <style jsx global>
         {`
-          .root {
+          .page-root {
             max-width: 800px;
-            @apply pt-8 pb-20 px-6 mx-auto;
+            @apply relative pt-8 pb-20 px-6 mx-auto;
           }
 
-          .body {
-            @apply block;
+          @screen sm {
+            .page-root {
+              @apply px-12;
+            }
           }
 
-          .body :global(> * + *) {
+          .page-root--inline {
+            @apply pb-0 px-6;
+          }
+
+          .page-body {
+            @apply block mx-auto;
+            max-width: 800px;
+          }
+
+          .page-body > * + * {
             margin-top: 1.4em;
           }
 
-          .body :global(b),
-          .body :global(strong) {
+          .page-body b,
+          .page-body strong {
             @apply font-semibold;
           }
 
-          .body :global(i),
-          .body :global(em) {
+          .page-body i,
+          .page-body em {
             @apply italic;
           }
 
-          .body :global(a) {
-            @apply text-blue;
+          .page-body a {
+            color: var(--color-blue);
           }
 
-          .body :global(ul li) {
+          .page-body ul li {
             list-style: outside disc;
             margin-left: 1.75rem;
           }
 
-          .body :global(ol li) {
+          .page-body ol li {
             list-style: outside decimal;
             margin-left: 1.75rem;
           }
 
-          .body :global(img) {
+          .page-body img {
             @apply my-10;
+          }
+
+          .page-body p {
+            @apply max-w-prose;
           }
         `}
       </style>

@@ -1,60 +1,97 @@
+import { RoughNotation } from 'react-rough-notation'
+import { useRouter } from 'next/router'
+
 import { Link } from 'components'
 
+const roughNotiationProps = {
+  iterations: 1,
+  animationDuration: 200,
+  animationDelay: 50,
+  padding: 3,
+  type: 'underline',
+}
+
 const Navigation = () => {
+  const router = useRouter()
+
+  const isSelected = (path) => router.pathname === path
+
   return (
     <>
-      <nav>
-        <Link href='/about'>
-          <a>About</a>
+      <nav className='root'>
+        <Link href='/about' className='item'>
+          <a>
+            <RoughNotation show={isSelected('/about')} {...roughNotiationProps}>
+              About
+            </RoughNotation>
+          </a>
         </Link>
-        <Link href='/archive'>
-          <a>Archive</a>
+        <Link href='/explore' className='item'>
+          <a>
+            <RoughNotation show={isSelected('/explore')} {...roughNotiationProps}>
+              Explore
+            </RoughNotation>
+          </a>
         </Link>
-        <Link href='/tags'>
-          <a>Tags</a>
+        <Link href='/subscribe' className='item gt-sm-screen'>
+          <a>
+            <RoughNotation show={isSelected('/subscribe')} {...roughNotiationProps}>
+              Subscribe
+            </RoughNotation>
+          </a>
         </Link>
-        <Link href='/search'>
-          <a>Search</a>
-        </Link>
-        <Link href='/subscribe'>
-          <a>Subscribe</a>
-        </Link>
-        <a href='https://www.patreon.com/sketchplanations' target='_blank' rel='noreferrer'>
-          Patreon
-        </a>
-        <a href='https://www.redbubble.com/people/sketchplanator/shop?asc=u' target='_blank' rel='noreferrer'>
+        <a
+          href='https://www.redbubble.com/people/sketchplanator/shop?asc=u'
+          target='_blank'
+          rel='noreferrer'
+          className='item gt-xxs-screen'
+        >
           Prints
         </a>
       </nav>
       <style jsx>{`
-        :global(.headroom--pinned) nav,
-        :global(.headroom--unfixed) nav {
-          @apply -mt-3 pb-4;
-        }
-
-        @screen lg {
-          :global(.headroom--pinned) nav,
-          :global(.headroom--unfixed) nav {
-            @apply pb-0;
-          }
-        }
-
-        nav {
-          @apply -mx-2 flex flex-wrap justify-center;
-        }
-
-        nav > * {
-          @apply py-1 px-2 text-blue text-sm;
+        .root {
+          @apply relative flex justify-center -mx-2;
         }
 
         @screen sm {
-          nav > * {
-            @apply py-3 px-3 text-blue text-base;
+          .root {
+            @apply -mx-3;
+          }
+        }
+
+        .root :global(a) {
+          @apply relative flex items-center py-4 px-2 overflow-hidden;
+        }
+
+        @screen sm {
+          .root :global(a) {
+            @apply px-3;
           }
         }
 
         .selected {
-          @apply text-blue;
+          @apply text-gray-400;
+        }
+
+        .item.gt-xxs-screen {
+          @apply hidden;
+        }
+
+        @screen xxs {
+          .item.gt-xxs-screen {
+            @apply block;
+          }
+        }
+
+        .item.gt-sm-screen {
+          @apply hidden;
+        }
+
+        @screen sm {
+          .item.gt-sm-screen {
+            @apply block;
+          }
         }
       `}</style>
     </>

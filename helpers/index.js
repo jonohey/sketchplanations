@@ -1,3 +1,5 @@
+import { either, isEmpty, isNil, complement } from 'ramda'
+
 import { Predicates, client } from 'services/prismic'
 
 const defaultPageTitle = 'Sketchplanations - A weekly explanation in a sketch'
@@ -40,4 +42,31 @@ export const pageTitle = (title) => {
   if (!title) return defaultPageTitle
 
   return `${title} - Sketchplanations`
+}
+
+export const isBlank = either(isEmpty, isNil)
+
+export const isPresent = complement(isBlank)
+
+export const setCookie = (name, value, days) => {
+  let expires = ''
+
+  if (days) {
+    var date = new Date()
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
+    expires = '; expires=' + date.toGMTString()
+  }
+
+  document.cookie = name + '=' + value + expires + '; path=/'
+}
+
+export const getCookie = (name) => {
+  var nameEQ = name + '='
+  var ca = document.cookie.split(';')
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i]
+    while (c.charAt(0) == ' ') c = c.substring(1, c.length)
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length)
+  }
+  return null
 }

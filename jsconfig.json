@@ -4,7 +4,8 @@
     "paths": {
       "components/*": ["components/*"],
       "helpers": ["helpers"],
-      "services/*": ["services/*"]
+      "services/*": ["services/*"],
+      "hooks/*": ["hooks/*"]
     }
   }
 }

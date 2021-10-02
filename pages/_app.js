@@ -1,18 +1,18 @@
-import { useEffect } from 'react'
-import * as Sentry from '@sentry/react'
-import { Integrations } from '@sentry/tracing'
 import 'lazysizes'
 import 'lazysizes/plugins/attrchange/ls.attrchange'
-import Head from 'next/head'
-import Headroom from 'react-headroom'
-import Link from 'next/link'
-import NextNprogress from 'nextjs-progressbar'
-import { pageTitle } from 'helpers'
-import { Navigation } from 'components'
-import { Elements } from '@stripe/react-stripe-js'
-import { loadStripe } from '@stripe/stripe-js'
-import TagManager from 'react-gtm-module'
 import 'styles.css'
+import { Elements } from '@stripe/react-stripe-js'
+import { Integrations } from '@sentry/tracing'
+import { loadStripe } from '@stripe/stripe-js'
+import { useEffect, useState } from 'react'
+import { useScrollPercentage } from 'react-scroll-percentage'
+import * as Sentry from '@sentry/react'
+import Head from 'next/head'
+import TagManager from 'react-gtm-module'
+
+import { pageTitle, getCookie, setCookie } from 'helpers'
+import Header from 'components/Header'
+import SubscribeModal from 'components/SubscribeModal'
 
 const polyfillDownloadAttr = () => {
   const downloadAttributeSupport = 'download' in document.createElement('a')
@@ -75,11 +75,29 @@ const ELEMENTS_OPTIONS = {
   ],
 }
 
-export default function MyApp({ Component, pageProps, router: { route } }) {
+const Sketchplanations = ({ Component, pageProps }) => {
+  const [ref, percentage] = useScrollPercentage()
+  const [scrolled, setScrolled] = useState(false)
+  const [subscribeModalEnabled, setSubscribeModalEnabled] = useState(true)
+  const [subscribeModalDismissed, setSubscribeModalDismissed] = useState(false)
+
   useEffect(() => {
     polyfillDownloadAttr()
     TagManager.initialize({ gtmId: 'GTM-WNS3LG4' })
+    setSubscribeModalEnabled(!getCookie('mjPopinShown'))
   }, [])
+
+  useEffect(() => {
+    if (scrolled) return
+
+    setScrolled(percentage > 0.5)
+  }, [percentage])
+
+  const handleSubscribeModalDismissed = () => {
+    setSubscribeModalDismissed(true)
+    setSubscribeModalEnabled(false)
+    setCookie('mjPopinShown', true, 14)
+  }
 
   return (
     <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
@@ -91,50 +109,36 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
         <link rel='manifest' href='/site.webmanifest' />
         <link rel='mask-icon' href='/safari-pinned-tab.svg' color='#000000' />
         <meta name='msapplication-TileColor' content='#fbf8de' />
-        <meta name='theme-color' content='#fbf8de' />
+        <meta name='theme-color' content='#fff' />
+        <meta name='theme-color' content='#35363a' media='(prefers-color-scheme: dark)' />
         <meta name='viewport' content='width = device-width, initial-scale = 1, minimum-scale = 1' />
         <meta key='og:title' property='og:title' content={pageTitle()} />
         <meta property='og:site_name' content='Sketchplanations' />
         <meta name='twitter:site' content='@sketchplanator' />
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='true' />
         <link rel='preconnect' href='https://js.stripe.com' crossOrigin='true' />
-        <link
-          rel='preload'
-          as='style'
-          href='https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap'
-        />
-        <link
-          href='https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap'
-          rel='stylesheet'
-          media='print'
-          onLoad="this.media='all'"
-        />
+        <link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap' rel='stylesheet' />
         <link
           rel='stylesheet'
           type='text/css'
           href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css'
         />
       </Head>
-      <NextNprogress color='#1253B5' options={{ showSpinner: false }} />
-      <Headroom className={route === '/' ? 'hide-when-unfixed' : ''}>
-        <div className='header'>
-          <div className='inline-flex flex-col sm:flex-row items-center justify-center lg:justify-start flex-wrap lg:flex-no-wrap -m-1 sm:-m-3 flex-grow'>
-            <div className='p-1 sm:p-3'>
-              <Link href='/'>
-                <a className='ident'>
-                  <img className='ident__svg' src='/logo.svg' width='300' height='47' alt='Sketchplanations' />
-                </a>
-              </Link>
-            </div>
-            <div className='p-1 sm:p-3'>
-              <p className='slogan'>Explaining the world one sketch at a time</p>
-            </div>
-          </div>
-          <Navigation />
-        </div>
-      </Headroom>
-      <Component {...pageProps} />
-      <a className='coffee' href='https://www.buymeacoffee.com/sketchplanator' target='_blank' rel='noreferrer'>
+      <Header />
+      <div ref={ref}>
+        <Component {...pageProps} />
+      </div>
+      {subscribeModalEnabled && (
+        <SubscribeModal show={!subscribeModalDismissed && scrolled} onHide={handleSubscribeModalDismissed} />
+      )}
+      <a
+        className='coffee'
+        data-visible={scrolled}
+        href='https://www.buymeacoffee.com/sketchplanator'
+        target='_blank'
+        rel='noreferrer'
+      >
         <img src='/bmc.svg' width='4169' height='913' alt='Buy Me A Coffee' />
       </a>
       <script src='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js' />
@@ -159,57 +163,16 @@ export default function MyApp({ Component, pageProps, router: { route } }) {
       <script
         dangerouslySetInnerHTML={{
           __html: `window.prismic = {
-            endpoint: 'https://sketchplanations.cdn.prismic.io/api/v2'
+            endpoint: 'https://Sketchplanations.cdn.prismic.io/api/v2'
           };`,
         }}
       />
       {/* <script
         type='text/javascript'
-        src='https://static.cdn.prismic.io/prismic.min.js?repo=sketchplanations.prismic.io&new=true'
+        src='https://static.cdn.prismic.io/prismic.min.js?repo=Sketchplanations.prismic.io&new=true'
       ></script> */}
-      <data
-        id='mj-w-res-data'
-        data-token='ac96f122b8e9e435f901384e1f8de579'
-        className='mj-w-data'
-        data-apikey='5y2N'
-        data-w-id='Hd2'
-        data-lang='en_US'
-        data-base='https://app.mailjet.com'
-        data-width='640'
-        data-height='265'
-        data-statics='statics'
-      ></data>
-      <script type='text/javascript' src='https://app.mailjet.com/statics/js/widget.modal.js'></script>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-          function setCookie(name,value,days) {
-            if (days) {
-              var date = new Date();
-              date.setTime(date.getTime()+(days*24*60*60*1000));
-              var expires = "; expires="+date.toGMTString();
-            }
-            else var expires = "";
-            document.cookie = name+"="+value+expires+"; path=/";
-          }
-          function getCookie(name) {
-            var nameEQ = name + "=";
-            var ca = document.cookie.split(';');
-            for(var i=0;i < ca.length;i++) {
-              var c = ca[i];
-              while (c.charAt(0)==' ') c = c.substring(1,c.length);
-              if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-            }
-            return null;
-          }
-          setTimeout(function(){
-            if (!getCookie('mjPopinShown')) {
-              setCookie("mjPopinShown", true, 1);
-              mjOpenPopin(document.createEvent('Event'), document.getElementById('mj-w-res-data'));
-            }
-          }, 15000);`,
-        }}
-      />
     </Elements>
   )
 }
+
+export default Sketchplanations
