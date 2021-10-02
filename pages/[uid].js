@@ -14,7 +14,7 @@ const SketchplanationPage = ({
   sketchplanation,
   previousSketchplanation,
   nextSketchplanation,
-  similarSketchplanations,
+  // similarSketchplanations,
 }) => {
   const {
     data: { image, title, body },
