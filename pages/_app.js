@@ -155,7 +155,7 @@ const Sketchplanations = ({ Component, pageProps }) => {
             },
             "theme": "classic",
             "content": {
-              "message": "FYI I use a few standard cookies just like everyone else."
+              "message": "Welcome! Stay and check out 100s of topics explained in sketches. Also, I use cookies."
             }
           })`,
         }}
