@@ -23,10 +23,12 @@ async function generateSitemap() {
     '!pages/**/[uid].js',
     '!pages/**/[tag].js',
     '!pages/404.js',
+    '!pages/500.js',
     '!pages/index.js',
     '!pages/preview.js',
     '!pages/subscribed.js',
     '!pages/thanks.js',
+    '!pages/api/**/*.js',
   ])
 
   const urls = []
