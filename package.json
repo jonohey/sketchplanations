@@ -39,7 +39,7 @@
     "react-text-loop": "^2.3.0",
     "react-use-cookie": "^1.2.1",
     "shiitake": "^3.0.2",
-    "stripe": "^8.142.0"
+    "stripe": "^8.183.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.4",
