@@ -51,7 +51,7 @@
     "now": "^21.0.1",
     "postcss": "^8.3.6",
     "postcss-preset-env": "^6.7.0",
-    "prismic-dom": "^2.2.5",
+    "prismic-dom": "^2.2.6",
     "request": "^2.88.2",
     "styled-jsx-plugin-postcss": "^4.0.1",
     "tailwindcss": "^2.2.15",
