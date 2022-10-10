@@ -3117,6 +3117,11 @@ module.exports = {
         permanent: true,
       },
       {
+        source: '/post/57105114072/what-gets-measured-gets-better-in-both-a-great',
+        destination: '/what-gets-measured-gets-better',
+        permanent: true,
+      },
+      {
         source: '/post/57012366998/enough-molehills-make-a-mountain-in-both-good',
         destination: '/enough-molehills-make-a-mountain',
         permanent: true,
@@ -3310,6 +3315,16 @@ module.exports = {
       {
         source: '/post/53955067424/cut-an-onion-into-teeny-pieces-various',
         destination: '/cut-an-onion-into-teeny-pieces',
+        permanent: true,
+      },
+      {
+        source: '/post/53955067424/cut-an-onion-into-teeny-pieces-various-informants',
+        destination: '/cut-an-onion-into-teeny-pieces',
+        permanent: true,
+      },
+      {
+        source: '/post/65085218790/advice-to-eat-well-from-michael-pollan-eat',
+        destination: '/eat-food-not-too-much-mostly-plants',
         permanent: true,
       },
       {
