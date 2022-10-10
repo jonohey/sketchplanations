@@ -1035,12 +1035,12 @@ module.exports = {
       },
       {
         source: '/post/159084136101/a-release-strategy-for-happier-customers-sooner',
-        destination: '/a-release-strategy-for-happier-customers-sooner',
+        destination: '/release-strategy',
         permanent: true,
       },
       {
-        source: '/release-strategy',
-        destination: '/a-release-strategy-for-happier-customers-sooner',
+        source: '/a-release-strategy-for-happier-customers-sooner',
+        destination: '/release-strategy',
         permanent: true,
       },
       {
@@ -2173,7 +2173,12 @@ module.exports = {
       },
       {
         source: '/post/74547777937/tie-a-sheet-bend-of-course-an-animated-gif-would',
-        destination: '/tie-a-sheet-bend-knot',
+        destination: '/sheet-bend',
+        permanent: true,
+      },
+      {
+        source: '/tie-a-sheet-bend-knot',
+        destination: '/sheet-bend',
         permanent: true,
       },
       {
