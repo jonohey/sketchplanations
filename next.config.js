@@ -469,6 +469,11 @@ module.exports = {
         permanent: true,
       },
       {
+        source: '/abilene',
+        destination: '/the-abilene-paradox',
+        permanent: true,
+      },
+      {
         source: '/post/183354031941/choose-the-fast-line-youre-at-the-supermarket',
         destination: '/choose-the-fast-line',
         permanent: true,
@@ -1851,6 +1856,11 @@ module.exports = {
       },
       {
         source: '/post/81024117141/the-firehouse-effect-when-cliques-of-people',
+        destination: '/the-firehouse-effect',
+        permanent: true,
+      },
+      {
+        source: '/firehouse',
         destination: '/the-firehouse-effect',
         permanent: true,
       },
