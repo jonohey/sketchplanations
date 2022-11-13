@@ -2,9 +2,9 @@ import { useRouter } from 'next/router'
 import Gallery from 'react-photo-gallery'
 import Imgix from 'react-imgix'
 import Link from 'next/link'
+import { Predicates } from '@prismicio/client'
 
-import { client, Predicates } from 'services/prismic'
-import { queryAll } from 'helpers'
+import { client } from 'services/prismic'
 import { TextHeader } from 'components'
 
 const Tag = ({ tag, sketchplanations }) => {
@@ -111,7 +111,7 @@ const Tag = ({ tag, sketchplanations }) => {
 }
 
 export async function getStaticPaths() {
-  const tags = await queryAll(Predicates.at('document.type', 'tag'))
+  const tags = await client.getAllByType('tag')
   const tagPaths = tags.map((tag) => ({ params: { tag: tag.slugs[0] } }))
 
   return {
@@ -135,12 +135,18 @@ export async function getStaticProps({ params: { tag } }) {
 
   const tagDoc = tagDocs?.results[0]
 
-  const sketchplanations = await queryAll(
-    [Predicates.at('document.type', 'sketchplanation'), Predicates.at('my.sketchplanation.tags.tag', tagDoc.id)],
-    {
-      orderings: '[my.sketchplanation.published_at desc]',
-    }
-  )
+  const sketchplanations = (
+    await client.get({
+      predicates: [
+        Predicates.at('document.type', 'sketchplanation'),
+        Predicates.at('my.sketchplanation.tags.tag', tagDoc.id),
+      ],
+      orderings: {
+        field: 'my.sketchplanation.published_at',
+        direction: 'desc',
+      },
+    })
+  ).results
 
   return { props: { tag: tagDoc, sketchplanations } }
 }

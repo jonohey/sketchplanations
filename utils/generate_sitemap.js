@@ -1,18 +1,21 @@
 const { create } = require('xmlbuilder2')
 const fs = require('fs')
 const globby = require('globby')
-const Prismic = require('@prismicio/client')
-const { queryAll } = require('./helpers')
+const { client } = require('./helpers')
 
 async function generateSitemap() {
-  const sketchplanations = await queryAll(Prismic.Predicates.at('document.type', 'sketchplanation'), {
+  const sketchplanations = await client.getAllByType('sketchplanation', {
     fetch: 'sketchplanation.uid',
-    orderings: '[document.last_publication_date]',
+    orderings: {
+      field: 'document.last_publication_date',
+    },
   })
 
-  const tags = await queryAll(Prismic.Predicates.at('document.type', 'tag'), {
+  const tags = await client.getAllByType('tag', {
     fetch: 'tag.identifier',
-    orderings: '[my.tag.identifier]',
+    orderings: {
+      field: 'my.tag.identifier',
+    },
   })
 
   const lastSketchPubDate = new Date(sketchplanations[sketchplanations.length - 1].last_publication_date)

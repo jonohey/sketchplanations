@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Gallery from 'react-photo-gallery'
 import Link from 'next/link'
+import { Predicates } from '@prismicio/client'
 
-import { Predicates } from 'services/prismic'
-import { queryAll, isBlank, searchSketchplanations, searchTags, isPresent } from 'helpers'
+import { isBlank, searchSketchplanations, searchTags, isPresent } from 'helpers'
 import useDebouncedValue from 'hooks/useDebouncedValue'
 import SearchForm from 'components/SearchForm'
 import SketchplanationGalleryPhoto from 'components/SketchplanationGalleryPhoto'
 import Tags from 'components/Tags'
 import useGalleryPhotos from 'hooks/useGalleryPhotos'
+import { client } from 'services/prismic'
 
 const Explore = ({ initialSketchplanations }) => {
   const router = useRouter()
@@ -130,8 +131,11 @@ const Explore = ({ initialSketchplanations }) => {
 }
 
 export async function getStaticProps() {
-  const initialSketchplanations = await queryAll(Predicates.at('document.type', 'sketchplanation'), {
-    orderings: '[my.sketchplanation.published_at desc]',
+  const initialSketchplanations = await client.getAllByType('sketchplanation', {
+    orderings: {
+      field: 'my.sketchplanation.published_at',
+      direction: 'desc',
+    },
   })
 
   return { props: { initialSketchplanations: initialSketchplanations.slice(0, 20) } }

@@ -1,4 +1,4 @@
-import Prismic from '@prismicio/client'
+import { createClient } from '@prismicio/client'
 
 // -- Prismic API endpoint
 // Determines which repository to query and fetch data from
@@ -40,6 +40,4 @@ export const hrefResolver = (doc) => {
 // -- Client method to query Prismic
 // Connects to the given repository to facilitate data queries
 // export const client = Prismic.client(apiEndpoint, { accessToken })
-export const client = Prismic.client(apiEndpoint)
-
-export const Predicates = Prismic.Predicates
+export const client = createClient(apiEndpoint)

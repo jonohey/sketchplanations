@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node utils/generate_sitemap.js && node utils/generate_rss.js && node utils/generate_uids_data.js",
     "dev": "next dev",
-    "build": "next build && node utils/generate_sitemap.js && node utils/generate_rss.js && node utils/generate_uids_data.js",
+    "prebuild": "node utils/generate_sitemap.js && node utils/generate_rss.js && node utils/generate_uids_data.js",
+    "build": "next build",
     "start": "next start"
   },
   "dependencies": {
-    "@prismicio/client": "^5.1.0",
+    "@prismicio/client": "^6.7.1",
     "@sentry/react": "^6.2.5",
     "@sentry/tracing": "^6.2.5",
     "@stripe/react-stripe-js": "^1.4.0",

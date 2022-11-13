@@ -1,9 +1,8 @@
 const fs = require('fs')
-const Prismic = require('@prismicio/client')
-const { queryAll } = require('./helpers')
+const { client } = require('./helpers')
 
 async function generateUidsData() {
-  const sketchplanations = await queryAll(Prismic.Predicates.at('document.type', 'sketchplanation'), {
+  const sketchplanations = await client.getAllByType('sketchplanation', {
     fetch: ['sketchplanation.uid'],
   })
 
