@@ -18,7 +18,7 @@ const Home = ({ sketchplanations }) => {
         direction: 'desc',
       },
       page,
-      pageSize: 5,
+      pageSize: 4,
     })
     setResults([...results, ...moreSketchplanations.results])
     setPage(page + 1)
