@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import React, { useState } from 'react'
 
-import { client, Predicates } from 'services/prismic'
+import { client } from 'services/prismic'
 
 const Sketchplanation = dynamic(() => import('../components/Sketchplanation'))
 
@@ -12,10 +12,13 @@ const Home = ({ sketchplanations }) => {
   const [results, setResults] = useState(sketchplanations.results)
 
   const fetchMore = async () => {
-    const moreSketchplanations = await client.query(Predicates.at('document.type', 'sketchplanation'), {
-      orderings: '[my.sketchplanation.published_at desc]',
+    const moreSketchplanations = await client.getByType('sketchplanation', {
+      orderings: {
+        field: 'my.sketchplanation.published_at',
+        direction: 'desc',
+      },
       page,
-      pageSize: 5,
+      pageSize: 4,
     })
     setResults([...results, ...moreSketchplanations.results])
     setPage(page + 1)
@@ -83,8 +86,11 @@ const Home = ({ sketchplanations }) => {
 }
 
 Home.getInitialProps = async () => {
-  const sketchplanations = await client.query(Predicates.at('document.type', 'sketchplanation'), {
-    orderings: '[my.sketchplanation.published_at desc]',
+  const sketchplanations = await client.getByType('sketchplanation', {
+    orderings: {
+      field: 'my.sketchplanation.published_at',
+      direction: 'desc',
+    },
     pageSize: 4,
   })
 

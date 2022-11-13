@@ -1,8 +1,7 @@
 const { create } = require('xmlbuilder2')
 const fs = require('fs')
-const Prismic = require('@prismicio/client')
 const PrismicDOM = require('prismic-dom')
-const { queryAll } = require('./helpers')
+const { client } = require('./helpers')
 
 const pubDate = (date) => {
   date = new Date(date)
@@ -16,7 +15,7 @@ const pubDate = (date) => {
 }
 
 async function generateRSS() {
-  const sketchplanations = await queryAll(Prismic.Predicates.at('document.type', 'sketchplanation'), {
+  const sketchplanations = await client.getAllByType('sketchplanation', {
     fetch: [
       'sketchplanation.uid',
       'sketchplanation.title',
@@ -24,7 +23,10 @@ async function generateRSS() {
       'sketchplanation.body',
       'sketchplanation.published_at',
     ],
-    orderings: '[my.sketchplanation.published_at desc]',
+    orderings: {
+      field: 'my.sketchplanation.published_at',
+      direction: 'desc',
+    },
   })
 
   const items = sketchplanations.map(

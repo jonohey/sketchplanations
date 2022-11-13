@@ -8,8 +8,8 @@ const Header = () => {
         <Link href='/'>
           <a className='ident'>
             <picture>
-              <source srcSet='/logo-small.svg 100w' media='(max-width: 479px)' />
-              <source srcSet='/logo.svg 100w' media='(min-width: 480px)' />
+              <source srcSet='/logo-small.svg 100w' media='(max-width: 549px)' />
+              <source srcSet='/logo.svg 100w' media='(min-width: 550px)' />
               <img src='/logo.svg' className='ident__svg' alt='Sketchplanations' />
             </picture>
           </a>
@@ -25,6 +25,13 @@ const Header = () => {
 
         .ident {
           @apply block;
+          width: 27px;
+        }
+
+        @media (min-width: 550px) {
+          .ident {
+            width: 205px;
+          }
         }
 
         @screen dark {

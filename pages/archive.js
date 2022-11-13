@@ -2,8 +2,7 @@ import Gallery from 'react-photo-gallery'
 import Imgix from 'react-imgix'
 import Link from 'next/link'
 
-import { Predicates } from 'services/prismic'
-import { queryAll } from 'helpers'
+import { client } from 'services/prismic'
 
 const Archive = ({ sketchplanations }) => {
   const images = sketchplanations.map(
@@ -79,8 +78,11 @@ const Archive = ({ sketchplanations }) => {
 }
 
 export async function getStaticProps() {
-  const sketchplanations = await queryAll(Predicates.at('document.type', 'sketchplanation'), {
-    orderings: '[my.sketchplanation.published_at desc]',
+  const sketchplanations = await client.getAllByType('sketchplanation', {
+    orderings: {
+      field: 'my.sketchplanation.published_at',
+      direction: 'desc',
+    },
   })
 
   return { props: { sketchplanations } }

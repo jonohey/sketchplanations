@@ -3,9 +3,10 @@ import { RichText } from 'prismic-reactjs'
 import Head from 'next/head'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import { Predicates } from '@prismicio/client'
 
-import { client, Predicates } from 'services/prismic'
-import { pageTitle, queryAll } from 'helpers'
+import { client } from 'services/prismic'
+import { pageTitle } from 'helpers'
 
 const Sketchplanation = dynamic(() => import('../components/Sketchplanation'))
 const PrevNextSketchplanation = dynamic(() => import('../components/PrevNextSketchplanation'))
@@ -78,7 +79,7 @@ const SketchplanationPage = ({
         )}
       </div>
       <div className='sketchplanation'>
-        <Sketchplanation sketchplanation={sketchplanation} fullPost />
+        <Sketchplanation key={sketchplanation.id} sketchplanation={sketchplanation} fullPost />
       </div>
       <div className='prev-next-footer'>
         <div>
@@ -226,26 +227,31 @@ const SketchplanationPage = ({
 export async function getStaticProps({ params: { uid } }) {
   const sketchplanation = await client.getByUID('sketchplanation', uid)
 
-  const similarSketchplanations = await client.query(
-    [Predicates.at('document.type', 'sketchplanation'), Predicates.similar(sketchplanation.id, 3)],
-    { pageSize: 6 }
-  )
+  const similarSketchplanations = await client.get({
+    predicates: [Predicates.at('document.type', 'sketchplanation'), Predicates.similar(sketchplanation.id, 3)],
+    pageSize: 6,
+  })
 
   const previousSketchplanation =
     (
-      await client.query(Predicates.at('document.type', 'sketchplanation'), {
+      await client.getByType('sketchplanation', {
         pageSize: 1,
         after: sketchplanation.id,
-        orderings: '[my.sketchplanation.published_at desc]',
+        orderings: {
+          field: 'my.sketchplanation.published_at',
+          direction: 'desc',
+        },
       })
     )?.results?.[0] || null
 
   const nextSketchplanation =
     (
-      await client.query(Predicates.at('document.type', 'sketchplanation'), {
+      await client.getByType('sketchplanation', {
         pageSize: 1,
         after: sketchplanation.id,
-        orderings: '[my.sketchplanation.published_at]',
+        orderings: {
+          field: 'my.sketchplanation.published_at',
+        },
       })
     )?.results?.[0] || null
 
@@ -253,7 +259,7 @@ export async function getStaticProps({ params: { uid } }) {
 }
 
 export async function getStaticPaths() {
-  const sketchplanations = await queryAll(Predicates.at('document.type', 'sketchplanation'))
+  const sketchplanations = await client.getAllByType('sketchplanation')
   const sketchplanationsPaths = sketchplanations.map((sketchplanation) => ({
     params: { uid: sketchplanation.uid },
   }))
