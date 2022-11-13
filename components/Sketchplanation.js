@@ -146,8 +146,8 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
       </div>
       <style jsx>{`
         .root {
+          @apply w-full px-0;
           max-width: 600px;
-          @apply px-0;
         }
 
         @screen sm {
