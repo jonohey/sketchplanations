@@ -29,6 +29,11 @@ module.exports = {
         permanent: false,
       },
       {
+        source: '/patreon',
+        destination: 'https://www.patreon.com/sketchplanations',
+        permanent: false,
+      },
+      {
         source: '/sketchplanator',
         destination: '/',
         permanent: false,
@@ -275,6 +280,11 @@ module.exports = {
       },
       {
         source: '/post/189398324791/law-of-diminishing-returns-you-might-think-that',
+        destination: '/law-of-diminishing-returns',
+        permanent: true,
+      },
+      {
+        source: '/diminishing-returns',
         destination: '/law-of-diminishing-returns',
         permanent: true,
       },
