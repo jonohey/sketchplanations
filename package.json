@@ -31,7 +31,7 @@
     "react-dom": "17.0.2",
     "react-gtm-module": "^2.0.11",
     "react-headroom": "^3.1.1",
-    "react-hotkeys-hook": "^3.3.0",
+    "react-hotkeys-hook": "^4.0.8",
     "react-imgix": "^9.0.3",
     "react-infinite-scroll-component": "^6.1.0",
     "react-overlays": "^5.1.1",
