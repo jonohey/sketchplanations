@@ -11,7 +11,7 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
   const secondaryKeyboardKey = kind === 'next' ? 'left' : 'right'
   const router = useRouter()
 
-  const navigate = () => router.push(`/${sketchplanation?.uid}`)
+  const navigate = () => sketchplanation?.uid && router.push(`/${sketchplanation.uid}`)
 
   useHotkeys(keyboardKey, navigate, {}, [sketchplanation])
   useHotkeys(secondaryKeyboardKey, navigate, {}, [sketchplanation])
