@@ -83,11 +83,12 @@ const Explore = ({ initialSketchplanations }) => {
           Archive
         </Link>
       </div>
-      <Tags tags={tagResults} />
+      {isPresent(tagResults) && <Tags tags={tagResults} />}
       <div className={styles.gallery}>
         {routerIsReady && !isSearching && (
           <SketchplanationsGrid prismicDocs={sketchplanationResults || initialSketchplanations} />
         )}
+        {!isSearching && isBlank(sketchplanationResults) && <div className={styles.noSketches}>No sketches found</div>}
       </div>
     </div>
   )
