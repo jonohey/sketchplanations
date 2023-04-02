@@ -88,7 +88,9 @@ const Explore = ({ initialSketchplanations }) => {
         {routerIsReady && !isSearching && (
           <SketchplanationsGrid prismicDocs={sketchplanationResults || initialSketchplanations} />
         )}
-        {!isSearching && isBlank(sketchplanationResults) && <div className={styles.noSketches}>No sketches found</div>}
+        {!isSearching && isPresent(searchQuery) && isBlank(sketchplanationResults) && (
+          <div className={styles.noSketches}>No sketches found</div>
+        )}
       </div>
     </div>
   )
