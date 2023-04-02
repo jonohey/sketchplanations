@@ -1,7 +1,10 @@
-import { RoughNotation } from 'react-rough-notation'
+import classNames from 'classnames'
 import { useRouter } from 'next/router'
+import { RoughNotation } from 'react-rough-notation'
 
 import { Link } from 'components'
+
+import styles from './Navigation.module.css'
 
 const roughNotiationProps = {
   iterations: 1,
@@ -17,84 +20,31 @@ const Navigation = () => {
   const isSelected = (path) => router.pathname === path
 
   return (
-    <>
-      <nav className='root'>
-        <Link href='/about' className='item'>
-          <a>
-            <RoughNotation show={isSelected('/about')} {...roughNotiationProps}>
-              About
-            </RoughNotation>
-          </a>
-        </Link>
-        <Link href='/explore' className='item'>
-          <a>
-            <RoughNotation show={isSelected('/explore')} {...roughNotiationProps}>
-              Explore
-            </RoughNotation>
-          </a>
-        </Link>
-        <Link href='/subscribe' className='item gt-sm-screen'>
-          <a>
-            <RoughNotation show={isSelected('/subscribe')} {...roughNotiationProps}>
-              Subscribe
-            </RoughNotation>
-          </a>
-        </Link>
-        <a
-          href='https://www.redbubble.com/people/sketchplanator/shop?asc=u'
-          target='_blank'
-          rel='noreferrer'
-          className='item gt-xxs-screen'
-        >
-          Prints
-        </a>
-      </nav>
-      <style jsx>{`
-        .root {
-          @apply relative flex justify-center -mx-2;
-        }
-
-        @screen sm {
-          .root {
-            @apply -mx-3;
-          }
-        }
-
-        .root :global(a) {
-          @apply relative flex items-center py-4 px-2 overflow-hidden;
-        }
-
-        @screen sm {
-          .root :global(a) {
-            @apply px-3;
-          }
-        }
-
-        .selected {
-          @apply text-gray-400;
-        }
-
-        .item.gt-xxs-screen {
-          @apply hidden;
-        }
-
-        @screen xxs {
-          .item.gt-xxs-screen {
-            @apply block;
-          }
-        }
-
-        .item.gt-sm-screen {
-          @apply hidden;
-        }
-
-        @screen sm {
-          .item.gt-sm-screen {
-            @apply block;
-          }
-        }
-      `}</style>
-    </>
+    <nav className={styles.root}>
+      <Link href='/about' className={styles.item}>
+        <RoughNotation show={isSelected('/about')} {...roughNotiationProps}>
+          About
+        </RoughNotation>
+      </Link>
+      <Link href='/explore' className={styles.item}>
+        <RoughNotation show={isSelected('/explore')} {...roughNotiationProps}>
+          Explore
+        </RoughNotation>
+      </Link>
+      <Link href='/subscribe' className={classNames(styles.item, styles['gt-sm-screen'])}>
+        <RoughNotation show={isSelected('/subscribe')} {...roughNotiationProps}>
+          Subscribe
+        </RoughNotation>
+      </Link>
+      <a
+        href='https://www.redbubble.com/people/sketchplanator/shop?asc=u'
+        target='_blank'
+        rel='noreferrer'
+        className={classNames(styles.item, styles['gt-xxs-screen'])}
+      >
+        Prints
+      </a>
+    </nav>
   )
 }
 

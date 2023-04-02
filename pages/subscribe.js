@@ -1,26 +1,63 @@
+import { useState } from 'react'
+
 import { Page } from 'components'
 import { client } from 'services/prismic'
 
-const Subscribe = ({ document }) => {
+import styles from './subscribe.module.css'
+
+const Subscribe = ({ subscribeDocument, subscribedDocument }) => {
+  const [email, setEmail] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+  const [processing, setProcessing] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    setProcessing(true)
+
+    await fetch(`/api/subscribe`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+      }),
+    })
+
+    setSubmitted(true)
+    setProcessing(false)
+  }
+
+  if (submitted) return <Page document={subscribedDocument} />
+
   return (
-    <Page document={document}>
-      <iframe
-        className='mj-w-res-iframe'
-        frameBorder='0'
-        scrolling='no'
-        marginHeight='0'
-        marginWidth='0'
-        src='https://app.mailjet.com/widget/iframe/5y2N/HBH'
-        width='100%'
-      ></iframe>
-      <script type='text/javascript' src='https://app.mailjet.com/statics/js/iframeResizer.min.js'></script>
+    <Page document={subscribeDocument}>
+      <form onSubmit={handleSubmit}>
+        <input
+          className={styles.input}
+          type='email'
+          required
+          placeholder='Email address'
+          autoFocus
+          autoComplete='email'
+          pattern='.+@.+'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          disabled={processing}
+        />
+        <button type='submit' className={styles.button}>
+          {processing ? 'Subscribing…' : 'Subscribe'}
+        </button>
+      </form>
     </Page>
   )
 }
 
 Subscribe.getInitialProps = async () => {
-  const document = await client.getSingle('subscribe')
-  return { document }
+  const subscribeDocument = await client.getSingle('subscribe')
+  const subscribedDocument = await client.getSingle('subscribed')
+  return { subscribeDocument, subscribedDocument }
 }
 
 export default Subscribe

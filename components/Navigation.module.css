@@ -1,0 +1,43 @@
+.root {
+  @apply relative flex justify-center -mx-2;
+}
+
+@screen sm {
+  .root {
+    @apply -mx-3;
+  }
+}
+
+.root :global(a) {
+  @apply relative flex items-center py-4 px-2 overflow-hidden;
+}
+
+@screen sm {
+  .root :global(a) {
+    @apply px-3;
+  }
+}
+
+.selected {
+  @apply text-gray-400;
+}
+
+.item.gt-xxs-screen {
+  @apply hidden;
+}
+
+@screen xxs {
+  .item.gt-xxs-screen {
+    @apply block;
+  }
+}
+
+.item.gt-sm-screen {
+  @apply hidden;
+}
+
+@screen sm {
+  .item.gt-sm-screen {
+    @apply block;
+  }
+}

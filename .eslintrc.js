@@ -16,6 +16,12 @@ module.exports = {
   rules: {
     'react/prop-types': 0,
     'react/react-in-jsx-scope': 'off',
+    'react/no-unknown-property': [
+      2,
+      {
+        ignore: ['jsx'],
+      },
+    ],
   },
-  settings: { 'import/core-modules': ['styled-jsx/css'] },
+  settings: { 'import/core-modules': ['styled-jsx/css'], react: { version: 'detect' } },
 }

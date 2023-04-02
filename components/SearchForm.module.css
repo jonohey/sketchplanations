@@ -1,0 +1,78 @@
+.root {
+  @apply relative mx-auto px-4 mb-6 flex flex-row;
+  max-width: 28rem;
+}
+
+@screen sm {
+  .root {
+    @apply px-0;
+  }
+}
+
+.input {
+  @apply block py-2 px-4 w-full bg-inputBg border border-inputBorder border-r-0 outline-none grow rounded-lg rounded-r-none;
+}
+
+@screen sm {
+  .input {
+    @apply py-3 px-6 text-lg rounded-full rounded-r-none;
+  }
+}
+
+.input:focus,
+.input:focus ~ .reset-button {
+  @apply border-blue;
+}
+
+.reset-button {
+  @apply px-4 bg-inputBg border border-inputBorder border-l-0 rounded-lg rounded-l-none pointer-events-none;
+}
+
+@screen sm {
+  .reset-button {
+    @apply px-6 rounded-full rounded-l-none;
+  }
+}
+
+.reset-button-active {
+  @apply pointer-events-auto;
+  color: #777;
+}
+
+.reset-button svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.reset-button-active svg {
+  opacity: 1;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-indicator {
+  @apply absolute top-0 right-12 h-full flex items-center;
+}
+
+@screen sm {
+  .loading-indicator {
+    @apply right-14;
+  }
+}
+
+.loading-indicator svg {
+  width: 18px;
+  height: 18px;
+  fill: #aaa;
+  animation: spin 1s linear infinite;
+}

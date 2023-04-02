@@ -74,20 +74,6 @@ pre {
   /* @apply hidden; */
 }
 
-.sketchplanations {
-  @apply flex flex-wrap justify-center pb-6;
-}
-
-@screen lg {
-  .sketchplanations {
-    @apply pb-12;
-  }
-}
-
-.sketchplanations > * {
-  @apply p-10;
-}
-
 .patreon {
   @apply fixed bottom-0 right-0;
 }

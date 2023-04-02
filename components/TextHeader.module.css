@@ -1,0 +1,14 @@
+.root h1 {
+  @apply text-2xl mb-10 mx-auto;
+  font-weight: 300;
+}
+
+@screen sm {
+  .root h1 {
+    @apply text-3xl;
+  }
+}
+
+.root b {
+  font-weight: 600;
+}

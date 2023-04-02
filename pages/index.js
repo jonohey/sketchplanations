@@ -1,8 +1,10 @@
 import dynamic from 'next/dynamic'
-import InfiniteScroll from 'react-infinite-scroll-component'
 import React, { useState } from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { client } from 'services/prismic'
+
+import styles from './index.module.css'
 
 const Sketchplanation = dynamic(() => import('../components/Sketchplanation'))
 
@@ -27,15 +29,15 @@ const Home = ({ sketchplanations }) => {
 
   return (
     <div>
-      <div className='masthead'>
-        <p className='sm:text-lg'>Explaining the world one sketch at a time</p>
+      <div className={styles.masthead}>
+        <p className={styles.slogan}>Explaining the world one sketch at a time</p>
       </div>
       <InfiniteScroll
         dataLength={results.length}
         next={fetchMore}
         hasMore={hasMore}
         loader={
-          <div className='loading'>
+          <div className={styles.loading}>
             Loading more…{' '}
             <svg viewBox='0 0 38 38' xmlns='http://www.w3.org/2000/svg'>
               <g transform='translate(1 1)' strokeWidth='2' fill='none' fillRule='evenodd'>
@@ -54,33 +56,12 @@ const Home = ({ sketchplanations }) => {
           </div>
         }
       >
-        <div className='sketchplanations'>
+        <div className={styles.sketchplanations}>
           {results.map((sketchplanation) => (
             <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} />
           ))}
         </div>
       </InfiniteScroll>
-      <style jsx>{`
-        nav a:hover {
-          text-decoration: underline;
-        }
-
-        .loading {
-          @apply flex mx-auto pb-20 items-center justify-center text-white;
-          max-width: 460px;
-        }
-
-        .loading svg {
-          @apply ml-4;
-          width: 20px;
-          height: 20px;
-          stroke: currentColor;
-        }
-
-        .masthead {
-          @apply mx-auto mt-6 px-8 flex flex-col items-center text-center text-gray-400;
-        }
-      `}</style>
     </div>
   )
 }

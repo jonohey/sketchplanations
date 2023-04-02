@@ -1,0 +1,94 @@
+.header {
+  @apply m-0 mb-3 text-lg;
+}
+
+.main p + p {
+  @apply mt-2;
+}
+
+.main a {
+  @apply text-blue;
+}
+
+.form {
+  @apply -m-2 mt-3;
+}
+
+.form :global(> *) {
+  @apply p-2;
+}
+
+.amount-input :global(input),
+.email-input,
+.cardInput :global(.StripeElement) {
+  @apply block py-2 px-4 w-full bg-inputBg rounded border border-inputBorder outline-none;
+}
+
+.amount-input :global(input:focus),
+.email-input:focus,
+.cardInput :global(.StripeElement--focus) {
+  @apply border-blue;
+}
+
+.pay-button {
+  @apply block mt-3 py-2 px-4 w-full bg-buttonBg text-white rounded;
+}
+
+.free-button {
+  @apply block mt-4 py-2 px-4 w-full rounded text-subduedText border border-border;
+}
+
+.amount-options {
+  @apply flex flex-wrap justify-center -m-1 mt-0;
+}
+
+.main label {
+  @apply relative p-1;
+}
+
+@screen sm {
+  .main label {
+    @apply grow;
+  }
+}
+
+.main label > input {
+  @apply absolute top-0 left-0 w-full h-full appearance-none opacity-0;
+}
+
+.main label > span {
+  @apply block text-center py-2 px-4 bg-inputBg rounded border border-inputBorder;
+}
+
+.main label > input:checked + span {
+  @apply bg-brightRed text-white border-brightRed;
+}
+
+.error {
+  @apply mt-2;
+  color: #eb1c26;
+}
+
+.footer {
+  @apply mt-6 grid gap-x-2 items-center;
+  grid-template-columns: auto 150px;
+}
+
+.stripe-climate {
+  @apply grid gap-x-4 items-center;
+  grid-template-columns: 1.5rem auto;
+}
+
+.stripe-climate span {
+  @apply text-sm text-subduedText;
+}
+
+.stripe-climate b {
+  @apply font-semibold;
+}
+
+.powered-by-stripe {
+  @apply block -mb-2 ml-auto text-subduedText fill-current;
+  width: 150px;
+  height: auto;
+}

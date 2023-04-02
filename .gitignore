@@ -34,3 +34,6 @@ yarn-error.log*
 data/*
 !data/.gitkeep
 /public/rss
+
+# Local Netlify folder
+.netlify

@@ -1,11 +1,11 @@
-import { useRouter } from 'next/router'
-import Gallery from 'react-photo-gallery'
-import Imgix from 'react-imgix'
-import Link from 'next/link'
 import { Predicates } from '@prismicio/client'
+import { useRouter } from 'next/router'
 
-import { client } from 'services/prismic'
 import { TextHeader } from 'components'
+import { client } from 'services/prismic'
+
+import styles from './[tag].module.css'
+import SketchplanationsGrid from 'components/SketchplanationsGrid'
 
 const Tag = ({ tag, sketchplanations }) => {
   const router = useRouter()
@@ -14,99 +14,13 @@ const Tag = ({ tag, sketchplanations }) => {
     return <div>Loading…</div>
   }
 
-  let images
-  try {
-    images = sketchplanations.map(
-      ({
-        uid,
-        data: {
-          title,
-          image: {
-            url,
-            alt,
-            dimensions: { width, height },
-          },
-        },
-      }) => ({
-        src: url,
-        width,
-        height,
-        alt: alt || `${title} - Sketchplanations`,
-        uid,
-      })
-    )
-  } catch {
-    console.log('sketchplanations', sketchplanations)
-  }
-
-  const renderImage = ({ photo }) => {
-    return (
-      <Link href={`/${photo.uid}`}>
-        <a>
-          <Imgix
-            className='lazyload'
-            src={photo.src}
-            attributeConfig={{
-              src: 'data-src',
-              srcSet: 'data-srcset',
-              sizes: 'data-sizes',
-            }}
-            htmlAttributes={{
-              src: `${photo.src}&w=400&blur=200&px=16`,
-              style: { margin: 16, display: 'block' },
-              width: photo.width,
-              height: photo.height,
-            }}
-            width={photo.width}
-            height={photo.height}
-            alt={photo.alt}
-            sizes='(min-width: 848px) 800px, (min-width: 640px) calc(100vw - 3rem), 100w'
-          />
-        </a>
-      </Link>
-    )
-  }
-
   return (
-    <>
-      <div className='root'>
-        <TextHeader className='text-center'>
-          Sketchplanations tagged with <b>{tag.slugs[0]}</b>
-        </TextHeader>
-        <div className='gallery'>
-          <Gallery photos={images} direction='row' margin={16} targetRowHeight={400} renderImage={renderImage} />
-        </div>
-      </div>
-      <style jsx>
-        {`
-          .root {
-            @apply pt-8 pb-20 mx-auto;
-          }
-
-          .gallery {
-            @apply overflow-hidden;
-          }
-
-          .gallery :global(.react-photo-gallery--gallery) {
-            margin: -16px;
-          }
-
-          @screen sm {
-            .gallery :global(.react-photo-gallery--gallery) {
-              margin: 16px;
-            }
-          }
-
-          .gallery :global(img) {
-            max-width: 570px;
-          }
-
-          .gallery :global(.react-photo-gallery--gallery > *) {
-            justify-content: center;
-          }
-        `}
-      </style>
-    </>
+    <div className={styles.root}>
+      <TextHeader className={styles.header}>
+        Sketchplanations tagged with <b>{tag.slugs[0]}</b>
+      </TextHeader>
+      <SketchplanationsGrid prismicDocs={sketchplanations} />
+    </div>
   )
 }
 

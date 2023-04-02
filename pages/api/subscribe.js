@@ -5,7 +5,7 @@ export default async (req, res) => {
 
   const email = req.body.email.trim()
 
-  const client = mailjet.connect(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
+  const client = mailjet.apiConnect(process.env.MJ_APIKEY_PUBLIC, process.env.MJ_APIKEY_PRIVATE)
 
   res.setHeader('X-Robots-Tag', 'noindex')
 

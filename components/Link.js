@@ -1,6 +1,6 @@
-import { cloneElement } from 'react'
 import { default as NextLink } from 'next/link'
 import { useRouter } from 'next/router'
+import { cloneElement } from 'react'
 
 const Link = ({ href, children }) => {
   const router = useRouter()
