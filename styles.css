@@ -49,7 +49,7 @@ html {
 }
 
 body {
-  @apply antialiased bg-bg text-black;
+  @apply bg-bg text-black;
   font-family: 'Inter', sans-serif;
   font-weight: 300;
 }
