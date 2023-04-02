@@ -1,13 +1,11 @@
 import { Predicates } from '@prismicio/client'
-import Image from 'next/image'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
-import Gallery from 'react-photo-gallery'
 
 import { TextHeader } from 'components'
 import { client } from 'services/prismic'
 
 import styles from './[tag].module.css'
+import SketchplanationsGrid from 'components/SketchplanationsGrid'
 
 const Tag = ({ tag, sketchplanations }) => {
   const router = useRouter()
@@ -16,53 +14,12 @@ const Tag = ({ tag, sketchplanations }) => {
     return <div>Loading…</div>
   }
 
-  let images
-  try {
-    images = sketchplanations.map(
-      ({
-        uid,
-        data: {
-          title,
-          image: {
-            url,
-            alt,
-            dimensions: { width, height },
-          },
-        },
-      }) => ({
-        src: url,
-        width,
-        height,
-        alt: alt || `${title} - Sketchplanations`,
-        uid,
-      })
-    )
-  } catch {
-    console.log('sketchplanations', sketchplanations)
-  }
-
-  const renderImage = ({ photo }) => {
-    return (
-      <Link href={`/${photo.uid}`}>
-        <Image
-          src={photo.src}
-          width={photo.width}
-          height={photo.height}
-          alt={photo.alt}
-          sizes='(min-width: 848px) 800px, (min-width: 640px) calc(100vw - 3rem), 100w'
-        />
-      </Link>
-    )
-  }
-
   return (
     <div className={styles.root}>
       <TextHeader className={styles.header}>
         Sketchplanations tagged with <b>{tag.slugs[0]}</b>
       </TextHeader>
-      <div className={styles.gallery}>
-        <Gallery photos={images} direction='row' margin={8} targetRowHeight={400} renderImage={renderImage} />
-      </div>
+      <SketchplanationsGrid prismicDocs={sketchplanations} />
     </div>
   )
 }
