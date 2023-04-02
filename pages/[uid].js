@@ -1,5 +1,6 @@
 import { Predicates } from '@prismicio/client'
 import classNames from 'classnames'
+import { ImageJsonLd } from 'next-seo'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -33,7 +34,7 @@ const SketchplanationPage = ({
         <meta key='og:title' property='og:title' content={title} />
         <meta property='og:description' content={RichText.asText(body)} />
         <meta property='og:image' content={`${image.url}&w=1200`} />
-        <meta property='og:url' content={`https://sketchplanations.vercel.app/${uid}`} />
+        <meta property='og:url' content={`https://sketchplanations.com/${uid}`} />
         <meta name='twitter:card' content='summary_large_image' />
         <meta name='twitter:image:alt' content={title} />
       </Head>
@@ -103,6 +104,21 @@ const SketchplanationPage = ({
         </div>
       </>
     )} */}
+      <ImageJsonLd
+        images={[
+          {
+            contentUrl: `${image.url}&w=1200`,
+            creator: {
+              '@type': 'Person',
+              name: 'Jono Hey',
+            },
+            creditText: 'Jono Hey',
+            copyrightNotice: '© Jono Hey ',
+            license: 'https://sketchplanations.com/licence',
+            acquireLicensePage: 'https://sketchplanations.com/licence',
+          },
+        ]}
+      />
     </>
   )
 }
