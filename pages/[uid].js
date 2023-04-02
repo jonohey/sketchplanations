@@ -29,6 +29,7 @@ const SketchplanationPage = ({
     <>
       <Head>
         <title>{pageTitle(title)}</title>
+        <meta name='description' content={RichText.asText(body)} />
         <meta key='og:title' property='og:title' content={title} />
         <meta property='og:description' content={RichText.asText(body)} />
         <meta property='og:image' content={`${image.url}&w=1200`} />
