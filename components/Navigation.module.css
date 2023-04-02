@@ -22,22 +22,26 @@
   @apply text-gray-400;
 }
 
-.item.gt-xxs-screen {
+.item {
+  @apply flex gap-x-2 items-center;
+}
+
+.gt-xxs-screen {
   @apply hidden;
 }
 
 @screen xxs {
-  .item.gt-xxs-screen {
-    @apply block;
+  .gt-xxs-screen {
+    @apply flex;
   }
 }
 
-.item.gt-sm-screen {
+.gt-sm-screen {
   @apply hidden;
 }
 
 @screen sm {
-  .item.gt-sm-screen {
-    @apply block;
+  .gt-sm-screen {
+    @apply flex;
   }
 }
