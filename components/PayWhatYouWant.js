@@ -142,7 +142,7 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
                       decimalsLimit={2}
                       allowNegativeValue={false}
                       turnOffAbbreviations={true}
-                      onChange={(value) => setCustomAmount(value)}
+                      onValueChange={setCustomAmount}
                     />
                   </div>
                 </div>
