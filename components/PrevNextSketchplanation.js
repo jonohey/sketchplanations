@@ -42,6 +42,7 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
           width={image.dimensions.width}
           height={image.dimensions.height}
           sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
+          alt={image.alt || `${title} - Sketchplanations`}
         />
       </div>
       <div className={classNames(styles.info, styles[`info-${kind}`])}>
