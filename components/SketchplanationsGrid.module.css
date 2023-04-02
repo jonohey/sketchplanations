@@ -1,0 +1,7 @@
+.root {
+  @apply p-6;
+}
+
+.noResults {
+  @apply p-2 text-center;
+}

@@ -32,7 +32,3 @@
 .photos-item img {
   @apply absolute top-0 left-0 block w-full h-full object-contain;
 }
-
-.noSketches {
-  @apply text-center;
-}
