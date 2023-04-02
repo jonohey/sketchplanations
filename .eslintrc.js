@@ -23,5 +23,5 @@ module.exports = {
       },
     ],
   },
-  settings: { 'import/core-modules': ['styled-jsx/css'] },
+  settings: { 'import/core-modules': ['styled-jsx/css'], react: { version: 'detect' } },
 }
