@@ -32,7 +32,7 @@ const renderImage = ({ image, title, priority = false }) => {
   )
 }
 
-const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = false }) => {
+const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = false, priority = false }) => {
   const [pwywModalOpen, setPwywModalOpen] = useState(false)
   const {
     data: { image, title, body, redbubble_link_url },
@@ -47,7 +47,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         <div className={styles.image}>{renderImage({ image, title, priority: true })}</div>
       ) : (
         <Link href={`/${uid}`} className={styles.image}>
-          {renderImage({ image, title })}
+          {renderImage({ image, title, priority })}
         </Link>
       )}
       <div className={styles.content}>

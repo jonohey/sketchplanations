@@ -57,8 +57,8 @@ const Home = ({ sketchplanations }) => {
         }
       >
         <div className={styles.sketchplanations}>
-          {results.map((sketchplanation) => (
-            <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} />
+          {results.map((sketchplanation, index) => (
+            <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} priority={index === 0} />
           ))}
         </div>
       </InfiniteScroll>
