@@ -1,5 +1,4 @@
 import { sort } from 'fast-sort'
-// import { SocialSharing, TextHeader, PayWhatYouWant, Modal } from 'components'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -28,26 +27,7 @@ const renderImage = ({ image, title }) => {
       width={adjustedWidth}
       height={adjustedheight}
       sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
-      layout='responsive'
     />
-    // <Imgix
-    //   className='lazyload image'
-    //   src={image.url}
-    //   attributeConfig={{
-    //     src: 'data-src',
-    //     srcSet: 'data-srcset',
-    //     sizes: 'data-sizes',
-    //   }}
-    //   htmlAttributes={{
-    //     src: `${image.url}&w=1600&blur=200&px=32`,
-    //     width: adjustedWidth,
-    //     height: adjustedheight,
-    //     alt: image.alt || `${title} - Sketchplanations`,
-    //   }}
-    //   width={adjustedWidth}
-    //   height={adjustedheight}
-    //   sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
-    // />
   )
 }
 
