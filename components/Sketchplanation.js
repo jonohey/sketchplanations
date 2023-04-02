@@ -14,7 +14,7 @@ const TextHeader = dynamic(() => import('./TextHeader'))
 const PayWhatYouWant = dynamic(() => import('./PayWhatYouWant'))
 const Modal = dynamic(() => import('./Modal'))
 
-const renderImage = ({ image, title }) => {
+const renderImage = ({ image, title, priority = false }) => {
   const { width, height } = image.dimensions
   const heightRatio = width / height
   const adjustedWidth = 1600
@@ -27,6 +27,7 @@ const renderImage = ({ image, title }) => {
       width={adjustedWidth}
       height={adjustedheight}
       sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
+      priority={priority}
     />
   )
 }
@@ -43,7 +44,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
   return (
     <div className={styles.root}>
       {fullPost ? (
-        <div className={styles.image}>{renderImage({ image, title })}</div>
+        <div className={styles.image}>{renderImage({ image, title, priority: true })}</div>
       ) : (
         <Link href={`/${uid}`} className={styles.image}>
           {renderImage({ image, title })}
