@@ -1,12 +1,12 @@
-import { createElement } from 'react'
-import { RichText } from 'prismic-reactjs'
-import dynamic from 'next/dynamic'
 import classNames from 'classnames'
+import dynamic from 'next/dynamic'
+import Image from 'next/image'
+import { RichText } from 'prismic-reactjs'
+import { createElement } from 'react'
 
 import { linkResolver } from 'services/prismic'
 
 import styles from './Page.module.css'
-import Image from 'next/image'
 
 const TextHeader = dynamic(() => import('./TextHeader'))
 

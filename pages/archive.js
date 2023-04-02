@@ -1,6 +1,5 @@
-import { client } from 'services/prismic'
-
 import SketchplanationsGrid from 'components/SketchplanationsGrid'
+import { client } from 'services/prismic'
 
 const Archive = ({ sketchplanations }) => {
   return <SketchplanationsGrid prismicDocs={sketchplanations} />

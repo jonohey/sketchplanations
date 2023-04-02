@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
-import { isBlank, searchSketchplanations, searchTags, isPresent } from 'helpers'
-import useDebouncedValue from 'hooks/useDebouncedValue'
 import SearchForm from 'components/SearchForm'
+import SketchplanationsGrid from 'components/SketchplanationsGrid'
 import Tags from 'components/Tags'
+import { isBlank, isPresent, searchSketchplanations, searchTags } from 'helpers'
+import useDebouncedValue from 'hooks/useDebouncedValue'
 import { client } from 'services/prismic'
 
 import styles from './explore.module.css'
-import SketchplanationsGrid from 'components/SketchplanationsGrid'
 
 const Explore = ({ initialSketchplanations }) => {
   const router = useRouter()

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import Link from 'next/link'
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
+import React, { useState } from 'react'
 import CurrencyInput from 'react-currency-input-field'
 
 import styles from './PayWhatYouWant.module.css'
@@ -110,11 +110,8 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
           <>
             <p>
               You’re free to use sketchplanations in your articles or presentations as you wish. Please spread the word!
-              (see{' '}
-              <Link href='/licence'>
-                licence
-              </Link>
-              ) If it’s useful to you please consider paying a small amount to help keep it going.
+              (see <Link href='/licence'>licence</Link>) If it’s useful to you please consider paying a small amount to
+              help keep it going.
             </p>
             <p>Jono</p>
             <form className={styles.form} onSubmit={handleSubmit}>
@@ -191,7 +188,7 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
         )}
       </div>
     </div>
-  );
+  )
 }
 
 export default PayWhatYouWant

@@ -1,7 +1,7 @@
-import styles from './Oops.module.css'
 import Image from 'next/image'
 
 import oopsImage from '../public/oops.png'
+import styles from './Oops.module.css'
 
 const loader = ({ src }) => src
 

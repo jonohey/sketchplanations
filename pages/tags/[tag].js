@@ -1,13 +1,13 @@
+import { Predicates } from '@prismicio/client'
+import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Gallery from 'react-photo-gallery'
-import Link from 'next/link'
-import { Predicates } from '@prismicio/client'
 
-import { client } from 'services/prismic'
 import { TextHeader } from 'components'
+import { client } from 'services/prismic'
 
 import styles from './[tag].module.css'
-import Image from 'next/image'
 
 const Tag = ({ tag, sketchplanations }) => {
   const router = useRouter()

@@ -1,10 +1,10 @@
+import classNames from 'classnames'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useHotkeys } from 'react-hotkeys-hook'
 
 import styles from './PrevNextSketchplanation.module.css'
-import classNames from 'classnames'
-import Image from 'next/image'
 
 const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
   const keyboardKey = kind === 'next' ? 'j' : 'k'

@@ -1,7 +1,8 @@
+import classNames from 'classnames'
+
 import { isPresent } from 'helpers'
 
 import styles from './SearchForm.module.css'
-import classNames from 'classnames'
 
 const SearchForm = ({ value, isBusy = false, onChange = () => {}, onReset = () => {} }) => {
   return (

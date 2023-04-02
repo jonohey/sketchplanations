@@ -1,8 +1,8 @@
+import classNames from 'classnames'
 import { useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import styles from './SocialSharing.module.css'
-import classNames from 'classnames'
 
 const buttons = [
   {

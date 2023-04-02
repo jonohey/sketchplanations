@@ -1,16 +1,15 @@
-import { RichText } from 'prismic-reactjs'
 import { sort } from 'fast-sort'
-import Link from 'next/link'
-import React, { useState } from 'react'
-import Shiitake from 'shiitake'
-import TextLoop from 'react-text-loop'
+// import { SocialSharing, TextHeader, PayWhatYouWant, Modal } from 'components'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import Link from 'next/link'
+import { RichText } from 'prismic-reactjs'
+import React, { useState } from 'react'
+import TextLoop from 'react-text-loop'
+import Shiitake from 'shiitake'
 
 import styles from './Sketchplanation.module.css'
 
-// import { SocialSharing, TextHeader, PayWhatYouWant, Modal } from 'components'
-
-import dynamic from 'next/dynamic'
 const SocialSharing = dynamic(() => import('./SocialSharing'))
 const TextHeader = dynamic(() => import('./TextHeader'))
 const PayWhatYouWant = dynamic(() => import('./PayWhatYouWant'))

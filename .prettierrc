@@ -6,6 +6,7 @@
   "semi": false,
   "trailingComma": "es5",
   "arrowParens": "always",
+  "importOrder": ["<THIRD_PARTY_MODULES>", "^(components|helpers|services|hooks)(/(.*))?$", "^[./]"],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
 }

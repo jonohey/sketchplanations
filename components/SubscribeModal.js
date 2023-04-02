@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 
-import { setCookie } from 'helpers'
-import { client } from 'services/prismic'
 import { Page } from 'components'
 import Modal from 'components/Modal'
+import { setCookie } from 'helpers'
+import { client } from 'services/prismic'
 
 import styles from './SubscribeModal.module.css'
 

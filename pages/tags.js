@@ -1,10 +1,11 @@
+import classNames from 'classnames'
 import { sort } from 'fast-sort'
 import Link from 'next/link'
 import useCookie from 'react-use-cookie'
+
 import { client } from 'services/prismic'
 
 import styles from './tags.module.css'
-import classNames from 'classnames'
 
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
 

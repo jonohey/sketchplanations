@@ -1,15 +1,15 @@
-import React from 'react'
-import { RichText } from 'prismic-reactjs'
+import { Predicates } from '@prismicio/client'
+import classNames from 'classnames'
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { Predicates } from '@prismicio/client'
+import { RichText } from 'prismic-reactjs'
+import React from 'react'
 
-import { client } from 'services/prismic'
 import { pageTitle } from 'helpers'
+import { client } from 'services/prismic'
 
 import styles from './[uid].module.css'
-import classNames from 'classnames'
 
 const Sketchplanation = dynamic(() => import('../components/Sketchplanation'))
 const PrevNextSketchplanation = dynamic(() => import('../components/PrevNextSketchplanation'))

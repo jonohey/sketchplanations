@@ -1,10 +1,10 @@
-import { RoughNotation } from 'react-rough-notation'
+import classNames from 'classnames'
 import { useRouter } from 'next/router'
+import { RoughNotation } from 'react-rough-notation'
 
 import { Link } from 'components'
 
 import styles from './Navigation.module.css'
-import classNames from 'classnames'
 
 const roughNotiationProps = {
   iterations: 1,

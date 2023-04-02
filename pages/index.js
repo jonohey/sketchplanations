@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
-import InfiniteScroll from 'react-infinite-scroll-component'
 import React, { useState } from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { client } from 'services/prismic'
 

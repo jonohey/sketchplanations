@@ -1,8 +1,9 @@
+import { useState } from 'react'
+
 import { Page } from 'components'
 import { client } from 'services/prismic'
 
 import styles from './subscribe.module.css'
-import { useState } from 'react'
 
 const Subscribe = ({ subscribeDocument, subscribedDocument }) => {
   const [email, setEmail] = useState('')
