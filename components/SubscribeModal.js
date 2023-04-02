@@ -5,10 +5,15 @@ import { client } from 'services/prismic'
 import { Page } from 'components'
 import Modal from 'components/Modal'
 
+import styles from './SubscribeModal.module.css'
+
 const SubscribeModal = ({ show, onHide = () => {} }) => {
-  const [email, setEmail] = useState('')
   const [subscribeModalDocument, setSubscribeModalDocument] = useState(null)
   const [subscribedModalDocument, setSubscribedModalDocument] = useState(null)
+
+  const [email, setEmail] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+  const [processing, setProcessing] = useState(false)
 
   useEffect(() => {
     const fetchSubscribeModal = async () => {
@@ -21,6 +26,8 @@ const SubscribeModal = ({ show, onHide = () => {} }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    setProcessing(true)
 
     await fetch(`/api/subscribe`, {
       method: 'POST',
@@ -35,18 +42,22 @@ const SubscribeModal = ({ show, onHide = () => {} }) => {
     const doc = await client.getSingle('subscribed')
     setSubscribedModalDocument(doc)
 
+    setSubmitted(true)
+    setProcessing(false)
+
     setCookie('mjPopinShown', true)
   }
 
   return (
-    <>
-      <Modal show={show} onHide={onHide}>
-        {subscribedModalDocument && <Page document={subscribedModalDocument} inline={true} />}
-        {!subscribedModalDocument && subscribeModalDocument && <Page document={subscribeModalDocument} inline={true} />}
-        {!subscribedModalDocument && (
-          <form className='form' onSubmit={handleSubmit}>
+    <Modal show={show} onHide={onHide}>
+      {submitted && subscribedModalDocument ? (
+        <Page document={subscribedModalDocument} inline={true} />
+      ) : (
+        <>
+          {subscribeModalDocument && <Page document={subscribeModalDocument} inline={true} />}
+          <form className={styles.form} onSubmit={handleSubmit}>
             <input
-              className='input'
+              className={styles.input}
               type='email'
               required
               placeholder='Email address'
@@ -55,27 +66,15 @@ const SubscribeModal = ({ show, onHide = () => {} }) => {
               pattern='.+@.+'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              disabled={processing}
             />
-            <button className='button' type='submit'>
-              Subscribe
+            <button type='submit' className={styles.button}>
+              {processing ? 'Subscribing…' : 'Subscribe'}
             </button>
           </form>
-        )}
-      </Modal>
-      <style jsx>{`
-        .form {
-          @apply p-6 flex;
-        }
-
-        .input {
-          @apply flex-grow p-3 rounded-l bg-inputBg border border-inputBorder border-r-0 outline-none;
-        }
-
-        .button {
-          @apply bg-brightRed text-white p-3 rounded-r;
-        }
-      `}</style>
-    </>
+        </>
+      )}
+    </Modal>
   )
 }
 

@@ -5,14 +5,14 @@ import { Elements } from '@stripe/react-stripe-js'
 import { Integrations } from '@sentry/tracing'
 import { loadStripe } from '@stripe/stripe-js'
 import { useEffect, useState } from 'react'
-import { useScrollPercentage } from 'react-scroll-percentage'
 import * as Sentry from '@sentry/react'
 import Head from 'next/head'
 import TagManager from 'react-gtm-module'
 
-import { pageTitle, getCookie, setCookie } from 'helpers'
+import { getCookie, pageTitle, setCookie } from 'helpers'
 import Header from 'components/Header'
 import SubscribeModal from 'components/SubscribeModal'
+import useScrollPercentage from 'hooks/useScrollPercentage'
 
 const polyfillDownloadAttr = () => {
   const downloadAttributeSupport = 'download' in document.createElement('a')
@@ -103,27 +103,7 @@ const Sketchplanations = ({ Component, pageProps }) => {
     <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
       <Head>
         <title>{pageTitle()}</title>
-        <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
-        <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
-        <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
-        <link rel='manifest' href='/site.webmanifest' />
-        <link rel='mask-icon' href='/safari-pinned-tab.svg' color='#000000' />
-        <meta name='msapplication-TileColor' content='#fbf8de' />
-        <meta name='theme-color' content='#fff' />
-        <meta name='theme-color' content='#35363a' media='(prefers-color-scheme: dark)' />
         <meta name='viewport' content='width = device-width, initial-scale = 1, minimum-scale = 1' />
-        <meta key='og:title' property='og:title' content={pageTitle()} />
-        <meta property='og:site_name' content='Sketchplanations' />
-        <meta name='twitter:site' content='@sketchplanator' />
-        <link rel='preconnect' href='https://fonts.googleapis.com' />
-        <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='true' />
-        <link rel='preconnect' href='https://js.stripe.com' crossOrigin='true' />
-        <link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap' rel='stylesheet' />
-        <link
-          rel='stylesheet'
-          type='text/css'
-          href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css'
-        />
       </Head>
       <Header />
       <div ref={ref}>

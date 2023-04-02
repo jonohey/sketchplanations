@@ -1,0 +1,20 @@
+.root {
+  @apply mx-auto px-3 mb-8 flex flex-row;
+  max-width: 28rem;
+}
+
+@screen sm {
+  .root {
+    @apply mb-0 px-4;
+  }
+}
+
+.button {
+  @apply flex py-2 px-4 w-full bg-white border outline-none grow rounded-lg;
+}
+
+@screen sm {
+  .button {
+    @apply py-3 px-6 text-lg rounded-full;
+  }
+}

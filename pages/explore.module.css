@@ -1,0 +1,34 @@
+.root {
+  @apply pt-8 pb-20 mx-auto;
+}
+
+.gallery {
+  @apply overflow-hidden;
+}
+
+.links {
+  @apply grid grid-flow-col-dense gap-x-6 justify-center px-6 mb-6;
+}
+
+.link {
+  @apply text-blue;
+}
+
+.photos {
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  @apply p-6 grid gap-6 items-center justify-center;
+
+  @supports (grid-template-rows: masonry) {
+    grid-template-rows: masonry;
+  }
+}
+
+.photos-item {
+  overflow: hidden;
+  padding-top: 100%;
+  position: relative;
+}
+
+.photos-item img {
+  @apply absolute top-0 left-0 block w-full h-full object-contain;
+}

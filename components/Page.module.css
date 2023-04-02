@@ -1,0 +1,55 @@
+.page-root {
+  max-width: 800px;
+  @apply relative pt-8 pb-20 px-6 mx-auto;
+}
+
+@screen sm {
+  .page-root {
+    @apply px-12;
+  }
+}
+
+.page-root--inline {
+  @apply pb-0 px-6;
+}
+
+.page-body {
+  @apply block mx-auto;
+  max-width: 800px;
+}
+
+.page-body > * + * {
+  margin-top: 1.4em;
+}
+
+.page-body b,
+.page-body strong {
+  @apply font-semibold;
+}
+
+.page-body i,
+.page-body em {
+  @apply italic;
+}
+
+.page-body a {
+  color: var(--color-blue);
+}
+
+.page-body ul li {
+  list-style: outside disc;
+  margin-left: 1.75rem;
+}
+
+.page-body ol li {
+  list-style: outside decimal;
+  margin-left: 1.75rem;
+}
+
+.page-body img {
+  @apply my-10;
+}
+
+.page-body p {
+  @apply max-w-prose;
+}

@@ -1,0 +1,82 @@
+.image {
+  @apply p-2 flex items-center border border-border rounded-lg overflow-hidden shadow;
+}
+
+.image-next {
+  @apply flex-row text-left;
+}
+
+.image-previous {
+  @apply flex-row-reverse text-right;
+}
+
+.imageEl {
+  @apply flex-none m-2;
+  width: 20%;
+  max-width: 140px;
+}
+
+@screen sm {
+  .imageEl {
+    width: 38%;
+  }
+}
+
+.info {
+  @apply items-center px-2;
+}
+
+.info-next {
+  @apply flex-row;
+}
+
+.info-previous {
+  @apply flex-row-reverse;
+}
+
+.label {
+  @apply block;
+}
+
+.title {
+  @apply block font-semibold;
+}
+
+@screen sm {
+  .title {
+    @apply text-lg;
+  }
+}
+
+.caret-wrapper {
+  @apply flex-none m-2;
+}
+
+.caret-wrapper-next {
+  @apply rotate-180;
+}
+
+.caret-wrapper-previous {
+  @apply rotate-0;
+}
+
+.caret {
+  @apply block;
+  width: 24px;
+  height: 24px;
+}
+
+.caret * {
+  fill: currentColor;
+}
+
+.keyboard-shortcuts {
+  @apply mt-2;
+}
+
+.keyboard-key {
+  @apply inline-flex items-center justify-center border border-border rounded text-sm font-sans uppercase;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--color-subduedText);
+}

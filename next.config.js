@@ -1,4 +1,9 @@
 module.exports = {
+  images: {
+    domains: ['images.prismic.io'],
+    loader: 'custom',
+    loaderFile: './loader.js',
+  },
   async headers() {
     return [
       {
@@ -3711,4 +3716,10 @@ module.exports = {
       },
     ]
   },
+  // webpack: (config) => {
+  //   // Use a different hash function for content hashing to avoid ERR_OSSL_EVP_UNSUPPORTED error
+  //   config.output.hashFunction = 'xxhash64'
+
+  //   return config
+  // },
 }

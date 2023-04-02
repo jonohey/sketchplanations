@@ -1,0 +1,50 @@
+.sort-button {
+  @apply relative py-1 px-4 border text-sm;
+  border-color: var(--color-inputBg);
+  background-color: var(--color-inputBg);
+}
+
+.sort-button-active {
+  border-color: var(--color-brightRed);
+  background-color: var(--color-brightRed);
+}
+
+.sort-buttons {
+  @apply flex justify-center pt-6 px-6;
+}
+
+.sort-buttons :global(> *:first-child) {
+  @apply rounded-l-md;
+}
+
+.sort-buttons :global(> *:last-child) {
+  @apply rounded-r-md;
+}
+
+.sort-buttons :global(> * + *) {
+  margin-left: -1px;
+}
+
+.tags {
+  @apply flex flex-wrap justify-center p-6 pb-20;
+}
+
+.tags a {
+  @apply relative py-2 px-4 m-2 rounded-full border border-border text-sm;
+  transition: all 0.1s ease-out;
+}
+
+@screen sm {
+  .tags a {
+    @apply text-base;
+  }
+}
+
+.tags b {
+  @apply text-xs;
+  opacity: 0.5;
+}
+
+.tags a:hover {
+  @apply bg-brightRed text-white border-brightRed shadow;
+}

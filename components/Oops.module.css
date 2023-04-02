@@ -1,0 +1,29 @@
+.main {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  @apply py-8;
+}
+
+.image {
+  @apply block mx-auto mb-4;
+}
+
+@media (prefers-color-scheme: dark) {
+  .image {
+    filter: grayscale(62%) invert(100%) hue-rotate(180deg);
+    mix-blend-mode: lighten;
+  }
+}
+
+.main p {
+  @apply text-center mx-auto mt-1 px-10;
+}
+
+.main a:hover {
+  text-decoration: underline;
+}
+
+.main a {
+  @apply text-blue;
+}

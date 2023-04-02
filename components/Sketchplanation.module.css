@@ -1,0 +1,127 @@
+.root {
+  @apply w-full px-0;
+  max-width: 600px;
+}
+
+@screen sm {
+  .root {
+    @apply px-6;
+  }
+}
+
+.image {
+  @apply block mb-10;
+  box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow);
+}
+
+.image > :global(img) {
+  @apply w-full h-auto;
+}
+
+.content {
+  @apply px-6 mx-auto;
+  max-width: 460px;
+}
+
+@screen sm {
+  .content {
+    @apply px-0;
+  }
+}
+
+.body {
+  @apply mx-auto;
+}
+
+.body :global(> * + *) {
+  margin-top: 1.4em;
+}
+
+.body :global(b),
+.body :global(strong) {
+  @apply font-semibold;
+}
+
+.body :global(i),
+.body :global(em) {
+  @apply italic;
+}
+
+.body :global(a) {
+  @apply text-blue;
+}
+
+.body :global(ul li) {
+  list-style: outside disc;
+  margin-left: 1.75rem;
+}
+
+.body :global(ol li) {
+  list-style: outside decimal;
+  margin-left: 1.75rem;
+}
+
+.tags {
+  @apply flex flex-wrap -mx-2 mt-10 mb-10;
+}
+
+.tags a {
+  @apply inline-block mx-2 text-sm whitespace-nowrap;
+  transition: all 0.1s ease-out;
+  color: var(--color-subduedText);
+}
+
+.tags a:hover {
+  color: var(--color-blue);
+}
+
+.after-post {
+  @apply mt-10;
+}
+
+.licence-note {
+  @apply p-5 bg-bgHighlight rounded;
+}
+
+.licence-link {
+  @apply text-blueLight;
+}
+
+.pwyw {
+  @apply p-8;
+}
+
+.pwyw-button {
+  @apply mt-6;
+  color: var(--color-subduedText);
+}
+
+.pwyw-button:hover {
+  color: var(--color-blue);
+}
+
+.pwyw-button > svg {
+  @apply inline-block mr-3;
+  fill: currentColor;
+}
+
+.redbubble-wrapper {
+  @apply block mt-6;
+}
+
+.redbubble {
+  color: var(--color-subduedText);
+}
+
+.redbubble:hover {
+  color: var(--color-blue);
+}
+
+.redbubble > svg {
+  @apply inline-block mr-3;
+  fill: currentColor;
+}
+
+.image {
+  @apply bg-paper;
+}
