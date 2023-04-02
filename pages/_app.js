@@ -4,6 +4,7 @@ import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import 'lazysizes'
 import 'lazysizes/plugins/attrchange/ls.attrchange'
+import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import TagManager from 'react-gtm-module'
@@ -13,6 +14,8 @@ import Header from 'components/Header'
 import SubscribeModal from 'components/SubscribeModal'
 import { getCookie, pageTitle, setCookie } from 'helpers'
 import useScrollPercentage from 'hooks/useScrollPercentage'
+
+const inter = Inter({ subsets: ['latin'] })
 
 const polyfillDownloadAttr = () => {
   const downloadAttributeSupport = 'download' in document.createElement('a')
@@ -106,7 +109,7 @@ const Sketchplanations = ({ Component, pageProps }) => {
         <meta name='viewport' content='width = device-width, initial-scale = 1, minimum-scale = 1' />
       </Head>
       <Header />
-      <div ref={ref}>
+      <div ref={ref} className={inter.className}>
         <Component {...pageProps} />
       </div>
       {subscribeModalEnabled && (

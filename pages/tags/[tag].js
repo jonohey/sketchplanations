@@ -2,10 +2,10 @@ import { Predicates } from '@prismicio/client'
 import { useRouter } from 'next/router'
 
 import { TextHeader } from 'components'
+import SketchplanationsGrid from 'components/SketchplanationsGrid'
 import { client } from 'services/prismic'
 
 import styles from './[tag].module.css'
-import SketchplanationsGrid from 'components/SketchplanationsGrid'
 
 const Tag = ({ tag, sketchplanations }) => {
   const router = useRouter()
