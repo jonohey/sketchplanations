@@ -102,9 +102,10 @@ export async function getStaticProps() {
       field: 'my.sketchplanation.published_at',
       direction: 'desc',
     },
+    limit: 20,
   })
 
-  return { props: { initialSketchplanations: initialSketchplanations.slice(0, 20) } }
+  return { props: { initialSketchplanations } }
 }
 
 export default Explore
