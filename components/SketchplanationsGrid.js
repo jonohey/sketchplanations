@@ -32,7 +32,7 @@ const SketchplanationsGrid = ({ prismicDocs }) => {
   const images = prismicDocsToImages(prismicDocs)
 
   return (
-    <JustifiedGrid images={images} maxRowHeight={550} gutter={20}>
+    <JustifiedGrid images={images} maxRowHeight={550} gutter={20} showIncompleteRow>
       {(processedImages) => {
         return (
           <>
