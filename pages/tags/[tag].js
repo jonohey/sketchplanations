@@ -49,18 +49,16 @@ export async function getStaticProps({ params: { tag } }) {
 
   const tagDoc = tagDocs?.results[0]
 
-  const sketchplanations = (
-    await client.get({
-      predicates: [
-        Predicates.at('document.type', 'sketchplanation'),
-        Predicates.at('my.sketchplanation.tags.tag', tagDoc.id),
-      ],
-      orderings: {
-        field: 'my.sketchplanation.published_at',
-        direction: 'desc',
-      },
-    })
-  ).results
+  const sketchplanations = await client.dangerouslyGetAll({
+    predicates: [
+      Predicates.at('document.type', 'sketchplanation'),
+      Predicates.at('my.sketchplanation.tags.tag', tagDoc.id),
+    ],
+    orderings: {
+      field: 'my.sketchplanation.published_at',
+      direction: 'desc',
+    },
+  })
 
   return { props: { tag: tagDoc, sketchplanations } }
 }
