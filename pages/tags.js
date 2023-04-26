@@ -1,33 +1,30 @@
-import classNames from 'classnames'
 import { sort } from 'fast-sort'
 import Link from 'next/link'
 import useCookie from 'react-use-cookie'
 
+import SortButtons from 'components/SortButtons'
 import { client } from 'services/prismic'
 
 import styles from './tags.module.css'
 
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
 
-const SortButton = ({ active, children, ...props }) => (
-  <button className={classNames(styles['sort-button'], active && styles['sort-button-active'])} {...props}>
-    {children}
-  </button>
-)
-
 const Tags = ({ tagsByName, tagsByCount }) => {
   const [sort, setSort] = useCookie('tagsSort', 'name')
 
   return (
     <>
-      <div className={styles['sort-buttons']}>
-        <SortButton active={sort === 'name'} type='button' onClick={() => setSort('name')}>
-          A-Z
-        </SortButton>
-        <SortButton active={sort === 'count'} type='button' onClick={() => setSort('count')}>
-          Frequency
-        </SortButton>
+      <div className='pt-6 px-6 max-w-md mx-auto'>
+        <SortButtons
+          value={sort}
+          onChange={setSort}
+          options={[
+            { label: 'A-Z', value: 'name' },
+            { label: 'Frequency', value: 'count' },
+          ]}
+        />
       </div>
+
       {sort === 'name' && (
         <div className={styles.tags}>
           {tagsByName.map(({ tag, slug, count }) => (

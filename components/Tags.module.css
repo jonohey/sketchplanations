@@ -12,6 +12,10 @@
   scrollbar-width: none;
 }
 
+.tags::-webkit-scrollbar {
+  display: none;
+}
+
 /* .root::before,
 .root::after {
   content: '';
