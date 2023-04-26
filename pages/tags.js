@@ -10,7 +10,7 @@ import styles from './tags.module.css'
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
 
 const Tags = ({ tagsByName, tagsByCount }) => {
-  const [sort, setSort] = useCookie('tagsSort', 'name')
+  const [sort, setSort] = useCookie('tagsSort', 'count')
 
   return (
     <>
@@ -19,8 +19,8 @@ const Tags = ({ tagsByName, tagsByCount }) => {
           value={sort}
           onChange={setSort}
           options={[
-            { label: 'A-Z', value: 'name' },
             { label: 'Frequency', value: 'count' },
+            { label: 'A-Z', value: 'name' },
           ]}
         />
       </div>

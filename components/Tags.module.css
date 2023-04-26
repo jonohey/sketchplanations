@@ -3,6 +3,12 @@
   border-color: rgba(255, 255, 255, 0.038);
 }
 
+@media (prefers-color-scheme: light) {
+  .root {
+    border-color: rgba(0, 0, 0, 0.062);
+  }
+}
+
 .tags {
   @apply relative flex md:flex-wrap md:justify-center px-5 gap-2 md:gap-3;
 

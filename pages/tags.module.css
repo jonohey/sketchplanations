@@ -14,7 +14,7 @@
 }
 
 .tags b {
-  @apply text-xs hidden;
+  @apply text-xs;
   color: var(--color-subduedText);
 }
 

@@ -37,6 +37,11 @@ const Navigation = () => {
           </RoughNotation>
         </Link>
       </span>
+      <Link href='/about' className={styles.item}>
+        <RoughNotation show={isSelected('/about')} {...roughNotiationProps}>
+          About
+        </RoughNotation>
+      </Link>
       <a
         href='https://www.redbubble.com/people/sketchplanator/shop?asc=u'
         target='_blank'
@@ -52,12 +57,6 @@ const Navigation = () => {
           />
         </svg>
       </a>
-
-      <Link href='/about' className={styles.item}>
-        <RoughNotation show={isSelected('/about')} {...roughNotiationProps}>
-          About
-        </RoughNotation>
-      </Link>
     </nav>
   )
 }
