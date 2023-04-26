@@ -12,23 +12,27 @@ const Tags = ({ tags }) => {
   const [isScrollableLeft, setIsScrollableLeft] = useState(false)
   const [isScrollableRight, setIsScrollableRight] = useState(false)
 
+  const onLayoutChange = debounce(100, () => {
+    const container = containerRef.current
+    if (!container) return
+
+    const { scrollLeft, scrollWidth, clientWidth } = container
+
+    setIsScrollableLeft(scrollLeft > 0)
+    setIsScrollableRight(scrollWidth - scrollLeft > clientWidth)
+  })
+
+  useEffect(onLayoutChange, [tags])
+
   useEffect(() => {
     const container = containerRef.current
 
-    const onLayoutChange = debounce(100, () => {
-      const container = containerRef.current
-      const { scrollLeft, scrollWidth, clientWidth } = container
-
-      setIsScrollableLeft(scrollLeft > 0)
-      setIsScrollableRight(scrollWidth - scrollLeft > clientWidth)
-    })
-
-    container.addEventListener('scroll', onLayoutChange)
-    window.addEventListener('resize', onLayoutChange)
+    container?.addEventListener('scroll', onLayoutChange)
+    window?.addEventListener('resize', onLayoutChange)
 
     return () => {
-      container.removeEventListener('scroll', onLayoutChange)
-      window.removeEventListener('resize', onLayoutChange)
+      container?.removeEventListener('scroll', onLayoutChange)
+      window?.removeEventListener('resize', onLayoutChange)
     }
   }, [])
 
