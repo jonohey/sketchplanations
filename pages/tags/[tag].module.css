@@ -2,10 +2,6 @@
   @apply pt-8 pb-20 mx-auto;
 }
 
-.gallery {
-  @apply overflow-hidden;
-}
-
 .header {
-  @apply text-center;
+  @apply text-center px-4;
 }

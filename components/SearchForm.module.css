@@ -1,5 +1,5 @@
 .root {
-  @apply relative mx-auto px-4 mb-6 flex flex-row;
+  @apply relative mx-auto px-4 mb-4 sm:mb-4 md:mb-6 flex flex-row;
   max-width: 28rem;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .loading-indicator {
-  @apply absolute top-0 right-12 h-full flex items-center;
+  @apply absolute top-0 right-14 md:right-12 h-full flex items-center pointer-events-none;
 }
 
 @screen sm {

@@ -44,7 +44,7 @@ const Navigation = () => {
         className={styles.item}
       >
         Shop
-        <svg xmlns='http://www.w3.org/2000/svg' width='13' height='15'>
+        <svg xmlns='http://www.w3.org/2000/svg' width='10' height='12' viewBox='0 0 13 15'>
           <path
             fill='#FFF'
             fillRule='nonzero'
@@ -52,13 +52,12 @@ const Navigation = () => {
           />
         </svg>
       </a>
-      <span className={styles['gt-sm-screen']}>
-        <Link href='/about' className={styles.item}>
-          <RoughNotation show={isSelected('/about')} {...roughNotiationProps}>
-            About
-          </RoughNotation>
-        </Link>
-      </span>
+
+      <Link href='/about' className={styles.item}>
+        <RoughNotation show={isSelected('/about')} {...roughNotiationProps}>
+          About
+        </RoughNotation>
+      </Link>
     </nav>
   )
 }

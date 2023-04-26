@@ -13,6 +13,7 @@
   --color-blue: #1253b5;
   --color-buttonBg: #1253b5;
   --color-bg: #fff;
+  --color-bgRgb: 255, 255, 255;
   --color-bgTransparent: rgba(255, 255, 255, 0.9);
   --color-bgDarker: #f5f5f5;
   --color-bgHighlight: #f5f5f5;
@@ -34,6 +35,7 @@
     --color-buttonBg: #1253b5;
     --color-blueLight: #90b8f4;
     --color-bg: #35363a;
+    --color-bgRgb: 53, 54, 58;
     --color-bgTransparent: rgba(53, 54, 58, 0.9);
     --color-bgDarker: #202124;
     --color-bgHighlight: #44454b;

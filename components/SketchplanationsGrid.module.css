@@ -1,5 +1,5 @@
 .root {
-  @apply p-6;
+  @apply p-5 sm:p-4 md:p-6;
 }
 
 .noResults {

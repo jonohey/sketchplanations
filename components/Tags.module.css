@@ -1,26 +1,55 @@
+.root {
+  @apply relative w-full border-y md:border-0 py-3 md:py-0;
+  border-color: rgba(255, 255, 255, 0.038);
+}
+
 .tags {
-  @apply flex flex-wrap justify-center p-6;
+  @apply relative flex md:flex-wrap md:justify-center px-5 gap-2 md:gap-3;
+
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* for smoother scrolling on iOS */
+  scroll-snap-type: x proximity; /* for snap-scrolling */
+  scrollbar-width: none;
 }
 
-.tags > span {
-  @apply relative py-2 m-2 rounded-full text-sm;
+/* .root::before,
+.root::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  width: 1rem;
+  background-image: linear-gradient(
+    to right,
+    rgba(var(--color-bgRgb), 1),
+    rgba(var(--color-bgRgb), 1) 50%,
+    rgba(var(--color-bgRgb), 0)
+  );
+  pointer-events: none;
+
+  @apply md:hidden;
 }
 
-@screen sm {
-  .tags > span {
-    @apply text-base;
-  }
+.root::before {
+  left: 0;
+}
+
+.root::after {
+  right: 0;
+  transform: rotate(180deg);
+} */
+
+.label {
+  @apply relative flex-none block py-1 sm:py-2 border border-transparent text-sm text-subduedText;
+
+  display: none;
 }
 
 .tags a {
-  @apply relative py-2 px-4 m-2 rounded-full border border-border text-sm;
+  @apply relative flex-none block py-1 sm:py-2 px-3 sm:px-4 rounded-full border border-border text-sm;
   transition: all 0.1s ease-out;
-}
-
-@screen sm {
-  .tags a {
-    @apply text-base;
-  }
+  scroll-snap-align: center;
 }
 
 .tags b {
@@ -30,4 +59,45 @@
 
 .tags a:hover {
   @apply bg-brightRed text-white border-brightRed shadow;
+}
+
+.overflow-indicator {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+  @apply flex items-center justify-center pl-10 pr-2 h-full;
+  background-image: linear-gradient(
+    to left,
+    rgba(var(--color-bgRgb), 1),
+    rgba(var(--color-bgRgb), 1) 38%,
+    rgba(var(--color-bgRgb), 0)
+  );
+  pointer-events: none;
+  @apply md:hidden;
+}
+
+.overflow-indicator--left {
+  left: 0;
+  transform: rotate(180deg);
+}
+
+.overflow-indicator--right {
+  right: 0;
+}
+
+.overflow-indicator svg {
+  width: 0.6rem;
+  height: 0.6rem;
+}
+
+.overflow-indicator path {
+  fill: var(--color-black);
+}
+
+.overflow-indicator--active {
+  opacity: 1;
 }
