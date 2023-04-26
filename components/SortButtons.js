@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import styles from './SortButtons.module.css'
 
-const SortButtons = ({ options, value, onChange = () => {}, ...props }) => {
+const SortButtons = ({ options, value, onChange = () => {} }) => {
   return (
     <div className={styles['sort-buttons']}>
       {options.map((option) => (
