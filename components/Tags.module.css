@@ -1,5 +1,5 @@
 .root {
-  @apply relative w-full;
+  @apply relative w-full mb-4 md:mb-6;
   border-color: rgba(255, 255, 255, 0.038);
 }
 
