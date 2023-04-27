@@ -2,6 +2,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import JustifiedGrid from 'react-justified-grid'
 
+import { isBlank } from 'helpers'
+
+import styles from './SketchplanationsGrid.module.css'
+
 const prismicDocsToImages = (prismicDocs) => {
   try {
     return prismicDocs.map(
@@ -30,6 +34,8 @@ const prismicDocsToImages = (prismicDocs) => {
 
 const SketchplanationsGrid = ({ prismicDocs }) => {
   const images = prismicDocsToImages(prismicDocs)
+
+  if (isBlank(images)) return <div className={styles.noResults}>No sketches found</div>
 
   return (
     <JustifiedGrid images={images} maxRowHeight={550} gutter={20} showIncompleteRow>

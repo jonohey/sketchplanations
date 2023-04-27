@@ -42,7 +42,8 @@
     "react-text-loop": "^2.3.0",
     "react-use-cookie": "^1.4.0",
     "shiitake": "^3.0.2",
-    "stripe": "^11.17.0"
+    "stripe": "^11.17.0",
+    "throttle-debounce": "^5.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

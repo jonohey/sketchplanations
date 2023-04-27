@@ -1,26 +1,38 @@
-.tags {
-  @apply flex flex-wrap justify-center p-6;
+.root {
+  @apply relative w-full;
+  border-color: rgba(255, 255, 255, 0.038);
 }
 
-.tags > span {
-  @apply relative py-2 m-2 rounded-full text-sm;
-}
-
-@screen sm {
-  .tags > span {
-    @apply text-base;
+@media (prefers-color-scheme: light) {
+  .root {
+    border-color: rgba(0, 0, 0, 0.062);
   }
+}
+
+.tags {
+  @apply relative flex md:flex-wrap md:justify-center px-5 gap-2 md:gap-3;
+
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* for smoother scrolling on iOS */
+  scroll-snap-type: x proximity; /* for snap-scrolling */
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.tags::-webkit-scrollbar {
+  display: none;
+}
+
+.label {
+  @apply relative flex-none block py-1 sm:py-2 border border-transparent text-sm text-subduedText;
+
+  display: none;
 }
 
 .tags a {
-  @apply relative py-2 px-4 m-2 rounded-full border border-border text-sm;
+  @apply relative flex-none block py-1 sm:py-2 px-3 sm:px-4 rounded-full border border-border text-sm;
   transition: all 0.1s ease-out;
-}
-
-@screen sm {
-  .tags a {
-    @apply text-base;
-  }
+  scroll-snap-align: center;
 }
 
 .tags b {
@@ -30,4 +42,56 @@
 
 .tags a:hover {
   @apply bg-brightRed text-white border-brightRed shadow;
+}
+
+.overflow-indicator {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+  @apply flex items-center justify-center pl-10 pr-2 h-full;
+  background-image: linear-gradient(
+    to left,
+    rgba(var(--color-bgRgb), 1),
+    rgba(var(--color-bgRgb), 1) 38%,
+    rgba(var(--color-bgRgb), 0)
+  );
+  pointer-events: none;
+  @apply md:hidden;
+}
+
+.overflow-indicator--left {
+  left: 0;
+  transform: rotate(180deg);
+}
+
+.overflow-indicator--right {
+  right: 0;
+}
+
+.overflow-indicator svg {
+  width: 0.6rem;
+  height: 0.6rem;
+  margin-left: 2px;
+}
+
+.overflow-indicator--active {
+  opacity: 1;
+}
+
+.overflow-indicator__button {
+  @apply flex items-center justify-center w-8 h-8 rounded-full hover:bg-bgDarker;
+  transition: all 0.1s ease-out;
+  pointer-events: auto;
+}
+
+.overflow-indicator__button path {
+  @apply fill-black group-hover:fill-red;
+}
+
+.overflow-indicator__button:hover path {
+  @apply fill-black;
 }

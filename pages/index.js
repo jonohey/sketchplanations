@@ -2,78 +2,81 @@ import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
+import LoadingIndicator from 'components/LoadingIndicator'
+import SearchForm from 'components/SearchForm'
+import SketchplanationsGrid from 'components/SketchplanationsGrid'
+import Tags from 'components/Tags'
+import { isBlank } from 'helpers'
+import useSearch from 'hooks/useSearch'
 import { client } from 'services/prismic'
 
 import styles from './index.module.css'
 
 const Sketchplanation = dynamic(() => import('../components/Sketchplanation'))
 
-const Home = ({ sketchplanations }) => {
+const Home = ({ sketchplanations: initialSketchplanations }) => {
   const [page, setPage] = useState(2)
   const [hasMore, setHasMore] = useState(true)
-  const [results, setResults] = useState(sketchplanations.results)
+  const [sketchplanations, setSketchplanations] = useState(initialSketchplanations)
+
+  const { query, setQuery, reset, results, tagResults, busy } = useSearch()
 
   const fetchMore = async () => {
-    const moreSketchplanations = await client.getByType('sketchplanation', {
-      orderings: {
-        field: 'my.sketchplanation.published_at',
-        direction: 'desc',
-      },
-      page,
-      pageSize: 4,
-    })
-    setResults([...results, ...moreSketchplanations.results])
+    const moreSketchplanations = (
+      await client.getByType('sketchplanation', {
+        orderings: {
+          field: 'my.sketchplanation.published_at',
+          direction: 'desc',
+        },
+        page,
+        pageSize: 4,
+      })
+    ).results
+    setSketchplanations([...sketchplanations, ...moreSketchplanations])
     setPage(page + 1)
     if (page === moreSketchplanations.total_pages) setHasMore(false)
   }
 
   return (
-    <div>
+    <>
       <div className={styles.masthead}>
         <p className={styles.slogan}>Explaining the world one sketch at a time</p>
       </div>
-      <InfiniteScroll
-        dataLength={results.length}
-        next={fetchMore}
-        hasMore={hasMore}
-        loader={
-          <div className={styles.loading}>
-            Loading more…{' '}
-            <svg viewBox='0 0 38 38' xmlns='http://www.w3.org/2000/svg'>
-              <g transform='translate(1 1)' strokeWidth='2' fill='none' fillRule='evenodd'>
-                <path d='M36 18c0-9.94-8.06-18-18-18'>
-                  <animateTransform
-                    attributeName='transform'
-                    type='rotate'
-                    from='0 18 18'
-                    to='360 18 18'
-                    dur='1s'
-                    repeatCount='indefinite'
-                  />
-                </path>
-              </g>
-            </svg>
+      <SearchForm isBusy={busy} value={query} onChange={setQuery} onReset={reset} />
+      {isBlank(query) && (
+        <InfiniteScroll
+          dataLength={sketchplanations.length}
+          next={fetchMore}
+          hasMore={hasMore}
+          loader={
+            <div className={styles.loading}>
+              Loading more… <LoadingIndicator />
+            </div>
+          }
+        >
+          <div className={styles.sketchplanations}>
+            {sketchplanations.map((sketchplanation, index) => (
+              <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} priority={index === 0} />
+            ))}
           </div>
-        }
-      >
-        <div className={styles.sketchplanations}>
-          {results.map((sketchplanation, index) => (
-            <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} priority={index === 0} />
-          ))}
-        </div>
-      </InfiniteScroll>
-    </div>
+        </InfiniteScroll>
+      )}
+      {tagResults && <Tags tags={tagResults} />}
+      {results && <SketchplanationsGrid prismicDocs={results} />}
+    </>
   )
 }
 
 Home.getInitialProps = async () => {
-  const sketchplanations = await client.getByType('sketchplanation', {
-    orderings: {
-      field: 'my.sketchplanation.published_at',
-      direction: 'desc',
-    },
-    pageSize: 4,
-  })
+  const sketchplanations = (
+    await client.getByType('sketchplanation', {
+      orderings: {
+        field: 'my.sketchplanation.published_at',
+        direction: 'desc',
+      },
+      pageSize: 4,
+    })
+  ).results
 
   return { sketchplanations }
 }

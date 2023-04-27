@@ -10,10 +10,9 @@ const SearchForm = ({ value, isBusy = false, onChange = () => {}, onReset = () =
       <input
         className={styles.input}
         type='text'
-        placeholder='Type to search…'
+        placeholder='Search…'
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        autoFocus={true}
       />
       {isBusy && (
         <div className={styles['loading-indicator']}>
