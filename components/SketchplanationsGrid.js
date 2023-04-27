@@ -38,26 +38,28 @@ const SketchplanationsGrid = ({ prismicDocs }) => {
   if (isBlank(images)) return <div className={styles.noResults}>No sketches found</div>
 
   return (
-    <div className={styles.root}>
-      <JustifiedGrid images={images} maxRowHeight={550} gutter={20} showIncompleteRow={true}>
-        {(processedImages) => {
-          return processedImages.map((image, index) => {
-            const { src, width, height, left, top, originalData } = image
-            return (
-              <Link key={index} href={`/${originalData.uid}`} className='absolute bg-paper' style={{ left, top }}>
-                <Image
-                  src={src}
-                  width={width}
-                  height={height}
-                  alt={originalData.alt}
-                  sizes='(min-width: 2750px) calc(20vw + 20 * 4), (min-width: 2200px) 25vw, (min-width: 1650px) 33vw, (min-width: 1100px) 50vw, 100vw'
-                />
-              </Link>
-            )
-          })
-        }}
-      </JustifiedGrid>
-    </div>
+    <JustifiedGrid images={images} maxRowHeight={550} gutter={20} showIncompleteRow>
+      {(processedImages) => {
+        return (
+          <>
+            {processedImages.map((image, index) => {
+              const { src, width, height, left, top, originalData } = image
+              return (
+                <Link key={index} href={`/${originalData.uid}`} className='absolute bg-paper' style={{ left, top }}>
+                  <Image
+                    src={src}
+                    width={width}
+                    height={height}
+                    alt={originalData.alt}
+                    sizes='(min-width: 2750px) calc(20vw + 20 * 4), (min-width: 2200px) 25vw, (min-width: 1650px) 33vw, (min-width: 1100px) 50vw, 100vw'
+                  />
+                </Link>
+              )
+            })}
+          </>
+        )
+      }}
+    </JustifiedGrid>
   )
 }
 
