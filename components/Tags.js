@@ -7,6 +7,24 @@ import { isBlank } from 'helpers'
 
 import styles from './Tags.module.css'
 
+const OverflowIndicator = ({ direction, isScrollable, onClick }) => {
+  const className = classNames(
+    styles['overflow-indicator'],
+    styles[`overflow-indicator--${direction}`],
+    isScrollable && styles['overflow-indicator--active']
+  )
+
+  return (
+    <div className={className}>
+      <button className={styles['overflow-indicator__button']} onClick={onClick}>
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fillRule='evenodd' clipRule='evenodd'>
+          <path d='M4 .755 18.374 12 4 23.219l.619.781L20 12 4.609 0 4 .755z' />
+        </svg>
+      </button>
+    </div>
+  )
+}
+
 const Tags = ({ tags }) => {
   const containerRef = useRef(null)
   const [isScrollableLeft, setIsScrollableLeft] = useState(false)
@@ -48,28 +66,16 @@ const Tags = ({ tags }) => {
           </Link>
         ))}
       </div>
-      <div
-        className={classNames(
-          styles['overflow-indicator'],
-          styles['overflow-indicator--left'],
-          isScrollableLeft && styles['overflow-indicator--active']
-        )}
-      >
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fillRule='evenodd' clipRule='evenodd'>
-          <path d='M4 .755 18.374 12 4 23.219l.619.781L20 12 4.609 0 4 .755z' />
-        </svg>
-      </div>
-      <div
-        className={classNames(
-          styles['overflow-indicator'],
-          styles['overflow-indicator--right'],
-          isScrollableRight && styles['overflow-indicator--active']
-        )}
-      >
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fillRule='evenodd' clipRule='evenodd'>
-          <path d='M4 .755 18.374 12 4 23.219l.619.781L20 12 4.609 0 4 .755z' />
-        </svg>
-      </div>
+      <OverflowIndicator
+        direction='left'
+        isScrollable={isScrollableLeft}
+        onClick={() => (containerRef.current.scrollLeft -= 100)}
+      />
+      <OverflowIndicator
+        direction='right'
+        isScrollable={isScrollableRight}
+        onClick={() => (containerRef.current.scrollLeft += 100)}
+      />
     </div>
   )
 }

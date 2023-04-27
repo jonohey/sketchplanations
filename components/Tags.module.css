@@ -1,5 +1,5 @@
 .root {
-  @apply relative w-full border-y md:border-0 py-3 md:py-0;
+  @apply relative w-full;
   border-color: rgba(255, 255, 255, 0.038);
 }
 
@@ -16,39 +16,12 @@
   -webkit-overflow-scrolling: touch; /* for smoother scrolling on iOS */
   scroll-snap-type: x proximity; /* for snap-scrolling */
   scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 
 .tags::-webkit-scrollbar {
   display: none;
 }
-
-/* .root::before,
-.root::after {
-  content: '';
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  bottom: 0;
-  width: 1rem;
-  background-image: linear-gradient(
-    to right,
-    rgba(var(--color-bgRgb), 1),
-    rgba(var(--color-bgRgb), 1) 50%,
-    rgba(var(--color-bgRgb), 0)
-  );
-  pointer-events: none;
-
-  @apply md:hidden;
-}
-
-.root::before {
-  left: 0;
-}
-
-.root::after {
-  right: 0;
-  transform: rotate(180deg);
-} */
 
 .label {
   @apply relative flex-none block py-1 sm:py-2 border border-transparent text-sm text-subduedText;
@@ -102,12 +75,23 @@
 .overflow-indicator svg {
   width: 0.6rem;
   height: 0.6rem;
-}
-
-.overflow-indicator path {
-  fill: var(--color-black);
+  margin-left: 2px;
 }
 
 .overflow-indicator--active {
   opacity: 1;
+}
+
+.overflow-indicator__button {
+  @apply flex items-center justify-center w-8 h-8 rounded-full hover:bg-bgDarker;
+  transition: all 0.1s ease-out;
+  pointer-events: auto;
+}
+
+.overflow-indicator__button path {
+  @apply fill-black group-hover:fill-red;
+}
+
+.overflow-indicator__button:hover path {
+  @apply fill-black;
 }
