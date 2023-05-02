@@ -75,7 +75,7 @@ const SketchplanationPage = ({
         ) : (
           <span />
         )}
-        <Link href={`/${randomHandle}`} className={!randomHandle && 'hidden'}>
+        <Link href={`/${randomHandle}`} className={!randomHandle && 'invisible'}>
           Random
         </Link>
         {previousSketchplanation ? (
