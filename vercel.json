@@ -1,7 +1,7 @@
 {
   "crons": [
     {
-      "path": "/api/pullPrismic?secret=d7e02a7917001f0452f4808644dabc08b6261d1a9d9f3a651aab76f05c81243828f6cbe14b7742ca5366baaaa9b746be5752af36530a9ab68f83c6e0b249cb8c",
+      "path": "/api/prismicToNeon?secret=d7e02a7917001f0452f4808644dabc08b6261d1a9d9f3a651aab76f05c81243828f6cbe14b7742ca5366baaaa9b746be5752af36530a9ab68f83c6e0b249cb8c",
       "schedule": "0 0 * * 1"
     }
   ]

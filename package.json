@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "node utils/generate_sitemap.js && node utils/generate_rss.js",
     "dev": "next dev",
-    "prebuild": "node utils/generate_sitemap.js && node utils/generate_rss.js",
     "build": "next build",
     "start": "next start"
   },
