@@ -78,4 +78,4 @@ async function generateRSS() {
   fs.writeFileSync('public/rss', xml)
 }
 
-generateRSS()
+export default generateRSS
