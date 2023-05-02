@@ -1,14 +1,7 @@
-import postgres from 'postgres'
-
-const sql = postgres({
-  ssl: {
-    rejectUnauthorized: true,
-    require: true,
-  },
-})
+import kv from '@vercel/kv'
 
 export default async (req, res) => {
-  const result = await sql`SELECT * FROM sketchplanations ORDER BY RANDOM() LIMIT 1`
+  const handle = await kv.srandmember('sketchplanations')
 
-  res.redirect(`/${result[0].handle}`)
+  res.status(200).json({ handle })
 }

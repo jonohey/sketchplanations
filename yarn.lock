@@ -879,6 +879,13 @@
     "@typescript-eslint/types" "5.57.0"
     eslint-visitor-keys "^3.3.0"
 
+"@upstash/redis@1.20.2":
+  version "1.20.2"
+  resolved "https://registry.yarnpkg.com/@upstash/redis/-/redis-1.20.2.tgz#f797915c90054764b26d2289f5da5dd4b68d8480"
+  integrity sha512-9QS/SypDxeeh672H7dEEmuYOX5TtPYnaDLlhxWJEPd8LzcEQ6hohwDJuojpqGkvvvrK58mlWOkN1GrMxbXPTeQ==
+  dependencies:
+    isomorphic-fetch "^3.0.0"
+
 "@vercel/build-utils@2.6.1-canary.0":
   version "2.6.1-canary.0"
   resolved "https://registry.yarnpkg.com/@vercel/build-utils/-/build-utils-2.6.1-canary.0.tgz#ba549e7817c5a13e9ce271f88db3c3b9432d0d8b"
@@ -888,6 +895,13 @@
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/@vercel/go/-/go-1.1.6.tgz#45ac3a6bd98a15b8bf1028b8c141a51fd971ac15"
   integrity sha512-swA2crS08fkPmw4UkR9yjmoL8FOCzuNHLFDqj8oM1V9ni610ibJ7Xk57jI8uyS7bTecQVh8VUxihb+SF0GT+aw==
+
+"@vercel/kv@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@vercel/kv/-/kv-0.1.1.tgz#e74a4c25cc5ab8b522754224a82798362b684007"
+  integrity sha512-wkhR/4okC3ZjAG66SPbSP31ToRYg4SFohl0P8WvuIjNl5EJGxdjJJ8l/yIJ2VMvxt0mMsEa442haS3GBJkRXBQ==
+  dependencies:
+    "@upstash/redis" "1.20.2"
 
 "@vercel/node@1.8.5":
   version "1.8.5"
@@ -3032,6 +3046,14 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
 
+isomorphic-fetch@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/isomorphic-fetch/-/isomorphic-fetch-3.0.0.tgz#0267b005049046d2421207215d45d6a262b8b8b4"
+  integrity sha512-qvUtwJ3j6qwsF3jLxkZ72qCgjMysPzDfeV240JHiGZsANBYd+EEuu35v7dfrJ9Up0Ak07D7GGSkGhCHTqg/5wA==
+  dependencies:
+    node-fetch "^2.6.1"
+    whatwg-fetch "^3.4.1"
+
 isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
@@ -3419,6 +3441,13 @@ nextjs-progressbar@^0.0.16:
     "@types/nprogress" "^0.2.0"
     nprogress "^0.2.0"
     prop-types "^15.8.1"
+
+node-fetch@^2.6.1:
+  version "2.6.9"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.9.tgz#7c7f744b5cc6eb5fd404e0c7a9fec630a55657e6"
+  integrity sha512-DJm/CJkZkRjKKj4Zi4BsKVZh3ValV5IR5s7LVZnW+6YMh0W1BfNA8XSs6DLMGYlId5F3KnA70uu2qepcR08Qqg==
+  dependencies:
+    whatwg-url "^5.0.0"
 
 node-mailjet@^6.0.2:
   version "6.0.2"
@@ -4907,6 +4936,11 @@ tough-cookie@~2.5.0:
     psl "^1.1.28"
     punycode "^2.1.1"
 
+tr46@~0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
+  integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
+
 ts-interface-checker@^0.1.9:
   version "0.1.13"
   resolved "https://registry.yarnpkg.com/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz#784fd3d679722bc103b1b4b8030bcddb5db2a699"
@@ -5107,6 +5141,11 @@ watchpack@^2.4.0:
     glob-to-regexp "^0.4.1"
     graceful-fs "^4.1.2"
 
+webidl-conversions@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
+  integrity sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==
+
 webpack-sources@^3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-3.2.3.tgz#2d4daab8451fd4b240cc27055ff6a0c2ccea0cde"
@@ -5141,6 +5180,19 @@ webpack@^5.77.0:
     terser-webpack-plugin "^5.1.3"
     watchpack "^2.4.0"
     webpack-sources "^3.2.3"
+
+whatwg-fetch@^3.4.1:
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.6.2.tgz#dced24f37f2624ed0281725d51d0e2e3fe677f8c"
+  integrity sha512-bJlen0FcuU/0EMLrdbJ7zOnW6ITZLrZMIarMUVmdKtsGvZna8vxKYaexICWPfZ8qwf9fzNq+UEIZrnSaApt6RA==
+
+whatwg-url@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/whatwg-url/-/whatwg-url-5.0.0.tgz#966454e8765462e37644d3626f6742ce8b70965d"
+  integrity sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==
+  dependencies:
+    tr46 "~0.0.3"
+    webidl-conversions "^3.0.0"
 
 which-boxed-primitive@^1.0.2:
   version "1.0.2"
