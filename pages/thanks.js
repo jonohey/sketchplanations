@@ -1,13 +1,25 @@
+import Head from 'next/head'
+
 import { Page } from 'components'
 import { client } from 'services/prismic'
 
-const Privacy = ({ document }) => {
-  return <Page document={document} />
+const Thanks = ({ document }) => {
+  return (
+    <>
+      <Head>
+        <meta
+          name='description'
+          content='Sketchplanations exists thanks to the generous patrons and followers who support me making them'
+        />
+      </Head>
+      <Page document={document} />
+    </>
+  )
 }
 
-Privacy.getInitialProps = async () => {
+Thanks.getInitialProps = async () => {
   const document = await client.getSingle('thanks')
   return { document }
 }
 
-export default Privacy
+export default Thanks
