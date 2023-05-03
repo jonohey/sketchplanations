@@ -1,10 +1,9 @@
-import { Predicates } from '@prismicio/client'
 import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Link from 'next/link'
 import { RichText } from 'prismic-reactjs'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { pageTitle } from 'helpers'
 import { client } from 'services/prismic'
@@ -24,6 +23,22 @@ const SketchplanationPage = ({
     data: { image, title, body },
     uid,
   } = sketchplanation
+
+  const [randomHandle, setRandomHandle] = useState(null)
+
+  useEffect(() => {
+    const fetchRandomHandle = async () => {
+      try {
+        const res = await fetch('/api/random')
+        const { handle } = await res.json()
+        setRandomHandle(handle)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    fetchRandomHandle()
+  }, [uid])
 
   return (
     <>
@@ -60,7 +75,9 @@ const SketchplanationPage = ({
         ) : (
           <span />
         )}
-        <Link href='/api/random'>Random</Link>
+        <Link href={`/${randomHandle}`} className={!randomHandle && 'invisible'}>
+          Random
+        </Link>
         {previousSketchplanation ? (
           <Link
             href={`/${previousSketchplanation?.uid}`}
@@ -110,10 +127,10 @@ const SketchplanationPage = ({
 export async function getStaticProps({ params: { uid } }) {
   const sketchplanation = await client.getByUID('sketchplanation', uid)
 
-  const similarSketchplanations = await client.get({
-    predicates: [Predicates.at('document.type', 'sketchplanation'), Predicates.similar(sketchplanation.id, 3)],
-    pageSize: 6,
-  })
+  // const similarSketchplanations = await client.get({
+  //   predicates: [Predicates.at('document.type', 'sketchplanation'), Predicates.similar(sketchplanation.id, 3)],
+  //   pageSize: 6,
+  // })
 
   const previousSketchplanation =
     (
@@ -138,7 +155,7 @@ export async function getStaticProps({ params: { uid } }) {
       })
     )?.results?.[0] || null
 
-  return { props: { sketchplanation, previousSketchplanation, nextSketchplanation, similarSketchplanations } }
+  return { props: { sketchplanation, previousSketchplanation, nextSketchplanation } }
 }
 
 export async function getStaticPaths() {

@@ -1,7 +1,8 @@
-const { create } = require('xmlbuilder2')
-const fs = require('fs')
-const PrismicDOM = require('prismic-dom')
-const { client } = require('./helpers')
+import fs from 'fs'
+import PrismicDOM from 'prismic-dom'
+import { create } from 'xmlbuilder2'
+
+import { client } from './helpers.mjs'
 
 const pubDate = (date) => {
   date = new Date(date)
@@ -77,4 +78,4 @@ async function generateRSS() {
   fs.writeFileSync('public/rss', xml)
 }
 
-generateRSS()
+export default generateRSS

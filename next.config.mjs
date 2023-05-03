@@ -1,4 +1,8 @@
-module.exports = {
+import buildRss from './utils/buildRss.mjs'
+import buildSitemap from './utils/buildSitemap.mjs'
+import prismicToKV from './utils/prismicToKV.mjs'
+
+const nextConfig = {
   images: {
     domains: ['images.prismic.io'],
     loader: 'custom',
@@ -3716,4 +3720,12 @@ module.exports = {
       },
     ]
   },
+}
+
+export default async () => {
+  await buildRss()
+  await buildSitemap()
+  await prismicToKV()
+
+  return nextConfig
 }

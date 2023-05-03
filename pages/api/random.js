@@ -1,15 +1,7 @@
-import fs from 'fs'
-import path from 'path'
-
-const randomArrayItem = (array) => array[Math.floor(Math.random() * array.length)]
-
-const getUids = () => {
-  const filepath = path.join(process.cwd(), 'data/uids.json')
-  return fs.readFileSync(filepath)
-}
+import kv from '@vercel/kv'
 
 export default async (req, res) => {
-  const uids = JSON.parse(getUids())
+  const handle = await kv.srandmember('sketchplanations')
 
-  res.redirect(`/${randomArrayItem(uids)}`)
+  res.status(200).json({ handle })
 }

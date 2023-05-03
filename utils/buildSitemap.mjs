@@ -1,7 +1,8 @@
-const { create } = require('xmlbuilder2')
-const fs = require('fs')
-const globby = require('globby')
-const { client } = require('./helpers')
+import fs from 'fs'
+import globby from 'globby'
+import { create } from 'xmlbuilder2'
+
+import { client } from './helpers.mjs'
 
 async function generateSitemap() {
   const sketchplanations = await client.getAllByType('sketchplanation', {
@@ -82,4 +83,4 @@ async function generateSitemap() {
   fs.writeFileSync('public/sitemap.xml', xml)
 }
 
-generateSitemap()
+export default generateSitemap
