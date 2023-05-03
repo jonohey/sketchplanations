@@ -4,6 +4,7 @@ import Link from 'next/link'
 import useCookie from 'react-use-cookie'
 
 import SortButtons from 'components/SortButtons'
+import { pageTitle } from 'helpers'
 import { client } from 'services/prismic'
 
 import styles from './tags.module.css'
@@ -16,6 +17,7 @@ const Tags = ({ tagsByName, tagsByCount }) => {
   return (
     <>
       <Head>
+        <title>{pageTitle('Tags')}</title>
         <meta name='description' content='The most common topics and themes of Sketchplanations' />
       </Head>
       <div className='pt-6 px-6 max-w-md mx-auto'>
