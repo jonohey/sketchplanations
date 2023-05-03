@@ -1,6 +1,5 @@
 import { sort } from 'fast-sort'
 import dynamic from 'next/dynamic'
-import Image from 'next/image'
 import Link from 'next/link'
 import { RichText } from 'prismic-reactjs'
 import React, { useState } from 'react'
