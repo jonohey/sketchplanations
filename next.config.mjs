@@ -1,7 +1,6 @@
 import buildRss from './utils/buildRss.mjs'
 import buildSitemap from './utils/buildSitemap.mjs'
 import prismicToKV from './utils/prismicToKV.mjs'
-import prismicToNeon from './utils/prismicToNeon.mjs'
 
 const nextConfig = {
   images: {
@@ -3726,7 +3725,6 @@ const nextConfig = {
 export default async () => {
   await buildRss()
   await buildSitemap()
-  // await prismicToNeon()
   await prismicToKV()
 
   return nextConfig
