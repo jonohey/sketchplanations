@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import Head from 'next/head'
 import React, { useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
@@ -39,6 +40,12 @@ const Home = ({ sketchplanations: initialSketchplanations }) => {
 
   return (
     <>
+      <Head>
+        <meta
+          name='description'
+          content='Explaining the world one sketch at a time — each sketch explains an idea or concept. Explore, search and share. Start here.'
+        />
+      </Head>
       <div className={styles.masthead}>
         <p className={styles.slogan}>Explaining the world one sketch at a time</p>
       </div>

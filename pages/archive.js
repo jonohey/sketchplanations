@@ -1,8 +1,17 @@
+import Head from 'next/head'
+
 import SketchplanationsGrid from 'components/SketchplanationsGrid'
 import { client } from 'services/prismic'
 
 const Archive = ({ sketchplanations }) => {
-  return <SketchplanationsGrid prismicDocs={sketchplanations} />
+  return (
+    <>
+      <Head>
+        <meta name='description' content='The full scrollable archive of Sketchplanations. Happy scrolling!' />
+      </Head>
+      <SketchplanationsGrid prismicDocs={sketchplanations} />
+    </>
+  )
 }
 
 export async function getStaticProps() {

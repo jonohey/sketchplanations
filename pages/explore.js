@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import Link from 'next/link'
 
 import SearchForm from 'components/SearchForm'
@@ -12,24 +13,32 @@ const Explore = ({ initialSketchplanations }) => {
   const { query, setQuery, reset, results, tagResults, busy } = useSearch()
 
   return (
-    <div className={styles.root}>
-      <SearchForm isBusy={busy} value={query} onChange={setQuery} onReset={reset} />
-      <div className={styles.links}>
-        <Link href='/api/random' className={styles.link}>
-          Random
-        </Link>
-        <Link href='/tags' className={styles.link}>
-          Explore by tag
-        </Link>
-        <Link href='/archive' className={styles.link}>
-          Archive
-        </Link>
+    <>
+      <Head>
+        <meta
+          name='description'
+          content='Explore the archive of 800+ sketches. Search, browse, or explore popular topics'
+        />
+      </Head>
+      <div className={styles.root}>
+        <SearchForm isBusy={busy} value={query} onChange={setQuery} onReset={reset} />
+        <div className={styles.links}>
+          <Link href='/api/random' className={styles.link}>
+            Random
+          </Link>
+          <Link href='/tags' className={styles.link}>
+            Explore by tag
+          </Link>
+          <Link href='/archive' className={styles.link}>
+            Archive
+          </Link>
+        </div>
+        {tagResults && <Tags tags={tagResults} />}
+        <div className={styles.gallery}>
+          <SketchplanationsGrid prismicDocs={results || initialSketchplanations} />
+        </div>
       </div>
-      {tagResults && <Tags tags={tagResults} />}
-      <div className={styles.gallery}>
-        <SketchplanationsGrid prismicDocs={results || initialSketchplanations} />
-      </div>
-    </div>
+    </>
   )
 }
 

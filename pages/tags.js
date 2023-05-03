@@ -1,4 +1,5 @@
 import { sort } from 'fast-sort'
+import Head from 'next/head'
 import Link from 'next/link'
 import useCookie from 'react-use-cookie'
 
@@ -14,6 +15,9 @@ const Tags = ({ tagsByName, tagsByCount }) => {
 
   return (
     <>
+      <Head>
+        <meta name='description' content='The most common topics and themes of Sketchplanations' />
+      </Head>
       <div className='pt-6 px-6 max-w-md mx-auto'>
         <SortButtons
           value={sort}
@@ -24,7 +28,6 @@ const Tags = ({ tagsByName, tagsByCount }) => {
           ]}
         />
       </div>
-
       {sort === 'name' && (
         <div className={styles.tags}>
           {tagsByName.map(({ tag, slug, count }) => (
