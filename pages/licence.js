@@ -1,13 +1,23 @@
+import Head from 'next/head'
+
 import { Page } from 'components'
+import { pageTitle } from 'helpers'
 import { client } from 'services/prismic'
 
-const Privacy = ({ document }) => {
-  return <Page document={document} />
+const Licence = ({ document }) => {
+  return (
+    <>
+      <Head>
+        <title>{pageTitle('Licence')}</title>
+      </Head>
+      <Page document={document} />
+    </>
+  )
 }
 
-Privacy.getInitialProps = async () => {
+Licence.getInitialProps = async () => {
   const document = await client.getSingle('licence')
   return { document }
 }
 
-export default Privacy
+export default Licence

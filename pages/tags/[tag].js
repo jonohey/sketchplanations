@@ -1,8 +1,10 @@
 import { Predicates } from '@prismicio/client'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import { TextHeader } from 'components'
 import SketchplanationsGrid from 'components/SketchplanationsGrid'
+import { pageTitle } from 'helpers'
 import { client } from 'services/prismic'
 
 import styles from './[tag].module.css'
@@ -15,12 +17,17 @@ const Tag = ({ tag, sketchplanations }) => {
   }
 
   return (
-    <div className={styles.root}>
-      <TextHeader className={styles.header}>
-        Sketchplanations tagged with <b>{tag.slugs[0]}</b>
-      </TextHeader>
-      <SketchplanationsGrid prismicDocs={sketchplanations} />
-    </div>
+    <>
+      <Head>
+        <title>{pageTitle(`Tag: ${tag}`)}</title>
+      </Head>
+      <div className={styles.root}>
+        <TextHeader className={styles.header}>
+          Sketchplanations tagged with <b>{tag}</b>
+        </TextHeader>
+        <SketchplanationsGrid prismicDocs={sketchplanations} />
+      </div>
+    </>
   )
 }
 
@@ -49,6 +56,8 @@ export async function getStaticProps({ params: { tag } }) {
 
   const tagDoc = tagDocs?.results[0]
 
+  if (!tagDoc) return { notFound: true }
+
   const sketchplanations = await client.dangerouslyGetAll({
     predicates: [
       Predicates.at('document.type', 'sketchplanation'),
@@ -60,7 +69,7 @@ export async function getStaticProps({ params: { tag } }) {
     },
   })
 
-  return { props: { tag: tagDoc, sketchplanations } }
+  return { props: { tag: tagDoc.slugs[0], sketchplanations } }
 }
 
 export default Tag

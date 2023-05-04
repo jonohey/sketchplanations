@@ -1,6 +1,8 @@
+import Head from 'next/head'
 import { useState } from 'react'
 
 import { Page } from 'components'
+import { pageTitle } from 'helpers'
 import { client } from 'services/prismic'
 
 import styles from './subscribe.module.css'
@@ -32,25 +34,30 @@ const Subscribe = ({ subscribeDocument, subscribedDocument }) => {
   if (submitted) return <Page document={subscribedDocument} />
 
   return (
-    <Page document={subscribeDocument}>
-      <form onSubmit={handleSubmit}>
-        <input
-          className={styles.input}
-          type='email'
-          required
-          placeholder='Email address'
-          autoFocus
-          autoComplete='email'
-          pattern='.+@.+'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={processing}
-        />
-        <button type='submit' className={styles.button}>
-          {processing ? 'Subscribing…' : 'Subscribe'}
-        </button>
-      </form>
-    </Page>
+    <>
+      <Head>
+        <title>{pageTitle('Subscribe')}</title>
+      </Head>
+      <Page document={subscribeDocument}>
+        <form onSubmit={handleSubmit}>
+          <input
+            className={styles.input}
+            type='email'
+            required
+            placeholder='Email address'
+            autoFocus
+            autoComplete='email'
+            pattern='.+@.+'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={processing}
+          />
+          <button type='submit' className={styles.button}>
+            {processing ? 'Subscribing…' : 'Subscribe'}
+          </button>
+        </form>
+      </Page>
+    </>
   )
 }
 

@@ -1,12 +1,14 @@
 import Head from 'next/head'
 
 import SketchplanationsGrid from 'components/SketchplanationsGrid'
+import { pageTitle } from 'helpers'
 import { client } from 'services/prismic'
 
 const Archive = ({ sketchplanations }) => {
   return (
     <>
       <Head>
+        <title>{pageTitle('Archive')}</title>
         <meta name='description' content='The full scrollable archive of Sketchplanations. Happy scrolling!' />
       </Head>
       <SketchplanationsGrid prismicDocs={sketchplanations} />

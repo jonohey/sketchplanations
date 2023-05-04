@@ -1,8 +1,18 @@
+import Head from 'next/head'
+
 import { Page } from 'components'
+import { pageTitle } from 'helpers'
 import { client } from 'services/prismic'
 
 const Subscribed = ({ document }) => {
-  return <Page document={document} />
+  return (
+    <>
+      <Head>
+        <title>{pageTitle('Subscribed')}</title>
+      </Head>
+      <Page document={document} />
+    </>
+  )
 }
 
 Subscribed.getInitialProps = async () => {

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import SearchForm from 'components/SearchForm'
 import SketchplanationsGrid from 'components/SketchplanationsGrid'
 import Tags from 'components/Tags'
+import { pageTitle } from 'helpers'
 import useSearch from 'hooks/useSearch'
 import { client } from 'services/prismic'
 
@@ -15,6 +16,7 @@ const Explore = ({ initialSketchplanations }) => {
   return (
     <>
       <Head>
+        <title>{pageTitle('Explore')}</title>
         <meta
           name='description'
           content='Explore the archive of 800+ sketches. Search, browse, or explore popular topics'
