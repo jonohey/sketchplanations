@@ -1,12 +1,5 @@
 .share-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  margin: 1.5rem -0.25rem -0.25rem;
-}
-
-.share-buttons > * {
-  margin: 0.25rem;
+  @apply w-full flex flex-wrap gap-4 mt-8;
 }
 
 .share-button__link {

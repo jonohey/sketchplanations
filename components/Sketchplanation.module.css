@@ -62,17 +62,16 @@
 }
 
 .tags {
-  @apply flex flex-wrap -mx-2 mt-10 mb-10;
+  @apply flex flex-wrap mt-10 mb-10 gap-4;
 }
 
 .tags a {
-  @apply inline-block mx-2 text-sm whitespace-nowrap;
+  @apply block py-2 px-4 rounded-full border border-border text-sm;
   transition: all 0.1s ease-out;
-  color: var(--color-subduedText);
 }
 
 .tags a:hover {
-  color: var(--color-blue);
+  @apply bg-blue border-blue;
 }
 
 .after-post {
