@@ -41,7 +41,7 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
           src={image.url}
           width={image.dimensions.width}
           height={image.dimensions.height}
-          sizes='(min-width: 648px) 600px, (min-width: 640px) calc(100vw - 3rem), 100w'
+          sizes='(max-width: 600px) calc(50vw - 80%) , (min-width: 600px) calc(50vw - 62%) , 140px'
           alt={image.alt || `${title} - Sketchplanations`}
         />
       </div>
