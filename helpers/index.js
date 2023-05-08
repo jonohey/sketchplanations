@@ -19,13 +19,26 @@ const fulltextDocumentSearch = async (documentType, query) => {
 export const searchSketchplanations = async (query) => {
   if (!query || query === '') return []
 
-  const { results } = await client.get({
+  const { results: titleResults } = await client.get({
     predicates: [
       Predicates.at('document.type', 'sketchplanation'),
       Predicates.fulltext('my.sketchplanation.title', query),
     ],
     pageSize: 100,
   })
+
+  const documentResults = await fulltextDocumentSearch('sketchplanation', query)
+
+  // Combine the results and remove duplicates
+  const results = [...titleResults, ...documentResults].reduce((acc, result) => {
+    const existingResult = acc.find((r) => r.id === result.id)
+
+    if (!existingResult) {
+      acc.push(result)
+    }
+
+    return acc
+  }, [])
 
   return results
 }
