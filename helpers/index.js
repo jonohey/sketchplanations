@@ -1,11 +1,11 @@
-import { either, isEmpty, isNil, complement } from 'ramda'
 import { Predicates } from '@prismicio/client'
+import { complement, either, isEmpty, isNil } from 'ramda'
 
 import { client } from 'services/prismic'
 
 const defaultPageTitle = 'Sketchplanations - A weekly explanation in a sketch'
 
-const search = async (documentType, query) => {
+const fulltextDocumentSearch = async (documentType, query) => {
   if (!query || query === '') return []
 
   const { results } = await client.get({
@@ -16,9 +16,34 @@ const search = async (documentType, query) => {
   return results
 }
 
-export const searchSketchplanations = async (query) => await search('sketchplanation', query)
+export const searchSketchplanations = async (query) => {
+  if (!query || query === '') return []
 
-export const searchTags = async (query) => await search('tag', query)
+  const { results: titleResults } = await client.get({
+    predicates: [
+      Predicates.at('document.type', 'sketchplanation'),
+      Predicates.fulltext('my.sketchplanation.title', query),
+    ],
+    pageSize: 100,
+  })
+
+  const documentResults = await fulltextDocumentSearch('sketchplanation', query)
+
+  // Combine the results and remove duplicates
+  const results = [...titleResults, ...documentResults].reduce((acc, result) => {
+    const existingResult = acc.find((r) => r.id === result.id)
+
+    if (!existingResult) {
+      acc.push(result)
+    }
+
+    return acc
+  }, [])
+
+  return results
+}
+
+export const searchTags = async (query) => await fulltextDocumentSearch('tag', query)
 
 export const pageTitle = (title) => {
   if (!title) return defaultPageTitle
