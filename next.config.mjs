@@ -28,6 +28,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/podcast',
+        destination: 'https://tr.ee/BU4_BvCVi-',
+        permanent: false,
+      },
+      {
         source: '/styleguide',
         destination: 'https://company-208276.frontify.com/d/iATaeFQL51Lv',
         permanent: false,
