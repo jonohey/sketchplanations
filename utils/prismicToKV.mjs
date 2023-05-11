@@ -6,6 +6,8 @@ const apiEndpoint = 'https://sketchplanations.prismic.io/api/v2'
 const client = createClient(apiEndpoint)
 
 const prismicToKV = async () => {
+  if (process.env.VERCEL !== '1') return
+
   const docs = await client.getAllByType('sketchplanation', {
     fetch: ['sketchplanation.uid'],
   })
