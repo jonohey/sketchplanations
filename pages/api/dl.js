@@ -1,5 +1,5 @@
-const request = require('request')
-const { client } = require('utils/helpers')
+import request from 'request'
+import { client } from 'utils/helpers'
 
 export default async (req, res) => {
   const uid = req.query.uid
