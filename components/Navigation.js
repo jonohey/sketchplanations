@@ -20,23 +20,23 @@ const Navigation = () => {
 
   return (
     <nav className={styles.root}>
-      <Link href='/tags' className={styles.item}>
-        <RoughNotation show={isSelected('/tags')} {...roughNotiationProps}>
-          Tags
-        </RoughNotation>
-      </Link>
+      <span className={styles['gt-sm-screen']}>
+        <Link href='/tags' className={styles.item}>
+          <RoughNotation show={isSelected('/tags')} {...roughNotiationProps}>
+            Tags
+          </RoughNotation>
+        </Link>
+      </span>
       <Link href='/explore' className={styles.item}>
         <RoughNotation show={isSelected('/explore')} {...roughNotiationProps}>
           Explore
         </RoughNotation>
       </Link>
-      <span className={styles['gt-sm-screen']}>
-        <Link href='/subscribe' className={styles.item}>
-          <RoughNotation show={isSelected('/subscribe')} {...roughNotiationProps}>
-            Subscribe
-          </RoughNotation>
-        </Link>
-      </span>
+      <Link href='/subscribe' className={styles.item}>
+        <RoughNotation show={isSelected('/subscribe')} {...roughNotiationProps}>
+          Subscribe
+        </RoughNotation>
+      </Link>
       <Link href='/about' className={styles.item}>
         <RoughNotation show={isSelected('/about')} {...roughNotiationProps}>
           About
