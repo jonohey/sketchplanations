@@ -108,6 +108,10 @@ const SketchplanationPage = ({
         images={[
           {
             contentUrl: `${image.url}&w=1200`,
+            thumbnail: {
+              type: 'ImageObject',
+              url: `${image.url}&w=200`
+            },
             creator: {
               '@type': 'Person',
               name: 'Jono Hey',
@@ -118,6 +122,7 @@ const SketchplanationPage = ({
             acquireLicensePage: 'https://sketchplanations.com/licence',
             name: title,
             caption: image.alt,
+            description: RichText.asText(body),
             isFamilyFriendly: true
           },
         ]}
