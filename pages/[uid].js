@@ -124,6 +124,7 @@ const SketchplanationPage = ({
             caption: image.alt,
             description: RichText.asText(body),
             isFamilyFriendly: true,
+            representativeOfPage: true,
             datePublished: publishedAt
           },
         ]}
