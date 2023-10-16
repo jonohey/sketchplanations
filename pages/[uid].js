@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { ImageJsonLd } from 'next-seo'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -20,7 +21,7 @@ const SketchplanationPage = ({
   // similarSketchplanations,
 }) => {
   const {
-    data: { image, title, body },
+    data: { image, title, body, published_at: publishedAt },
     uid,
   } = sketchplanation
 
@@ -120,6 +121,31 @@ const SketchplanationPage = ({
         </div>
       </>
     )} */}
+      <ImageJsonLd
+        images={[
+          {
+            contentUrl: `${image.url}&w=1200`,
+            thumbnail: {
+              type: 'ImageObject',
+              url: `${image.url}&w=200`
+            },
+            creator: {
+              '@type': 'Person',
+              name: 'Jono Hey',
+            },
+            creditText: 'Jono Hey',
+            copyrightNotice: 'Creative Commons Attribution-NonCommercial 4.0 International License',
+            license: 'https://creativecommons.org/licenses/by-nc/4.0/',
+            acquireLicensePage: 'https://sketchplanations.com/licence',
+            name: title,
+            caption: image.alt,
+            description: RichText.asText(body),
+            isFamilyFriendly: true,
+            representativeOfPage: true,
+            datePublished: publishedAt
+          },
+        ]}
+      />
     </>
   )
 }
