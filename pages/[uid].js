@@ -117,7 +117,8 @@ const SketchplanationPage = ({
             license: 'https://creativecommons.org/licenses/by-nc/4.0/',
             acquireLicensePage: 'https://sketchplanations.com/licence',
             name: title,
-            caption: image.alt
+            caption: image.alt,
+            isFamilyFriendly: true
           },
         ]}
       />
