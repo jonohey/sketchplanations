@@ -116,6 +116,8 @@ const SketchplanationPage = ({
             copyrightNotice: 'Creative Commons Attribution-NonCommercial 4.0 International License',
             license: 'https://sketchplanations.com/licence',
             acquireLicensePage: 'https://sketchplanations.com/licence',
+            name: title,
+            caption: image.alt
           },
         ]}
       />
