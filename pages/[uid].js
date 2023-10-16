@@ -22,7 +22,7 @@ const SketchplanationPage = ({
   // similarSketchplanations,
 }) => {
   const {
-    data: { image, title, body },
+    data: { image, title, body, published_at: publishedAt },
     uid,
   } = sketchplanation
 
@@ -123,7 +123,8 @@ const SketchplanationPage = ({
             name: title,
             caption: image.alt,
             description: RichText.asText(body),
-            isFamilyFriendly: true
+            isFamilyFriendly: true,
+            datePublished: publishedAt
           },
         ]}
       />
