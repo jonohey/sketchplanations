@@ -113,7 +113,7 @@ const SketchplanationPage = ({
               name: 'Jono Hey',
             },
             creditText: 'Jono Hey',
-            copyrightNotice: '© Jono Hey ',
+            copyrightNotice: 'Creative Commons Attribution-NonCommercial 4.0 International License',
             license: 'https://sketchplanations.com/licence',
             acquireLicensePage: 'https://sketchplanations.com/licence',
           },
