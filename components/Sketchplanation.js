@@ -27,11 +27,11 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
     <div className={styles.root}>
       {fullPost ? (
         <div className={styles.image}>
-          <SketchplanationImage image={image} title={title} priority={true} />
+          <SketchplanationImage image={image} title={title} priority={true} onDownload={() => setPwywModalOpen(true)} />
         </div>
       ) : (
         <Link href={`/${uid}`} className={styles.image}>
-          <SketchplanationImage image={image} title={title} priority={priority} />
+          <SketchplanationImage image={image} title={title} priority={priority} lightbox={false} />
         </Link>
       )}
       <div className={styles.content}>

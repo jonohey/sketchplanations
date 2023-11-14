@@ -1,0 +1,57 @@
+.root {
+  position: relative;
+}
+
+.root--lightbox img {
+  cursor: zoom-in;
+}
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  overscroll-behavior: contain;
+  display: grid;
+  grid-template-rows: min-content auto min-content;
+  gap: 0.5rem;
+  justify-items: center;
+}
+
+@media (min-width: 768px) {
+  .lightbox {
+    padding: 1rem;
+    gap: 1rem;
+  }
+}
+
+.lightbox__image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.lightbox__img {
+  object-fit: contain;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.button:hover {
+  color: var(--color-blue);
+}
+
+.button > svg {
+  @apply inline-block mr-3;
+  fill: currentColor;
+}
