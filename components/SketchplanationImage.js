@@ -26,7 +26,7 @@ const SketchplanationImage = ({ image, title, priority = false, lightbox = true,
   return (
     <>
       <div
-        className={classNames(styles.root, lightbox && styles.root__lightbox)}
+        className={classNames(styles.root, lightbox && styles['root--lightbox'])}
         style={{ width: '100%', paddingTop: `${paddingTopPercentage}%` }}
       >
         <Image
