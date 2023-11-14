@@ -1,0 +1,16 @@
+.root {
+  @apply w-full px-6 pb-36 mx-auto;
+  max-width: 600px;
+}
+
+.form {
+  @apply flex flex-col sm:flex-row gap-2 sm:gap-0;
+}
+
+.input {
+  @apply w-full sm:w-0 flex-auto p-3 rounded sm:rounded-r-none bg-inputBg border border-inputBorder sm:border-r-0 outline-none;
+}
+
+.button {
+  @apply flex-none bg-brightRed text-white p-3 rounded sm:rounded-l-none;
+}

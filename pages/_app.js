@@ -12,6 +12,7 @@ import TagManager from 'react-gtm-module'
 
 import Header from 'components/Header'
 import SubscribeModal from 'components/SubscribeModal'
+import SubscribeInline from 'components/SubscribeInline'
 import { getCookie, pageTitle, setCookie } from 'helpers'
 import useScrollPercentage from 'hooks/useScrollPercentage'
 
@@ -112,6 +113,7 @@ const Sketchplanations = ({ Component, pageProps }) => {
       <div ref={ref} className={inter.className}>
         <Component {...pageProps} />
       </div>
+      <SubscribeInline />
       {subscribeModalEnabled && (
         <SubscribeModal show={!subscribeModalDismissed && scrolled} onHide={handleSubscribeModalDismissed} />
       )}
