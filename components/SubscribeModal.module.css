@@ -3,9 +3,9 @@
 }
 
 .input {
-  @apply grow p-3 rounded-l bg-inputBg border border-inputBorder border-r-0 outline-none;
+  @apply w-1 flex-auto p-3 rounded-l bg-inputBg border border-inputBorder border-r-0 outline-none;
 }
 
 .button {
-  @apply bg-brightRed text-white p-3 rounded-r;
+  @apply flex-none bg-brightRed text-white p-3 rounded-r;
 }

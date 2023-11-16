@@ -1,28 +1,24 @@
 import { useEffect, useState } from 'react'
+import { RichText } from 'prismic-reactjs'
 import TagManager from 'react-gtm-module'
 
-import { Page } from 'components'
-import Modal from 'components/Modal'
 import { setCookie } from 'helpers'
-import { client } from 'services/prismic'
+import { client, linkResolver } from 'services/prismic'
 
-import styles from './SubscribeModal.module.css'
+import styles from './SubscribeInline.module.css'
 
-const SubscribeModal = ({ show, onHide = () => {} }) => {
-  const [subscribeModalDocument, setSubscribeModalDocument] = useState(null)
-  const [subscribedModalDocument, setSubscribedModalDocument] = useState(null)
-
+const SubscribeInline = () => {
+  const [doc, setDoc] = useState(null)
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [processing, setProcessing] = useState(false)
 
   useEffect(() => {
-    const fetchSubscribeModal = async () => {
-      const doc = await client.getSingle('subscribe_modal')
-      setSubscribeModalDocument(doc)
+    const fetchDoc = async () => {
+      setDoc(await client.getSingle('subscribe_inline'))
     }
 
-    fetchSubscribeModal()
+    fetchDoc()
   }, [])
 
   const handleSubmit = async (e) => {
@@ -44,13 +40,10 @@ const SubscribeModal = ({ show, onHide = () => {} }) => {
       TagManager.dataLayer({
         dataLayer: {
           event: 'subscribe',
-          data: 'modal',
+          data: 'inline',
         },
       })
     } catch (e) {} // eslint-disable-line no-empty
-
-    const doc = await client.getSingle('subscribed')
-    setSubscribedModalDocument(doc)
 
     setSubmitted(true)
     setProcessing(false)
@@ -59,12 +52,16 @@ const SubscribeModal = ({ show, onHide = () => {} }) => {
   }
 
   return (
-    <Modal show={show} onHide={onHide}>
-      {submitted && subscribedModalDocument ? (
-        <Page document={subscribedModalDocument} inline={true} />
+    <div className={styles.root}>
+      {submitted ? (
+        <div className='prose'>
+          <RichText render={doc?.data?.['post-submit']} linkResolver={linkResolver} />
+        </div>
       ) : (
         <>
-          {subscribeModalDocument && <Page document={subscribeModalDocument} inline={true} />}
+          <div className='prose mb-6'>
+            <RichText render={doc?.data?.['pre-submit']} linkResolver={linkResolver} />
+          </div>
           <form className={styles.form} onSubmit={handleSubmit}>
             <input
               className={styles.input}
@@ -84,8 +81,8 @@ const SubscribeModal = ({ show, onHide = () => {} }) => {
           </form>
         </>
       )}
-    </Modal>
+    </div>
   )
 }
 
-export default SubscribeModal
+export default SubscribeInline
