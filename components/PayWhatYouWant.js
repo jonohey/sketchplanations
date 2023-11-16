@@ -1,9 +1,10 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CurrencyInput from 'react-currency-input-field'
 
 import styles from './PayWhatYouWant.module.css'
+import { PaymentRequestButtonElement } from '@stripe/react-stripe-js'
 
 const CARD_OPTIONS = {
   iconStyle: 'solid',
@@ -32,6 +33,31 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
   const [cardComplete, setCardComplete] = useState(false)
   const [processing, setProcessing] = useState(false)
   const [paymentIntent, setPaymentIntent] = useState(null)
+  const [paymentRequest, setPaymentRequest] = useState(null)
+
+  useEffect(() => {
+    if (stripe) {
+      const pr = stripe.paymentRequest({
+        country: 'GB',
+        currency: 'gbp',
+        total: {
+          label: 'Sketchplanations download',
+          amount: 10,
+          pending: true,
+        },
+        requestPayerName: false,
+        requestPayerEmail: false,
+      })
+
+      // Check the availability of the Payment Request API.
+      pr.canMakePayment().then((result) => {
+        console.log('canMakePayment', result)
+        if (result) {
+          setPaymentRequest(pr)
+        }
+      })
+    }
+  }, [stripe])
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -153,6 +179,7 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
                 </div>
                 {error && <div className={styles.error}>{error.message}</div>}
               </div>
+              {paymentRequest && <PaymentRequestButtonElement options={{ paymentRequest }} />}
               <div>
                 <input
                   className={styles['email-input']}
