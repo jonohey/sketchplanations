@@ -15,6 +15,7 @@ import SubscribeModal from 'components/SubscribeModal'
 import SubscribeInline from 'components/SubscribeInline'
 import { getCookie, pageTitle, setCookie } from 'helpers'
 import useScrollPercentage from 'hooks/useScrollPercentage'
+import { useRouter } from 'next/router'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -80,6 +81,7 @@ const ELEMENTS_OPTIONS = {
 }
 
 const Sketchplanations = ({ Component, pageProps }) => {
+  const router = useRouter()
   const [ref, percentage] = useScrollPercentage()
   const [scrolled, setScrolled] = useState(false)
   const [subscribeModalEnabled, setSubscribeModalEnabled] = useState(true)
@@ -113,7 +115,7 @@ const Sketchplanations = ({ Component, pageProps }) => {
       <div ref={ref} className={inter.className}>
         <Component {...pageProps} />
       </div>
-      <SubscribeInline />
+      {router.pathname !== '/' && <SubscribeInline />}
       {subscribeModalEnabled && (
         <SubscribeModal show={!subscribeModalDismissed && scrolled} onHide={handleSubscribeModalDismissed} />
       )}
