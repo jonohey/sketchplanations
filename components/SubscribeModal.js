@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import TagManager from 'react-gtm-module'
 
 import { Page } from 'components'
 import Modal from 'components/Modal'
@@ -38,6 +39,15 @@ const SubscribeModal = ({ show, onHide = () => {} }) => {
         email,
       }),
     })
+
+    try {
+      TagManager.dataLayer({
+        dataLayer: {
+          event: 'subscribe',
+          data: 'modal',
+        },
+      })
+    } catch (e) {} // eslint-disable-line no-empty
 
     const doc = await client.getSingle('subscribed')
     setSubscribedModalDocument(doc)

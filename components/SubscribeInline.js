@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { RichText } from 'prismic-reactjs'
+import TagManager from 'react-gtm-module'
 
 import { setCookie } from 'helpers'
 import { client, linkResolver } from 'services/prismic'
@@ -34,6 +35,15 @@ const SubscribeInline = () => {
         email,
       }),
     })
+
+    try {
+      TagManager.dataLayer({
+        dataLayer: {
+          event: 'subscribe',
+          data: 'inline',
+        },
+      })
+    } catch (e) {} // eslint-disable-line no-empty
 
     setSubmitted(true)
     setProcessing(false)
