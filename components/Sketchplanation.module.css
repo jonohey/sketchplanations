@@ -101,7 +101,7 @@
 }
 
 .pwyw-button {
-  @apply mt-6 flex items-center;
+  @apply mt-6 flex items-center text-left;
   color: var(--color-subduedText);
 }
 
