@@ -91,8 +91,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
                   </a>
                 </div>
               )}
-              {/* {podcast_link_url && ( */}
-              {true && (
+              {podcast_link_url && (
                 <div className={styles['podcast-wrapper']}>
                   <a className={styles.podcast} href={podcast_link_url} target='_blank' rel='noreferrer'>
                     <div className={styles['action-icon']}>
