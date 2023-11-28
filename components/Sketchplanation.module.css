@@ -86,12 +86,22 @@
   @apply text-blueLight;
 }
 
+.action-icon {
+  display: inline-block;
+  @apply w-6 h-6 mr-3 inline-flex justify-center items-center;
+}
+
+.action-icon > svg {
+  @apply inline-block;
+  fill: currentColor;
+}
+
 .pwyw {
   @apply p-8;
 }
 
 .pwyw-button {
-  @apply mt-6;
+  @apply mt-6 flex items-center text-left;
   color: var(--color-subduedText);
 }
 
@@ -99,16 +109,12 @@
   color: var(--color-blue);
 }
 
-.pwyw-button > svg {
-  @apply inline-block mr-3;
-  fill: currentColor;
-}
-
 .redbubble-wrapper {
-  @apply block mt-6;
+  @apply mt-6;
 }
 
 .redbubble {
+  @apply flex items-center;
   color: var(--color-subduedText);
 }
 
@@ -116,9 +122,17 @@
   color: var(--color-blue);
 }
 
-.redbubble > svg {
-  @apply inline-block mr-3;
-  fill: currentColor;
+.podcast-wrapper {
+  @apply mt-6;
+}
+
+.podcast {
+  @apply flex items-center;
+  color: var(--color-subduedText);
+}
+
+.podcast:hover {
+  color: var(--color-blue);
 }
 
 .image {

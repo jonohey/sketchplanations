@@ -17,7 +17,7 @@ const Modal = dynamic(() => import('./Modal'))
 const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = false, priority = false }) => {
   const [pwywModalOpen, setPwywModalOpen] = useState(false)
   const {
-    data: { image, title, body, redbubble_link_url },
+    data: { image, title, body, redbubble_link_url, podcast_link_url },
     uid,
   } = sketchplanation
 
@@ -74,10 +74,12 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
               {redbubble_link_url && (
                 <div className={styles['redbubble-wrapper']}>
                   <a className={styles.redbubble} href={redbubble_link_url} target='_blank' rel='noreferrer'>
-                    <svg width='19' height='19' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-                      <path d='M24 3l-.743 2h-1.929l-3.474 12h-13.239l-4.615-11h16.812l-.564 2h-13.24l2.937 7h10.428l3.432-12h4.195zm-15.5 15c-.828 0-1.5.672-1.5 1.5 0 .829.672 1.5 1.5 1.5s1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm6.9-7-1.9 7c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5z' />
-                    </svg>
-                    <span>Order as a </span>
+                    <div className={styles['action-icon']}>
+                      <svg width='19' height='19' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+                        <path d='M24 3l-.743 2h-1.929l-3.474 12h-13.239l-4.615-11h16.812l-.564 2h-13.24l2.937 7h10.428l3.432-12h4.195zm-15.5 15c-.828 0-1.5.672-1.5 1.5 0 .829.672 1.5 1.5 1.5s1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm6.9-7-1.9 7c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5z' />
+                      </svg>
+                    </div>
+                    <span>Order as a&nbsp;</span>
                     <TextLoop>
                       <span>print</span>
                       <span>sticker</span>
@@ -89,10 +91,24 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
                   </a>
                 </div>
               )}
+              {podcast_link_url && (
+                <div className={styles['podcast-wrapper']}>
+                  <a className={styles.podcast} href={podcast_link_url} target='_blank' rel='noreferrer'>
+                    <div className={styles['action-icon']}>
+                      <svg xmlns='http://www.w3.org/2000/svg' width='17' height='17' viewBox='0 0 24 24'>
+                        <path d='M6.043 17.496 4.56 19.001C1.77 16.8 0 13.588 0 10s1.77-6.8 4.561-9l1.483 1.504C3.717 4.339 2.239 7.016 2.239 10s1.478 5.661 3.804 7.496zM15 10a3 3 0 0 0-6 0c0 1.304.838 2.403 2 2.816V23h2V12.816A2.992 2.992 0 0 0 15 10zm-8.282 0c0-1.791.887-3.398 2.282-4.498L7.519 4c-1.86 1.467-3.04 3.608-3.04 6s1.18 4.533 3.04 6L9 14.498c-1.396-1.1-2.282-2.707-2.282-4.498zM19.44 1l-1.483 1.504c2.326 1.835 3.804 4.512 3.804 7.496s-1.478 5.661-3.804 7.496l1.483 1.505C22.23 16.8 24 13.588 24 10s-1.77-6.8-4.56-9zm-2.959 3L15 5.502c1.396 1.101 2.282 2.707 2.282 4.498s-.886 3.398-2.282 4.498L16.481 16c1.86-1.467 3.04-3.608 3.04-6s-1.179-4.533-3.04-6z' />
+                      </svg>
+                    </div>
+                    <span>Listen to {title} in the podcast</span>
+                  </a>
+                </div>
+              )}
               <button className={styles['pwyw-button']} type='button' onClick={() => setPwywModalOpen(true)}>
-                <svg width='14' height='19' xmlns='http://www.w3.org/2000/svg'>
-                  <path d='M11.951 7.095L7.757 11.29V0H6.243v11.29L2.05 7.095.979 8.166 7 14.187l6.022-6.021-1.07-1.07zM0 16.964h14v1.513H0v-1.513z' />
-                </svg>
+                <div className={styles['action-icon']}>
+                  <svg width='14' height='19' xmlns='http://www.w3.org/2000/svg'>
+                    <path d='M11.951 7.095L7.757 11.29V0H6.243v11.29L2.05 7.095.979 8.166 7 14.187l6.022-6.021-1.07-1.07zM0 16.964h14v1.513H0v-1.513z' />
+                  </svg>
+                </div>
                 Download highest-quality image
               </button>
               <Modal show={pwywModalOpen} onHide={() => setPwywModalOpen(false)}>
