@@ -15,8 +15,8 @@ dependencies:
     specifier: ^7.84.0
     version: 7.84.0
   '@stripe/react-stripe-js':
-    specifier: ^2.1.0
-    version: 2.3.1(@stripe/stripe-js@1.54.2)(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^2.4.0
+    version: 2.4.0(@stripe/stripe-js@1.54.2)(react-dom@18.2.0)(react@18.2.0)
   '@stripe/stripe-js':
     specifier: ^1.52.0
     version: 1.54.2
@@ -999,8 +999,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /@stripe/react-stripe-js@2.3.1(@stripe/stripe-js@1.54.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-vXiwcG2ZjAF4AezjP7DJ8jiwxfCWCen/X2rBhyXaKrfQ7+pwmXhsoUlKRa0eLWioY1oelOQOafauNUiwTwFHgQ==}
+  /@stripe/react-stripe-js@2.4.0(@stripe/stripe-js@1.54.2)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-1jVQEL3OuhuzNlf4OdfqovHt+MkWh8Uh8xpLxx/xUFUDdF+7/kDOrGKy+xJO3WLCfZUL7NAy+/ypwXbbYZi0tg==}
     peerDependencies:
       '@stripe/stripe-js': ^1.44.1 || ^2.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
