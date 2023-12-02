@@ -1,5 +1,5 @@
 import fs from 'fs'
-import globby from 'globby'
+import { globby } from 'globby'
 import { create } from 'xmlbuilder2'
 
 import { client } from './helpers.mjs'
