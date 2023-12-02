@@ -20,6 +20,7 @@ const Tags = ({ tagsByName, tagsByCount }) => {
         <title>{pageTitle('Tags')}</title>
         <meta name='description' content='The most common topics and themes of Sketchplanations' />
       </Head>
+      <h1 className='sr-only'>Tags</h1>
       <div className='pt-6 px-6 max-w-md mx-auto'>
         <SortButtons
           value={sort}
