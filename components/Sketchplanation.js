@@ -41,7 +41,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
               <TextHeader>{title}</TextHeader>
             ) : (
               <Link href={`/${uid}`}>
-                <TextHeader>{title}</TextHeader>
+                <TextHeader as='h2'>{title}</TextHeader>
               </Link>
             )}
             <div className={styles.body}>
