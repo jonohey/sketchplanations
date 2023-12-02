@@ -63,8 +63,8 @@ dependencies:
     specifier: ^1.3.4
     version: 1.3.4(react@18.2.0)
   ramda:
-    specifier: ^0.28.0
-    version: 0.28.0
+    specifier: ^0.29.1
+    version: 0.29.1
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -4280,8 +4280,8 @@ packages:
     resolution: {integrity: sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ==}
     dev: false
 
-  /ramda@0.28.0:
-    resolution: {integrity: sha512-9QnLuG/kPVgWvMQ4aODhsBUFKOUmnbUnsSXACv+NCQZcHbeb+v8Lodp8OVxtRULN1/xOyYLLaL6npE6dMq5QTA==}
+  /ramda@0.29.1:
+    resolution: {integrity: sha512-OfxIeWzd4xdUNxlWhgFazxsA/nl3mS4/jGZI5n00uWOoSSFRhC1b6gl6xvmzUamgmqELraWp0J/qqVlXYPDPyA==}
     dev: false
 
   /randombytes@2.1.0:
