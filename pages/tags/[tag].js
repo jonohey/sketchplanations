@@ -20,6 +20,7 @@ const Tag = ({ tag, sketchplanations }) => {
     <>
       <Head>
         <title>{pageTitle(`Tag: ${tag}`)}</title>
+        <meta name='description' content={`Sketchplanations tagged with ${tag}`} />
       </Head>
       <div className={styles.root}>
         <TextHeader className={styles.header}>
