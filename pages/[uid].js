@@ -14,6 +14,28 @@ import styles from './[uid].module.css'
 const Sketchplanation = dynamic(() => import('../components/Sketchplanation'))
 const PrevNextSketchplanation = dynamic(() => import('../components/PrevNextSketchplanation'))
 
+function truncate(string, limit) {
+  if (string.length <= limit) return string
+
+  const words = string.split(' ')
+  let truncatedString = ''
+
+  for (let i = 0; i < words.length; i++) {
+    if (truncatedString.length + words[i].length + 1 <= limit - 1) {
+      truncatedString += words[i] + ' '
+    } else {
+      break
+    }
+  }
+
+  // Add ellipsis if the original string was truncated
+  if (truncatedString.length < string.length) {
+    truncatedString = truncatedString.trim() + '…'
+  }
+
+  return truncatedString
+}
+
 const SketchplanationPage = ({
   sketchplanation,
   previousSketchplanation,
@@ -45,7 +67,7 @@ const SketchplanationPage = ({
     <>
       <Head>
         <title>{pageTitle(title)}</title>
-        <meta name='description' content={RichText.asText(body)} />
+        <meta name='description' content={truncate(RichText.asText(body), 160)} />
         <meta key='og:title' property='og:title' content={title} />
         <meta property='og:description' content={RichText.asText(body)} />
         <meta property='og:image' content={`${image.url}&w=1200`} />
@@ -127,7 +149,7 @@ const SketchplanationPage = ({
             contentUrl: `${image.url}&w=1200`,
             thumbnail: {
               type: 'ImageObject',
-              url: `${image.url}&w=200`
+              url: `${image.url}&w=200`,
             },
             creator: {
               '@type': 'Person',
@@ -142,7 +164,7 @@ const SketchplanationPage = ({
             description: RichText.asText(body),
             isFamilyFriendly: true,
             representativeOfPage: true,
-            datePublished: publishedAt
+            datePublished: publishedAt,
           },
         ]}
       />
