@@ -1,5 +1,5 @@
 import { createClient } from '@prismicio/client'
-import kv from '@vercel/kv'
+import { kv } from '@vercel/kv'
 
 const apiEndpoint = 'https://sketchplanations.prismic.io/api/v2'
 

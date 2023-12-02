@@ -1,4 +1,4 @@
-import kv from '@vercel/kv'
+import { kv } from '@vercel/kv'
 
 export default async (req, res) => {
   const handle = await kv.srandmember('sketchplanations')
