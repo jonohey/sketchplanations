@@ -57,7 +57,7 @@
     "node-mailjet": "^6.0.5",
     "now": "^21.0.1",
     "postcss": "^8.4.32",
-    "postcss-preset-env": "^8.3.0",
+    "postcss-preset-env": "^9.3.0",
     "prettier": "^3.1.0",
     "request": "^2.88.2",
     "styled-jsx-plugin-postcss": "^4.0.1",
