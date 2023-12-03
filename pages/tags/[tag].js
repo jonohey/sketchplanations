@@ -1,4 +1,4 @@
-import { Predicates } from '@prismicio/client'
+import * as prismic from '@prismicio/client'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
@@ -44,13 +44,13 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { tag } }) {
   const tagIdentifer = tag.replace(/-/g, ' ')
-  let tagDocs = await client.query(Predicates.at('my.tag.identifier', tagIdentifer), {
+  let tagDocs = await client.get(prismic.filters.at('my.tag.identifier', tagIdentifer), {
     pageSize: 1,
   })
 
   // The tag probably has a - in it
   if (tagDocs.total_results_size === 0) {
-    tagDocs = await client.query(Predicates.at('my.tag.identifier', tag), {
+    tagDocs = await client.get(prismic.filters.at('my.tag.identifier', tag), {
       pageSize: 1,
     })
   }
@@ -60,14 +60,16 @@ export async function getStaticProps({ params: { tag } }) {
   if (!tagDoc) return { notFound: true }
 
   const sketchplanations = await client.dangerouslyGetAll({
-    predicates: [
-      Predicates.at('document.type', 'sketchplanation'),
-      Predicates.at('my.sketchplanation.tags.tag', tagDoc.id),
+    filters: [
+      prismic.filters.at('document.type', 'sketchplanation'),
+      prismic.filters.at('my.sketchplanation.tags.tag', tagDoc.id),
     ],
-    orderings: {
-      field: 'my.sketchplanation.published_at',
-      direction: 'desc',
-    },
+    orderings: [
+      {
+        field: 'my.sketchplanation.published_at',
+        direction: 'desc',
+      },
+    ],
   })
 
   return { props: { tag: tagDoc.slugs[0], sketchplanations } }

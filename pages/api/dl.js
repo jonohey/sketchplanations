@@ -1,5 +1,5 @@
 import request from 'request'
-import { client } from 'utils/helpers'
+import { client } from 'services/prismic'
 
 export default async (req, res) => {
   const uid = req.query.uid

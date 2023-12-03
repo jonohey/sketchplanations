@@ -1,8 +1,8 @@
 import fs from 'fs'
-import PrismicDOM from 'prismic-dom'
+import * as prismicH from '@prismicio/helpers'
 import { create } from 'xmlbuilder2'
 
-import { client } from './helpers.mjs'
+import { client } from '../services/prismic.mjs'
 
 const pubDate = (date) => {
   date = new Date(date)
@@ -24,10 +24,12 @@ async function generateRSS() {
       'sketchplanation.body',
       'sketchplanation.published_at',
     ],
-    orderings: {
-      field: 'my.sketchplanation.published_at',
-      direction: 'desc',
-    },
+    orderings: [
+      {
+        field: 'my.sketchplanation.published_at',
+        direction: 'desc',
+      },
+    ],
   })
 
   const items = sketchplanations.map(
@@ -41,7 +43,7 @@ async function generateRSS() {
       },
     }) => {
       const url = `https://sketchplanations.com/${uid}`
-      const html = `<img src="${image_url}&w=798" />${PrismicDOM.RichText.asHtml(body)}`
+      const html = `<img src="${image_url}&w=798" />${prismicH.asHTML(body)}`
 
       return {
         guid: url,

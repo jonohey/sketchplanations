@@ -1,9 +1,5 @@
-import { createClient } from '@prismicio/client'
 import { kv } from '@vercel/kv'
-
-const apiEndpoint = 'https://sketchplanations.prismic.io/api/v2'
-
-const client = createClient(apiEndpoint)
+import { client } from '../services/prismic.mjs'
 
 const prismicToKV = async () => {
   if (process.env.VERCEL !== '1') return

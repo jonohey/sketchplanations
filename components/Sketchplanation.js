@@ -1,7 +1,8 @@
+import * as prismicH from '@prismicio/helpers'
 import { sort } from 'fast-sort'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { RichText } from 'prismic-reactjs'
+import { PrismicRichText } from '@prismicio/react'
 import React, { useState } from 'react'
 import TextLoop from 'react-text-loop'
 import Shiitake from 'shiitake'
@@ -46,11 +47,11 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
             )}
             <div className={styles.body}>
               {fullPost ? (
-                <RichText render={body} />
+                <PrismicRichText field={body} />
               ) : (
                 <>
                   <Shiitake lines={3} throttleRate={200}>
-                    {RichText.asText(body)}
+                    {prismicH.asText(body)}
                   </Shiitake>
                   <Link href={`/${uid}`}>Read more…</Link>
                 </>
@@ -116,7 +117,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
                   <PayWhatYouWant sketchplanationUid={sketchplanation.uid} sketchplanationTitle={title} />
                 </div>
               </Modal>
-              <SocialSharing handle={uid} title={title} text={RichText.asText(body)} />
+              <SocialSharing handle={uid} title={title} text={prismicH.asText(body)} />
               <ul className={styles.tags}>
                 {tags.map((tag, index) => (
                   <li key={index}>

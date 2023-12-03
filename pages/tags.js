@@ -55,16 +55,20 @@ const Tags = ({ tagsByName, tagsByCount }) => {
 
 export async function getStaticProps() {
   const sketchplanations = await client.getAllByType('sketchplanation', {
-    orderings: {
-      field: 'my.sketchplanation.published_at',
-      direction: 'desc',
-    },
+    orderings: [
+      {
+        field: 'my.sketchplanation.published_at',
+        direction: 'desc',
+      },
+    ],
   })
 
   const tags = await client.getAllByType('tag', {
-    orderings: {
-      field: 'my.tag.identifier',
-    },
+    orderings: [
+      {
+        field: 'my.tag.identifier',
+      },
+    ],
   })
 
   const tagsFromSketchplanations = sketchplanations

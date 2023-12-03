@@ -26,10 +26,12 @@ const Home = ({ sketchplanations: initialSketchplanations }) => {
   const fetchMore = async () => {
     const moreSketchplanations = (
       await client.getByType('sketchplanation', {
-        orderings: {
-          field: 'my.sketchplanation.published_at',
-          direction: 'desc',
-        },
+        orderings: [
+          {
+            field: 'my.sketchplanation.published_at',
+            direction: 'desc',
+          },
+        ],
         page,
         pageSize: 4,
       })
@@ -136,10 +138,12 @@ const Home = ({ sketchplanations: initialSketchplanations }) => {
 export const getStaticProps = async () => {
   const sketchplanations = (
     await client.getByType('sketchplanation', {
-      orderings: {
-        field: 'my.sketchplanation.published_at',
-        direction: 'desc',
-      },
+      orderings: [
+        {
+          field: 'my.sketchplanation.published_at',
+          direction: 'desc',
+        },
+      ],
       pageSize: 8,
     })
   ).results
