@@ -15,8 +15,9 @@ export default async (req, res) => {
 
   try {
     const response = await fetch(imageUrl)
-    const data = await response.buffer()
-    res.send(data)
+    const arrayBuffer = await response.arrayBuffer()
+    const buffer = Buffer.from(arrayBuffer)
+    res.send(buffer)
   } catch (e) {
     res.status(404)
   }
