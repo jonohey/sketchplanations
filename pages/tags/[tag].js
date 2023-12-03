@@ -44,13 +44,15 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { tag } }) {
   const tagIdentifer = tag.replace(/-/g, ' ')
-  let tagDocs = await client.get(prismic.filters.at('my.tag.identifier', tagIdentifer), {
+  let tagDocs = await client.get({
+    filters: [prismic.filters.at('my.tag.identifier', tagIdentifer)],
     pageSize: 1,
   })
 
   // The tag probably has a - in it
   if (tagDocs.total_results_size === 0) {
-    tagDocs = await client.get(prismic.filters.at('my.tag.identifier', tag), {
+    tagDocs = await client.get({
+      filters: [prismic.filters.at('my.tag.identifier', tag)],
       pageSize: 1,
     })
   }
