@@ -1,4 +1,4 @@
-import request from 'request'
+import fetch from 'node-fetch'
 
 import { client } from 'services/prismic'
 
@@ -14,7 +14,8 @@ export default async (req, res) => {
   res.setHeader('X-Robots-Tag', 'noindex')
 
   try {
-    const data = await request.get(imageUrl)
+    const response = await fetch(imageUrl)
+    const data = await response.buffer()
     res.send(data)
   } catch (e) {
     res.status(404)
