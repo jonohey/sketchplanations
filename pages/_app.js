@@ -115,7 +115,7 @@ const Sketchplanations = ({ Component, pageProps }) => {
       <div ref={ref} className={inter.className}>
         <Component {...pageProps} />
       </div>
-      {router.pathname !== '/' && <SubscribeInline />}
+      {!['/', '/subscribe', '/subscribed'].includes(router.pathname) && <SubscribeInline />}
       {subscribeModalEnabled && (
         <SubscribeModal show={!subscribeModalDismissed && scrolled} onHide={handleSubscribeModalDismissed} />
       )}
