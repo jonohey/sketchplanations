@@ -46,7 +46,6 @@ const Subscribe = ({ subscribeDocument, subscribedDocument }) => {
             type='email'
             required
             placeholder='Email address'
-            autoFocus
             autoComplete='email'
             pattern='.+@.+'
             value={email}
