@@ -1,9 +1,9 @@
+import * as prismicH from '@prismicio/helpers'
 import classNames from 'classnames'
 import { ImageJsonLd } from 'next-seo'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Link from 'next/link'
-import * as prismicH from '@prismicio/helpers'
 import React, { useEffect, useState } from 'react'
 
 import { pageTitle } from 'helpers'

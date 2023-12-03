@@ -1,7 +1,8 @@
+import classNames from 'classnames'
 import Image from 'next/image'
 import { useState } from 'react'
+
 import styles from './SketchplanationImage.module.css'
-import classNames from 'classnames'
 
 const SketchplanationImage = ({ image, title, priority = false, lightbox = true, onDownload = () => {} }) => {
   const { width, height } = image.dimensions

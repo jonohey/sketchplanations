@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
 import { PrismicRichText } from '@prismicio/react'
+import { useEffect, useState } from 'react'
 import TagManager from 'react-gtm-module'
 
 import { setCookie } from 'helpers'

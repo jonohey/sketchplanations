@@ -1,5 +1,5 @@
-import fs from 'fs'
 import * as prismicH from '@prismicio/helpers'
+import fs from 'fs'
 import { create } from 'xmlbuilder2'
 
 import { client } from '../services/prismic.mjs'

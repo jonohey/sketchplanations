@@ -1,4 +1,5 @@
 import request from 'request'
+
 import { client } from 'services/prismic'
 
 export default async (req, res) => {

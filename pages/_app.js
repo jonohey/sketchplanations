@@ -1,3 +1,4 @@
+import { PrismicToolbar } from '@prismicio/react'
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import { Elements } from '@stripe/react-stripe-js'
@@ -7,16 +8,15 @@ import 'lazysizes'
 import 'lazysizes/plugins/attrchange/ls.attrchange'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import TagManager from 'react-gtm-module'
 
 import Header from 'components/Header'
-import SubscribeModal from 'components/SubscribeModal'
 import SubscribeInline from 'components/SubscribeInline'
+import SubscribeModal from 'components/SubscribeModal'
 import { getCookie, pageTitle, setCookie } from 'helpers'
 import useScrollPercentage from 'hooks/useScrollPercentage'
-import { useRouter } from 'next/router'
-import { PrismicToolbar } from '@prismicio/react'
 
 const inter = Inter({ subsets: ['latin'] })
 

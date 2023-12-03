@@ -1,4 +1,5 @@
 import { kv } from '@vercel/kv'
+
 import { client } from '../services/prismic.mjs'
 
 const prismicToKV = async () => {

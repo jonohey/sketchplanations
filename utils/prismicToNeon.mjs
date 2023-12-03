@@ -1,4 +1,5 @@
 import postgres from 'postgres'
+
 import { client } from '../services/prismic.mjs'
 
 const sql = postgres({

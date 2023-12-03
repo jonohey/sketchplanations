@@ -17,7 +17,10 @@
   max-width: 36rem;
   max-height: 90vh;
   z-index: 1040;
-  box-shadow: 0 1px 2.7px rgba(0, 0, 0, 0.045), 0 2.6px 7.5px rgba(0, 0, 0, 0.065), 0 6.3px 18.1px rgba(0, 0, 0, 0.085),
+  box-shadow:
+    0 1px 2.7px rgba(0, 0, 0, 0.045),
+    0 2.6px 7.5px rgba(0, 0, 0, 0.065),
+    0 6.3px 18.1px rgba(0, 0, 0, 0.085),
     0 21px 60px rgba(0, 0, 0, 0.13);
   transform: translate(-50%, -50%);
 }

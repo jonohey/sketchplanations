@@ -1,8 +1,8 @@
 import * as prismicH from '@prismicio/helpers'
+import { PrismicRichText } from '@prismicio/react'
 import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import { PrismicRichText } from '@prismicio/react'
 import { createElement } from 'react'
 
 import { linkResolver } from 'services/prismic'
