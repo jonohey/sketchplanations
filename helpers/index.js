@@ -1,4 +1,4 @@
-import { Predicates } from '@prismicio/client'
+import * as prismic from '@prismicio/client'
 import { complement, either, isEmpty, isNil } from 'ramda'
 
 import { client } from 'services/prismic'
@@ -9,7 +9,7 @@ const fulltextDocumentSearch = async (documentType, query) => {
   if (!query || query === '') return []
 
   const { results } = await client.get({
-    predicates: [Predicates.at('document.type', documentType), Predicates.fulltext('document', query)],
+    filters: [prismic.filter.at('document.type', documentType), prismic.filter.fulltext('document', query)],
     pageSize: 100,
   })
 
@@ -20,9 +20,9 @@ export const searchSketchplanations = async (query) => {
   if (!query || query === '') return []
 
   const { results: titleResults } = await client.get({
-    predicates: [
-      Predicates.at('document.type', 'sketchplanation'),
-      Predicates.fulltext('my.sketchplanation.title', query),
+    filters: [
+      prismic.filter.at('document.type', 'sketchplanation'),
+      prismic.filter.fulltext('my.sketchplanation.title', query),
     ],
     pageSize: 100,
   })

@@ -16,6 +16,7 @@ import SubscribeInline from 'components/SubscribeInline'
 import { getCookie, pageTitle, setCookie } from 'helpers'
 import useScrollPercentage from 'hooks/useScrollPercentage'
 import { useRouter } from 'next/router'
+import { PrismicToolbar } from '@prismicio/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -147,17 +148,7 @@ const Sketchplanations = ({ Component, pageProps }) => {
           })`,
         }}
       />
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `window.prismic = {
-            endpoint: 'https://Sketchplanations.cdn.prismic.io/api/v2'
-          };`,
-        }}
-      />
-      {/* <script
-        type='text/javascript'
-        src='https://static.cdn.prismic.io/prismic.min.js?repo=Sketchplanations.prismic.io&new=true'
-      ></script> */}
+      <PrismicToolbar repositoryName='sketchplanations' />
     </Elements>
   )
 }

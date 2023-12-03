@@ -47,10 +47,12 @@ const Explore = ({ initialSketchplanations }) => {
 
 export async function getStaticProps() {
   const initialSketchplanations = await client.getAllByType('sketchplanation', {
-    orderings: {
-      field: 'my.sketchplanation.published_at',
-      direction: 'desc',
-    },
+    orderings: [
+      {
+        field: 'my.sketchplanation.published_at',
+        direction: 'desc',
+      },
+    ],
     limit: 20,
   })
 
