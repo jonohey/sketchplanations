@@ -45,14 +45,14 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params: { tag } }) {
   const tagIdentifer = tag.replace(/-/g, ' ')
   let tagDocs = await client.get({
-    filters: [prismic.filters.at('my.tag.identifier', tagIdentifer)],
+    filters: [prismic.filter.at('my.tag.identifier', tagIdentifer)],
     pageSize: 1,
   })
 
   // The tag probably has a - in it
   if (tagDocs.total_results_size === 0) {
     tagDocs = await client.get({
-      filters: [prismic.filters.at('my.tag.identifier', tag)],
+      filters: [prismic.filter.at('my.tag.identifier', tag)],
       pageSize: 1,
     })
   }
@@ -63,8 +63,8 @@ export async function getStaticProps({ params: { tag } }) {
 
   const sketchplanations = await client.dangerouslyGetAll({
     filters: [
-      prismic.filters.at('document.type', 'sketchplanation'),
-      prismic.filters.at('my.sketchplanation.tags.tag', tagDoc.id),
+      prismic.filter.at('document.type', 'sketchplanation'),
+      prismic.filter.at('my.sketchplanation.tags.tag', tagDoc.id),
     ],
     orderings: [
       {

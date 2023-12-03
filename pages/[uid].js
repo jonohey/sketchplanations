@@ -176,7 +176,7 @@ export async function getStaticProps({ params: { uid } }) {
   const sketchplanation = await client.getByUID('sketchplanation', uid)
 
   // const similarSketchplanations = await client.get({
-  //   filters: [prismic.filters.at('document.type', 'sketchplanation'), prismic.filters.similar(sketchplanation.id, 3)],
+  //   filters: [prismic.filter.at('document.type', 'sketchplanation'), prismic.filter.similar(sketchplanation.id, 3)],
   //   pageSize: 6,
   // })
 
