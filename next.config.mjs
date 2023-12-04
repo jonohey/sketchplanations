@@ -38,18 +38,13 @@ const nextConfig = {
         permanent: false,
       },
       {
-        source: '/wonder',
-        destination: 'https://www.wonder.me/r?id=1dc76a0d-73b0-46f1-a711-acd502af7633',
+        source: '/license',
+        destination: 'https://sketchplanations.com/licence',
         permanent: false,
       },
       {
         source: '/patreon',
         destination: 'https://www.patreon.com/sketchplanations',
-        permanent: false,
-      },
-      {
-        source: '/sketchplanator',
-        destination: '/',
         permanent: false,
       },
       {
@@ -63,13 +58,18 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/browse',
+        destination: '/tags',
+        permanent: false,
+      },
+      {
         source: '/sketchplanations',
         destination: '/',
         permanent: false,
       },
       {
-        source: '/browse',
-        destination: '/tags',
+        source: '/sketchplanator',
+        destination: '/',
         permanent: false,
       },
       {
