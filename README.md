@@ -9,7 +9,7 @@ There's also a styleguide at [sketchplanations.com/styleguide](https://sketchpla
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
 
 1. Clone this repo
-2. Run `pnpm` to install all the required depedencies. If you don’t have pnpm follow the [installation instructions](https://pnpm.io/installation).
+2. Run `pnpm install` to install all the required depedencies. If you don’t have pnpm follow the [installation instructions](https://pnpm.io/installation).
 3. Start the development server with `pnpm dev`
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
