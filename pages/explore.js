@@ -23,6 +23,7 @@ const Explore = ({ initialSketchplanations }) => {
         />
       </Head>
       <div className={styles.root}>
+        <h1 className='sr-only'>Explore</h1>
         <SearchForm isBusy={busy} value={query} onChange={setQuery} onReset={reset} />
         <div className={styles.links}>
           <Link href='/api/random' className={styles.link}>
@@ -46,10 +47,12 @@ const Explore = ({ initialSketchplanations }) => {
 
 export async function getStaticProps() {
   const initialSketchplanations = await client.getAllByType('sketchplanation', {
-    orderings: {
-      field: 'my.sketchplanation.published_at',
-      direction: 'desc',
-    },
+    orderings: [
+      {
+        field: 'my.sketchplanation.published_at',
+        direction: 'desc',
+      },
+    ],
     limit: 20,
   })
 

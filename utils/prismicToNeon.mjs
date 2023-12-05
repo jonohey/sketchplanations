@@ -1,9 +1,6 @@
-import { createClient } from '@prismicio/client'
 import postgres from 'postgres'
 
-const apiEndpoint = 'https://sketchplanations.prismic.io/api/v2'
-
-const client = createClient(apiEndpoint)
+import { client } from '../services/prismic.mjs'
 
 const sql = postgres({
   ssl: {

@@ -1,5 +1,5 @@
+import { PrismicRichText } from '@prismicio/react'
 import { useEffect, useState } from 'react'
-import { RichText } from 'prismic-reactjs'
 import TagManager from 'react-gtm-module'
 
 import { setCookie } from 'helpers'
@@ -55,12 +55,12 @@ const SubscribeInline = () => {
     <div className={styles.root}>
       {submitted ? (
         <div className='prose'>
-          <RichText render={doc?.data?.['post-submit']} linkResolver={linkResolver} />
+          <PrismicRichText field={doc?.data?.['post-submit']} linkResolver={linkResolver} />
         </div>
       ) : (
         <>
           <div className='prose mb-6'>
-            <RichText render={doc?.data?.['pre-submit']} linkResolver={linkResolver} />
+            <PrismicRichText field={doc?.data?.['pre-submit']} linkResolver={linkResolver} />
           </div>
           <form className={styles.form} onSubmit={handleSubmit}>
             <input

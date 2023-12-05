@@ -1,22 +1,26 @@
 import fs from 'fs'
-import globby from 'globby'
+import { globby } from 'globby'
 import { create } from 'xmlbuilder2'
 
-import { client } from './helpers.mjs'
+import { client } from '../services/prismic.mjs'
 
 async function generateSitemap() {
   const sketchplanations = await client.getAllByType('sketchplanation', {
     fetch: 'sketchplanation.uid',
-    orderings: {
-      field: 'document.last_publication_date',
-    },
+    orderings: [
+      {
+        field: 'document.last_publication_date',
+      },
+    ],
   })
 
   const tags = await client.getAllByType('tag', {
     fetch: 'tag.identifier',
-    orderings: {
-      field: 'my.tag.identifier',
-    },
+    orderings: [
+      {
+        field: 'my.tag.identifier',
+      },
+    ],
   })
 
   const lastSketchPubDate = new Date(sketchplanations[sketchplanations.length - 1].last_publication_date)

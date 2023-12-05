@@ -37,6 +37,7 @@ const Subscribe = ({ subscribeDocument, subscribedDocument }) => {
     <>
       <Head>
         <title>{pageTitle('Subscribe')}</title>
+        <meta name='description' content='Get a new Sketchplanation in your inbox every week' />
       </Head>
       <Page document={subscribeDocument}>
         <form onSubmit={handleSubmit}>
@@ -45,7 +46,6 @@ const Subscribe = ({ subscribeDocument, subscribedDocument }) => {
             type='email'
             required
             placeholder='Email address'
-            autoFocus
             autoComplete='email'
             pattern='.+@.+'
             value={email}

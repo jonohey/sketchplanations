@@ -20,6 +20,7 @@ const Tags = ({ tagsByName, tagsByCount }) => {
         <title>{pageTitle('Tags')}</title>
         <meta name='description' content='The most common topics and themes of Sketchplanations' />
       </Head>
+      <h1 className='sr-only'>Tags</h1>
       <div className='pt-6 px-6 max-w-md mx-auto'>
         <SortButtons
           value={sort}
@@ -54,16 +55,20 @@ const Tags = ({ tagsByName, tagsByCount }) => {
 
 export async function getStaticProps() {
   const sketchplanations = await client.getAllByType('sketchplanation', {
-    orderings: {
-      field: 'my.sketchplanation.published_at',
-      direction: 'desc',
-    },
+    orderings: [
+      {
+        field: 'my.sketchplanation.published_at',
+        direction: 'desc',
+      },
+    ],
   })
 
   const tags = await client.getAllByType('tag', {
-    orderings: {
-      field: 'my.tag.identifier',
-    },
+    orderings: [
+      {
+        field: 'my.tag.identifier',
+      },
+    ],
   })
 
   const tagsFromSketchplanations = sketchplanations

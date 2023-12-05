@@ -1,7 +1,8 @@
+import * as prismicH from '@prismicio/helpers'
+import { PrismicRichText } from '@prismicio/react'
 import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import { RichText } from 'prismic-reactjs'
 import { createElement } from 'react'
 
 import { linkResolver } from 'services/prismic'
@@ -10,7 +11,7 @@ import styles from './Page.module.css'
 
 const TextHeader = dynamic(() => import('./TextHeader'))
 
-const Text = ({ slice }) => RichText.render(slice.primary.content, linkResolver)
+const Text = ({ slice }) => <PrismicRichText field={slice.primary.content} linkResolver={linkResolver} />
 
 const Photo = ({
   slice: {
@@ -27,7 +28,7 @@ const Photo = ({
   />
 )
 
-const Html = ({ slice }) => <div dangerouslySetInnerHTML={{ __html: RichText.asText(slice.primary.html) }} />
+const Html = ({ slice }) => <div dangerouslySetInnerHTML={{ __html: prismicH.asText(slice.primary.html) }} />
 
 const sliceTypesToComponent = {
   text: Text,

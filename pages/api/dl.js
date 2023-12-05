@@ -1,5 +1,6 @@
-import request from 'request'
-import { client } from 'utils/helpers'
+import fetch from 'node-fetch'
+
+import { client } from 'services/prismic'
 
 export default async (req, res) => {
   const uid = req.query.uid
@@ -13,8 +14,10 @@ export default async (req, res) => {
   res.setHeader('X-Robots-Tag', 'noindex')
 
   try {
-    const data = await request.get(imageUrl)
-    res.send(data)
+    const response = await fetch(imageUrl)
+    const arrayBuffer = await response.arrayBuffer()
+    const buffer = Buffer.from(arrayBuffer)
+    res.send(buffer)
   } catch (e) {
     res.status(404)
   }

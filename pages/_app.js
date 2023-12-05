@@ -1,3 +1,4 @@
+import { PrismicToolbar } from '@prismicio/react'
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import { Elements } from '@stripe/react-stripe-js'
@@ -7,15 +8,15 @@ import 'lazysizes'
 import 'lazysizes/plugins/attrchange/ls.attrchange'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import TagManager from 'react-gtm-module'
 
 import Header from 'components/Header'
-import SubscribeModal from 'components/SubscribeModal'
 import SubscribeInline from 'components/SubscribeInline'
+import SubscribeModal from 'components/SubscribeModal'
 import { getCookie, pageTitle, setCookie } from 'helpers'
 import useScrollPercentage from 'hooks/useScrollPercentage'
-import { useRouter } from 'next/router'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -115,7 +116,7 @@ const Sketchplanations = ({ Component, pageProps }) => {
       <div ref={ref} className={inter.className}>
         <Component {...pageProps} />
       </div>
-      {router.pathname !== '/' && <SubscribeInline />}
+      {!['/', '/subscribe', '/subscribed'].includes(router.pathname) && <SubscribeInline />}
       {subscribeModalEnabled && (
         <SubscribeModal show={!subscribeModalDismissed && scrolled} onHide={handleSubscribeModalDismissed} />
       )}
@@ -147,17 +148,7 @@ const Sketchplanations = ({ Component, pageProps }) => {
           })`,
         }}
       />
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `window.prismic = {
-            endpoint: 'https://Sketchplanations.cdn.prismic.io/api/v2'
-          };`,
-        }}
-      />
-      {/* <script
-        type='text/javascript'
-        src='https://static.cdn.prismic.io/prismic.min.js?repo=Sketchplanations.prismic.io&new=true'
-      ></script> */}
+      <PrismicToolbar repositoryName='sketchplanations' />
     </Elements>
   )
 }

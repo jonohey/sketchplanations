@@ -67,7 +67,12 @@ h6 {
 
 pre {
   padding: 1rem;
-  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-family:
+    SFMono-Regular,
+    Consolas,
+    Liberation Mono,
+    Menlo,
+    monospace;
   font-size: 10px;
   white-space: pre-wrap;
   color: #8ae8fc;
@@ -84,7 +89,9 @@ pre {
 #mc_embed_signup {
   background: #fff;
   clear: left;
-  font: 16px 'Open Sans', sans-serif;
+  font:
+    16px 'Open Sans',
+    sans-serif;
   width: 375px;
 }
 

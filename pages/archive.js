@@ -18,10 +18,12 @@ const Archive = ({ sketchplanations }) => {
 
 export async function getStaticProps() {
   const sketchplanations = await client.getAllByType('sketchplanation', {
-    orderings: {
-      field: 'my.sketchplanation.published_at',
-      direction: 'desc',
-    },
+    orderings: [
+      {
+        field: 'my.sketchplanation.published_at',
+        direction: 'desc',
+      },
+    ],
   })
 
   return { props: { sketchplanations } }
