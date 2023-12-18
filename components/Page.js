@@ -44,7 +44,7 @@ const Page = ({
   children,
 }) => {
   return (
-    <div className={classNames(styles['page-root'], inline && styles['page-root--inline'])}>
+    <div className={classNames(styles['page-root'], inline && styles['page-root--inline'], 'prose')}>
       <TextHeader>{title}</TextHeader>
       <div className={styles['page-body']}>
         {body.map((slice, index) => createElement(sliceTypesToComponent[slice.slice_type], { key: index, slice }))}
