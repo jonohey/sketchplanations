@@ -18,14 +18,16 @@ const Photo = ({
     primary: { photo },
   },
 }) => (
-  <Image
-    className='block w-full'
-    src={photo.url}
-    width={photo.dimensions.width}
-    height={photo.dimensions.height}
-    alt={photo.alt}
-    sizes='(min-width: 848px) 800px, (min-width: 640px) calc(100vw - 3rem), 100w'
-  />
+  <div className='slice-image'>
+    <Image
+      className='block w-full'
+      src={photo.url}
+      width={photo.dimensions.width}
+      height={photo.dimensions.height}
+      alt={photo.alt}
+      sizes='(min-width: 848px) 800px, (min-width: 640px) calc(100vw - 3rem), 100w'
+    />
+  </div>
 )
 
 const Html = ({ slice }) => <div dangerouslySetInnerHTML={{ __html: prismicH.asText(slice.primary.html) }} />
