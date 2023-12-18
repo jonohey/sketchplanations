@@ -1,5 +1,6 @@
 import * as prismicH from '@prismicio/helpers'
 import { PrismicRichText } from '@prismicio/react'
+import classNames from 'classnames'
 import { sort } from 'fast-sort'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
@@ -45,7 +46,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
                 <TextHeader as='h2'>{title}</TextHeader>
               </Link>
             )}
-            <div className={styles.body}>
+            <div className={classNames(styles.body, 'prose')}>
               {fullPost ? (
                 <PrismicRichText field={body} />
               ) : (

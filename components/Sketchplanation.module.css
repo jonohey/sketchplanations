@@ -33,34 +33,6 @@
   @apply mx-auto;
 }
 
-.body :global(> * + *) {
-  margin-top: 1.4em;
-}
-
-.body :global(b),
-.body :global(strong) {
-  @apply font-semibold;
-}
-
-.body :global(i),
-.body :global(em) {
-  @apply italic;
-}
-
-.body :global(a) {
-  @apply text-blue;
-}
-
-.body :global(ul li) {
-  list-style: outside disc;
-  margin-left: 1.75rem;
-}
-
-.body :global(ol li) {
-  list-style: outside decimal;
-  margin-left: 1.75rem;
-}
-
 .tags {
   @apply flex flex-wrap mt-10 mb-10 gap-4;
 }
