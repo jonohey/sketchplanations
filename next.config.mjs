@@ -33,6 +33,16 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/book',
+        destination: '/big-ideas-little-pictures',
+        permanent: true,
+      },
+      {
+        source: '/big-ideas',
+        destination: '/big-ideas-little-pictures',
+        permanent: true,
+      },
+      {
         source: '/styleguide',
         destination: 'https://company-208276.frontify.com/d/iATaeFQL51Lv',
         permanent: false,
@@ -40,7 +50,7 @@ const nextConfig = {
       {
         source: '/license',
         destination: 'https://sketchplanations.com/licence',
-        permanent: false,
+        permanent: true,
       },
       {
         source: '/patreon',
@@ -60,7 +70,7 @@ const nextConfig = {
       {
         source: '/browse',
         destination: '/tags',
-        permanent: false,
+        permanent: true,
       },
       {
         source: '/sketchplanations',
