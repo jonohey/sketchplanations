@@ -14,7 +14,7 @@
     "@sentry/react": "^7.93.0",
     "@sentry/tracing": "^7.88.0",
     "@stripe/react-stripe-js": "^2.4.0",
-    "@stripe/stripe-js": "^1.52.0",
+    "@stripe/stripe-js": "^2.4.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@vercel/kv": "^1.0.0",
     "classnames": "^2.3.2",
