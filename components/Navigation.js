@@ -5,7 +5,7 @@ import { Link } from 'components'
 
 import styles from './Navigation.module.css'
 
-const roughNotiationProps = {
+const roughNotationProps = {
   iterations: 1,
   animationDuration: 200,
   animationDelay: 50,
@@ -21,12 +21,12 @@ const Navigation = () => {
   return (
     <nav className={styles.root}>
       <Link href='/explore' className={styles.item}>
-        <RoughNotation show={isSelected('/explore')} {...roughNotiationProps}>
+        <RoughNotation show={isSelected('/explore')} {...roughNotationProps}>
           Explore
         </RoughNotation>
       </Link>
       <Link href='/big-ideas-little-pictures' className={styles.item}>
-        <RoughNotation show={isSelected('/big-ideas-little-pictures')} {...roughNotiationProps}>
+        <RoughNotation show={isSelected('/big-ideas-little-pictures')} {...roughNotationProps}>
           Book!
         </RoughNotation>
       </Link>
@@ -43,12 +43,12 @@ const Navigation = () => {
         </a>
       </span>
       <Link href='/subscribe' className={styles.item}>
-        <RoughNotation show={isSelected('/subscribe')} {...roughNotiationProps}>
+        <RoughNotation show={isSelected('/subscribe')} {...roughNotationProps}>
           Subscribe
         </RoughNotation>
       </Link>
       <Link href='/about' className={styles.item}>
-        <RoughNotation show={isSelected('/about')} {...roughNotiationProps}>
+        <RoughNotation show={isSelected('/about')} {...roughNotationProps}>
           About
         </RoughNotation>
       </Link>
