@@ -26,11 +26,8 @@ const Explore = ({ initialSketchplanations }) => {
         <h1 className='sr-only'>Explore</h1>
         <SearchForm isBusy={busy} value={query} onChange={setQuery} onReset={reset} />
         <div className={styles.links}>
-          <Link href='/api/random' className={styles.link}>
-            Random
-          </Link>
           <Link href='/tags' className={styles.link}>
-            Explore by tag
+            Explore by category
           </Link>
           <Link href='/archive' className={styles.link}>
             Archive
