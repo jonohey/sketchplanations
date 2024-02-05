@@ -27,7 +27,7 @@ const Explore = ({ initialSketchplanations }) => {
         <SearchForm isBusy={busy} value={query} onChange={setQuery} onReset={reset} />
         <div className={styles.links}>
           <Link href='/tags' className={styles.link}>
-            Explore by category
+            Categories
           </Link>
           <Link href='/archive' className={styles.link}>
             Archive
