@@ -67,6 +67,7 @@ const SketchplanationPage = ({
     <>
       <Head>
         <title>{pageTitle(title)}</title>
+        <meta name='robots' content='max-image-preview:large' />
         <meta name='description' content={truncate(prismicH.asText(body), 160)} />
         <meta key='og:title' property='og:title' content={title} />
         <meta property='og:description' content={prismicH.asText(body)} />
