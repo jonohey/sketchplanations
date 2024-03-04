@@ -1,6 +1,13 @@
 .root {
-  @apply w-full px-6 pb-36 mx-auto;
+  @apply w-full pt-4 px-6 pb-4 mx-auto mb-4 mt-4 rounded-md;
   max-width: 600px;
+  background: rgb(251, 247, 218);
+  background: linear-gradient(
+    -315deg,
+    rgba(251, 247, 218, 0.25) 0%,
+    rgba(189, 180, 163, 0.05) 35%,
+    rgba(253, 96, 65, 0.25) 100%
+  );
 }
 
 .form {
