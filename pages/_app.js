@@ -113,10 +113,10 @@ const Sketchplanations = ({ Component, pageProps }) => {
         <meta name='viewport' content='width = device-width, initial-scale = 1, minimum-scale = 1' />
       </Head>
       <Header />
+      {!['/', '/explore', '/subscribe', '/subscribed'].includes(router.pathname) && <SubscribeInline />}
       <div ref={ref} className={inter.className}>
         <Component {...pageProps} />
       </div>
-      {!['/', '/subscribe', '/subscribed'].includes(router.pathname) && <SubscribeInline />}
       {subscribeModalEnabled && (
         <SubscribeModal show={!subscribeModalDismissed && scrolled} onHide={handleSubscribeModalDismissed} />
       )}
