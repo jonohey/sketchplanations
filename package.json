@@ -48,6 +48,7 @@
     "vanilla-cookieconsent": "v3.0.0"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^5.0.0",
     "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.55.0",
