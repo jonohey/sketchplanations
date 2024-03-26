@@ -3,22 +3,25 @@ import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
-import 'global.css'
 import 'lazysizes'
 import 'lazysizes/plugins/attrchange/ls.attrchange'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import TagManager from 'react-gtm-module'
 import * as CookieConsent from 'vanilla-cookieconsent'
+
 import 'vanilla-cookieconsent/dist/cookieconsent.css'
+
+import 'global.css'
 
 import Header from 'components/Header'
 import SubscribeInline from 'components/SubscribeInline'
 import SubscribeModal from 'components/SubscribeModal'
 import { getCookie, pageTitle, setCookie } from 'helpers'
 import useScrollPercentage from 'hooks/useScrollPercentage'
+
+import { GoogleTagManager } from '../gtm'
 
 const inter = Inter({ subsets: ['latin'], weights: [300, 600] })
 
@@ -92,7 +95,7 @@ const Sketchplanations = ({ Component, pageProps }) => {
 
   useEffect(() => {
     polyfillDownloadAttr()
-    TagManager.initialize({ gtmId: 'GTM-WNS3LG4' })
+    // TagManager.initialize({ gtmId: 'GTM-WNS3LG4' })
     setSubscribeModalEnabled(!getCookie('mjPopinShown'))
   }, [])
 
@@ -114,12 +117,36 @@ const Sketchplanations = ({ Component, pageProps }) => {
      * https://cookieconsent.orestbida.com/reference/configuration-reference.html
      */
     CookieConsent.run({
+      guiOptions: {
+        consentModal: {
+          layout: 'box',
+          position: 'bottom right',
+          flipButtons: true,
+          equalWeightButtons: false,
+        },
+        preferencesModal: {
+          equalWeightButtons: false,
+        },
+      },
       categories: {
         necessary: {
           enabled: true, // this category is enabled by default
           readOnly: true, // this category cannot be disabled
         },
-        analytics: {},
+        analytics: {
+          enabled: false,
+          readOnly: false,
+          autoClear: {
+            cookies: [
+              {
+                name: '_ga',
+              },
+              {
+                name: '_hj',
+              },
+            ],
+          },
+        },
       },
 
       language: {
@@ -131,13 +158,13 @@ const Sketchplanations = ({ Component, pageProps }) => {
               description: 'Cookie modal description',
               acceptAllBtn: 'Accept all',
               acceptNecessaryBtn: 'Reject all',
-              showPreferencesBtn: 'Manage Individual preferences',
+              showPreferencesBtn: 'Manage',
             },
             preferencesModal: {
               title: 'Manage cookie preferences',
               acceptAllBtn: 'Accept all',
               acceptNecessaryBtn: 'Reject all',
-              savePreferencesBtn: 'Accept current selection',
+              savePreferencesBtn: 'Save preferences',
               closeIconLabel: 'Close modal',
               sections: [
                 {
@@ -172,30 +199,33 @@ const Sketchplanations = ({ Component, pageProps }) => {
   }, [])
 
   return (
-    <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-      <Head>
-        <title>{pageTitle()}</title>
-        <meta name='viewport' content='width = device-width, initial-scale = 1, minimum-scale = 1' />
-      </Head>
-      <Header />
-      {!['/', '/explore', '/subscribe', '/subscribed'].includes(router.pathname) && <SubscribeInline />}
-      <div ref={ref} className={inter.className}>
-        <Component {...pageProps} />
-      </div>
-      {subscribeModalEnabled && (
-        <SubscribeModal show={!subscribeModalDismissed && scrolled} onHide={handleSubscribeModalDismissed} />
-      )}
-      <a
-        className='coffee'
-        data-visible={scrolled}
-        href='https://www.buymeacoffee.com/sketchplanator'
-        target='_blank'
-        rel='noreferrer'
-      >
-        <img src='/bmc.svg' width='4169' height='913' alt='Buy Me A Coffee' />
-      </a>
-      <PrismicToolbar repositoryName='sketchplanations' />
-    </Elements>
+    <>
+      <GoogleTagManager gtmId='GTM-WNS3LG4' />
+      <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
+        <Head>
+          <title>{pageTitle()}</title>
+          <meta name='viewport' content='width = device-width, initial-scale = 1, minimum-scale = 1' />
+        </Head>
+        <Header />
+        {!['/', '/explore', '/subscribe', '/subscribed'].includes(router.pathname) && <SubscribeInline />}
+        <div ref={ref} className={inter.className}>
+          <Component {...pageProps} />
+        </div>
+        {subscribeModalEnabled && (
+          <SubscribeModal show={!subscribeModalDismissed && scrolled} onHide={handleSubscribeModalDismissed} />
+        )}
+        <a
+          className='coffee'
+          data-visible={scrolled}
+          href='https://www.buymeacoffee.com/sketchplanator'
+          target='_blank'
+          rel='noreferrer'
+        >
+          <img src='/bmc.svg' width='4169' height='913' alt='Buy Me A Coffee' />
+        </a>
+        <PrismicToolbar repositoryName='sketchplanations' />
+      </Elements>
+    </>
   )
 }
 

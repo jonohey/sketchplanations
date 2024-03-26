@@ -80,9 +80,6 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
-  react-gtm-module:
-    specifier: ^2.0.11
-    version: 2.0.11
   react-headroom:
     specifier: ^3.2.1
     version: 3.2.1(react@18.2.0)
@@ -4660,10 +4657,6 @@ packages:
 
   /react-fast-compare@2.0.4:
     resolution: {integrity: sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==}
-    dev: false
-
-  /react-gtm-module@2.0.11:
-    resolution: {integrity: sha512-8gyj4TTxeP7eEyc2QKawEuQoAZdjKvMY4pgWfycGmqGByhs17fR+zEBs0JUDq4US/l+vbTl+6zvUIx27iDo/Vw==}
     dev: false
 
   /react-headroom@3.2.1(react@18.2.0):

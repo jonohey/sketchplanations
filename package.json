@@ -33,7 +33,6 @@
     "react-copy-to-clipboard": "^5.1.0",
     "react-currency-input-field": "^3.6.10",
     "react-dom": "^18.2.0",
-    "react-gtm-module": "^2.0.11",
     "react-headroom": "^3.2.1",
     "react-hotkeys-hook": "^4.3.8",
     "react-infinite-scroll-component": "^6.1.0",

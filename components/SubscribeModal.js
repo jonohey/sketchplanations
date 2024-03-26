@@ -1,12 +1,12 @@
+import { sendGTMEvent } from 'gtm'
 import { useEffect, useState } from 'react'
-import TagManager from 'react-gtm-module'
+
+import styles from './SubscribeModal.module.css'
 
 import { Page } from 'components'
 import Modal from 'components/Modal'
 import { setCookie } from 'helpers'
 import { client } from 'services/prismic'
-
-import styles from './SubscribeModal.module.css'
 
 const SubscribeModal = ({ show, onHide = () => {} }) => {
   const [subscribeModalDocument, setSubscribeModalDocument] = useState(null)
@@ -41,11 +41,9 @@ const SubscribeModal = ({ show, onHide = () => {} }) => {
     })
 
     try {
-      TagManager.dataLayer({
-        dataLayer: {
-          event: 'subscribe',
-          data: 'modal',
-        },
+      sendGTMEvent({
+        event: 'subscribe',
+        data: 'modal',
       })
     } catch (e) {} // eslint-disable-line no-empty
 

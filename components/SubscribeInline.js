@@ -1,11 +1,11 @@
 import { PrismicRichText } from '@prismicio/react'
+import { sendGTMEvent } from 'gtm'
 import { useEffect, useState } from 'react'
-import TagManager from 'react-gtm-module'
+
+import styles from './SubscribeInline.module.css'
 
 import { setCookie } from 'helpers'
 import { client, linkResolver } from 'services/prismic'
-
-import styles from './SubscribeInline.module.css'
 
 const SubscribeInline = () => {
   const [doc, setDoc] = useState(null)
@@ -37,11 +37,9 @@ const SubscribeInline = () => {
     })
 
     try {
-      TagManager.dataLayer({
-        dataLayer: {
-          event: 'subscribe',
-          data: 'inline',
-        },
+      sendGTMEvent({
+        event: 'subscribe',
+        data: 'inline',
       })
     } catch (e) {} // eslint-disable-line no-empty
 
