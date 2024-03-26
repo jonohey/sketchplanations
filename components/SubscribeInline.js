@@ -1,25 +1,16 @@
 import { PrismicRichText } from '@prismicio/react'
 import { sendGTMEvent } from 'gtm'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import styles from './SubscribeInline.module.css'
 
 import { setCookie } from 'helpers'
-import { client, linkResolver } from 'services/prismic'
+import { linkResolver } from 'services/prismic'
 
-const SubscribeInline = () => {
-  const [doc, setDoc] = useState(null)
+const SubscribeInline = ({ doc }) => {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [processing, setProcessing] = useState(false)
-
-  useEffect(() => {
-    const fetchDoc = async () => {
-      setDoc(await client.getSingle('subscribe_inline'))
-    }
-
-    fetchDoc()
-  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()

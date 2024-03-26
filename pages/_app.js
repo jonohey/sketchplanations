@@ -20,6 +20,7 @@ import SubscribeInline from 'components/SubscribeInline'
 import SubscribeModal from 'components/SubscribeModal'
 import { getCookie, pageTitle, setCookie } from 'helpers'
 import useScrollPercentage from 'hooks/useScrollPercentage'
+import { client } from 'services/prismic'
 
 import { GoogleTagManager } from '../gtm'
 
@@ -86,7 +87,7 @@ const ELEMENTS_OPTIONS = {
   ],
 }
 
-const Sketchplanations = ({ Component, pageProps }) => {
+const Sketchplanations = ({ Component, pageProps, subscribeInlineDoc }) => {
   const router = useRouter()
   const [ref, percentage] = useScrollPercentage()
   const [scrolled, setScrolled] = useState(false)
@@ -207,7 +208,9 @@ const Sketchplanations = ({ Component, pageProps }) => {
           <meta name='viewport' content='width = device-width, initial-scale = 1, minimum-scale = 1' />
         </Head>
         <Header />
-        {!['/', '/explore', '/subscribe', '/subscribed'].includes(router.pathname) && <SubscribeInline />}
+        {!['/', '/explore', '/subscribe', '/subscribed'].includes(router.pathname) && (
+          <SubscribeInline doc={subscribeInlineDoc} />
+        )}
         <div ref={ref} className={inter.className}>
           <Component {...pageProps} />
         </div>
@@ -227,6 +230,12 @@ const Sketchplanations = ({ Component, pageProps }) => {
       </Elements>
     </>
   )
+}
+
+Sketchplanations.getInitialProps = async () => {
+  const subscribeInlineDoc = await client.getSingle('subscribe_inline')
+
+  return { subscribeInlineDoc }
 }
 
 export default Sketchplanations
