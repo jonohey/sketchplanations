@@ -27,11 +27,6 @@ class MyDocument extends Document {
           <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='true' />
           <link rel='preconnect' href='https://js.stripe.com' crossOrigin='true' />
           <link rel='preconnect' href='https://images.prismic.io' />
-          <link
-            rel='stylesheet'
-            type='text/css'
-            href='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css'
-          />
         </Head>
         <body>
           <Main />
