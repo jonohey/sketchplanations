@@ -155,8 +155,8 @@ const Sketchplanations = ({ Component, pageProps, subscribeInlineDoc }) => {
         translations: {
           en: {
             consentModal: {
-              title: 'We use cookies',
-              description: 'Cookie modal description',
+              title: 'Welcome',
+              description: 'Stay and check out 100s of topics explained in sketches. Also, I use cookies.',
               acceptAllBtn: 'Accept all',
               acceptNecessaryBtn: 'Reject all',
               showPreferencesBtn: 'Manage',
