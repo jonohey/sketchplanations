@@ -20,7 +20,7 @@ import SubscribeModal from 'components/SubscribeModal'
 import { getCookie, pageTitle, setCookie } from 'helpers'
 import useScrollPercentage from 'hooks/useScrollPercentage'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'], weights: [300, 600] })
 
 const polyfillDownloadAttr = () => {
   const downloadAttributeSupport = 'download' in document.createElement('a')

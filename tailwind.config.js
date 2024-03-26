@@ -70,6 +70,24 @@ module.exports = {
             '--tw-prose-invert-pre-bg': 'var(--color-bgHighlight)',
             '--tw-prose-invert-th-borders': 'var(--color-text)',
             '--tw-prose-invert-td-borders': 'var(--color-text)',
+            h1: {
+              fontWeight: '600',
+            },
+            'h1 strong': {
+              fontWeight: '600',
+            },
+            h2: {
+              fontWeight: '600',
+            },
+            'h2 strong': {
+              fontWeight: '600',
+            },
+            'h3 strong': {
+              fontWeight: '600',
+            },
+            'h4 strong': {
+              fontWeight: '600',
+            },
           },
         },
       }),
