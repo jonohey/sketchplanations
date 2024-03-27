@@ -50,6 +50,7 @@ export function GoogleTagManager(props) {
         data-category='analytics'
         data-service='Google Tag Manager'
         src={`https://www.googletagmanager.com/gtm.js?id=${gtmId}${gtmLayer}${gtmAuth}${gtmPreview}`}
+        async
       />
     </>
   )

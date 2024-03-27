@@ -13,8 +13,8 @@ const Preview = ({ token }) => {
   return null
 }
 
-export async function getStaticProps({ query: { token, documentId } }) {
-  return { props: { token, documentId } }
+export async function getServerSideProps({ query: { token, documentId } }) {
+  return { token, documentId }
 }
 
 export default Preview

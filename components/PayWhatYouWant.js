@@ -173,6 +173,7 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
             </form>
             <div className={styles.footer}>
               <div className={styles['stripe-climate']}>
+                {/*eslint-disable-next-line @next/next/no-img-element */}
                 <img src='/stripe-climate-badge.svg' />
                 <span>
                   Sketchplanations will contribute <b>2% of your purchase</b> to remove CO₂ from the atmosphere

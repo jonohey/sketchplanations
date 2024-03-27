@@ -224,6 +224,7 @@ const Sketchplanations = ({ Component, pageProps, subscribeInlineDoc }) => {
           target='_blank'
           rel='noreferrer'
         >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src='/bmc.svg' width='4169' height='913' alt='Buy Me A Coffee' />
         </a>
         <PrismicToolbar repositoryName='sketchplanations' />
