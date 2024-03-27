@@ -170,7 +170,7 @@ const Sketchplanations = ({ Component, pageProps, subscribeInlineDoc }) => {
               sections: [
                 {
                   title: 'Somebody said ... cookies?',
-                  description: 'I want one!',
+                  description: 'Toggle on/off below as you wish. I use cookies to help make the site better.',
                 },
                 {
                   title: 'Strictly Necessary cookies',
@@ -188,8 +188,7 @@ const Sketchplanations = ({ Component, pageProps, subscribeInlineDoc }) => {
                 },
                 {
                   title: 'More information',
-                  description:
-                    'For any queries in relation to my policy on cookies and your choices, please <a href="#contact-page">contact us</a>',
+                  description: 'See my <a href="/privacy">privacy page</a>',
                 },
               ],
             },
