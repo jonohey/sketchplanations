@@ -13,7 +13,7 @@ const Preview = ({ token }) => {
   return null
 }
 
-Preview.getInitialProps = ({ query: { token, documentId } }) => {
+export async function getServerSideProps({ query: { token, documentId } }) {
   return { token, documentId }
 }
 

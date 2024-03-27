@@ -16,9 +16,9 @@ const Wisdom = ({ document }) => {
   )
 }
 
-Wisdom.getInitialProps = async () => {
+export async function getStaticProps() {
   const document = await client.getSingle('wisdom')
-  return { document }
+  return { props: { document } }
 }
 
 export default Wisdom

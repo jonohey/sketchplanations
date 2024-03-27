@@ -19,9 +19,9 @@ const About = ({ document }) => {
   )
 }
 
-About.getInitialProps = async () => {
+export const getStaticProps = async () => {
   const document = await client.getSingle('about')
-  return { document }
+  return { props: { document } }
 }
 
 export default About

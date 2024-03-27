@@ -3,22 +3,28 @@ import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
-import 'global.css'
 import 'lazysizes'
 import 'lazysizes/plugins/attrchange/ls.attrchange'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import TagManager from 'react-gtm-module'
+import * as CookieConsent from 'vanilla-cookieconsent'
+
+import 'vanilla-cookieconsent/dist/cookieconsent.css'
+
+import 'global.css'
 
 import Header from 'components/Header'
 import SubscribeInline from 'components/SubscribeInline'
 import SubscribeModal from 'components/SubscribeModal'
 import { getCookie, pageTitle, setCookie } from 'helpers'
 import useScrollPercentage from 'hooks/useScrollPercentage'
+import { client } from 'services/prismic'
 
-const inter = Inter({ subsets: ['latin'] })
+import { GoogleTagManager } from '../gtm'
+
+const inter = Inter({ subsets: ['latin'], weights: [300, 600] })
 
 const polyfillDownloadAttr = () => {
   const downloadAttributeSupport = 'download' in document.createElement('a')
@@ -81,7 +87,7 @@ const ELEMENTS_OPTIONS = {
   ],
 }
 
-const Sketchplanations = ({ Component, pageProps }) => {
+const Sketchplanations = ({ Component, pageProps, subscribeInlineDoc }) => {
   const router = useRouter()
   const [ref, percentage] = useScrollPercentage()
   const [scrolled, setScrolled] = useState(false)
@@ -90,7 +96,7 @@ const Sketchplanations = ({ Component, pageProps }) => {
 
   useEffect(() => {
     polyfillDownloadAttr()
-    TagManager.initialize({ gtmId: 'GTM-WNS3LG4' })
+    // TagManager.initialize({ gtmId: 'GTM-WNS3LG4' })
     setSubscribeModalEnabled(!getCookie('mjPopinShown'))
   }, [])
 
@@ -106,51 +112,130 @@ const Sketchplanations = ({ Component, pageProps }) => {
     setCookie('mjPopinShown', true, 14)
   }
 
-  return (
-    <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-      <Head>
-        <title>{pageTitle()}</title>
-        <meta name='viewport' content='width = device-width, initial-scale = 1, minimum-scale = 1' />
-      </Head>
-      <Header />
-      {!['/', '/explore', '/subscribe', '/subscribed'].includes(router.pathname) && <SubscribeInline />}
-      <div ref={ref} className={inter.className}>
-        <Component {...pageProps} />
-      </div>
-      {subscribeModalEnabled && (
-        <SubscribeModal show={!subscribeModalDismissed && scrolled} onHide={handleSubscribeModalDismissed} />
-      )}
-      <a
-        className='coffee'
-        data-visible={scrolled}
-        href='https://www.buymeacoffee.com/sketchplanator'
-        target='_blank'
-        rel='noreferrer'
-      >
-        <img src='/bmc.svg' width='4169' height='913' alt='Buy Me A Coffee' />
-      </a>
-      <script src='https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js' />
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `window.cookieconsent.initialise({
-            "palette": {
-              "popup": {
-                "background": "#000"
+  useEffect(() => {
+    /**
+     * All config. options available here:
+     * https://cookieconsent.orestbida.com/reference/configuration-reference.html
+     */
+    CookieConsent.run({
+      guiOptions: {
+        consentModal: {
+          layout: 'box',
+          position: 'bottom right',
+          flipButtons: true,
+          equalWeightButtons: false,
+        },
+        preferencesModal: {
+          equalWeightButtons: false,
+        },
+      },
+      categories: {
+        necessary: {
+          enabled: true, // this category is enabled by default
+          readOnly: true, // this category cannot be disabled
+        },
+        analytics: {
+          enabled: false,
+          readOnly: false,
+          autoClear: {
+            cookies: [
+              {
+                name: '_ga',
               },
-              "button": {
-                "background": "#fbf8de"
-              }
+              {
+                name: '_hj',
+              },
+            ],
+          },
+        },
+      },
+
+      language: {
+        default: 'en',
+        translations: {
+          en: {
+            consentModal: {
+              title: 'Welcome',
+              description: 'Stay and check out 100s of topics explained in sketches. Also, I use cookies.',
+              acceptAllBtn: 'Accept all',
+              acceptNecessaryBtn: 'Reject all',
+              showPreferencesBtn: 'Manage',
             },
-            "theme": "classic",
-            "content": {
-              "message": "Welcome! Stay and check out 100s of topics explained in sketches. Also, I use cookies."
-            }
-          })`,
-        }}
-      />
-      <PrismicToolbar repositoryName='sketchplanations' />
-    </Elements>
+            preferencesModal: {
+              title: 'Manage cookie preferences',
+              acceptAllBtn: 'Accept all',
+              acceptNecessaryBtn: 'Reject all',
+              savePreferencesBtn: 'Save preferences',
+              closeIconLabel: 'Close modal',
+              sections: [
+                {
+                  title: 'Somebody said ... cookies?',
+                  description: 'Toggle on/off below as you wish. I use cookies to help make the site better.',
+                },
+                {
+                  title: 'Strictly Necessary cookies',
+                  description:
+                    'These cookies are essential for the proper functioning of the website and cannot be disabled.',
+
+                  //this field will generate a toggle linked to the 'necessary' category
+                  linkedCategory: 'necessary',
+                },
+                {
+                  title: 'Performance and Analytics',
+                  description:
+                    'These cookies collect information about how you use our website. All of the data is anonymized and cannot be used to identify you.',
+                  linkedCategory: 'analytics',
+                },
+                {
+                  title: 'More information',
+                  description: 'See my <a href="/privacy">privacy page</a>',
+                },
+              ],
+            },
+          },
+        },
+      },
+    })
+  }, [])
+
+  return (
+    <>
+      <GoogleTagManager gtmId='GTM-WNS3LG4' />
+      <Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
+        <Head>
+          <title>{pageTitle()}</title>
+          <meta name='viewport' content='width = device-width, initial-scale = 1, minimum-scale = 1' />
+        </Head>
+        <Header />
+        {!['/', '/explore', '/subscribe', '/subscribed'].includes(router.pathname) && (
+          <SubscribeInline doc={subscribeInlineDoc} />
+        )}
+        <div ref={ref} className={inter.className}>
+          <Component {...pageProps} />
+        </div>
+        {subscribeModalEnabled && (
+          <SubscribeModal show={!subscribeModalDismissed && scrolled} onHide={handleSubscribeModalDismissed} />
+        )}
+        <a
+          className='coffee'
+          data-visible={scrolled}
+          href='https://www.buymeacoffee.com/sketchplanator'
+          target='_blank'
+          rel='noreferrer'
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src='/bmc.svg' width='4169' height='913' alt='Buy Me A Coffee' />
+        </a>
+        <PrismicToolbar repositoryName='sketchplanations' />
+      </Elements>
+    </>
   )
+}
+
+Sketchplanations.getInitialProps = async () => {
+  const subscribeInlineDoc = await client.getSingle('subscribe_inline')
+
+  return { subscribeInlineDoc }
 }
 
 export default Sketchplanations

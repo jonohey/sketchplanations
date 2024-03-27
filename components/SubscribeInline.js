@@ -1,25 +1,16 @@
 import { PrismicRichText } from '@prismicio/react'
-import { useEffect, useState } from 'react'
-import TagManager from 'react-gtm-module'
-
-import { setCookie } from 'helpers'
-import { client, linkResolver } from 'services/prismic'
+import { sendGTMEvent } from 'gtm'
+import { useState } from 'react'
 
 import styles from './SubscribeInline.module.css'
 
-const SubscribeInline = () => {
-  const [doc, setDoc] = useState(null)
+import { setCookie } from 'helpers'
+import { linkResolver } from 'services/prismic'
+
+const SubscribeInline = ({ doc }) => {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [processing, setProcessing] = useState(false)
-
-  useEffect(() => {
-    const fetchDoc = async () => {
-      setDoc(await client.getSingle('subscribe_inline'))
-    }
-
-    fetchDoc()
-  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -37,11 +28,9 @@ const SubscribeInline = () => {
     })
 
     try {
-      TagManager.dataLayer({
-        dataLayer: {
-          event: 'subscribe',
-          data: 'inline',
-        },
+      sendGTMEvent({
+        event: 'subscribe',
+        data: 'inline',
       })
     } catch (e) {} // eslint-disable-line no-empty
 

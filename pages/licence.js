@@ -15,9 +15,9 @@ const Licence = ({ document }) => {
   )
 }
 
-Licence.getInitialProps = async () => {
+export async function getStaticProps() {
   const document = await client.getSingle('licence')
-  return { document }
+  return { props: { document } }
 }
 
 export default Licence

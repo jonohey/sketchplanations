@@ -6,10 +6,10 @@ const Error = () => {
   return <Oops />
 }
 
-Error.getInitialProps = ({ res, err }) => {
+export async function getServerSideProps({ res, err }) {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404
   Sentry.captureException(err)
-  return { statusCode }
+  return { props: { statusCode } }
 }
 
 export default Error

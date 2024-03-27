@@ -1,10 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
+
+import styles from './Oops.module.css'
 
 import { pageTitle } from 'helpers'
 
 import oopsImage from '../public/oops.png'
-import styles from './Oops.module.css'
 
 const loader = ({ src }) => src
 
@@ -20,7 +22,7 @@ const Oops = ({ children }) => {
         </div>
         {children}
         <p>
-          Maybe <a href='/explore'>search Sketchplanations</a> or try looking in <a href='/tags'>tags</a>?
+          Maybe <Link href='/explore'>search Sketchplanations</Link> or try looking in <Link href='/tags'>tags</Link>?
         </p>
         <p>
           Please let me know if a link is broken so I can fix it for others. I’m at{' '}

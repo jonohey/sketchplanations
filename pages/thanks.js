@@ -19,9 +19,9 @@ const Thanks = ({ document }) => {
   )
 }
 
-Thanks.getInitialProps = async () => {
+export async function getStaticProps() {
   const document = await client.getSingle('thanks')
-  return { document }
+  return { props: { document } }
 }
 
 export default Thanks

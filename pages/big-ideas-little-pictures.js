@@ -1,10 +1,10 @@
 import Head from 'next/head'
 
+import styles from './big-ideas-little-pictures.module.css'
+
 import { Page } from 'components'
 import { pageTitle } from 'helpers'
 import { client } from 'services/prismic'
-
-import styles from './big-ideas-little-pictures.module.css'
 
 const About = ({ document }) => {
   return (
@@ -20,9 +20,9 @@ const About = ({ document }) => {
   )
 }
 
-About.getInitialProps = async () => {
+export async function getStaticProps() {
   const document = await client.getSingle('book')
-  return { document }
+  return { props: { document } }
 }
 
 export default About
