@@ -15,9 +15,9 @@ const Subscribed = ({ document }) => {
   )
 }
 
-Subscribed.getInitialProps = async () => {
+export async function getStaticProps() {
   const document = await client.getSingle('subscribed')
-  return { document }
+  return { props: { document } }
 }
 
 export default Subscribed

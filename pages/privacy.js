@@ -5,9 +5,13 @@ const Privacy = ({ document }) => {
   return <Page document={document} />
 }
 
-Privacy.getInitialProps = async () => {
+export async function getStaticProps() {
   const document = await client.getSingle('privacy')
-  return { document }
+  return {
+    props: {
+      document,
+    },
+  }
 }
 
 export default Privacy

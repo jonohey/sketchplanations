@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import { useState } from 'react'
 
+import styles from './subscribe.module.css'
+
 import { Page } from 'components'
 import { pageTitle } from 'helpers'
 import { client } from 'services/prismic'
-
-import styles from './subscribe.module.css'
 
 const Subscribe = ({ subscribeDocument, subscribedDocument }) => {
   const [email, setEmail] = useState('')
@@ -61,10 +61,10 @@ const Subscribe = ({ subscribeDocument, subscribedDocument }) => {
   )
 }
 
-Subscribe.getInitialProps = async () => {
+export async function getStaticProps() {
   const subscribeDocument = await client.getSingle('subscribe')
   const subscribedDocument = await client.getSingle('subscribed')
-  return { subscribeDocument, subscribedDocument }
+  return { props: { subscribeDocument, subscribedDocument } }
 }
 
 export default Subscribe
