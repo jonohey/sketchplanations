@@ -105,8 +105,8 @@ dependencies:
     specifier: ^2.3.0
     version: 2.3.0(react-dom@18.2.0)(react@18.2.0)
   react-use-cookie:
-    specifier: ^1.4.0
-    version: 1.4.0(react@18.2.0)
+    specifier: ^1.6.1
+    version: 1.6.1(react@18.2.0)
   shiitake:
     specifier: ^3.0.2
     version: 3.0.2(react@18.2.0)
@@ -4899,8 +4899,8 @@ packages:
       react-motion: 0.5.2(react@18.2.0)
     dev: false
 
-  /react-use-cookie@1.4.0(react@18.2.0):
-    resolution: {integrity: sha512-e21YFkimh8OX6Ctqq89YeeiwsIL1jr2GyCeBdkBKDWY5X5o2yonbQuqfFODK4opteJS3F7ya0OuYg06lOeqvJQ==}
+  /react-use-cookie@1.6.1(react@18.2.0):
+    resolution: {integrity: sha512-77bENFpc+pi1roLJIrRvekprB4IjwG1Mowir0QdbwA0pDjgMtp3Ya9E1H9dJAisCxBvTZih6k5+2SSVo9BR2qw==}
     engines: {node: '>=8', npm: '>=5'}
     peerDependencies:
       react: '>=16.8'
