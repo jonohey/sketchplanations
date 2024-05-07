@@ -29,7 +29,7 @@ const nextConfig = {
     return [
       {
         source: '/podcast',
-        destination: 'https://tr.ee/BU4_BvCVi-',
+        destination: 'https://podcast.sketchplanations.com/',
         permanent: false,
       },
       {
