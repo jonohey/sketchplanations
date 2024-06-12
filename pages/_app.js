@@ -3,6 +3,7 @@ import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
+import { Analytics } from '@vercel/analytics/react'
 import 'lazysizes'
 import 'lazysizes/plugins/attrchange/ls.attrchange'
 import { Inter } from 'next/font/google'
@@ -228,6 +229,7 @@ const Sketchplanations = ({ Component, pageProps, subscribeInlineDoc }) => {
         </a>
         <PrismicToolbar repositoryName='sketchplanations' />
       </Elements>
+      <Analytics />
     </>
   )
 }
