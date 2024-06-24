@@ -18,7 +18,7 @@ import 'global.css'
 
 import Header from 'components/Header'
 import SubscribeInline from 'components/SubscribeInline'
-import { getCookie, pageTitle, setCookie } from 'helpers'
+import {pageTitle, setCookie } from 'helpers'
 import useScrollPercentage from 'hooks/useScrollPercentage'
 import { client } from 'services/prismic'
 
