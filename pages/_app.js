@@ -18,7 +18,6 @@ import 'global.css'
 
 import Header from 'components/Header'
 import SubscribeInline from 'components/SubscribeInline'
-import SubscribeModal from 'components/SubscribeModal'
 import { getCookie, pageTitle, setCookie } from 'helpers'
 import useScrollPercentage from 'hooks/useScrollPercentage'
 import { client } from 'services/prismic'
@@ -92,13 +91,10 @@ const Sketchplanations = ({ Component, pageProps, subscribeInlineDoc }) => {
   const router = useRouter()
   const [ref, percentage] = useScrollPercentage()
   const [scrolled, setScrolled] = useState(false)
-  const [subscribeModalEnabled, setSubscribeModalEnabled] = useState(true)
-  const [subscribeModalDismissed, setSubscribeModalDismissed] = useState(false)
 
   useEffect(() => {
     polyfillDownloadAttr()
     // TagManager.initialize({ gtmId: 'GTM-WNS3LG4' })
-    setSubscribeModalEnabled(!getCookie('mjPopinShown'))
   }, [])
 
   useEffect(() => {
@@ -106,12 +102,6 @@ const Sketchplanations = ({ Component, pageProps, subscribeInlineDoc }) => {
 
     setScrolled(percentage > 0.5)
   }, [percentage])
-
-  const handleSubscribeModalDismissed = () => {
-    setSubscribeModalDismissed(true)
-    setSubscribeModalEnabled(false)
-    setCookie('mjPopinShown', true, 14)
-  }
 
   useEffect(() => {
     /**
@@ -214,9 +204,6 @@ const Sketchplanations = ({ Component, pageProps, subscribeInlineDoc }) => {
         <div ref={ref} className={inter.className}>
           <Component {...pageProps} />
         </div>
-        {subscribeModalEnabled && (
-          <SubscribeModal show={!subscribeModalDismissed && scrolled} onHide={handleSubscribeModalDismissed} />
-        )}
         <a
           className='coffee'
           data-visible={scrolled}
