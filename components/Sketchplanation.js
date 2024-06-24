@@ -120,7 +120,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
               </Modal>
               <SocialSharing handle={uid} title={title} text={prismicH.asText(body)} />
               <ul className={styles.tags}>
-                {tags.map((tag, index) => (
+                {tags.sort((a, b) => a.tag.slug.localeCompare(b.tag.slug)).map((tag, index) => (
                   <li key={index}>
                     <Link key={tag} href={`/tags/${tag.tag.slug}`}>
                       {tag.tag.slug.replace(/-/, ' ')}
