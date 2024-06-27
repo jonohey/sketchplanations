@@ -110,3 +110,7 @@
 .image {
   @apply bg-paper;
 }
+
+.published-at {
+  @apply py-6 text-sm text-subduedText;
+}

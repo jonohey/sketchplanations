@@ -9,6 +9,7 @@ import TextLoop from 'react-text-loop'
 import Shiitake from 'shiitake'
 
 import styles from './Sketchplanation.module.css'
+
 import SketchplanationImage from './SketchplanationImage'
 
 const SocialSharing = dynamic(() => import('./SocialSharing'))
@@ -19,14 +20,14 @@ const Modal = dynamic(() => import('./Modal'))
 const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = false, priority = false }) => {
   const [pwywModalOpen, setPwywModalOpen] = useState(false)
   const {
-    data: { image, title, body, redbubble_link_url, podcast_link_url },
+    data: { image, title, body, published_at: publishedAt, redbubble_link_url, podcast_link_url },
     uid,
   } = sketchplanation
 
   const tags = sort(sketchplanation.data.tags).asc()
 
   return (
-    <div className={styles.root}>
+    <article className={styles.root}>
       {fullPost ? (
         <div className={styles.image}>
           <SketchplanationImage image={image} title={title} priority={true} onDownload={() => setPwywModalOpen(true)} />
@@ -62,6 +63,16 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         )}
         {fullPost && (
           <>
+            <div className={styles['published-at']}>
+              Published{' '}
+              <time dateTime={publishedAt}>
+                {new Date(publishedAt).toLocaleDateString('en-GB', {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
+                })}
+              </time>
+            </div>
             <div className={styles['after-post']}>
               <div className={styles['licence-note']}>
                 <p>
@@ -120,19 +131,21 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
               </Modal>
               <SocialSharing handle={uid} title={title} text={prismicH.asText(body)} />
               <ul className={styles.tags}>
-                {tags.sort((a, b) => a.tag.slug.localeCompare(b.tag.slug)).map((tag, index) => (
-                  <li key={index}>
-                    <Link key={tag} href={`/tags/${tag.tag.slug}`}>
-                      {tag.tag.slug.replace(/-/, ' ')}
-                    </Link>
-                  </li>
-                ))}
+                {tags
+                  .sort((a, b) => a.tag.slug.localeCompare(b.tag.slug))
+                  .map((tag, index) => (
+                    <li key={index}>
+                      <Link key={tag} href={`/tags/${tag.tag.slug}`}>
+                        {tag.tag.slug.replace(/-/, ' ')}
+                      </Link>
+                    </li>
+                  ))}
               </ul>
             </div>
           </>
         )}
       </div>
-    </div>
+    </article>
   )
 }
 
