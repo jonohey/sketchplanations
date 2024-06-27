@@ -47,7 +47,7 @@ const Navigation = () => {
       </Link>
       <span className={styles['gt-sm-screen']}>
         <a
-          href='https://www.redbubble.com/people/sketchplanator/shop?asc=u'
+          href='https://www.redbubble.com/people/sketchplanator/explore?asc=u&page=1&sortOrder=top%20selling'
           target='_blank'
           rel='noreferrer'
           className={styles.item}
