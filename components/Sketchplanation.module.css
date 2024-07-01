@@ -112,5 +112,5 @@
 }
 
 .published-at {
-  @apply py-6 text-sm text-subduedText;
+  @apply py-4 text-sm text-subduedText;
 }

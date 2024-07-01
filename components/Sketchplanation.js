@@ -26,6 +26,24 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
 
   const tags = sort(sketchplanation.data.tags).asc()
 
+  // Parse the publishedAt date
+  const publishedDate = new Date(publishedAt)
+  const currentDate = new Date()
+
+  let publishedText
+  if (publishedDate > currentDate) {
+    // If the date is in the future, set publishedText to "Latest"
+    publishedText = <>✨ Latest</>
+  } else {
+    // Format the date based on whether it's from the current year or a previous year
+    const dateFormatOptions = {
+      day: 'numeric',
+      month: 'short',
+      ...(publishedDate.getFullYear() !== currentDate.getFullYear() && { year: 'numeric' }),
+    }
+    publishedText = publishedDate.toLocaleDateString('en-GB', dateFormatOptions)
+  }
+
   return (
     <article className={styles.root}>
       {fullPost ? (
@@ -56,6 +74,9 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
                     {prismicH.asText(body)}
                   </Shiitake>
                   <Link href={`/${uid}`}>Read more…</Link>
+                  <div className={styles['published-at']}>
+                    <time dateTime={publishedAt}>{publishedText}</time>
+                  </div>
                 </>
               )}
             </div>
