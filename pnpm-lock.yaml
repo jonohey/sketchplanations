@@ -95,9 +95,6 @@ dependencies:
   react-intersection-observer:
     specifier: ^9.5.3
     version: 9.5.3(react@18.2.0)
-  react-justified-grid:
-    specifier: ^1.0.0
-    version: 1.0.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
   react-overlays:
     specifier: ^5.2.1
     version: 5.2.1(react-dom@18.2.0)(react@18.2.0)
@@ -1246,10 +1243,6 @@ packages:
     dependencies:
       '@types/node': 20.10.2
     dev: true
-
-  /@types/lodash@4.14.201:
-    resolution: {integrity: sha512-y9euML0cim1JrykNxADLfaG0FgD1g/yTHwUs/Jg9ZIU7WKj2/4IW9Lbb1WZbvck78W/lfGXFfe+u2EGfIJXdLQ==}
-    dev: false
 
   /@types/node@20.10.2:
     resolution: {integrity: sha512-37MXfxkb0vuIlRKHNxwCkb60PNBpR94u4efQuN4JgIAm66zfCDXGSAFCef9XUWFovX2R1ok6Z7MHhtdVXXkkIw==}
@@ -4845,21 +4838,6 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
-
-  /react-justified-grid@1.0.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-QDP86ynUD8izlh+oEiWk5mQDwSay2IKS91GN+x5F5Aeh31qMMwGcqfdf+u2Gkp218ZC7VS43AxpxjWCBbpJesw==}
-    engines: {node: '>=8', npm: '>=5'}
-    peerDependencies:
-      prop-types: ^15.5.4
-      react: ^15.0.0 || ^16.0.0
-      react-dom: ^15.0.0 || ^16.0.0
-    dependencies:
-      '@types/lodash': 4.14.201
-      lodash: 4.17.21
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: false
 
   /react-lifecycles-compat@3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
