@@ -5,3 +5,19 @@
 .noResults {
   @apply p-2 text-center;
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+.gridItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  @apply py-2 text-sm;
+}
