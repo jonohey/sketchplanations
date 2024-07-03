@@ -1,6 +1,3 @@
-import Image from 'next/image'
-import Link from 'next/link'
-
 import styles from './SketchplanationsGrid.module.css'
 
 import { isBlank } from 'helpers'
