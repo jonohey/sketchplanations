@@ -6,10 +6,10 @@ import Head from 'next/head'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
+import styles from './[uid].module.css'
+
 import { pageTitle } from 'helpers'
 import { client } from 'services/prismic'
-
-import styles from './[uid].module.css'
 
 const Sketchplanation = dynamic(() => import('../components/Sketchplanation'))
 const PrevNextSketchplanation = dynamic(() => import('../components/PrevNextSketchplanation'))
@@ -70,11 +70,14 @@ const SketchplanationPage = ({
         <meta name='robots' content='max-image-preview:large' />
         <meta name='description' content={truncate(prismicH.asText(body), 160)} />
         <meta key='og:title' property='og:title' content={title} />
-        <meta property='og:description' content={prismicH.asText(body)} />
+        <meta property='og:description' content={truncate(prismicH.asText(body), 200)} />
         <meta property='og:image' content={`${image.url}&w=1200`} />
         <meta property='og:url' content={`https://sketchplanations.com/${uid}`} />
         <meta name='twitter:card' content='summary_large_image' />
-        <meta name='twitter:image:alt' content={title} />
+        <meta name='twitter:image:alt' content={image.alt} />
+        <meta name='twitter:image' content={`${image.url}&w=1200`} />
+        <meta name='twitter:title' content={truncate(title, 70)} />
+        <meta name='twitter:description' content={truncate(prismicH.asText(body), 200)} />
       </Head>
       <div className={styles['prev-next-header']}>
         {nextSketchplanation ? (
