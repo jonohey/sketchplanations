@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import styles from './SketchplanationsGrid.module.css'
 
 import { isBlank } from 'helpers'
@@ -37,10 +39,12 @@ const SketchplanationsGrid = ({ prismicDocs }) => {
   return (
     <div className={styles.grid}>
       {images.map((image) => (
-        <div key={image.uid} className={styles.gridItem}>
-          <div className={styles.title}>{image.title}</div>
-          <img src={image.src} alt={image.alt} style={{ maxWidth: '100%', height: 'auto' }} />
-        </div>
+        <Link key={image.uid} href={`/${image.uid}`}>
+          <div className={styles.gridItem}>
+            <div className={styles.title}>{image.title}</div>
+            <img src={image.src} loading='lazy' alt={image.alt} style={{ maxWidth: '100%', height: 'auto' }} />
+          </div>
+        </Link>
       ))}
     </div>
   )
