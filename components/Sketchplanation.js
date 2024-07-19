@@ -46,11 +46,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
 
   return (
     <article className={styles.root}>
-      {fullPost ? (
-        <div className={styles.image}>
-          <SketchplanationImage image={image} title={title} priority={true} onDownload={() => setPwywModalOpen(true)} />
-        </div>
-      ) : (
+      {!fullPost && (
         <Link href={`/${uid}`} className={styles.image}>
           <SketchplanationImage image={image} title={title} priority={priority} lightbox={false} />
         </Link>
@@ -59,7 +55,17 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
         {!hideContent && (
           <>
             {fullPost ? (
-              <TextHeader>{title}</TextHeader>
+              <>
+                <TextHeader>{title}</TextHeader>
+                <div className={styles.image}>
+                  <SketchplanationImage
+                    image={image}
+                    title={title}
+                    priority={true}
+                    onDownload={() => setPwywModalOpen(true)}
+                  />
+                </div>
+              </>
             ) : (
               <Link href={`/${uid}`}>
                 <TextHeader as='h2'>{title}</TextHeader>
