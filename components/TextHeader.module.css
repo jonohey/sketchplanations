@@ -3,9 +3,17 @@
   font-weight: 300;
 }
 
+.root h2 {
+  @apply py-4;
+}
+
 @screen sm {
   .root h1 {
     @apply text-3xl;
+  }
+
+  .root h2 {
+    @apply text-xl;
   }
 }
 

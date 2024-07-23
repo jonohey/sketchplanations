@@ -10,7 +10,8 @@
 }
 
 .image {
-  @apply block mb-10;
+  @apply block mb-4;
+  @apply bg-paper;
   box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow);
 }
 
@@ -26,6 +27,9 @@
 @screen sm {
   .content {
     @apply px-0;
+  }
+  .image {
+    @apply mb-10;
   }
 }
 
@@ -105,10 +109,6 @@
 
 .podcast:hover {
   color: var(--color-blue);
-}
-
-.image {
-  @apply bg-paper;
 }
 
 .published-at {
