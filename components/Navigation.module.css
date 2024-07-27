@@ -1,47 +1,30 @@
 .root {
-  @apply relative flex justify-center -mx-2 font-normal;
+  @apply relative flex justify-center font-normal self-stretch;
+  @apply flex-col;
 }
 
-@screen sm {
+@screen md {
   .root {
-    @apply -mx-3;
+    @apply -mx-3 flex-row;
   }
 }
 
 .root :global(a) {
-  @apply relative flex items-center py-4 px-2 overflow-hidden;
+  @apply relative flex items-center py-3;
 }
 
-@screen sm {
+@screen md {
   .root :global(a) {
-    @apply px-3;
+    @apply px-3 py-0;
   }
-}
-
-.selected {
-  @apply text-gray-400;
 }
 
 .item {
-  @apply flex gap-x-2 items-center;
+  @apply flex gap-x-2 items-center justify-center;
 }
 
-.gt-xxs-screen {
-  @apply hidden;
-}
-
-@screen xxs {
-  .gt-xxs-screen {
-    @apply flex;
-  }
-}
-
-.gt-sm-screen {
-  @apply hidden;
-}
-
-@screen sm {
-  .gt-sm-screen {
-    @apply flex;
+@screen md {
+  .item {
+    @apply justify-start;
   }
 }

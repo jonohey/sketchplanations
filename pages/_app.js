@@ -18,7 +18,7 @@ import 'global.css'
 
 import Header from 'components/Header'
 import SubscribeInline from 'components/SubscribeInline'
-import {pageTitle} from 'helpers'
+import { pageTitle } from 'helpers'
 import useScrollPercentage from 'hooks/useScrollPercentage'
 import { client } from 'services/prismic'
 
@@ -198,7 +198,7 @@ const Sketchplanations = ({ Component, pageProps, subscribeInlineDoc }) => {
           <meta name='viewport' content='width = device-width, initial-scale = 1, minimum-scale = 1' />
         </Head>
         <Header />
-        {!['/', '/explore', '/subscribe', '/subscribed'].includes(router.pathname) && (
+        {!['/', '/explore', '/subscribe', '/subscribed', '/blank'].includes(router.pathname) && (
           <SubscribeInline doc={subscribeInlineDoc} />
         )}
         <div ref={ref} className={inter.className}>
