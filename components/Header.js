@@ -79,37 +79,36 @@ const Header = () => {
   return (
     <>
       <div className={classNames(styles.root, isOpen && styles['root-open'])}>
-        <div className={styles.divider} />
-        <div className={classNames(styles['ident-and-search'], isOpen && styles['ident-and-search-open'])}>
-          <button className={styles.menu} onClick={() => setIsOpen(!isOpen)}>
-            <Menu />
-          </button>
-          {router.pathname === '/' ? (
-            <div onClick={scrollToTop} className={styles.ident} style={{ cursor: 'pointer' }}>
-              {/* <LogoPicture /> */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src='/logo.svg' className={styles.ident__svg} alt='Sketchplanations' />
-            </div>
-          ) : (
-            <Link href='/' className={styles.ident}>
-              {/* <LogoPicture /> */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src='/logo.svg' className={styles.ident__svg} alt='Sketchplanations' />
-            </Link>
-          )}
-          <button className={styles['search-toggle']} onClick={() => setIsSearching(true)}>
-            <span className={styles['search-toggle__icon']}>
+        <button className={styles.menu} onClick={() => setIsOpen(!isOpen)}>
+          <Menu />
+        </button>
+        {router.pathname === '/' ? (
+          <div onClick={scrollToTop} className={styles.ident} style={{ cursor: 'pointer' }}>
+            {/* <LogoPicture /> */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src='/logo.svg' className={styles.ident__svg} alt='Sketchplanations' />
+          </div>
+        ) : (
+          <Link href='/' className={styles.ident}>
+            {/* <LogoPicture /> */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src='/logo.svg' className={styles.ident__svg} alt='Sketchplanations' />
+          </Link>
+        )}
+        <div className={styles['search-toggle']}>
+          <button className={styles['search-toggle-button']} onClick={() => setIsSearching(true)}>
+            <span className={styles['search-toggle-button__icon']}>
               <Search strokeWidth={1} size={22} />
             </span>
-            <span className={styles['search-toggle__text']}>Search…</span>
+            <span className={styles['search-toggle-button__text']}>Search…</span>
           </button>
         </div>
-        <div className={classNames(styles.main, isOpen && styles['main-open'])}>
-          <div className={styles['search-form']}>
-            <SearchForm isBusy={busy} value={query} onChange={setQuery} onReset={reset} />
-          </div>
+        <div className={classNames(styles.navigation, isOpen && styles['navigation--is-open'])}>
           <Navigation />
         </div>
+        <div className={styles.divider} />
+        <div className={styles['spacer-left']} />
+        <div className={styles['spacer-right']} />
       </div>
 
       {isSearching && (
