@@ -33,6 +33,11 @@ const Header = () => {
 
   const { query, setQuery, reset, results, busy } = useSearch()
 
+  useHotkeys('meta+k', (e) => {
+    e.preventDefault()
+    setIsSearching(true)
+  })
+
   useEffect(() => {
     if (isSearching || isBlank(query)) return undefined
 
