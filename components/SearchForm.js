@@ -1,18 +1,32 @@
 import classNames from 'classnames'
-
-import { isPresent } from 'helpers'
+import { Search } from 'lucide-react'
+import { useRef } from 'react'
 
 import styles from './SearchForm.module.css'
 
-const SearchForm = ({ value, isBusy = false, onChange = () => {}, onReset = () => {} }) => {
+import { isPresent } from 'helpers'
+
+const SearchForm = ({ value, isBusy = false, onChange = () => {}, onReset = () => {}, ...props }) => {
+  const inputRef = useRef(null)
+
+  const handleReset = () => {
+    onReset()
+    inputRef.current.focus()
+  }
+
   return (
     <div className={styles.root}>
+      <div className={styles.icon}>
+        <Search strokeWidth={1} size={22} />
+      </div>
       <input
+        ref={inputRef}
         className={styles.input}
         type='text'
         placeholder='Search…'
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        {...props}
       />
       {isBusy && (
         <div className={styles['loading-indicator']}>
@@ -22,7 +36,7 @@ const SearchForm = ({ value, isBusy = false, onChange = () => {}, onReset = () =
         </div>
       )}
       <button
-        onClick={onReset}
+        onClick={handleReset}
         className={classNames(styles['reset-button'], isPresent(value) && styles['reset-button-active'])}
         type='button'
       >

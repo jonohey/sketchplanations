@@ -1,6 +1,7 @@
 .root {
-  @apply relative mx-auto px-4 mb-4 sm:mb-4 md:mb-6 flex flex-row;
-  max-width: 28rem;
+  /* @apply relative mx-auto px-4 mb-4 sm:mb-4 md:mb-6 flex flex-row; */
+  @apply relative flex flex-row;
+  /* max-width: 28rem; */
 }
 
 @screen sm {
@@ -9,13 +10,17 @@
   }
 }
 
+.icon {
+  @apply absolute top-0 left-3 sm:left-5 h-full flex items-center pointer-events-none text-subduedText;
+}
+
 .input {
-  @apply block py-2 px-4 w-full bg-inputBg border border-inputBorder border-r-0 outline-none grow rounded-lg rounded-r-none placeholder-subduedText;
+  @apply block py-2 pr-4 pl-10 w-full bg-inputBg border border-inputBorder border-r-0 outline-none grow rounded-lg rounded-r-none placeholder-subduedText;
 }
 
 @screen sm {
   .input {
-    @apply py-3 px-6 text-lg rounded-full rounded-r-none;
+    @apply py-3 pr-6 pl-12 text-lg rounded-full rounded-r-none;
   }
 }
 

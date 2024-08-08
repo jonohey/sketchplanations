@@ -16,7 +16,7 @@ const fulltextDocumentSearch = async (documentType, query) => {
   return results
 }
 
-export const searchSketchplanations = async (query) => {
+export const searchSketchplanations = async (query, { limit = 100 } = {}) => {
   if (!query || query === '') return []
 
   const { results: titleResults } = await client.get({
@@ -24,7 +24,7 @@ export const searchSketchplanations = async (query) => {
       prismic.filter.at('document.type', 'sketchplanation'),
       prismic.filter.fulltext('my.sketchplanation.title', query),
     ],
-    pageSize: 100,
+    pageSize: limit,
   })
 
   const documentResults = await fulltextDocumentSearch('sketchplanation', query)

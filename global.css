@@ -80,13 +80,9 @@
 }
 
 html {
-  @apply bg-bg;
-}
-
-body {
   @apply bg-bg text-black;
-  font-family: 'Inter', sans-serif;
   font-weight: 300;
+  font-optical-sizing: auto;
 }
 
 h1,
@@ -129,7 +125,7 @@ pre {
 }
 
 .coffee {
-  @apply fixed z-10 bottom-0 left-0 mb-4 ml-4 flex flex-col items-center py-3 px-4 bg-white light:border shadow-lg rounded;
+  @apply fixed z-50 bottom-0 left-0 mb-4 ml-4 flex flex-col items-center py-3 px-4 bg-white light:border shadow-lg rounded;
   transform: translateY(150%);
   transition: transform 0.2s ease-out;
 }

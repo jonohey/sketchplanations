@@ -4,15 +4,15 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-import LoadingIndicator from 'components/LoadingIndicator'
-import SearchForm from 'components/SearchForm'
-import SketchplanationsGrid from 'components/SketchplanationsGrid'
-import Tags from 'components/Tags'
-import { isBlank } from 'helpers'
-import useSearch from 'hooks/useSearch'
-import { client } from 'services/prismic'
-
 import styles from './index.module.css'
+
+import LoadingIndicator from 'components/LoadingIndicator'
+// import SearchForm from 'components/SearchForm'
+// import SketchplanationsGrid from 'components/SketchplanationsGrid'
+// import Tags from 'components/Tags'
+// import { isBlank } from 'helpers'
+// import useSearch from 'hooks/useSearch'
+import { client } from 'services/prismic'
 
 const Sketchplanation = dynamic(() => import('../components/Sketchplanation'))
 
@@ -21,7 +21,7 @@ const Home = ({ sketchplanations: initialSketchplanations }) => {
   const [hasMore, setHasMore] = useState(true)
   const [sketchplanations, setSketchplanations] = useState(initialSketchplanations)
 
-  const { query, setQuery, reset, results, tagResults, busy } = useSearch()
+  // const { query, setQuery, reset, results, tagResults, busy } = useSearch()
 
   const fetchMore = async () => {
     const moreSketchplanations = (
@@ -110,27 +110,25 @@ const Home = ({ sketchplanations: initialSketchplanations }) => {
       <div className={styles.masthead}>
         <p className={styles.slogan}>Explaining the world one sketch at a time</p>
       </div>
-      <SearchForm isBusy={busy} value={query} onChange={setQuery} onReset={reset} />
-      {isBlank(query) && (
-        <InfiniteScroll
-          dataLength={sketchplanations.length}
-          next={fetchMore}
-          hasMore={hasMore}
-          loader={
-            <div className={styles.loading}>
-              Loading more… <LoadingIndicator />
-            </div>
-          }
-        >
-          <div className={styles.sketchplanations}>
-            {sketchplanations.map((sketchplanation, index) => (
-              <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} priority={index === 0} />
-            ))}
+      {/* <SearchForm isBusy={busy} value={query} onChange={setQuery} onReset={reset} /> */}
+      <InfiniteScroll
+        dataLength={sketchplanations.length}
+        next={fetchMore}
+        hasMore={hasMore}
+        loader={
+          <div className={styles.loading}>
+            Loading more… <LoadingIndicator />
           </div>
-        </InfiniteScroll>
-      )}
-      {tagResults && <Tags tags={tagResults} />}
-      {results && <SketchplanationsGrid prismicDocs={results} />}
+        }
+      >
+        <div className={styles.sketchplanations}>
+          {sketchplanations.map((sketchplanation, index) => (
+            <Sketchplanation key={sketchplanation.uid} sketchplanation={sketchplanation} priority={index === 0} />
+          ))}
+        </div>
+      </InfiniteScroll>
+      {/* {tagResults && <Tags tags={tagResults} />} */}
+      {/* {results && <SketchplanationsGrid prismicDocs={results} />} */}
     </>
   )
 }

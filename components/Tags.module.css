@@ -1,5 +1,5 @@
 .root {
-  @apply relative w-full mb-4 md:mb-6;
+  @apply relative w-full;
   border-color: rgba(255, 255, 255, 0.038);
 }
 
@@ -10,7 +10,7 @@
 }
 
 .tags {
-  @apply relative flex md:flex-wrap md:justify-center px-5 gap-2 md:gap-3;
+  @apply relative flex md:flex-wrap md:justify-center gap-2;
 
   overflow-x: auto;
   -webkit-overflow-scrolling: touch; /* for smoother scrolling on iOS */
@@ -19,20 +19,28 @@
   scroll-behavior: smooth;
 }
 
+.tags--align-left {
+  justify-content: flex-start;
+}
+
 .tags::-webkit-scrollbar {
   display: none;
 }
 
-.label {
-  @apply relative flex-none block py-1 sm:py-2 border border-transparent text-sm text-subduedText;
-
-  display: none;
-}
-
-.tags a {
-  @apply relative flex-none block py-1 sm:py-2 px-3 sm:px-4 rounded-full border border-border text-sm;
+.tag {
+  @apply relative flex-none block py-1 px-3 rounded-full border border-border text-sm;
   transition: all 0.1s ease-out;
   scroll-snap-align: center;
+}
+
+.more-tags {
+  @apply relative flex-none block py-1 px-3 rounded-full border border-border text-sm font-medium;
+  transition: all 0.1s ease-out;
+  scroll-snap-align: center;
+}
+
+.more-tags:hover {
+  @apply bg-brightRed text-white border-brightRed shadow;
 }
 
 .tags b {
@@ -40,7 +48,7 @@
   opacity: 0.5;
 }
 
-.tags a:hover {
+.tag:hover {
   @apply bg-brightRed text-white border-brightRed shadow;
 }
 
@@ -52,7 +60,7 @@
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
   pointer-events: none;
-  @apply flex items-center justify-center pl-10 pr-2 h-full;
+  @apply flex items-center justify-center h-full pl-6;
   background-image: linear-gradient(
     to left,
     rgba(var(--color-bgRgb), 1),

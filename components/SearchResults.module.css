@@ -1,0 +1,48 @@
+.search-results {
+  @apply grid grid-cols-1 gap-y-6;
+}
+
+.search-results__tags {
+  @apply px-5;
+  /* outline: solid thin blue; */
+}
+
+.search-results__sketches {
+  /* outline: solid thin red; */
+}
+
+.search-results__empty {
+  @apply flex items-center justify-center flex-col gap-2;
+}
+
+.search-results__empty a {
+  @apply text-blue;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-indicator {
+  @apply px-6 pointer-events-none;
+}
+
+.loading-indicator svg {
+  width: 18px;
+  height: 18px;
+  fill: #aaa;
+  animation: spin 1s linear infinite;
+}
+
+.links {
+  @apply grid grid-flow-col-dense gap-x-6 justify-center px-6;
+}
+
+.link {
+  @apply text-blue;
+}
