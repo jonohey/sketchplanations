@@ -8,15 +8,22 @@ module.exports = {
   theme: {
     screens: {
       xxs: '380px',
+      maxXxs: { max: '379px' },
       xs: '480px',
+      maxXs: { max: '479px' },
       sm: '640px',
+      maxSm: { max: '639px' },
       md: '768px',
+      maxMd: { max: '767px' },
       lg: '1024px',
+      maxLg: { max: '1023px' },
       xl: '1280px',
+      maxXl: { max: '1279px' },
       light: { raw: '(prefers-color-scheme: light)' },
       dark: { raw: '(prefers-color-scheme: dark)' },
     },
     extend: {
+      opacity: ['group-hover'],
       colors: {
         black: 'var(--color-black)',
         paper: 'var(--color-paper)',

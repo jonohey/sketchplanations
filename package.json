@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^5.0.0",
-    "@tailwindcss/typography": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.14",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.3",
@@ -63,7 +63,7 @@
     "postcss-preset-env": "^9.3.0",
     "prettier": "^3.1.0",
     "styled-jsx-plugin-postcss": "^4.0.1",
-    "tailwindcss": "^3.3.6",
+    "tailwindcss": "^3.4.8",
     "webpack": "^5.77.0",
     "xmlbuilder2": "^3.0.2"
   }

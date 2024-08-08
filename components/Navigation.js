@@ -44,7 +44,9 @@ const Navigation = () => {
       <a href='https://podcast.sketchplanations.com' target='_blank' rel='noreferrer' className={styles.item}>
         Podcast
         {/* <ExternalLinkIcon /> */}
-        <ExternalLink strokeWidth={1} size={16} />
+        <span className={styles['external-link-icon']}>
+          <ExternalLink size={16} />
+        </span>
       </a>
       <Link href='/subscribe' className={styles.item}>
         <RoughNotation show={isSelected('/subscribe')} {...roughNotationProps}>
@@ -64,7 +66,9 @@ const Navigation = () => {
       >
         Shop
         {/* <ExternalLinkIcon /> */}
-        <ExternalLink strokeWidth={1} size={16} />
+        <span className={styles['external-link-icon']}>
+          <ExternalLink size={16} />
+        </span>
       </a>
     </nav>
   )

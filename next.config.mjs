@@ -1,3 +1,4 @@
+import buildInitialSearchResults from './utils/buildInitialSearchResults.mjs'
 import buildRss from './utils/buildRss.mjs'
 import buildSitemap from './utils/buildSitemap.mjs'
 import prismicToKV from './utils/prismicToKV.mjs'
@@ -3738,6 +3739,7 @@ const nextConfig = {
 }
 
 export default async () => {
+  await buildInitialSearchResults()
   await buildRss()
   await buildSitemap()
   await prismicToKV()

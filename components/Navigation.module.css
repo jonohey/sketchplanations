@@ -10,21 +10,19 @@
 }
 
 .root :global(a) {
-  @apply relative flex items-center py-3;
+  @apply relative flex items-center px-5 py-3 hover:text-blue text-xl;
 }
 
 @screen md {
   .root :global(a) {
-    @apply px-3 py-0;
+    @apply px-3 py-0 text-base;
   }
 }
 
 .item {
-  @apply flex gap-x-2 items-center justify-center;
+  @apply flex gap-x-2 items-center justify-start;
 }
 
-@screen md {
-  .item {
-    @apply justify-start;
-  }
+.external-link-icon {
+  @apply text-subduedText;
 }
