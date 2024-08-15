@@ -5,8 +5,6 @@ import { debounce } from 'throttle-debounce'
 
 import styles from './Tags.module.css'
 
-import { isBlank } from 'helpers'
-
 const OverflowIndicator = ({ direction, isScrollable, onClick }) => {
   const className = classNames(
     styles['overflow-indicator'],
