@@ -16,15 +16,17 @@ const Tag = ({ tag, sketchplanations }) => {
     return <div>Loading…</div>
   }
 
+  const humanizedTag = tag.replace(/-/g, ' ')
+
   return (
     <>
       <Head>
-        <title>{pageTitle(`Category: ${tag}`)}</title>
-        <meta name='description' content={`Sketchplanations from the ${tag} category`} />
+        <title>{pageTitle(`Category: ${humanizedTag}`)}</title>
+        <meta name='description' content={`Sketchplanations from the ${humanizedTag} category`} />
       </Head>
       <div className={styles.root}>
         <TextHeader className={styles.header}>
-          Category: <b>{tag}</b>
+          Category: <b>{humanizedTag}</b>
         </TextHeader>
         <SketchplanationsGrid prismicDocs={sketchplanations} />
       </div>
