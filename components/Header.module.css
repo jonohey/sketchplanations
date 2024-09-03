@@ -89,7 +89,7 @@
 }
 
 .search-toggle-button__text {
-  @apply text-subduedText select-none overflow-hidden text-ellipsis whitespace-nowrap pr-2;
+  @apply text-subduedText select-none overflow-hidden text-ellipsis whitespace-nowrap pr-1;
 }
 
 .search-toggle-button__keyboard-shortcut {
