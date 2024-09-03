@@ -22,6 +22,12 @@ const SearchResults = () => {
 
   const [randomHandle, setRandomHandle] = useState(null)
 
+  const loadingMessage = useMemo(() => {
+    // Get random loading message
+    const index = Math.floor(Math.random() * loadingMessages.length)
+    return loadingMessages[index]
+  }, [busy])
+
   useEffect(() => {
     const fetchRandomHandle = async () => {
       try {
@@ -55,12 +61,6 @@ const SearchResults = () => {
       </div>
     )
   }
-
-  const loadingMessage = useMemo(() => {
-    // Get random loading message
-    const index = Math.floor(Math.random() * loadingMessages.length)
-    return loadingMessages[index]
-  }, [busy])
 
   return (
     <div className={styles['search-results']}>
