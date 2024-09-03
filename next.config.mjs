@@ -29,6 +29,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/explore',
+        destination: '/search',
+        permanent: false,
+      },
+      {
         source: '/podcast',
         destination: 'https://podcast.sketchplanations.com/',
         permanent: false,
