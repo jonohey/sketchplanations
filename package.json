@@ -43,7 +43,7 @@
     "react-remove-scroll": "^2.5.10",
     "react-rough-notation": "^1.0.3",
     "react-text-loop": "^2.3.0",
-    "react-use-cookie": "^1.4.0",
+    "react-use-cookie": "^1.6.1",
     "shiitake": "^3.0.2",
     "stripe": "^11.17.0",
     "throttle-debounce": "^5.0.0",

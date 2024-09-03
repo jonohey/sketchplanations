@@ -1,30 +1,40 @@
 import { sort } from 'fast-sort'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import useCookie from 'react-use-cookie'
+
+import styles from './categories.module.css'
 
 import SortButtons from 'components/SortButtons'
 import { pageTitle } from 'helpers'
 import { client } from 'services/prismic'
 
-import styles from './tags.module.css'
-
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
 
-const Tags = ({ tagsByName, tagsByCount }) => {
-  const [sort, setSort] = useCookie('tagsSort', 'count')
+const Categories = ({ tagsByName, tagsByCount }) => {
+  const [sort, setSort] = useState('count') // Default value
+  const [cookieSort, setCookieSort] = useCookie('tagsSort', 'count')
+
+  useEffect(() => {
+    if (cookieSort) {
+      setSort(cookieSort)
+    }
+  }, [cookieSort])
+
+  console.log({ sort })
 
   return (
     <>
       <Head>
-        <title>{pageTitle('Tags')}</title>
+        <title>{pageTitle('Categories')}</title>
         <meta name='description' content='The most common topics and themes of Sketchplanations' />
       </Head>
-      <h1 className='sr-only'>Tags</h1>
+      <h1 className='sr-only'>Categories</h1>
       <div className='pt-6 px-6 max-w-md mx-auto'>
         <SortButtons
           value={sort}
-          onChange={setSort}
+          onChange={setCookieSort}
           options={[
             { label: 'Frequency', value: 'count' },
             { label: 'A-Z', value: 'name' },
@@ -34,7 +44,7 @@ const Tags = ({ tagsByName, tagsByCount }) => {
       {sort === 'name' && (
         <div className={styles.tags}>
           {tagsByName.map(({ tag, slug, count }) => (
-            <Link key={slug} href={`/tags/${slug}`}>
+            <Link key={slug} href={`/categories/${slug}`}>
               {tag} <b>{count}</b>
             </Link>
           ))}
@@ -43,7 +53,7 @@ const Tags = ({ tagsByName, tagsByCount }) => {
       {sort === 'count' && (
         <div className={styles.tags}>
           {tagsByCount.map(({ tag, slug, count }) => (
-            <Link key={slug} href={`/tags/${slug}`}>
+            <Link key={slug} href={`/categories/${slug}`}>
               {tag} <b>{count}</b>
             </Link>
           ))}
@@ -93,4 +103,4 @@ export async function getStaticProps() {
   return { props: { tagsByName, tagsByCount } }
 }
 
-export default Tags
+export default Categories

@@ -50,8 +50,8 @@ const SearchResults = () => {
     return (
       <div className={styles['search-results']}>
         <div className={styles.links}>
-          <Link href='/tags' className={styles.link}>
-            Tags
+          <Link href='/categories' className={styles.link}>
+            Categories
           </Link>
           <Link href='/archive' className={styles.link}>
             Archive

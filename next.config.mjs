@@ -75,8 +75,18 @@ const nextConfig = {
       },
       {
         source: '/browse',
-        destination: '/tags',
+        destination: '/categories',
         permanent: true,
+      },
+      {
+        source: '/tags',
+        destination: '/categories',
+        permanent: false,
+      },
+      {
+        source: '/tags/:tag',
+        destination: '/categories/:tag',
+        permanent: false,
       },
       {
         source: '/sketchplanations',

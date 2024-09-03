@@ -56,12 +56,12 @@ const Tags = ({ tags, align = 'center' }) => {
     <div className={styles.root}>
       <div className={classNames(styles.tags, align === 'left' && styles['tags--align-left'])} ref={containerRef}>
         {tags?.map(({ data: { identifier: tag }, slugs }) => (
-          <Link key={tag} href={`/tags/${slugs[0]}`} className={styles.tag}>
+          <Link key={tag} href={`/categories/${slugs[0]}`} className={styles.tag}>
             {tag}
           </Link>
         ))}
-        <Link href='/tags' className={styles['more-tags']}>
-          Explore tags
+        <Link href='/categories' className={styles['more-tags']}>
+          Explore categories
         </Link>
       </div>
       <OverflowIndicator

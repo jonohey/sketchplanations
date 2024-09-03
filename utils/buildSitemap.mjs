@@ -57,10 +57,10 @@ async function generateSitemap() {
     })
   })
 
-  // Tags
+  // Categories
   tags.map((tag) => {
     urls.push({
-      loc: `https://sketchplanations.com/tags/${tag.data.identifier}`,
+      loc: `https://sketchplanations.com/categories/${tag.data.identifier}`,
       lastmod: new Date(tag.last_publication_date).toISOString(),
       priority: '0.64',
     })
