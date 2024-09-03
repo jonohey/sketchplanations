@@ -1,23 +1,40 @@
 .root {
-  @apply p-5 sm:p-4 md:p-6;
-}
-
-.noResults {
-  @apply p-2 text-center;
-}
-
-.grid {
+  @apply grid gap-x-3 gap-y-3;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  /* align-items: center; */
 }
 
-.gridItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.item {
+  @apply relative overflow-hidden;
+  aspect-ratio: 5/4;
 }
 
-.title {
-  @apply py-2 text-sm;
+.item::before {
+  content: '';
+  @apply absolute bottom-0 left-0 right-0 h-1/2;
+  background-image: linear-gradient(
+    to top,
+    rgba(var(--color-bgRgb), 1),
+    rgba(var(--color-bgRgb), 1) 14%,
+    rgba(var(--color-bgRgb), 0)
+  );
+  pointer-events: none;
+}
+
+.item__title {
+  @apply block w-full pl-5 pr-12 pb-2 text-sm overflow-hidden text-ellipsis whitespace-nowrap;
+}
+
+.item__img {
+  /* @apply hover:absolute hover:z-10 hover:scale-110; */
+  /* @apply hover:-translate-y-2 transition-transform; */
+  /* @apply -skew-x-2; */
+  /* transform: perspective(75em) rotateX(30deg) scale(0.92) translateY(1.5rem);
+  transition: transform 0.2s ease-out 0s;
+  box-shadow: rgba(0, 0, 0, 0.8) 0px 25px 50px -12px; */
+}
+
+.item__img:hover {
+  /* transform: perspective(75rem) rotateY(5deg) scale(1) translateY(0); */
 }

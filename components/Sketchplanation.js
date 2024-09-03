@@ -162,7 +162,7 @@ const Sketchplanation = ({ sketchplanation, fullPost = false, hideContent = fals
                   .sort((a, b) => a.tag.slug.localeCompare(b.tag.slug))
                   .map((tag, index) => (
                     <li key={index}>
-                      <Link key={tag} href={`/tags/${tag.tag.slug}`}>
+                      <Link key={tag} href={`/categories/${tag.tag.slug}`}>
                         {tag.tag.slug.replace(/-/, ' ')}
                       </Link>
                     </li>

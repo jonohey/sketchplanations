@@ -3,8 +3,6 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { debounce } from 'throttle-debounce'
 
-import { isBlank } from 'helpers'
-
 import styles from './Tags.module.css'
 
 const OverflowIndicator = ({ direction, isScrollable, onClick }) => {
@@ -25,7 +23,7 @@ const OverflowIndicator = ({ direction, isScrollable, onClick }) => {
   )
 }
 
-const Tags = ({ tags }) => {
+const Tags = ({ tags, align = 'center' }) => {
   const containerRef = useRef(null)
   const [isScrollableLeft, setIsScrollableLeft] = useState(false)
   const [isScrollableRight, setIsScrollableRight] = useState(false)
@@ -54,17 +52,17 @@ const Tags = ({ tags }) => {
     }
   }, [])
 
-  if (isBlank(tags)) return null
-
   return (
     <div className={styles.root}>
-      <div className={styles.tags} ref={containerRef}>
-        <span className={styles.label}>Explore by tag:</span>
-        {tags.map(({ data: { identifier: tag }, slugs }) => (
-          <Link key={tag} href={`/tags/${slugs[0]}`}>
+      <div className={classNames(styles.tags, align === 'left' && styles['tags--align-left'])} ref={containerRef}>
+        {tags?.map(({ data: { identifier: tag }, slugs }) => (
+          <Link key={tag} href={`/categories/${slugs[0]}`} className={styles.tag}>
             {tag}
           </Link>
         ))}
+        <Link href='/categories' className={styles['more-tags']}>
+          Explore categories
+        </Link>
       </div>
       <OverflowIndicator
         direction='left'

@@ -1,47 +1,32 @@
 .root {
-  @apply relative flex justify-center -mx-2 font-normal;
+  @apply relative flex justify-center font-normal self-stretch;
+  @apply flex-col;
 }
 
-@screen sm {
+@screen md {
   .root {
-    @apply -mx-3;
+    @apply -mx-3 flex-row;
   }
-}
-
-.root :global(a) {
-  @apply relative flex items-center py-4 px-2 overflow-hidden;
-}
-
-@screen sm {
-  .root :global(a) {
-    @apply px-3;
-  }
-}
-
-.selected {
-  @apply text-gray-400;
 }
 
 .item {
-  @apply flex gap-x-2 items-center;
+  @apply relative flex items-center px-5 py-3 hover:text-blue text-xl;
 }
 
-.gt-xxs-screen {
-  @apply hidden;
-}
-
-@screen xxs {
-  .gt-xxs-screen {
-    @apply flex;
+@screen md {
+  .item {
+    @apply px-3 py-0 text-base;
   }
 }
 
-.gt-sm-screen {
-  @apply hidden;
+.item {
+  @apply flex gap-x-2 items-center justify-start;
 }
 
-@screen sm {
-  .gt-sm-screen {
-    @apply flex;
-  }
+.item--home {
+  @apply md:hidden;
+}
+
+.external-link-icon {
+  @apply text-subduedText;
 }

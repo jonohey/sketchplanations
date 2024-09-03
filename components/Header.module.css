@@ -1,18 +1,139 @@
 .root {
-  @apply sticky grid grid-flow-col-dense gap-x-6 top-0 items-center justify-between px-6 z-50;
+  --lr-width: 12rem;
+  --min-search-toggle-width: 4rem;
+  --spacer-width: 0;
+
+  @screen sm {
+    --min-search-toggle-width: 5rem;
+  }
+
+  @apply grid gap-x-4;
   background-color: var(--color-bgTransparent);
   backdrop-filter: saturate(180%) blur(5px);
+  grid-template-areas:
+    'spacer-left menu ident search-toggle spacer-right'
+    'divider divider divider divider divider'
+    'navigation navigation navigation navigation navigation';
+  grid-template-columns: min-content 24px auto var(--min-search-toggle-width) min-content;
+  grid-template-rows: auto 1px 1fr;
+}
+
+.spacer-left {
+  grid-area: spacer-left;
+  width: var(--spacer-width);
+}
+
+.spacer-right {
+  grid-area: spacer-right;
+  width: var(--spacer-width);
+}
+
+@screen md {
+  .root {
+    @apply gap-x-6 sticky top-0 items-center justify-between z-50;
+    grid-template-areas:
+      'spacer-left ident navigation search-toggle spacer-right'
+      'divider divider divider divider divider';
+    grid-template-columns: min-content var(--lr-width) 1fr minmax(var(--min-search-toggle-width), var(--lr-width)) min-content;
+    grid-template-rows: auto 1px;
+  }
+}
+
+@screen maxMd {
+  .root--is-open {
+    @apply fixed inset-0 z-40 items-start;
+  }
+}
+
+.navigation {
+  @apply flex justify-center;
+  grid-area: navigation;
+}
+
+.divider {
+  @apply w-full h-px bg-border;
+  grid-area: divider;
+}
+
+.search-toggle {
+  @apply flex h-16 items-center justify-end;
+  grid-area: search-toggle;
+  container-type: inline-size;
+}
+
+.search-toggle-button {
+  @apply flex items-center justify-center lg:justify-start gap-x-2 w-full py-2 px-4 bg-inputBg border border-inputBorder rounded-lg;
+}
+
+@screen sm {
+  .search-toggle-button {
+    @apply py-3 px-6 rounded-full;
+  }
+}
+
+@screen lg {
+  .search-toggle-button {
+    @apply mx-auto;
+  }
+}
+
+.search-toggle-button__icon {
+  @apply flex items-center text-subduedText;
+  height: 24px;
+}
+
+@screen sm {
+  .search-toggle-button__icon {
+    height: 28px;
+  }
+}
+
+.search-toggle-button__text {
+  @apply text-subduedText select-none overflow-hidden text-ellipsis whitespace-nowrap pr-1;
+}
+
+.search-toggle-button__keyboard-shortcut {
+  @apply text-xs bg-bg rounded-md text-subduedText py-1 px-2;
+}
+
+@screen sm {
+  .search-toggle-button__text {
+    @apply text-lg;
+  }
+}
+
+@container (max-width: 191px) {
+  .search-toggle-button {
+    width: var(--min-search-toggle-width);
+  }
+
+  .search-toggle-button__text {
+    @apply hidden;
+  }
+
+  .search-toggle-button__keyboard-shortcut {
+    @apply hidden;
+  }
+}
+
+.search-form {
+  @apply hidden;
+}
+
+.menu {
+  @apply flex h-16 items-center justify-center;
+  grid-area: menu;
+}
+
+@screen md {
+  .menu {
+    @apply hidden;
+  }
 }
 
 .ident {
-  @apply block;
-  width: 27px;
-}
-
-@media (min-width: 550px) {
-  .ident {
-    width: 205px;
-  }
+  @apply flex-none flex h-16 items-center;
+  min-width: var(--lr-width);
 }
 
 @screen dark {
@@ -24,7 +145,47 @@
 .ident__svg {
   @apply block;
   width: 100%;
+  max-width: var(--lr-width);
   height: 100%;
   max-height: 2rem;
   fill: currentColor;
+}
+
+.navigation {
+  @apply hidden h-full;
+  grid-area: navigation;
+}
+
+@screen md {
+  .navigation {
+    @apply flex flex-row h-auto self-stretch border-t-0 pr-4;
+  }
+}
+
+@screen maxMd {
+  .navigation--is-open {
+    @apply block overflow-auto overscroll-contain;
+  }
+}
+
+.search-overlay {
+  @apply fixed inset-0 z-50 bg-bg grid h-screen;
+
+  grid-template-rows: min-content 1fr;
+}
+
+.search-overlay--search-page {
+  @apply h-16;
+}
+
+.search-header {
+  @apply px-3 sm:px-4 grid gap-y-2 h-16;
+}
+
+.search-main {
+  @apply pt-3 overflow-auto h-full relative border-t border-border;
+}
+
+.cancel {
+  @apply flex gap-x-2 items-center justify-center py-4;
 }

@@ -22,7 +22,8 @@ const Oops = ({ children }) => {
         </div>
         {children}
         <p>
-          Maybe <Link href='/explore'>search Sketchplanations</Link> or try looking in <Link href='/tags'>tags</Link>?
+          Maybe <Link href='/explore'>search Sketchplanations</Link> or try looking in{' '}
+          <Link href='/categories'>categories</Link>?
         </p>
         <p>
           Please let me know if a link is broken so I can fix it for others. I’m at{' '}

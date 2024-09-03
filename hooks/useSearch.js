@@ -1,48 +1,60 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-import { isBlank } from 'helpers'
+import { isBlank, isPresent } from 'helpers'
 import { searchSketchplanations, searchTags } from 'helpers'
 
 import useDebouncedValue from './useDebouncedValue'
 
+const fetchIntialResults = async () => {
+  const response = await fetch('/api/initial-search-results')
+  const results = await response.json()
+
+  return results
+}
+
 const useSearch = () => {
   const router = useRouter()
-  const { query: queryParams, pathname, isReady } = router
+  const { query: queryParams, pathname } = router
+  const query = queryParams?.q
+  const isSearchPage = pathname === '/search'
 
-  const [query, setQuery] = useState(queryParams?.q || '')
-  const [results, setSketchplanationResults] = useState(null)
+  const [originalRoute, setOriginalRoute] = useState(null)
+  const [initialResults, setInitialResults] = useState(null)
+  const [results, setResults] = useState(null)
   const [tagResults, setTagResults] = useState(null)
-  const [busy, setBusy] = useState(true)
+  const [busy, setBusy] = useState(false)
 
+  const prevSearchQuery = useRef(null)
   const debouncedSearchQuery = useDebouncedValue(query, 500)
 
-  const reset = () => setQuery('')
-
   useEffect(() => {
-    if (!isReady) return undefined
+    fetchIntialResults().then(setInitialResults)
+  }, [])
 
-    setQuery(queryParams?.q || '')
-  }, [isReady, queryParams])
+  const setQuery = (query) => {
+    if (isBlank(originalRoute)) {
+      setOriginalRoute({ pathname, queryParams })
+    }
 
-  useEffect(() => {
-    if (!isReady) return undefined
+    if (isSearchPage) {
+      const stringifiedQuery = new URLSearchParams({ q: query }).toString()
 
-    if (query.trim() === '') {
       router.replace(
         {
           pathname,
+          query: { ...queryParams, q: query },
         },
-        undefined,
+        `/search?${stringifiedQuery}`,
         {
           shallow: true,
         }
       )
-    } else if (query !== queryParams?.q) {
-      router.replace(
+    } else {
+      router.push(
         {
-          pathname,
-          query: { q: query },
+          pathname: isSearchPage ? pathname : '/search',
+          query: { ...queryParams, q: query },
         },
         undefined,
         {
@@ -50,35 +62,88 @@ const useSearch = () => {
         }
       )
     }
-  }, [query])
+  }
+
+  const clear = () => {
+    router.replace(
+      {
+        pathname,
+        query: { ...queryParams, q: undefined },
+      },
+      `/search`,
+      {
+        shallow: true,
+      }
+    )
+  }
+
+  const reset = () => {
+    if (isBlank(originalRoute)) {
+      return undefined
+    }
+
+    router.replace(
+      {
+        pathname: originalRoute?.pathname,
+        query: originalRoute?.queryParams,
+      },
+      originalRoute?.pathname,
+      {
+        shallow: true,
+      }
+    )
+
+    setOriginalRoute(null)
+  }
 
   useEffect(() => {
-    setBusy(true)
+    if (prevSearchQuery.current === debouncedSearchQuery && isPresent(results)) {
+      return undefined
+    }
 
     if (isBlank(debouncedSearchQuery)) {
-      setSketchplanationResults(null)
+      setResults(null)
       setTagResults(null)
-      setBusy(false)
 
       return undefined
     }
 
     const search = async () => {
-      setSketchplanationResults(await searchSketchplanations(debouncedSearchQuery))
-      setTagResults(await searchTags(debouncedSearchQuery))
-      setBusy(false)
+      setBusy(true)
+
+      try {
+        const [sketchplanationResults, tagResults] = await Promise.all([
+          searchSketchplanations(debouncedSearchQuery),
+          searchTags(debouncedSearchQuery),
+        ])
+
+        setResults(sketchplanationResults)
+        setTagResults(tagResults)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setBusy(false)
+      }
     }
+
+    prevSearchQuery.current = debouncedSearchQuery
 
     search()
   }, [debouncedSearchQuery])
 
+  const called = isPresent(debouncedSearchQuery)
+
   return {
     query,
     setQuery,
+    initialResults,
     results,
     tagResults,
+    called,
     busy,
     reset,
+    clear,
+    isSearchPage,
   }
 }
 

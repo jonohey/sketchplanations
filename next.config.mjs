@@ -1,3 +1,4 @@
+import buildInitialSearchResults from './utils/buildInitialSearchResults.mjs'
 import buildRss from './utils/buildRss.mjs'
 import buildSitemap from './utils/buildSitemap.mjs'
 import prismicToKV from './utils/prismicToKV.mjs'
@@ -27,6 +28,11 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      {
+        source: '/explore',
+        destination: '/search',
+        permanent: false,
+      },
       {
         source: '/podcast',
         destination: 'https://podcast.sketchplanations.com/',
@@ -69,8 +75,18 @@ const nextConfig = {
       },
       {
         source: '/browse',
-        destination: '/tags',
+        destination: '/categories',
         permanent: true,
+      },
+      {
+        source: '/tags',
+        destination: '/categories',
+        permanent: false,
+      },
+      {
+        source: '/tags/:tag',
+        destination: '/categories/:tag',
+        permanent: false,
       },
       {
         source: '/sketchplanations',
@@ -3738,6 +3754,7 @@ const nextConfig = {
 }
 
 export default async () => {
+  await buildInitialSearchResults()
   await buildRss()
   await buildSitemap()
   await prismicToKV()

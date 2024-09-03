@@ -2,12 +2,12 @@ import * as prismic from '@prismicio/client'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
+import styles from './[tag].module.css'
+
 import { TextHeader } from 'components'
 import SketchplanationsGrid from 'components/SketchplanationsGrid'
 import { pageTitle } from 'helpers'
 import { client } from 'services/prismic'
-
-import styles from './[tag].module.css'
 
 const Tag = ({ tag, sketchplanations }) => {
   const router = useRouter()
@@ -16,15 +16,17 @@ const Tag = ({ tag, sketchplanations }) => {
     return <div>Loading…</div>
   }
 
+  const humanizedTag = tag.replace(/-/g, ' ')
+
   return (
     <>
       <Head>
-        <title>{pageTitle(`Tag: ${tag}`)}</title>
-        <meta name='description' content={`Sketchplanations tagged with ${tag}`} />
+        <title>{pageTitle(`Category: ${humanizedTag}`)}</title>
+        <meta name='description' content={`Sketchplanations from the ${humanizedTag} category`} />
       </Head>
       <div className={styles.root}>
         <TextHeader className={styles.header}>
-          Sketchplanations tagged with <b>{tag}</b>
+          Category: <b>{humanizedTag}</b>
         </TextHeader>
         <SketchplanationsGrid prismicDocs={sketchplanations} />
       </div>
