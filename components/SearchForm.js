@@ -6,11 +6,11 @@ import styles from './SearchForm.module.css'
 
 import { isPresent } from 'helpers'
 
-const SearchForm = ({ value, isBusy = false, onChange = () => {}, onReset = () => {}, ...props }) => {
+const SearchForm = ({ value, isBusy = false, onChange = () => {}, onClear = () => {}, ...props }) => {
   const inputRef = useRef(null)
 
-  const handleReset = () => {
-    onReset()
+  const handleClear = () => {
+    onClear()
     inputRef.current.focus()
   }
 
@@ -36,7 +36,7 @@ const SearchForm = ({ value, isBusy = false, onChange = () => {}, onReset = () =
         </div>
       )}
       <button
-        onClick={handleReset}
+        onClick={handleClear}
         className={classNames(styles['reset-button'], isPresent(value) && styles['reset-button-active'])}
         type='button'
       >

@@ -6,10 +6,11 @@ import SearchForm from 'components/SearchForm'
 import SearchResults from 'components/SearchResults'
 import { isPresent, pageTitle } from 'helpers'
 import useSearch from 'hooks/useSearch'
-import { client } from 'services/prismic'
 
-const Search = ({ initialResults }) => {
-  const { query, setQuery, reset, busy } = useSearch()
+// import { client } from 'services/prismic'
+
+const Search = () => {
+  const { query, setQuery, clear, busy } = useSearch()
 
   const dynamicPageTitle = isPresent(query) ? `Search: ${query}` : 'Search'
 
@@ -25,33 +26,34 @@ const Search = ({ initialResults }) => {
             isBusy={busy}
             value={query}
             onChange={setQuery}
-            onReset={reset}
+            onClear={clear}
             onKeyDown={(e) => {
               if (e.key === 'Escape') {
-                reset()
+                clear()
               }
             }}
             autoFocus
           />
         </div>
-        <SearchResults initialResults={initialResults} />
+        {/* <SearchResults initialResults={initialResults} /> */}
+        <SearchResults />
       </div>
     </>
   )
 }
 
-export async function getStaticProps() {
-  const initialResults = await client.getAllByType('sketchplanation', {
-    orderings: [
-      {
-        field: 'my.sketchplanation.published_at',
-        direction: 'desc',
-      },
-    ],
-    limit: 20,
-  })
+// export async function getStaticProps() {
+//   const initialResults = await client.getAllByType('sketchplanation', {
+//     orderings: [
+//       {
+//         field: 'my.sketchplanation.published_at',
+//         direction: 'desc',
+//       },
+//     ],
+//     limit: 3,
+//   })
 
-  return { props: { initialResults } }
-}
+//   return { props: { initialResults } }
+// }
 
 export default Search

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import styles from './SearchResults.module.css'
 
@@ -8,6 +8,14 @@ import useSearch from 'hooks/useSearch'
 
 import SketchplanationsGrid from './SketchplanationsGrid'
 import Tags from './Tags'
+
+const loadingMessages = [
+  'Finding some spectacular sketches…',
+  'Sketching up a storm…',
+  'Searching the archives…',
+  'Let me find that for you…',
+  'Where did I put that sketch…',
+]
 
 const SearchResults = () => {
   const { initialResults, results, tagResults, called, busy } = useSearch()
@@ -48,6 +56,12 @@ const SearchResults = () => {
     )
   }
 
+  const loadingMessage = useMemo(() => {
+    // Get random loading message
+    const index = Math.floor(Math.random() * loadingMessages.length)
+    return loadingMessages[index]
+  }, [busy])
+
   return (
     <div className={styles['search-results']}>
       {busy ? (
@@ -55,6 +69,7 @@ const SearchResults = () => {
           <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
             <path d='M0 11c.511-6.158 5.685-11 12-11s11.489 4.842 12 11h-2.009c-.506-5.046-4.793-9-9.991-9s-9.485 3.954-9.991 9h-2.009zm21.991 2c-.506 5.046-4.793 9-9.991 9s-9.485-3.954-9.991-9h-2.009c.511 6.158 5.685 11 12 11s11.489-4.842 12-11h-2.009z' />
           </svg>
+          {loadingMessage}
         </div>
       ) : (
         <>

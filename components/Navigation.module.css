@@ -9,18 +9,22 @@
   }
 }
 
-.root :global(a) {
+.item {
   @apply relative flex items-center px-5 py-3 hover:text-blue text-xl;
 }
 
 @screen md {
-  .root :global(a) {
+  .item {
     @apply px-3 py-0 text-base;
   }
 }
 
 .item {
   @apply flex gap-x-2 items-center justify-start;
+}
+
+.item--home {
+  @apply md:hidden;
 }
 
 .external-link-icon {

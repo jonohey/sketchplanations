@@ -15,10 +15,11 @@ const fetchIntialResults = async () => {
 
 const useSearch = () => {
   const router = useRouter()
-  const { query: queryParams, pathname, isReady } = router
+  const { query: queryParams, pathname } = router
+  const query = queryParams?.q
   const isSearchPage = pathname === '/search'
 
-  const [query, setQuery] = useState(queryParams?.q || '')
+  const [originalRoute, setOriginalRoute] = useState(null)
   const [initialResults, setInitialResults] = useState(null)
   const [results, setResults] = useState(null)
   const [tagResults, setTagResults] = useState(null)
@@ -31,32 +32,15 @@ const useSearch = () => {
     fetchIntialResults().then(setInitialResults)
   }, [])
 
-  const reset = () => {
-    setQuery('')
-  }
+  const setQuery = (query) => {
+    console.log('setQuery', query)
 
-  useEffect(() => {
-    if (!isReady) return undefined
+    if (isBlank(originalRoute)) {
+      setOriginalRoute({ pathname, queryParams })
+    }
 
-    setQuery(queryParams?.q?.trim() || '')
-  }, [isReady, queryParams])
-
-  useEffect(() => {
-    if (!isReady) return undefined
-
-    if (query.trim() === '') {
-      router.replace(
-        {
-          pathname,
-          query: { ...queryParams, q: undefined },
-        },
-        pathname,
-        {
-          shallow: true,
-        }
-      )
-    } else if (query !== queryParams?.q) {
-      const stringifiedQuery = new URLSearchParams({ q: query.trim() }).toString()
+    if (isSearchPage) {
+      const stringifiedQuery = new URLSearchParams({ q: query }).toString()
 
       router.replace(
         {
@@ -68,8 +52,92 @@ const useSearch = () => {
           shallow: true,
         }
       )
+    } else {
+      router.push(
+        {
+          pathname: isSearchPage ? pathname : '/search',
+          query: { ...queryParams, q: query },
+        },
+        undefined,
+        {
+          shallow: true,
+        }
+      )
     }
-  }, [query])
+  }
+
+  const clear = () => {
+    console.log('clear')
+
+    router.replace(
+      {
+        pathname,
+        query: { ...queryParams, q: undefined },
+      },
+      `/search`,
+      {
+        shallow: true,
+      }
+    )
+  }
+
+  const reset = () => {
+    console.log('reset')
+
+    if (isBlank(originalRoute)) {
+      return undefined
+    }
+
+    router.replace(
+      {
+        pathname: originalRoute?.pathname,
+        query: originalRoute?.queryParams,
+      },
+      originalRoute?.pathname,
+      {
+        shallow: true,
+      }
+    )
+
+    setOriginalRoute(null)
+  }
+
+  // useEffect(() => {
+  //   if (!isReady) return undefined
+
+  //   setQuery(queryParams?.q.trim())
+  // }, [isReady, queryParams])
+
+  // useEffect(() => {
+  //   if (!isReady) return undefined
+
+  //   if (query && query !== queryParams?.q) {
+  //     const stringifiedQuery = new URLSearchParams({ q: query }).toString()
+
+  //     router.replace(
+  //       {
+  //         pathname,
+  //         query: { ...queryParams, q: query },
+  //       },
+  //       `/search?${stringifiedQuery}`,
+  //       {
+  //         shallow: true,
+  //       }
+  //     )
+  //   } else {
+  //     console.log('fuck you')
+  //     router.replace(
+  //       {
+  //         pathname,
+  //         query: { ...queryParams, q: undefined },
+  //       },
+  //       pathname,
+  //       {
+  //         shallow: true,
+  //       }
+  //     )
+  //   }
+  // }, [query])
 
   useEffect(() => {
     console.log('useSearch', prevSearchQuery.current, debouncedSearchQuery)
@@ -119,6 +187,7 @@ const useSearch = () => {
     called,
     busy,
     reset,
+    clear,
     isSearchPage,
   }
 }

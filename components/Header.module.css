@@ -3,6 +3,10 @@
   --min-search-toggle-width: 4rem;
   --spacer-width: 0;
 
+  @screen sm {
+    --min-search-toggle-width: 5rem;
+  }
+
   @apply grid gap-x-4;
   background-color: var(--color-bgTransparent);
   backdrop-filter: saturate(180%) blur(5px);
@@ -85,7 +89,11 @@
 }
 
 .search-toggle-button__text {
-  @apply text-subduedText select-none overflow-hidden text-ellipsis whitespace-nowrap;
+  @apply text-subduedText select-none overflow-hidden text-ellipsis whitespace-nowrap pr-2;
+}
+
+.search-toggle-button__keyboard-shortcut {
+  @apply text-xs bg-bg rounded-md text-subduedText py-1 px-2;
 }
 
 @screen sm {
@@ -94,12 +102,16 @@
   }
 }
 
-@container (max-width: 140px) {
+@container (max-width: 191px) {
   .search-toggle-button {
     width: var(--min-search-toggle-width);
   }
 
   .search-toggle-button__text {
+    @apply hidden;
+  }
+
+  .search-toggle-button__keyboard-shortcut {
     @apply hidden;
   }
 }
