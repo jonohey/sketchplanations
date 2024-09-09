@@ -61,6 +61,12 @@ const Home = ({ sketchplanations }) => {
 export const getServerSideProps = async (context) => {
 	const page = context.query.page || 1;
 	const sketchplanations = await client.getByType("sketchplanation", {
+		orderings: [
+			{
+				field: "my.sketchplanation.published_at",
+				direction: "desc",
+			},
+		],
 		pageSize: 6,
 		page,
 	});
