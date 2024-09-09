@@ -1,0 +1,40 @@
+.root {}
+
+.ident {
+  @apply flex-none flex items-center mb-3;
+}
+
+@screen dark {
+  .ident {
+    @apply invert;
+  }
+}
+
+.ident__svg {
+  @apply block;
+  width: 100%;
+  max-width: var(--lr-width);
+  height: 100%;
+  max-height: 2rem;
+  fill: currentColor;
+}
+
+.pagination {
+  @apply flex items-center justify-center gap-x-3;
+}
+
+.navButton {
+	@apply flex flex-row items-center gap-x-1 flex-shrink-0;
+}
+
+.pageLink {
+	@apply px-1;
+}
+
+.pageLink.active {
+	@apply font-semibold;
+}
+
+.ellipsis {
+  @apply text-subduedText;
+}

@@ -1,116 +1,17 @@
 .root {
   @apply w-full px-0;
-  max-width: 600px;
-}
-
-@screen sm {
-  .root {
-    @apply px-6;
-  }
+  max-width: 38rem;
 }
 
 .image {
-  @apply block mb-4;
-  @apply bg-paper;
+  @apply block bg-paper mb-3;
   box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow);
 }
 
-.image > :global(img) {
-  @apply w-full h-auto;
-}
-
 .content {
-  @apply px-6 mx-auto;
-  max-width: 460px;
-}
-
-@screen sm {
-  .content {
-    @apply px-0;
-  }
-  .image {
-    @apply mb-10;
-  }
-}
-
-.body {
-  @apply mx-auto;
-}
-
-.tags {
-  @apply flex flex-wrap mt-10 mb-10 gap-4;
-}
-
-.tags a {
-  @apply block py-2 px-4 rounded-full border border-border text-sm;
-  transition: all 0.1s ease-out;
-}
-
-.tags a:hover {
-  @apply bg-blue border-blue;
-}
-
-.after-post {
-  @apply mt-10;
-}
-
-.licence-note {
-  @apply p-5 bg-bgHighlight rounded;
-}
-
-.licence-link {
-  @apply text-blueLight;
-}
-
-.action-icon {
-  display: inline-block;
-  @apply w-6 h-6 mr-3 inline-flex justify-center items-center;
-}
-
-.action-icon > svg {
-  @apply inline-block;
-  fill: currentColor;
-}
-
-.pwyw {
-  @apply p-8;
-}
-
-.pwyw-button {
-  @apply mt-6 flex items-center text-left;
-  color: var(--color-subduedText);
-}
-
-.pwyw-button:hover {
-  color: var(--color-blue);
-}
-
-.redbubble-wrapper {
-  @apply mt-6;
-}
-
-.redbubble {
-  @apply flex items-center;
-  color: var(--color-subduedText);
-}
-
-.redbubble:hover {
-  color: var(--color-blue);
-}
-
-.podcast-wrapper {
-  @apply mt-6;
-}
-
-.podcast {
-  @apply flex items-center;
-  color: var(--color-subduedText);
-}
-
-.podcast:hover {
-  color: var(--color-blue);
+  @apply mx-auto px-3;
 }
 
 .published-at {
-  @apply py-4 text-sm text-subduedText;
+  @apply block mt-5 text-sm text-subduedText;
 }

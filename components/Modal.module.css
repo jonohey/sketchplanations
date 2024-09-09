@@ -1,28 +1,73 @@
+@keyframes backdropAnimation {
+  from {
+    backdrop-filter: blur(0);
+    opacity: 0;
+  }
+
+  to {
+    backdrop-filter: blur(10px);
+    opacity: 1;
+  }
+}
+
+@keyframes modalAnimation {
+  from {
+    transform: scale(0.9) translate(-50%, -40%);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1) translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
 .backdrop {
-  @apply fixed top-0 left-0 w-full h-full;
-  z-index: 1040;
+  @apply fixed top-0 left-0 w-full;
+  height: var(--visual-viewport-height);
+  z-index: 1100;
   background-color: rgba(255, 255, 255, 0.38);
   backdrop-filter: blur(10px);
 }
 
+.backdrop[data-entering] {
+  animation: backdropAnimation 200ms ease;
+}
+
+.backdrop[data-exiting] {
+  animation: backdropAnimation 200ms reverse ease;
+}
+
 @screen dark {
   .backdrop {
-    background-color: rgba(53, 54, 58, 0.38);
+    /* background-color: rgba(53, 54, 58, 0.38); */
+    background-color: hsla(228, 4.5%, 0%, 0.38);
+    /* background-color: rgba(0, 0, 0, 0.8); */
   }
 }
 
-.root {
-  @apply fixed top-1/2 left-1/2 rounded-md bg-bg overflow-hidden;
+.modal {
+  @apply fixed top-1/2 left-1/2 rounded-md bg-bg;
   width: 90vw;
   max-width: 36rem;
   max-height: 90vh;
-  z-index: 1040;
+  z-index: 1200;
   box-shadow:
     0 1px 2.7px rgba(0, 0, 0, 0.045),
     0 2.6px 7.5px rgba(0, 0, 0, 0.065),
     0 6.3px 18.1px rgba(0, 0, 0, 0.085),
     0 21px 60px rgba(0, 0, 0, 0.13);
-  transform: translate(-50%, -50%);
+  transform: scale(1) translate(-50%, -50%);
+  transform-origin: bottom left;
+  opacity: 1;
+}
+
+.modal[data-entering] {
+  animation: modalAnimation 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal[data-exiting] {
+  animation: modalAnimation 200ms reverse ease-out;
 }
 
 .main {

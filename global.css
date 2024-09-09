@@ -2,10 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .link-primary {
+    @apply text-blue font-semibold underline;
+  }
+
+  .btn-primary {
+    @apply bg-buttonBg text-white px-4 py-2 rounded flex flex-row items-center justify-center gap-x-2 shadow-sm;
+  }
+
+  .btn-secondary {
+    @apply bg-bg text-subduedText px-4 py-2 rounded flex flex-row items-center justify-center gap-x-2 border border-border shadow-sm;
+  }
+
+  .truncated-sketchplanation-image {
+    mask-image: var(--mask-image);
+  }
+}
+
 :root {
   --color-shadow: rgba(0, 0, 0, 0.05);
   --color-black: #222;
   --color-paper: #fbf8de;
+  --color-paperTransparent: hsla(53.8, 78.4%, 92.7%, 0.8);
   --color-paperDarker: #e2dcc5;
   --color-sketchShadow: #e2dcc5;
   --color-red: #ba3c3e;
@@ -15,12 +34,32 @@
   --color-bg: #fff;
   --color-bgRgb: 255, 255, 255;
   --color-bgTransparent: rgba(255, 255, 255, 0.9);
-  --color-bgDarker: #f5f5f5;
+  --color-bgDarker: hsl(0, 0%, 98.1%);
   --color-bgHighlight: #f5f5f5;
   --color-border: #e5e7eb;
   --color-inputBg: hsl(0, 0%, 93%);
   --color-inputBorder: #e5e7eb;
   --color-subduedText: #595959;
+
+  --mask-image: linear-gradient(
+    to bottom,
+    hsl(0, 0%, 0%) 0%,
+    hsla(0, 0%, 0%, 0.987) 18.4%,
+    hsla(0, 0%, 0%, 0.951) 33.7%,
+    hsla(0, 0%, 0%, 0.896) 46.3%,
+    hsla(0, 0%, 0%, 0.825) 56.5%,
+    hsla(0, 0%, 0%, 0.741) 64.6%,
+    hsla(0, 0%, 0%, 0.648) 70.9%,
+    hsla(0, 0%, 0%, 0.55) 75.8%,
+    hsla(0, 0%, 0%, 0.45) 79.5%,
+    hsla(0, 0%, 0%, 0.352) 82.4%,
+    hsla(0, 0%, 0%, 0.259) 84.7%,
+    hsla(0, 0%, 0%, 0.175) 86.9%,
+    hsla(0, 0%, 0%, 0.104) 89.2%,
+    hsla(0, 0%, 0%, 0.049) 92%,
+    hsla(0, 0%, 0%, 0.013) 95.4%,
+    hsla(0, 0%, 0%, 0) 100%
+  );
 
   --cc-bg: #35363a;
   --cc-primary-color: #fff;
@@ -60,6 +99,7 @@
   :root {
     --color-black: #fcfcfc;
     --color-paper: #fbf8de;
+    --color-paperTransparent: hsla(53.8, 78.4%, 92.7%, 0.8);
     --color-paperDarker: #e2dcc5;
     --color-sketchShadow: #27282b;
     --color-red: #ba3c3e;
@@ -72,16 +112,15 @@
     --color-bgTransparent: rgba(53, 54, 58, 0.9);
     --color-bgDarker: #202124;
     --color-bgHighlight: #44454b;
-    --color-border: #575960;
+    --color-border: #4a4c52;
     --color-inputBg: #202124;
-    --color-inputBorder: #35363a;
+    --color-inputBorder: hsl(228, 4.5%, 12.8%);
     --color-subduedText: #c6c6c6;
   }
 }
 
 html {
-  @apply bg-bg text-black;
-  font-weight: 300;
+  @apply bg-bg text-black font-light;
   font-optical-sizing: auto;
 }
 
@@ -91,7 +130,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 600;
+  @apply font-semibold;
 }
 
 pre {
@@ -107,7 +146,6 @@ pre {
   color: #8ae8fc;
   background-color: #282a36;
   line-height: 1.4;
-  /* @apply hidden; */
 }
 
 .patreon {
@@ -122,22 +160,6 @@ pre {
     16px 'Open Sans',
     sans-serif;
   width: 375px;
-}
-
-.coffee {
-  @apply fixed z-50 bottom-0 left-0 mb-4 ml-4 flex flex-col items-center py-3 px-4 bg-white light:border shadow-lg rounded;
-  transform: translateY(150%);
-  transition: transform 0.2s ease-out;
-}
-
-.coffee[data-visible='true'] {
-  transform: translateY(0);
-}
-
-.coffee img {
-  @apply inline-block;
-  width: 120px;
-  height: auto;
 }
 
 #cc-main .cm,

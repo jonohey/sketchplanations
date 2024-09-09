@@ -1,17 +1,5 @@
-.loading {
-  @apply flex mx-auto pb-20 items-center justify-center text-white;
-  max-width: 460px;
-}
-
-.loading svg {
-  @apply ml-4;
-  width: 20px;
-  height: 20px;
-  stroke: currentColor;
-}
-
 .masthead {
-  @apply mx-auto mt-6 mb-4 px-8 flex flex-col items-center text-center text-subduedText;
+  @apply mx-auto my-6 px-8 flex flex-col items-center text-center text-subduedText;
 }
 
 .slogan {
@@ -19,7 +7,7 @@
 }
 
 .sketchplanations {
-  @apply flex flex-wrap justify-center pb-6;
+  @apply grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 px-5 pb-6 justify-items-center;
 }
 
 @screen lg {
@@ -28,6 +16,3 @@
   }
 }
 
-.sketchplanations > * {
-  @apply p-5 sm:p-10;
-}

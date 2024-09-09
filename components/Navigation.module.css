@@ -23,6 +23,10 @@
   @apply flex gap-x-2 items-center justify-start;
 }
 
+.item[aria-current="page"] {
+  @apply text-blue;
+}
+
 .item--home {
   @apply md:hidden;
 }

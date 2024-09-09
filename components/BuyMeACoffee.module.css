@@ -1,0 +1,9 @@
+.coffee {
+  @apply fixed z-50 bottom-0 left-0 mb-4 ml-4 flex flex-col items-center py-3 px-4 bg-white light:border shadow-lg rounded;
+}
+
+.image {
+  @apply inline-block;
+  width: 120px;
+  height: auto;
+}

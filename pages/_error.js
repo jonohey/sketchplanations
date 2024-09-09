@@ -1,15 +1,15 @@
-import * as Sentry from '@sentry/react'
+import * as Sentry from "@sentry/react";
 
-import Oops from 'components/Oops'
+import Oops from "components/Oops";
 
 const Error = () => {
-  return <Oops />
-}
+	return <Oops />;
+};
 
 export async function getServerSideProps({ res, err }) {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404
-  Sentry.captureException(err)
-  return { props: { statusCode } }
+	const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+	Sentry.captureException(err);
+	return { props: { statusCode } };
 }
 
-export default Error
+export default Error;

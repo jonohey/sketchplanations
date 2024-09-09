@@ -1,5 +1,5 @@
 .root {
-  @apply pt-4 pb-20 mx-auto grid grid-cols-1 gap-y-3;
+  @apply pt-6 pb-20 mx-auto grid grid-cols-1 gap-y-3;
 }
 
 .search-form {

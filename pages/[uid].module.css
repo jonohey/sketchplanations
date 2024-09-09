@@ -1,6 +1,93 @@
-.sketchplanation {
-  @apply flex flex-wrap justify-center pb-6;
+.wrapper {
+  --gap: 1rem;
+  @apply py-6 pb-12 sm:pb-6 sm:py-10 sm:px-6;
 }
+
+.root {
+  @apply w-full grid mx-auto max-w-screen-xl pb-8 sm:pb-0;
+  /* max-width: 66rem; */
+  column-gap: var(--gap);
+
+
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    'title'
+    'image'
+    'ctas'
+    'main'
+    'sidebar';
+
+  @screen md {
+    grid-template-columns: 62fr 38fr;
+    grid-template-areas:
+      'title title'
+      'image image'
+      'ctas ctas'
+      'main sidebar';
+    /* 'related related'; */
+  }
+
+  @screen lg {
+    grid-template-columns: 62fr 38fr;
+    grid-template-areas:
+      'title title'
+      'image sidebar'
+      'ctas sidebar'
+      'main sidebar'
+      '. sidebar';
+  }
+}
+
+.title {
+  grid-area: title;
+  @apply text-center sm:text-left pb-6 sm:pb-8;
+}
+
+.title * {
+  margin-bottom: 0 !important;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  @apply px-6 sm:px-0 pt-8 md:pt-14 flex flex-col-reverse sm:flex-col;
+  @apply md:pl-10 md:pr-4;
+  container-type: inline-size;
+  /* @apply border-l border-border; */
+}
+
+.cards {
+  /* @apply border-l border-border md:pl-10; */
+  @apply hidden md:flex flex-col gap-y-12;
+  /* @apply sticky top-0; */
+  container-type: inline-size;
+}
+
+.cards a {
+  @apply text-blue dark:text-blueLight underline font-semibold;
+}
+
+.card {
+  @apply grid items-center gap-6;
+  grid-template-columns: 1fr 62cqw;
+}
+
+.card img {
+  @apply shadow-md;
+  /* @apply shadow-md shadow-bgDarker hover:-rotate-3 transition-transform duration-300; */
+}
+
+.card > *:only-child {
+  @apply col-span-2;
+}
+
+.related {
+  @apply bg-bg;
+
+  @apply text-sm;
+  @apply md:pt-14;
+
+}
+
 
 @screen lg {
   .sketchplanation {
@@ -114,4 +201,204 @@
   .prev-next-footer > * + * {
     @apply mt-0;
   }
+}
+
+/* From Sketchplanation component */
+
+.ctas-area {
+  grid-area: ctas;
+  @apply py-3 mx-5 sm:mx-0 mb-6 border-t border-b border-border;
+}
+
+.image {
+  grid-area: image;
+  @apply block mb-6;
+  /* @apply bg-paper; */
+  /* box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow); */
+}
+
+.image > img {
+  @apply w-full h-auto;
+}
+
+@screen sm {
+  .image {
+    @apply mb-10;
+  }
+}
+
+.main {
+  grid-area: main;
+  @apply mx-5 sm:mx-0;
+}
+
+.body {
+}
+
+.tags {
+  @apply flex flex-wrap mt-10 mb-10 gap-4;
+}
+
+.tags a {
+  @apply block py-2 px-4 rounded-full border border-border text-sm;
+  transition: all 0.1s ease-out;
+}
+
+.tags a:hover {
+  @apply bg-blue border-blue;
+}
+
+.after-post {
+  @apply mt-10;
+}
+
+.licence-note {
+  @apply p-5 bg-bgHighlight rounded;
+}
+
+.licence-link {
+  @apply text-blueLight;
+}
+
+.action-icon {
+  display: inline-block;
+  @apply w-6 h-6 mr-3 inline-flex justify-center items-center;
+}
+
+.action-icon > svg {
+  @apply inline-block;
+  fill: currentColor;
+}
+
+.pwyw {
+  @apply p-8;
+}
+
+.pwyw-button {
+  @apply mt-6 flex items-center text-left;
+  color: var(--color-subduedText);
+}
+
+.pwyw-button:hover {
+  color: var(--color-blue);
+}
+
+.redbubble-wrapper {
+  @apply mt-6;
+}
+
+.redbubble {
+  @apply flex items-center;
+  color: var(--color-subduedText);
+}
+
+.redbubble:hover {
+  color: var(--color-blue);
+}
+
+.podcast-wrapper {
+  @apply mt-6;
+}
+
+.podcast {
+  @apply flex items-center;
+  color: var(--color-subduedText);
+}
+
+.podcast:hover {
+  color: var(--color-blue);
+}
+
+.published-at {
+  @apply py-4 text-sm text-subduedText;
+}
+
+.taggedSketchplanations {
+  @apply relative;
+  /* --gradient-color: 0, 0%, 100%; */
+  /* --gradient-color: 225, 5.9%, 13.3%; */
+  --gradient-color: 228, 4.5%, 21.8%
+}
+
+@screen dark {
+  .taggedSketchplanations {
+    --gradient-color: 228, 4.5%, 21.8%
+    /* --gradient-color: 225, 5.9%, 13.3%; */
+  }
+}
+
+.taggedSketchplanations::before {
+  content: "";
+  @apply absolute z-10 top-0 left-0 h-full w-6;
+
+  background-image: linear-gradient(
+    to left,
+    hsla(var(--gradient-color), 0) 0%,
+    hsla(var(--gradient-color), 0.013) 8.1%,
+    hsla(var(--gradient-color), 0.049) 15.5%,
+    hsla(var(--gradient-color), 0.104) 22.5%,
+    hsla(var(--gradient-color), 0.175) 29%,
+    hsla(var(--gradient-color), 0.259) 35.3%,
+    hsla(var(--gradient-color), 0.352) 41.2%,
+    hsla(var(--gradient-color), 0.45) 47.1%,
+    hsla(var(--gradient-color), 0.55) 52.9%,
+    hsla(var(--gradient-color), 0.648) 58.8%,
+    hsla(var(--gradient-color), 0.741) 64.7%,
+    hsla(var(--gradient-color), 0.825) 71%,
+    hsla(var(--gradient-color), 0.896) 77.5%,
+    hsla(var(--gradient-color), 0.951) 84.5%,
+    hsla(var(--gradient-color), 0.987) 91.9%,
+    hsl(var(--gradient-color)) 100%
+  );
+}
+
+.taggedSketchplanations::after {
+  content: "";
+  @apply absolute z-10 top-0 right-0 h-full w-6;
+
+  background-image: linear-gradient(
+    to right,
+    hsla(var(--gradient-color), 0) 0%,
+    hsla(var(--gradient-color), 0.013) 8.1%,
+    hsla(var(--gradient-color), 0.049) 15.5%,
+    hsla(var(--gradient-color), 0.104) 22.5%,
+    hsla(var(--gradient-color), 0.175) 29%,
+    hsla(var(--gradient-color), 0.259) 35.3%,
+    hsla(var(--gradient-color), 0.352) 41.2%,
+    hsla(var(--gradient-color), 0.45) 47.1%,
+    hsla(var(--gradient-color), 0.55) 52.9%,
+    hsla(var(--gradient-color), 0.648) 58.8%,
+    hsla(var(--gradient-color), 0.741) 64.7%,
+    hsla(var(--gradient-color), 0.825) 71%,
+    hsla(var(--gradient-color), 0.896) 77.5%,
+    hsla(var(--gradient-color), 0.951) 84.5%,
+    hsla(var(--gradient-color), 0.987) 91.9%,
+    hsl(var(--gradient-color)) 100%
+  );
+}
+
+.taggedSketchplanations :global(.swiper-slide) {
+  width: 38vw !important;
+  min-width: 12rem;
+  max-width: 24rem;
+}
+
+.taggedSketchplanations :global(.swiper) {
+  @apply px-5;
+}
+
+.taggedSketchplanations :global(.swiper-wrapper) {
+  @apply py-5 -mx-1.5;
+}
+
+.taggedSketch {
+  @apply block rounded overflow-hidden bg-paper scale-[0.94] hover:scale-100 relative hover:z-20 transition-all shadow-paperDarker hover:shadow-lg;
+}
+
+.footer {
+  /* @apply py-6 sm:py-10 grid bg-[#202124]; */
+  /* @apply border-t border-border pt-4 grid gap-y-4; */
+  @apply grid gap-y-4 mx-auto pb-6;
+  max-width: 83rem;
+  /* box-shadow: inset 0 5px 10px 0 rgba(0, 0, 0, 0.1); */
 }

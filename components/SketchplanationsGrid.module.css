@@ -2,24 +2,12 @@
   @apply grid gap-x-3 gap-y-3;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
-  /* align-items: center; */
 }
 
 .item {
   @apply relative overflow-hidden;
-  aspect-ratio: 5/4;
-}
-
-.item::before {
-  content: '';
-  @apply absolute bottom-0 left-0 right-0 h-1/2;
-  background-image: linear-gradient(
-    to top,
-    rgba(var(--color-bgRgb), 1),
-    rgba(var(--color-bgRgb), 1) 14%,
-    rgba(var(--color-bgRgb), 0)
-  );
-  pointer-events: none;
+  aspect-ratio: 5/3;
+  mask-image: var(--mask-image);
 }
 
 .item__title {

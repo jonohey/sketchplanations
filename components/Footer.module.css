@@ -1,0 +1,21 @@
+.cards {
+  @apply grid gap-y-8;
+}
+
+.cards a {
+  @apply text-blue dark:text-blueLight underline font-semibold;
+}
+
+.card {
+  @apply grid items-center gap-6;
+  grid-template-columns:4rem 1fr;
+}
+
+.card img {
+  @apply shadow-md;
+  /* @apply shadow-md shadow-bgDarker hover:-rotate-3 transition-transform duration-300; */
+}
+
+.card > *:only-child {
+  @apply col-span-2;
+}

@@ -1,5 +1,5 @@
 const Debug = ({ children }) => {
-  return <pre>{JSON.stringify(children, null, 2)}</pre>
-}
+	return <pre>{JSON.stringify(children, null, 2)}</pre>;
+};
 
-export default Debug
+export default Debug;

@@ -1,18 +1,23 @@
-import { kv } from '@vercel/kv'
+import { kv } from "@vercel/kv";
 
-import { client } from '../services/prismic.mjs'
+import { client } from "../services/prismic.mjs";
 
 const prismicToKV = async () => {
-  if (process.env.VERCEL !== '1') return
+	if (process.env.VERCEL !== "1") return;
 
-  const docs = await client.getAllByType('sketchplanation', {
-    fetch: ['sketchplanation.uid'],
-  })
+	console.time("[prismicToKV]");
+	console.log("[prismicToKV] Starting...");
 
-  const uids = docs.map(({ uid }) => uid)
+	const docs = await client.getAllByType("sketchplanation", {
+		fetch: ["sketchplanation.uid"],
+	});
 
-  await kv.del('sketchplanations')
-  await kv.sadd('sketchplanations', ...uids)
-}
+	const uids = docs.map(({ uid }) => uid);
 
-export default prismicToKV
+	await kv.del("sketchplanations");
+	await kv.sadd("sketchplanations", ...uids);
+
+	console.timeEnd("[prismicToKV]");
+};
+
+export default prismicToKV;

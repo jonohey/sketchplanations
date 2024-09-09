@@ -1,11 +1,13 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "components/*": ["components/*"],
-      "helpers": ["helpers"],
-      "services/*": ["services/*"],
-      "hooks/*": ["hooks/*"]
-    }
-  }
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"context": ["./context"],
+			"components/*": ["components/*"],
+			"helpers": ["helpers"],
+			"services/*": ["services/*"],
+			"hooks/*": ["hooks/*"],
+			"images/*": ["images/*"]
+		}
+	}
 }

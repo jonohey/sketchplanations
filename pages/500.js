@@ -1,11 +1,11 @@
-import Oops from 'components/Oops'
+import Oops from "components/Oops";
 
 const InternalServerError = () => {
-  return (
-    <Oops>
-      <p>Something broke. Sorry!</p>
-    </Oops>
-  )
-}
+	return (
+		<Oops>
+			<p>Something broke. Sorry!</p>
+		</Oops>
+	);
+};
 
-export default InternalServerError
+export default InternalServerError;

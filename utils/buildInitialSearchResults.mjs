@@ -1,21 +1,26 @@
-import fs from 'fs'
-import path from 'path'
+import fs from "node:fs";
+import path from "node:path";
 
-import { client } from '../services/prismic.mjs'
+import { client } from "../services/prismic.mjs";
 
 async function buildInitialSearchResults() {
-  const results = await client.getAllByType('sketchplanation', {
-    orderings: [
-      {
-        field: 'my.sketchplanation.published_at',
-        direction: 'desc',
-      },
-    ],
-    limit: 20,
-  })
+	console.time("[buildInitialSearchResults]");
+	console.log("[buildInitialSearchResults] Starting...");
 
-  const filePath = path.join(process.cwd(), 'initial-search-results.json')
-  fs.writeFileSync(filePath, JSON.stringify(results))
+	const results = await client.getAllByType("sketchplanation", {
+		orderings: [
+			{
+				field: "my.sketchplanation.published_at",
+				direction: "desc",
+			},
+		],
+		limit: 20,
+	});
+
+	const filePath = path.join(process.cwd(), "initial-search-results.json");
+	fs.writeFileSync(filePath, JSON.stringify(results));
+
+	console.timeEnd("[buildInitialSearchResults]");
 }
 
-export default buildInitialSearchResults
+export default buildInitialSearchResults;

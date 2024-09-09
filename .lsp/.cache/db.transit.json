@@ -1,0 +1,23 @@
+[
+	"^ ",
+	"~:classpath",
+	["~#set", []],
+	"~:project-hash",
+	"",
+	"~:project-root",
+	"/Users/alistairholt/Code/sketchplanations",
+	"~:kondo-config-hash",
+	"15566bea9ba4ae2535ca47a821404a94f1515c46f891dd75bff20b82d6146852",
+	"~:dependency-scheme",
+	"jar",
+	"~:analysis",
+	null,
+	"~:analysis-checksums",
+	["^ "],
+	"~:project-analysis-type",
+	"~:project-and-full-dependencies",
+	"~:version",
+	12,
+	"~:stubs-generation-namespaces",
+	["^1", []]
+]

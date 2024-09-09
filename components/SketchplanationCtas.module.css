@@ -1,0 +1,7 @@
+.ctas {
+  @apply flex justify-center gap-x-4 text-sm;
+}
+
+.cta {
+  @apply text-blue dark:text-blueLight underline font-semibold flex items-center gap-x-1;
+}
