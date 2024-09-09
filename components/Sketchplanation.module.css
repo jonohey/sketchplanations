@@ -5,7 +5,8 @@
 
 .image {
   @apply block bg-paper mb-3;
-  box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow);
+  /* box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow); */
+  box-shadow: 0 2.3rem 1rem -2rem hsla(0, 0%, 0%, 0.1);
 }
 
 .content {

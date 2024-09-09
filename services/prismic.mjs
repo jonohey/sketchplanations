@@ -9,7 +9,7 @@ export const linkResolver = (doc) => {
 		privacy: "/privacy",
 		wisdom: "/wisdom",
 	};
-	return routes[doc.type] || "/";
+	return routes[doc.type] || `/${doc.uid}`;
 };
 
 export const client = createClient("sketchplanations");

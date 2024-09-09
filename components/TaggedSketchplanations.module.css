@@ -1,0 +1,80 @@
+.taggedSketchplanations {
+  @apply relative;
+  --gradient-color: 0, 0%, 100%;
+  /* --gradient-color: 225, 5.9%, 13.3%; */
+  /* --gradient-color: 228, 4.5%, 21.8%; */
+}
+
+@screen dark {
+  .taggedSketchplanations {
+    --gradient-color: 228, 4.5%, 21.8% /* --gradient-color: 225, 5.9%, 13.3%; */;
+  }
+}
+
+.taggedSketchplanations::before {
+  content: '';
+  @apply absolute z-10 top-0 left-0 h-full w-6;
+
+  background-image: linear-gradient(
+    to left,
+    hsla(var(--gradient-color), 0) 0%,
+    hsla(var(--gradient-color), 0.013) 8.1%,
+    hsla(var(--gradient-color), 0.049) 15.5%,
+    hsla(var(--gradient-color), 0.104) 22.5%,
+    hsla(var(--gradient-color), 0.175) 29%,
+    hsla(var(--gradient-color), 0.259) 35.3%,
+    hsla(var(--gradient-color), 0.352) 41.2%,
+    hsla(var(--gradient-color), 0.45) 47.1%,
+    hsla(var(--gradient-color), 0.55) 52.9%,
+    hsla(var(--gradient-color), 0.648) 58.8%,
+    hsla(var(--gradient-color), 0.741) 64.7%,
+    hsla(var(--gradient-color), 0.825) 71%,
+    hsla(var(--gradient-color), 0.896) 77.5%,
+    hsla(var(--gradient-color), 0.951) 84.5%,
+    hsla(var(--gradient-color), 0.987) 91.9%,
+    hsl(var(--gradient-color)) 100%
+  );
+}
+
+.taggedSketchplanations::after {
+  content: '';
+  @apply absolute z-10 top-0 right-0 h-full w-6;
+
+  background-image: linear-gradient(
+    to right,
+    hsla(var(--gradient-color), 0) 0%,
+    hsla(var(--gradient-color), 0.013) 8.1%,
+    hsla(var(--gradient-color), 0.049) 15.5%,
+    hsla(var(--gradient-color), 0.104) 22.5%,
+    hsla(var(--gradient-color), 0.175) 29%,
+    hsla(var(--gradient-color), 0.259) 35.3%,
+    hsla(var(--gradient-color), 0.352) 41.2%,
+    hsla(var(--gradient-color), 0.45) 47.1%,
+    hsla(var(--gradient-color), 0.55) 52.9%,
+    hsla(var(--gradient-color), 0.648) 58.8%,
+    hsla(var(--gradient-color), 0.741) 64.7%,
+    hsla(var(--gradient-color), 0.825) 71%,
+    hsla(var(--gradient-color), 0.896) 77.5%,
+    hsla(var(--gradient-color), 0.951) 84.5%,
+    hsla(var(--gradient-color), 0.987) 91.9%,
+    hsl(var(--gradient-color)) 100%
+  );
+}
+
+.taggedSketchplanations :global(.swiper-slide) {
+  width: 38vw !important;
+  min-width: 12rem;
+  max-width: 24rem;
+}
+
+.taggedSketchplanations :global(.swiper) {
+  @apply px-5;
+}
+
+.taggedSketchplanations :global(.swiper-wrapper) {
+  @apply py-5 -mx-1.5;
+}
+
+.taggedSketch {
+  @apply block rounded overflow-hidden bg-paper scale-[0.94] hover:scale-100 relative hover:z-20 transition-all shadow-paperDarker shadow-sm hover:shadow-lg;
+}

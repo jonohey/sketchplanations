@@ -24,8 +24,6 @@ const Categories = ({ tagsByName, tagsByCount }) => {
 		}
 	}, [cookieSort]);
 
-	console.log({ sort });
-
 	return (
 		<>
 			<Head>

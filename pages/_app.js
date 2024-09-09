@@ -23,7 +23,6 @@ import cookieConstentConfig from "cookieConstentConfig.mjs";
 import "vanilla-cookieconsent/dist/cookieconsent.css";
 import "global.css";
 import Footer from "components/Footer";
-import { client } from "services/prismic";
 
 const inter = Inter({ subsets: ["latin"], weights: [300, 600] });
 
@@ -92,7 +91,7 @@ const ELEMENTS_OPTIONS = {
 	],
 };
 
-const Sketchplanations = ({ Component, pageProps, subscribeInlineDoc }) => {
+const Sketchplanations = ({ Component, pageProps }) => {
 	const [decorationHidden, setDecorationHidden] = useState(false);
 
 	useEffect(() => {
@@ -124,7 +123,7 @@ const Sketchplanations = ({ Component, pageProps, subscribeInlineDoc }) => {
 					<Header />
 					<Component {...pageProps} />
 					<BuyMeACoffee />
-					<Footer subscribeInlineDoc={subscribeInlineDoc} />
+					<Footer />
 				</div>
 			</Elements>
 			<Analytics />
@@ -132,10 +131,11 @@ const Sketchplanations = ({ Component, pageProps, subscribeInlineDoc }) => {
 	);
 };
 
-Sketchplanations.getInitialProps = async () => {
-	const subscribeInlineDoc = await client.getSingle("subscribe_inline");
+// TODO: Do this in setup.js
+// Sketchplanations.getInitialProps = async () => {
+// 	const subscribeInlineDoc = await client.getSingle("subscribe_inline");
 
-	return { subscribeInlineDoc };
-};
+// 	return { subscribeInlineDoc };
+// };
 
 export default Sketchplanations;

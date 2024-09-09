@@ -8,8 +8,88 @@ import podcastImage from "images/podcast.jpg";
 import SubscribeInline from "./SubscribeInline";
 import FancyLink from "./FancyLink";
 import { ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
-export const Card = ({ href, imageSrc, alt, content }) => (
+const Nav = () => (
+	<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 lg:text-center gap-x-12 gap-y-1 items-start">
+		<FancyLink href="/">Home</FancyLink>
+		<FancyLink href="/big-ideas-little-pictures">Book!</FancyLink>
+		<FancyLink
+			href="https://podcast.sketchplanations.com"
+			target="_blank"
+			rel="noreferrer"
+		>
+			<span className="flex flex-row gap-x-1 items-center">
+				Podcast
+				<ExternalLink size={16} />
+			</span>
+		</FancyLink>
+		<FancyLink href="/subscribe">Subscribe</FancyLink>
+		<FancyLink href="/about">About</FancyLink>
+		<FancyLink
+			href="https://www.redbubble.com/people/sketchplanator/explore?asc=u&page=1&sortOrder=top%20selling"
+			target="_blank"
+			rel="noreferrer"
+		>
+			<span className="flex flex-row gap-x-1 items-center">
+				Shop
+				<ExternalLink size={16} />
+			</span>
+		</FancyLink>
+		<FancyLink href="/categories">Categories</FancyLink>
+		<FancyLink href="/archive">Archive</FancyLink>
+	</div>
+);
+
+const Cards = () => (
+	<div className={styles.cards}>
+		<Card
+			href="/big-ideas-little-pictures"
+			imageSrc={bigIdeasLittlePicturesImage}
+			alt="Big Ideas Little Pictures"
+			content={
+				<>
+					Sketchplanations is now a book! I think you’ll love{" "}
+					<FancyLink href="/big-ideas-little-pictures">
+						Big Ideas Little Pictures
+					</FancyLink>
+				</>
+			}
+		/>
+		<Card
+			href="/thanks"
+			content={
+				<>
+					Thanks to <FancyLink href="/thanks">my Patrons</FancyLink> for
+					enabling me to keep creating Sketchplanations 🙏
+				</>
+			}
+		/>
+		<Card
+			href="https://podcast.sketchplanations.com/"
+			imageSrc={podcastImage}
+			alt="Big Ideas Little Pictures"
+			content={
+				<>
+					Prefer to listen to the ideas on your commute or while doing chores? I
+					don’t blame you.{" "}
+					<FancyLink
+						href="https://podcast.sketchplanations.com/"
+						target="_blank"
+						rel="noreferrer"
+					>
+						<span className="inline-flex flex-row gap-x-1 items-center">
+							Listen to the podcast
+							<ExternalLink size={16} />
+						</span>
+					</FancyLink>
+				</>
+			}
+		/>
+	</div>
+);
+
+const Card = ({ href, imageSrc, alt, content }) => (
 	<div className={styles.card}>
 		{imageSrc && (
 			<Link href={href}>
@@ -79,11 +159,18 @@ const categories = [
 	},
 ];
 
-const Footer = ({ subscribeInlineDoc }) => {
+const Footer = () => {
+	const [subscribeInlineDoc, setSubscribeInlineDoc] = useState(null);
+
+	useEffect(() => {
+		fetch("/api/subscribeInlineDoc")
+			.then((res) => res.json())
+			.then(setSubscribeInlineDoc);
+	}, []);
+
 	return (
-		// max-w-[66rem] mx-auto
-		<footer className="bg-bg pb-36 grid gap-y-12">
-			<div className="border-t border-border pt-6 sm:pt-10 px-6">
+		<footer className="bg-bg pb-36 grid gap-y-12 border-t border-border">
+			<div className="pt-6 sm:pt-10 px-6">
 				<div className="max-w-screen-xl mx-auto">
 					<div className="mb-3 text-xl font-semibold">Explore more</div>
 					<div className="prose mb-6">
@@ -91,11 +178,6 @@ const Footer = ({ subscribeInlineDoc }) => {
 							The sketches cover all sorts of topics. Explore some common themes
 							to find what interests you:
 						</p>
-						{/* <p className="text-subduedText">
-						The sketches cover all sorts of topics. Try a{" "}
-						<Link href="/search">search</Link> or start from some common themes
-						below to find what interests you:
-					</p> */}
 					</div>
 					<div className="sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 -my-1">
 						{categories.map(({ title, uid }) => {
@@ -118,81 +200,21 @@ const Footer = ({ subscribeInlineDoc }) => {
 			</div>
 
 			<div className="border-t border-border pt-6 sm:pt-10 px-6">
-				<div className="grid sm:grid-cols-2 gap-12 max-w-screen-xl mx-auto">
-					<div className={styles.cards}>
-						<Card
-							href="/big-ideas-little-pictures"
-							imageSrc={bigIdeasLittlePicturesImage}
-							alt="Big Ideas Little Pictures"
-							content={
-								<>
-									Sketchplanations is now a book! I think you’ll love{" "}
-									<Link href="/big-ideas-little-pictures">
-										Big Ideas Little Pictures
-									</Link>
-								</>
-							}
-						/>
-						<Card
-							href="/thanks"
-							content={
-								<>
-									Thanks to <Link href="/thanks">my Patrons</Link> for enabling
-									me to keep creating Sketchplanations 🙏
-								</>
-							}
-						/>
-						<Card
-							href="https://podcast.sketchplanations.com/"
-							imageSrc={podcastImage}
-							alt="Big Ideas Little Pictures"
-							content={
-								<>
-									Prefer to listen to the ideas on your commute or while doing
-									chores? I don’t blame you.
-									<a
-										className="inline-flex flex-roew gap-x-1 items-center"
-										href="https://podcast.sketchplanations.com/"
-										target="_blank"
-										rel="noreferrer"
-									>
-										Listen to the podcast
-										<ExternalLink size={16} />
-									</a>
-								</>
-							}
-						/>
-					</div>
-					<div className="grid gap-y-8">
+				<div className="grid sm:grid-cols-2 gap-12 max-w-screen-xl mx-auto items-center">
+					<Cards />
+					<div className="grid gap-y-8 items-start">
 						<SubscribeInline doc={subscribeInlineDoc} />
-						<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-12 gap-y-1">
-							<Link href="/">Home</Link>
-							<Link href="/big-ideas-little-pictures">Book!</Link>
-							<a
-								href="https://podcast.sketchplanations.com"
-								target="_blank"
-								rel="noreferrer"
-								className="flex flex-row gap-x-1 items-center"
-							>
-								Podcast
-								<ExternalLink size={16} />
-							</a>
-							<Link href="/subscribe">Subscribe</Link>
-							<Link href="/about">About</Link>
-							<a
-								href="https://www.redbubble.com/people/sketchplanator/explore?asc=u&page=1&sortOrder=top%20selling"
-								target="_blank"
-								rel="noreferrer"
-								className="flex flex-row gap-x-1 items-center"
-							>
-								Shop
-								<ExternalLink size={16} />
-							</a>
-							<Link href="/search">Search</Link>
-							<Link href="/licence">Licence</Link>
-						</div>
+						{/* <p className="text-subduedText">
+							<b className="font-semibold">Looking to use a Sketchplanation?</b>{" "}
+							Please do! See the <FancyLink href="/licence">licence</FancyLink>{" "}
+							for details.
+						</p> */}
 					</div>
 				</div>
+			</div>
+
+			<div className="border-t border-border pt-6 sm:pt-10 px-6">
+				<Nav />
 			</div>
 		</footer>
 	);

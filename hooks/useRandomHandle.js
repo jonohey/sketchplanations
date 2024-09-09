@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useRandomHandle = () => {
+export const useRandomHandle = (dependencies = []) => {
 	const [randomHandle, setRandomHandle] = useState(null);
 
 	useEffect(() => {
@@ -15,7 +15,7 @@ export const useRandomHandle = () => {
 		};
 
 		fetchRandomHandle();
-	}, []);
+	}, dependencies);
 
 	return randomHandle;
 };

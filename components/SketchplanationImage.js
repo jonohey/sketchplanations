@@ -98,7 +98,8 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					tabIndex="0"
 					style={{
 						opacity,
-						boxShadow: "0 2.3rem 1rem -2rem var(--color-sketchShadow)",
+						// boxShadow: "0 2.3rem 1rem -2rem var(--color-sketchShadow)",
+						boxShadow: "0 2.3rem 1rem -2rem hsla(0, 0%, 0%, 0.1)",
 					}}
 				/>
 				<motion.div

@@ -53,3 +53,9 @@
 .page-body p {
   @apply max-w-prose;
 }
+
+.page-body hr {
+  @apply bg-border;
+  height: 1px;
+  border: none;
+}

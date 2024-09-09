@@ -2,13 +2,9 @@
   @apply grid gap-y-8;
 }
 
-.cards a {
-  @apply text-blue dark:text-blueLight underline font-semibold;
-}
-
 .card {
   @apply grid items-center gap-6;
-  grid-template-columns:4rem 1fr;
+  grid-template-columns: 4rem 1fr;
 }
 
 .card img {

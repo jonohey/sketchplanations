@@ -11,6 +11,7 @@ import styles from "./SketchplanationCards.module.css";
 
 import "swiper/css";
 import "swiper/css/effect-cards";
+import { isBlank } from "helpers";
 
 const SketchplanationCards = ({ title, sketchplanations }) => {
 	const [swiperRef, setSwiperRef] = useState(null);
@@ -26,6 +27,8 @@ const SketchplanationCards = ({ title, sketchplanations }) => {
 
 	const isBeginning = currentSlide === 0;
 	const isEnd = currentSlide === sketchplanations.length - 1;
+
+	if (isBlank(sketchplanations)) return null;
 
 	return (
 		<div className="sticky top-0">

@@ -1,28 +1,5 @@
 .root {
-  @apply grid gap-x-3 gap-y-3;
+  @apply grid gap-x-2 gap-y-3 px-3;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
-}
-
-.item {
-  @apply relative overflow-hidden;
-  aspect-ratio: 5/3;
-  mask-image: var(--mask-image);
-}
-
-.item__title {
-  @apply block w-full pl-5 pr-12 pb-2 text-sm overflow-hidden text-ellipsis whitespace-nowrap;
-}
-
-.item__img {
-  /* @apply hover:absolute hover:z-10 hover:scale-110; */
-  /* @apply hover:-translate-y-2 transition-transform; */
-  /* @apply -skew-x-2; */
-  /* transform: perspective(75em) rotateX(30deg) scale(0.92) translateY(1.5rem);
-  transition: transform 0.2s ease-out 0s;
-  box-shadow: rgba(0, 0, 0, 0.8) 0px 25px 50px -12px; */
-}
-
-.item__img:hover {
-  /* transform: perspective(75rem) rotateY(5deg) scale(1) translateY(0); */
 }

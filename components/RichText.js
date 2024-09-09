@@ -6,6 +6,8 @@ import redirects from "redirects.mjs";
 import sketchTooltipsData from "../sketch-tooltips-data.json";
 import SketchTooltip from "./SketchTooltip";
 import FancyLink from "./FancyLink";
+import { ExternalLink } from "lucide-react";
+import { linkResolver } from "services/prismic.mjs";
 
 // Example
 // Input: /chestertons-fence
@@ -55,34 +57,35 @@ const RichText = ({ ...props }) => {
 			{...props}
 			components={{
 				hyperlink: ({ node, children }) => {
+					let url = node.data.url;
+
+					if (node.data.link_type === LinkType.Document) {
+						url = linkResolver(node.data);
+					}
+
 					const link = {
 						...node.data,
-						url: rewriteWithRedirects(maybeRelativeUrl(node.data.url)),
+						url: rewriteWithRedirects(maybeRelativeUrl(url)),
 					};
 
 					// Sketchplanations links
-					if (link.link_type === LinkType.Web) {
-						const uid = extractSketchplanationsUid(link.url);
-						const image = sketchTooltipsData.find(
-							({ uid: dataUid }) => dataUid === uid,
-						);
+					const uid = extractSketchplanationsUid(link.url);
+					const image = sketchTooltipsData.find(
+						({ uid: dataUid }) => dataUid === uid,
+					);
 
-						if (image) {
-							return (
-								<SketchTooltip uid={uid}>
-									<FancyLink as={PrismicNextLink} field={link}>
-										{children}
-									</FancyLink>
-								</SketchTooltip>
-							);
-						}
+					if (image) {
+						return (
+							<SketchTooltip uid={uid}>
+								<FancyLink as={PrismicNextLink} field={link}>
+									{children}
+								</FancyLink>
+							</SketchTooltip>
+						);
 					}
 
 					// Tag links
-					if (
-						link.link_type === LinkType.Web &&
-						/\/tags(\/|$)/.test(link.url)
-					) {
+					if (/\/tags(\/|$)/.test(link.url)) {
 						const correctedUrl = link.url.replace(
 							/\/tags(\/|$)/,
 							(_, slash) => `/categories${slash || ""}`,
@@ -99,11 +102,19 @@ const RichText = ({ ...props }) => {
 							);
 					}
 
-					return (
-						<FancyLink as={PrismicNextLink} field={link}>
-							{children}
-						</FancyLink>
-					);
+					// External links
+					if (/^https?:\/\//.test(link.url)) {
+						return (
+							<FancyLink href={link.url} target="_blank" rel="noopener">
+								<span className="inline-flex items-center gap-x-1">
+									{children}
+									<ExternalLink size={16} />
+								</span>
+							</FancyLink>
+						);
+					}
+
+					return <FancyLink href={link.url}>{children}</FancyLink>;
 				},
 			}}
 		/>

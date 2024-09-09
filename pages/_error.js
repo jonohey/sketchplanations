@@ -2,7 +2,7 @@ import * as Sentry from "@sentry/react";
 
 import Oops from "components/Oops";
 
-const Error = () => {
+const ErrorPage = () => {
 	return <Oops />;
 };
 
@@ -12,4 +12,4 @@ export async function getServerSideProps({ res, err }) {
 	return { props: { statusCode } };
 }
 
-export default Error;
+export default ErrorPage;

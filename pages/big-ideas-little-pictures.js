@@ -1,12 +1,10 @@
 import Head from "next/head";
 
-import styles from "./big-ideas-little-pictures.module.css";
-
 import { Page } from "components";
 import { pageTitle } from "helpers";
 import { client } from "services/prismic";
 
-const About = ({ document }) => {
+const Book = ({ document }) => {
 	return (
 		<>
 			<Head>
@@ -16,9 +14,7 @@ const About = ({ document }) => {
 					content="Buy Big Ideas Little Pictures the book of sketchplanations by Jono Hey"
 				/>
 			</Head>
-			<div className={styles.book}>
-				<Page document={document} />
-			</div>
+			<Page document={document} />
 		</>
 	);
 };
@@ -28,4 +24,4 @@ export async function getStaticProps() {
 	return { props: { document } };
 }
 
-export default About;
+export default Book;

@@ -1,6 +1,9 @@
 import redirects from "./redirects.mjs";
 
 const nextConfig = {
+	experimental: {
+		largePageDataBytes: 256 * 1000, // 128KB by default
+	},
 	images: {
 		domains: ["images.prismic.io"],
 		loader: "custom",

@@ -36,7 +36,7 @@ const TextHeader = ({ as = "h1", children, ...props }) => {
 					// animationDelay={250}
 					strokeWidth={2}
 					multiline
-					padding={3}
+					padding={1}
 				>
 					{children}
 				</RoughNotation>,

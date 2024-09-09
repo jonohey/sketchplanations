@@ -6,14 +6,14 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRandomHandle } from "hooks/useRandomHandle";
 
 import styles from "./[uid].module.css";
 
 import SketchplanationImage from "components/SketchplanationImage";
 import SubscribeInline from "components/SubscribeInline";
-import { humanizePublishedDate, humanizeTag, pageTitle } from "helpers";
+import { humanizePublishedDate, isPresent, pageTitle } from "helpers";
 import bigIdeasLittlePicturesImage from "images/bigideaslittlepictures.jpg";
 import podcastImage from "images/podcast.jpg";
 import { client } from "services/prismic";
@@ -23,16 +23,10 @@ import RichText from "components/RichText";
 import SketchplanationCtas from "components/SketchplanationCtas";
 import SketchplanationCards from "components/SketchplanationCards";
 import { Shuffle } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
 
-import "swiper/css";
-
-import { FreeMode, Mousewheel } from "swiper/modules";
-import { Tabs } from "react-aria-components";
-import { TabList } from "react-aria-components";
-import { Tab } from "react-aria-components";
-import { TabPanel } from "react-aria-components";
-import { RoughNotation } from "react-rough-notation";
+import TaggedSketchplanations from "components/TaggedSketchplanations";
+import FancyLink from "components/FancyLink";
+import { PrismicNextImage } from "@prismicio/next";
 
 // const SocialSharing = dynamic(() => import('components/SocialSharing'))
 const TextHeader = dynamic(() => import("components/TextHeader"));
@@ -61,12 +55,20 @@ const truncate = (string, limit) => {
 	return truncatedString;
 };
 
+const randomTitles = [
+	"Feeling adventurous?",
+	"Explore something new",
+	"Discover a surprise",
+	"Take a chance",
+	"Random inspiration",
+];
+
 const SketchplanationPage = ({
 	sketchplanation,
 	subscribeInlineDoc,
 	similarSketchplanations,
 	licenceDocument,
-	taggedSketchplanations,
+	tags,
 }) => {
 	const {
 		data: {
@@ -82,7 +84,8 @@ const SketchplanationPage = ({
 
 	const [pwywModalOpen, setPwywModalOpen] = useState(false);
 	const [licenceModalOpen, setLicenceModalOpen] = useState(false);
-	const randomHandle = useRandomHandle();
+	const [randomTitle, setRandomTitle] = useState("");
+	const randomHandle = useRandomHandle([uid]);
 
 	const publishedText = humanizePublishedDate(publishedAt);
 
@@ -94,8 +97,14 @@ const SketchplanationPage = ({
 		onViewLicence: () => setLicenceModalOpen(true),
 	};
 
+	useEffect(() => {
+		setRandomTitle(
+			randomTitles[Math.floor(Math.random() * randomTitles.length)],
+		);
+	}, [uid]);
+
 	return (
-		<div key={sketchplanation.uid}>
+		<div key={uid}>
 			<Head>
 				<title>{pageTitle(title)}</title>
 				<meta name="robots" content="max-image-preview:large" />
@@ -168,6 +177,21 @@ const SketchplanationPage = ({
 						<TextHeader>{title}</TextHeader>
 					</div>
 					<div className={styles.image}>
+						{image.dimensions.width < 790 && (
+							<div className="absolute inset-0">
+								<PrismicNextImage
+									field={image}
+									className="absolute inset-0 w-full h-full object-cover"
+									width={100}
+									height={100}
+									imgixParams={{
+										width: 100,
+										blur: 100,
+									}}
+								/>
+								<div className="absolute inset-0 backdrop-blur-md backdrop-brightness-75" />
+							</div>
+						)}
 						<SketchplanationImage
 							image={image}
 							title={title}
@@ -184,7 +208,7 @@ const SketchplanationPage = ({
 
 					<div className={styles.main}>
 						<div className={classNames(styles.body, "prose")}>
-							<RichText field={body} className="prose" />
+							<RichText field={body} />
 							<div className={styles["published-at"]}>
 								Published <time dateTime={publishedAt}>{publishedText}</time>
 							</div>
@@ -208,9 +232,9 @@ const SketchplanationPage = ({
 								content={
 									<>
 										Sketchplanations is now a book! I think you’ll love{" "}
-										<Link href="/big-ideas-little-pictures">
+										<FancyLink href="/big-ideas-little-pictures">
 											Big Ideas Little Pictures
-										</Link>
+										</FancyLink>
 									</>
 								}
 							/>
@@ -218,8 +242,8 @@ const SketchplanationPage = ({
 								href="/thanks"
 								content={
 									<>
-										Thanks to <Link href="/thanks">my Patrons</Link> for
-										enabling me to keep creating Sketchplanations 🙏
+										Thanks to <FancyLink href="/thanks">my Patrons</FancyLink>{" "}
+										for enabling me to keep creating Sketchplanations 🙏
 									</>
 								}
 							/>
@@ -230,16 +254,17 @@ const SketchplanationPage = ({
 								content={
 									<>
 										Prefer to listen to the ideas on your commute or while doing
-										chores? I don’t blame you.
-										<a
-											className="inline-flex flex-row gap-x-1 items-center"
+										chores? I don’t blame you.{" "}
+										<FancyLink
 											href="https://podcast.sketchplanations.com/"
 											target="_blank"
 											rel="noreferrer"
 										>
-											Listen to the podcast
-											<ExternalLink size={16} />
-										</a>
+											<div className="inline-flex flex-row gap-x-1 items-center">
+												Listen to the podcast
+												<ExternalLink size={16} />
+											</div>
+										</FancyLink>
 									</>
 								}
 							/>
@@ -247,18 +272,20 @@ const SketchplanationPage = ({
 						</div>
 
 						<div className="md:sticky top-[65px]">
-							<div className={styles.related}>
-								<SketchplanationCards
-									title="Explore similar"
-									sketchplanations={similarSketchplanations}
-								/>
-							</div>
+							{isPresent(similarSketchplanations) && (
+								<div className={styles.related}>
+									<SketchplanationCards
+										title="Explore similar"
+										sketchplanations={similarSketchplanations}
+									/>
+								</div>
+							)}
 
 							<div className="mt-10">
-								<p className="font-semibold text-base">Feeling adventurous?</p>
+								<p className="font-semibold text-base">{randomTitle}</p>
 								<Link
 									href={`/${randomHandle}`}
-									className="btn-secondary text-base mt-4"
+									className="btn-secondary text-base mt-4 rounded-lg"
 								>
 									Random sketch <Shuffle strokeWidth={1} size={16} />
 								</Link>
@@ -269,138 +296,7 @@ const SketchplanationPage = ({
 			</div>
 
 			<div className={styles.footer}>
-				<Tabs className="w-full overflow-hidden">
-					<div className="flex flex-row gap-x-4 px-6">
-						<span className="font-semibold">Related</span>
-						<TabList aria-label="Related" className="flex flex-row gap-x-4">
-							{taggedSketchplanations.map(({ tag }) => (
-								<Tab
-									key={tag.id}
-									id={tag.id}
-									className={({ isSelected }) =>
-										[
-											isSelected ? "text-blue" : "bg-transparent",
-											"outline-none cursor-pointer hover:text-blue",
-										].join(" ")
-									}
-								>
-									{({ isSelected }) => (
-										<RoughNotation
-											show={isSelected}
-											iterations={1}
-											animate={false}
-											// animationDuration={150}
-											// animationDelay={100}
-											strokeWidth={1}
-											multiline
-											padding={3}
-										>
-											{humanizeTag(tag.slug)}
-										</RoughNotation>
-									)}
-								</Tab>
-							))}
-						</TabList>
-					</div>
-					{taggedSketchplanations.map(({ tag, sketchplanations }) => (
-						<TabPanel key={tag.id} id={tag.id}>
-							<div className={styles.taggedSketchplanations}>
-								<Swiper
-									grabCursor={true}
-									slidesPerView="auto"
-									spaceBetween={0}
-									scroll
-									mousewheel={{
-										enabled: true,
-										forceToAxis: true,
-									}}
-									freeMode={true}
-									modules={[Mousewheel, FreeMode]}
-								>
-									{sketchplanations.map((sketchplanation) => (
-										<SwiperSlide key={sketchplanation.id}>
-											<Link
-												href={`/${sketchplanation.uid}`}
-												className={classNames("group", styles.taggedSketch)}
-											>
-												<div className="relative w-full aspect-[5/3]">
-													<Image
-														src={sketchplanation.data.image.url}
-														title={sketchplanation.data.title}
-														className="bg-paper object-cover object-top w-[10rem]"
-														// width={sketchplanation.data.image.dimensions.width}
-														// height={sketchplanation.data.image.dimensions.height}
-														fill={true}
-														alt={sketchplanation.data.title}
-													/>
-												</div>
-												<div className="absolute bottom-0 left-0 w-full bg-paperTransparent backdrop-blur-lg font-semibold text-sm px-4 py-3 text-[#222] group-hover:text-red border-t border-paperDarker whitespace-nowrap overflow-hidden text-ellipsis">
-													{sketchplanation.data.title}
-												</div>
-											</Link>
-										</SwiperSlide>
-									))}
-								</Swiper>
-							</div>
-						</TabPanel>
-					))}
-				</Tabs>
-
-				{/* {taggedSketchplanations.map(({ tag, sketchplanations }) => (
-					<div key={tag.id} className="-mt-5 overflow-x-hidden">
-						<div key={tag.id} className="w-full overflow-hidden">
-							<div className="sm:mx-6 flex flex-row gap-x-3 items-center -mb-4">
-								<h2 className="text-lg font-semibold text-white">
-									{humanizeTag(tag.slug)}
-								</h2>
-								<Link
-									className="link-primary text-sm"
-									href={`/categories/${tag.slug}`}
-								>
-									View all
-								</Link>
-							</div>
-							<div className={styles.taggedSketchplanations}>
-								<Swiper
-									grabCursor={true}
-									slidesPerView="auto"
-									spaceBetween={0}
-									scroll
-									mousewheel={{
-										enabled: true,
-										forceToAxis: true,
-									}}
-									freeMode={true}
-									modules={[Mousewheel, FreeMode]}
-								>
-									{sketchplanations.map((sketchplanation) => (
-										<SwiperSlide key={sketchplanation.id}>
-											<Link
-												href={`/${sketchplanation.uid}`}
-												className={classNames("group", styles.taggedSketch)}
-											>
-												<div className="relative w-full aspect-[5/2]">
-													<Image
-														src={sketchplanation.data.image.url}
-														title={sketchplanation.data.title}
-														className="bg-paper object-cover object-top w-[10rem] truncated-sketchplanation-image"
-														// width={sketchplanation.data.image.dimensions.width}
-														// height={sketchplanation.data.image.dimensions.height}
-														fill={true}
-														alt={sketchplanation.data.title}
-													/>
-												</div>
-												<div className="font-semibold text-sm px-4 py-3 text-[#222] group-hover:text-red border-t border-paperDarker whitespace-nowrap overflow-hidden text-ellipsis">
-													{sketchplanation.data.title}
-												</div>
-											</Link>
-										</SwiperSlide>
-									))}
-								</Swiper>
-							</div>
-						</div>
-					</div>
-				))} */}
+				<TaggedSketchplanations tags={tags} excludeUid={uid} />
 			</div>
 		</div>
 	);
@@ -430,26 +326,6 @@ export async function getStaticProps({ params: { uid } }) {
 
 	const tags = sketchplanation.data.tags;
 
-	const taggedSketchplanations = await Promise.all(
-		tags.map(async (tag) => {
-			const taggedSketches = await client.getAllByType("sketchplanation", {
-				filters: [
-					prismic.filter.at("my.sketchplanation.tags.tag", tag.tag.id),
-					prismic.filter.not("my.sketchplanation.uid", uid),
-				],
-			});
-
-			if (taggedSketches.length === 0) return null;
-
-			return {
-				tag: tag.tag,
-				sketchplanations: taggedSketches.sort(() => Math.random() - 0.5),
-			};
-		}),
-	);
-
-	const filteredTaggedSketchplanations = taggedSketchplanations.filter(Boolean);
-
 	return {
 		props: {
 			sketchplanation,
@@ -457,7 +333,6 @@ export async function getStaticProps({ params: { uid } }) {
 			similarSketchplanations,
 			licenceDocument,
 			tags,
-			taggedSketchplanations: filteredTaggedSketchplanations,
 		},
 	};
 }

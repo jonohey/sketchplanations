@@ -8,6 +8,7 @@ import useSearch from "hooks/useSearch";
 
 import SketchplanationsGrid from "./SketchplanationsGrid";
 import Tags from "./Tags";
+import FancyLink from "./FancyLink";
 
 const loadingMessages = [
 	"Finding some spectacular sketches…",
@@ -52,12 +53,12 @@ const SearchResults = () => {
 		return (
 			<div className={styles["search-results"]}>
 				<div className={styles.links}>
-					<Link href="/categories" className={styles.link}>
+					<FancyLink href="/categories" className={styles.link}>
 						Categories
-					</Link>
-					<Link href="/archive" className={styles.link}>
+					</FancyLink>
+					<FancyLink href="/archive" className={styles.link}>
 						Archive
-					</Link>
+					</FancyLink>
 				</div>
 				<SketchplanationsGrid prismicDocs={initialResults} />
 			</div>
