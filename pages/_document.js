@@ -32,7 +32,11 @@ class MyDocument extends Document {
 					<link rel="manifest" href="/site.webmanifest" />
 					<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
 					<meta name="msapplication-TileColor" content="#fbf8de" />
-					<meta name="theme-color" content="#fff" />
+					<meta
+						name="theme-color"
+						content="#fff"
+						media="(prefers-color-scheme: light)"
+					/>
 					<meta
 						name="theme-color"
 						content="#35363a"
