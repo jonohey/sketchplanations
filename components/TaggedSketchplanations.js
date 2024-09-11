@@ -91,7 +91,6 @@ const TaggedSketchplanations = ({ tags, excludeUid }) => {
 										grabCursor={true}
 										slidesPerView="auto"
 										spaceBetween={0}
-										scroll={true}
 										mousewheel={{
 											enabled: true,
 											forceToAxis: true,
@@ -119,7 +118,6 @@ const TaggedSketchplanations = ({ tags, excludeUid }) => {
 									grabCursor={true}
 									slidesPerView="auto"
 									spaceBetween={0}
-									scroll
 									mousewheel={{
 										enabled: true,
 										forceToAxis: true,
