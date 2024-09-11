@@ -19,9 +19,9 @@ const Nav = () => (
 			target="_blank"
 			rel="noreferrer"
 		>
-			<span className="flex flex-row gap-x-1 items-center">
-				Podcast
-				<ExternalLink size={16} />
+			<span className="inline">
+				<span>Podcast</span>
+				<ExternalLink size={16} className="inline" />
 			</span>
 		</FancyLink>
 		<FancyLink href="/subscribe">Subscribe</FancyLink>
@@ -31,9 +31,9 @@ const Nav = () => (
 			target="_blank"
 			rel="noreferrer"
 		>
-			<span className="flex flex-row gap-x-1 items-center">
-				Shop
-				<ExternalLink size={16} />
+			<span className="inline">
+				<span>Shop</span>
+				<ExternalLink size={16} className="inline" />
 			</span>
 		</FancyLink>
 		<FancyLink href="/categories">Categories</FancyLink>
@@ -78,9 +78,9 @@ const Cards = () => (
 						target="_blank"
 						rel="noreferrer"
 					>
-						<span className="inline-flex flex-row gap-x-1 items-center">
-							Listen to the podcast
-							<ExternalLink size={16} />
+						<span className="inline">
+							<span>Listen to the podcast</span>
+							<ExternalLink size={16} className="inline" />
 						</span>
 					</FancyLink>
 				</>

@@ -52,9 +52,9 @@ const Navigation = () => {
 				className={styles.item}
 				data-active={false}
 			>
-				Podcast
-				<span className={styles["external-link-icon"]}>
-					<ExternalLink size={16} />
+				<span className="inline">
+					<span>Podcast</span>
+					<ExternalLink size={16} className="inline" />
 				</span>
 			</a>
 			<Link
@@ -82,9 +82,9 @@ const Navigation = () => {
 				className={styles.item}
 				data-active={false}
 			>
-				Shop
-				<span className={styles["external-link-icon"]}>
-					<ExternalLink size={16} />
+				<span className="inline">
+					<span>Shop</span>
+					<ExternalLink size={16} className="inline" />
 				</span>
 			</a>
 		</nav>

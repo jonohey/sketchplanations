@@ -260,9 +260,9 @@ const SketchplanationPage = ({
 											target="_blank"
 											rel="noreferrer"
 										>
-											<span className="inline-flex flex-row gap-x-1 items-center">
-												Listen to the podcast
-												<ExternalLink size={16} />
+											<span className="inline">
+												<span>Listen to the podcast</span>
+												<ExternalLink size={16} className="inline" />
 											</span>
 										</FancyLink>
 									</>

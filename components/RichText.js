@@ -106,9 +106,9 @@ const RichText = ({ ...props }) => {
 					if (/^https?:\/\//.test(link.url)) {
 						return (
 							<FancyLink href={link.url} target="_blank" rel="noopener">
-								<span className="inline-flex items-center gap-x-1">
-									{children}
-									<ExternalLink size={16} />
+								<span className="inline">
+									<span>{children}</span>{" "}
+									<ExternalLink size={16} className="inline" />
 								</span>
 							</FancyLink>
 						);
