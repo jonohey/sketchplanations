@@ -27,7 +27,6 @@ const Sketchplanation = ({ sketchplanation, priority = false }) => {
 					field={image}
 					title={title}
 					priority={priority}
-					lightbox={false}
 					sizes="(max-width: 40rem) 100vw, 40rem"
 				/>
 			</Link>
