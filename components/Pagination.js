@@ -29,10 +29,10 @@ const Pagination = ({ currentPage, totalPages, className }) => {
 						href={currentPage <= 1 ? "/" : `/?page=${currentPage - 1}`}
 						aria-label="Previous page"
 					>
-						<div className={styles.navButton}>
+						<span className={styles.navButton}>
 							<ChevronLeft {...commonIconProps} />
 							Previous
-						</div>
+						</span>
 					</FancyLink>
 				)}
 
@@ -58,10 +58,10 @@ const Pagination = ({ currentPage, totalPages, className }) => {
 						aria-label="Next page"
 						aria-disabled={currentPage >= totalPages}
 					>
-						<div className={styles.navButton}>
+						<span className={styles.navButton}>
 							Next
 							<ChevronRight {...commonIconProps} />
-						</div>
+						</span>
 					</FancyLink>
 				)}
 			</nav>

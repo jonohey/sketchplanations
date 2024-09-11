@@ -1,13 +1,14 @@
 {
-	"compilerOptions": {
-		"baseUrl": ".",
-		"paths": {
-			"context": ["./context"],
-			"components/*": ["components/*"],
-			"helpers": ["helpers"],
-			"services/*": ["services/*"],
-			"hooks/*": ["hooks/*"],
-			"images/*": ["images/*"]
-		}
-	}
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "data/*": ["data/*"],
+      "context": ["./context"],
+      "components/*": ["components/*"],
+      "helpers": ["helpers"],
+      "services/*": ["services/*"],
+      "hooks/*": ["hooks/*"],
+      "images/*": ["images/*"]
+    }
+  }
 }

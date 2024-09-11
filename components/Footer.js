@@ -191,9 +191,9 @@ const Footer = () => {
 							href="/categories"
 							className="text-subduedText hover:text-blue"
 						>
-							<div className="inline-flex flex-row gap-x-1 items-center">
+							<span className="inline-flex flex-row gap-x-1 items-center">
 								More <ChevronRight size={16} />
-							</div>
+							</span>
 						</FancyLink>
 					</div>
 				</div>

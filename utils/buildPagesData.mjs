@@ -29,7 +29,7 @@ async function buildPagesData() {
 
 	const uids = await getUids();
 
-	const filePath = path.join(process.cwd(), "pages.json");
+	const filePath = path.join(process.cwd(), "data/pages.json");
 	fs.writeFileSync(filePath, JSON.stringify(uids));
 
 	console.timeEnd("[buildPagesData]");

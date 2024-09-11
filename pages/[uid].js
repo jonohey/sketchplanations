@@ -260,10 +260,10 @@ const SketchplanationPage = ({
 											target="_blank"
 											rel="noreferrer"
 										>
-											<div className="inline-flex flex-row gap-x-1 items-center">
+											<span className="inline-flex flex-row gap-x-1 items-center">
 												Listen to the podcast
 												<ExternalLink size={16} />
-											</div>
+											</span>
 										</FancyLink>
 									</>
 								}
