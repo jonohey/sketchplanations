@@ -23,7 +23,7 @@ async function buildSketchTooltipsData() {
 		})
 		.filter(Boolean);
 
-	const filePath = path.join(process.cwd(), "sketch-tooltips-data.json");
+	const filePath = path.join(process.cwd(), "data/sketch-tooltips-data.json");
 	fs.writeFileSync(filePath, JSON.stringify(data));
 
 	console.timeEnd("[buildSketchTooltipsData]");

@@ -17,7 +17,7 @@ async function buildInitialSearchResults() {
 		limit: 20,
 	});
 
-	const filePath = path.join(process.cwd(), "initial-search-results.json");
+	const filePath = path.join(process.cwd(), "data/initial-search-results.json");
 	fs.writeFileSync(filePath, JSON.stringify(results));
 
 	console.timeEnd("[buildInitialSearchResults]");
