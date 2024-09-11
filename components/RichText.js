@@ -3,7 +3,7 @@ import { PrismicRichText } from "@prismicio/react";
 import { LinkType } from "@prismicio/types";
 import { compile, match } from "path-to-regexp";
 import redirects from "redirects.mjs";
-import sketchTooltipsData from "../sketch-tooltips-data.json";
+import sketchTooltipsData from "data/sketch-tooltips-data.json";
 import SketchTooltip from "./SketchTooltip";
 import FancyLink from "./FancyLink";
 import { ExternalLink } from "lucide-react";
