@@ -39,5 +39,5 @@ export default async function handler(req, res) {
 
 	const filteredTaggedSketchplanations = taggedSketchplanations.filter(Boolean);
 
-	res.status(200).json(filteredTaggedSketchplanations);
+	res.status(200).json(shuffle(filteredTaggedSketchplanations));
 }

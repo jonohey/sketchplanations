@@ -52,7 +52,7 @@ const Navigation = () => {
 				className={styles.item}
 				data-active={false}
 			>
-				<span className="inline">
+				<span className="inline-flex items-center gap-2">
 					<span>Podcast</span>
 					<ExternalLink size={16} className="inline" />
 				</span>
@@ -82,7 +82,7 @@ const Navigation = () => {
 				className={styles.item}
 				data-active={false}
 			>
-				<span className="inline">
+				<span className="inline-flex items-center gap-2">
 					<span>Shop</span>
 					<ExternalLink size={16} className="inline" />
 				</span>

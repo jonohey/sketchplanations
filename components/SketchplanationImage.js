@@ -130,11 +130,17 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 				onOpenChange={close}
 			>
 				<motion.div
-					className="fixed inset-0 z-10 bg-bgTransparent"
-					initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+					className="fixed inset-0 z-10 bg-overlay"
+					initial={{
+						opacity: 0,
+						backdropFilter: "blur(0px)",
+						WebkitBackdropFilter: "blur(0px)",
+					}}
 					animate={{
 						opacity: isOpen && !isLoading ? 1 : 0,
 						backdropFilter: isOpen && !isLoading ? "blur(8px)" : "blur(0px)",
+						WebkitBackdropFilter:
+							isOpen && !isLoading ? "blur(8px)" : "blur(0px)",
 					}}
 					transition={{
 						duration: 0.2,
@@ -162,10 +168,15 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					animate={
 						isOpen && !isLoading
 							? {
+									// top: "1.5rem",
+									// left: "1.5rem",
+									// width: "calc(100vw - 3rem)",
+									// height: "calc(100vh - 6rem)",
 									top: "1.5rem",
-									left: "1.5rem",
-									width: "calc(100vw - 3rem)",
-									height: "calc(100vh - 6rem)",
+									left: "0",
+									width: "100vw",
+									// height: "calc(100vh - 6rem)",
+									height: "calc(var(--visual-viewport-height) - 6rem)",
 								}
 							: {
 									top: initialImageRect.top,
@@ -184,40 +195,40 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					<MotionDialog
 						ref={dialog}
 						className="w-full h-full"
-						drag="y"
-						dragMomentum={false}
-						onDragEnd={(e, { offset, velocity }) => {
-							if (
-								offset.y > window.innerHeight * 0.75 ||
-								velocity.y > 10 ||
-								offset.y < -window.innerHeight * 0.75 ||
-								velocity.y < -10
-							) {
-								// Animate back to original position
-								animate(
-									dialog.current,
-									{ y: 0 },
-									{
-										type: "spring",
-										damping: 10,
-										stiffness: 200,
-										mass: 0.1,
-									},
-								);
-								close();
-							} else {
-								animate(
-									dialog.current,
-									{ y: 0 },
-									{
-										type: "spring",
-										damping: 10,
-										stiffness: 200,
-										mass: 0.1,
-									},
-								);
-							}
-						}}
+						// drag="y"
+						// dragMomentum={false}
+						// onDragEnd={(e, { offset, velocity }) => {
+						// 	if (
+						// 		offset.y > window.innerHeight * 0.75 ||
+						// 		velocity.y > 10 ||
+						// 		offset.y < -window.innerHeight * 0.75 ||
+						// 		velocity.y < -10
+						// 	) {
+						// 		// Animate back to original position
+						// 		animate(
+						// 			dialog.current,
+						// 			{ y: 0 },
+						// 			{
+						// 				type: "spring",
+						// 				damping: 10,
+						// 				stiffness: 200,
+						// 				mass: 0.1,
+						// 			},
+						// 		);
+						// 		close();
+						// 	} else {
+						// 		animate(
+						// 			dialog.current,
+						// 			{ y: 0 },
+						// 			{
+						// 				type: "spring",
+						// 				damping: 10,
+						// 				stiffness: 200,
+						// 				mass: 0.1,
+						// 			},
+						// 		);
+						// 	}
+						// }}
 					>
 						<MotionImage
 							className="object-contain cursor-zoom-out"
@@ -233,7 +244,7 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					<AnimatePresence>
 						{isOpen && !isLoading && (
 							<motion.div
-								className="fixed z-20 bottom-0 left-0 right-0 flex items-center justify-center h-12 border-t border-border bg-bgTransparent backdrop-blur-sm"
+								className="fixed z-20 bottom-0 left-0 right-0 flex items-center justify-center h-12 border-t border-[rgba(255,255,255,0.05)] backdrop-blur-sm"
 								initial={{
 									translateY: 100,
 								}}

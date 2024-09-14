@@ -76,11 +76,13 @@ const RichText = ({ ...props }) => {
 
 					if (image) {
 						return (
-							<SketchTooltip uid={uid}>
-								<FancyLink as={PrismicNextLink} field={link}>
-									{children}
-								</FancyLink>
-							</SketchTooltip>
+							<span className="not-prose">
+								<SketchTooltip uid={uid}>
+									<FancyLink as={PrismicNextLink} field={link}>
+										{children}
+									</FancyLink>
+								</SketchTooltip>
+							</span>
 						);
 					}
 
@@ -108,7 +110,10 @@ const RichText = ({ ...props }) => {
 							<FancyLink href={link.url} target="_blank" rel="noopener">
 								<span className="inline">
 									<span>{children}</span>{" "}
-									<ExternalLink size={16} className="inline" />
+									<ExternalLink
+										size={16}
+										className="inline relate -translate-y-[2px]"
+									/>
 								</span>
 							</FancyLink>
 						);

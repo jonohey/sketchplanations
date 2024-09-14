@@ -12,7 +12,7 @@
 
 @keyframes modalAnimation {
   from {
-    transform: scale(0.9) translate(-50%, -40%);
+    transform: scale(0.9) translate(-50%, -45%);
     opacity: 0;
   }
 
@@ -26,7 +26,7 @@
   @apply fixed top-0 left-0 w-full;
   height: var(--visual-viewport-height);
   z-index: 1100;
-  background-color: rgba(255, 255, 255, 0.38);
+  background-color: var(--color-overlay);
   backdrop-filter: blur(10px);
 }
 
@@ -38,19 +38,11 @@
   animation: backdropAnimation 200ms reverse ease;
 }
 
-@screen dark {
-  .backdrop {
-    /* background-color: rgba(53, 54, 58, 0.38); */
-    background-color: hsla(228, 4.5%, 0%, 0.38);
-    /* background-color: rgba(0, 0, 0, 0.8); */
-  }
-}
-
 .modal {
   @apply fixed top-1/2 left-1/2 rounded-md bg-bg;
   width: 90vw;
   max-width: 36rem;
-  max-height: 90vh;
+  max-height: calc(var(--visual-viewport-height) - 3rem);
   z-index: 1200;
   box-shadow:
     0 1px 2.7px rgba(0, 0, 0, 0.045),
@@ -63,7 +55,8 @@
 }
 
 .modal[data-entering] {
-  animation: modalAnimation 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* animation: modalAnimation 400ms cubic-bezier(0.34, 1.56, 0.64, 1); */
+  animation: modalAnimation 200ms ease-out;
 }
 
 .modal[data-exiting] {

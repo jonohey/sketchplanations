@@ -4,9 +4,8 @@ import classNames from "classnames";
 import { ImageJsonLd } from "next-seo";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { useRandomHandle } from "hooks/useRandomHandle";
 
 import styles from "./[uid].module.css";
@@ -14,19 +13,18 @@ import styles from "./[uid].module.css";
 import SketchplanationImage from "components/SketchplanationImage";
 import SubscribeInline from "components/SubscribeInline";
 import { humanizePublishedDate, isPresent, pageTitle } from "helpers";
-import bigIdeasLittlePicturesImage from "images/bigideaslittlepictures.jpg";
-import podcastImage from "images/podcast.jpg";
+
 import { client } from "services/prismic";
-import { ExternalLink } from "lucide-react";
+
 import Page from "components/Page";
 import RichText from "components/RichText";
 import SketchplanationCtas from "components/SketchplanationCtas";
-import SketchplanationCards from "components/SketchplanationCards";
+import SketchplanationsStack from "components/SketchplanationsStack";
 import { Shuffle } from "lucide-react";
 
 import TaggedSketchplanations from "components/TaggedSketchplanations";
-import FancyLink from "components/FancyLink";
 import { PrismicNextImage } from "@prismicio/next";
+import Cards from "components/Cards";
 
 // const SocialSharing = dynamic(() => import('components/SocialSharing'))
 const TextHeader = dynamic(() => import("components/TextHeader"));
@@ -104,7 +102,7 @@ const SketchplanationPage = ({
 	}, [uid]);
 
 	return (
-		<div key={uid}>
+		<Fragment key={uid}>
 			<Head>
 				<title>{pageTitle(title)}</title>
 				<meta name="robots" content="max-image-preview:large" />
@@ -171,49 +169,50 @@ const SketchplanationPage = ({
 				<Page document={licenceDocument} inline />
 			</Modal>
 
-			<div className={styles.wrapper}>
-				<article className={styles.root}>
-					<div className={styles.title}>
-						<TextHeader>{title}</TextHeader>
-					</div>
-					<div className={styles.image}>
-						{image.dimensions.width < 790 && (
-							<div className="absolute inset-0">
-								<PrismicNextImage
-									field={image}
-									className="absolute inset-0 w-full h-full object-cover"
-									width={100}
-									height={100}
-									imgixParams={{
-										width: 100,
-										blur: 100,
-									}}
-								/>
-								<div className="absolute inset-0 backdrop-blur-md backdrop-brightness-75" />
-							</div>
-						)}
-						<SketchplanationImage
-							image={image}
-							title={title}
-							priority={true}
-							onDownload={() => setPwywModalOpen(true)}
-						>
-							<SketchplanationCtas {...commonProps} />
-						</SketchplanationImage>
-					</div>
-
-					<div className={styles["ctas-area"]}>
-						<SketchplanationCtas {...commonProps} />
-					</div>
-
-					<div className={styles.main}>
-						<div className={classNames(styles.body, "prose")}>
-							<RichText field={body} />
-							<div className={styles["published-at"]}>
-								Published <time dateTime={publishedAt}>{publishedText}</time>
-							</div>
+			<div className={styles.root}>
+				<div className={styles.articleWrapper}>
+					<article className={styles.article}>
+						<div className={styles.title}>
+							<TextHeader>{title}</TextHeader>
 						</div>
-						{/* <ul className={styles.tags}>
+						<div className={styles.image}>
+							{image.dimensions.width < 790 && (
+								<div className="absolute inset-0">
+									<PrismicNextImage
+										field={image}
+										className="absolute inset-0 w-full h-full object-cover"
+										width={100}
+										height={100}
+										imgixParams={{
+											width: 100,
+											blur: 100,
+										}}
+									/>
+									<div className="absolute inset-0 backdrop-blur-md backdrop-brightness-75" />
+								</div>
+							)}
+							<SketchplanationImage
+								image={image}
+								title={title}
+								priority={true}
+								onDownload={() => setPwywModalOpen(true)}
+							>
+								<SketchplanationCtas {...commonProps} variant="lightbox" />
+							</SketchplanationImage>
+						</div>
+
+						<div className={styles["ctas-area"]}>
+							<SketchplanationCtas {...commonProps} />
+						</div>
+
+						<div className={styles.main}>
+							<div className={classNames(styles.body, "prose lg:prose-lg")}>
+								<RichText field={body} />
+								<div className={styles["published-at"]}>
+									Published <time dateTime={publishedAt}>{publishedText}</time>
+								</div>
+							</div>
+							{/* <ul className={styles.tags}>
 							{tags.map((tag) => (
 								<li key={tag.tag.id}>
 									<Link key={tag} href={`/categories/${tag.tag.slug}`}>
@@ -222,103 +221,51 @@ const SketchplanationPage = ({
 								</li>
 							))}
 						</ul> */}
-					</div>
-					<aside className={styles.sidebar}>
-						<div className={styles.cards}>
-							<Card
-								href="/big-ideas-little-pictures"
-								imageSrc={bigIdeasLittlePicturesImage}
-								alt="Big Ideas Little Pictures"
-								content={
-									<>
-										Sketchplanations is now a book! I think you’ll love{" "}
-										<FancyLink href="/big-ideas-little-pictures">
-											Big Ideas Little Pictures
-										</FancyLink>
-									</>
-								}
-							/>
-							<Card
-								href="/thanks"
-								content={
-									<>
-										Thanks to <FancyLink href="/thanks">my Patrons</FancyLink>{" "}
-										for enabling me to keep creating Sketchplanations 🙏
-									</>
-								}
-							/>
-							<Card
-								href="https://podcast.sketchplanations.com/"
-								imageSrc={podcastImage}
-								alt="Big Ideas Little Pictures"
-								content={
-									<>
-										Prefer to listen to the ideas on your commute or while doing
-										chores? I don’t blame you.{" "}
-										<FancyLink
-											href="https://podcast.sketchplanations.com/"
-											target="_blank"
-											rel="noreferrer"
-										>
-											<span className="inline">
-												<span>Listen to the podcast</span>
-												<ExternalLink size={16} className="inline" />
-											</span>
-										</FancyLink>
-									</>
-								}
-							/>
-							<SubscribeInline doc={subscribeInlineDoc} />
 						</div>
-
-						<div className="md:sticky top-[65px]">
-							{isPresent(similarSketchplanations) && (
-								<div className={styles.related}>
-									<SketchplanationCards
-										title="Explore similar"
-										sketchplanations={similarSketchplanations}
-									/>
-								</div>
-							)}
-
-							<div className="mt-10">
-								<p className="font-semibold text-base">{randomTitle}</p>
-								<Link
-									href={`/${randomHandle}`}
-									className="btn-secondary text-base mt-4 rounded-lg"
-								>
-									Random sketch <Shuffle strokeWidth={1} size={16} />
-								</Link>
+						<aside className={styles.sidebar}>
+							<div className={styles.cards}>
+								<SubscribeInline doc={subscribeInlineDoc} />
+								<Cards />
 							</div>
-						</div>
-					</aside>
-				</article>
-			</div>
 
-			<div className={styles.footer}>
-				<TaggedSketchplanations tags={tags} excludeUid={uid} />
+							<div className="md:sticky top-[65px]">
+								{isPresent(similarSketchplanations) && (
+									<div className={styles.related}>
+										<SketchplanationsStack
+											title="Keep exploring"
+											sketchplanations={similarSketchplanations}
+										/>
+									</div>
+								)}
+
+								<div className="mt-10">
+									<p className="font-semibold text-base">{randomTitle}</p>
+									<Link
+										href={`/${randomHandle}`}
+										className="btn-secondary text-base mt-4 rounded-lg"
+									>
+										Random sketch <Shuffle size={16} />
+									</Link>
+								</div>
+							</div>
+						</aside>
+					</article>
+				</div>
+
+				<div className={styles.footer}>
+					<TaggedSketchplanations tags={tags} excludeUid={uid} />
+				</div>
 			</div>
-		</div>
+		</Fragment>
 	);
 };
-
-const Card = ({ href, imageSrc, alt, content }) => (
-	<div className={styles.card}>
-		{imageSrc && (
-			<Link href={href}>
-				<Image src={imageSrc} alt={alt} width={114} className="w-full" />
-			</Link>
-		)}
-		<p>{content}</p>
-	</div>
-);
 
 export async function getStaticProps({ params: { uid } }) {
 	const sketchplanation = await client.getByUID("sketchplanation", uid);
 	const subscribeInlineDoc = await client.getSingle("subscribe_inline");
 	const similarSketchplanations = (
 		await client.getByType("sketchplanation", {
-			filters: [prismic.filter.similar(sketchplanation.id, 30)],
+			filters: [prismic.filter.similar(sketchplanation.id, 10)],
 			pageSize: 6,
 		})
 	).results;

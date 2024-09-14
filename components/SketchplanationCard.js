@@ -1,25 +1,61 @@
 import Link from "next/link";
 import Image from "next/image";
+import { LoaderCircle } from "lucide-react";
+import styles from "./SketchplanationCard.module.css";
+import classNames from "classnames";
+import { PrismicNextImage } from "@prismicio/next";
 
-const SketchplanationCard = ({ sketchplanation, imageProps = {} }) => (
-	<Link
-		href={`/${sketchplanation.uid}`}
-		className="group block rounded overflow-hidden bg-paper scale-[0.94] hover:scale-100 relative hover:z-[2] transition-all shadow-sm hover:shadow-lg"
-	>
-		<span className="block relative w-full aspect-[5/3] bg-paper">
-			<Image
-				{...imageProps}
-				src={sketchplanation.data.image.url}
-				title={sketchplanation.data.title}
-				className="object-cover object-top w-[10rem]"
-				fill={true}
-				alt={sketchplanation.data.title}
-			/>
-		</span>
-		<span className="absolute bottom-0 left-0 w-full bg-paperTransparent backdrop-blur-lg font-semibold text-sm px-4 py-3 text-[#222] group-hover:text-red border-t border-paperDarker whitespace-nowrap overflow-hidden text-ellipsis">
-			{sketchplanation.data.title}
-		</span>
-	</Link>
-);
+const SketchplanationCard = ({
+	sketchplanation,
+	imageProps = {},
+	isLoading = false,
+}) => {
+	const rootClassName = classNames(styles.root, "group");
+
+	const content = (
+		<>
+			<span className={styles.imageContainer}>
+				{isLoading ? (
+					<div className={styles.loaderContainer}>
+						<LoaderCircle
+							className={styles.loader}
+							strokeWidth={1}
+							color="var(--color-paperDarker)"
+							size={40}
+						/>
+					</div>
+				) : (
+					// <Image
+					// 	{...imageProps}
+					// 	src={sketchplanation.data.image.url}
+					// 	title={sketchplanation.data.title}
+					// 	className={styles.image}
+					// 	fill={true}
+					// 	alt={sketchplanation.data.title}
+					// />
+					<PrismicNextImage
+						field={sketchplanation.data.image}
+						className={styles.image}
+						fill={true}
+						imgixParams={{ fit: "crop", crop: "top", ar: "5:3" }}
+						{...imageProps}
+						fallbackAlt={sketchplanation.data.title}
+					/>
+				)}
+			</span>
+			<span className={styles.title}>
+				{isLoading ? "…" : sketchplanation.data.title}
+			</span>
+		</>
+	);
+
+	return isLoading ? (
+		<div className={rootClassName}>{content}</div>
+	) : (
+		<Link href={`/${sketchplanation.uid}`} className={rootClassName}>
+			{content}
+		</Link>
+	);
+};
 
 export default SketchplanationCard;

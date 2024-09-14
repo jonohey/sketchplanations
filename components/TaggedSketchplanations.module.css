@@ -1,19 +1,19 @@
 .taggedSketchplanations {
   @apply relative;
   --gradient-color: 0, 0%, 100%;
-  /* --gradient-color: 225, 5.9%, 13.3%; */
-  /* --gradient-color: 228, 4.5%, 21.8%; */
+  --fadeWidth: var(--edgeInset);
 }
 
 @screen dark {
   .taggedSketchplanations {
-    --gradient-color: 228, 4.5%, 21.8% /* --gradient-color: 225, 5.9%, 13.3%; */;
+    --gradient-color: 228, 4.5%, 21.8%;
   }
 }
 
 .taggedSketchplanations::before {
   content: '';
-  @apply absolute z-10 top-0 left-0 h-full w-6;
+  @apply absolute z-10 top-0 left-0 h-full;
+  width: var(--fadeWidth);
 
   background-image: linear-gradient(
     to left,
@@ -38,7 +38,8 @@
 
 .taggedSketchplanations::after {
   content: '';
-  @apply absolute z-10 top-0 right-0 h-full w-6;
+  @apply absolute z-10 top-0 right-0 h-full;
+  width: var(--fadeWidth);
 
   background-image: linear-gradient(
     to right,
@@ -61,20 +62,41 @@
   );
 }
 
+.taggedSketchplanations {
+  --slideWidth: 60vw;
+}
+
+@screen sm {
+  .taggedSketchplanations {
+    --slideWidth: 39vw;
+  }
+}
+
+@screen lg {
+  .taggedSketchplanations {
+    --slideWidth: 27vw;
+  }
+}
+
 .taggedSketchplanations :global(.swiper-slide) {
-  width: 38vw !important;
-  min-width: 12rem;
-  max-width: 24rem;
+  width: var(--slideWidth) !important;
 }
 
 .taggedSketchplanations :global(.swiper) {
-  @apply px-5;
+  padding-left: var(--edgeInset);
+  padding-right: var(--edgeInset);
 }
 
 .taggedSketchplanations :global(.swiper-wrapper) {
-  @apply py-5 -mx-1.5;
+  @apply py-5;
 }
 
 .taggedSketch {
-  @apply block rounded overflow-hidden bg-paper scale-[0.94] hover:scale-100 relative hover:z-20 transition-all shadow-paperDarker shadow-sm hover:shadow-lg;
+  @apply block rounded overflow-hidden bg-paper translate-x-0 hover:-translate-x-1 relative hover:z-20 transition-all shadow-paperDarker shadow-sm hover:shadow-lg;
+}
+
+.header,
+.tabsList {
+  padding-left: var(--edgeInset);
+  padding-right: var(--edgeInset);
 }

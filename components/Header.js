@@ -66,78 +66,75 @@ const Header = () => {
 				variants={variants}
 				initial="visible"
 				animate={decorationHidden ? "hidden" : "visible"}
+				className={classNames(styles.root, isOpen && styles["root--is-open"])}
 			>
-				<div
-					className={classNames(styles.root, isOpen && styles["root--is-open"])}
+				<button
+					type="button"
+					className={styles.menu}
+					onClick={() => setIsOpen(!isOpen)}
 				>
-					<button
-						type="button"
-						className={styles.menu}
-						onClick={() => setIsOpen(!isOpen)}
-					>
-						<Menu />
-					</button>
-					{router.pathname === "/" ? (
-						<div
-							onClick={() => {}}
-							onKeyUp={scrollToTop}
-							className={styles.ident}
-							style={{ cursor: "pointer" }}
-						>
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img
-								src="/logo.svg"
-								className={styles.ident__svg}
-								alt="Sketchplanations"
-							/>
-						</div>
-					) : (
-						<Link href="/" className={styles.ident}>
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img
-								src="/logo.svg"
-								className={styles.ident__svg}
-								alt="Sketchplanations"
-							/>
-						</Link>
-					)}
-					<div className={styles["search-toggle"]}>
-						{!isSearchPage && (
-							<button
-								type="button"
-								className={styles["search-toggle-button"]}
-								onClick={enterSearch}
-							>
-								<span className={styles["search-toggle-button__icon"]}>
-									<Search strokeWidth={1} size={22} />
-								</span>
-								<span className={styles["search-toggle-button__text"]}>
-									Search…
-								</span>
-								<kbd
-									className={styles["search-toggle-button__keyboard-shortcut"]}
-								>
-									/
-								</kbd>
-							</button>
-						)}
-					</div>
+					<Menu />
+				</button>
+				{router.pathname === "/" ? (
 					<div
-						className={classNames(
-							styles.navigation,
-							isOpen && styles["navigation--is-open"],
-						)}
+						onClick={() => {}}
+						onKeyUp={scrollToTop}
+						className={styles.ident}
+						style={{ cursor: "pointer" }}
 					>
-						<Navigation />
+						{/* eslint-disable-next-line @next/next/no-img-element */}
+						<img
+							src="/logo.svg"
+							className={styles.ident__svg}
+							alt="Sketchplanations"
+						/>
 					</div>
-					<div className={styles.divider} />
-					<div className={styles["spacer-left"]} />
-					<div className={styles["spacer-right"]} />
+				) : (
+					<Link href="/" className={styles.ident}>
+						{/* eslint-disable-next-line @next/next/no-img-element */}
+						<img
+							src="/logo.svg"
+							className={styles.ident__svg}
+							alt="Sketchplanations"
+						/>
+					</Link>
+				)}
+				<div className={styles["search-toggle"]}>
+					{!isSearchPage && (
+						<button
+							type="button"
+							className={styles["search-toggle-button"]}
+							onClick={enterSearch}
+						>
+							<span className={styles["search-toggle-button__icon"]}>
+								<Search strokeWidth={1} size={22} />
+							</span>
+							<span className={styles["search-toggle-button__text"]}>
+								Search…
+							</span>
+							<kbd
+								className={styles["search-toggle-button__keyboard-shortcut"]}
+							>
+								/
+							</kbd>
+						</button>
+					)}
 				</div>
-				<div className="absolute w-full">
-					<GradientBlur height={1.5} easing="cubic-bezier(0.7, 0, 0.84, 0)" />
+				<div
+					className={classNames(
+						styles.navigation,
+						isOpen && styles["navigation--is-open"],
+					)}
+				>
+					<Navigation />
 				</div>
+				<div className={styles.divider} />
+				<div className={styles["spacer-left"]} />
+				<div className={styles["spacer-right"]} />
 			</motion.div>
+			<div className="absolute w-full">
+				<GradientBlur height={1.5} easing="cubic-bezier(0.7, 0, 0.84, 0)" />
+			</div>
 		</RemoveScroll>
 	);
 };

@@ -1,17 +1,13 @@
-.cards {
-  @apply grid gap-y-8;
-}
+.root {
+  @apply bg-bgFooter pb-36 grid gap-y-12 border-t border-border;
 
-.card {
-  @apply grid items-center gap-6;
-  grid-template-columns: 4rem 1fr;
-}
+  --edgeInset: 1.5em;
 
-.card img {
-  @apply shadow-md;
-  /* @apply shadow-md shadow-bgDarker hover:-rotate-3 transition-transform duration-300; */
-}
+  @screen md {
+    --edgeInset: 2em;
+  }
 
-.card > *:only-child {
-  @apply col-span-2;
+  @screen lg {
+    --edgeInset: 3em;
+  }
 }

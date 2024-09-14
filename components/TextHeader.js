@@ -7,14 +7,26 @@ const TextHeader = ({ as = "h1", children, ...props }) => {
 	const [show, setShow] = useState(true);
 
 	useEffect(() => {
-		// On window resize, hide the annotation until resizing is done
-		const handleResize = () => {
-			setShow(false);
-			clearTimeout(resizeTimeout);
-			resizeTimeout = setTimeout(() => setShow(true), 500);
-		};
-
 		let resizeTimeout;
+		let lastWidth = window.innerWidth;
+		let lastHeight = window.innerHeight;
+
+		const handleResize = () => {
+			const newWidth = window.innerWidth;
+			const newHeight = window.innerHeight;
+			const widthDiff = Math.abs(newWidth - lastWidth);
+			const heightDiff = Math.abs(newHeight - lastHeight);
+
+			if (widthDiff > 0 || heightDiff > 100) {
+				setShow(false);
+				clearTimeout(resizeTimeout);
+				resizeTimeout = setTimeout(() => {
+					setShow(true);
+					lastWidth = newWidth;
+					lastHeight = newHeight;
+				}, 500);
+			}
+		};
 
 		window.addEventListener("resize", handleResize);
 

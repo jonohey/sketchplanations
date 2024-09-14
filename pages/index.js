@@ -36,7 +36,7 @@ const Home = ({ sketchplanations }) => {
 
 			<Pagination
 				key={sketchplanations.page}
-				className="mb-8"
+				className="mb-12"
 				currentPage={sketchplanations.page}
 				totalPages={sketchplanations.total_pages}
 			/>

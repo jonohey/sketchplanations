@@ -78,5 +78,5 @@
   @apply inline-flex items-center justify-center border border-border rounded text-sm font-sans uppercase;
   width: 1.5rem;
   height: 1.5rem;
-  color: var(--color-subduedText);
+  color: var(--color-textSubdued);
 }

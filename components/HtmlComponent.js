@@ -2,7 +2,12 @@ import * as prismicH from "@prismicio/helpers";
 import { RoughNotation } from "react-rough-notation";
 
 const FancyBlockquote = ({ html }) => (
-	<RoughNotation type="highlight" show={true} color="var(--color-paper)">
+	<RoughNotation
+		animate={false}
+		type="highlight"
+		show={true}
+		color="var(--color-paper)"
+	>
 		<blockquote
 			className="not-prose text-[#222] p-8"
 			// biome-ignore lint/security/noDangerouslySetInnerHtml: We control the HTML

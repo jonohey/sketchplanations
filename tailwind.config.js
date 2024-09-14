@@ -26,6 +26,7 @@ module.exports = {
 			opacity: ["group-hover"],
 			colors: {
 				black: "var(--color-black)",
+				tracingPaper: "var(--color-tracingPaper)",
 				paper: "var(--color-paper)",
 				paperTransparent: "var(--color-paperTransparent)",
 				paperDarker: "var(--color-paperDarker)",
@@ -34,14 +35,18 @@ module.exports = {
 				blue: "var(--color-blue)",
 				blueLight: "var(--color-blueLight)",
 				bg: "var(--color-bg)",
+				bgFooter: "var(--color-bgFooter)",
 				bgTransparent: "var(--color-bgTransparent)",
 				bgDarker: "var(--color-bgDarker)",
 				bgHighlight: "var(--color-bgHighlight)",
+				bgKeyboardShortcut: "var(--color-bgKeyboardShortcut)",
 				border: "var(--color-border)",
+				borderFooter: "var(--color-borderFooter)",
 				inputBg: "var(--color-inputBg)",
 				inputBorder: "var(--color-inputBorder)",
-				subduedText: "var(--color-subduedText)",
+				textSubdued: "var(--color-textSubdued)",
 				buttonBg: "var(--color-buttonBg)",
+				overlay: "var(--color-overlay)",
 			},
 			typography: () => ({
 				DEFAULT: {

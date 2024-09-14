@@ -2,7 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Tailwind layer system */
 @layer components {
+  .debug {
+    outline: solid thin red;
+  }
+
   .link-primary {
     @apply text-blue font-semibold underline;
   }
@@ -12,34 +17,51 @@
   }
 
   .btn-secondary {
-    @apply bg-bg text-subduedText px-4 py-2 rounded flex flex-row items-center justify-center gap-x-2 border border-border shadow-sm;
+    @apply bg-bg text-blue px-4 py-2 rounded flex flex-row items-center justify-center gap-x-2 border border-border shadow-sm;
   }
 
-  .truncated-sketchplanation-image {
+  .masked-image {
     mask-image: var(--mask-image);
   }
 }
 
 :root {
-  --color-shadow: rgba(0, 0, 0, 0.05);
-  --color-black: #222;
-  --color-paper: #fbf8de;
+  /* Bad name? */
+  --color-black: hsl(0, 0%, 13.3%);
+
+  --color-paper: hsl(53.8, 78.4%, 92.7%);
   --color-paperTransparent: hsla(53.8, 78.4%, 92.7%, 0.8);
-  --color-paperDarker: #e2dcc5;
-  --color-sketchShadow: #e2dcc5;
-  --color-red: #ba3c3e;
-  --color-brightRed: #fd4c2b;
-  --color-blue: #1253b5;
-  --color-buttonBg: #1253b5;
-  --color-bg: #fff;
-  --color-bgRgb: 255, 255, 255;
-  --color-bgTransparent: rgba(255, 255, 255, 0.9);
+  --color-paperDarker: hsl(47.6, 33.3%, 82.9%);
+
+  --color-tracingPaper: hsla(0, 0%, 100%, 0.75);
+
+  --color-sketchShadow: hsl(47.6, 33.3%, 82.9%);
+  --color-sketchShadowHover: hsla(47.6, 33.3%, 82.9%, 0.75);
+
+  --color-red: hsl(359, 51.2%, 48.2%);
+  --color-brightRed: hsl(9.4, 98.1%, 58%);
+
+  --color-blue: hsl(216.1, 81.9%, 39%);
+
+  --color-buttonBg: hsl(216.1, 81.9%, 39%);
+
+  --color-bg: hsl(0, 0%, 100%);
+  --color-bgFooter: hsl(0, 0%, 96%);
+  --color-bgHsl: 0, 0%, 100%;
+  --color-bgTransparent: hsla(0, 0%, 100%, 0.9);
   --color-bgDarker: hsl(0, 0%, 98.1%);
-  --color-bgHighlight: #f5f5f5;
-  --color-border: #e5e7eb;
-  --color-inputBg: hsl(0, 0%, 93%);
-  --color-inputBorder: #e5e7eb;
-  --color-subduedText: #595959;
+  --color-bgHighlight: hsl(0, 0%, 96.1%);
+  --color-bgKeyboardShortcut: hsl(0, 0%, 90%);
+
+  --color-border: hsl(220, 13%, 91%);
+  --color-borderFooter: hsl(220, 13%, 91%);
+
+  --color-inputBg: hsl(0, 0%, 98%);
+  --color-inputBorder: hsl(220, 13%, 89%);
+
+  --color-textSubdued: hsl(0, 0%, 44.9%);
+
+  --color-overlay: hsla(0, 0%, 0%, 0.9);
 
   --mask-image: linear-gradient(
     to bottom,
@@ -60,6 +82,9 @@
     hsla(0, 0%, 0%, 0.013) 95.4%,
     hsla(0, 0%, 0%, 0) 100%
   );
+
+  /* vanilla-cookieconsent -> */
+  /* https://github.com/orestbida/vanilla-cookieconsent */
 
   --cc-bg: #35363a;
   --cc-primary-color: #fff;
@@ -93,29 +118,46 @@
 
   --cc-footer-border-color: #212529;
   --cc-footer-bg: #000;
+
+  /* <- vanilla-cookieconsent */
 }
 
 @screen dark {
   :root {
-    --color-black: #fcfcfc;
-    --color-paper: #fbf8de;
+    --color-black: hsl(0, 0%, 98.8%);
+
+    --color-paper: hsl(53.8, 78.4%, 92.7%);
     --color-paperTransparent: hsla(53.8, 78.4%, 92.7%, 0.8);
-    --color-paperDarker: #e2dcc5;
-    --color-sketchShadow: #27282b;
-    --color-red: #ba3c3e;
-    --color-brightRed: #fd4c2b;
-    --color-blue: #6aa0f0;
-    --color-buttonBg: #1253b5;
-    --color-blueLight: #90b8f4;
-    --color-bg: #35363a;
-    --color-bgRgb: 53, 54, 58;
+    --color-paperDarker: hsl(47.6, 33.3%, 82.9%);
+
+    --color-sketchShadow: hsl(225, 4.9%, 16.1%);
+    --color-sketchShadowHover: hsla(225, 4.9%, 16.1%, 0.75);
+
+    --color-red: hsl(359, 51.2%, 48.2%);
+    --color-brightRed: hsl(9.4, 98.1%, 58%);
+
+    --color-blue: hsl(215.8, 81.7%, 67.8%);
+    --color-blueLight: hsl(216, 82%, 76.1%); /* Odd dark mode color */
+
+    --color-buttonBg: hsl(216.1, 81.9%, 39%);
+
+    --color-bg: hsl(228, 4.5%, 21.8%);
+    --color-bgFooter: hsl(228, 4.5%, 19.8%);
+    --color-bgHsl: 228, 4.5%, 21.8%;
     --color-bgTransparent: rgba(53, 54, 58, 0.9);
-    --color-bgDarker: #202124;
-    --color-bgHighlight: #44454b;
-    --color-border: #4a4c52;
-    --color-inputBg: #202124;
+    --color-bgDarker: hsl(225, 5.9%, 13.3%);
+    --color-bgHighlight: hsl(231.4, 4.9%, 28%);
+    --color-bgKeyboardShortcut: hsl(228, 4.5%, 21.8%);
+
+    --color-border: hsl(225, 5.1%, 30.6%);
+    --color-borderFooter: hsl(225, 5.1%, 23.6%);
+
+    --color-inputBg: hsl(225, 5.9%, 13.3%);
     --color-inputBorder: hsl(228, 4.5%, 12.8%);
-    --color-subduedText: #c6c6c6;
+
+    --color-textSubdued: hsl(0, 0%, 77.6%);
+
+    --color-overlay: hsla(0, 0%, 7%, 0.9);
   }
 }
 
@@ -148,21 +190,23 @@ pre {
   line-height: 1.4;
 }
 
-.patreon {
-  @apply fixed bottom-0 right-0;
-}
-
-/* Mailchimp */
-#mc_embed_signup {
-  background: #fff;
-  clear: left;
-  font:
-    16px 'Open Sans',
-    sans-serif;
-  width: 375px;
-}
-
+/* vanilla-cookieconsent -> */
 #cc-main .cm,
 #cc-main .pm {
   border: 1px solid var(--cc-separator-border-color);
+}
+/* <- vanilla-cookieconsent */
+
+.swiper-slide-shadow {
+  top: 0.25rem !important;
+  height: auto !important;
+  bottom: 1.25rem !important;
+  background: rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: saturate(80%);
+  filter: blur(1px);
+  mask-image: var(--mask-image);
+
+  @screen dark {
+    background: rgba(0, 0, 0, 0.3) !important;
+  }
 }

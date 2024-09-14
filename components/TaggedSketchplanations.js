@@ -1,6 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Mousewheel } from "swiper/modules";
-import classNames from "classnames";
 import { TabList, Tab, Tabs, TabPanel } from "react-aria-components";
 import { useEffect, useState } from "react";
 import { RoughNotation } from "react-rough-notation";
@@ -8,7 +7,6 @@ import { humanizeTag, isPresent } from "helpers";
 import { useInView } from "react-intersection-observer";
 
 import styles from "./TaggedSketchplanations.module.css";
-import { LoaderCircle } from "lucide-react";
 import SketchplanationCard from "./SketchplanationCard";
 
 const TaggedSketchplanations = ({ tags, excludeUid }) => {
@@ -32,12 +30,29 @@ const TaggedSketchplanations = ({ tags, excludeUid }) => {
 		fetchTaggedSketchplanations();
 	}, [inView, tags, excludeUid]);
 
+	const swiperProps = {
+		grabCursor: true,
+		slidesPerView: "auto",
+		spaceBetween: 20,
+		mousewheel: {
+			enabled: true,
+			forceToAxis: true,
+		},
+		freeMode: true,
+		modules: [Mousewheel, FreeMode],
+	};
+
 	return (
 		<div ref={ref} className="overflow-hidden">
+			<div className={styles.header}>
+				<div className="mb-3 text-xl font-semibold">More on these topics</div>
+			</div>
 			<Tabs>
-				<div className="flex flex-row gap-x-4 px-6">
-					<span className="font-semibold">Related</span>
-					<TabList aria-label="Related" className="flex flex-row gap-x-4">
+				<div className={styles.tabsList}>
+					<TabList
+						aria-label="Moon in these topics"
+						className="flex flex-row gap-x-4"
+					>
 						{isPresent(taggedSketchplanations) ? (
 							<>
 								{taggedSketchplanations.map(({ tag }) => (
@@ -87,17 +102,7 @@ const TaggedSketchplanations = ({ tags, excludeUid }) => {
 						{taggedSketchplanations.map(({ tag, sketchplanations }) => (
 							<TabPanel key={tag.id} id={tag.id}>
 								<div className={styles.taggedSketchplanations}>
-									<Swiper
-										grabCursor={true}
-										slidesPerView="auto"
-										spaceBetween={0}
-										mousewheel={{
-											enabled: true,
-											forceToAxis: true,
-										}}
-										freeMode={true}
-										modules={[Mousewheel, FreeMode]}
-									>
+									<Swiper {...swiperProps}>
 										{sketchplanations.map((sketchplanation) => (
 											<SwiperSlide key={sketchplanation.id}>
 												<SketchplanationCard
@@ -114,36 +119,12 @@ const TaggedSketchplanations = ({ tags, excludeUid }) => {
 					<>
 						<TabPanel id="empty">
 							<div className={styles.taggedSketchplanations}>
-								<Swiper
-									grabCursor={true}
-									slidesPerView="auto"
-									spaceBetween={0}
-									mousewheel={{
-										enabled: true,
-										forceToAxis: true,
-									}}
-									freeMode={true}
-									modules={[Mousewheel, FreeMode]}
-								>
+								<Swiper {...swiperProps}>
 									{/* 10 empty slides  */}
 									{Array.from({ length: 10 }).map((_, index) => (
 										// biome-ignore lint/suspicious/noArrayIndexKey: It's not possible to use the key as a string
 										<SwiperSlide key={index}>
-											<div className={classNames("group", styles.taggedSketch)}>
-												<div className="relative w-full aspect-[5/3] bg-paper">
-													<div className="flex items-center justify-center w-full h-full">
-														<LoaderCircle
-															className="animate-spin"
-															strokeWidth={1}
-															color="var(--color-paperDarker)"
-															size={40}
-														/>
-													</div>
-												</div>
-												<div className="absolute bottom-0 left-0 w-full bg-paperTransparent backdrop-blur-lg font-semibold text-sm px-4 py-3 text-paperDarker group-hover:text-red border-t border-paperDarker whitespace-nowrap overflow-hidden text-ellipsis">
-													…
-												</div>
-											</div>
+											<SketchplanationCard isLoading={true} />
 										</SwiperSlide>
 									))}
 								</Swiper>

@@ -137,15 +137,25 @@ export const humanizePublishedDate = (publishedAt) => {
 
 	if (publishedDate > currentDate) return "✨ Latest";
 
-	const dateFormatOptions = {
-		day: "numeric",
-		month: "short",
-		...(publishedDate.getFullYear() !== currentDate.getFullYear() && {
-			year: "numeric",
-		}),
-	};
+	const months = [
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dec",
+	];
+	const day = publishedDate.getDate();
+	const month = months[publishedDate.getMonth()];
+	const year = publishedDate.getFullYear();
 
-	return new Intl.DateTimeFormat("en-GB", dateFormatOptions).format(
-		publishedDate,
-	);
+	return currentDate.getFullYear() === year
+		? `${day} ${month}`
+		: `${day} ${month} ${year}`;
 };

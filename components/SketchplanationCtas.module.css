@@ -5,3 +5,10 @@
 .cta {
   @apply text-blue dark:text-blueLight underline font-semibold flex items-center gap-x-1;
 }
+
+.ctasLightbox {
+}
+
+.ctaLightbox {
+  @apply text-white dark:text-white;
+}

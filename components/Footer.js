@@ -1,14 +1,11 @@
 import { ExternalLink } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import styles from "./Footer.module.css";
-
-import bigIdeasLittlePicturesImage from "images/bigideaslittlepictures.jpg";
-import podcastImage from "images/podcast.jpg";
+import { Cards } from "./Cards";
 import SubscribeInline from "./SubscribeInline";
 import FancyLink from "./FancyLink";
 import { ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
+
+import styles from "./Footer.module.css";
 
 const Nav = () => (
 	<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 lg:text-center gap-x-12 gap-y-1 items-start">
@@ -19,7 +16,7 @@ const Nav = () => (
 			target="_blank"
 			rel="noreferrer"
 		>
-			<span className="inline">
+			<span className="inline-flex items-center gap-2">
 				<span>Podcast</span>
 				<ExternalLink size={16} className="inline" />
 			</span>
@@ -31,72 +28,13 @@ const Nav = () => (
 			target="_blank"
 			rel="noreferrer"
 		>
-			<span className="inline">
+			<span className="inline-flex items-center gap-2">
 				<span>Shop</span>
 				<ExternalLink size={16} className="inline" />
 			</span>
 		</FancyLink>
 		<FancyLink href="/categories">Categories</FancyLink>
 		<FancyLink href="/archive">Archive</FancyLink>
-	</div>
-);
-
-const Cards = () => (
-	<div className={styles.cards}>
-		<Card
-			href="/big-ideas-little-pictures"
-			imageSrc={bigIdeasLittlePicturesImage}
-			alt="Big Ideas Little Pictures"
-			content={
-				<>
-					Sketchplanations is now a book! I think you’ll love{" "}
-					<FancyLink href="/big-ideas-little-pictures">
-						Big Ideas Little Pictures
-					</FancyLink>
-				</>
-			}
-		/>
-		<Card
-			href="/thanks"
-			content={
-				<>
-					Thanks to <FancyLink href="/thanks">my Patrons</FancyLink> for
-					enabling me to keep creating Sketchplanations 🙏
-				</>
-			}
-		/>
-		<Card
-			href="https://podcast.sketchplanations.com/"
-			imageSrc={podcastImage}
-			alt="Big Ideas Little Pictures"
-			content={
-				<>
-					Prefer to listen to the ideas on your commute or while doing chores? I
-					don’t blame you.{" "}
-					<FancyLink
-						href="https://podcast.sketchplanations.com/"
-						target="_blank"
-						rel="noreferrer"
-					>
-						<span className="inline">
-							<span>Listen to the podcast</span>
-							<ExternalLink size={16} className="inline" />
-						</span>
-					</FancyLink>
-				</>
-			}
-		/>
-	</div>
-);
-
-const Card = ({ href, imageSrc, alt, content }) => (
-	<div className={styles.card}>
-		{imageSrc && (
-			<Link href={href}>
-				<Image src={imageSrc} alt={alt} width={114} className="w-full" />
-			</Link>
-		)}
-		<p>{content}</p>
 	</div>
 );
 
@@ -169,17 +107,17 @@ const Footer = () => {
 	}, []);
 
 	return (
-		<footer className="bg-bg pb-36 grid gap-y-12 border-t border-border">
-			<div className="pt-6 sm:pt-10 px-6">
+		<footer className={styles.root}>
+			<div className="pt-6 sm:pt-10 px-[var(--edgeInset)]">
 				<div className="max-w-screen-xl mx-auto">
 					<div className="mb-3 text-xl font-semibold">Explore more</div>
 					<div className="prose mb-6">
-						<p className="text-subduedText">
-							The sketches cover all sorts of topics. Explore some common themes
-							to find what interests you:
+						<p className="text-textSubdued text-balance ">
+							The sketches cover all sorts of topics. Here are some common
+							themes to find what interests you:
 						</p>
 					</div>
-					<div className="sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 -my-1">
+					<div className="columns-2 md:columns-3 lg:columns-5 -my-1">
 						{categories.map(({ title, uid }) => {
 							return (
 								<div key={uid} className="block break-inside-avoid py-1">
@@ -187,24 +125,25 @@ const Footer = () => {
 								</div>
 							);
 						})}
-						<FancyLink
-							href="/categories"
-							className="text-subduedText hover:text-blue"
-						>
-							<span className="inline-flex flex-row gap-x-1 items-center">
-								More <ChevronRight size={16} />
-							</span>
-						</FancyLink>
 					</div>
+					<FancyLink
+						href="/categories"
+						className="inline-block text-textSubdued hover:text-blue mt-6"
+					>
+						<span className="inline-flex flex-row gap-x-1 items-center">
+							More topics
+							<ChevronRight size={16} />
+						</span>
+					</FancyLink>
 				</div>
 			</div>
 
-			<div className="border-t border-border pt-6 sm:pt-10 px-6">
+			<div className="border-t border-borderFooter pt-6 sm:pt-10 px-[var(--edgeInset)]">
 				<div className="grid sm:grid-cols-2 gap-12 max-w-screen-xl mx-auto items-center">
 					<Cards />
 					<div className="grid gap-y-8 items-start">
 						<SubscribeInline doc={subscribeInlineDoc} />
-						{/* <p className="text-subduedText">
+						{/* <p className="text-textSubdued">
 							<b className="font-semibold">Looking to use a Sketchplanation?</b>{" "}
 							Please do! See the <FancyLink href="/licence">licence</FancyLink>{" "}
 							for details.
@@ -213,7 +152,7 @@ const Footer = () => {
 				</div>
 			</div>
 
-			<div className="border-t border-border pt-6 sm:pt-10 px-6">
+			<div className="border-t border-borderFooter pt-6 sm:pt-10 px-[var(--edgeInset)]">
 				<Nav />
 			</div>
 		</footer>

@@ -9,6 +9,8 @@ import useSearch from "hooks/useSearch";
 import SketchplanationsGrid from "./SketchplanationsGrid";
 import Tags from "./Tags";
 import FancyLink from "./FancyLink";
+import { Lightbulb } from "lucide-react";
+import { Shuffle } from "lucide-react";
 
 const loadingMessages = [
 	"Finding some spectacular sketches…",
@@ -95,8 +97,23 @@ const SearchResults = () => {
 								href={`/${randomHandle}`}
 								className={!randomHandle && "invisible"}
 							>
-								Try something random
+								<span className="inline-flex items-center gap-2">
+									<Shuffle size={16} />
+									Try something random
+								</span>
 							</Link>
+							<p>
+								<FancyLink
+									href="https://forms.gle/c6LymLW5vLx9FUeW6"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<span className="inline-flex items-center gap-2">
+										<Lightbulb size={16} />
+										Let me know if you think I’m missing something
+									</span>
+								</FancyLink>
+							</p>
 						</div>
 					)}
 				</>

@@ -1,0 +1,31 @@
+.swiper {
+  /* &::after {
+    content: '';
+    @apply absolute z-50 bottom-0 left-[-2rem] h-8 bg-gradient-to-t to-transparent from-bg pointer-events-none;
+    width: calc(100% + 4rem);
+  } */
+}
+
+.slide {
+  @apply pt-1 pb-5;
+
+  /* @apply relative;
+
+  box-shadow:
+    5px 0 2px -4px rgba(0, 0, 0, 0.1),
+    -5px 0 2px -4px rgba(0, 0, 0, 0.1);
+  user-select: none;
+
+  &::before {
+    content: '';
+    @apply absolute z-10 inset-0;
+
+    box-shadow: inset 0 0 0 1px hsla(0, 0%, 0%, 0.08);
+    mix-blend-mode: multiply;
+  } */
+}
+
+.image {
+  @apply relative aspect-[5/3] overflow-hidden bg-paper;
+  /* mask-image: var(--mask-image); */
+}

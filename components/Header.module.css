@@ -79,7 +79,7 @@
 }
 
 .search-toggle-button__icon {
-  @apply flex items-center text-subduedText;
+  @apply flex items-center text-textSubdued;
   height: 24px;
 }
 
@@ -90,11 +90,11 @@
 }
 
 .search-toggle-button__text {
-  @apply text-subduedText select-none overflow-hidden text-ellipsis whitespace-nowrap pr-1;
+  @apply text-textSubdued select-none overflow-hidden text-ellipsis whitespace-nowrap pr-1;
 }
 
 .search-toggle-button__keyboard-shortcut {
-  @apply text-xs bg-bg rounded-md text-subduedText py-1 px-2;
+  @apply text-xs bg-bgKeyboardShortcut rounded-md text-textSubdued py-1 px-2;
 }
 
 @screen sm {

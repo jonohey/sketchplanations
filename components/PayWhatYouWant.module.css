@@ -35,7 +35,7 @@
 }
 
 .free-button {
-  @apply block mt-4 py-2 px-4 w-full rounded text-subduedText border border-border;
+  @apply block mt-4 py-2 px-4 w-full rounded text-textSubdued border border-border;
 }
 
 .amount-options {
@@ -80,7 +80,7 @@
 }
 
 .stripe-climate span {
-  @apply text-sm text-subduedText;
+  @apply text-sm text-textSubdued;
 }
 
 .stripe-climate b {
@@ -88,7 +88,7 @@
 }
 
 .powered-by-stripe {
-  @apply block -mb-2 ml-auto text-subduedText fill-current;
+  @apply block -mb-2 ml-auto text-textSubdued fill-current;
   width: 150px;
   height: auto;
 }

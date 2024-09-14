@@ -15,7 +15,7 @@
 
 .tags b {
   @apply text-xs;
-  color: var(--color-subduedText);
+  color: var(--color-textSubdued);
 }
 
 .tags a:hover {

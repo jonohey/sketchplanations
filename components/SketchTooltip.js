@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 import sketchTooltipsData from "data/sketch-tooltips-data.json";
 
 const SketchTooltip = ({ uid, children }) => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState();
 
 	const image = sketchTooltipsData.find(({ uid: dataUid }) => dataUid === uid);
 
@@ -91,7 +91,6 @@ const SketchTooltip = ({ uid, children }) => {
 					<AnimatePresence>
 						{isMounted && (
 							<motion.div
-								className="w-[10rem] rounded shadow-md overflow-hidden"
 								initial={{
 									scale: 0.9,
 									rotate: 0,
@@ -115,19 +114,15 @@ const SketchTooltip = ({ uid, children }) => {
 								}}
 							>
 								{image ? (
-									<Image
-										// className="m-0 object-cover object-top"
-										className="m-0"
-										src={image.url}
-										alt={image.alt}
-										style={{
-											width: "100%",
-											height: "auto",
-										}}
-										sizes="10rem"
-										width={image.dimensions.width}
-										height={image.dimensions.height}
-									/>
+									<div className="rounded shadow-md overflow-hidden relative bg-emerald-400 w-[10rem] h-[10rem]">
+										<Image
+											className="m-0 object-cover object-top"
+											src={image.url}
+											alt={image.alt}
+											sizes="10rem"
+											fill
+										/>
+									</div>
 								) : (
 									<div className="mx-auto p-4">
 										<LoaderCircle className="animate-spin" strokeWidth={1} />

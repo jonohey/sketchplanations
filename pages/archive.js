@@ -43,7 +43,7 @@ const Archive = ({ initialSketchplanations }) => {
 			{hasMore && (
 				<div className="pt-8 pb-12 px-6 flex flex-col gap-4 items-center justify-center">
 					<div className="w-full max-w-96 flex flex-col gap-3 px-6 items-center justify-center">
-						<div className=" text-sm text-subduedText">
+						<div className=" text-sm text-textSubdued">
 							Showing {sketchplanations.length} of{" "}
 							{initialSketchplanations.total_results_size} sketchplanations
 						</div>

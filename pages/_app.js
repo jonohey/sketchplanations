@@ -1,4 +1,3 @@
-import { PrismicToolbar } from "@prismicio/react";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import { Elements } from "@stripe/react-stripe-js";
@@ -23,6 +22,7 @@ import cookieConstentConfig from "cookieConstentConfig.mjs";
 import "vanilla-cookieconsent/dist/cookieconsent.css";
 import "global.css";
 import Footer from "components/Footer";
+import { PrismicPreview } from "@prismicio/next";
 
 const inter = Inter({ subsets: ["latin"], weights: [300, 600] });
 
@@ -103,27 +103,28 @@ const Sketchplanations = ({ Component, pageProps }) => {
 	}, []);
 
 	return (
-		<Context.Provider
-			value={{
-				decorationHidden,
-				setDecorationHidden,
-			}}
-		>
-			<GoogleTagManager gtmId="GTM-WNS3LG4" />
-			<PrismicToolbar repositoryName="sketchplanations" />
-			<Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-				<Head>
-					<title>{pageTitle()}</title>
-				</Head>
-				<div className={inter.className}>
-					<Header />
-					<Component {...pageProps} />
-					<BuyMeACoffee />
-					<Footer />
-				</div>
-			</Elements>
-			<Analytics />
-		</Context.Provider>
+		<PrismicPreview repositoryName="sketchplanations">
+			<Context.Provider
+				value={{
+					decorationHidden,
+					setDecorationHidden,
+				}}
+			>
+				<GoogleTagManager gtmId="GTM-WNS3LG4" />
+				<Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
+					<Head>
+						<title>{pageTitle()}</title>
+					</Head>
+					<div className={inter.className}>
+						<Header />
+						<Component {...pageProps} />
+						<BuyMeACoffee />
+						<Footer />
+					</div>
+				</Elements>
+				<Analytics />
+			</Context.Provider>
+		</PrismicPreview>
 	);
 };
 

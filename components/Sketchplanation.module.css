@@ -14,5 +14,5 @@
 }
 
 .published-at {
-  @apply block mt-5 text-sm text-subduedText;
+  @apply block mt-5 text-sm text-textSubdued;
 }

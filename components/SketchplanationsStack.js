@@ -7,13 +7,15 @@ import Shiitake from "shiitake";
 import { EffectCards } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import styles from "./SketchplanationCards.module.css";
+import styles from "./SketchplanationsStack.module.css";
 
 import "swiper/css";
 import "swiper/css/effect-cards";
 import { isBlank } from "helpers";
+import { PrismicNextImage } from "@prismicio/next";
+import SketchplanationCard from "./SketchplanationCard";
 
-const SketchplanationCards = ({ title, sketchplanations }) => {
+const SketchplanationsStack = ({ title, sketchplanations }) => {
 	const [swiperRef, setSwiperRef] = useState(null);
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [currentSketchplanation, setCurrentSketchplanation] = useState(
@@ -53,41 +55,44 @@ const SketchplanationCards = ({ title, sketchplanations }) => {
 					</button>
 				</div>
 			</div>
-			<Swiper
-				onSwiper={setSwiperRef}
-				effect="cards"
-				grabCursor={true}
-				modules={[EffectCards]}
-				onSlideChange={handleSlideChange}
-				cardsEffect={{
-					perSlideOffset: 7,
-					slideShadows: false,
-				}}
-			>
-				{sketchplanations.map((sketchplanation) => (
-					<SwiperSlide key={sketchplanation.id} className={styles.cards}>
-						<Link href={`/${sketchplanation.uid}`} className="block bg-bg">
-							<div className={styles.image}>
-								<Image
-									src={sketchplanation.data.image.url}
-									title={sketchplanation.data.title}
-									className="bg-paper object-cover object-top"
-									fill={true}
-									alt={sketchplanation.data.title}
-								/>
-							</div>
-						</Link>
-					</SwiperSlide>
-				))}
-			</Swiper>
-			<div className="font-semibold mb-1 mt-4">
-				{currentSketchplanation.data.title}
+			<div className={styles.swiper}>
+				<Swiper
+					onSwiper={setSwiperRef}
+					effect="cards"
+					grabCursor={true}
+					modules={[EffectCards]}
+					onSlideChange={handleSlideChange}
+					cardsEffect={{
+						perSlideOffset: 7,
+						// slideShadows: false,
+					}}
+				>
+					{sketchplanations.map((sketchplanation) => (
+						<SwiperSlide key={sketchplanation.id} className={styles.slide}>
+							{/* <Link href={`/${sketchplanation.uid}`} className="block bg-bg">
+								<div className={styles.image}>
+									<PrismicNextImage
+										field={sketchplanation.data.image}
+										className={styles.image}
+										fill={true}
+										imgixParams={{ fit: "crop", crop: "top", ar: "5:3" }}
+										fallbackAlt={sketchplanation.data.title}
+									/>
+								</div>
+							</Link> */}
+							<SketchplanationCard sketchplanation={sketchplanation} />
+						</SwiperSlide>
+					))}
+				</Swiper>
 			</div>
-			<Shiitake lines={3} throttleRate={200}>
+			{/* <div className="font-semibold mb-1 mt-4">
+				{currentSketchplanation.data.title}
+			</div> */}
+			<Shiitake lines={3} throttleRate={200} className="text-textSubdued mt-1">
 				{prismicH.asText(currentSketchplanation.data.body)}
 			</Shiitake>
 		</div>
 	);
 };
 
-export default SketchplanationCards;
+export default SketchplanationsStack;

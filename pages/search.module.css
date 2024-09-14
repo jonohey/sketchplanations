@@ -3,5 +3,5 @@
 }
 
 .search-form {
-  @apply px-4;
+  @apply px-4 w-full lg:max-w-[42rem] lg:mx-auto;
 }
