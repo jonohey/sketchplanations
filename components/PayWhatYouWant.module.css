@@ -21,7 +21,7 @@
 .amount-input :global(input),
 .email-input,
 .cardInput :global(.StripeElement) {
-  @apply block py-2 px-4 w-full bg-inputBg rounded border border-inputBorder outline-none;
+  @apply block py-2 px-4 w-full bg-bgInput rounded border border-borderInput outline-none;
 }
 
 .amount-input :global(input:focus),
@@ -31,7 +31,7 @@
 }
 
 .pay-button {
-  @apply block mt-3 py-2 px-4 w-full bg-buttonBg text-white rounded;
+  @apply block mt-3 py-2 px-4 w-full bg-bgButton text-white rounded;
 }
 
 .free-button {
@@ -57,7 +57,7 @@
 }
 
 .main label > span {
-  @apply block text-center py-2 px-4 bg-inputBg rounded border border-inputBorder;
+  @apply block text-center py-2 px-4 bg-bgInput rounded border border-borderInput;
 }
 
 .main label > input:checked + span {

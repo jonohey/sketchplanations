@@ -1,39 +1,33 @@
 import * as prismic from "@prismicio/client";
 import * as prismicH from "@prismicio/helpers";
+import { PrismicNextImage } from "@prismicio/next";
 import classNames from "classnames";
-import { ImageJsonLd } from "next-seo";
-import dynamic from "next/dynamic";
-import Head from "next/head";
-import React, { useState, Fragment } from "react";
-import { useRandomHandle } from "hooks/useRandomHandle";
-
-import styles from "./[uid].module.css";
-
-import SketchplanationImage from "components/SketchplanationImage";
-import SubscribeInline from "components/SubscribeInline";
-import { humanizePublishedDate, isPresent, pageTitle } from "helpers";
-
-import { client } from "services/prismic";
-
+import Cards from "components/Cards";
+import FancyLink from "components/FancyLink";
+import KeyboardShortcut from "components/KeyboardShortcut";
 import Page from "components/Page";
 import RichText from "components/RichText";
 import SketchplanationCtas from "components/SketchplanationCtas";
+import SketchplanationImage from "components/SketchplanationImage";
 import SketchplanationsStack from "components/SketchplanationsStack";
-
+import SubscribeInline from "components/SubscribeInline";
 import TaggedSketchplanations from "components/TaggedSketchplanations";
-import { PrismicNextImage } from "@prismicio/next";
-import Cards from "components/Cards";
-import { useHotkeys } from "react-hotkeys-hook";
+import { humanizePublishedDate, isPresent, pageTitle } from "helpers";
+import { useRandomHandle } from "hooks/useRandomHandle";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ImageJsonLd } from "next-seo";
+import dynamic from "next/dynamic";
+import Head from "next/head";
 import { useRouter } from "next/router";
-import KeyboardShortcut from "components/KeyboardShortcut";
-import FancyLink from "components/FancyLink";
-import { ArrowLeft } from "lucide-react";
-import { ArrowRight } from "lucide-react";
+import { Fragment, useState } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
+import { client } from "services/prismic";
 
-// const SocialSharing = dynamic(() => import('components/SocialSharing'))
 const TextHeader = dynamic(() => import("components/TextHeader"));
 const PayWhatYouWant = dynamic(() => import("components/PayWhatYouWant"));
 const Modal = dynamic(() => import("components/Modal"));
+
+import styles from "./[uid].module.css";
 
 const truncate = (string, limit) => {
 	if (string.length <= limit) return string;

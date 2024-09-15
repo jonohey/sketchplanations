@@ -1,0 +1,39 @@
+:root {
+  --cc-bg: #35363a;
+  --cc-primary-color: #fff;
+  --cc-secondary-color: #c6c6c6;
+
+  --cc-btn-primary-bg: #ffffff;
+  --cc-btn-primary-color: #000;
+  --cc-btn-primary-hover-bg: #ffffff;
+  --cc-btn-primary-hover-color: #000;
+
+  --cc-btn-secondary-bg: rgba(255, 255, 255, 0.039);
+  --cc-btn-secondary-color: var(--cc-primary-color);
+  --cc-btn-secondary-border-color: rgba(0, 0, 0, 0.3);
+  --cc-btn-secondary-hover-bg: #252729;
+  --cc-btn-secondary-hover-color: #fff;
+  --cc-btn-secondary-hover-border-color: #252729;
+
+  --cc-cookie-category-block-bg: #202124;
+  --cc-cookie-category-block-border: #202124;
+  --cc-cookie-category-block-hover-bg: #202124;
+  --cc-cookie-category-block-hover-border: #1d1e1f;
+  --cc-cookie-category-expanded-block-hover-bg: #1d1e1f;
+  --cc-cookie-category-expanded-block-bg: #202124;
+  --cc-toggle-readonly-bg: #2f3132;
+  --cc-overlay-bg: rgba(0, 0, 0, 0.6) !important;
+
+  --cc-toggle-on-knob-bg: #202124;
+  --cc-toggle-readonly-knob-bg: var(--cc-cookie-category-block-bg);
+
+  --cc-separator-border-color: #252729;
+
+  --cc-footer-border-color: #212529;
+  --cc-footer-bg: #000;
+}
+
+#cc-main .cm,
+#cc-main .pm {
+  border: 1px solid var(--cc-separator-border-color);
+}

@@ -63,7 +63,7 @@
 }
 
 .search-toggle-button {
-  @apply flex items-center justify-center lg:justify-start gap-x-2 w-full py-2 px-4 bg-inputBg border border-inputBorder rounded-lg;
+  @apply flex items-center justify-center lg:justify-start gap-x-2 w-full py-2 px-4 bg-bgInput border border-borderInput rounded-lg;
 }
 
 @screen sm {

@@ -1,28 +1,26 @@
+import { PrismicPreview } from "@prismicio/next";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Analytics } from "@vercel/analytics/react";
-import "lazysizes";
-import "lazysizes/plugins/attrchange/ls.attrchange";
+import BuyMeACoffee from "components/BuyMeACoffee";
+import Footer from "components/Footer";
+import Header from "components/Header";
+import Context from "context";
+import cookieConstentConfig from "cookieConstentConfig.mjs";
+import { pageTitle } from "helpers";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import * as CookieConsent from "vanilla-cookieconsent";
-
-import Header from "components/Header";
-import { pageTitle } from "helpers";
-
 import { GoogleTagManager } from "../gtm";
 
-import BuyMeACoffee from "components/BuyMeACoffee";
-import Context from "context";
-import cookieConstentConfig from "cookieConstentConfig.mjs";
-
+import "vanilla-cookieconsent.css";
 import "vanilla-cookieconsent/dist/cookieconsent.css";
+
 import "global.css";
-import Footer from "components/Footer";
-import { PrismicPreview } from "@prismicio/next";
+import "swiper.css";
 
 const inter = Inter({ subsets: ["latin"], weights: [300, 600] });
 

@@ -1,13 +1,12 @@
 import * as prismic from "@prismicio/client";
+import SketchplanationsGrid from "components/SketchplanationsGrid";
+import TextHeader from "components/TextHeader";
+import { humanizeTag, pageTitle } from "helpers";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { client } from "services/prismic";
 
 import styles from "./[tag].module.css";
-
-import { TextHeader } from "components";
-import SketchplanationsGrid from "components/SketchplanationsGrid";
-import { pageTitle, humanizeTag } from "helpers";
-import { client } from "services/prismic";
 
 const Tag = ({ tag, sketchplanations }) => {
 	const router = useRouter();

@@ -15,6 +15,7 @@ import Navigation from "components/Navigation";
 import useSearch from "hooks/useSearch";
 
 import Context from "context";
+import KeyboardShortcut from "./KeyboardShortcut";
 
 const Header = () => {
 	const router = useRouter();
@@ -112,11 +113,12 @@ const Header = () => {
 							<span className={styles["search-toggle-button__text"]}>
 								Search…
 							</span>
-							<kbd
+							{/* <kbd
 								className={styles["search-toggle-button__keyboard-shortcut"]}
 							>
 								/
-							</kbd>
+							</kbd> */}
+							<KeyboardShortcut shortcut="/" />
 						</button>
 					)}
 				</div>

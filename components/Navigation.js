@@ -2,10 +2,9 @@ import classNames from "classnames";
 import { ExternalLink } from "lucide-react";
 import { useRouter } from "next/router";
 import { RoughNotation } from "react-rough-notation";
+import Link from "./Link";
 
 import styles from "./Navigation.module.css";
-
-import { Link } from "components";
 
 const roughNotationProps = {
 	iterations: 1,

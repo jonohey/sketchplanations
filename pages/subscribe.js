@@ -1,11 +1,10 @@
+import Page from "components/Page";
+import { pageTitle } from "helpers";
 import Head from "next/head";
 import { useState } from "react";
+import { client } from "services/prismic";
 
 import styles from "./subscribe.module.css";
-
-import { Page } from "components";
-import { pageTitle } from "helpers";
-import { client } from "services/prismic";
 
 const Subscribe = ({ subscribeDocument, subscribedDocument }) => {
 	const [email, setEmail] = useState("");
@@ -17,7 +16,7 @@ const Subscribe = ({ subscribeDocument, subscribedDocument }) => {
 
 		setProcessing(true);
 
-		await fetch(`/api/subscribe`, {
+		await fetch("/api/subscribe", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

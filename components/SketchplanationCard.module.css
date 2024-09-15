@@ -41,7 +41,7 @@
 }
 
 .title {
-  @apply absolute bottom-0 left-0 w-full bg-tracingPaper backdrop-blur-lg font-semibold text-sm px-4 py-3 text-[#222] group-hover:text-red whitespace-nowrap overflow-hidden text-ellipsis;
+  @apply absolute bottom-0 left-0 w-full bg-paperTracing backdrop-blur-lg font-semibold text-sm px-4 py-3 text-[#222] group-hover:text-red whitespace-nowrap overflow-hidden text-ellipsis;
 
   &::before {
     content: '';

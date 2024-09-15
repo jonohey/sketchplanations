@@ -19,7 +19,7 @@
 }
 
 .tags a:hover {
-  @apply bg-blue dark:bg-buttonBg text-white border-blue shadow;
+  @apply bg-blue dark:bg-bgButton text-white border-blue shadow;
 }
 
 .tags a:hover b {

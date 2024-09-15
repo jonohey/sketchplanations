@@ -15,7 +15,7 @@
 }
 
 .input {
-  @apply block py-2 pr-4 pl-10 w-full bg-inputBg border border-inputBorder border-r-0 outline-none grow rounded-lg rounded-r-none placeholder-textSubdued;
+  @apply block py-2 pr-4 pl-10 w-full bg-bgInput border border-borderInput border-r-0 outline-none grow rounded-lg rounded-r-none placeholder-textSubdued;
 }
 
 @screen sm {
@@ -34,7 +34,7 @@
 }
 
 .reset-button {
-  @apply px-4 bg-inputBg border border-inputBorder border-l-0 rounded-lg rounded-l-none pointer-events-none;
+  @apply px-4 bg-bgInput border border-borderInput border-l-0 rounded-lg rounded-l-none pointer-events-none;
 }
 
 @screen sm {
