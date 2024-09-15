@@ -1,13 +1,12 @@
-import { PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText } from "@prismicio/react";
 import { LinkType } from "@prismicio/types";
+import sketchTooltipsData from "data/sketch-tooltips-data.json";
+import { ExternalLink } from "lucide-react";
 import { compile, match } from "path-to-regexp";
 import redirects from "redirects.mjs";
-import sketchTooltipsData from "data/sketch-tooltips-data.json";
-import SketchTooltip from "./SketchTooltip";
-import FancyLink from "./FancyLink";
-import { ExternalLink } from "lucide-react";
 import { linkResolver } from "services/prismic.mjs";
+import FancyLink from "./FancyLink";
+import SketchTooltip from "./SketchTooltip";
 
 // Example
 // Input: /chestertons-fence
@@ -68,6 +67,11 @@ const RichText = ({ ...props }) => {
 						url: rewriteWithRedirects(maybeRelativeUrl(url)),
 					};
 
+					const correctedNode = {
+						...node,
+						data: link,
+					};
+
 					// Sketchplanations links
 					const uid = extractSketchplanationsUid(link.url);
 					const image = sketchTooltipsData.find(
@@ -76,33 +80,31 @@ const RichText = ({ ...props }) => {
 
 					if (image) {
 						return (
-							<span className="not-prose">
-								<SketchTooltip uid={uid}>
-									<FancyLink as={PrismicNextLink} field={link}>
-										{children}
-									</FancyLink>
-								</SketchTooltip>
-							</span>
+							<SketchTooltip uid={uid}>
+								<FancyLink href={link.url}>{children}</FancyLink>
+							</SketchTooltip>
 						);
 					}
 
 					// Tag links
-					if (/\/tags(\/|$)/.test(link.url)) {
-						const correctedUrl = link.url.replace(
-							/\/tags(\/|$)/,
-							(_, slash) => `/categories${slash || ""}`,
-						);
+					// if (/\/tags(\/|$)/.test(link.url)) {
+					// 	const correctedUrl = link.url.replace(
+					// 		/\/tags(\/|$)/,
+					// 		(_, slash) => `/categories${slash || ""}`,
+					// 	);
 
-						if (correctedUrl)
-							return (
-								<FancyLink
-									as={PrismicNextLink}
-									field={{ ...link, url: correctedUrl }}
-								>
-									{children}
-								</FancyLink>
-							);
-					}
+					// 	link.url = correctedUrl;
+
+					// 	if (correctedUrl)
+					// 		return (
+					// 			<>
+					// 				<Debug>tag</Debug>
+					// 				<FancyLink as={PrismicNextLink} field={correctedNode}>
+					// 					{children}
+					// 				</FancyLink>
+					// 			</>
+					// 		);
+					// }
 
 					// External links
 					if (/^https?:\/\//.test(link.url)) {

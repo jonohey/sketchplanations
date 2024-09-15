@@ -88,7 +88,7 @@ const SketchTooltip = ({ uid, children }) => {
 					ref={refs.setFloating}
 					style={{ ...floatingStyles, ...styles }}
 					{...getFloatingProps()}
-					className="block pointer-events-none"
+					className="block pointer-events-none not-prose"
 				>
 					<AnimatePresence>
 						{isMounted && (

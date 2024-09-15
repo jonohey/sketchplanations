@@ -1,5 +1,5 @@
-import styles from "./SketchplanationsGrid.module.css";
 import SketchplanationCard from "./SketchplanationCard";
+import styles from "./SketchplanationsGrid.module.css";
 
 const SketchplanationsGrid = ({ prismicDocs: sketchplanations = [] }) => {
 	return (
@@ -9,7 +9,7 @@ const SketchplanationsGrid = ({ prismicDocs: sketchplanations = [] }) => {
 					key={sketchplanation.uid}
 					sketchplanation={sketchplanation}
 					imageProps={{
-						sizes: "14rem",
+						sizes: "(min-width: 14rem) 14rem, 100vw",
 					}}
 				/>
 			))}

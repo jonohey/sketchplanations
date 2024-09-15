@@ -24,10 +24,11 @@ const Tag = ({ tag, sketchplanations }) => {
 					content={`Sketchplanations from the ${tag} category`}
 				/>
 			</Head>
-			<div className={styles.root}>
-				<TextHeader className={styles.header}>
-					Category: <b>{tag}</b>
-				</TextHeader>
+			<div className={styles.root} key={tag}>
+				<span className="block mb-3 text-xl font-semibold text-center">
+					Category
+				</span>
+				<TextHeader className={styles.header}>{tag}</TextHeader>
 				<SketchplanationsGrid prismicDocs={sketchplanations} />
 			</div>
 		</>
