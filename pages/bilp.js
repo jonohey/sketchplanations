@@ -10,9 +10,7 @@ import { TabList } from "react-aria-components";
 import { Tabs } from "react-aria-components";
 import { RoughNotation } from "react-rough-notation";
 import { parse } from "node-html-parser";
-import Debug from "components/Debug";
 import Shiitake from "shiitake";
-import { ChevronRight } from "lucide-react";
 
 const StarIcon = ({ filled, size = 16 }) => (
 	<svg
@@ -70,7 +68,6 @@ const buyLinksByCountry = {
 const Bilp = ({ reviews, ratingsAverage, ratingsMeta }) => {
 	return (
 		<div>
-			<Debug>{{ reviews, ratingsAverage, ratingsMeta }}</Debug>
 			<div className="grid gap-y-12 items-center justify-center px-12 pb-24">
 				<div className="py-36 -mx-12 bg-gradient-to-b from-bg to-bgFooter border-b border-border">
 					<div className="grid grid-cols-[25fr_50fr_25fr] gap-x-8 items-center bg-[#323846] border-y border-[#a1bad8]">
