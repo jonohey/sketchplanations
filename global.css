@@ -6,6 +6,7 @@
 @layer components {
   .debug {
     outline: solid thin red;
+    outline-offset: -1px;
   }
 
   .link-primary {

@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { LoaderCircle } from "lucide-react";
-import styles from "./SketchplanationCard.module.css";
-import classNames from "classnames";
 import { PrismicNextImage } from "@prismicio/next";
+import classNames from "classnames";
+import { LoaderCircle } from "lucide-react";
+import Link from "next/link";
+import styles from "./SketchplanationCard.module.css";
 
 const SketchplanationCard = ({
 	sketchplanation,
@@ -36,9 +36,17 @@ const SketchplanationCard = ({
 						field={sketchplanation.data.image}
 						className={styles.image}
 						fill={true}
-						imgixParams={{ fit: "crop", crop: "top", ar: "5:3" }}
+						imgixParams={{
+							fit: "crop",
+							crop: "top",
+							ar: "5:3",
+							// dpr:
+							// 	typeof window !== "undefined"
+							// 		? window.devicePixelRatio || 2
+							// 		: 2,
+						}}
+						fallbackAlt=""
 						{...imageProps}
-						fallbackAlt={sketchplanation.data.title}
 					/>
 				)}
 			</span>

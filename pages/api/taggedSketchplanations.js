@@ -1,14 +1,6 @@
 import * as prismic from "@prismicio/client";
+import { shuffle } from "helpers";
 import { client } from "services/prismic";
-
-// Fisher-Yates shuffle algorithm
-const shuffle = (array) => {
-	for (let i = array.length - 1; i > 0; i--) {
-		const j = Math.floor(Math.random() * (i + 1));
-		[array[i], array[j]] = [array[j], array[i]];
-	}
-	return array;
-};
 
 export default async function handler(req, res) {
 	const { tags, excludeUid } = req.query;

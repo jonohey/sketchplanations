@@ -1,3 +1,7 @@
+.root {
+  @apply max-w-md mx-auto;
+}
+
 .swiper {
   /* &::after {
     content: '';

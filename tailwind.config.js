@@ -21,6 +21,8 @@ module.exports = {
 			maxXl: { max: "1279px" },
 			light: { raw: "(prefers-color-scheme: light)" },
 			dark: { raw: "(prefers-color-scheme: dark)" },
+			pointerFine: { raw: "(pointer: fine)" },
+			pointerCoarse: { raw: "(pointer: coarse)" },
 		},
 		extend: {
 			opacity: ["group-hover"],

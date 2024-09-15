@@ -1,0 +1,9 @@
+.root {
+  @apply flex-shrink-0 inline-flex items-center justify-center text-xs bg-bgKeyboardShortcut border border-borderKeyboardShortcut rounded-md text-textSubdued w-6 aspect-square;
+}
+
+@media (pointer: coarse) {
+  .root {
+    @apply hidden;
+  }
+}

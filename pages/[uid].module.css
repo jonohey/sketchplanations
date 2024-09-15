@@ -23,8 +23,8 @@
 }
 
 .article {
+  /* Max width is 1280px */
   @apply w-full grid mx-auto max-w-screen-xl pb-8 sm:pb-0;
-  /* max-width: 66rem; */
   column-gap: var(--gap);
 
   grid-template-columns: 1fr;
@@ -44,6 +44,7 @@
       'main sidebar';
   } */
 
+  /* 768px */
   @screen md {
     grid-template-columns: 62fr 38fr;
     grid-template-areas:
@@ -85,7 +86,7 @@
   }
 
   @apply flex flex-col-reverse sm:flex-col;
-  @apply border-l border-border;
+  @apply md:border-l md:border-border;
   @apply md:pt-10;
 
   container-type: inline-size;
@@ -237,9 +238,19 @@
 
 .main {
   grid-area: main;
-  @apply mx-5 sm:mx-0;
+  @apply mx-auto md:mx-0;
 
   max-width: var(--maxWidth);
+
+  padding-left: var(--edgeInset);
+  padding-right: var(--edgeInset);
+}
+
+@screen md {
+  .main {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .body {
@@ -278,19 +289,6 @@
 .action-icon > svg {
   @apply inline-block;
   fill: currentColor;
-}
-
-.pwyw {
-  @apply p-8;
-}
-
-.pwyw-button {
-  @apply mt-6 flex items-center text-left;
-  color: var(--color-textSubdued);
-}
-
-.pwyw-button:hover {
-  color: var(--color-blue);
 }
 
 .redbubble-wrapper {

@@ -54,6 +54,7 @@ const SubscribeInline = ({ doc }) => {
 					<form className={styles.form} onSubmit={handleSubmit}>
 						<input
 							className={styles.input}
+							id="email"
 							type="email"
 							required
 							placeholder="Email address"

@@ -2,7 +2,6 @@ import * as prismicH from "@prismicio/helpers";
 import { PrismicNextImage } from "@prismicio/next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import React from "react";
 import Shiitake from "shiitake";
 
 import styles from "./Sketchplanation.module.css";
@@ -27,7 +26,10 @@ const Sketchplanation = ({ sketchplanation, priority = false }) => {
 					field={image}
 					title={title}
 					priority={priority}
-					sizes="(max-width: 40rem) 100vw, 40rem"
+					sizes="(max-width: 640px) calc(100vw - 2.5rem), 38rem"
+					imgixParams={{
+						format: "auto",
+					}}
 				/>
 			</Link>
 			<div className={styles.content}>

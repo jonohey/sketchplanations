@@ -11,11 +11,9 @@ async function buildSketchTooltipsData() {
 	});
 
 	const data = sketchplanations
-		.map(({ uid, data }) => {
+		.map(({ uid, data: { image } }) => {
 			try {
-				const { alt, url, dimensions } = data.image;
-
-				return { uid, alt, url, dimensions };
+				return { uid, image };
 			} catch (error) {
 				console.error(error);
 				return null;

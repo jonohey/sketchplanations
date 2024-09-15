@@ -7,12 +7,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import styles from "./SketchplanationsStack.module.css";
 
+import { isBlank } from "helpers";
 import "swiper/css";
 import "swiper/css/effect-cards";
-import { isBlank } from "helpers";
 import SketchplanationCard from "./SketchplanationCard";
 
-const SketchplanationsStack = ({ title, sketchplanations }) => {
+const SketchplanationsStack = ({
+	title,
+	sketchplanations,
+	imageProps = {},
+}) => {
 	const [swiperRef, setSwiperRef] = useState(null);
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [currentSketchplanation, setCurrentSketchplanation] = useState(
@@ -30,7 +34,7 @@ const SketchplanationsStack = ({ title, sketchplanations }) => {
 	if (isBlank(sketchplanations)) return null;
 
 	return (
-		<div className="sticky top-0">
+		<div className={styles.root}>
 			<div className="flex flex-row gap-4 justify-between mb-3 font-semibold text-base">
 				{title}
 				<div className="flex flex-row ml-auto">
@@ -77,7 +81,10 @@ const SketchplanationsStack = ({ title, sketchplanations }) => {
 									/>
 								</div>
 							</Link> */}
-							<SketchplanationCard sketchplanation={sketchplanation} />
+							<SketchplanationCard
+								sketchplanation={sketchplanation}
+								imageProps={imageProps}
+							/>
 						</SwiperSlide>
 					))}
 				</Swiper>
@@ -85,9 +92,15 @@ const SketchplanationsStack = ({ title, sketchplanations }) => {
 			{/* <div className="font-semibold mb-1 mt-4">
 				{currentSketchplanation.data.title}
 			</div> */}
-			<Shiitake lines={3} throttleRate={200} className="text-textSubdued mt-1">
-				{prismicH.asText(currentSketchplanation.data.body)}
-			</Shiitake>
+			<div className="block h-[3rlh]">
+				<Shiitake
+					lines={3}
+					throttleRate={200}
+					className="text-textSubdued mt-1"
+				>
+					{prismicH.asText(currentSketchplanation.data.body)}
+				</Shiitake>
+			</div>
 		</div>
 	);
 };

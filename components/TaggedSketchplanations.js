@@ -1,13 +1,13 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Mousewheel } from "swiper/modules";
-import { TabList, Tab, Tabs, TabPanel } from "react-aria-components";
-import { useEffect, useState } from "react";
-import { RoughNotation } from "react-rough-notation";
 import { humanizeTag, isPresent } from "helpers";
+import { useEffect, useState } from "react";
+import { Tab, TabList, TabPanel, Tabs } from "react-aria-components";
 import { useInView } from "react-intersection-observer";
+import { RoughNotation } from "react-rough-notation";
+import { FreeMode, Mousewheel } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import styles from "./TaggedSketchplanations.module.css";
 import SketchplanationCard from "./SketchplanationCard";
+import styles from "./TaggedSketchplanations.module.css";
 
 const TaggedSketchplanations = ({ tags, excludeUid }) => {
 	const [taggedSketchplanations, setTaggedSketchplanations] = useState([]);
@@ -104,6 +104,10 @@ const TaggedSketchplanations = ({ tags, excludeUid }) => {
 											<SwiperSlide key={[tag.id, sketchplanation.id].join("-")}>
 												<SketchplanationCard
 													sketchplanation={sketchplanation}
+													imageProps={{
+														sizes:
+															"(max-width: 640px) 60vw, (max-width: 1024px) 39vw, 27vw",
+													}}
 												/>
 											</SwiperSlide>
 										))}

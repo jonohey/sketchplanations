@@ -5,14 +5,13 @@ import classNames from "classnames";
 import Cards from "components/Cards";
 import FancyLink from "components/FancyLink";
 import KeyboardShortcut from "components/KeyboardShortcut";
-import Page from "components/Page";
 import RichText from "components/RichText";
 import SketchplanationCtas from "components/SketchplanationCtas";
 import SketchplanationImage from "components/SketchplanationImage";
 import SketchplanationsStack from "components/SketchplanationsStack";
 import SubscribeInline from "components/SubscribeInline";
 import TaggedSketchplanations from "components/TaggedSketchplanations";
-import { humanizePublishedDate, isPresent, pageTitle } from "helpers";
+import { humanizePublishedDate, isPresent, pageTitle, shuffle } from "helpers";
 import { useRandomHandle } from "hooks/useRandomHandle";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { ImageJsonLd } from "next-seo";
@@ -27,6 +26,8 @@ const TextHeader = dynamic(() => import("components/TextHeader"));
 const PayWhatYouWant = dynamic(() => import("components/PayWhatYouWant"));
 const Modal = dynamic(() => import("components/Modal"));
 
+import InlinePage from "components/InlinePage";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import styles from "./[uid].module.css";
 
 const truncate = (string, limit) => {
@@ -190,25 +191,18 @@ const SketchplanationPage = ({
 				]}
 			/>
 
-			<Modal
-				isOpen={pwywModalOpen}
-				onClose={() => setPwywModalOpen(false)}
-				onOpenChange={setPwywModalOpen}
-			>
-				<div className={styles.pwyw}>
-					<PayWhatYouWant
-						sketchplanationUid={sketchplanation.uid}
-						sketchplanationTitle={title}
-					/>
-				</div>
+			<Modal isOpen={pwywModalOpen} onClose={() => setPwywModalOpen(false)}>
+				<PayWhatYouWant
+					sketchplanationUid={sketchplanation.uid}
+					sketchplanationTitle={title}
+				/>
 			</Modal>
 
 			<Modal
 				isOpen={licenceModalOpen}
 				onClose={() => setLicenceModalOpen(false)}
-				onOpenChange={setLicenceModalOpen}
 			>
-				<Page document={licenceDoc} inline />
+				<InlinePage document={licenceDoc} />
 			</Modal>
 
 			<div className={styles.root}>
@@ -229,6 +223,7 @@ const SketchplanationPage = ({
 											width: 100,
 											blur: 100,
 										}}
+										priority={true}
 									/>
 									<div className="absolute inset-0 backdrop-blur-md backdrop-brightness-75" />
 								</div>
@@ -248,7 +243,13 @@ const SketchplanationPage = ({
 						</div>
 
 						<div className={styles.main}>
-							<div className={classNames(styles.body, "prose lg:prose-lg")}>
+							<div
+								className={classNames(
+									styles.body,
+									// "prose lg:prose-lg mx-auto md:mx-0",
+									"prose lg:prose-lg",
+								)}
+							>
 								<RichText field={body} />
 								<div className={styles["published-at"]}>
 									Published <time dateTime={publishedAt}>{publishedText}</time>
@@ -270,12 +271,18 @@ const SketchplanationPage = ({
 								<Cards />
 							</div>
 
-							<div className="md:sticky top-[65px]">
+							<div className="md:sticky top-[40px]">
 								{isPresent(similarSketchplanations) && (
 									<div className={styles.related}>
 										<SketchplanationsStack
 											title="Keep exploring"
 											sketchplanations={similarSketchplanations}
+											imageProps={{
+												format: "auto",
+												// Smallest to largest viewport
+												sizes:
+													"(max-width: 768px) calc(100vw - (var(--edgeInset) * 2)), (max-width: 1280px) calc(38vw - var(--gap) - (var(--edgeInset) * 2)), 26rem",
+											}}
 										/>
 									</div>
 								)}
@@ -297,14 +304,30 @@ const SketchplanationPage = ({
 												shortcut="←"
 												icon={<ArrowLeft size={14} strokeWidth={1.5} />}
 											/>
-											<FancyLink href={`/${newerUid}`}>Newer</FancyLink>
+											<FancyLink href={`/${newerUid}`}>
+												<span className="flex flex-row items-center gap-x-1">
+													<ChevronLeft
+														size={16}
+														className="pointerFine:hidden"
+													/>
+													Newer
+												</span>
+											</FancyLink>
 										</div>
 										<div className="flex flex-row mx-auto items-center gap-x-2">
 											<KeyboardShortcut shortcut="R" />
 											<FancyLink href={`/${randomHandle}`}>Random</FancyLink>
 										</div>
 										<div className="flex flex-row items-center gap-x-2">
-											<FancyLink href={`/${olderUid}`}>Older</FancyLink>
+											<FancyLink href={`/${olderUid}`}>
+												<span className="flex flex-row items-center gap-x-1">
+													Older
+													<ChevronRight
+														size={16}
+														className="pointerFine:hidden"
+													/>
+												</span>
+											</FancyLink>
 											<KeyboardShortcut
 												shortcut="→"
 												icon={<ArrowRight size={14} strokeWidth={1.5} />}
@@ -365,12 +388,14 @@ export async function getStaticProps({ params: { uid } }) {
 			})
 		)?.results?.[0]?.uid || null;
 
-	const similarSketchplanations = (
-		await client.getByType("sketchplanation", {
-			filters: [prismic.filter.similar(sketchplanation.id, 10)],
-			pageSize: 6,
-		})
-	).results;
+	const similarSketchplanations = shuffle(
+		(
+			await client.getByType("sketchplanation", {
+				filters: [prismic.filter.similar(sketchplanation.id, 10)],
+				pageSize: 6,
+			})
+		).results,
+	);
 
 	const subscribeInlineDoc = await client.getSingle("subscribe_inline");
 	const licenceDoc = await client.getSingle("licence");

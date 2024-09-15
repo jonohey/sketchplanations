@@ -1,7 +1,8 @@
+import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import FancyLink from "./FancyLink";
-import { ExternalLink } from "lucide-react";
+
 import bigIdeasLittlePicturesImage from "images/bigideaslittlepictures.jpg";
 import podcastImage from "images/podcast.jpg";
 
@@ -11,7 +12,7 @@ const Card = ({ href, imageSrc, alt, content }) => (
 	<div className={styles.card}>
 		{imageSrc && (
 			<Link href={href}>
-				<Image src={imageSrc} alt={alt} width={114} className="w-full" />
+				<Image src={imageSrc} alt={alt} sizes="6rem" className="w-full" />
 			</Link>
 		)}
 		<p>{content}</p>

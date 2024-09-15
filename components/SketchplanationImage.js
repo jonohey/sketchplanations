@@ -1,5 +1,4 @@
-import { AnimatePresence } from "framer-motion";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { debounce } from "lodash";
 import { LoaderCircle } from "lucide-react";
 import Image from "next/image";
@@ -14,7 +13,7 @@ import {
 import { Dialog, Modal, ModalOverlay } from "react-aria-components";
 
 const MotionModal = motion.create(Modal);
-const MotionDialog = motion.create(Dialog);
+// const MotionDialog = motion.create(Dialog);
 const MotionImage = motion.create(Image);
 
 import Context from "context";
@@ -155,8 +154,6 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 						height: initialImageRect.height,
 					}}
 					onAnimationComplete={() => {
-						// !isOpen ? setIsClosing(false) : setIsOpening(false);
-
 						if (isOpen) {
 							setIsOpening(false);
 						} else {
@@ -167,14 +164,9 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					animate={
 						isOpen && !isLoading
 							? {
-									// top: "1.5rem",
-									// left: "1.5rem",
-									// width: "calc(100vw - 3rem)",
-									// height: "calc(100vh - 6rem)",
 									top: "1.5rem",
 									left: "0",
 									width: "100vw",
-									// height: "calc(100vh - 6rem)",
 									height: "calc(var(--visual-viewport-height) - 6rem)",
 								}
 							: {
@@ -191,7 +183,7 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 						mass: 0.1,
 					}}
 				>
-					<MotionDialog
+					<Dialog
 						ref={dialog}
 						className="w-full h-full"
 						// drag="y"
@@ -239,7 +231,7 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 							priority
 							onLoad={() => setIsLoading(false)}
 						/>
-					</MotionDialog>
+					</Dialog>
 					<AnimatePresence>
 						{isOpen && !isLoading && (
 							<motion.div

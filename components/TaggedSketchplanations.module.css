@@ -66,12 +66,14 @@
   --slideWidth: 60vw;
 }
 
+/* 640px */
 @screen sm {
   .taggedSketchplanations {
     --slideWidth: 39vw;
   }
 }
 
+/* 1024px */
 @screen lg {
   .taggedSketchplanations {
     --slideWidth: 27vw;

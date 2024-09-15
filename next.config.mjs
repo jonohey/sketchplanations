@@ -6,8 +6,8 @@ const nextConfig = {
 	},
 	images: {
 		domains: ["images.prismic.io"],
-		loader: "custom",
-		loaderFile: "./loader.js",
+		// loader: "custom",
+		// loaderFile: "./loader.js",
 	},
 	async headers() {
 		return [
