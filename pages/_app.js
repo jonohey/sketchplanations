@@ -114,6 +114,10 @@ const Sketchplanations = ({ Component, pageProps }) => {
 				<Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
 					<Head>
 						<title>{pageTitle()}</title>
+						<meta
+							name="viewport"
+							content="width=device-width, initial-scale=1, minimum-scale=1"
+						/>
 					</Head>
 					<div className={inter.className}>
 						<Header />

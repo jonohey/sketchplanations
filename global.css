@@ -18,6 +18,10 @@
 
   .btn-secondary {
     @apply bg-bg text-blue px-4 py-2 rounded flex flex-row items-center justify-center gap-x-2 border border-border shadow-sm;
+
+    & > * {
+      @apply flex-shrink-0;
+    }
   }
 
   .masked-image {

@@ -25,6 +25,14 @@ import { Shuffle } from "lucide-react";
 import TaggedSketchplanations from "components/TaggedSketchplanations";
 import { PrismicNextImage } from "@prismicio/next";
 import Cards from "components/Cards";
+import { useHotkeys } from "react-hotkeys-hook";
+import { useRouter } from "next/router";
+import { ChevronLeft } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import KeyboardShortcut from "components/KeyboardShortcut";
+import FancyLink from "components/FancyLink";
+import { ArrowLeft } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 // const SocialSharing = dynamic(() => import('components/SocialSharing'))
 const TextHeader = dynamic(() => import("components/TextHeader"));
@@ -56,17 +64,26 @@ const truncate = (string, limit) => {
 const randomTitles = [
 	"Feeling adventurous?",
 	"Explore something new",
-	"Discover a surprise",
 	"Take a chance",
 	"Random inspiration",
+	"Surprise yourself",
+	"Discover a gem",
+	"Serendipity awaits",
+	"Roll the dice",
+	"Unexpected insights",
+	"Lucky dip",
+	"Broaden your horizons",
+	"Curiosity’s reward",
 ];
 
 const SketchplanationPage = ({
 	sketchplanation,
 	subscribeInlineDoc,
 	similarSketchplanations,
-	licenceDocument,
+	licenceDoc,
 	tags,
+	olderUid,
+	newerUid,
 }) => {
 	const {
 		data: {
@@ -94,6 +111,30 @@ const SketchplanationPage = ({
 		redbubbleLinkUrl,
 		onViewLicence: () => setLicenceModalOpen(true),
 	};
+
+	const router = useRouter();
+
+	useHotkeys(
+		"right, k",
+		() => {
+			if (olderUid) {
+				router.push(`/${olderUid}`);
+			}
+		},
+		{},
+		[router, olderUid],
+	);
+
+	useHotkeys(
+		"left, j",
+		() => {
+			if (newerUid) {
+				router.push(`/${newerUid}`);
+			}
+		},
+		{},
+		[router, newerUid],
+	);
 
 	useEffect(() => {
 		setRandomTitle(
@@ -166,7 +207,7 @@ const SketchplanationPage = ({
 				onClose={() => setLicenceModalOpen(false)}
 				onOpenChange={setLicenceModalOpen}
 			>
-				<Page document={licenceDocument} inline />
+				<Page document={licenceDoc} inline />
 			</Modal>
 
 			<div className={styles.root}>
@@ -238,7 +279,7 @@ const SketchplanationPage = ({
 									</div>
 								)}
 
-								<div className="mt-10">
+								{/* <div className="mt-10">
 									<p className="font-semibold text-base">{randomTitle}</p>
 									<Link
 										href={`/${randomHandle}`}
@@ -246,6 +287,29 @@ const SketchplanationPage = ({
 									>
 										Random sketch <Shuffle size={16} />
 									</Link>
+								</div> */}
+
+								<div className="mt-10">
+									<div className="flex gap-4">
+										<div className="flex flex-row items-center gap-x-2">
+											<KeyboardShortcut
+												shortcut="←"
+												icon={<ArrowLeft size={14} strokeWidth={1.5} />}
+											/>
+											<FancyLink href={`/${newerUid}`}>Newer</FancyLink>
+										</div>
+										<div className="flex flex-row mx-auto items-center gap-x-2">
+											<KeyboardShortcut shortcut="R" />
+											<FancyLink href={`/${randomHandle}`}>Random</FancyLink>
+										</div>
+										<div className="flex flex-row items-center gap-x-2">
+											<FancyLink href={`/${olderUid}`}>Older</FancyLink>
+											<KeyboardShortcut
+												shortcut="→"
+												icon={<ArrowRight size={14} strokeWidth={1.5} />}
+											/>
+										</div>
+									</div>
 								</div>
 							</div>
 						</aside>
@@ -262,14 +326,53 @@ const SketchplanationPage = ({
 
 export async function getStaticProps({ params: { uid } }) {
 	const sketchplanation = await client.getByUID("sketchplanation", uid);
-	const subscribeInlineDoc = await client.getSingle("subscribe_inline");
+
+	const olderUid =
+		(
+			await client.getByType("sketchplanation", {
+				pageSize: 1,
+				after: sketchplanation.id,
+				graphQuery: `{
+					sketchplanation {
+						uid
+					}
+				}`,
+				orderings: [
+					{
+						field: "my.sketchplanation.published_at",
+						direction: "desc",
+					},
+				],
+			})
+		)?.results?.[0]?.uid || null;
+
+	const newerUid =
+		(
+			await client.getByType("sketchplanation", {
+				pageSize: 1,
+				after: sketchplanation.id,
+				graphQuery: `{
+					sketchplanation {
+						uid
+					}
+				}`,
+				orderings: [
+					{
+						field: "my.sketchplanation.published_at",
+					},
+				],
+			})
+		)?.results?.[0]?.uid || null;
+
 	const similarSketchplanations = (
 		await client.getByType("sketchplanation", {
 			filters: [prismic.filter.similar(sketchplanation.id, 10)],
 			pageSize: 6,
 		})
 	).results;
-	const licenceDocument = await client.getSingle("licence");
+
+	const subscribeInlineDoc = await client.getSingle("subscribe_inline");
+	const licenceDoc = await client.getSingle("licence");
 
 	const tags = sketchplanation.data.tags;
 
@@ -278,8 +381,10 @@ export async function getStaticProps({ params: { uid } }) {
 			sketchplanation,
 			subscribeInlineDoc,
 			similarSketchplanations,
-			licenceDocument,
+			licenceDoc,
 			tags,
+			olderUid,
+			newerUid,
 		},
 	};
 }
