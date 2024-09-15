@@ -67,11 +67,6 @@ const RichText = ({ ...props }) => {
 						url: rewriteWithRedirects(maybeRelativeUrl(url)),
 					};
 
-					const correctedNode = {
-						...node,
-						data: link,
-					};
-
 					// Sketchplanations links
 					const uid = extractSketchplanationsUid(link.url);
 					const image = sketchTooltipsData.find(
