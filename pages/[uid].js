@@ -132,6 +132,17 @@ const SketchplanationPage = ({
 		[router, newerUid],
 	);
 
+	useHotkeys(
+		"r",
+		() => {
+			if (randomHandle) {
+				router.push(`/${randomHandle}`);
+			}
+		},
+		{},
+		[router, randomHandle],
+	);
+
 	// useEffect(() => {
 	// 	setRandomTitle(
 	// 		randomTitles[Math.floor(Math.random() * randomTitles.length)],
