@@ -101,7 +101,7 @@ const TaggedSketchplanations = ({ tags, excludeUid }) => {
 								<div className={styles.taggedSketchplanations}>
 									<Swiper {...swiperProps}>
 										{sketchplanations.map((sketchplanation) => (
-											<SwiperSlide key={sketchplanation.id}>
+											<SwiperSlide key={[tag.id, sketchplanation.id].join("-")}>
 												<SketchplanationCard
 													sketchplanation={sketchplanation}
 												/>
