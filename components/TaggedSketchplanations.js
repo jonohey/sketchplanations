@@ -49,10 +49,7 @@ const TaggedSketchplanations = ({ tags, excludeUid }) => {
 			</div>
 			<Tabs>
 				<div className={styles.tabsList}>
-					<TabList
-						aria-label="Moon in these topics"
-						className="flex flex-row gap-x-4"
-					>
+					<TabList className="flex flex-row gap-x-4">
 						{isPresent(taggedSketchplanations) ? (
 							<>
 								{taggedSketchplanations.map(({ tag }) => (
