@@ -83,6 +83,7 @@ module.exports = {
 						"--tw-prose-invert-pre-bg": "var(--color-bgHighlight)",
 						"--tw-prose-invert-th-borders": "var(--color-text)",
 						"--tw-prose-invert-td-borders": "var(--color-text)",
+						maxWidth: "55ch",
 						h1: {
 							fontWeight: "600",
 						},
