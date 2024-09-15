@@ -1,4 +1,3 @@
-import { animate } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
 import { debounce } from "lodash";

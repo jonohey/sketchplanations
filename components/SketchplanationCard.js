@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { LoaderCircle } from "lucide-react";
 import styles from "./SketchplanationCard.module.css";
 import classNames from "classnames";

@@ -4,8 +4,7 @@ import classNames from "classnames";
 import { ImageJsonLd } from "next-seo";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import Link from "next/link";
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import { useRandomHandle } from "hooks/useRandomHandle";
 
 import styles from "./[uid].module.css";
@@ -20,15 +19,12 @@ import Page from "components/Page";
 import RichText from "components/RichText";
 import SketchplanationCtas from "components/SketchplanationCtas";
 import SketchplanationsStack from "components/SketchplanationsStack";
-import { Shuffle } from "lucide-react";
 
 import TaggedSketchplanations from "components/TaggedSketchplanations";
 import { PrismicNextImage } from "@prismicio/next";
 import Cards from "components/Cards";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useRouter } from "next/router";
-import { ChevronLeft } from "lucide-react";
-import { ChevronRight } from "lucide-react";
 import KeyboardShortcut from "components/KeyboardShortcut";
 import FancyLink from "components/FancyLink";
 import { ArrowLeft } from "lucide-react";
@@ -61,20 +57,20 @@ const truncate = (string, limit) => {
 	return truncatedString;
 };
 
-const randomTitles = [
-	"Feeling adventurous?",
-	"Explore something new",
-	"Take a chance",
-	"Random inspiration",
-	"Surprise yourself",
-	"Discover a gem",
-	"Serendipity awaits",
-	"Roll the dice",
-	"Unexpected insights",
-	"Lucky dip",
-	"Broaden your horizons",
-	"Curiosity’s reward",
-];
+// const randomTitles = [
+// 	"Feeling adventurous?",
+// 	"Explore something new",
+// 	"Take a chance",
+// 	"Random inspiration",
+// 	"Surprise yourself",
+// 	"Discover a gem",
+// 	"Serendipity awaits",
+// 	"Roll the dice",
+// 	"Unexpected insights",
+// 	"Lucky dip",
+// 	"Broaden your horizons",
+// 	"Curiosity’s reward",
+// ];
 
 const SketchplanationPage = ({
 	sketchplanation,
@@ -99,7 +95,7 @@ const SketchplanationPage = ({
 
 	const [pwywModalOpen, setPwywModalOpen] = useState(false);
 	const [licenceModalOpen, setLicenceModalOpen] = useState(false);
-	const [randomTitle, setRandomTitle] = useState("");
+	// const [randomTitle, setRandomTitle] = useState("");
 	const randomHandle = useRandomHandle([uid]);
 
 	const publishedText = humanizePublishedDate(publishedAt);
@@ -136,11 +132,11 @@ const SketchplanationPage = ({
 		[router, newerUid],
 	);
 
-	useEffect(() => {
-		setRandomTitle(
-			randomTitles[Math.floor(Math.random() * randomTitles.length)],
-		);
-	}, [uid]);
+	// useEffect(() => {
+	// 	setRandomTitle(
+	// 		randomTitles[Math.floor(Math.random() * randomTitles.length)],
+	// 	);
+	// }, [uid]);
 
 	return (
 		<Fragment key={uid}>

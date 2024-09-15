@@ -1,7 +1,5 @@
 import * as prismicH from "@prismicio/helpers";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import Shiitake from "shiitake";
 import { EffectCards } from "swiper/modules";
@@ -12,7 +10,6 @@ import styles from "./SketchplanationsStack.module.css";
 import "swiper/css";
 import "swiper/css/effect-cards";
 import { isBlank } from "helpers";
-import { PrismicNextImage } from "@prismicio/next";
 import SketchplanationCard from "./SketchplanationCard";
 
 const SketchplanationsStack = ({ title, sketchplanations }) => {
