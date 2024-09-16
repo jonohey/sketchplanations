@@ -45,7 +45,7 @@ export const Cards = () => (
 					<FancyLink
 						href="https://podcast.sketchplanations.com/"
 						target="_blank"
-						rel="noreferrer"
+						rel="noopener"
 					>
 						<span className="inline">
 							<span>Listen to the podcast</span>{" "}
@@ -62,10 +62,14 @@ export const Cards = () => (
 			href="/thanks"
 			content={
 				<>
-					Like Sketchplanations?. I keep it going thanks to{" "}
-					<FancyLink href="https://www.patreon.com/sketchplanations">
-						<span className="inline">
-							<span>my patrons</span>{" "}
+					Like Sketchplanations?{" "}
+					<FancyLink href="https://www.patreon.com/sketchplanations"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<span>
+							<br/>
+							<span>Support me on Patreon</span>{" "}
 							<ExternalLink
 								size={16}
 								className="inline relate -translate-y-[2px]"
