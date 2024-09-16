@@ -1,6 +1,7 @@
+import { track } from '@vercel/analytics';
+import classNames from "classnames";
 import { ExternalLink } from "lucide-react";
 import styles from "./SketchplanationCtas.module.css";
-import classNames from "classnames";
 
 const SketchplanationCtas = ({
 	title,
@@ -29,6 +30,9 @@ const SketchplanationCtas = ({
 					target="_blank"
 					rel="noreferrer"
 					title={`Listen to ${title} in the podcast`}
+					onClick={() => {
+						track('Sketch-link-podcast-episode', { sketch: `${title}` });
+					}}
 				>
 					Listen
 					<ExternalLink size={16} />
@@ -43,7 +47,10 @@ const SketchplanationCtas = ({
 					variant === "lightbox" && styles.ctaLightbox,
 				)}
 				type="button"
-				onClick={onDownload}
+				onClick={() => {
+                    track('Sketch-link-download', { sketch: `${title}` });
+                    onDownload();
+                }}
 			>
 				Download
 			</button>
@@ -59,6 +66,9 @@ const SketchplanationCtas = ({
 					href={redbubbleLinkUrl}
 					target="_blank"
 					rel="noreferrer"
+					onClick={() => {
+                    	track('Sketch-link-prints', { sketch: `${title}` });
+                	}}
 				>
 					Prints
 					<ExternalLink size={16} />
@@ -73,7 +83,10 @@ const SketchplanationCtas = ({
 					variant === "lightbox" && styles.ctaLightbox,
 				)}
 				type="button"
-				onClick={onViewLicence}
+				onClick={() => {
+                    track('Sketch-link-licence', { sketch: `${title}` });
+                    onViewLicence();
+                }}
 			>
 				Licence
 			</button>

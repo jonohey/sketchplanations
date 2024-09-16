@@ -1,3 +1,4 @@
+import { track } from '@vercel/analytics';
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,10 +9,10 @@ import podcastImage from "images/podcast.jpg";
 
 import styles from "./Cards.module.css";
 
-const Card = ({ href, imageSrc, alt, content }) => (
+const Card = ({ href, imageSrc, alt, content, onImageClick, target, rel }) => (
 	<div className={styles.card}>
 		{imageSrc && (
-			<Link href={href}>
+			<Link href={href} onClick={onImageClick} target={target} rel={rel}>
 				<Image src={imageSrc} alt={alt} sizes="6rem" className="w-full" />
 			</Link>
 		)}
@@ -25,10 +26,18 @@ export const Cards = () => (
 			href="/big-ideas-little-pictures"
 			imageSrc={bigIdeasLittlePicturesImage}
 			alt="Big Ideas Little Pictures"
+			onImageClick={() => {
+                track('Book-page-link', { location: 'card-image' });
+            }}
 			content={
 				<>
-					Sketchplanations is now a book! I think you’ll love{" "}
-					<FancyLink href="/big-ideas-little-pictures">
+					Sketchplanations in a book! I think you'll love{" "}
+					<FancyLink
+						href="/big-ideas-little-pictures"
+						onClick={() => {
+							track('Book-page-link', { location: 'card' });
+						}}
+					>
 						Big Ideas Little Pictures
 					</FancyLink>
 				</>
@@ -37,18 +46,26 @@ export const Cards = () => (
 		<Card
 			href="https://podcast.sketchplanations.com/"
 			imageSrc={podcastImage}
-			alt="Big Ideas Little Pictures"
+			alt="Sketchplanations podcast photo of Rob Bell, Tom Pellereau and Jono Hey"
+			onImageClick={() => {
+                track('Podcast-site-link', { location: 'card-image' });
+            }}
+			target="_blank"
+            rel="noopener"
 			content={
 				<>
-					Prefer to listen to the ideas on your commute or while doing chores? I
-					don’t blame you.{" "}
+					Prefer to listen?
 					<FancyLink
 						href="https://podcast.sketchplanations.com/"
 						target="_blank"
 						rel="noopener"
+						onClick={() => {
+							track('Podcast-site-link', { location: 'card' });
+						}}
 					>
-						<span className="inline">
-							<span>Listen to the podcast</span>{" "}
+						<span>
+							<br/>
+							<span>Try the podcast</span>{" "}
 							<ExternalLink
 								size={16}
 								className="inline relate -translate-y-[2px]"
@@ -59,13 +76,19 @@ export const Cards = () => (
 			}
 		/>
 		<Card
-			href="/thanks"
+			href="https://www.patreon.com/sketchplanations"
+			onImageClick={() => {
+                track('Patreon-site-link', { location: 'card-image' });
+            }}
 			content={
 				<>
 					Like Sketchplanations?{" "}
 					<FancyLink href="https://www.patreon.com/sketchplanations"
 						target="_blank"
 						rel="noopener noreferrer"
+						onClick={() => {
+							track('Patreon-site-link', { location: 'card' });
+						}}
 					>
 						<span>
 							<br/>

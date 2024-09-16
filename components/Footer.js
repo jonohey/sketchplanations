@@ -1,3 +1,4 @@
+import { track } from '@vercel/analytics';
 import { ChevronRight, ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Cards } from "./Cards";
@@ -9,11 +10,21 @@ import styles from "./Footer.module.css";
 const Nav = () => (
 	<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-9 lg:text-center gap-x-12 gap-y-2 items-start">
 		<FancyLink href="/">Home</FancyLink>
-		<FancyLink href="/big-ideas-little-pictures">Book!</FancyLink>
+		<FancyLink
+			href="/big-ideas-little-pictures"
+			onClick={() => {
+					track('Book-page-link', { location: 'footer' });
+			}}
+		>
+				Book!
+		</FancyLink>
 		<FancyLink
 			href="https://podcast.sketchplanations.com"
 			target="_blank"
 			rel="noreferrer"
+			onClick={() => {
+					track('Podcast-site-link', { location: 'footer' });
+			}}
 		>
 			<span className="inline-flex items-center gap-2">
 				<span>Podcast</span>
@@ -26,6 +37,9 @@ const Nav = () => (
 			href="https://www.redbubble.com/people/sketchplanator/explore?asc=u&page=1&sortOrder=top%20selling"
 			target="_blank"
 			rel="noreferrer"
+			onClick={() => {
+					track('Shop', { location: 'footer' });
+			}}
 		>
 			<span className="inline-flex items-center gap-2">
 				<span>Shop</span>
