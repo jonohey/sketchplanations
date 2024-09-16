@@ -48,9 +48,9 @@ const SketchplanationCtas = ({
 				)}
 				type="button"
 				onClick={() => {
-                    track('Sketch-link-download', { sketch: `${title}` });
-                    onDownload();
-                }}
+					track('Sketch-link-download', { sketch: `${title}` });
+					onDownload();
+				}}
 			>
 				Download
 			</button>
@@ -67,8 +67,8 @@ const SketchplanationCtas = ({
 					target="_blank"
 					rel="noreferrer"
 					onClick={() => {
-                    	track('Sketch-link-prints', { sketch: `${title}` });
-                	}}
+						track('Sketch-link-prints', { sketch: `${title}` });
+					}}
 				>
 					Prints
 					<ExternalLink size={16} />
@@ -84,9 +84,9 @@ const SketchplanationCtas = ({
 				)}
 				type="button"
 				onClick={() => {
-                    track('Sketch-link-licence', { sketch: `${title}` });
-                    onViewLicence();
-                }}
+					track('Sketch-link-licence', { sketch: `${title}` });
+					onViewLicence();
+				}}
 			>
 				Licence
 			</button>

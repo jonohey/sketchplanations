@@ -27,11 +27,11 @@ export const Cards = () => (
 			imageSrc={bigIdeasLittlePicturesImage}
 			alt="Big Ideas Little Pictures"
 			onImageClick={() => {
-                track('Book-page-link', { location: 'card-image' });
-            }}
+				track('Book-page-link', { location: 'card-image' });
+			}}
 			content={
 				<>
-					Sketchplanations in a book! I think you'll love{" "}
+					Sketchplanations in a book! I think you&apos;ll love{" "}
 					<FancyLink
 						href="/big-ideas-little-pictures"
 						onClick={() => {
@@ -48,10 +48,10 @@ export const Cards = () => (
 			imageSrc={podcastImage}
 			alt="Sketchplanations podcast photo of Rob Bell, Tom Pellereau and Jono Hey"
 			onImageClick={() => {
-                track('Podcast-site-link', { location: 'card-image' });
-            }}
+				track('Podcast-site-link', { location: 'card-image' });
+			}}
 			target="_blank"
-            rel="noopener"
+			rel="noopener"
 			content={
 				<>
 					Prefer to listen?
@@ -78,8 +78,8 @@ export const Cards = () => (
 		<Card
 			href="https://www.patreon.com/sketchplanations"
 			onImageClick={() => {
-                track('Patreon-site-link', { location: 'card-image' });
-            }}
+				track('Patreon-site-link', { location: 'card-image' });
+			}}
 			content={
 				<>
 					Like Sketchplanations?{" "}
