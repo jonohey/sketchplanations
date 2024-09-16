@@ -1,0 +1,53 @@
+.root {
+  @apply relative block overflow-hidden bg-paper;
+
+  /* border-color: hsla(0, 0%, 0%, 0.1); */
+
+  box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow);
+
+  &::before {
+    content: '';
+    @apply absolute z-10 inset-0;
+
+    box-shadow: inset 0 0 0 1px hsla(0, 0%, 0%, 0.08);
+    mix-blend-mode: multiply;
+  }
+}
+
+@media (pointer: fine) {
+  .root {
+    @apply transition-all hover:-translate-y-1;
+  }
+
+  .root:hover {
+    box-shadow: 0 2.8rem 1rem -2.25rem var(--color-sketchShadowHover);
+  }
+}
+
+.imageContainer {
+  @apply block relative w-full aspect-[5/3] bg-paper;
+}
+
+.loaderContainer {
+  @apply flex items-center justify-center w-full h-full;
+}
+
+.loader {
+  @apply animate-spin;
+}
+
+.image {
+  @apply object-cover object-top w-[10rem];
+}
+
+.title {
+  @apply absolute bottom-0 left-0 w-full bg-paperTracing backdrop-blur-lg font-semibold text-sm px-4 py-3 text-[#222] group-hover:text-red whitespace-nowrap overflow-hidden text-ellipsis;
+
+  &::before {
+    content: '';
+    @apply absolute z-10 top-0 left-0 w-full h-px;
+
+    background-color: hsla(0, 0%, 0%, 0.08);
+    mix-blend-mode: multiply;
+  }
+}

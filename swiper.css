@@ -1,0 +1,13 @@
+.swiper-slide-shadow {
+  top: 0.25rem !important;
+  height: auto !important;
+  bottom: 1.25rem !important;
+  background: rgba(0, 0, 0, 0.1) !important;
+  backdrop-filter: saturate(80%);
+  filter: blur(1px);
+  mask-image: var(--mask-image);
+
+  @screen dark {
+    background: rgba(0, 0, 0, 0.3) !important;
+  }
+}

@@ -9,7 +9,7 @@
     "<THIRD_PARTY_MODULES>",
     "vanilla-cookieconsent/dist/cookieconsent.css",
     "(.*).css",
-    "^(components|helpers|services|hooks)(/(.*))?$",
+    "^(components|helpers|services|hooks|images)(/(.*))?$",
     "^[./]"
   ],
   "importOrderSeparation": true,

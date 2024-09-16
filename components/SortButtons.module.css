@@ -1,13 +1,13 @@
 .sort-buttons {
   @apply flex justify-center p-2 rounded-lg;
-  border-color: var(--color-inputBg);
-  background-color: var(--color-inputBg);
+  border-color: var(--color-bgInput);
+  background-color: var(--color-bgInput);
 }
 
 .sort-button {
   @apply relative py-1 px-4 text-sm basis-1/2 rounded;
-  border-color: var(--color-inputBg);
-  background-color: var(--color-inputBg);
+  border-color: var(--color-bgInput);
+  background-color: var(--color-bgInput);
 }
 
 .sort-button-active {

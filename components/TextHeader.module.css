@@ -1,6 +1,6 @@
 .root h1 {
   @apply text-2xl mb-10 mx-auto;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .root h2 {

@@ -63,9 +63,9 @@
   @apply flex items-center justify-center h-full pl-6;
   background-image: linear-gradient(
     to left,
-    rgba(var(--color-bgRgb), 1),
-    rgba(var(--color-bgRgb), 1) 38%,
-    rgba(var(--color-bgRgb), 0)
+    hsla(var(--color-bgHsl), 1),
+    hsla(var(--color-bgHsl), 1) 38%,
+    hsla(var(--color-bgHsl), 0)
   );
   pointer-events: none;
   @apply md:hidden;
@@ -97,7 +97,7 @@
 }
 
 .overflow-indicator__button path {
-  @apply fill-black group-hover:fill-red;
+  @apply fill-black;
 }
 
 .overflow-indicator__button:hover path {

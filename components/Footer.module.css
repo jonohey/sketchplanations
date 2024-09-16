@@ -1,0 +1,13 @@
+.root {
+  @apply bg-bgFooter pb-36 grid gap-y-12 border-t border-border;
+
+  --edgeInset: 1.5em;
+
+  @screen md {
+    --edgeInset: 2em;
+  }
+
+  @screen lg {
+    --edgeInset: 3em;
+  }
+}

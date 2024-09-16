@@ -1,7 +1,7 @@
 .root {
-  @apply pt-4 pb-20 mx-auto grid grid-cols-1 gap-y-3;
+  @apply pt-6 pb-20 mx-auto grid grid-cols-1 gap-y-3;
 }
 
 .search-form {
-  @apply px-4;
+  @apply px-4 w-full lg:max-w-[42rem] lg:mx-auto;
 }

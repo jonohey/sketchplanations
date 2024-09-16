@@ -1,7 +1,7 @@
-import Oops from 'components/Oops'
+import Oops from "components/Oops";
 
 const NotFound = () => {
-  return <Oops />
-}
+	return <Oops />;
+};
 
-export default NotFound
+export default NotFound;

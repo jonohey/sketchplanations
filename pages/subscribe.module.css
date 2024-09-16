@@ -1,7 +1,7 @@
 .input {
-  @apply block py-2 px-4 w-full bg-inputBg rounded border border-inputBorder outline-none;
+  @apply block py-2 px-4 w-full bg-bgInput rounded border border-borderInput outline-none;
 }
 
 .button {
-  @apply block mt-3 py-2 px-4 w-full bg-buttonBg text-white rounded;
+  @apply block mt-3 py-2 px-4 w-full bg-bgButton text-white rounded;
 }

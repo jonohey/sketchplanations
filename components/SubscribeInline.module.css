@@ -1,23 +1,29 @@
 .root {
-  @apply w-full pt-4 px-6 pb-4 mx-auto mb-4 mt-4 rounded-md;
-  max-width: 600px;
-  background: rgb(251, 247, 218);
-  background: linear-gradient(
-    -315deg,
-    rgba(251, 247, 218, 0.25) 0%,
-    rgba(189, 180, 163, 0.05) 35%,
-    rgba(253, 96, 65, 0.25) 100%
-  );
+  container-type: inline-size;
+}
+
+.root * {
+  @apply text-base;
 }
 
 .form {
-  @apply flex flex-col sm:flex-row gap-2 sm:gap-0;
+  @apply flex flex-col gap-3;
 }
 
 .input {
-  @apply w-full sm:w-0 flex-auto p-3 rounded sm:rounded-r-none bg-inputBg border border-inputBorder sm:border-r-0 outline-none;
+  @apply w-full flex-auto p-3 rounded bg-bgInput border border-borderInput focus:border-blue outline-none;
 }
 
 .button {
-  @apply flex-none bg-brightRed text-white p-3 rounded sm:rounded-l-none;
+  @apply flex-none bg-bgButton text-white p-3 rounded;
+}
+
+@container (min-width: 300px) {
+  .form {
+    @apply flex-row;
+  }
+
+  .input {
+    @apply w-0;
+  }
 }

@@ -1,0 +1,104 @@
+.taggedSketchplanations {
+  @apply relative;
+  --gradient-color: 0, 0%, 100%;
+  --fadeWidth: var(--edgeInset);
+}
+
+@screen dark {
+  .taggedSketchplanations {
+    --gradient-color: 228, 4.5%, 21.8%;
+  }
+}
+
+.taggedSketchplanations::before {
+  content: '';
+  @apply absolute z-10 top-0 left-0 h-full;
+  width: var(--fadeWidth);
+
+  background-image: linear-gradient(
+    to left,
+    hsla(var(--gradient-color), 0) 0%,
+    hsla(var(--gradient-color), 0.013) 8.1%,
+    hsla(var(--gradient-color), 0.049) 15.5%,
+    hsla(var(--gradient-color), 0.104) 22.5%,
+    hsla(var(--gradient-color), 0.175) 29%,
+    hsla(var(--gradient-color), 0.259) 35.3%,
+    hsla(var(--gradient-color), 0.352) 41.2%,
+    hsla(var(--gradient-color), 0.45) 47.1%,
+    hsla(var(--gradient-color), 0.55) 52.9%,
+    hsla(var(--gradient-color), 0.648) 58.8%,
+    hsla(var(--gradient-color), 0.741) 64.7%,
+    hsla(var(--gradient-color), 0.825) 71%,
+    hsla(var(--gradient-color), 0.896) 77.5%,
+    hsla(var(--gradient-color), 0.951) 84.5%,
+    hsla(var(--gradient-color), 0.987) 91.9%,
+    hsl(var(--gradient-color)) 100%
+  );
+}
+
+.taggedSketchplanations::after {
+  content: '';
+  @apply absolute z-10 top-0 right-0 h-full;
+  width: var(--fadeWidth);
+
+  background-image: linear-gradient(
+    to right,
+    hsla(var(--gradient-color), 0) 0%,
+    hsla(var(--gradient-color), 0.013) 8.1%,
+    hsla(var(--gradient-color), 0.049) 15.5%,
+    hsla(var(--gradient-color), 0.104) 22.5%,
+    hsla(var(--gradient-color), 0.175) 29%,
+    hsla(var(--gradient-color), 0.259) 35.3%,
+    hsla(var(--gradient-color), 0.352) 41.2%,
+    hsla(var(--gradient-color), 0.45) 47.1%,
+    hsla(var(--gradient-color), 0.55) 52.9%,
+    hsla(var(--gradient-color), 0.648) 58.8%,
+    hsla(var(--gradient-color), 0.741) 64.7%,
+    hsla(var(--gradient-color), 0.825) 71%,
+    hsla(var(--gradient-color), 0.896) 77.5%,
+    hsla(var(--gradient-color), 0.951) 84.5%,
+    hsla(var(--gradient-color), 0.987) 91.9%,
+    hsl(var(--gradient-color)) 100%
+  );
+}
+
+.taggedSketchplanations {
+  --slideWidth: 60vw;
+}
+
+/* 640px */
+@screen sm {
+  .taggedSketchplanations {
+    --slideWidth: 39vw;
+  }
+}
+
+/* 1024px */
+@screen lg {
+  .taggedSketchplanations {
+    --slideWidth: 27vw;
+  }
+}
+
+.taggedSketchplanations :global(.swiper-slide) {
+  width: var(--slideWidth) !important;
+}
+
+.taggedSketchplanations :global(.swiper) {
+  padding-left: var(--edgeInset);
+  padding-right: var(--edgeInset);
+}
+
+.taggedSketchplanations :global(.swiper-wrapper) {
+  @apply py-5;
+}
+
+.taggedSketch {
+  @apply block rounded overflow-hidden bg-paper translate-x-0 hover:-translate-x-1 relative hover:z-20 transition-all shadow-paperDarker shadow-sm hover:shadow-lg;
+}
+
+.header,
+.tabsList {
+  padding-left: var(--edgeInset);
+  padding-right: var(--edgeInset);
+}

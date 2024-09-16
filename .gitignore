@@ -38,3 +38,7 @@ data/*
 # Local Netlify folder
 .netlify
 /initial-search-results.json
+
+# Misc
+.clj-kondo
+.lsp

@@ -2,86 +2,131 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Tailwind layer system */
+@layer components {
+  .debug {
+    outline: solid thin red;
+    outline-offset: -1px;
+  }
+
+  .link-primary {
+    @apply text-blue font-semibold underline;
+  }
+
+  .btn-primary {
+    @apply bg-bgButton text-white px-4 py-2 rounded flex flex-row items-center justify-center gap-x-2 shadow-sm;
+  }
+
+  .btn-secondary {
+    @apply bg-bg text-blue px-4 py-2 rounded flex flex-row items-center justify-center gap-x-2 border border-border shadow-sm;
+
+    & > * {
+      @apply flex-shrink-0;
+    }
+  }
+
+  .masked-image {
+    mask-image: var(--mask-image);
+  }
+}
+
 :root {
-  --color-shadow: rgba(0, 0, 0, 0.05);
-  --color-black: #222;
-  --color-paper: #fbf8de;
-  --color-paperDarker: #e2dcc5;
-  --color-sketchShadow: #e2dcc5;
-  --color-red: #ba3c3e;
-  --color-brightRed: #fd4c2b;
-  --color-blue: #1253b5;
-  --color-buttonBg: #1253b5;
-  --color-bg: #fff;
-  --color-bgRgb: 255, 255, 255;
-  --color-bgTransparent: rgba(255, 255, 255, 0.9);
-  --color-bgDarker: #f5f5f5;
-  --color-bgHighlight: #f5f5f5;
-  --color-border: #e5e7eb;
-  --color-inputBg: hsl(0, 0%, 93%);
-  --color-inputBorder: #e5e7eb;
-  --color-subduedText: #595959;
+  /* Bad name? */
+  --color-black: hsl(0, 0%, 13.3%);
 
-  --cc-bg: #35363a;
-  --cc-primary-color: #fff;
-  --cc-secondary-color: #c6c6c6;
+  --color-paper: hsl(53.8, 78.4%, 92.7%);
+  --color-paperDarker: hsl(47.6, 33.3%, 82.9%);
+  --color-paperTracing: hsla(0, 0%, 100%, 0.75);
+  --color-paperTransparent: hsla(53.8, 78.4%, 92.7%, 0.8);
 
-  --cc-btn-primary-bg: #ffffff;
-  --cc-btn-primary-color: #000;
-  --cc-btn-primary-hover-bg: #ffffff;
-  --cc-btn-primary-hover-color: #000;
+  --color-sketchShadow: hsl(47.6, 33.3%, 82.9%);
+  --color-sketchShadowHover: hsla(47.6, 33.3%, 82.9%, 0.75);
 
-  --cc-btn-secondary-bg: rgba(255, 255, 255, 0.039);
-  --cc-btn-secondary-color: var(--cc-primary-color);
-  --cc-btn-secondary-border-color: rgba(0, 0, 0, 0.3);
-  --cc-btn-secondary-hover-bg: #252729;
-  --cc-btn-secondary-hover-color: #fff;
-  --cc-btn-secondary-hover-border-color: #252729;
+  --color-red: hsl(359, 51.2%, 48.2%);
+  --color-brightRed: hsl(9.4, 98.1%, 58%);
+  --color-blue: hsl(216.1, 81.9%, 39%);
 
-  --cc-cookie-category-block-bg: #202124;
-  --cc-cookie-category-block-border: #202124;
-  --cc-cookie-category-block-hover-bg: #202124;
-  --cc-cookie-category-block-hover-border: #1d1e1f;
-  --cc-cookie-category-expanded-block-hover-bg: #1d1e1f;
-  --cc-cookie-category-expanded-block-bg: #202124;
-  --cc-toggle-readonly-bg: #2f3132;
-  --cc-overlay-bg: rgba(0, 0, 0, 0.6) !important;
+  --color-bg: hsl(0, 0%, 100%);
+  --color-bgButton: hsl(216.1, 81.9%, 39%);
+  --color-bgDarker: hsl(0, 0%, 98.1%);
+  --color-bgFooter: hsl(0, 0%, 96%);
+  --color-bgHighlight: hsl(0, 0%, 96.1%);
+  --color-bgHsl: 0, 0%, 100%;
+  --color-bgInput: hsl(0, 0%, 98%);
+  --color-bgKeyboardShortcut: hsl(0, 0%, 98%);
+  --color-bgTransparent: hsla(0, 0%, 100%, 0.9);
 
-  --cc-toggle-on-knob-bg: #202124;
-  --cc-toggle-readonly-knob-bg: var(--cc-cookie-category-block-bg);
+  --color-border: hsl(220, 13%, 91%);
+  --color-borderFooter: hsl(220, 13%, 91%);
+  --color-borderInput: hsl(220, 13%, 89%);
+  --color-borderKeyboardShortcut: hsl(0, 0%, 88%);
 
-  --cc-separator-border-color: #252729;
+  --color-text: hsl(0, 0%, 13.3%);
+  --color-textSubdued: hsl(0, 0%, 44.9%);
 
-  --cc-footer-border-color: #212529;
-  --cc-footer-bg: #000;
+  --color-overlay: hsla(0, 0%, 0%, 0.9);
+
+  --mask-image: linear-gradient(
+    to bottom,
+    hsl(0, 0%, 0%) 0%,
+    hsla(0, 0%, 0%, 0.987) 18.4%,
+    hsla(0, 0%, 0%, 0.951) 33.7%,
+    hsla(0, 0%, 0%, 0.896) 46.3%,
+    hsla(0, 0%, 0%, 0.825) 56.5%,
+    hsla(0, 0%, 0%, 0.741) 64.6%,
+    hsla(0, 0%, 0%, 0.648) 70.9%,
+    hsla(0, 0%, 0%, 0.55) 75.8%,
+    hsla(0, 0%, 0%, 0.45) 79.5%,
+    hsla(0, 0%, 0%, 0.352) 82.4%,
+    hsla(0, 0%, 0%, 0.259) 84.7%,
+    hsla(0, 0%, 0%, 0.175) 86.9%,
+    hsla(0, 0%, 0%, 0.104) 89.2%,
+    hsla(0, 0%, 0%, 0.049) 92%,
+    hsla(0, 0%, 0%, 0.013) 95.4%,
+    hsla(0, 0%, 0%, 0) 100%
+  );
 }
 
 @screen dark {
   :root {
-    --color-black: #fcfcfc;
-    --color-paper: #fbf8de;
-    --color-paperDarker: #e2dcc5;
-    --color-sketchShadow: #27282b;
-    --color-red: #ba3c3e;
-    --color-brightRed: #fd4c2b;
-    --color-blue: #6aa0f0;
-    --color-buttonBg: #1253b5;
-    --color-blueLight: #90b8f4;
-    --color-bg: #35363a;
-    --color-bgRgb: 53, 54, 58;
+    --color-black: hsl(0, 0%, 98.8%);
+
+    --color-paper: hsl(53.8, 78.4%, 92.7%);
+    --color-paperDarker: hsl(47.6, 33.3%, 82.9%);
+    --color-paperTransparent: hsla(53.8, 78.4%, 92.7%, 0.8);
+
+    --color-sketchShadow: hsl(225, 4.9%, 16.1%);
+    --color-sketchShadowHover: hsla(225, 4.9%, 16.1%, 0.75);
+
+    --color-red: hsl(359, 51.2%, 48.2%);
+    --color-brightRed: hsl(9.4, 98.1%, 58%);
+    --color-blue: hsl(215.8, 81.7%, 67.8%);
+    --color-blueLight: hsl(216, 82%, 76.1%); /* Odd dark mode color */
+
+    --color-bg: hsl(228, 4.5%, 21.8%);
+    --color-bgButton: hsl(216.1, 81.9%, 39%);
+    --color-bgDarker: hsl(225, 5.9%, 13.3%);
+    --color-bgFooter: hsl(228, 4.5%, 19.8%);
+    --color-bgHighlight: hsl(231.4, 4.9%, 28%);
+    --color-bgHsl: 228, 4.5%, 21.8%;
+    --color-bgInput: hsl(225, 5.9%, 13.3%);
+    --color-bgKeyboardShortcut: hsl(228, 4.5%, 21.8%);
     --color-bgTransparent: rgba(53, 54, 58, 0.9);
-    --color-bgDarker: #202124;
-    --color-bgHighlight: #44454b;
-    --color-border: #575960;
-    --color-inputBg: #202124;
-    --color-inputBorder: #35363a;
-    --color-subduedText: #c6c6c6;
+
+    --color-border: hsl(225, 5.1%, 30.6%);
+    --color-borderFooter: hsl(225, 5.1%, 23.6%);
+    --color-borderInput: hsl(228, 4.5%, 12.8%);
+    --color-borderKeyboardShortcut: hsl(228, 4.5%, 27.8%);
+
+    --color-text: hsl(0, 0%, 98.8%);
+    --color-textSubdued: hsl(0, 0%, 77.6%);
+
+    --color-overlay: hsla(0, 0%, 7%, 0.9);
   }
 }
 
 html {
-  @apply bg-bg text-black;
-  font-weight: 300;
+  @apply bg-bg text-text font-light;
   font-optical-sizing: auto;
 }
 
@@ -91,7 +136,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 600;
+  @apply font-semibold;
 }
 
 pre {
@@ -107,40 +152,4 @@ pre {
   color: #8ae8fc;
   background-color: #282a36;
   line-height: 1.4;
-  /* @apply hidden; */
-}
-
-.patreon {
-  @apply fixed bottom-0 right-0;
-}
-
-/* Mailchimp */
-#mc_embed_signup {
-  background: #fff;
-  clear: left;
-  font:
-    16px 'Open Sans',
-    sans-serif;
-  width: 375px;
-}
-
-.coffee {
-  @apply fixed z-50 bottom-0 left-0 mb-4 ml-4 flex flex-col items-center py-3 px-4 bg-white light:border shadow-lg rounded;
-  transform: translateY(150%);
-  transition: transform 0.2s ease-out;
-}
-
-.coffee[data-visible='true'] {
-  transform: translateY(0);
-}
-
-.coffee img {
-  @apply inline-block;
-  width: 120px;
-  height: auto;
-}
-
-#cc-main .cm,
-#cc-main .pm {
-  border: 1px solid var(--cc-separator-border-color);
 }

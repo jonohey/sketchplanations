@@ -30,7 +30,8 @@
 
 @screen md {
   .root {
-    @apply gap-x-6 sticky top-0 items-center justify-between z-50;
+    /* @apply gap-x-6 sticky top-0 items-center justify-between z-50; */
+    @apply gap-x-6 items-center justify-between z-50;
     grid-template-areas:
       'spacer-left ident navigation search-toggle spacer-right'
       'divider divider divider divider divider';
@@ -62,7 +63,7 @@
 }
 
 .search-toggle-button {
-  @apply flex items-center justify-center lg:justify-start gap-x-2 w-full py-2 px-4 bg-inputBg border border-inputBorder rounded-lg;
+  @apply flex items-center justify-center lg:justify-start gap-x-2 w-full py-2 px-4 bg-bgInput border border-borderInput rounded-lg;
 }
 
 @screen sm {
@@ -78,7 +79,7 @@
 }
 
 .search-toggle-button__icon {
-  @apply flex items-center text-subduedText;
+  @apply flex items-center text-textSubdued;
   height: 24px;
 }
 
@@ -89,11 +90,11 @@
 }
 
 .search-toggle-button__text {
-  @apply text-subduedText select-none overflow-hidden text-ellipsis whitespace-nowrap pr-1;
+  @apply text-textSubdued select-none overflow-hidden text-ellipsis whitespace-nowrap pr-1;
 }
 
 .search-toggle-button__keyboard-shortcut {
-  @apply text-xs bg-bg rounded-md text-subduedText py-1 px-2;
+  @apply text-xs bg-bgKeyboardShortcut rounded-md text-textSubdued py-1 px-2;
 }
 
 @screen sm {
