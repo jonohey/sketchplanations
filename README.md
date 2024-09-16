@@ -10,7 +10,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 1. Clone this repo
 2. Run `pnpm install` to install all the required depedencies. If you don’t have pnpm follow the [installation instructions](https://pnpm.io/installation).
-3. Start the development server with `pnpm dev`
+3. Start the development server with `pnpm dev` (you may need to run the build scripts first: `pnpm run predev` and `pnpm run dev`)
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## Resources
