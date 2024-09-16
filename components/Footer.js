@@ -48,7 +48,7 @@ const Nav = () => (
 		</FancyLink>
 		<FancyLink href="/categories">Categories</FancyLink>
 		<FancyLink href="/archive">Archive</FancyLink>
-		<FancyLink href="/archive">Licence</FancyLink>
+		<FancyLink href="/licence">Licence</FancyLink>
 	</div>
 );
 
