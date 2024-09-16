@@ -1,3 +1,4 @@
+import { track } from '@vercel/analytics';
 import classNames from "classnames";
 import { ExternalLink } from "lucide-react";
 import { useRouter } from "next/router";
@@ -36,6 +37,9 @@ const Navigation = () => {
 				aria-current={
 					isSelected("/big-ideas-little-pictures") ? "page" : undefined
 				}
+				onClick={() => {
+					track('Book-page-link', { location: 'header' });
+				}}
 			>
 				<RoughNotation
 					show={isSelected("/big-ideas-little-pictures")}
@@ -50,6 +54,9 @@ const Navigation = () => {
 				rel="noreferrer"
 				className={styles.item}
 				data-active={false}
+				onClick={() => {
+					track('Podcast-site-link', { location: 'header' });
+				}}
 			>
 				<span className="inline-flex items-center gap-2">
 					<span>Podcast</span>
@@ -80,6 +87,9 @@ const Navigation = () => {
 				rel="noreferrer"
 				className={styles.item}
 				data-active={false}
+				onClick={() => {
+					track('Shop', { location: 'header' });
+				}}
 			>
 				<span className="inline-flex items-center gap-2">
 					<span>Shop</span>
