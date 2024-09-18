@@ -1,9 +1,11 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { Download, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import CurrencyInput from "react-currency-input-field";
 
 import styles from "./PayWhatYouWant.module.css";
+import SubscribeInline from "./SubscribeInline";
 
 const CARD_OPTIONS = {
 	iconStyle: "solid",
@@ -92,27 +94,62 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
 		setCardComplete(e.complete);
 	};
 
+	const [subscribeInlineDoc, setSubscribeInlineDoc] = useState(null);
+		useEffect(() => {
+		fetch("/api/subscribeInlineDoc")
+			.then((res) => res.json())
+			.then(setSubscribeInlineDoc);
+		},
+	[]);
+	
 	return (
 		<div>
-			<h2 className={styles.header}>Download highest-quality image</h2>
+			<h2 className={styles.header}>
+				Download
+			</h2>
 			<div className={styles.main}>
 				{free || paymentIntent ? (
-					<>
-						<p>
-							{paymentIntent && "Thank you. "}You can download the
-							highest-quality version I have of the sketch below:
-						</p>
-						<p>
+					<div className="space-y-6">
+						{paymentIntent && (
+							<p className="text-lg font-semibold text-green-600">
+								Thank you for your support!
+							</p>
+						)}
+						<div>
+							<p className="mb-4">
+								Enjoy the best quality version of the sketch I have:
+							</p>
 							<a
 								href={`/api/dl?uid=${sketchplanationUid}`}
 								download
 								rel="noreferrer"
 								target="_blank"
+								className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 border-2 border-blue-600"
 							>
-								https://sketchplanations.com/api/dl?uid={sketchplanationUid}
+								<Download size={18} className="inline-block mr-2" />
+								Download {sketchplanationTitle}
 							</a>
-						</p>
-					</>
+						</div>
+						<div className="bg-gray-100 p-4 rounded-lg border border-gray-300">
+							<p>
+								Commercial usage? Please see the{" "}
+								<a href="/licence" target="_blank" className="text-blue-600 hover:underline">
+									licence
+									<ExternalLink size={14} className="inline-block ml-1 mb-1" />
+								</a>
+								.
+							</p>
+							<p>
+								Enjoying the sketches?&nbsp;
+								<a href="https://www.patreon.com/sketchplanations" target="_blank" className="text-blue-600 hover:underline">
+									Support me on Patreon
+									<ExternalLink size={14} className="inline-block ml-1 mb-1" />
+								</a>&nbsp;
+								or subscribe by email below.
+							</p>
+						</div>
+						<SubscribeInline doc={subscribeInlineDoc} />
+					</div>
 				) : (
 					<>
 						<p>
