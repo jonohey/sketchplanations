@@ -54,6 +54,7 @@
 		"react-rough-notation": "^1.0.3",
 		"react-text-loop": "^2.3.0",
 		"react-use-cookie": "^1.6.1",
+		"react-zoom-pan-pinch": "^3.6.1",
 		"shiitake": "^3.0.2",
 		"stripe": "^11.17.0",
 		"swiper": "^11.1.12",
