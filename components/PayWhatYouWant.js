@@ -119,18 +119,20 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
 							<p className="mb-4">
 								Enjoy the best quality version of the sketch I have:
 							</p>
-							<a
-								href={`/api/dl?uid=${sketchplanationUid}`}
-								download
-								rel="noreferrer"
-								target="_blank"
-								className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 border-2 border-blue-600"
-							>
-								<Download size={18} className="inline-block mr-2" />
-								Download {sketchplanationTitle}
-							</a>
+							<button className="btn-primary inline-block hover:brightness-110 dark:hover:brightness-125 transition-all duration-200 transform hover:scale-105">
+								<a
+									href={`/api/dl?uid=${sketchplanationUid}`}
+									download
+									rel="noreferrer"
+									target="_blank"
+									className="flex items-center"
+								>
+									<Download size={18} className="mr-2" />
+									Download {sketchplanationTitle}
+								</a>
+							</button>
 						</div>
-						<div className="bg-gray-100 p-4 rounded-lg border border-gray-300">
+						<div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg border border-gray-300 dark:border-gray-700">
 							<p>
 								Commercial usage? Please see the{" "}
 								<a
@@ -142,7 +144,6 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
 									licence
 									<ExternalLink size={14} className="inline-block ml-1 mb-1" />
 								</a>
-								.
 							</p>
 							<p>
 								Enjoying the sketches?&nbsp;
@@ -155,7 +156,7 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
 									Support me on Patreon
 									<ExternalLink size={14} className="inline-block ml-1 mb-1" />
 								</a>
-								&nbsp;or subscribe by email below.
+								&nbsp;or subscribe by email below
 							</p>
 						</div>
 						<SubscribeInline doc={subscribeInlineDoc} />
