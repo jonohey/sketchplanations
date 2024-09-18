@@ -133,7 +133,12 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
 						<div className="bg-gray-100 p-4 rounded-lg border border-gray-300">
 							<p>
 								Commercial usage? Please see the{" "}
-								<a href="/licence" target="_blank" className="text-blue-600 hover:underline">
+								<a
+									href="/licence"
+									target="_blank"
+									rel="noreferrer"
+									className="text-blue-600 hover:underline"
+								>
 									licence
 									<ExternalLink size={14} className="inline-block ml-1 mb-1" />
 								</a>
@@ -141,11 +146,16 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
 							</p>
 							<p>
 								Enjoying the sketches?&nbsp;
-								<a href="https://www.patreon.com/sketchplanations" target="_blank" className="text-blue-600 hover:underline">
+								<a
+									href="https://www.patreon.com/sketchplanations"
+									target="_blank"
+									rel="noreferrer"
+									className="text-blue-600 hover:underline"
+								>
 									Support me on Patreon
 									<ExternalLink size={14} className="inline-block ml-1 mb-1" />
-								</a>&nbsp;
-								or subscribe by email below.
+								</a>
+								&nbsp;or subscribe by email below.
 							</p>
 						</div>
 						<SubscribeInline doc={subscribeInlineDoc} />
