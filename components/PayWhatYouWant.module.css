@@ -11,7 +11,7 @@
 }
 
 .main button a {
-  @apply dark:text-white;
+  @apply text-white;
 }
 
 .form {

@@ -111,13 +111,13 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
 				{free || paymentIntent ? (
 					<div className="space-y-6">
 						{paymentIntent && (
-							<p className="text-lg font-semibold text-green-600">
-								Thank you for your support!
+							<p className="text-lg font-semibold">
+								Thanks for your support!
 							</p>
 						)}
 						<div>
 							<p className="mb-4">
-								Enjoy the best quality version of the sketch I have:
+								Here's a high resolution version of the sketch:
 							</p>
 							<button className="btn-primary inline-block hover:brightness-110 dark:hover:brightness-125 transition-all duration-200 transform hover:scale-105">
 								<a
