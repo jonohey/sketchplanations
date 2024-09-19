@@ -126,6 +126,9 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
 									rel="noreferrer"
 									target="_blank"
 									className="flex items-center"
+									onClick={() => {
+										track('Downloaded-sketch', { sketch: `${sketchplanationTitle}` });
+									}}
 								>
 									<Download size={18} className="mr-2" />
 									Download {sketchplanationTitle}
