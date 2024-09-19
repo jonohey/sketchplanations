@@ -10,6 +10,10 @@
   @apply text-blue;
 }
 
+.main button a {
+  @apply text-white;
+}
+
 .form {
   @apply -m-2 mt-3;
 }
