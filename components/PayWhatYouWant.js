@@ -117,7 +117,7 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
 						)}
 						<div>
 							<p className="mb-4">
-								Here's a high resolution version of the sketch:
+								Here&apos;s a high resolution version of the sketch:
 							</p>
 							<button className="btn-primary inline-block hover:brightness-110 dark:hover:brightness-125 transition-all duration-200 transform hover:scale-105">
 								<a
