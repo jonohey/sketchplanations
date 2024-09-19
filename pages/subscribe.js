@@ -1,3 +1,4 @@
+import { track } from "@vercel/analytics";
 import Page from "components/Page";
 import { pageTitle } from "helpers";
 import Head from "next/head";
@@ -25,6 +26,12 @@ const Subscribe = ({ subscribeDocument, subscribedDocument }) => {
 				email,
 			}),
 		});
+
+		try {
+			track('Subscribe', { source: 'subscribe-page', pageUrl: window.location.pathname });
+		} catch (error) {
+			console.error('Failed to send Vercel analytics event:', error);
+		}
 
 		setSubmitted(true);
 		setProcessing(false);
