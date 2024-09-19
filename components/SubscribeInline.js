@@ -1,3 +1,4 @@
+import { track } from "@vercel/analytics";
 import { sendGTMEvent } from "gtm";
 import { useState } from "react";
 
@@ -33,6 +34,12 @@ const SubscribeInline = ({ doc }) => {
 				data: "inline",
 			});
 		} catch (e) {} // eslint-disable-line no-empty
+
+		try {
+			track('Subscribe', { source: 'inline-subscribe', pageUrl: window.location.pathname });
+		} catch (error) {
+			console.error('Failed to send Vercel analytics event:', error);
+		}
 
 		setSubmitted(true);
 		setProcessing(false);
