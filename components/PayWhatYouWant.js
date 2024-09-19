@@ -1,4 +1,5 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { track } from "@vercel/analytics";
 import { Download, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
