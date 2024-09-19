@@ -1,4 +1,5 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { track } from "@vercel/analytics";
 import { Download, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -126,6 +127,9 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
 									rel="noreferrer"
 									target="_blank"
 									className="flex items-center"
+									onClick={() => {
+										track('Downloaded-sketch', { sketch: `${sketchplanationTitle}` });
+									}}
 								>
 									<Download size={18} className="mr-2" />
 									Download {sketchplanationTitle}
