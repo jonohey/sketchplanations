@@ -115,7 +115,7 @@ const TaggedSketchplanations = ({ tags, excludeUid }) => {
 									</Swiper>
 								</div>
 								<div className={styles.seeAllLink}>
-                  					<FancyLink href={`/categories/${tag.slug}`}>
+									<FancyLink href={`/categories/${tag.slug}`}>
 										All {humanizeTag(tag.slug)} sketches &raquo;
 									</FancyLink>
 								</div>
