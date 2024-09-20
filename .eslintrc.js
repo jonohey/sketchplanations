@@ -25,6 +25,7 @@ module.exports = {
 				ignore: ["jsx"],
 			},
 		],
+		"react/no-unescaped-entities": ['error', { forbid: ['\'', '"'] }],
 	},
 	settings: {
 		"import/core-modules": ["styled-jsx/css"],
