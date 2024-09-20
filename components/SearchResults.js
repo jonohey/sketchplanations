@@ -6,18 +6,34 @@ import styles from "./SearchResults.module.css";
 import { isPresent } from "helpers";
 import useSearch from "hooks/useSearch";
 
+import { Lightbulb, Shuffle } from "lucide-react";
+import FancyLink from "./FancyLink";
 import SketchplanationsGrid from "./SketchplanationsGrid";
 import Tags from "./Tags";
-import FancyLink from "./FancyLink";
-import { Lightbulb } from "lucide-react";
-import { Shuffle } from "lucide-react";
 
 const loadingMessages = [
 	"Finding some spectacular sketches…",
 	"Sketching up a storm…",
 	"Searching the archives…",
 	"Let me find that for you…",
+	"Flicking through the catalogue…",
 	"Where did I put that sketch…",
+	"I know it's here somewhere…",
+	"Sifting through the vaults…",
+	"Hmm, tum, tum. What did I do with that sketch?…",
+	"Back in a jiffy…",
+	"One does not simply walk into the sketch…", // Boromir
+	"On a noble quest for the Holy Sketch…", // Holy Grail
+	"Just keep searching, just keep searching…", // Finding Dory
+	"Just one more thing…about that sketch we're looking for…", // Colombo
+	"Ze little grey cells are working on it, mon ami…", // Poirot
+	"This sketch ain't going to find itself, but I will…", // Sam Spade
+	"The streets are mean, but we'll find your sketch…", // Philip Marlowe
+	"The game is afoot, we'll have it soon, Watson…", // Sherlock
+	"It's elementary, the sketch can't hide…", // Sherlock
+	"Ah, the case of the missing sketch. On it…", // Sherlock
+	"My pipe Watson—this search may take a moment…", // Sherlock
+	"No time for half measures, Watson, they need that sketch…", // Sherlock
 ];
 
 const randomLoadingMessage = () => {
