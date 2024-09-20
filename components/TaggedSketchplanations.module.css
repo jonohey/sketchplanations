@@ -97,8 +97,13 @@
   @apply block rounded overflow-hidden bg-paper translate-x-0 hover:-translate-x-1 relative hover:z-20 transition-all shadow-paperDarker shadow-sm hover:shadow-lg;
 }
 
+.seeAllLink {
+  @apply mt-2 text-left;
+}
+
 .header,
-.tabsList {
+.tabsList,
+.seeAllLink {
   padding-left: var(--edgeInset);
   padding-right: var(--edgeInset);
 }
