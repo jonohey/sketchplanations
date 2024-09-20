@@ -93,7 +93,7 @@ const SketchplanationPage = ({
 	// const [randomTitle, setRandomTitle] = useState("");
 	const randomHandle = useRandomHandle([uid]);
 
-	const publishedText = humanizePublishedDate(publishedAt);
+	const publishedText = humanizePublishedDate(publishedAt, { showYear: true });
 
 	const commonProps = {
 		title,
@@ -252,7 +252,8 @@ const SketchplanationPage = ({
 							>
 								<RichText field={body} />
 								<div className={styles["published-at"]}>
-									Published <time dateTime={publishedAt}>{publishedText}</time>
+									{publishedText !== "✨ Latest" && "Published "}
+									<time dateTime={publishedAt}>{publishedText}</time>
 								</div>
 							</div>
 							{/* <ul className={styles.tags}>

@@ -131,7 +131,7 @@ const addApostrophes = (str) => {
 
 export const humanizeTag = (tag) => addApostrophes(humanizeString(tag));
 
-export const humanizePublishedDate = (publishedAt) => {
+export const humanizePublishedDate = (publishedAt, { showYear = false } = {}) => {
 	const publishedDate = new Date(publishedAt);
 	const currentDate = new Date();
 
@@ -155,9 +155,9 @@ export const humanizePublishedDate = (publishedAt) => {
 	const month = months[publishedDate.getMonth()];
 	const year = publishedDate.getFullYear();
 
-	return currentDate.getFullYear() === year
-		? `${day} ${month}`
-		: `${day} ${month} ${year}`;
+	return showYear || currentDate.getFullYear() !== year
+		? `${day} ${month} ${year}`
+		: `${day} ${month}`;
 };
 
 // Fisher-Yates shuffle algorithm
