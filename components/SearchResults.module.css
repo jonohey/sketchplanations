@@ -29,7 +29,8 @@
 }
 
 .loading-indicator {
-  @apply flex items-center gap-x-3 px-6 pointer-events-none text-textSubdued;
+  @apply flex flex-row items-center justify-center h-full text-center px-6 pointer-events-none text-textSubdued;
+  gap: 0.5rem;
 }
 
 .loading-indicator svg {
