@@ -139,7 +139,7 @@ const SearchResults = () => {
 								>
 									<span className="inline-flex items-center gap-2">
 										<Lightbulb size={16} />
-										Let me know what I'm missing
+										Let me know what I&apos;m missing
 									</span>
 								</FancyLink>
 							</p>
