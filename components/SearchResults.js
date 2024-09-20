@@ -41,7 +41,7 @@ const randomLoadingMessage = () => {
 	return loadingMessages[index];
 };
 
-const MIN_LOADING_TIME = 1100;
+const MIN_LOADING_TIME = 1000;
 
 const SearchResults = () => {
 	const { initialResults, results, tagResults, called, busy } = useSearch();
