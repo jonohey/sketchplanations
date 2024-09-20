@@ -6,6 +6,7 @@ import { RoughNotation } from "react-rough-notation";
 import { FreeMode, Mousewheel } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import FancyLink from "./FancyLink";
 import SketchplanationCard from "./SketchplanationCard";
 import styles from "./TaggedSketchplanations.module.css";
 
@@ -112,6 +113,11 @@ const TaggedSketchplanations = ({ tags, excludeUid }) => {
 											</SwiperSlide>
 										))}
 									</Swiper>
+								</div>
+								<div className={styles.seeAllLink}>
+                  					<FancyLink href={`/categories/${tag.slug}`}>
+										All {humanizeTag(tag.slug)} sketches &raquo;
+									</FancyLink>
 								</div>
 							</TabPanel>
 						))}
