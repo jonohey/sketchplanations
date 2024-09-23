@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import { motion } from "framer-motion";
-import { Menu } from "lucide-react";
-import { Search } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
@@ -15,6 +14,7 @@ import Navigation from "components/Navigation";
 import useSearch from "hooks/useSearch";
 
 import Context from "context";
+import Cards from "./Cards";
 import KeyboardShortcut from "./KeyboardShortcut";
 
 const Header = () => {
@@ -129,6 +129,9 @@ const Header = () => {
 					)}
 				>
 					<Navigation />
+					<div className={styles.cards}>
+						<Cards />
+					</div>
 				</div>
 				<div className={styles.divider} />
 				<div className={styles["spacer-left"]} />
