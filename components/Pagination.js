@@ -1,9 +1,8 @@
-import styles from "./Pagination.module.css";
+import classNames from "classnames";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Fragment } from "react";
 import FancyLink from "./FancyLink";
-import { ChevronRight } from "lucide-react";
-import { ChevronLeft } from "lucide-react";
-import classNames from "classnames";
+import styles from "./Pagination.module.css";
 
 const commonIconProps = {
 	color: "var(--color-blue)",
@@ -65,6 +64,20 @@ const Pagination = ({ currentPage, totalPages, className }) => {
 					</FancyLink>
 				)}
 			</nav>
+
+			<div className="text-center mt-8">
+				<FancyLink href="/search" className={styles.footerLink}>
+					Search
+				</FancyLink>
+				<span className="mx-2">·</span>
+				<FancyLink href="/categories" className={styles.footerLink}>
+					Categories
+				</FancyLink>
+				<span className="mx-2">·</span>
+				<FancyLink href="/archive" className={styles.footerLink}>
+					Archive
+				</FancyLink>
+			</div>
 		</div>
 	);
 };
@@ -94,8 +107,6 @@ function getPageNumbers(currentPage, totalPages) {
 		if (currentPage < totalPages - 3) {
 			pageNumbers.push("…");
 		}
-
-		pageNumbers.push(totalPages);
 	}
 
 	return pageNumbers;
