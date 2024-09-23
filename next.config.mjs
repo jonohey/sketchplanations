@@ -5,7 +5,11 @@ const nextConfig = {
 		largePageDataBytes: 256 * 1000, // 128KB by default
 	},
 	images: {
-		domains: ["images.prismic.io"],
+		remotePatterns: [
+			{
+				hostname: "images.prismic.io",
+			},
+		],
 		// loader: "custom",
 		// loaderFile: "./loader.js",
 	},
