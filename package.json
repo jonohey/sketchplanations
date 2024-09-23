@@ -71,7 +71,7 @@
 		"eslint-plugin-prettier": "^5.2.1",
 		"eslint-plugin-react": "^7.35.2",
 		"node-mailjet": "^6.0.6",
-		"postcss": "^8.4.45",
+		"postcss": "^8.4.47",
 		"postcss-preset-env": "^9.6.0",
 		"prettier": "^3.3.3",
 		"styled-jsx-plugin-postcss": "^4.0.1",
