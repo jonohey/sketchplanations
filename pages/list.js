@@ -58,6 +58,8 @@ const SketchList = ({ initialSketches }) => {
 		}
 	}, [groupedSketches, sortMethod]);
 
+	const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
 	return (
 		<>
 			<Head>
@@ -90,10 +92,16 @@ const SketchList = ({ initialSketches }) => {
 				</div>
 				{sortMethod === 'alphabetical' && (
 					<div id="top" className="flex flex-wrap justify-center gap-2 mb-6 scroll-mt-24">
-						{groupKeys.map(key => (
-							<a key={key} href={`#${key}`} className="text-blue hover:underline">
-								{key}
-							</a>
+						{alphabet.map(letter => (
+							groupedSketches[letter] ? (
+								<a key={letter} href={`#${letter}`} className="text-blue hover:underline">
+									{letter}
+								</a>
+							) : (
+								<span key={letter} className="text-gray-400">
+									{letter}
+								</span>
+							)
 						))}
 					</div>
 				)}
@@ -101,7 +109,7 @@ const SketchList = ({ initialSketches }) => {
 				{groupKeys.map(key => (
 					groupedSketches[key] && (
 						<div key={key} className="mb-12">
-							<h2 id={key} className="text-5xl font-bold mb-4">{key}</h2>
+							<h2 id={key} className="text-5xl font-bold mb-4 scroll-mt-24">{key}</h2>
 							<div className="columns-1 sm:columns-2 lg:columns-3 gap-x-10">
 								{groupedSketches[key].map(sketch => (
 									<Link key={sketch.id} href={`/${sketch.uid}`} className="block mb-3 text-textDefault hover:text-blue">
