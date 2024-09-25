@@ -1,11 +1,11 @@
-import { useState } from "react";
-import Head from "next/head";
-
+import FancyLink from "components/FancyLink";
 import SketchplanationsGrid from "components/SketchplanationsGrid";
-import { pageTitle } from "helpers";
-import { client } from "services/prismic";
 import TextHeader from "components/TextHeader";
+import { pageTitle } from "helpers";
 import { LoaderCircle } from "lucide-react";
+import Head from "next/head";
+import { useState } from "react";
+import { client } from "services/prismic";
 
 const ITEMS_PER_PAGE = 40;
 
@@ -38,6 +38,13 @@ const Archive = ({ initialSketchplanations }) => {
 			</Head>
 			<div className="pt-6 px-6 text-center">
 				<TextHeader>Archive</TextHeader>
+			</div>
+			<div className="text-center mt-8 mb-8">
+				<FancyLink href="/search">Search</FancyLink>
+				<span className="mx-2">·</span>
+				<FancyLink href="/categories">Categories</FancyLink>
+				<span className="mx-2">·</span>
+				<FancyLink href="/list">List</FancyLink>
 			</div>
 			<SketchplanationsGrid prismicDocs={sketchplanations} />
 			{hasMore && (
