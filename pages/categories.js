@@ -1,15 +1,15 @@
+import FancyLink from "components/FancyLink";
 import { sort } from "fast-sort";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import useCookie from "react-use-cookie";
-
 import styles from "./categories.module.css";
 
 import SortButtons from "components/SortButtons";
+import TextHeader from "components/TextHeader";
 import { humanizeTag, pageTitle } from "helpers";
 import { client } from "services/prismic";
-import TextHeader from "components/TextHeader";
 
 const countOccurrences = (arr, val) =>
 	arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
@@ -35,6 +35,13 @@ const Categories = ({ tagsByName, tagsByCount }) => {
 			</Head>
 			<div className="pt-6 px-6 text-center">
 				<TextHeader>Categories</TextHeader>
+			</div>
+			<div className="text-center mt-8 mb-8">
+				<FancyLink href="/search">Search</FancyLink>
+				<span className="mx-2">·</span>
+				<FancyLink href="/archive">Archive</FancyLink>
+				<span className="mx-2">·</span>
+				<FancyLink href="/list">List</FancyLink>
 			</div>
 			<div className="px-6 max-w-md mx-auto">
 				<SortButtons

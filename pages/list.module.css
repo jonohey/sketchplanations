@@ -1,0 +1,16 @@
+/* Default (mobile first) */
+.columns-1 {
+  column-count: 1;
+}
+
+@screen sm {
+  .columns-2 {
+    column-count: 2;
+  }
+}
+
+@screen lg {
+  .columns-3 {
+    column-count: 3;
+  }
+}
