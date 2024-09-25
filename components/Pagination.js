@@ -77,6 +77,10 @@ const Pagination = ({ currentPage, totalPages, className }) => {
 				<FancyLink href="/archive" className={styles.footerLink}>
 					Archive
 				</FancyLink>
+				<span className="mx-2">·</span>
+				<FancyLink href="/list" className={styles.footerLink}>
+					List
+				</FancyLink>
 			</div>
 		</div>
 	);
