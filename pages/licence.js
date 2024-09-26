@@ -9,6 +9,10 @@ const Licence = ({ document }) => {
 			<Head>
 				<title>{pageTitle("Licence")}</title>
 			</Head>
+			<meta
+				name="description"
+				content="How to share and use Sketchplanations considerately. Follow the license terms to help more people find and enjoy the sketches they love."
+			/>
 			<Page document={document} />
 		</>
 	);

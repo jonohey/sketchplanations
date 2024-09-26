@@ -84,11 +84,12 @@ const SearchResults = () => {
 		return (
 			<>
 				<div className="text-center mt-8 mb-8">
-						<FancyLink href="/categories">Categories</FancyLink>
-						<span className="mx-2">·</span>
-						<FancyLink href="/archive">Archive</FancyLink>
-						<span className="mx-2">·</span>
-						<FancyLink href="/list">List</FancyLink>
+					<p className="text-textSubdued text-sm mb-2">More ways to explore</p>
+					<FancyLink href="/categories">Categories</FancyLink>
+					<span className="mx-2">·</span>
+					<FancyLink href="/archive">Archive</FancyLink>
+					<span className="mx-2">·</span>
+					<FancyLink href="/list">List</FancyLink>
 				</div>
 				<div className={styles["search-results"]}>				
 					<SketchplanationsGrid prismicDocs={initialResults} />

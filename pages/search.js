@@ -1,13 +1,10 @@
 import Head from "next/head";
-
 import styles from "./search.module.css";
 
 import SearchForm from "components/SearchForm";
 import SearchResults from "components/SearchResults";
 import { isPresent, pageTitle } from "helpers";
 import useSearch from "hooks/useSearch";
-
-// import { client } from 'services/prismic'
 
 const Search = () => {
 	const { query, setQuery, clear, busy } = useSearch();
@@ -20,9 +17,14 @@ const Search = () => {
 				<title>{pageTitle(dynamicPageTitle)}</title>
 				<meta
 					name="description"
-					content="Search the archive of 800+ sketches. Search or browse popular topics"
+					content="Search and explore hundreds of simple, clear explanations on science, creativity, psychology, and more. Find your favourite Sketchplanations in seconds."
 				/>
 			</Head>
+			<header className="pt-6 px-4">
+				<div className="prose mx-auto text-center">
+					<h1 className="text-2xl">Search</h1>
+				</div>
+			</header>
 			<div className={styles.root}>
 				<div className={styles["search-form"]}>
 					<SearchForm
@@ -38,25 +40,10 @@ const Search = () => {
 						autoFocus
 					/>
 				</div>
-				{/* <SearchResults initialResults={initialResults} /> */}
 				<SearchResults />
 			</div>
 		</>
 	);
 };
-
-// export async function getStaticProps() {
-//   const initialResults = await client.getAllByType('sketchplanation', {
-//     orderings: [
-//       {
-//         field: 'my.sketchplanation.published_at',
-//         direction: 'desc',
-//       },
-//     ],
-//     limit: 3,
-//   })
-
-//   return { props: { initialResults } }
-// }
 
 export default Search;

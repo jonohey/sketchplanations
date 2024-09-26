@@ -66,12 +66,15 @@ const SketchList = ({ initialSketches }) => {
 				<title>{pageTitle("List of sketchplanations")}</title>
 				<meta
 					name="description"
-					content="Browse the full list of all sketchplanations by title or date"
+					content="Browse the full list of all Sketchplanations, organized A-Z or by date. Explore titles that span over a decade of sketches, offering clear and simple explanations on a wide range of topics."
 				/>
 			</Head>
 			<div className="max-w-7xl mx-auto px-5 py-6">
 				<div className="pt-6 px-6 text-center">
 					<TextHeader>List of sketchplanations</TextHeader>
+          <p className="prose mx-auto mt-4 mb-8 max-w-2xl text-textSubdued">
+            Explore the complete list of all Sketchplanations, organized by title or date.
+          </p>
 				</div>
 				<div className="text-center mt-8 mb-8">
 					<FancyLink href="/search">Search</FancyLink>

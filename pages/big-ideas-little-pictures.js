@@ -10,7 +10,7 @@ const Book = ({ document }) => {
 				<title>{pageTitle("Big Ideas Little Pictures by Jono Hey")}</title>
 				<meta
 					name="description"
-					content="Buy Big Ideas Little Pictures the book of sketchplanations by Jono Hey"
+					content="Discover 'Big Ideas, Little Pictures' by Jono Hey—a delightful book that simplifies complex ideas with clear illustrations. Explore reviews, FAQs, see what's inside, and find out how to order your copy."
 				/>
 			</Head>
 			<Page document={document} />

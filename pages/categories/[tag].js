@@ -2,7 +2,9 @@ import * as prismic from "@prismicio/client";
 import SketchplanationsGrid from "components/SketchplanationsGrid";
 import TextHeader from "components/TextHeader";
 import { humanizeTag, pageTitle } from "helpers";
+import { ChevronRight } from "lucide-react";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { client } from "services/prismic";
 
@@ -18,17 +20,46 @@ const Tag = ({ tag, sketchplanations }) => {
 	return (
 		<>
 			<Head>
-				<title>{pageTitle(`Category: ${tag}`)}</title>
+				<title>{pageTitle(`${tag} sketches`)}</title>
 				<meta
 					name="description"
-					content={`Sketchplanations from the ${tag} category`}
+					content={`Discover sketches, drawings, illustrations, and pictures that explain key ideas related to ${tag}. Explore visual explanations that make understanding the topic of ${tag} simple.`}
 				/>
+				<script type="application/ld+json">
+					{JSON.stringify({
+						"@context": "https://schema.org",
+						"@type": "BreadcrumbList",
+						"itemListElement": [{
+							"@type": "ListItem",
+							"position": 1,
+							"name": "Categories",
+							"item": "https://sketchplanations.com/categories"
+						},{
+							"@type": "ListItem",
+							"position": 2,
+							"name": `${tag} sketches`,
+							"item": `https://sketchplanations.com/categories/${router.query.tag}`
+						}]
+					})}
+				</script>
 			</Head>
 			<div className={styles.root} key={tag}>
-				<span className="block mb-3 text-xl font-semibold text-center">
-					Category
-				</span>
-				<TextHeader className={styles.header}>{tag}</TextHeader>
+				<nav className="text-sm mb-4 px-6">
+					<div className="flex items-center">
+						<Link href="/categories" className="text-blue-600 hover:underline">All categories</Link>
+						<ChevronRight className="mx-1" size={16} />
+						<span className="text-gray-600">{tag}</span>
+					</div>
+				</nav>
+				<div className="pt-2 px-6 text-center">
+					<TextHeader className={styles.header}>{tag} sketches</TextHeader>
+					<p className="prose mx-auto mt-2 sm:mt-3 mb-8 max-w-2xl text-textSubdued">
+						Explore sketches, drawings, and illustrations that simplify ideas related to <em>{tag}</em>.
+						<span className="hidden md:inline">
+							{" "}Discover the frameworks, principles, and tips I've sketched to make <em>{tag}</em> topics easy to understand and share.
+						</span>
+					</p>
+				</div>
 				<SketchplanationsGrid prismicDocs={sketchplanations} />
 			</div>
 		</>
