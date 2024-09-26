@@ -1,0 +1,48 @@
+.masthead {
+  @apply mx-auto my-6 px-8 flex flex-col items-center text-center text-textSubdued;
+}
+
+.slogan {
+  @apply sm:text-lg;
+}
+
+.root {
+  @apply grid gap-y-12 pb-12;
+
+  --edgeInset: 1.5em;
+
+  @screen md {
+    --edgeInset: 2em;
+  }
+
+  @screen lg {
+    --edgeInset: 3em;
+  }
+}
+
+.sketchplanation {
+  @apply mx-auto;
+  /* @apply mx-auto max-w-6xl; */
+  /* padding-left: var(--edgeInset); */
+  /* padding-right: var(--edgeInset); */
+}
+
+/* .sketchplanation > * {
+  @apply grid grid-cols-2 max-w-none gap-x-12 items-center;
+} */
+
+.section {
+  @apply border-t border-border pt-12;
+  padding-left: var(--edgeInset);
+  padding-right: var(--edgeInset);
+}
+
+/* .sketchplanations {
+  @apply grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 px-5 pb-12 justify-items-center;
+}
+
+@screen lg {
+  .sketchplanations {
+    @apply pb-12;
+  }
+} */
