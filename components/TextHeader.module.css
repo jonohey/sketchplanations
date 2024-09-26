@@ -1,5 +1,5 @@
 .root h1 {
-  @apply text-2xl mb-10 mx-auto;
+  @apply text-2xl mb-4 sm:mb-6 mx-auto;
   font-weight: 500;
 }
 
