@@ -42,6 +42,30 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
 						</button>
 					</div>
 					<div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg border border-gray-300 dark:border-gray-700">
+						<p className="mb-2">
+							Enjoying the sketches?
+						</p>
+						<ul className="list-disc list-inside space-y-2 mb-2">
+							<li>
+								<a
+									href="https://www.patreon.com/sketchplanations"
+									target="_blank"
+									rel="noreferrer"
+									className="text-blue-600 hover:underline"
+								>
+									Support me on Patreon
+									<ExternalLink size={14} className="inline-block ml-1 mb-1" />
+								</a>
+							</li>
+							<li><a
+									href="/big-ideas-little-pictures"
+									className="text-blue-600 hover:underline"
+								>
+									Buy the book
+								</a>
+							</li>
+							<li>or subscribe by email below</li>
+						</ul>
 						<p>
 							Commercial usage? Please see the{" "}
 							<a
@@ -53,19 +77,6 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
 								licence
 								<ExternalLink size={14} className="inline-block ml-1 mb-1" />
 							</a>
-						</p>
-						<p>
-							Enjoying the sketches?&nbsp;
-							<a
-								href="https://www.patreon.com/sketchplanations"
-								target="_blank"
-								rel="noreferrer"
-								className="text-blue-600 hover:underline"
-							>
-								Support me on Patreon
-								<ExternalLink size={14} className="inline-block ml-1 mb-1" />
-							</a>
-							&nbsp;or subscribe by email below
 						</p>
 					</div>
 					<SubscribeInline doc={subscribeInlineDoc} />
