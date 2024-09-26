@@ -56,7 +56,7 @@ const Tag = ({ tag, sketchplanations }) => {
 					<p className="prose mx-auto mt-2 sm:mt-3 mb-8 max-w-2xl text-textSubdued">
 						Explore sketches, drawings, and illustrations that simplify ideas related to <em>{tag}</em>.
 						<span className="hidden md:inline">
-							{" "}Discover the frameworks, principles, and tips I've sketched to make <em>{tag}</em> topics easy to understand and share.
+							{" "}Discover the frameworks, principles, and tips I&apos;ve sketched to make <em>{tag}</em> topics easy to understand and share.
 						</span>
 					</p>
 				</div>
