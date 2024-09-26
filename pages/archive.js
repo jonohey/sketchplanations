@@ -33,11 +33,14 @@ const Archive = ({ initialSketchplanations }) => {
 				<title>{pageTitle("Archive")}</title>
 				<meta
 					name="description"
-					content="The full scrollable archive of Sketchplanations. Happy scrolling!"
+					content="Browse the full visual archive of over a decade of Sketchplanations. Discover simple, clear sketches that explain complex ideas, and explore topics that inspire your curiosity."
 				/>
 			</Head>
 			<div className="pt-6 px-6 text-center">
 				<TextHeader>Archive</TextHeader>
+				<p className="prose mx-auto mt-4 mb-8 max-w-2xl text-textSubdued">
+					Explore the full visual archive of over a decade of Sketchplanations and discover sketches that interest and inspire you.
+				</p>
 			</div>
 			<div className="text-center mt-8 mb-8">
 				<FancyLink href="/search">Search</FancyLink>

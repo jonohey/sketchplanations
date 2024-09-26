@@ -10,7 +10,7 @@ const About = ({ document }) => {
 				<title>{pageTitle("About")}</title>
 				<meta
 					name="description"
-					content="Everything you wanted to know about why Sketchplanations exists, how it’s made and how you can support it."
+					content="Learn about the inspiration behind Sketchplanations, the process of creating weekly sketches, and how you can support the project."
 				/>
 			</Head>
 			<Page document={document} />

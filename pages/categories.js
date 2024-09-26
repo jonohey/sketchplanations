@@ -30,11 +30,14 @@ const Categories = ({ tagsByName, tagsByCount }) => {
 				<title>{pageTitle("Categories")}</title>
 				<meta
 					name="description"
-					content="The most common topics and themes of Sketchplanations"
+					content="Explore Sketchplanations by topic to discover clear, simple explanations on subjects like science, creativity, psychology, and more. Find sketches and illustrations that explain the topics you care about most."
 				/>
 			</Head>
 			<div className="pt-6 px-6 text-center">
 				<TextHeader>Categories</TextHeader>
+				<p className="prose mx-auto mt-4 mb-8 max-w-2xl text-textSubdued">
+					Browse topics to find clear, simple explanations through sketches and illustrations, covering a wide range of subjects from everyday concepts to complex ideas.
+				</p>
 			</div>
 			<div className="text-center mt-8 mb-8">
 				<FancyLink href="/search">Search</FancyLink>
