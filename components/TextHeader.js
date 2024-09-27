@@ -51,9 +51,7 @@ const TextHeader = ({ as = "h1", children, ...props }) => {
 					padding={2}
 					type="underline"
 				>
-					<span style={{ whiteSpace: 'nowrap', position: 'relative', zIndex: 1 }}>
-						{children}
-					</span>
+					{children}
 				</RoughNotation>
 			)}
 		</div>
