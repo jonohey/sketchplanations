@@ -67,9 +67,9 @@ const Tag = ({ tag, sketchplanations }) => {
 				<div className="pt-2 px-6 text-center">
 					<TextHeader className={styles.header}>{tag} sketches</TextHeader>
 					<p className="prose mx-auto mt-2 sm:mt-3 mb-8 max-w-2xl text-textSubdued">
-						Explore sketches, drawings, and illustrations that simplify ideas related to <em>{tag}</em>.
+						Explore sketches, drawings, and illustrations that simplify ideas related to {tag}.
 						<span className="hidden md:inline">
-							{" "}Discover the frameworks, principles, and tips I&apos;ve sketched to make <em>{tag}</em> topics easy to understand and share.
+							{" "}Discover the frameworks, principles, and tips I&apos;ve sketched to make {tag} topics easy to understand and share.
 						</span>
 					</p>
 				</div>
