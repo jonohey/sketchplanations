@@ -25,38 +25,51 @@ const Tag = ({ tag, sketchplanations }) => {
 					name="description"
 					content={`Discover sketches, drawings, illustrations, and pictures that explain key ideas related to ${tag}. Explore visual explanations that make understanding the topic of ${tag} simple.`}
 				/>
-				<script type="application/ld+json">
-					{JSON.stringify({
-						"@context": "https://schema.org",
-						"@type": "BreadcrumbList",
-						"itemListElement": [{
-							"@type": "ListItem",
-							"position": 1,
-							"name": "Categories",
-							"item": "https://sketchplanations.com/categories"
-						},{
-							"@type": "ListItem",
-							"position": 2,
-							"name": `${tag} sketches`,
-							"item": `https://sketchplanations.com/categories/${router.query.tag}`
-						}]
-					})}
-				</script>
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify({
+							"@context": "https://schema.org",
+							"@type": "BreadcrumbList",
+							"itemListElement": [
+								{
+									"@type": "ListItem",
+									"position": 1,
+									"name": "Home",
+									"item": "https://sketchplanations.com/"
+								},
+								{
+									"@type": "ListItem",
+									"position": 2,
+									"name": "Categories",
+									"item": "https://sketchplanations.com/categories"
+								},{
+									"@type": "ListItem",
+									"position": 3,
+									"name": `${tag}`,
+									"item": `https://sketchplanations.com/categories/${router.query.tag}`
+								},
+							],
+						}),
+					}}
+				/>
 			</Head>
 			<div className={styles.root} key={tag}>
 				<nav className="text-sm mb-4 px-6">
 					<div className="flex items-center">
-						<Link href="/categories" className="text-blue-600 hover:underline">All categories</Link>
+						<Link href="/" className="text-blue-600 hover:underline">Home</Link>
 						<ChevronRight className="mx-1" size={16} />
-						<span className="text-gray-600">{tag}</span>
+						<Link href="/categories" className="text-blue-600 hover:underline">Categories</Link>
+						<ChevronRight className="mx-1" size={16} />
+						<span className="text-gray-600 dark:text-gray-300">{tag}</span>
 					</div>
 				</nav>
 				<div className="pt-2 px-6 text-center">
 					<TextHeader className={styles.header}>{tag} sketches</TextHeader>
 					<p className="prose mx-auto mt-2 sm:mt-3 mb-8 max-w-2xl text-textSubdued">
-						Explore sketches, drawings, and illustrations that simplify ideas related to <em>{tag}</em>.
+						Explore sketches, drawings, and illustrations that simplify ideas related to {tag}.
 						<span className="hidden md:inline">
-							{" "}Discover the frameworks, principles, and tips I&apos;ve sketched to make <em>{tag}</em> topics easy to understand and share.
+							{" "}Discover the frameworks, principles, and tips I&apos;ve sketched to make {tag} topics easy to understand and share.
 						</span>
 					</p>
 				</div>
