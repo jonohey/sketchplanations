@@ -61,7 +61,7 @@
 		"vanilla-cookieconsent": "v3.0.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.8.3",
+		"@biomejs/biome": "^1.9.3",
 		"@fullhuman/postcss-purgecss": "^5.0.0",
 		"@tailwindcss/typography": "^0.5.15",
 		"autoprefixer": "^10.4.20",
