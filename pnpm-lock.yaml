@@ -144,8 +144,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2(react@18.3.1)
       stripe:
-        specifier: ^11.17.0
-        version: 11.18.0
+        specifier: ^17.0.0
+        version: 17.0.0
       swiper:
         specifier: ^11.1.12
         version: 11.1.12
@@ -4259,8 +4259,8 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
-  stripe@11.18.0:
-    resolution: {integrity: sha512-OUA32uhNoSoM6wOodyFbV+3IBCoO140uzdXmBArQ0S88D4EbH91xl2v+Ml1sKalcFKUBadHLeHfU/p9AbsOfGw==}
+  stripe@17.0.0:
+    resolution: {integrity: sha512-URKpnjH2O+OWxhvXLIaEIaAkp2fQvqITm/3zJS0a3nGCREjH3qJYxmGowngA46Qu1x2MumNL3Y/OdY6uzIhpCQ==}
     engines: {node: '>=12.*'}
 
   styled-jsx-plugin-postcss@4.0.1:
@@ -9533,7 +9533,7 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  stripe@11.18.0:
+  stripe@17.0.0:
     dependencies:
       '@types/node': 22.5.4
       qs: 6.13.0
