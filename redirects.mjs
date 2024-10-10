@@ -76,6 +76,12 @@ export default [
 	},
 	{
 		source:
+			"/great-britain-the-united-kingdom-and-the-british-isles-whats-the-difference",
+		destination: "/great-britain-the-united-kingdom-whats-the-difference",
+		permanent: true,
+	},
+	{
+		source:
 			"/post/630439800088985600/the-4-horsemen-of-relationship-apocalypse-john",
 		destination: "/the-4-horsemen-of-relationship-apocalypse",
 		permanent: true,
