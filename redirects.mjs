@@ -2,12 +2,12 @@ export default [
 	{
 		source: "/explore",
 		destination: "/search",
-		permanent: false,
+		permanent: true,
 	},
 	{
 		source: "/podcast",
 		destination: "https://podcast.sketchplanations.com/",
-		permanent: false,
+		permanent: true,
 	},
 	{
 		source: "/book",
@@ -52,22 +52,22 @@ export default [
 	{
 		source: "/tags",
 		destination: "/categories",
-		permanent: false,
+		permanent: true,
 	},
 	{
 		source: "/tags/:tag",
 		destination: "/categories/:tag",
-		permanent: false,
+		permanent: true,
 	},
 	{
 		source: "/sketchplanations",
 		destination: "/",
-		permanent: false,
+		permanent: true,
 	},
 	{
 		source: "/sketchplanator",
 		destination: "/",
-		permanent: false,
+		permanent: true,
 	},
 	{
 		source: "/microadventures",
