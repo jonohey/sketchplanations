@@ -24,7 +24,7 @@ const Home = ({ sketchplanations, subscribeInlineDoc }) => {
 					<h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
 						Explaining the world one sketch at a time
 					</h1>
-					<p className="lead text-base sm:text-lg lg:text-xl mb-6 sm:mb-8">
+					<p className="lead text-base sm:text-lg lg:text-xl mb-2">
 						Simplifying complex ideas through fun and insightful sketches.
 						<span className="hidden sm:inline">{' '}
 							Explore topics from science, creativity, psychology, and more
