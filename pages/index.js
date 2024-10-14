@@ -19,13 +19,17 @@ const Home = ({ sketchplanations, subscribeInlineDoc }) => {
 					content="Sketchplanations explains the world one sketch at a time. Discover clear, simple sketches that break down ideas from science, creativity, psychology, and more. Explore recent sketches, search for topics, and share your favourites. Start here."
 				/>
 			</Head>
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-				<div className="prose lg:prose-xl mx-auto text-center">
-					<h1>
+			<div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+				<div className="prose sm:prose-lg lg:prose-xl mx-auto text-center">
+					<h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
 						Explaining the world one sketch at a time
 					</h1>
-					<p className="lead">
-						Sketchplanations makes complex ideas simple with clear, insightful sketches. Explore topics from science, creativity, psychology, and beyond explained in pictures.
+					<p className="lead text-base sm:text-lg lg:text-xl mb-2">
+						Simplifying complex ideas through fun and insightful sketches.
+						<span className="hidden sm:inline">{' '}
+							Explore topics from science, creativity, psychology, and more
+							explained in pictures.
+						</span>
 					</p>
 				</div>
 			</div>
