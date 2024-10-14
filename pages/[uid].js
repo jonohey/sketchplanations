@@ -76,6 +76,12 @@ const SketchplanationPage = ({
 	olderUid,
 	newerUid,
 }) => {
+	const router = useRouter();
+	// This checks for ref= query param in the url and sets the noindex meta tag if it's present
+	// On recommendation from SEO expert.
+	const shouldNoIndex = router.query.ref !== undefined;
+	const robotsContent = `max-image-preview:large${shouldNoIndex ? ', noindex, nofollow' : ''}`;
+
 	const {
 		data: {
 			image,
@@ -102,8 +108,6 @@ const SketchplanationPage = ({
 		redbubbleLinkUrl,
 		onViewLicence: () => setLicenceModalOpen(true),
 	};
-
-	const router = useRouter();
 
 	useHotkeys(
 		"right, k",
@@ -148,7 +152,7 @@ const SketchplanationPage = ({
 		<Fragment key={uid}>
 			<Head>
 				<title>{pageTitle(title)}</title>
-				<meta name="robots" content="max-image-preview:large" />
+				<meta name="robots" content={robotsContent} />
 				<meta
 					name="description"
 					content={truncate(prismicH.asText(body), 160)}
