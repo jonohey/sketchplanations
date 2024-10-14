@@ -10,6 +10,7 @@ const Search = () => {
 	const { query, setQuery, clear, busy } = useSearch();
 
 	const dynamicPageTitle = isPresent(query) ? `Search: ${query}` : "Search";
+	const queryIsPresent = isPresent(query);
 
 	return (
 		<>
@@ -19,6 +20,9 @@ const Search = () => {
 					name="description"
 					content="Search and explore hundreds of simple, clear explanations on science, creativity, psychology, and more. Find your favourite Sketchplanations in seconds."
 				/>
+				{queryIsPresent && (
+					<meta name="robots" content="noindex, nofollow" />
+				)}
 			</Head>
 			<header className="pt-6 px-4">
 				<div className="prose mx-auto text-center">
