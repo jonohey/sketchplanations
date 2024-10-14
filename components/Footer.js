@@ -8,8 +8,10 @@ import SubscribeInline from "./SubscribeInline";
 import styles from "./Footer.module.css";
 
 const Nav = () => (
-	<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-9 lg:text-center gap-x-12 gap-y-2 items-start">
+	<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-10 lg:text-center gap-x-12 gap-y-2 items-start">
 		<FancyLink href="/">Home</FancyLink>
+		<FancyLink href="/search">Search</FancyLink>
+		<FancyLink href="/categories">Categories</FancyLink>
 		<FancyLink
 			href="/big-ideas-little-pictures"
 			onClick={() => {
@@ -18,6 +20,7 @@ const Nav = () => (
 		>
 				Book!
 		</FancyLink>
+		<FancyLink href="/subscribe">Subscribe</FancyLink>
 		<FancyLink
 			href="https://podcast.sketchplanations.com"
 			target="_blank"
@@ -31,8 +34,6 @@ const Nav = () => (
 				<ExternalLink size={16} className="inline" />
 			</span>
 		</FancyLink>
-		<FancyLink href="/subscribe">Subscribe</FancyLink>
-		<FancyLink href="/about">About</FancyLink>
 		<FancyLink
 			href="https://www.redbubble.com/people/sketchplanator/explore?asc=u&page=1&sortOrder=top%20selling"
 			target="_blank"
@@ -46,7 +47,7 @@ const Nav = () => (
 				<ExternalLink size={16} className="inline" />
 			</span>
 		</FancyLink>
-		<FancyLink href="/categories">Categories</FancyLink>
+		<FancyLink href="/about">About</FancyLink>
 		<FancyLink href="/archive">Archive</FancyLink>
 		<FancyLink href="/licence">Licence</FancyLink>
 	</div>
