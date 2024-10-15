@@ -8,6 +8,7 @@ const Subscribed = ({ document }) => {
 		<>
 			<Head>
 				<title>{pageTitle("Subscribed")}</title>
+				<link rel="canonical" href="https://www.sketchplanations.com/subscribed" />
 			</Head>
 			<Page document={document} />
 		</>

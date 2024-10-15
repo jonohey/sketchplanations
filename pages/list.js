@@ -68,6 +68,7 @@ const SketchList = ({ initialSketches }) => {
 					name="description"
 					content="Browse the full list of all Sketchplanations, organized A-Z or by date. Explore titles that span over a decade of sketches, offering clear and simple explanations on a wide range of topics."
 				/>
+				<link rel="canonical" href="https://www.sketchplanations.com/list" />
 			</Head>
 			<div className="max-w-7xl mx-auto px-5 py-6">
 				<div className="pt-6 px-6 text-center">
