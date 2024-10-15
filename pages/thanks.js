@@ -12,6 +12,7 @@ const Thanks = ({ document }) => {
 					name="description"
 					content="Sketchplanations exists thanks to the generous patrons and followers who support me making them"
 				/>
+				<link rel="canonical" href="https://www.sketchplanations.com/thanks" />
 			</Head>
 			<Page document={document} />
 		</>

@@ -12,6 +12,7 @@ const Wisdom = ({ document }) => {
 					name="description"
 					content="A collection of wise words and quotes to live by"
 				/>
+				<link rel="canonical" href="https://www.sketchplanations.com/wisdom" />
 			</Head>
 			<Page document={document} />
 		</>
