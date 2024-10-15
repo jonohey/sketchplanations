@@ -152,6 +152,7 @@ const SketchplanationPage = ({
 		<Fragment key={uid}>
 			<Head>
 				<title>{pageTitle(title)}</title>
+				<link rel="canonical" href={`https://www.sketchplanations.com/${uid}`} />
 				<meta name="robots" content={robotsContent} />
 				<meta
 					name="description"
