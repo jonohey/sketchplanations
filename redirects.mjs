@@ -70,7 +70,7 @@ export default [
 		permanent: true,
 	},
 	{
-		source: "/privacy(:?\\?.*)?",
+		source: "/privacy(:?\\?.*)",
 		destination: "/privacy",
 		permanent: true,
 	},
