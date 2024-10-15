@@ -70,7 +70,7 @@ export default [
 		permanent: true,
 	},
 	{
-		source: "/privacy?route=custom_page",
+		source: "/privacy(:?\\?.*)?",
 		destination: "/privacy",
 		permanent: true,
 	},
@@ -462,12 +462,7 @@ export default [
 		permanent: true,
 	},
 	{
-		source: "/post/185787123841/the-continental-axis-hypothesis-jared-diamonds",
-		destination: "/the-continental-axis-hypothesis",
-		permanent: true,
-	},
-	{
-		source: "/post/185787123841/the-continental-axis-hypothesis-jared-diamonds?is_liked_post=1",
+		source: "/post/185787123841/the-continental-axis-hypothesis-jared-diamonds(:?\\?.*)?",
 		destination: "/the-continental-axis-hypothesis",
 		permanent: true,
 	},
