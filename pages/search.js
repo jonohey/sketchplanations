@@ -23,7 +23,7 @@ const Search = () => {
 				{queryIsPresent && (
 					<meta name="robots" content="noindex, nofollow" />
 				)}
-				<link rel="canonical" href="https://www.sketchplanations.com/search" />
+				<link rel="canonical" href="https://sketchplanations.com/search" />
 			</Head>
 			<header className="pt-6 px-4">
 				<div className="prose mx-auto text-center">

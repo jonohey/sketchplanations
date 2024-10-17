@@ -47,7 +47,7 @@ const Subscribe = ({ subscribeDocument, subscribedDocument }) => {
 					name="description"
 					content="Get a new Sketchplanation in your inbox every week"
 				/>
-				<link rel="canonical" href="https://www.sketchplanations.com/subscribe" />
+				<link rel="canonical" href="https://sketchplanations.com/subscribe" />
 			</Head>
 			<Page document={subscribeDocument}>
 				<form onSubmit={handleSubmit}>
