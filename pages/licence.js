@@ -12,7 +12,7 @@ const Licence = ({ document }) => {
 					name="description"
 					content="How to share and use Sketchplanations considerately. Follow the license terms to help more people find and enjoy the sketches they love."
 				/>
-				<link rel="canonical" href="https://www.sketchplanations.com/licence" />
+				<link rel="canonical" href="https://sketchplanations.com/licence" />
 			</Head>
 			<Page document={document} />
 		</>

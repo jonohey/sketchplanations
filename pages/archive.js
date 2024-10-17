@@ -35,7 +35,7 @@ const Archive = ({ initialSketchplanations }) => {
 					name="description"
 					content="Browse the full visual archive of over a decade of Sketchplanations. Discover simple, clear sketches that explain complex ideas, and explore topics that inspire your curiosity."
 				/>
-				<link rel="canonical" href="https://www.sketchplanations.com/archive" />
+				<link rel="canonical" href="https://sketchplanations.com/archive" />
 			</Head>
 			<div className="pt-6 px-6 text-center">
 				<TextHeader>Archive</TextHeader>

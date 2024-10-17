@@ -12,7 +12,7 @@ const About = ({ document }) => {
 					name="description"
 					content="Learn about the inspiration behind Sketchplanations, the process of creating weekly sketches, and how you can support the project."
 				/>
-				<link rel="canonical" href="https://www.sketchplanations.com/about" />
+				<link rel="canonical" href="https://sketchplanations.com/about" />
 			</Head>
 			<Page document={document} />
 		</>
