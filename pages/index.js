@@ -18,7 +18,7 @@ const Home = ({ sketchplanations, subscribeInlineDoc }) => {
 					name="description"
 					content="Sketchplanations explains the world one sketch at a time. Discover clear, simple sketches that break down ideas from science, creativity, psychology, and more. Explore recent sketches, search for topics, and share your favourites. Start here."
 				/>
-				<link rel="canonical" href="https://www.sketchplanations.com" />
+				<link rel="canonical" href="https://sketchplanations.com" />
 			</Head>
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
 				<div className="prose sm:prose-lg lg:prose-xl mx-auto text-center">

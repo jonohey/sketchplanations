@@ -32,7 +32,7 @@ const Categories = ({ tagsByName, tagsByCount }) => {
 					name="description"
 					content="Explore Sketchplanations by topic to discover clear, simple explanations on subjects like science, creativity, psychology, and more. Find sketches and illustrations that explain the topics you care about most."
 				/>
-				<link rel="canonical" href="https://www.sketchplanations.com/categories" />
+				<link rel="canonical" href="https://sketchplanations.com/categories" />
 			</Head>
 			<div className="pt-6 px-6 text-center">
 				<TextHeader>Categories</TextHeader>

@@ -25,7 +25,7 @@ const Tag = ({ tag, sketchplanations }) => {
 					name="description"
 					content={`Discover sketches, drawings, illustrations, and pictures that explain key ideas related to ${tag}. Explore visual explanations that make understanding the topic of ${tag} simple.`}
 				/>
-				<link rel="canonical" href={`https://www.sketchplanations.com/categories/${router.query.tag}`} />
+				<link rel="canonical" href={`https://sketchplanations.com/categories/${router.query.tag}`} />
 				<script
 					type="application/ld+json"
 					dangerouslySetInnerHTML={{
