@@ -4,7 +4,7 @@ import { complement, either, isEmpty, isNil } from "ramda";
 
 import { client } from "services/prismic";
 
-const defaultPageTitle = "Sketchplanations - A weekly explanation in a sketch";
+const defaultPageTitle = "Sketchplanations - Simplifying complex ideas in sketches";
 
 const fulltextDocumentSearch = async (documentType, query) => {
 	if (!query || query === "") return [];
