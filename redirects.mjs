@@ -60,6 +60,11 @@ export default [
 		permanent: true,
 	},
 	{
+		source: "/tagged/:tag",
+		destination: "/categories/:tag",
+		permanent: true,
+	},
+	{
 		source: "/sketchplanations",
 		destination: "/",
 		permanent: true,
