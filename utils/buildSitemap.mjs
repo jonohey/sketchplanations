@@ -49,6 +49,7 @@ async function buildSitemap() {
 	// Home page
 	urls.push({
 		loc: "https://sketchplanations.com/",
+		changefreq: "weekly",
 		lastmod: lastSketchPubDate.toISOString(),
 		priority: "1.00",
 	});
@@ -74,9 +75,34 @@ async function buildSitemap() {
 	// Pages
 	pages.map((page) => {
 		const path = page.replace("pages", "").replace(".js", "");
+		let priority = "0.64"; // Default priority
+
+		// Set specific priorities for certain pages
+		if (path === "/about") {
+			priority = "0.8";
+		} else if (path === "/big-ideas-little-pictures") {
+			priority = "0.8";
+		} else if (path === "/categories") {
+			priority = "0.8";
+		} else if (path === "/subscribe") {
+			priority = "0.8";
+		} else if (path === "/search") {
+			priority = "0.8";
+		} else if (path === "/archive") {
+			priority = "0.7";
+		} else if (path === "/list") {
+			priority = "0.7";
+		} else if (path === "/licence") {
+			priority = "0.3";
+		} else if (path === "/wisdom") {
+			priority = "0.1";
+		} else if (path === "/privacy") {
+			priority = "0.1";
+		}
+
 		urls.push({
 			loc: `https://sketchplanations.com${path}`,
-			priority: "0.64",
+			priority: priority,
 		});
 	});
 
