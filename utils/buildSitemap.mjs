@@ -1,5 +1,5 @@
-import fs from "node:fs";
 import { globby } from "globby";
+import fs from "node:fs";
 import { create } from "xmlbuilder2";
 
 import { client } from "../services/prismic.mjs";
@@ -65,7 +65,7 @@ async function buildSitemap() {
 	// Categories
 	tags.map((tag) => {
 		urls.push({
-			loc: `https://sketchplanations.com/categories/${tag.data.identifier}`,
+			loc: `https://sketchplanations.com/categories/${tag.uid}`,
 			lastmod: new Date(tag.last_publication_date).toISOString(),
 			priority: "0.64",
 		});
