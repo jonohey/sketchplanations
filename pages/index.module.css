@@ -12,6 +12,25 @@
 
 @screen lg {
   .sketchplanations {
-    @apply pb-12;
+    @apply pb-4;
   }
+}
+
+.ident {
+  @apply flex-none flex items-center mb-3;
+}
+
+@screen dark {
+  .ident {
+    @apply invert;
+  }
+}
+
+.ident__svg {
+  @apply block;
+  width: 100%;
+  max-width: var(--lr-width);
+  height: 100%;
+  max-height: 2rem;
+  fill: currentColor;
 }

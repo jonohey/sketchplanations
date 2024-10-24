@@ -1,9 +1,10 @@
 import dynamic from "next/dynamic";
 import Head from "next/head";
 
+import FancyLink from "components/FancyLink";
+import Link from "next/link";
 import styles from "./index.module.css";
 
-import Pagination from "components/Pagination";
 import SubscribeInline from "components/SubscribeInline";
 
 import { client } from "services/prismic";
@@ -55,23 +56,48 @@ const Home = ({ sketchplanations, subscribeInlineDoc }) => {
 				))}
 			</div>
 
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8 my-12">
-				<Pagination
-					key={sketchplanations.page}
-					currentPage={sketchplanations.page}
-					totalPages={sketchplanations.total_pages}
-				/>
+			<div className="container mx-auto px-4 sm:px-6 lg:px-8 my-12 flex flex-col items-center">
+				<Link
+					href="/archive"
+					className="btn-primary w-full max-w-96 inline-block text-center py-2 px-4 mb-4"
+				>
+					See more
+				</Link>
+				<div className="text-center mt-4 mb-8">
+					<FancyLink href="/search" className={styles.footerLink}>
+						Search
+					</FancyLink>
+					<span className="mx-2">·</span>
+					<FancyLink href="/categories" className={styles.footerLink}>
+						Categories
+					</FancyLink>
+					<span className="mx-2">·</span>
+					<FancyLink href="/archive" className={styles.footerLink}>
+						Archive
+					</FancyLink>
+					<span className="mx-2">·</span>
+					<FancyLink href="/list" className={styles.footerLink}>
+						List
+					</FancyLink>
+				</div>
+				<div className={styles.ident}>
+					<img
+						src="/logo.svg"
+						className={styles.ident__svg}
+						alt="Sketchplanations"
+					/>
+				</div>
 			</div>
+							
 		</>
 	);
 };
 
-export const getServerSideProps = async ({ query }) => {
+export const getServerSideProps = async () => {
 	const [sketchplanations, subscribeInlineDoc] = await Promise.all([
 		client.getByType("sketchplanation", {
 			orderings: [{ field: "my.sketchplanation.published_at", direction: "desc" }],
 			pageSize: 6,
-			page: query.page || 1,
 		}),
 		client.getSingle("subscribe_inline")
 	]);
