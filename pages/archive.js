@@ -78,6 +78,13 @@ const Archive = ({ initialSketchplanations }) => {
 					</button>
 				</div>
 			)}
+			<div className="text-center mt-2 mb-12">
+				<FancyLink href="/search">Search</FancyLink>
+				<span className="mx-2">·</span>
+				<FancyLink href="/categories">Categories</FancyLink>
+				<span className="mx-2">·</span>
+				<FancyLink href="/list">List</FancyLink>
+			</div>
 		</>
 	);
 };
