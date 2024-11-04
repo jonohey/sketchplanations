@@ -172,14 +172,14 @@ const Home = ({ sketchplanations, subscribeInlineDoc }) => {
 								track('Book-page-link', { location: 'home-book-text' });
 							}}
 						>
-							<h2 className="hover:text-blue">Big Ideas Little Pictures: Explaining the world one sketch at a time</h2>
+							<h2 className="mt-2 sm:mt-6 hover:text-blue">Big Ideas Little Pictures: Explaining the world one sketch at a time</h2>
 						</Link>
 						<div>
 							<p className="font-bold">
 								5-star rated on Amazon!
 							</p>
 							<p>
-								Transform complex ideas into crystal-clear understanding with this collection of 135 visual explanations.
+								Absorb big ideas with crystal-clear understanding through this collection of 135 visual explanations.
 								Including 24 exclusive new sketches and enhanced versions of classic favourites,
 								each page shares life-improving ideas through beautifully simple illustrations.
 							</p>
