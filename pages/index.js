@@ -1,3 +1,4 @@
+import { track } from '@vercel/analytics';
 import dynamic from "next/dynamic";
 import Head from "next/head";
 
@@ -122,10 +123,13 @@ const Home = ({ sketchplanations, subscribeInlineDoc }) => {
 					</FancyLink>
 				</div>
 				<div className={styles.ident}>
-					<img
+					<Image
 						src="/logo.svg"
-						className={styles.ident__svg}
 						alt="Sketchplanations"
+						className={styles.ident__svg}
+						width={520}
+						height={84}
+						sizes="(max-width: 768px) 150px, 200px"
 					/>
 				</div>
 			</div>
