@@ -175,7 +175,7 @@ const Home = ({ sketchplanations, subscribeInlineDoc }) => {
 							<h2 className="mt-2 sm:mt-6 hover:text-blue">Big Ideas Little Pictures: Explaining the world one sketch at a time</h2>
 						</Link>
 						<div>
-							<p className="font-bold">
+							<p className="font-bold text-xl">
 								5-star rated on Amazon!
 							</p>
 							<p>
