@@ -63,7 +63,7 @@ const Home = ({ sketchplanations, subscribeInlineDoc }) => {
 					}}
 				/>
 			</Head>
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+			<div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12" id="hero">
 				<div className="prose sm:prose-lg lg:prose-xl mx-auto text-center">
 					<h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
 						Explaining the world one sketch at a time
@@ -78,63 +78,13 @@ const Home = ({ sketchplanations, subscribeInlineDoc }) => {
 				</div>
 			</div>
 
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
+			<div className="container mx-auto px-4 sm:px-6 lg:px-8" id="subscribe-strip">
 				<div className="max-w-xl mx-auto text-center">
 					<SubscribeInline doc={subscribeInlineDoc} />
 				</div>
 			</div>
 
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-8 mt-12 sm:mt-16 lg:mt-20">
-				<h2 className="prose prose-xl mx-auto text-center">Recent sketches</h2>
-			</div>
-
-			<div className={styles.sketchplanations}>
-				{sketchplanations.results.map((sketchplanation, index) => (
-					<Sketchplanation
-						key={sketchplanation.uid}
-						sketchplanation={sketchplanation}
-						priority={index === 0}
-					/>
-				))}
-			</div>
-
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8 my-12 flex flex-col items-center">
-				<Link
-					href="/archive"
-					className="btn-primary w-full max-w-96 inline-block text-center py-2 px-4 mb-4"
-				>
-					See more
-				</Link>
-				<div className="text-center mt-4 mb-8">
-					<FancyLink href="/search" className={styles.footerLink}>
-						Search
-					</FancyLink>
-					<span className="mx-2">·</span>
-					<FancyLink href="/categories" className={styles.footerLink}>
-						Categories
-					</FancyLink>
-					<span className="mx-2">·</span>
-					<FancyLink href="/archive" className={styles.footerLink}>
-						Archive
-					</FancyLink>
-					<span className="mx-2">·</span>
-					<FancyLink href="/list" className={styles.footerLink}>
-						List
-					</FancyLink>
-				</div>
-				<div className={styles.ident}>
-					<Image
-						src="/logo.svg"
-						alt="Sketchplanations"
-						className={styles.ident__svg}
-						width={520}
-						height={84}
-						sizes="(max-width: 768px) 150px, 200px"
-					/>
-				</div>
-			</div>
-
-			<section className={styles.section} aria-label="Book promotion">
+			<section className={styles.section} aria-label="Book promotion" id="big-ideas-little-pictures-strip">
 				<div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 mb-12">
 					<div className="w-full md:w-1/2 relative">
 						<div className={styles.bookSection}>
@@ -197,6 +147,56 @@ const Home = ({ sketchplanations, subscribeInlineDoc }) => {
 					</div>
 				</div>
 			</section>
+
+			<div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-8 mt-12 sm:mt-16 lg:mt-20">
+				<h2 className="prose prose-xl mx-auto text-center">Recent sketches</h2>
+			</div>
+
+			<div className={styles.sketchplanations} id="recent-sketches">
+				{sketchplanations.results.map((sketchplanation, index) => (
+					<Sketchplanation
+						key={sketchplanation.uid}
+						sketchplanation={sketchplanation}
+						priority={index === 0}
+					/>
+				))}
+			</div>
+
+			<div className="container mx-auto px-4 sm:px-6 lg:px-8 my-12 flex flex-col items-center" id="see-more-strip">
+				<Link
+					href="/archive"
+					className="btn-primary w-full max-w-96 inline-block text-center py-2 px-4 mb-4"
+				>
+					See more
+				</Link>
+				<div className="text-center mt-4 mb-8">
+					<FancyLink href="/search" className={styles.footerLink}>
+						Search
+					</FancyLink>
+					<span className="mx-2">·</span>
+					<FancyLink href="/categories" className={styles.footerLink}>
+						Categories
+					</FancyLink>
+					<span className="mx-2">·</span>
+					<FancyLink href="/archive" className={styles.footerLink}>
+						Archive
+					</FancyLink>
+					<span className="mx-2">·</span>
+					<FancyLink href="/list" className={styles.footerLink}>
+						List
+					</FancyLink>
+				</div>
+				<div className={styles.ident}>
+					<Image
+						src="/logo.svg"
+						alt="Sketchplanations"
+						className={styles.ident__svg}
+						width={520}
+						height={84}
+						sizes="(max-width: 768px) 150px, 200px"
+					/>
+				</div>
+			</div>
 
 		</>
 	);
