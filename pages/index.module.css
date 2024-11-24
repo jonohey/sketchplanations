@@ -17,7 +17,7 @@
 }
 
 .section {
-  @apply border-t border-border pt-12;
+  @apply pt-12;
   --edgeInset: 1.5em;
 
   @screen md {
