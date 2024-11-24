@@ -3,6 +3,7 @@ import * as prismicH from "@prismicio/helpers";
 import { PrismicNextImage } from "@prismicio/next";
 import classNames from "classnames";
 import Cards from "components/Cards";
+import DownloadModal from "components/DownloadModal";
 import FancyLink from "components/FancyLink";
 import KeyboardShortcut from "components/KeyboardShortcut";
 import RichText from "components/RichText";
@@ -23,7 +24,6 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { client } from "services/prismic";
 
 const TextHeader = dynamic(() => import("components/TextHeader"));
-const PayWhatYouWant = dynamic(() => import("components/PayWhatYouWant"));
 const Modal = dynamic(() => import("components/Modal"));
 
 import InlinePage from "components/InlinePage";
@@ -94,7 +94,7 @@ const SketchplanationPage = ({
 		uid,
 	} = sketchplanation;
 
-	const [pwywModalOpen, setPwywModalOpen] = useState(false);
+	const [downloadModalOpen, setDownloadModalOpen] = useState(false);
 	const [licenceModalOpen, setLicenceModalOpen] = useState(false);
 	// const [randomTitle, setRandomTitle] = useState("");
 	const randomHandle = useRandomHandle([uid]);
@@ -104,7 +104,7 @@ const SketchplanationPage = ({
 	const commonProps = {
 		title,
 		podcastLinkUrl,
-		onDownload: () => setPwywModalOpen(true),
+		onDownload: () => setDownloadModalOpen(true),
 		redbubbleLinkUrl,
 		onViewLicence: () => setLicenceModalOpen(true),
 	};
@@ -196,8 +196,8 @@ const SketchplanationPage = ({
 				]}
 			/>
 
-			<Modal isOpen={pwywModalOpen} onClose={() => setPwywModalOpen(false)}>
-				<PayWhatYouWant
+			<Modal isOpen={downloadModalOpen} onClose={() => setDownloadModalOpen(false)}>
+				<DownloadModal
 					sketchplanationUid={sketchplanation.uid}
 					sketchplanationTitle={title}
 				/>
@@ -237,7 +237,7 @@ const SketchplanationPage = ({
 								image={image}
 								title={title}
 								priority={true}
-								onDownload={() => setPwywModalOpen(true)}
+								onDownload={() => setDownloadModalOpen(true)}
 							>
 								<SketchplanationCtas {...commonProps} variant="lightbox" />
 							</SketchplanationImage>
