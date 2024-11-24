@@ -74,15 +74,6 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
 	});
 }
 
-const ELEMENTS_OPTIONS = {
-	fonts: [
-		{
-			cssSrc:
-				"https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap",
-		},
-	],
-};
-
 const Sketchplanations = ({ Component, pageProps }) => {
 	const [decorationHidden, setDecorationHidden] = useState(false);
 
