@@ -1,8 +1,6 @@
 import { PrismicPreview } from "@prismicio/next";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 import { Analytics } from "@vercel/analytics/react";
 import BuyMeACoffee from "components/BuyMeACoffee";
 import Footer from "components/Footer";
@@ -76,19 +74,6 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
 	});
 }
 
-const stripePromise = loadStripe(
-	process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
-);
-
-const ELEMENTS_OPTIONS = {
-	fonts: [
-		{
-			cssSrc:
-				"https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap",
-		},
-	],
-};
-
 const Sketchplanations = ({ Component, pageProps }) => {
 	const [decorationHidden, setDecorationHidden] = useState(false);
 
@@ -109,32 +94,23 @@ const Sketchplanations = ({ Component, pageProps }) => {
 				}}
 			>
 				<GoogleTagManager gtmId="GTM-WNS3LG4" />
-				<Elements stripe={stripePromise} options={ELEMENTS_OPTIONS}>
-					<Head>
-						<title>{pageTitle()}</title>
-						<meta
-							name="viewport"
-							content="width=device-width, initial-scale=1, minimum-scale=1"
-						/>
-					</Head>
-					<div className={inter.className}>
-						<Header />
-						<Component {...pageProps} />
-						<BuyMeACoffee />
-						<Footer />
-					</div>
-				</Elements>
+				<Head>
+					<title>{pageTitle()}</title>
+					<meta
+						name="viewport"
+						content="width=device-width, initial-scale=1, minimum-scale=1"
+					/>
+				</Head>
+				<div className={inter.className}>
+					<Header />
+					<Component {...pageProps} />
+					<BuyMeACoffee />
+					<Footer />
+				</div>
 				<Analytics />
 			</Context.Provider>
 		</PrismicPreview>
 	);
 };
-
-// TODO: Do this in setup.js
-// Sketchplanations.getInitialProps = async () => {
-// 	const subscribeInlineDoc = await client.getSingle("subscribe_inline");
-
-// 	return { subscribeInlineDoc };
-// };
 
 export default Sketchplanations;

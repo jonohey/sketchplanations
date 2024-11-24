@@ -1,0 +1,23 @@
+.header {
+  @apply m-0 mb-3 text-lg;
+}
+
+.main p + p {
+  @apply mt-2;
+}
+
+.main a {
+  @apply text-blue;
+}
+
+.main button a {
+  @apply text-white;
+}
+
+.form {
+  @apply -m-2 mt-3;
+}
+
+.form :global(> *) {
+  @apply p-2;
+}

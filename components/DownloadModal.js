@@ -2,10 +2,10 @@ import { track } from "@vercel/analytics";
 import { Download, ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import styles from "./PayWhatYouWant.module.css";
+import styles from "./DownloadModal.module.css";
 import SubscribeInline from "./SubscribeInline";
 
-const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
+const DownloadModal = ({ sketchplanationUid, sketchplanationTitle }) => {
 	const [subscribeInlineDoc, setSubscribeInlineDoc] = useState(null);
 	
 	useEffect(() => {
@@ -86,4 +86,4 @@ const PayWhatYouWant = ({ sketchplanationUid, sketchplanationTitle }) => {
 	);
 };
 
-export default PayWhatYouWant;
+export default DownloadModal;
