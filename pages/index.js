@@ -148,6 +148,40 @@ const Home = ({ sketchplanations, subscribeInlineDoc }) => {
 				</div>
 			</section>
 
+			<section className={styles.section} aria-label="About information" id="about-strip">
+				<div className="flex flex-col md:flex-row items-start mb-12 prose max-w-none">
+					<div className="w-full md:w-1/2">
+						<div className="px-0 sm:px-12 lg:px-24">
+							<h2>Hi, I&apos;m Jono 👋</h2>
+							<p>
+								I&apos;m an author and illustrator creating one of the world&apos;s largest libraries of hand-drawn sketches explaining the world—sketch-by-sketch.
+							</p>
+							<p>
+								Sketchplanations have been shared millions of times and used in books, articles, classrooms, and more. <FancyLink href="/about">Learn more about the project</FancyLink>, <FancyLink href="/search">search for a sketch you like</FancyLink>, or see recent sketches below.
+							</p>
+						</div>
+					</div>
+					<div className="w-full md:w-1/2">
+						<div className="px-0 sm:px-12 lg:px-24">
+							<h3>Explore sketches for:</h3>
+							<ul className="columns-1 sm:columns-2 gap-x-8 list-disc ml-4 [&>li]:mt-[0.25em] [&>li:first-child]:mt-0">
+								<li><FancyLink href="/categories/learning">Teachers</FancyLink></li>
+								<li><FancyLink href="/categories/management">Managers & Leaders</FancyLink></li>
+								<li><FancyLink href="/categories/writing">Writers</FancyLink></li>
+								<li><FancyLink href="/categories/software">Developers</FancyLink></li>
+								<li><FancyLink href="/categories/entrepreneurship">Entrepreneurs</FancyLink></li>
+								<li><FancyLink href="/categories/product-management">Product managers</FancyLink></li>
+								<li><FancyLink href="/categories/parenting">Parents</FancyLink></li>
+								<li><FancyLink href="/categories/data">Data scientists</FancyLink></li>
+								<li><FancyLink href="/categories/marketing">Marketers</FancyLink></li>
+								<li><FancyLink href="/categories/design">Designers</FancyLink></li>
+								<li><FancyLink href="/categories">And loads more...</FancyLink></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-8 mt-12 sm:mt-16 lg:mt-20">
 				<h2 className="prose prose-xl mx-auto text-center">Recent sketches</h2>
 			</div>
