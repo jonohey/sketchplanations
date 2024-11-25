@@ -152,9 +152,9 @@ const Home = ({ sketchplanations, subscribeInlineDoc }) => {
 				<div className="flex flex-col md:flex-row items-start mb-12 prose max-w-none">
 					<div className="w-full md:w-1/2">
 						<div className="px-0 sm:px-12 lg:px-24">
-							<h2>Hi, I'm Jono 👋</h2>
+							<h2>Hi, I&apos;m Jono 👋</h2>
 							<p>
-								I'm an author and illustrator creating one of the world's largest libraries of hand-drawn sketches explaining the world—sketch-by-sketch.
+								I&apos;m an author and illustrator creating one of the world&apos;s largest libraries of hand-drawn sketches explaining the world—sketch-by-sketch.
 							</p>
 							<p>
 								Sketchplanations have been shared millions of times and used in books, articles, classrooms, and more. <FancyLink href="/about">Learn more about the project</FancyLink>, <FancyLink href="/search">search for a sketch you like</FancyLink>, or see recent sketches below.
