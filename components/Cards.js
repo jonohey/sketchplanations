@@ -31,7 +31,7 @@ export const Cards = () => (
 			}}
 			content={
 				<>
-					Sketchplanations in a book! I think you&apos;ll love{" "}
+					Get the book!<br/>
 					<FancyLink
 						href="/big-ideas-little-pictures"
 						onClick={() => {
@@ -54,7 +54,7 @@ export const Cards = () => (
 			rel="noopener"
 			content={
 				<>
-					Prefer to listen?
+					Prefer to listen?<br/>
 					<FancyLink
 						href="https://podcast.sketchplanations.com/"
 						target="_blank"
@@ -64,7 +64,6 @@ export const Cards = () => (
 						}}
 					>
 						<span>
-							<br/>
 							<span>Try the podcast</span>{" "}
 							<ExternalLink
 								size={16}
@@ -81,25 +80,23 @@ export const Cards = () => (
 				track('Patreon-site-link', { location: 'card-image' });
 			}}
 			content={
-				<>
-					Like Sketchplanations?{" "}
-					<FancyLink href="https://www.patreon.com/sketchplanations"
+				<div className={styles.supportCard}>
+					<b>Sketchplanations is ad-free<br/>thanks to supporters like you.</b>
+					<FancyLink 
+						href="https://www.patreon.com/sketchplanations"
 						target="_blank"
 						rel="noopener noreferrer"
 						onClick={() => {
 							track('Patreon-site-link', { location: 'card' });
 						}}
 					>
-						<span>
-							<br/>
-							<span>Support me on Patreon</span>{" "}
-							<ExternalLink
-								size={16}
-								className="inline relate -translate-y-[2px]"
-							/>
-						</span>
-					</FancyLink>{" "}
-				</>
+						See more on Patreon{" "}
+						<ExternalLink
+							size={16}
+							className="inline relate -translate-y-[2px]"
+						/>
+					</FancyLink>
+				</div>
 			}
 		/>
 	</div>

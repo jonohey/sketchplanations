@@ -14,3 +14,15 @@
 .card > *:only-child {
   @apply col-span-2;
 }
+
+.supportCard {
+  @apply bg-bgHighlight rounded-lg p-6 text-center;
+}
+
+.supportCard b {
+  @apply block;
+}
+
+.supportCard a {
+  @apply inline-flex items-center gap-2 mt-2;
+}
