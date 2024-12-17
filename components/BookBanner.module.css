@@ -1,8 +1,8 @@
 .root {
-  @apply block w-full bg-blueLight backdrop-blur-sm rounded-lg overflow-hidden transition-all mx-auto;
+  @apply block w-full bg-blueLight backdrop-blur-sm rounded-lg overflow-hidden transition-all;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  max-width: 800px;
   width: 100%;
+  max-width: var(--maxWidth, 40rem);
 }
 
 .content {
