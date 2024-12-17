@@ -45,6 +45,7 @@
   --color-red: hsl(359, 51.2%, 48.2%);
   --color-brightRed: hsl(9.4, 98.1%, 58%);
   --color-blue: hsl(216.1, 81.9%, 39%);
+  --color-blueLight: hsl(197.65, 100%, 90%);
 
   --color-bg: hsl(0, 0%, 100%);
   --color-bgButton: hsl(216.1, 81.9%, 39%);
@@ -101,7 +102,7 @@
     --color-red: hsl(359, 51.2%, 48.2%);
     --color-brightRed: hsl(9.4, 98.1%, 58%);
     --color-blue: hsl(215.8, 81.7%, 67.8%);
-    --color-blueLight: hsl(216, 82%, 76.1%); /* Odd dark mode color */
+    --color-blueLight: hsl(197.65, 100%, 90%);
 
     --color-bg: hsl(228, 4.5%, 21.8%);
     --color-bgButton: hsl(216.1, 81.9%, 39%);
