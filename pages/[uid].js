@@ -2,6 +2,7 @@ import * as prismic from "@prismicio/client";
 import * as prismicH from "@prismicio/helpers";
 import { PrismicNextImage } from "@prismicio/next";
 import classNames from "classnames";
+import BookBanner from "components/BookBanner";
 import Cards from "components/Cards";
 import DownloadModal from "components/DownloadModal";
 import FancyLink from "components/FancyLink";
@@ -245,6 +246,10 @@ const SketchplanationPage = ({
 
 						<div className={styles["ctas-area"]}>
 							<SketchplanationCtas {...commonProps} />
+						</div>
+
+						<div className={styles["book-banner"]}>
+							<BookBanner />
 						</div>
 
 						<div className={styles.main}>

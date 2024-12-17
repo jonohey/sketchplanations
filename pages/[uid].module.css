@@ -32,6 +32,7 @@
     'title'
     'image'
     'ctas'
+    'book-banner'
     'main'
     'sidebar';
 
@@ -51,6 +52,7 @@
       'title sidebar'
       'image sidebar'
       'ctas sidebar'
+      'book-banner sidebar'
       'main sidebar'
       '. sidebar';
   }
@@ -323,4 +325,17 @@
 
 .footer {
   @apply grid gap-y-4 mx-auto pb-6;
+}
+
+.book-banner {
+  grid-area: book-banner;
+  @apply mx-auto md:mx-0 mb-8;
+  max-width: var(--maxWidth);
+  padding-left: var(--edgeInset);
+  padding-right: var(--edgeInset);
+
+  @screen md {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
