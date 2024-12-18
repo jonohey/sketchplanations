@@ -22,11 +22,11 @@
 }
 
 .title {
-  @apply font-semibold mb-0;
+  @apply font-semibold mb-0 text-gray-900 dark:text-gray-900;
 }
 
 .leadCopy {
-  @apply mt-0;
+  @apply mt-0 text-gray-900 dark:text-gray-900;
   text-decoration: none;
   background-image: linear-gradient(currentColor, currentColor);
   background-position: 0% 100%;
