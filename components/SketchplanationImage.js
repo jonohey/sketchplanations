@@ -11,12 +11,13 @@ import {
 	useState,
 } from "react";
 import { Dialog, Modal, ModalOverlay } from "react-aria-components";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 const MotionModal = motion.create(Modal);
-// const MotionDialog = motion.create(Dialog);
 const MotionImage = motion.create(Image);
 
 import Context from "context";
+import { X } from "lucide-react";
 
 const SketchplanationImage = ({ image, title, priority = false, children }) => {
 	const { width, height } = image.dimensions;
@@ -41,8 +42,19 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 	const close = useCallback(() => {
 		if (isOpening || !isOpen) return;
 
-		setIsClosing(true);
-		setIsOpen(false);
+		const { scale, positionX, positionY } =
+			transformWrapperRef.current.instance.transformState;
+
+		if (scale !== 1 || positionX !== 0 || positionY !== 0) {
+			transformWrapperRef.current.resetTransform();
+			setTimeout(() => {
+				setIsClosing(true);
+				setIsOpen(false);
+			}, 200);
+		} else {
+			setIsClosing(true);
+			setIsOpen(false);
+		}
 	}, [isOpen, isOpening]);
 
 	const getInitialImageDimensions = useCallback(() => {
@@ -77,7 +89,24 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 		return 1;
 	}, [isOpen, isOpening, isClosing, isLoading]);
 
-	const dialog = useRef(null);
+	const transformWrapperRef = useRef(null);
+
+	const touchCountRef = useRef(0);
+
+	const handlePointerDown = useCallback(() => {
+		touchCountRef.current++;
+	}, []);
+
+	const handlePointerUp = useCallback(() => {
+		touchCountRef.current = Math.max(0, touchCountRef.current - 1);
+
+		if (touchCountRef.current === 0) {
+			const { scale } = transformWrapperRef.current.instance.transformState;
+			if (scale === 1) {
+				close();
+			}
+		}
+	}, [close]);
 
 	return (
 		<>
@@ -164,10 +193,10 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					animate={
 						isOpen && !isLoading
 							? {
-									top: "1.5rem",
+									top: "0",
 									left: "0",
 									width: "100vw",
-									height: "calc(var(--visual-viewport-height) - 6rem)",
+									height: "calc(var(--visual-viewport-height) - 3rem)",
 								}
 							: {
 									top: initialImageRect.top,
@@ -183,56 +212,75 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 						mass: 0.1,
 					}}
 				>
-					<Dialog
-						ref={dialog}
-						className="w-full h-full"
-						// drag="y"
-						// dragMomentum={false}
-						// onDragEnd={(e, { offset, velocity }) => {
-						// 	if (
-						// 		offset.y > window.innerHeight * 0.75 ||
-						// 		velocity.y > 10 ||
-						// 		offset.y < -window.innerHeight * 0.75 ||
-						// 		velocity.y < -10
-						// 	) {
-						// 		// Animate back to original position
-						// 		animate(
-						// 			dialog.current,
-						// 			{ y: 0 },
-						// 			{
-						// 				type: "spring",
-						// 				damping: 10,
-						// 				stiffness: 200,
-						// 				mass: 0.1,
-						// 			},
-						// 		);
-						// 		close();
-						// 	} else {
-						// 		animate(
-						// 			dialog.current,
-						// 			{ y: 0 },
-						// 			{
-						// 				type: "spring",
-						// 				damping: 10,
-						// 				stiffness: 200,
-						// 				mass: 0.1,
-						// 			},
-						// 		);
-						// 	}
-						// }}
-					>
-						<MotionImage
-							className="object-contain cursor-zoom-out"
-							src={image.url}
-							alt={image.alt || `${title} - Sketchplanations`}
-							sizes="calc(100w - 3rem)"
-							fill={true}
-							onClick={close}
-							priority
-							onLoad={() => setIsLoading(false)}
-						/>
+					<Dialog className="w-full h-full">
+						<TransformWrapper
+							disabled={!isOpen}
+							ref={transformWrapperRef}
+							minScale={1}
+							maxScale={2}
+							velocityAnimation={{
+								disabled: true,
+							}}
+							wheel={{
+								smoothStep: 0.004,
+							}}
+							panning={{
+								wheelPanning: true,
+								velocityDisabled: true,
+							}}
+							doubleClick={{
+								mode: "toggle",
+							}}
+						>
+							<TransformComponent
+								wrapperStyle={{ width: "100%", height: "100%" }}
+								contentStyle={{ width: "100%", height: "100%" }}
+								contentProps={{
+									onPointerDown: handlePointerDown,
+									onPointerUp: handlePointerUp,
+									onPointerCancel: handlePointerUp,
+								}}
+							>
+								<MotionImage
+									className="object-contain cursor-zoom-out"
+									src={image.url}
+									alt={image.alt || `${title} - Sketchplanations`}
+									// sizes="calc(100vw - 3rem)"
+									sizes="100vw"
+									fill={true}
+									priority
+									onLoad={() => setIsLoading(false)}
+								/>
+							</TransformComponent>
+						</TransformWrapper>
 					</Dialog>
 					<AnimatePresence>
+						{isOpen && !isLoading && (
+							<motion.div
+								className="fixed z-20 top-0 left-0 right-0 flex items-center justify-end h-12 px-2"
+								initial={{
+									opacity: 0,
+								}}
+								animate={{
+									opacity: 1,
+								}}
+								exit={{
+									opacity: 0,
+								}}
+								transition={{
+									duration: 0.2,
+								}}
+							>
+								<button
+									type="button"
+									onClick={close}
+									className="bg-[hsla(0,0%,0%,0.5)] backdrop-blur-lg p-2 rounded-full font-semibold text-sm text-white"
+								>
+									<span className="sr-only px-1">Close</span>
+									<X size={16} />
+								</button>
+							</motion.div>
+						)}
 						{isOpen && !isLoading && (
 							<motion.div
 								className="fixed z-20 bottom-0 left-0 right-0 flex items-center justify-center h-12 border-t border-[rgba(255,255,255,0.05)] backdrop-blur-sm"
