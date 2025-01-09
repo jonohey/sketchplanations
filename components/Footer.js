@@ -1,6 +1,7 @@
 import { track } from '@vercel/analytics';
 import { ChevronRight, ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
+import { RoughNotation } from "react-rough-notation";
 import { Cards } from "./Cards";
 import FancyLink from "./FancyLink";
 import SubscribeInline from "./SubscribeInline";
@@ -115,7 +116,7 @@ const Footer = () => {
 
 	return (
 		<footer className={styles.root}>
-			<div className="pt-6 sm:pt-10 px-[var(--edgeInset)]">
+			<div id="footer-categories" className="pt-6 sm:pt-10 px-[var(--edgeInset)]">
 				<div className="max-w-screen-xl mx-auto">
 					<div className="mb-3 text-xl font-semibold">Explore more</div>
 					<div className="prose mb-6">
@@ -144,22 +145,40 @@ const Footer = () => {
 				</div>
 			</div>
 
-			<div className="border-t border-borderFooter pt-6 sm:pt-10 px-[var(--edgeInset)]">
+			<div id="footer-subscribe-inline" className="border-t border-borderFooter pt-6 sm:pt-10 px-[var(--edgeInset)]">
 				<div className="grid sm:grid-cols-2 gap-12 max-w-screen-xl mx-auto items-center">
 					<Cards />
 					<div className="grid gap-y-8 items-start">
 						<SubscribeInline doc={subscribeInlineDoc} />
-						{/* <p className="text-textSubdued">
-							<b className="font-semibold">Looking to use a Sketchplanation?</b>{" "}
-							Please do! See the <FancyLink href="/licence">licence</FancyLink>{" "}
-							for details.
-						</p> */}
 					</div>
 				</div>
 			</div>
 
-			<div className="border-t border-borderFooter pt-6 sm:pt-10 px-[var(--edgeInset)]">
+			<div id="footer-nav-links" className="border-t border-borderFooter pt-6 sm:pt-10 px-[var(--edgeInset)]">
 				<Nav />
+			</div>
+
+			<div id="feedback-link" className="text-center pt-4 text-sm relative">
+				<RoughNotation
+					type="highlight"
+					show={true}
+					color="var(--color-paper)"
+					iterations={1}
+					strokeWidth={1}
+					animate={true}
+				>
+					<a 
+						href="https://forms.gle/Htu1Zy1MdnpYGSV98"
+						target="_blank"
+						rel="noreferrer"
+						className="text-blue"
+						onClick={() => {
+							track('Feedback-form', { location: 'footer' });
+						}}
+					>
+						Leave feedback
+					</a>
+				</RoughNotation>
 			</div>
 		</footer>
 	);

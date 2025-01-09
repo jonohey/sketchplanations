@@ -49,7 +49,7 @@
 		"react-intersection-observer": "^9.5.3",
 		"react-overlays": "^5.2.1",
 		"react-remove-scroll": "^2.6.0",
-		"react-rough-notation": "^1.0.3",
+		"react-rough-notation": "^1.0.5",
 		"react-text-loop": "^2.3.0",
 		"react-use-cookie": "^1.6.1",
 		"shiitake": "^3.0.2",
