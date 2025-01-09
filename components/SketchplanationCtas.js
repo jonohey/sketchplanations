@@ -1,11 +1,8 @@
 import { track } from '@vercel/analytics';
 import classNames from "classnames";
 import { ExternalLink } from "lucide-react";
-import { useCallback, useEffect, useRef } from 'react';
+import { RoughNotation } from "react-rough-notation";
 import styles from "./SketchplanationCtas.module.css";
-
-import { annotate } from 'rough-notation';
-
 
 const SketchplanationCtas = ({
 	title,
@@ -15,22 +12,6 @@ const SketchplanationCtas = ({
 	onViewLicence,
 	variant = "normal",
 }) => {
-	const podcastLinkRef = useRef(null);
-
-	const createAnnotation = useCallback(() => {
-		if (podcastLinkRef.current) {
-			const annotation = annotate(podcastLinkRef.current, { 
-				type: 'box', 
-				color: 'var(--color-brightRed)' 
-			});
-			annotation.show();
-		}
-	}, []);
-
-	useEffect(() => {
-		createAnnotation();
-	}, [createAnnotation]);
-
 	return (
 		<ul
 			className={classNames(
@@ -41,24 +22,29 @@ const SketchplanationCtas = ({
 		>
 			{podcastLinkUrl && (
 				<li>
-					<a
-						ref={podcastLinkRef}
-						className={classNames(
-							styles.cta,
-							variant === "normal" && styles.ctaNormal,
-							variant === "lightbox" && styles.ctaLightbox,
-						)}
-						href={podcastLinkUrl}
-						target="_blank"
-						rel="noreferrer"
-						title={`Listen to ${title} in the podcast`}
-						onClick={() => {
-							track('Sketch-link-podcast-episode', { sketch: `${title}` });
-						}}
+					<RoughNotation
+						type="box"
+						show={true}
+						color="var(--color-brightRed)"
 					>
-						Listen
-						<ExternalLink size={16} />
-					</a>
+						<a
+							className={classNames(
+								styles.cta,
+								variant === "normal" && styles.ctaNormal,
+								variant === "lightbox" && styles.ctaLightbox,
+							)}
+							href={podcastLinkUrl}
+							target="_blank"
+							rel="noreferrer"
+							title={`Listen to ${title} in the podcast`}
+							onClick={() => {
+								track('Sketch-link-podcast-episode', { sketch: `${title}` });
+							}}
+						>
+							Listen
+							<ExternalLink size={16} />
+						</a>
+					</RoughNotation>
 				</li>
 			)}
 			<li>

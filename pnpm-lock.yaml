@@ -126,7 +126,7 @@ importers:
         specifier: ^2.6.0
         version: 2.6.0(@types/react@18.3.5)(react@18.3.1)
       react-rough-notation:
-        specifier: ^1.0.3
+        specifier: ^1.0.5
         version: 1.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-text-loop:
         specifier: ^2.3.0
