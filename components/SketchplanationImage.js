@@ -235,7 +235,7 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					<AnimatePresence>
 						{isOpen && !isLoading && (
 							<motion.div
-								className="fixed z-20 bottom-0 left-0 right-0 flex items-center justify-center h-12 border-t border-[rgba(255,255,255,0.05)] backdrop-blur-sm"
+								className="fixed z-20 bottom-0 left-0 right-0 flex items-center justify-center h-14 border-t border-[rgba(255,255,255,0.05)] backdrop-blur-sm"
 								initial={{
 									translateY: 100,
 								}}
