@@ -748,7 +748,12 @@ export default [
 	},
 	{
 		source: "/post/175913353056/2-factor-authentication-two-factor",
-		destination: "/2-factor-authentication",
+		destination: "/2fa",
+		permanent: true,
+	},
+	{
+		source: "/2-factor-authentication",
+		destination: "/2fa",
 		permanent: true,
 	},
 	{
