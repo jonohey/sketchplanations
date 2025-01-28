@@ -64,6 +64,7 @@
 
   --color-text: hsl(0, 0%, 13.3%);
   --color-textSubdued: hsl(0, 0%, 44.9%);
+  --color-textSubduedMore: hsl(0, 0%, 70%);
 
   --color-overlay: hsla(0, 0%, 0%, 0.9);
 
@@ -121,6 +122,7 @@
 
     --color-text: hsl(0, 0%, 98.8%);
     --color-textSubdued: hsl(0, 0%, 77.6%);
+    --color-textSubduedMore: hsl(0, 0%, 40%);
 
     --color-overlay: hsla(0, 0%, 7%, 0.9);
   }

@@ -50,6 +50,7 @@ module.exports = {
 				red: "var(--color-red)",
 				text: "var(--color-text)",
 				textSubdued: "var(--color-textSubdued)",
+				textSubduedMore: "var(--color-textSubduedMore)",
 				paperTracing: "var(--color-paperTracing)",
 			},
 			typography: () => ({
