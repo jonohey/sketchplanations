@@ -1,5 +1,10 @@
 export default [
 	{
+    	source: "/rss",
+    	destination: "/rss.xml",
+    	permanent: true,
+	},
+	{
 		source: "/explore",
 		destination: "/search",
 		permanent: true,

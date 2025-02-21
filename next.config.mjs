@@ -16,7 +16,7 @@ const nextConfig = {
 	async headers() {
 		return [
 			{
-				source: "/rss",
+				source: "/rss.xml",
 				headers: [
 					{
 						key: "Content-Type",
