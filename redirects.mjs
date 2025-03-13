@@ -35,6 +35,11 @@ export default [
 		permanent: false,
 	},
 	{
+		source: "/bigthink",
+		destination: "https://bigthink.com/business/better-leadership-in-3-sketchplanations/",
+		permanent: false,
+	},
+	{
 		source: "/license",
 		destination: "https://sketchplanations.com/licence",
 		permanent: true,
