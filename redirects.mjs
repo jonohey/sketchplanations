@@ -30,6 +30,11 @@ export default [
 		permanent: false,
 	},
 	{
+		source: "/travel-journal",
+		destination: "https://issuu.com/palojono/docs/mindmap_travel_journal_hey",
+		permanent: false,
+	},
+	{
 		source: "/license",
 		destination: "https://sketchplanations.com/licence",
 		permanent: true,
