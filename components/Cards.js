@@ -16,7 +16,7 @@ const Card = ({ href, imageSrc, alt, content, onImageClick, target, rel }) => (
 				<Image src={imageSrc} alt={alt} sizes="6rem" className="w-full" />
 			</Link>
 		)}
-		<p>{content}</p>
+		<div className="prose">{content}</div>
 	</div>
 );
 
@@ -31,15 +31,17 @@ export const Cards = () => (
 			}}
 			content={
 				<>
-					Get the book!<br/>
-					<FancyLink
-						href="/big-ideas-little-pictures"
-						onClick={() => {
-							track('Book-page-link', { location: 'card' });
-						}}
-					>
-						Big Ideas Little Pictures
-					</FancyLink>
+					<div>Get the book!</div>
+					<div>
+						<FancyLink
+							href="/big-ideas-little-pictures"
+							onClick={() => {
+								track('Book-page-link', { location: 'card' });
+							}}
+						>
+							Big Ideas Little Pictures
+						</FancyLink>
+					</div>
 				</>
 			}
 		/>
@@ -54,23 +56,25 @@ export const Cards = () => (
 			rel="noopener"
 			content={
 				<>
-					Prefer to listen?<br/>
-					<FancyLink
-						href="https://podcast.sketchplanations.com/"
-						target="_blank"
-						rel="noopener"
-						onClick={() => {
-							track('Podcast-site-link', { location: 'card' });
-						}}
-					>
-						<span>
-							<span>Try the podcast</span>{" "}
-							<ExternalLink
-								size={16}
-								className="inline relate -translate-y-[2px]"
-							/>
-						</span>
-					</FancyLink>
+					<div>Prefer to listen?</div>
+					<div>
+						<FancyLink
+							href="https://podcast.sketchplanations.com/"
+							target="_blank"
+							rel="noopener"
+							onClick={() => {
+								track('Podcast-site-link', { location: 'card' });
+							}}
+						>
+							<span>
+								<span>Try the podcast</span>{" "}
+								<ExternalLink
+									size={16}
+									className="inline relate -translate-y-[2px]"
+								/>
+							</span>
+						</FancyLink>
+					</div>
 				</>
 			}
 		/>
@@ -81,21 +85,27 @@ export const Cards = () => (
 			}}
 			content={
 				<div className={styles.supportCard}>
-					<b>Sketchplanations is ad-free<br/>thanks to supporters like you.</b>
-					<FancyLink 
-						href="https://www.patreon.com/sketchplanations"
-						target="_blank"
-						rel="noopener noreferrer"
-						onClick={() => {
-							track('Patreon-site-link', { location: 'card' });
-						}}
-					>
-						See more on Patreon{" "}
-						<ExternalLink
-							size={16}
-							className="inline relate -translate-y-[2px]"
-						/>
-					</FancyLink>
+					<div>
+						<strong>Sketchplanations is ad-free</strong>
+						<br />
+						<strong>thanks to supporters like you.</strong>
+					</div>
+					<div>
+						<FancyLink 
+							href="https://www.patreon.com/sketchplanations"
+							target="_blank"
+							rel="noopener noreferrer"
+							onClick={() => {
+								track('Patreon-site-link', { location: 'card' });
+							}}
+						>
+							See more on Patreon{" "}
+							<ExternalLink
+								size={16}
+								className="inline relate -translate-y-[2px]"
+							/>
+						</FancyLink>
+					</div>
 				</div>
 			}
 		/>
