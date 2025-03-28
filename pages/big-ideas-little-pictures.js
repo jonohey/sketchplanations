@@ -339,16 +339,16 @@ const Book = () => {
 								<div className="bg-gray-50 p-8 rounded-lg">
 									<blockquote className="text-base mb-6">
 										<p>
-											"I love this book. It will delight adults, fascinate children and help us all to grasp important ideas. Want to understand the four horsemen of relationship apocalypse? Or different types of phishing? Or the ten essentials for wilderness safety? Jono Hey's explanations are brief and clear – but it's his pictures that stick in your head. Every time you turn over a page, there's something new. I can't wait to try out the instructions for skipping rocks like a pro and taking better photographs – and I'll certainly take up the Dracula sneeze."
+											"I love this book. It will delight adults, fascinate children and help us all to grasp important ideas. Want to understand the four horsemen of relationship apocalypse? Or different types of phishing? Or the ten essentials for wilderness safety? Jono Hey&apos;s explanations are brief and clear – but it&apos;s his pictures that stick in your head. Every time you turn over a page, there&apos;s something new. I can&apos;t wait to try out the instructions for skipping rocks like a pro and taking better photographs – and I&apos;ll certainly take up the Dracula sneeze."
 										</p>
 										<p className="mt-4">
-											"I meant to read it slowly, a few pages at a time, but it's such fun that I kept thinking, Just one more picture and finished it in one sitting. I'm looking forward to re-reading it very soon."
+											"I meant to read it slowly, a few pages at a time, but it&apos;s such fun that I kept thinking, Just one more picture and finished it in one sitting. I&apos;m looking forward to re-reading it very soon."
 										</p>
 									</blockquote>
 									<div className="flex items-center gap-4">
 										<div>
 											<div className="font-semibold">Gillian Cross</div>
-											<div className="text-sm text-gray-600">Multi-award-winning children's book author</div>
+											<div className="text-sm text-gray-600">Multi-award-winning children&apos;s book author</div>
 										</div>
 									</div>
 								</div>
