@@ -90,11 +90,6 @@ export default [
 		permanent: true,
 	},
 	{
-		source: "/privacy(:?\\?.*)",
-		destination: "/privacy",
-		permanent: true,
-	},
-	{
 		source: "/microadventures",
 		destination: "/microadventure",
 		permanent: true,
@@ -482,7 +477,7 @@ export default [
 		permanent: true,
 	},
 	{
-		source: "/post/185787123841/the-continental-axis-hypothesis-jared-diamonds(:?\\?.*)?",
+		source: "/post/185787123841/the-continental-axis-hypothesis-jared-diamonds",
 		destination: "/the-continental-axis-hypothesis",
 		permanent: true,
 	},
