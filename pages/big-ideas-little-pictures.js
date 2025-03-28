@@ -224,7 +224,7 @@ const Book = () => {
 								{/* Bill Gates Quote */}
 								<div className="bg-gray-50 p-8 rounded-lg">
 									<blockquote className="text-base mb-6">
-										"This is such a cool book. The range of Jono's knowledge is astounding, and so is his ability to digest complex ideas into deceptively simple drawings. You'll learn something on every page—and be entertained too."
+										"This is such a cool book. The range of Jono&apos;s knowledge is astounding, and so is his ability to digest complex ideas into deceptively simple drawings. You&apos;ll learn something on every page—and be entertained too."
 									</blockquote>
 									<div className="flex items-center gap-4">
 										<div className="font-semibold">Bill Gates</div>
@@ -234,7 +234,7 @@ const Book = () => {
 								{/* Dan Roam Quote */}
 								<div className="bg-gray-50 p-8 rounded-lg">
 									<blockquote className="text-base mb-6">
-										"As the world becomes more complex and fraught, the more we need clear and honest pictures to show us a better way. In his marvellous book, "Big Ideas, Little Pictures," Jono Hey gives us the pictures we need. Whether exploring the size of the universe, unpacking the paradox of choice, or illuminating the pure joy of the Golden Ratio, Jono's brilliant sketches make everything make more sense. I can't think of a better gift for my mind, and yours."
+										"As the world becomes more complex and fraught, the more we need clear and honest pictures to show us a better way. In his marvellous book, &quot;Big Ideas, Little Pictures,&quot; Jono Hey gives us the pictures we need. Whether exploring the size of the universe, unpacking the paradox of choice, or illuminating the pure joy of the Golden Ratio, Jono&apos;s brilliant sketches make everything make more sense. I can&apos;t think of a better gift for my mind, and yours."
 									</blockquote>
 									<div className="flex items-center gap-4">
 										<div>
@@ -356,7 +356,12 @@ const Book = () => {
 								{/* Eva-Lotta Lamm Quote */}
 								<div className="bg-gray-50 p-8 rounded-lg">
 									<blockquote className="text-base mb-6">
-										"'Big Ideas, Little Pictures' by Jono Hey is a beautiful and powerful book at the same time. On each page, Jono visualises a complex concept into a clear, engaging little drawing. His sketches don't just simplify ideas, they bring them to life and make them understandable at a glance. This large collection of concepts, scientific findings and interesting frameworks is delightful and a real testament to the power of communicating through simple visuals. This body of work is even more impressive as it was created by Jono over years of drawing one concept per week. As a fellow visual thinker I'm in love with this wonderful book. It's a joy to dive in at any page, to get drawn in by the pictures and to learn a new fact with every turn of the page."
+										<p>
+											"&apos;Big Ideas, Little Pictures&apos; by Jono Hey is a beautiful and powerful book at the same time. On each page, Jono visualises a complex concept into a clear, engaging little drawing. His sketches don&apos;t just simplify ideas, they bring them to life and make them understandable at a glance."
+										</p>
+										<p className="mt-4">
+											"This large collection of concepts, scientific findings and interesting frameworks is delightful and a real testament to the power of communicating through simple visuals. This body of work is even more impressive as it was created by Jono over years of drawing one concept per week. As a fellow visual thinker I&apos;m in love with this wonderful book. It&apos;s a joy to dive in at any page, to get drawn in by the pictures and to learn a new fact with every turn of the page."
+										</p>
 									</blockquote>
 									<div className="flex items-center gap-4">
 										<div>
