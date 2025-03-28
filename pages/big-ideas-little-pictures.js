@@ -57,7 +57,7 @@ const Book = () => {
 						</div>
 						<div className="w-full md:w-1/2">
 							<blockquote className="text-xl md:text-2xl mb-4 font-medium">
-								"This is such a cool book. The range of Jono's knowledge is astounding, and so is his ability to digest complex ideas into deceptively simple drawings. You'll learn something on every page—and be entertained too."
+								&quot;This is such a cool book. The range of Jono&apos;s knowledge is astounding, and so is his ability to digest complex ideas into deceptively simple drawings. You&apos;ll learn something on every page—and be entertained too.&quot;
 							</blockquote>
 							<cite className="text-gray-600 dark:text-gray-300 block text-lg">
 								— Bill Gates
@@ -193,7 +193,6 @@ const Book = () => {
 										height="315" 
 										src="https://www.youtube.com/embed/dQqP6aBLHYc?si=oogeEYEXru3cs53s&controls=0&rel=0" 
 										title="YouTube video player" 
-										showinfo="0" 
 										frameBorder="0" 
 										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
 										allowFullScreen
@@ -224,7 +223,7 @@ const Book = () => {
 								{/* Bill Gates Quote */}
 								<div className="bg-gray-50 p-8 rounded-lg">
 									<blockquote className="text-base mb-6">
-										"This is such a cool book. The range of Jono&apos;s knowledge is astounding, and so is his ability to digest complex ideas into deceptively simple drawings. You&apos;ll learn something on every page—and be entertained too."
+										&quot;This is such a cool book. The range of Jono&apos;s knowledge is astounding, and so is his ability to digest complex ideas into deceptively simple drawings. You&apos;ll learn something on every page—and be entertained too.&quot;
 									</blockquote>
 									<div className="flex items-center gap-4">
 										<div className="font-semibold">Bill Gates</div>
@@ -234,7 +233,7 @@ const Book = () => {
 								{/* Dan Roam Quote */}
 								<div className="bg-gray-50 p-8 rounded-lg">
 									<blockquote className="text-base mb-6">
-										"As the world becomes more complex and fraught, the more we need clear and honest pictures to show us a better way. In his marvellous book, &quot;Big Ideas, Little Pictures,&quot; Jono Hey gives us the pictures we need. Whether exploring the size of the universe, unpacking the paradox of choice, or illuminating the pure joy of the Golden Ratio, Jono&apos;s brilliant sketches make everything make more sense. I can&apos;t think of a better gift for my mind, and yours."
+										&quot;As the world becomes more complex and fraught, the more we need clear and honest pictures to show us a better way. In his marvellous book, &quot;Big Ideas, Little Pictures,&quot; Jono Hey gives us the pictures we need. Whether exploring the size of the universe, unpacking the paradox of choice, or illuminating the pure joy of the Golden Ratio, Jono&apos;s brilliant sketches make everything make more sense. I can&apos;t think of a better gift for my mind, and yours.&quot;
 									</blockquote>
 									<div className="flex items-center gap-4">
 										<div>
@@ -247,7 +246,7 @@ const Book = () => {
 								{/* Mike Rohde Quote */}
 								<div className="bg-gray-50 p-8 rounded-lg">
 									<blockquote className="text-base mb-6">
-										"Big Ideas, Little Pictures is a magical collection of ideas, concepts, and wisdom—some that I've wondered about and others that I've never thought about before—presented in a clear visual way that makes Jono's sketchplanations a joy to read, reference, and share. It's a fantastic book!"
+										&quot;Big Ideas, Little Pictures is a magical collection of ideas, concepts, and wisdom—some that I&apos;ve wondered about and others that I&apos;ve never thought about before—presented in a clear visual way that makes Jono&apos;s sketchplanations a joy to read, reference, and share. It&apos;s a fantastic book!&quot;
 									</blockquote>
 									<div className="flex items-center gap-4">
 										<div>
@@ -260,7 +259,7 @@ const Book = () => {
 								{/* Katy Milkman Quote */}
 								<div className="bg-gray-50 p-8 rounded-lg">
 									<blockquote className="text-base mb-6">
-										"I'm an enormous fan of the wonderful way Jono's sketches bring scientific insights to life for a wide audience."
+										&quot;I&apos;m an enormous fan of the wonderful way Jono&apos;s sketches bring scientific insights to life for a wide audience.&quot;
 									</blockquote>
 									<div className="flex items-center gap-4">
 										<div>
@@ -273,7 +272,7 @@ const Book = () => {
 								{/* Richard Shotton Quote */}
 								<div className="bg-gray-50 p-8 rounded-lg">
 									<blockquote className="text-base mb-6">
-										"Brilliant! It distills a variety of complex and profound ideas into simple to understand and beautifully drawn sketches."
+										&quot;Brilliant! It distills a variety of complex and profound ideas into simple to understand and beautifully drawn sketches.&quot;
 									</blockquote>
 									<div className="flex items-center gap-4">
 										<div>
@@ -286,7 +285,7 @@ const Book = () => {
 								{/* Brendan Leonard Quote */}
 								<div className="bg-gray-50 p-8 rounded-lg">
 									<blockquote className="text-base mb-6">
-										"Jono Hey's Big Ideas Little Pictures is the kind of book that I want to devour all at once, with his brilliantly efficient illustrations breaking down complex ideas—but that I make myself ration to a few pages per day, to give myself time to absorb everything. Either way, it's the best bet I have to make myself seem more interesting as a dinner party guest."
+										&quot;Jono Hey&apos;s Big Ideas Little Pictures is the kind of book that I want to devour all at once, with his brilliantly efficient illustrations breaking down complex ideas—but that I make myself ration to a few pages per day, to give myself time to absorb everything. Either way, it&apos;s the best bet I have to make myself seem more interesting as a dinner party guest.&quot;
 									</blockquote>
 									<div className="flex items-center gap-4">
 										<div>
@@ -299,7 +298,7 @@ const Book = () => {
 								{/* Mark Frauenfelder Quote */}
 								<div className="bg-gray-50 p-8 rounded-lg">
 									<blockquote className="text-base mb-6">
-										"Jono's superpower is the ability to break down complex concepts into digestible, visually appealing explanations."
+										&quot;Jono&apos;s superpower is the ability to break down complex concepts into digestible, visually appealing explanations.&quot;
 									</blockquote>
 									<div className="flex items-center gap-4">
 										<div>
@@ -312,7 +311,7 @@ const Book = () => {
 								{/* Trenton Moss Quote */}
 								<div className="bg-gray-50 p-8 rounded-lg">
 									<blockquote className="text-base mb-6">
-										"I've loved following Sketchplanations for years. And finally, Jono has brought it all together in this wonderful book. Keep a copy in your home and show it to everyone who comes over."
+										&quot;I&apos;ve loved following Sketchplanations for years. And finally, Jono has brought it all together in this wonderful book. Keep a copy in your home and show it to everyone who comes over.&quot;
 									</blockquote>
 									<div className="flex items-center gap-4">
 										<div>
@@ -325,7 +324,7 @@ const Book = () => {
 								{/* Jason Barron Quote */}
 								<div className="bg-gray-50 p-8 rounded-lg">
 									<blockquote className="text-base mb-6">
-										"Jono's delightful book is a fantastic blend of text and visuals, making the topics easy to understand and remember. I found myself eager to turn each page, learning things I had never known before. I love this book and recommend it to anyone looking to enrich their knowledge at super speed with some creativity and fun."
+										&quot;Jono&apos;s delightful book is a fantastic blend of text and visuals, making the topics easy to understand and remember. I found myself eager to turn each page, learning things I had never known before. I love this book and recommend it to anyone looking to enrich their knowledge at super speed with some creativity and fun.&quot;
 									</blockquote>
 									<div className="flex items-center gap-4">
 										<div>
@@ -338,12 +337,10 @@ const Book = () => {
 								{/* Gillian Cross Quote */}
 								<div className="bg-gray-50 p-8 rounded-lg">
 									<blockquote className="text-base mb-6">
-										<p>
-											"I love this book. It will delight adults, fascinate children and help us all to grasp important ideas. Want to understand the four horsemen of relationship apocalypse? Or different types of phishing? Or the ten essentials for wilderness safety? Jono Hey&apos;s explanations are brief and clear – but it&apos;s his pictures that stick in your head. Every time you turn over a page, there&apos;s something new. I can&apos;t wait to try out the instructions for skipping rocks like a pro and taking better photographs – and I&apos;ll certainly take up the Dracula sneeze."
-										</p>
-										<p className="mt-4">
-											"I meant to read it slowly, a few pages at a time, but it&apos;s such fun that I kept thinking, Just one more picture and finished it in one sitting. I&apos;m looking forward to re-reading it very soon."
-										</p>
+										&quot;I love this book. It will delight adults, fascinate children and help us all to grasp important ideas. Want to understand the four horsemen of relationship apocalypse? Or different types of phishing? Or the ten essentials for wilderness safety? Jono Hey&apos;s explanations are brief and clear – but it&apos;s his pictures that stick in your head. Every time you turn over a page, there&apos;s something new. I can&apos;t wait to try out the instructions for skipping rocks like a pro and taking better photographs – and I&apos;ll certainly take up the Dracula sneeze.&quot;
+									</blockquote>
+									<blockquote className="text-base mb-6">
+										&quot;I meant to read it slowly, a few pages at a time, but it&apos;s such fun that I kept thinking, Just one more picture and finished it in one sitting. I&apos;m looking forward to re-reading it very soon.&quot;
 									</blockquote>
 									<div className="flex items-center gap-4">
 										<div>
@@ -356,12 +353,10 @@ const Book = () => {
 								{/* Eva-Lotta Lamm Quote */}
 								<div className="bg-gray-50 p-8 rounded-lg">
 									<blockquote className="text-base mb-6">
-										<p>
-											"&apos;Big Ideas, Little Pictures&apos; by Jono Hey is a beautiful and powerful book at the same time. On each page, Jono visualises a complex concept into a clear, engaging little drawing. His sketches don&apos;t just simplify ideas, they bring them to life and make them understandable at a glance."
-										</p>
-										<p className="mt-4">
-											"This large collection of concepts, scientific findings and interesting frameworks is delightful and a real testament to the power of communicating through simple visuals. This body of work is even more impressive as it was created by Jono over years of drawing one concept per week. As a fellow visual thinker I&apos;m in love with this wonderful book. It&apos;s a joy to dive in at any page, to get drawn in by the pictures and to learn a new fact with every turn of the page."
-										</p>
+										&quot;&apos;Big Ideas, Little Pictures&apos; by Jono Hey is a beautiful and powerful book at the same time. On each page, Jono visualises a complex concept into a clear, engaging little drawing. His sketches don&apos;t just simplify ideas, they bring them to life and make them understandable at a glance.&quot;
+									</blockquote>
+									<blockquote className="text-base mb-6">
+										&quot;This large collection of concepts, scientific findings and interesting frameworks is delightful and a real testament to the power of communicating through simple visuals. This body of work is even more impressive as it was created by Jono over years of drawing one concept per week. As a fellow visual thinker I&apos;m in love with this wonderful book. It&apos;s a joy to dive in at any page, to get drawn in by the pictures and to learn a new fact with every turn of the page.&quot;
 									</blockquote>
 									<div className="flex items-center gap-4">
 										<div>
@@ -374,7 +369,7 @@ const Book = () => {
 								{/* Dad Quote */}
 								<div className="bg-gray-50 p-8 rounded-lg">
 									<blockquote className="text-base mb-6">
-										"I resent our bedroom looking so messy in the tsundoku sketch."
+										&quot;I resent our bedroom looking so messy in the tsundoku sketch.&quot;
 									</blockquote>
 									<div className="flex items-center gap-4">
 										<div>
