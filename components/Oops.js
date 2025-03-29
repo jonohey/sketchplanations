@@ -7,8 +7,6 @@ import styles from "./Oops.module.css";
 
 import oopsImage from "../public/oops.png";
 
-const loader = ({ src }) => src;
-
 const Oops = ({ children }) => {
 	return (
 		<>
@@ -23,7 +21,6 @@ const Oops = ({ children }) => {
 						alt="Error"
 						width={640}
 						height={542.5}
-						loader={loader}
 						aria-label="404 error illustration"
 						className={styles.image}
 					/>
