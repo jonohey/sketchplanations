@@ -97,6 +97,10 @@ async function fetchSketchplanations(page = 1) {
 				direction: "desc",
 			},
 		],
+		fetch: [
+			'sketchplanation.title',
+			'sketchplanation.image',
+		],
 		pageSize: ITEMS_PER_PAGE,
 		page,
 	});

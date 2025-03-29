@@ -151,11 +151,21 @@ export async function getStaticProps() {
 					direction: "desc",
 				},
 			],
+			fetch: ['sketchplanation.title', 'sketchplanation.published_at'],
 		});
+
+		const sketchTitlesAndDates = sketches.map(({ id, uid, data }) => ({
+			id,
+			uid,
+			data: {
+				title: data.title,
+				published_at: data.published_at
+			}
+		}));
 
 		return {
 			props: {
-				initialSketches: Array.isArray(sketches) ? sketches : [],
+				initialSketches: sketchTitlesAndDates,
 			},
 		};
 	} catch (error) {
