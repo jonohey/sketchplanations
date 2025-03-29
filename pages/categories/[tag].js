@@ -120,9 +120,25 @@ export async function getStaticProps({ params: { tag } }) {
 				direction: "desc",
 			},
 		],
+		fetch: [
+			'sketchplanation.title',
+			'sketchplanation.image',
+		]
 	});
 
-	return { props: { tag: humanizeTag(tagDoc.slugs[0]), sketchplanations } };
+	return { 
+		props: { 
+			tag: humanizeTag(tagDoc.uid), 
+			sketchplanations: sketchplanations.map(({ id, uid, data }) => ({
+				id,
+				uid,
+				data: {
+					title: data.title,
+					image: data.image
+				}
+			}))
+		} 
+	};
 }
 
 export default Tag;
