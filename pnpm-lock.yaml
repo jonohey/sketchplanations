@@ -102,7 +102,7 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0(react@18.3.1)
       react-currency-input-field:
-        specifier: ^3.6.10
+        specifier: ^3.8.0
         version: 3.8.0(react@18.3.1)
       react-dom:
         specifier: ^18.3.1
@@ -111,13 +111,13 @@ importers:
         specifier: ^3.2.1
         version: 3.2.1(react@18.3.1)
       react-hotkeys-hook:
-        specifier: ^4.3.8
+        specifier: ^4.5.1
         version: 4.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-infinite-scroll-component:
         specifier: ^6.1.0
         version: 6.1.0(react@18.3.1)
       react-intersection-observer:
-        specifier: ^9.5.3
+        specifier: ^9.13.1
         version: 9.13.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-overlays:
         specifier: ^5.2.1
@@ -138,7 +138,7 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2(react@18.3.1)
       stripe:
-        specifier: ^11.17.0
+        specifier: ^11.18.0
         version: 11.18.0
       swiper:
         specifier: ^11.1.12
@@ -147,7 +147,7 @@ importers:
         specifier: ^5.0.2
         version: 5.0.2
       vanilla-cookieconsent:
-        specifier: v3.0.0
+        specifier: 3.0.0
         version: 3.0.0
     devDependencies:
       '@biomejs/biome':
@@ -202,7 +202,7 @@ importers:
         specifier: ^5.94.0
         version: 5.94.0
       xmlbuilder2:
-        specifier: ^3.0.2
+        specifier: ^3.1.1
         version: 3.1.1
 
 packages:
@@ -1942,8 +1942,8 @@ packages:
     resolution: {integrity: sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==}
     engines: {node: '>= 6'}
 
-  caniuse-lite@1.0.30001659:
-    resolution: {integrity: sha512-Qxxyfv3RdHAfJcXelgf0hU4DFUVXBGTjqrBUZLUh8AtlGnsDo+CnncYtTd95+ZKfnANUOzxyIQCuU/UeBZBYoA==}
+  caniuse-lite@1.0.30001707:
+    resolution: {integrity: sha512-3qtRjw/HQSMlDWf+X79N206fepf4SOOU6SQLMaq/0KkZLmSjPxAkBOQQ+FxbHKfHmYLZFfdWsO3KA90ceHPSnw==}
 
   chalk@2.4.2:
     resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==}
@@ -6899,7 +6899,7 @@ snapshots:
   autoprefixer@10.4.20(postcss@8.4.47):
     dependencies:
       browserslist: 4.23.3
-      caniuse-lite: 1.0.30001659
+      caniuse-lite: 1.0.30001707
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.1.0
@@ -6949,7 +6949,7 @@ snapshots:
 
   browserslist@4.23.3:
     dependencies:
-      caniuse-lite: 1.0.30001659
+      caniuse-lite: 1.0.30001707
       electron-to-chromium: 1.5.18
       node-releases: 2.0.18
       update-browserslist-db: 1.1.0(browserslist@4.23.3)
@@ -6986,7 +6986,7 @@ snapshots:
 
   camelcase-css@2.0.1: {}
 
-  caniuse-lite@1.0.30001659: {}
+  caniuse-lite@1.0.30001707: {}
 
   chalk@2.4.2:
     dependencies:
@@ -8456,7 +8456,7 @@ snapshots:
       '@next/env': 14.2.13
       '@swc/helpers': 0.5.5
       busboy: 1.6.0
-      caniuse-lite: 1.0.30001659
+      caniuse-lite: 1.0.30001707
       graceful-fs: 4.2.11
       postcss: 8.4.31
       react: 18.3.1
