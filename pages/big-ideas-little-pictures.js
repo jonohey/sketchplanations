@@ -32,7 +32,7 @@ const Book = () => {
 				<title>{pageTitle("Big Ideas Little Pictures by Jono Hey")}</title>
 				<meta
 					name="description"
-					content="Discover 'Big Ideas, Little Pictures' by Jono Hey—a delightful book that simplifies complex ideas with clear illustrations. Explore reviews, FAQs, see what's inside, and find out how to order your copy."
+					content="Discover &apos;Big Ideas, Little Pictures&apos; by Jono Hey—a delightful book that simplifies complex ideas with clear illustrations. Explore reviews, FAQs, see what&apos;s inside, and find out how to order your copy."
 				/>
 				<link rel="canonical" href="https://sketchplanations.com/big-ideas-little-pictures" />
 			</Head>
@@ -145,7 +145,7 @@ const Book = () => {
 
 					{/* What's inside section moved after order section */}
 					<div className="mt-24">
-						<h2 className="text-3xl font-bold mb-4 text-center">What's inside Big Ideas Little Pictures?</h2>
+						<h2 className="text-3xl font-bold mb-4 text-center">What&apos;s inside Big Ideas Little Pictures?</h2>
 						<p className="text-xl text-gray-600 dark:text-gray-300 mb-12 text-center">Sample pages from Big Ideas Little Pictures</p>
 						
 						{/* Gallery in What's Inside section */}
@@ -392,17 +392,17 @@ const Book = () => {
 
 							<div>
 								<h3 className="font-bold mb-2">Will there be an eBook?</h3>
-								<p>Yes. There should be a Kindle version of the book when published, but it's not out yet, and it's not nearly as nice on the coffee table.</p>
+								<p>&quot;Yes. There should be a Kindle version of the book when published, but it&apos;s not out yet, and it&apos;s not nearly as nice on the coffee table.&quot;</p>
 							</div>
 
 							<div>
 								<h3 className="font-bold mb-2">Do you have photos or images I can use to share?</h3>
-								<p>Yes, I put together a <a href="#" className="text-blue-600 hover:underline">basic media kit</a>. Let me know what else you'd want to see in it.</p>
+								<p>Yes, I put together a <a href="#" className="text-blue-600 hover:underline">basic media kit</a>. Let me know what else you&apos;d want to see in it.</p>
 							</div>
 
 							<div>
 								<h3 className="font-bold mb-2">Is it available in other languages?</h3>
-								<p>Not yet. Feel free to let me know if you'd like it in another language—it always helps to gauge demand. If you work in translating or could help publish in another language, please get in touch.</p>
+								<p>Not yet. Feel free to let me know if you&apos;d like it in another language—it always helps to gauge demand. If you work in translating or could help publish in another language, please get in touch.</p>
 							</div>
 
 							<div>
@@ -412,19 +412,19 @@ const Book = () => {
 							</div>
 
 							<div>
-								<h3 className="font-bold mb-2">What's the picture on the cover?</h3>
-								<p>The picture is my own version of Hokusai's remarkable "The Great Wave off Kanagawa" or just the "Great Wave." Here's the <a href="#" className="text-blue-600 hover:underline">Great Wave at The MET</a>. I once saw the real thing at the British Museum in London. It's small, but few pictures captivate the way it does. <a href="#" className="text-blue-600 hover:underline">Hokusai's wave evolved a lot throughout his life</a>.</p>
+								<h3 className="font-bold mb-2">What&apos;s the picture on the cover?</h3>
+								<p>&quot;The picture is my own version of Hokusai&apos;s remarkable &quot;The Great Wave off Kanagawa&quot; or just the &quot;Great Wave.&quot; Here&apos;s the Great Wave at The MET. I once saw the real thing at the British Museum in London. It&apos;s small, but few pictures captivate the way it does.&quot;</p>
 							</div>
 
 							<div>
 								<h3 className="font-bold mb-2">Can I buy a print of the cover?</h3>
-								<p>I'm so glad you asked ;o) You can <a href="#" className="text-blue-600 hover:underline">buy prints and other merch of the Sketchplanations Wave</a>.</p>
-								<p>Let me know if you there's a design you'd like that I don't have.</p>
+								<p>I&apos;m so glad you asked ;o) You can <a href="#" className="text-blue-600 hover:underline">buy prints and other merch of the Sketchplanations Wave</a>.</p>
+								<p>Let me know if you there&apos;s a design you&apos;d like that I don&apos;t have.</p>
 							</div>
 
 							<div>
 								<h3 className="font-bold mb-2">Got another question? Please contact me</h3>
-								<p>I'm at: <a href="mailto:jono.hey@gmail.com" className="text-blue-600 hover:underline">jono.hey@gmail.com</a></p>
+								<p>I&apos;m at: <a href="mailto:jono.hey@gmail.com" className="text-blue-600 hover:underline">jono.hey@gmail.com</a></p>
 							</div>
 						</div>
 					</div>
@@ -434,10 +434,10 @@ const Book = () => {
 						<h2 className="text-3xl font-bold mb-8">Why a book?</h2>
 						<div className="space-y-6 prose">
 							<p>
-								I started making sketchplanations in 2013 by sketching them in actual books. While putting the sketches online has helped them reach so many more people there's something about browsing through the sketches in a book, phones and laptops away, that makes it the best way to experience it.
+								I started making sketchplanations in 2013 by sketching them in actual books. While putting the sketches online has helped them reach so many more people there&apos;s something about browsing through the sketches in a book, phones and laptops away, that makes it the best way to experience it.
 							</p>
 							<p>
-								Which sketches to include was a challenge. I'm really happy that I've selected sketches that will teach you a new thing or two about the world, make you think, inspire you and make you smile. In the process, I added a host of sketches for topics I'd always wanted to cover ranging from How to Win at Monopoly to the Basics of a Good Night's Sleep.
+								Which sketches to include was a challenge. I&apos;m really happy that I&apos;ve selected sketches that will teach you a new thing or two about the world, make you think, inspire you and make you smile. In the process, I added a host of sketches for topics I&apos;d always wanted to cover ranging from How to Win at Monopoly to the Basics of a Good Night&apos;s Sleep.
 							</p>
 						</div>
 					</div>
