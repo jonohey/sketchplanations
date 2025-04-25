@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import styles from './big-ideas-little-pictures.module.css'
 
 import { pageTitle } from 'helpers'
 import bigIdeasLittlePicturesCoverTransparentImage from 'images/big-ideas-little-pictures-cover-transparent.png'
@@ -313,10 +314,8 @@ const Book = ({ country }) => {
             {/* Videos stacked vertically */}
             <div className='max-w-3xl mx-auto px-4 sm:px-6 lg:px-8'>
               <div className='space-y-8'>
-                <div className='youtube-video-container'>
+                <div className={styles.youtube_container}>
                   <iframe
-                    width='560'
-                    height='315'
                     src='https://www.youtube.com/embed/dQqP6aBLHYc?si=oogeEYEXru3cs53s&controls=0&rel=0'
                     title='YouTube video player'
                     frameBorder='0'
@@ -324,10 +323,8 @@ const Book = ({ country }) => {
                     allowFullScreen
                   ></iframe>
                 </div>
-                <div className='youtube-video-container'>
+                <div className={styles.youtube_container}>
                   <iframe
-                    width='560'
-                    height='315'
                     src='https://www.youtube.com/embed/1NQqM5ZjR2g?si=BOQLpNP4RDwVLnQ4'
                     title='YouTube video player'
                     frameBorder='0'
