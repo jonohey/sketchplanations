@@ -101,6 +101,7 @@ const Book = ({ country }) => {
           content="Discover 'Big Ideas, Little Pictures' by Jono Hey—a delightful book that simplifies complex ideas with clear illustrations. Explore reviews, FAQs, see what's inside, and find out how to order your copy."
         />
         <link rel='canonical' href='https://sketchplanations.com/big-ideas-little-pictures' />
+        <link rel="preconnect" href="https://www.youtube.com" />
       </Head>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='py-12'>
@@ -114,7 +115,7 @@ const Book = ({ country }) => {
                   placeholder='blur'
                   className='mx-auto'
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  quality={90}
+                  quality={75}
                   width={600}
                   height={800}
                 />
@@ -270,6 +271,8 @@ const Book = ({ country }) => {
                   fill
                   className='object-contain rounded-lg'
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  loading="lazy"
+                  quality={75}
                 />
               </div>
               <div className='aspect-[3/2] relative'>
@@ -279,6 +282,8 @@ const Book = ({ country }) => {
                   fill
                   className='object-contain rounded-lg'
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  loading="lazy"
+                  quality={75}
                 />
               </div>
               <div className='aspect-[3/2] relative'>
@@ -288,6 +293,8 @@ const Book = ({ country }) => {
                   fill
                   className='object-contain rounded-lg'
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  loading="lazy"
+                  quality={75}
                 />
               </div>
               <div className='aspect-[3/2] relative'>
@@ -297,6 +304,8 @@ const Book = ({ country }) => {
                   fill
                   className='object-contain rounded-lg'
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  loading="lazy"
+                  quality={75}
                 />
               </div>
             </div>
@@ -311,6 +320,7 @@ const Book = ({ country }) => {
                     frameBorder='0'
                     allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
                     allowFullScreen
+                    loading="lazy"
                   ></iframe>
                 </div>
                 <div className={styles.youtube_container}>
@@ -321,6 +331,7 @@ const Book = ({ country }) => {
                     allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
                     referrerPolicy='strict-origin-when-cross-origin'
                     allowFullScreen
+                    loading="lazy"
                   ></iframe>
                 </div>
               </div>
