@@ -81,7 +81,8 @@ const OrderLink = ({ href, children }) => (
     href={href}
     target='_blank'
     rel='noopener noreferrer'
-    className='inline-block px-6 py-2 rounded-full border border-blue text-blue hover:bg-blueLight transition-colors'
+    className='btn-outline'
+    aria-label={`Order from ${children}`}
     onClick={() => {
       track('Book-store-link', { location: children })
     }}
@@ -132,7 +133,7 @@ const Book = ({ country }) => {
               </div>
             </div>
             <div className='w-full md:w-1/2'>
-              <blockquote className='text-xl md:text-2xl mb-4 font-medium'>
+              <blockquote className='text-lg md:text-xl mb-4 font-medium'>
                 <p className='mb-4'>
                   &quot;This is such a cool book.
                 </p>
@@ -143,7 +144,7 @@ const Book = ({ country }) => {
                   You&apos;ll learn something on every page—and be entertained too.&quot;
                 </p>
               </blockquote>
-              <cite className='text-gray-600 dark:text-gray-300 block text-lg'>— Bill Gates</cite>
+              <cite className={`text-gray-800 dark:text-gray-200 block text-2xl font-semibold ${styles.cite}`}>— Bill Gates</cite>
             </div>
           </div>
 
@@ -151,7 +152,7 @@ const Book = ({ country }) => {
             <h1 className='text-4xl font-bold mb-2'>Big Ideas Little Pictures</h1>
             <p className='text-xl text-gray-600 dark:text-gray-300 mb-8'>Explaining the world one sketch at a time</p>
             <p className='text-lg leading-relaxed'>
-              At last! Sketchplanations in a book. In this 288-page collection, Jono Hey collects together over 130
+              Sketchplanations in a book! In this 288-page collection, Jono Hey collects together over 130
               inspiring, funny and relatable sketches about life. Combining existing and new topics, Big Ideas Little
               Pictures is a perfect gift of the wisdom and joy of Sketchplanations.
             </p>
@@ -261,12 +262,14 @@ const Book = ({ country }) => {
               )}
             </div>
 
-            <p className='text-gray-600 mt-8 text-center'>
-              Or order from your local bookshop because we 💙 them.
-            </p>
-            <p className='text-sm text-gray-600 mt-8 text-center'>
-              Notwithstanding, I earn from qualifying purchases through the Amazon Associates program if you use the Amazon links on this site, which helps me out if you are planning to buy from Amazon.
-            </p>
+            <div className='prose dark:prose-invert mx-auto text-center'>
+              <p className='mt-8'>
+                Or order from your local bookshop because we 💙 them.
+              </p>
+              <p className='text-sm mt-8'>
+                Notwithstanding, I earn from qualifying purchases through the Amazon Associates program if you use the Amazon links on this site, which helps me out if you are planning to buy from Amazon.
+              </p>
+            </div>
           </div>
 
           <div id='whats-inside' className='mt-24'>
@@ -343,38 +346,38 @@ const Book = ({ country }) => {
             <div className='max-w-5xl mx-auto px-4 sm:px-6 lg:px-8'>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
                 {/* Bill Gates Quote */}
-                <div className='bg-gray-50 p-8 rounded-lg'>
-                  <blockquote className='text-base mb-6'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     &quot;This is such a cool book. The range of Jono&apos;s knowledge is astounding, and so is his
                     ability to digest complex ideas into deceptively simple drawings. You&apos;ll learn something on
                     every page—and be entertained too.&quot;
                   </blockquote>
                   <div className='flex items-center gap-4'>
-                    <div className='font-semibold'>Bill Gates</div>
+                    <cite className={`${styles.cite} font-semibold`}>Bill Gates</cite>
                   </div>
                 </div>
 
                 {/* Dan Roam Quote */}
-                <div className='bg-gray-50 p-8 rounded-lg'>
-                  <blockquote className='text-base mb-6'>
-					<p>
-						As the world becomes more complex and fraught, the more we need clear and honest pictures to
-						show us a better way. In his marvellous book, <i>Big Ideas, Little Pictures</i>, Jono Hey gives
-						us the pictures we need.
-					</p>
-					<p>
-						Whether exploring the size of the universe, unpacking the paradox of
-                    choice, or illuminating the pure joy of the Golden Ratio, Jono&apos;s brilliant sketches make
-                    everything make more sense.
-					</p>
-					<p>
-						I can&apos;t think of a better gift for my mind, and yours.
-					</p>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
+                    <p>
+                      As the world becomes more complex and fraught, the more we need clear and honest pictures to
+                      show us a better way. In his marvellous book, <i>Big Ideas, Little Pictures</i>, Jono Hey gives
+                      us the pictures we need.
+                    </p>
+                    <p>
+                      Whether exploring the size of the universe, unpacking the paradox of
+                      choice, or illuminating the pure joy of the Golden Ratio, Jono&apos;s brilliant sketches make
+                      everything make more sense.
+                    </p>
+                    <p>
+                      I can&apos;t think of a better gift for my mind, and yours.
+                    </p>
                   </blockquote>
                   <div className='flex items-center gap-4'>
                     <div>
-                      <div className='font-semibold'>Dan Roam</div>
-                      <div className='text-sm text-gray-600'>
+                      <cite className={`${styles.cite} font-semibold block`}>Dan Roam</cite>
+                      <div className='text-sm text-gray-600 dark:text-gray-300'>
                         International bestselling author of The Back of the Napkin, and Draw To Win
                       </div>
                     </div>
@@ -382,8 +385,8 @@ const Book = ({ country }) => {
                 </div>
 
                 {/* Mike Rohde Quote */}
-                <div className='bg-gray-50 p-8 rounded-lg'>
-                  <blockquote className='text-base mb-6'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     &quot;Big Ideas, Little Pictures is a magical collection of ideas, concepts, and wisdom—some that
                     I&apos;ve wondered about and others I&apos;ve never thought about before—presented in a clear
                     visual way that makes Jono&apos;s sketchplanations a joy to read, reference, and share. It&apos;s a
@@ -391,8 +394,8 @@ const Book = ({ country }) => {
                   </blockquote>
                   <div className='flex items-center gap-4'>
                     <div>
-                      <div className='font-semibold'>Mike Rohde</div>
-                      <div className='text-sm text-gray-600'>
+                      <cite className={`${styles.cite} font-semibold block`}>Mike Rohde</cite>
+                      <div className='text-sm text-gray-600 dark:text-gray-300'>
                         Bestselling author of The Sketchnote Handbook and illustrator of REWORK
                       </div>
                     </div>
@@ -400,15 +403,15 @@ const Book = ({ country }) => {
                 </div>
 
                 {/* Katy Milkman Quote */}
-                <div className='bg-gray-50 p-8 rounded-lg'>
-                  <blockquote className='text-base mb-6'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     &quot;I&apos;m an enormous fan of the wonderful way Jono&apos;s sketches bring scientific insights
                     to life for a wide audience.&quot;
                   </blockquote>
                   <div className='flex items-center gap-4'>
                     <div>
-                      <div className='font-semibold'>Katy Milkman</div>
-                      <div className='text-sm text-gray-600'>
+                      <cite className={`${styles.cite} font-semibold block`}>Katy Milkman</cite>
+                      <div className='text-sm text-gray-600 dark:text-gray-300'>
                         Professor at the Wharton School of the University of Pennsylvania and author of the
                         international bestseller How to Change
                       </div>
@@ -417,22 +420,22 @@ const Book = ({ country }) => {
                 </div>
 
                 {/* Richard Shotton Quote */}
-                <div className='bg-gray-50 p-8 rounded-lg'>
-                  <blockquote className='text-base mb-6'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     &quot;Brilliant! It distills a variety of complex and profound ideas into simple to understand and
                     beautifully drawn sketches.&quot;
                   </blockquote>
                   <div className='flex items-center gap-4'>
                     <div>
-                      <div className='font-semibold'>Richard Shotton</div>
-                      <div className='text-sm text-gray-600'>Author of The Choice Factory</div>
+                      <cite className={`${styles.cite} font-semibold block`}>Richard Shotton</cite>
+                      <div className='text-sm text-gray-600 dark:text-gray-300'>Author of The Choice Factory</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Brendan Leonard Quote */}
-                <div className='bg-gray-50 p-8 rounded-lg'>
-                  <blockquote className='text-base mb-6'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     &quot;Jono Hey&apos;s Big Ideas Little Pictures is the kind of book that I want to devour all at
                     once, with his brilliantly efficient illustrations breaking down complex ideas—but that I make
                     myself ration to a few pages per day, to give myself time to absorb everything. Either way,
@@ -440,8 +443,8 @@ const Book = ({ country }) => {
                   </blockquote>
                   <div className='flex items-center gap-4'>
                     <div>
-                      <div className='font-semibold'>Brendan Leonard</div>
-                      <div className='text-sm text-gray-600'>
+                      <cite className={`${styles.cite} font-semibold block`}>Brendan Leonard</cite>
+                      <div className='text-sm text-gray-600 dark:text-gray-300'>
                         Creator at Semi-rad and author of Make It: 50 Myths and Truths About Creating
                       </div>
                     </div>
@@ -449,15 +452,15 @@ const Book = ({ country }) => {
                 </div>
 
                 {/* Mark Frauenfelder Quote */}
-                <div className='bg-gray-50 p-8 rounded-lg'>
-                  <blockquote className='text-base mb-6'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     &quot;Jono&apos;s superpower is the ability to break down complex concepts into digestible, visually
                     appealing explanations.&quot;
                   </blockquote>
                   <div className='flex items-center gap-4'>
                     <div>
-                      <div className='font-semibold'>Mark Frauenfelder</div>
-                      <div className='text-sm text-gray-600'>
+                      <cite className={`${styles.cite} font-semibold block`}>Mark Frauenfelder</cite>
+                      <div className='text-sm text-gray-600 dark:text-gray-300'>
                         Founder of Boing Boing, Recomendo, Make and Wired magazines
                       </div>
                     </div>
@@ -465,16 +468,16 @@ const Book = ({ country }) => {
                 </div>
 
                 {/* Trenton Moss Quote */}
-                <div className='bg-gray-50 p-8 rounded-lg'>
-                  <blockquote className='text-base mb-6'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     &quot;I&apos;ve loved following Sketchplanations for years. And finally, Jono has brought it all
                     together in this wonderful book. Keep a copy in your home and show it to everyone who comes
                     over.&quot;
                   </blockquote>
                   <div className='flex items-center gap-4'>
                     <div>
-                      <div className='font-semibold'>Trenton Moss</div>
-                      <div className='text-sm text-gray-600'>
+                      <cite className={`${styles.cite} font-semibold block`}>Trenton Moss</cite>
+                      <div className='text-sm text-gray-600 dark:text-gray-300'>
                         Bestselling author of Human Powered and Founder of Team Sterka
                       </div>
                     </div>
@@ -482,8 +485,8 @@ const Book = ({ country }) => {
                 </div>
 
                 {/* Jason Barron Quote */}
-                <div className='bg-gray-50 p-8 rounded-lg'>
-                  <blockquote className='text-base mb-6'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     &quot;Jono&apos;s delightful book is a fantastic blend of text and visuals, making the topics easy
                     to understand and remember. I found myself eager to turn each page, learning things I had never
                     known before. I love this book and recommend it to anyone looking to enrich their knowledge at super
@@ -491,20 +494,20 @@ const Book = ({ country }) => {
                   </blockquote>
                   <div className='flex items-center gap-4'>
                     <div>
-                      <div className='font-semibold'>Jason Barron</div>
-                      <div className='text-sm text-gray-600'>Author of The Visual MBA</div>
+                      <cite className={`${styles.cite} font-semibold block`}>Jason Barron</cite>
+                      <div className='text-sm text-gray-600 dark:text-gray-300'>Author of The Visual MBA</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Gillian Cross Quote */}
-                <div className='bg-gray-50 p-8 rounded-lg'>
-                  <blockquote className='text-base mb-6'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     <p>
                       &quot;I love this book. It will delight adults, fascinate children and help us all to grasp
                       important ideas.
-					</p>
-					<p>Want to understand the four horsemen of relationship apocalypse? Or different types
+                    </p>
+                    <p>Want to understand the four horsemen of relationship apocalypse? Or different types
                       of phishing? Or the ten essentials for wilderness safety? Jono Hey&apos;s explanations are brief and
                       clear – but it&apos;s his pictures that stick in your head. Every time you turn over a page,
                       there&apos;s something new. I can&apos;t wait to try out the instructions for skipping rocks like a
@@ -518,15 +521,15 @@ const Book = ({ country }) => {
                   </blockquote>
                   <div className='flex items-center gap-4'>
                     <div>
-                      <div className='font-semibold'>Gillian Cross</div>
-                      <div className='text-sm text-gray-600'>Multi-award-winning children&apos;s book author</div>
+                      <cite className={`${styles.cite} font-semibold block`}>Gillian Cross</cite>
+                      <div className='text-sm text-gray-600 dark:text-gray-300'>Multi-award-winning children&apos;s book author</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Eva-Lotta Lamm Quote */}
-                <div className='bg-gray-50 p-8 rounded-lg'>
-                  <blockquote className='text-base mb-6'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     <p>
                       &quot;<i>Big Ideas, Little Pictures</i> by Jono Hey is a beautiful and powerful book at the
                       same time. On each page, Jono visualises a complex concept into a clear, engaging little drawing.
@@ -537,29 +540,27 @@ const Book = ({ country }) => {
                       This large collection of concepts, scientific findings and interesting frameworks is
                       delightful and a real testament to the power of communicating through simple visuals. This body of
                       work is even more impressive as it was created by Jono over years of drawing one concept per week.
-					</p>
-					<p>
+                    </p>
+                    <p>
                       As a fellow visual thinker I&apos;m in love with this wonderful book. It&apos;s a joy to dive in at
                       any page, to get drawn in by the pictures and to learn a new fact with every turn of the page.&quot;
                     </p>
                   </blockquote>
                   <div className='flex items-center gap-4'>
                     <div>
-                      <div className='font-semibold'>Eva-Lotta Lamm</div>
-                      <div className='text-sm text-gray-600'>Designer and Visual Thinker</div>
+                      <cite className={`${styles.cite} font-semibold block`}>Eva-Lotta Lamm</cite>
+                      <div className='text-sm text-gray-600 dark:text-gray-300'>Designer and Visual Thinker</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Dad Quote */}
-                <div className='bg-gray-50 p-8 rounded-lg'>
-                  <blockquote className='text-base mb-6'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     &quot;I resent our bedroom looking so messy in the <FancyLink href='/tsundoku'>tsundoku</FancyLink> sketch.&quot;
                   </blockquote>
                   <div className='flex items-center gap-4'>
-                    <div>
-                      <div className='font-semibold'>Dad</div>
-                    </div>
+                    <cite className={`${styles.cite} font-semibold`}>Dad</cite>
                   </div>
                 </div>
               </div>
@@ -568,9 +569,9 @@ const Book = ({ country }) => {
 
           <div id='faq' className='mt-24 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8'>
             <h2 className='text-3xl font-bold mb-8 text-center'>FAQ</h2>
-            <div className='space-y-8 prose'>
+            <div className='space-y-8 prose dark:prose-invert max-w-none'>
               <div>
-                <h3 className='font-bold mb-2'>Interested in ordering from other countries?</h3>
+                <h3>Can I order in a different country?</h3>
                 <p>
                   Please contact me at{' '}
                   <FancyLink href='mailto:jono.hey@gmail.com'>
@@ -581,17 +582,22 @@ const Book = ({ country }) => {
               </div>
 
               <div>
-                <h3 className='font-bold mb-2'>Will there be an eBook?</h3>
+                <h3>Will there be an eBook?</h3>
                 <p>
                   Yes. There should be a Kindle version of the book coming in 2025, but it&apos;s not out yet, and it&apos;s not nearly as nice on the coffee table.
                 </p>
               </div>
 
               <div>
-                <h3 className='font-bold mb-2'>Do you have photos or images I can use to share?</h3>
+                <h3>Do you have photos or images I can use to share?</h3>
                 <p>
                   Yes. Please use images in the{' '}
-                  <FancyLink href='https://drive.google.com/drive/folders/1QFZrtmseJO9kbH3NLwIq9RPaxeKd7Hb3?usp=sharing' target='_blank'>
+                  <FancyLink 
+                    href='https://drive.google.com/drive/folders/1QFZrtmseJO9kbH3NLwIq9RPaxeKd7Hb3?usp=sharing' 
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    aria-label='Access the basic media kit on Google Drive'
+                  >
                     basic media kit
                   </FancyLink>
                   . Let me know if it&apos;s missing something.
@@ -599,35 +605,47 @@ const Book = ({ country }) => {
               </div>
 
               <div>
-                <h3 className='font-bold mb-2'>Is it available in other languages?</h3>
+                <h3>Is it available in other languages?</h3>
                 <p>
                   Not yet. Do let me know if you&apos;d like it in another language—it always helps to gauge demand.
                 </p>
               </div>
 
               <div>
-                <h3 className='font-bold mb-2'>What is the ISBN for Big Ideas Little Pictures?</h3>
+                <h3>What is the ISBN for Big Ideas Little Pictures?</h3>
                 <p>The ISBN-13 is 978-1956403572</p>
                 <p>ISBN-10 is 1956403574</p>
               </div>
 
               <div>
-                <h3 className='font-bold mb-2'>What&apos;s the picture on the cover?</h3>
+                <h3>What&apos;s the picture on the cover?</h3>
                 <p>
                   The picture is my own version of Hokusai&apos;s remarkable <i>The Great Wave off
                   Kanagawa</i> or just the <i>Great Wave</i>. I once saw
                   the real thing at the British Museum in London. It&apos;s small, but few pictures captivate the way it
-                  does. <FancyLink href='https://kottke.org/24/05/the-evolution-of-hokusais-great-wave' target='_blank'>Hokusai&apos;s wave evolved a lot throughout his life</FancyLink>.
+                  does. <FancyLink 
+                    href='https://kottke.org/24/05/the-evolution-of-hokusais-great-wave' 
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    aria-label='Read about how Hokusais wave evolved throughout his life'
+                  >
+                    Hokusai&apos;s wave evolved a lot throughout his life
+                  </FancyLink>.
                 </p>
                 <p>
-                  <FancyLink href='https://www.redbubble.com/shop/ap/153657825'>
+                  <FancyLink 
+                    href='https://www.redbubble.com/shop/ap/153657825'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    aria-label='Buy a print of the Sketchplanations Wave on Redbubble'
+                  >
                     Buy a print of the Sketchplanations Wave
                   </FancyLink>
                 </p>
               </div>
 
               <div>
-                <h3 className='font-bold mb-2'>Got another question? Please contact me</h3>
+                <h3>Got another question? Please contact me</h3>
                 <p>
                   I&apos;m at:{' '}
                   <FancyLink href='mailto:jono.hey@gmail.com'>
@@ -638,7 +656,7 @@ const Book = ({ country }) => {
             </div>
           </div>
 
-          <div id='why-book' className='mt-24 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8'>
+          <div id='why' className='mt-24 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8'>
             <h2 className='text-3xl font-bold mb-8'>Why a book?</h2>
             <div className='space-y-6 prose'>
               <p>
