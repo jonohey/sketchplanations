@@ -25,6 +25,10 @@
     }
   }
 
+  .btn-outline {
+    @apply inline-block px-6 py-2 rounded-full border border-blue dark:border-white text-blue dark:text-white hover:bg-blueLight dark:hover:bg-white/10 transition-colors;
+  }
+
   .masked-image {
     mask-image: var(--mask-image);
   }
