@@ -240,8 +240,11 @@ const Book = ({ country }) => {
               {!showAllStores ? (
                 <div className='text-center mt-8'>
                   <button
+                    type="button"
                     onClick={() => setShowAllStores(true)}
-                    className='text-blue hover:underline text-sm font-medium'
+                    className='text-blue hover:underline font-medium'
+                    aria-expanded={showAllStores}
+                    aria-controls="other-regions-stores"
                   >
                     Show stores in more regions →
                   </button>
@@ -271,8 +274,11 @@ const Book = ({ country }) => {
                   
                   <div className='text-center mt-8'>
                     <button
+                      type="button"
                       onClick={() => setShowAllStores(false)}
-                      className='text-blue hover:underline text-sm font-medium'
+                      className='text-blue hover:underline font-medium'
+                      aria-expanded={showAllStores}
+                      aria-controls="other-regions-stores"
                     >
                       Show fewer stores ↑
                     </button>
@@ -282,6 +288,14 @@ const Book = ({ country }) => {
             </div>
 
             <div className='prose dark:prose-invert mx-auto text-center'>
+              <p className='mt-8'>
+                <FancyLink 
+                  href='https://forms.gle/btggtcZZuBqJb58U8'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  aria-label='Order a signed copy of Big Ideas Little Pictures'
+                >Order a signed copy from me</FancyLink>
+              </p>
               <p className='mt-8'>
                 Or order from your local bookshop because we 💙 them.
               </p>
@@ -590,7 +604,7 @@ const Book = ({ country }) => {
                 {/* Dad Quote */}
                 <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
                   <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    &quot;I resent our bedroom looking so messy in the <FancyLink href='/tsundoku'>tsundoku</FancyLink> sketch.&quot;
+                    &quot;I resent our bedroom looking so messy in the <FancyLink href='/tsundoku' aria-label='Learn more about Tsundoku'>tsundoku</FancyLink> sketch.&quot;
                   </blockquote>
                   <div className='flex items-center gap-4'>
                     <cite className={`${styles.cite} font-semibold`}>Dad</cite>
@@ -607,7 +621,10 @@ const Book = ({ country }) => {
                 <h3>Can I order in a different country?</h3>
                 <p>
                   Please contact me at{' '}
-                  <FancyLink href='mailto:jono.hey@gmail.com'>
+                  <FancyLink 
+                    href='mailto:jono.hey@gmail.com'
+                    aria-label='Email Jono Hey'
+                  >
                     jono.hey@gmail.com
                   </FancyLink>{' '}
                   and let me know where you are. It helps us get distribution in the right places first.
@@ -657,17 +674,15 @@ const Book = ({ country }) => {
                   Kanagawa</i> or just the <i>Great Wave</i>. I once saw
                   the real thing at the British Museum in London. It&apos;s small, but few pictures captivate the way it
                   does. <FancyLink 
-                    href='https://kottke.org/24/05/the-evolution-of-hokusais-great-wave' 
+                    href='https://kottke.org/24/05/the-evolution-of-hokusais-great-wave'
                     target='_blank'
                     rel='noopener noreferrer'
                     aria-label='Read about how Hokusais wave evolved throughout his life'
-                  >
-                    Hokusai&apos;s wave evolved a lot throughout his life
-                  </FancyLink>.
+                  >Hokusai&apos;s wave evolved a lot throughout his life</FancyLink>.
                 </p>
                 <p>
                   <FancyLink 
-                    href='https://www.redbubble.com/shop/ap/153657825'
+                    href='https://www.redbubble.com/shop/ap/162403242?asc=u'
                     target='_blank'
                     rel='noopener noreferrer'
                     aria-label='Buy a print of the Sketchplanations Wave on Redbubble'
@@ -681,7 +696,10 @@ const Book = ({ country }) => {
                 <h3>Got another question? Please contact me</h3>
                 <p>
                   I&apos;m at:{' '}
-                  <FancyLink href='mailto:jono.hey@gmail.com'>
+                  <FancyLink 
+                    href='mailto:jono.hey@gmail.com'
+                    aria-label='Email Jono Hey'
+                  >
                     jono.hey@gmail.com
                   </FancyLink>
                 </p>
