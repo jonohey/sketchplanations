@@ -120,7 +120,7 @@ const Footer = () => {
 				<div className="max-w-screen-xl mx-auto">
 					<div className="mb-3 text-xl font-semibold">Explore more</div>
 					<div className="prose mb-6">
-						<p className="text-textSubdued text-balance ">
+						<p className="text-balance">
 							The sketches cover many topics. Here are some of my favourites:
 						</p>
 					</div>
@@ -135,7 +135,7 @@ const Footer = () => {
 					</div>
 					<FancyLink
 						href="/categories"
-						className="inline-block text-textSubdued hover:text-blue mt-6"
+						className="inline-block hover:text-blue mt-6"
 					>
 						<span className="inline-flex flex-row gap-x-1 items-center">
 							More topics
