@@ -1,5 +1,6 @@
 import { track } from "@vercel/analytics";
 import { Download, ExternalLink } from "lucide-react";
+import Link from 'next/link';
 import { useEffect, useState } from "react";
 
 import styles from "./DownloadModal.module.css";
@@ -57,18 +58,19 @@ const DownloadModal = ({ sketchplanationUid, sketchplanationTitle }) => {
 									<ExternalLink size={14} className="inline-block ml-1 mb-1" />
 								</a>
 							</li>
-							<li><a
+							<li>
+								<Link
 									href="/big-ideas-little-pictures"
 									className="text-blue-600 hover:underline"
 								>
 									Buy the book
-								</a>
+								</Link>
 							</li>
 							<li>or subscribe by email below</li>
 						</ul>
 						<p>
 							Commercial usage? Please see the{" "}
-							<a
+							<Link
 								href="/licence"
 								target="_blank"
 								rel="noreferrer"
@@ -76,7 +78,7 @@ const DownloadModal = ({ sketchplanationUid, sketchplanationTitle }) => {
 							>
 								licence
 								<ExternalLink size={14} className="inline-block ml-1 mb-1" />
-							</a>
+							</Link>
 						</p>
 					</div>
 					<SubscribeInline doc={subscribeInlineDoc} />
