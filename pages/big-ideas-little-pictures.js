@@ -18,24 +18,15 @@ const storeLinks = {
   US: [
     { href: 'https://amzn.to/455q8Qp', label: 'Amazon.com' },
     { href: 'https://www.barnesandnoble.com/w/big-ideas-little-pictures-jono-hey/1143331058?ean=9781956403572', label: 'Barnes & Noble' },
-    {
-      href: 'https://bookshop.org/p/books/big-ideas-little-pictures-explaining-the-world-once-sketch-at-a-time-jono-hey/19990252',
-      label: 'Bookshop.org',
-    },
-	{ href: 'https://www.target.com/p/big-ideas-little-pictures-by-jono-hey-hardcover/-/A-89029770', label: 'Target' },
-	{ href: 'https://www.booksamillion.com/p/Big-Ideas-Little-Pictures/Jono-Hey/9781956403572?id=8965300189654', label: 'Books A Million' },
+    { href: 'https://bookshop.org/p/books/big-ideas-little-pictures-explaining-the-world-once-sketch-at-a-time-jono-hey/19990252', label: 'Bookshop.org' },
+    { href: 'https://www.target.com/p/big-ideas-little-pictures-by-jono-hey-hardcover/-/A-89029770', label: 'Target' },
+    { href: 'https://www.booksamillion.com/p/Big-Ideas-Little-Pictures/Jono-Hey/9781956403572?id=8965300189654', label: 'Books A Million' },
   ],
   GB: [
     { href: 'https://amzn.to/3tsd3lF', label: 'Amazon UK' },
-    {
-      href: 'https://blackwells.co.uk/bookshop/product/Big-Ideas-Little-Pictures-by-Jono-Hey/9781804190029',
-      label: 'Blackwells',
-    },
-    { href: 'https://www.waterstones.com/book/big-ideas-little-pictures/jono-hey/9781804190029', label: 'Waterstones' },
-    {
-      href: 'https://www.foyles.co.uk/witem/computing-science/big-ideas-little-pictures-explaining,jono-hey-9781804190029',
-      label: 'Foyles',
-    },
+    { href: 'https://blackwells.co.uk/bookshop/product/Big-Ideas-Little-Pictures-by-Jono-Hey/9781956403572', label: 'Blackwells'},
+    { href: 'https://www.waterstones.com/book/big-ideas-little-pictures/jono-hey/9781956403572', label: 'Waterstones' },
+    { href: 'https://www.foyles.co.uk/book/big-ideas-little-pictures/jono-hey/9781956403572', label: 'Foyles'},
   ],
 }
 
@@ -122,6 +113,10 @@ const Book = ({ country }) => {
                   priority
                   placeholder='blur'
                   className='mx-auto'
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  quality={90}
+                  width={600}
+                  height={800}
                 />
                 <div className='flex justify-center mt-4'>
                   {[...Array(5)].map((_, i) => (
@@ -184,24 +179,12 @@ const Book = ({ country }) => {
               {/* US Section */}
               <div className='text-center'>
                 <h3 className='text-xl font-semibold mb-4'>United States</h3>
-                <div className='flex flex-wrap gap-4 justify-center mb-3'>
-                  <OrderLink href='https://amzn.to/455q8Qp'>
-                    Amazon.com
-                  </OrderLink>
-                  <OrderLink href='https://www.barnesandnoble.com/w/big-ideas-little-pictures-jono-hey/1143331058?ean=9781956403572'>
-                    Barnes & Noble
-                  </OrderLink>
-                </div>
                 <div className='flex flex-wrap gap-4 justify-center'>
-                  <OrderLink href='https://bookshop.org/p/books/big-ideas-little-pictures-explaining-the-world-once-sketch-at-a-time-jono-hey/19990252'>
-                    Bookshop.org
-                  </OrderLink>
-                  <OrderLink href='https://www.target.com/p/big-ideas-little-pictures-by-jono-hey-hardcover/-/A-89029770'>
-                    Target
-                  </OrderLink>
-                  <OrderLink href='https://www.booksamillion.com/p/Big-Ideas-Little-Pictures/Jono-Hey/9781956403572?id=8965300189654'>
-                    Books A Million
-                  </OrderLink>
+                  {storeLinks.US.map((store) => (
+                    <OrderLink key={store.label} href={store.href}>
+                      {store.label}
+                    </OrderLink>
+                  ))}
                 </div>
               </div>
 
@@ -286,6 +269,7 @@ const Book = ({ country }) => {
                   alt='The Coastline Paradox - How the length of a coastline depends on how you measure it'
                   fill
                   className='object-contain rounded-lg'
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
               <div className='aspect-[3/2] relative'>
@@ -294,6 +278,7 @@ const Book = ({ country }) => {
                   alt='Tsundoku - The act of acquiring books and letting them pile up without reading them'
                   fill
                   className='object-contain rounded-lg'
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
               <div className='aspect-[3/2] relative'>
@@ -302,6 +287,7 @@ const Book = ({ country }) => {
                   alt='The Swiss Cheese Model - For understanding accidents and improving safety'
                   fill
                   className='object-contain rounded-lg'
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
               <div className='aspect-[3/2] relative'>
@@ -310,6 +296,7 @@ const Book = ({ country }) => {
                   alt='Starting a Company - Is like jumping off a cliff and assembling the plane on the way down'
                   fill
                   className='object-contain rounded-lg'
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
             </div>
