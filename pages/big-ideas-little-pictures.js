@@ -253,7 +253,7 @@ const Book = ({ country }) => {
                 <>
                   <div className='text-center'>
                     <h3 className='text-xl font-semibold mb-4'>Worldwide</h3>
-                    <div className='flex flex-wrap gap-4 justify-center'>
+                    <div id="other-regions-stores" className='flex flex-wrap gap-4 justify-center'>
                       {Object.entries(otherStores).map(([countryCode, store]) => (
                         countryCode !== country && (
                           Array.isArray(store) ? (
