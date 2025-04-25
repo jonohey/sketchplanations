@@ -102,6 +102,41 @@ const Book = ({ country }) => {
         />
         <link rel='canonical' href='https://sketchplanations.com/big-ideas-little-pictures' />
         <link rel="preconnect" href="https://www.youtube.com" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              "name": "Big Ideas Little Pictures",
+              "description": "A delightful book that simplifies complex ideas with clear illustrations. Over 130 inspiring, funny and relatable sketches about life.",
+              "image": "https://sketchplanations.com/images/big-ideas-little-pictures-cover-transparent.png",
+              "isbn": "978-1956403572",
+              "author": {
+                "@type": "Person",
+                "name": "Jono Hey"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "Media Lab Books"
+              },
+              "offers": {
+                "@type": "Offer",
+                "availability": "https://schema.org/InStock",
+                "price": "18.99",
+                "priceCurrency": "USD"
+              },
+              "review": {
+                "@type": "Review",
+                "author": {
+                  "@type": "Person",
+                  "name": "Bill Gates"
+                },
+                "reviewBody": "This is such a cool book. The range of Jono's knowledge is astounding, and so is his ability to digest complex ideas into deceptively simple drawings. You'll learn something on every page—and be entertained too."
+              }
+            })
+          }}
+        />
       </Head>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='py-12'>
