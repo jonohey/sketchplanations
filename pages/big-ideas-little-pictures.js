@@ -98,7 +98,7 @@ const Book = ({ country }) => {
         <title>{pageTitle('Big Ideas Little Pictures by Jono Hey')}</title>
         <meta
           name='description'
-          content="Discover 'Big Ideas, Little Pictures' by Jono Hey—a delightful book that simplifies complex ideas with clear illustrations. Explore reviews, FAQs, see what's inside, and order your copy."
+          content="Discover Big Ideas, Little Pictures by Jono Hey—a delightful book that simplifies complex ideas with clear illustrations. Explore reviews, FAQs, see what's inside, and order your copy."
         />
         <link rel='canonical' href='https://sketchplanations.com/big-ideas-little-pictures' />
         <link rel="preconnect" href="https://www.youtube.com" />
