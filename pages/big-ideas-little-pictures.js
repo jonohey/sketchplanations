@@ -112,8 +112,8 @@ const Book = ({ country }) => {
         <meta property="og:type" content="product" />
 
         {/* Additional Open Graph properties */}
-        <meta property="og:image:width" content="640" />
-        <meta property="og:image:height" content="500" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:locale" content="en_GB" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:secure_url" content="https://sketchplanations.com/images/big-ideas-little-pictures-book-thumbnail-1200x630.png" />
