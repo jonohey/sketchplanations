@@ -106,7 +106,7 @@ const Book = ({ country }) => {
         {/* Open Graph Meta Tags */}
         <meta property="og:title" content="Big Ideas Little Pictures by Jono Hey" />
         <meta property="og:description" content="A delightful book that simplifies complex ideas with clear illustrations. Over 130 inspiring, funny and relatable sketches about life." />
-        <meta property="og:image" content="https://sketchplanations.com/images/big-ideas-little-pictures-cover-transparent.png" />
+        <meta property="og:image" content="https://sketchplanations.com/images/big-ideas-little-pictures-book-thumbnail-1200x630.png" />
         <meta property="og:url" content="https://sketchplanations.com/big-ideas-little-pictures" />
         <meta property="og:site_name" content="Sketchplanations" />
         <meta property="og:type" content="product" />
@@ -116,7 +116,7 @@ const Book = ({ country }) => {
         <meta property="og:image:height" content="500" />
         <meta property="og:locale" content="en_GB" />
         <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:secure_url" content="https://sketchplanations.com/images/big-ideas-little-pictures-cover-transparent.png" />
+        <meta property="og:image:secure_url" content="https://sketchplanations.com/images/big-ideas-little-pictures-book-thumbnail-1200x630.png" />
         <meta property="og:image:alt" content="Big Ideas Little Pictures book cover" />
         <meta property="og:price:amount" content="18.99" />
         <meta property="og:price:currency" content="USD" />
@@ -127,7 +127,7 @@ const Book = ({ country }) => {
         <meta name="twitter:site" content="@sketchplanator" />
         <meta name="twitter:title" content="Big Ideas Little Pictures by Jono Hey" />
         <meta name="twitter:description" content="A delightful book that simplifies complex ideas with clear illustrations. Over 130 inspiring, funny and relatable sketches about life." />
-        <meta name="twitter:image" content="https://sketchplanations.com/images/big-ideas-little-pictures-cover-transparent.png" />
+        <meta name="twitter:image" content="https://sketchplanations.com/images/big-ideas-little-pictures-book-thumbnail-1200x630.png" />
         <meta name="twitter:image:alt" content="Big Ideas Little Pictures book cover" />
 
         {/* Additional Twitter properties */}
@@ -147,7 +147,7 @@ const Book = ({ country }) => {
               "@type": "Product",
               "name": "Big Ideas Little Pictures",
               "description": "A delightful book that simplifies complex ideas with clear illustrations. Over 130 inspiring, funny and relatable sketches about life.",
-              "image": "https://sketchplanations.com/images/big-ideas-little-pictures-cover-transparent.png",
+              "image": "https://sketchplanations.com/images/big-ideas-little-pictures-book-thumbnail-1200x630.png",
               "isbn": "978-1956403572",
               "author": {
                 "@type": "Person",
