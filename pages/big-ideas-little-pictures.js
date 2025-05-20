@@ -227,7 +227,7 @@ const Book = ({ country }) => {
             <h1 className='text-4xl font-bold mb-2'>Big Ideas Little Pictures</h1>
             <p className='text-xl text-gray-600 dark:text-gray-300 mb-8'>Explaining the world one sketch at a time</p>
             <p className='text-lg leading-relaxed'>
-              Sketchplanations in a book! In this 288-page collection, Jono Hey collects together over 130
+              Sketchplanations in a book! And <span aria-hidden="true">✨</span> news flash <span aria-hidden="true">✨</span> now an eBook too! In this 288-page collection, Jono Hey collects together over 130
               inspiring, funny and relatable sketches about life. Combining existing and new topics, Big Ideas Little
               Pictures is a perfect gift of the wisdom and joy of Sketchplanations.
             </p>
@@ -676,9 +676,17 @@ const Book = ({ country }) => {
               </div>
 
               <div>
-                <h3>Will there be an eBook?</h3>
+                <h3>Is there an eBook version?</h3>
                 <p>
-                  Yes. There should be a Kindle version of the book coming in 2025, but it&apos;s not out yet, and it&apos;s not nearly as nice on the coffee table.
+                  Yes! As of May 2025 there&apos;s now an eBook of Big Ideas Little Pictures.
+                </p>
+                <p>
+                  It&apos;s great for quick reference, easier to carry on your commute or a flight, and a decent amount cheaper. It&apos;s packed with nearly 150 bite-sized sketches—perfect for dipping in when you need an idea, a shift in perspective, or a smile.
+                </p>
+                <p>You can buy it on the <FancyLink 
+                    href='#order'
+                    aria-label='Buy the eBook of Big Ideas Little Pictures'
+                  >store links above</FancyLink>, or find it on B&N, Apple Books, Kobo, and others.
                 </p>
               </div>
 
