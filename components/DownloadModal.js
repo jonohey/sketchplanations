@@ -1,20 +1,11 @@
 import { track } from "@vercel/analytics";
 import { Download, ExternalLink } from "lucide-react";
 import Link from 'next/link';
-import { useEffect, useState } from "react";
 
 import styles from "./DownloadModal.module.css";
 import SubscribeInline from "./SubscribeInline";
 
 const DownloadModal = ({ sketchplanationUid, sketchplanationTitle }) => {
-	const [subscribeInlineDoc, setSubscribeInlineDoc] = useState(null);
-	
-	useEffect(() => {
-		fetch("/api/subscribeInlineDoc")
-			.then((res) => res.json())
-			.then(setSubscribeInlineDoc);
-	}, []);
-	
 	return (
 		<div>
 			<h2 className={styles.header}>
@@ -81,7 +72,7 @@ const DownloadModal = ({ sketchplanationUid, sketchplanationTitle }) => {
 							</Link>
 						</p>
 					</div>
-					<SubscribeInline doc={subscribeInlineDoc} />
+					<SubscribeInline />
 				</div>
 			</div>
 		</div>

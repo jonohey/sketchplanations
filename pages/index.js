@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 
 import FancyLink from "components/FancyLink";
-import SubscribeInline from "components/SubscribeInline";
 import Image from "next/image";
 import Link from "next/link";
 import bigIdeasLittlePicturesCoverTransparentImage from "../images/big-ideas-little-pictures-cover-transparent.png";
@@ -13,7 +12,7 @@ import { client } from "services/prismic";
 
 const Sketchplanation = dynamic(() => import("../components/Sketchplanation"));
 
-const Home = ({ sketchplanations, subscribeInlineDoc }) => {
+const Home = ({ sketchplanations }) => {
 	return (
 		<>
 			<Head>
@@ -78,10 +77,17 @@ const Home = ({ sketchplanations, subscribeInlineDoc }) => {
 				</div>
 			</div>
 
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8" id="subscribe-strip">
-				<div className="max-w-xl mx-auto text-center">
-					<SubscribeInline doc={subscribeInlineDoc} />
-				</div>
+			<div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-center" id="substack-subscribe-strip">
+				<iframe 
+					src="https://sketchplanations.substack.com/embed" 
+					width="480" 
+					height="320" 
+					style={{ 
+						border: '1px solid #EEE', 
+						background: 'white',
+						overflow: 'hidden'
+					}}
+				/>
 			</div>
 
 			<section className={styles.section} aria-label="Book promotion" id="big-ideas-little-pictures-strip">
@@ -237,15 +243,12 @@ const Home = ({ sketchplanations, subscribeInlineDoc }) => {
 };
 
 export const getServerSideProps = async () => {
-	const [sketchplanations, subscribeInlineDoc] = await Promise.all([
-		client.getByType("sketchplanation", {
-			orderings: [{ field: "my.sketchplanation.published_at", direction: "desc" }],
-			pageSize: 6,
-		}),
-		client.getSingle("subscribe_inline")
-	]);
+	const sketchplanations = await client.getByType("sketchplanation", {
+		orderings: [{ field: "my.sketchplanation.published_at", direction: "desc" }],
+		pageSize: 6,
+	});
 
-	return { props: { sketchplanations, subscribeInlineDoc } };
+	return { props: { sketchplanations } };
 };
 
 export default Home;

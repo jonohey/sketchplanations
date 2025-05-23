@@ -64,12 +64,11 @@ const truncate = (string, limit) => {
 // 	"Unexpected insights",
 // 	"Lucky dip",
 // 	"Broaden your horizons",
-// 	"Curiosity’s reward",
+// 	"Curiosity's reward",
 // ];
 
 const SketchplanationPage = ({
 	sketchplanation,
-	subscribeInlineDoc,
 	similarSketchplanations,
 	licenceDoc,
 	tags,
@@ -276,7 +275,7 @@ const SketchplanationPage = ({
 						</div>
 						<aside className={styles.sidebar}>
 							<div className={styles.cards}>
-								<SubscribeInline doc={subscribeInlineDoc} />
+								<SubscribeInline />
 								<Cards />
 							</div>
 
@@ -296,15 +295,6 @@ const SketchplanationPage = ({
 									</div>
 								)}
 
-								{/* <div className="mt-10">
-									<p className="font-semibold text-base">{randomTitle}</p>
-									<Link
-										href={`/${randomHandle}`}
-										className="btn-secondary text-base mt-4 rounded-lg"
-									>
-										Random sketch <Shuffle size={16} />
-									</Link>
-								</div> */}
 
 								<div className="mt-10">
 									<div className="flex gap-4">
@@ -406,7 +396,6 @@ export async function getStaticProps({ params: { uid } }) {
 		).results,
 	);
 
-	const subscribeInlineDoc = await client.getSingle("subscribe_inline");
 	const licenceDoc = await client.getSingle("licence");
 
 	const tags = sketchplanation.data.tags;
@@ -414,7 +403,6 @@ export async function getStaticProps({ params: { uid } }) {
 	return {
 		props: {
 			sketchplanation,
-			subscribeInlineDoc,
 			similarSketchplanations,
 			licenceDoc,
 			tags,

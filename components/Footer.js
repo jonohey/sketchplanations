@@ -1,6 +1,5 @@
 import { track } from '@vercel/analytics';
 import { ChevronRight, ExternalLink } from "lucide-react";
-import { useEffect, useState } from "react";
 import { RoughNotation } from "react-rough-notation";
 import { Cards } from "./Cards";
 import FancyLink from "./FancyLink";
@@ -118,14 +117,6 @@ const categories = [
 ];
 
 const Footer = () => {
-	const [subscribeInlineDoc, setSubscribeInlineDoc] = useState(null);
-
-	useEffect(() => {
-		fetch("/api/subscribeInlineDoc")
-			.then((res) => res.json())
-			.then(setSubscribeInlineDoc);
-	}, []);
-
 	return (
 		<footer className={styles.root}>
 			<div id="footer-categories" className="pt-6 sm:pt-10 px-[var(--edgeInset)]">
@@ -161,7 +152,7 @@ const Footer = () => {
 				<div className="grid sm:grid-cols-2 gap-12 max-w-screen-xl mx-auto items-center">
 					<Cards />
 					<div className="grid gap-y-8 items-start">
-						<SubscribeInline doc={subscribeInlineDoc} />
+						<SubscribeInline />
 					</div>
 				</div>
 			</div>
