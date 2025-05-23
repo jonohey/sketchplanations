@@ -2,7 +2,7 @@ export default [
 	{
 		source: "/rss",
 		destination: "/rss.xml",
-		permanent: false,
+		permanent: true,
 	},
 	{
 		source: "/subscribe",
