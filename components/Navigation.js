@@ -69,9 +69,8 @@ const Navigation = () => {
 			<a
 				href="https://sketchplanations.substack.com/subscribe"
 				target="_blank"
-				rel="noreferrer"
+				rel="noopener noreferrer"
 				className={styles.item}
-				data-active={false}
 				onClick={() => {
 					track('Subscribe', { location: 'header' });
 				}}
@@ -86,7 +85,6 @@ const Navigation = () => {
 				target="_blank"
 				rel="noreferrer"
 				className={styles.item}
-				data-active={false}
 				onClick={() => {
 					track('Podcast-site-link', { location: 'header' });
 				}}
@@ -101,7 +99,6 @@ const Navigation = () => {
 				target="_blank"
 				rel="noreferrer"
 				className={styles.item}
-				data-active={false}
 				onClick={() => {
 					track('Shop', { location: 'header' });
 				}}

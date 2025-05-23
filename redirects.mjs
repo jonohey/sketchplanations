@@ -7,7 +7,7 @@ export default [
 	{
 		source: "/subscribe",
 		destination: "https://sketchplanations.substack.com/subscribe",
-		permanent: true,
+		permanent: false,
 	},
 	{
 		source: "/explore",

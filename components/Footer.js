@@ -24,7 +24,7 @@ const Nav = () => (
 		<FancyLink
 			href="https://sketchplanations.substack.com/subscribe"
 			target="_blank"
-			rel="noreferrer"
+			rel="noopener noreferrer"
 			onClick={() => {
 				track('Subscribe', { location: 'footer' });
 			}}
