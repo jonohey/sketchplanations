@@ -1,8 +1,13 @@
 export default [
 	{
-    	source: "/rss",
-    	destination: "/rss.xml",
-    	permanent: true,
+		source: "/rss",
+		destination: "/rss.xml",
+		permanent: true,
+	},
+	{
+		source: "/subscribe",
+		destination: "https://sketchplanations.substack.com/subscribe",
+		permanent: false,
 	},
 	{
 		source: "/explore",

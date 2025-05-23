@@ -21,7 +21,19 @@ const Nav = () => (
 		>
 				Book!
 		</FancyLink>
-		<FancyLink href="/subscribe">Subscribe</FancyLink>
+		<FancyLink
+			href="https://sketchplanations.substack.com/subscribe"
+			target="_blank"
+			rel="noopener noreferrer"
+			onClick={() => {
+				track('Subscribe', { location: 'footer' });
+			}}
+		>
+			<span className="inline-flex items-center gap-2">
+				<span>Subscribe</span>
+				<ExternalLink size={16} className="inline" />
+			</span>
+		</FancyLink>
 		<FancyLink
 			href="https://podcast.sketchplanations.com"
 			target="_blank"

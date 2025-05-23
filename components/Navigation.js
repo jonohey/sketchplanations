@@ -66,21 +66,25 @@ const Navigation = () => {
 					Book!
 				</RoughNotation>
 			</Link>
-			<Link
-				href="/subscribe"
+			<a
+				href="https://sketchplanations.substack.com/subscribe"
+				target="_blank"
+				rel="noopener noreferrer"
 				className={styles.item}
-				aria-current={isSelected("/subscribe") ? "page" : undefined}
+				onClick={() => {
+					track('Subscribe', { location: 'header' });
+				}}
 			>
-				<RoughNotation show={isSelected("/subscribe")} {...roughNotationProps}>
-					Subscribe
-				</RoughNotation>
-			</Link>
+				<span className="inline-flex items-center gap-2">
+					<span>Subscribe</span>
+					<ExternalLink size={16} className="inline" />
+				</span>
+			</a>
 			<a
 				href="https://podcast.sketchplanations.com"
 				target="_blank"
 				rel="noreferrer"
 				className={styles.item}
-				data-active={false}
 				onClick={() => {
 					track('Podcast-site-link', { location: 'header' });
 				}}
@@ -95,7 +99,6 @@ const Navigation = () => {
 				target="_blank"
 				rel="noreferrer"
 				className={styles.item}
-				data-active={false}
 				onClick={() => {
 					track('Shop', { location: 'header' });
 				}}
