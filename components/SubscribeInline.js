@@ -5,6 +5,7 @@ const SubscribeInline = () => {
 		<div className={styles.root}>
 			<iframe 
 				src="https://sketchplanations.substack.com/embed" 
+				title="Substack subscription"
 				width="100%" 
 				height="150" 
 				style={{ 
