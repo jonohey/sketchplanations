@@ -147,8 +147,8 @@ importers:
         specifier: ^5.0.2
         version: 5.0.2
       vanilla-cookieconsent:
-        specifier: 3.0.0
-        version: 3.0.0
+        specifier: v3.0.1
+        version: 3.0.1
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.8.3
@@ -4525,8 +4525,8 @@ packages:
   v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
 
-  vanilla-cookieconsent@3.0.0:
-    resolution: {integrity: sha512-oeK7FivRDb424mt3/UT8DG98Pu5m6Uuye7JsdzO6HnYkstW5QHXhkslXyUpE3phtKz3NEeIo7hzLUtfRNRMfbQ==}
+  vanilla-cookieconsent@3.0.1:
+    resolution: {integrity: sha512-gqc4x7O9t1I4xWr7x6/jtQWPr4PZK26SmeA0iyTv1WyoECfAGnu5JEOExmMEP+5Fz66AT9OiCBO3GII4wDQHLw==}
 
   vercel@37.4.0:
     resolution: {integrity: sha512-v7NCmCW1ISjvJy5h2WqmV2GH7Md1c/OYuikWVLnCyqv+6tiVl6ef5v02bsk5HKGBZh70beArxRB3r4sTBD3gBQ==}
@@ -9800,7 +9800,7 @@ snapshots:
 
   v8-compile-cache-lib@3.0.1: {}
 
-  vanilla-cookieconsent@3.0.0: {}
+  vanilla-cookieconsent@3.0.1: {}
 
   vercel@37.4.0:
     dependencies:
