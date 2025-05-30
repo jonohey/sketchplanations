@@ -1,11 +1,11 @@
-import { useState } from "react";
-import Head from "next/head";
-
+import FancyLink from "components/FancyLink";
 import SketchplanationsGrid from "components/SketchplanationsGrid";
-import { pageTitle } from "helpers";
-import { client } from "services/prismic";
 import TextHeader from "components/TextHeader";
+import { pageTitle } from "helpers";
 import { LoaderCircle } from "lucide-react";
+import Head from "next/head";
+import { useState } from "react";
+import { client } from "services/prismic";
 
 const ITEMS_PER_PAGE = 40;
 
@@ -33,11 +33,22 @@ const Archive = ({ initialSketchplanations }) => {
 				<title>{pageTitle("Archive")}</title>
 				<meta
 					name="description"
-					content="The full scrollable archive of Sketchplanations. Happy scrolling!"
+					content="Browse the full visual archive of over a decade of Sketchplanations. Discover simple, clear sketches that explain complex ideas, and explore topics that inspire your curiosity."
 				/>
+				<link rel="canonical" href="https://sketchplanations.com/archive" />
 			</Head>
 			<div className="pt-6 px-6 text-center">
 				<TextHeader>Archive</TextHeader>
+				<p className="prose mx-auto mt-4 mb-8 max-w-2xl text-textSubdued">
+					Explore the full visual archive of over a decade of Sketchplanations and discover sketches that interest and inspire you.
+				</p>
+			</div>
+			<div className="text-center mt-8 mb-8">
+				<FancyLink href="/search">Search</FancyLink>
+				<span className="mx-2">·</span>
+				<FancyLink href="/categories">Categories</FancyLink>
+				<span className="mx-2">·</span>
+				<FancyLink href="/list">List</FancyLink>
 			</div>
 			<SketchplanationsGrid prismicDocs={sketchplanations} />
 			{hasMore && (
@@ -67,6 +78,13 @@ const Archive = ({ initialSketchplanations }) => {
 					</button>
 				</div>
 			)}
+			<div className="text-center mt-2 mb-12">
+				<FancyLink href="/search">Search</FancyLink>
+				<span className="mx-2">·</span>
+				<FancyLink href="/categories">Categories</FancyLink>
+				<span className="mx-2">·</span>
+				<FancyLink href="/list">List</FancyLink>
+			</div>
 		</>
 	);
 };
@@ -78,6 +96,10 @@ async function fetchSketchplanations(page = 1) {
 				field: "my.sketchplanation.published_at",
 				direction: "desc",
 			},
+		],
+		fetch: [
+			'sketchplanation.title',
+			'sketchplanation.image',
 		],
 		pageSize: ITEMS_PER_PAGE,
 		page,

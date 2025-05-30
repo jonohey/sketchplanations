@@ -1,0 +1,13 @@
+.youtube_container iframe {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  width: 100%;
+}
+
+.blockquote p:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.cite {
+  font-style: normal;
+}

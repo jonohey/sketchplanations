@@ -73,6 +73,7 @@ const Header = () => {
 					type="button"
 					className={styles.menu}
 					onClick={() => setIsOpen(!isOpen)}
+					aria-label="Toggle navigation menu"
 				>
 					<Menu />
 				</button>
@@ -106,6 +107,7 @@ const Header = () => {
 							type="button"
 							className={styles["search-toggle-button"]}
 							onClick={enterSearch}
+							aria-label="Open search"
 						>
 							<span className={styles["search-toggle-button__icon"]}>
 								<Search strokeWidth={1} size={22} />
@@ -113,11 +115,6 @@ const Header = () => {
 							<span className={styles["search-toggle-button__text"]}>
 								Search…
 							</span>
-							{/* <kbd
-								className={styles["search-toggle-button__keyboard-shortcut"]}
-							>
-								/
-							</kbd> */}
 							<KeyboardShortcut shortcut="/" />
 						</button>
 					)}

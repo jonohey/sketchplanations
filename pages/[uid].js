@@ -3,6 +3,7 @@ import * as prismicH from "@prismicio/helpers";
 import { PrismicNextImage } from "@prismicio/next";
 import classNames from "classnames";
 import Cards from "components/Cards";
+import DownloadModal from "components/DownloadModal";
 import FancyLink from "components/FancyLink";
 import KeyboardShortcut from "components/KeyboardShortcut";
 import RichText from "components/RichText";
@@ -23,7 +24,6 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { client } from "services/prismic";
 
 const TextHeader = dynamic(() => import("components/TextHeader"));
-const PayWhatYouWant = dynamic(() => import("components/PayWhatYouWant"));
 const Modal = dynamic(() => import("components/Modal"));
 
 import InlinePage from "components/InlinePage";
@@ -64,18 +64,23 @@ const truncate = (string, limit) => {
 // 	"Unexpected insights",
 // 	"Lucky dip",
 // 	"Broaden your horizons",
-// 	"Curiosity’s reward",
+// 	"Curiosity's reward",
 // ];
 
 const SketchplanationPage = ({
 	sketchplanation,
-	subscribeInlineDoc,
 	similarSketchplanations,
 	licenceDoc,
 	tags,
 	olderUid,
 	newerUid,
 }) => {
+	const router = useRouter();
+	// This checks for ref= query param in the url and sets the noindex meta tag if it's present
+	// On recommendation from SEO expert.
+	const shouldNoIndex = router.query.ref !== undefined;
+	const robotsContent = `max-image-preview:large${shouldNoIndex ? ', noindex, nofollow' : ''}`;
+
 	const {
 		data: {
 			image,
@@ -88,7 +93,7 @@ const SketchplanationPage = ({
 		uid,
 	} = sketchplanation;
 
-	const [pwywModalOpen, setPwywModalOpen] = useState(false);
+	const [downloadModalOpen, setDownloadModalOpen] = useState(false);
 	const [licenceModalOpen, setLicenceModalOpen] = useState(false);
 	// const [randomTitle, setRandomTitle] = useState("");
 	const randomHandle = useRandomHandle([uid]);
@@ -98,12 +103,10 @@ const SketchplanationPage = ({
 	const commonProps = {
 		title,
 		podcastLinkUrl,
-		onDownload: () => setPwywModalOpen(true),
+		onDownload: () => setDownloadModalOpen(true),
 		redbubbleLinkUrl,
 		onViewLicence: () => setLicenceModalOpen(true),
 	};
-
-	const router = useRouter();
 
 	useHotkeys(
 		"right, k",
@@ -148,7 +151,8 @@ const SketchplanationPage = ({
 		<Fragment key={uid}>
 			<Head>
 				<title>{pageTitle(title)}</title>
-				<meta name="robots" content="max-image-preview:large" />
+				<link rel="canonical" href={`https://sketchplanations.com/${uid}`} />
+				<meta name="robots" content={robotsContent} />
 				<meta
 					name="description"
 					content={truncate(prismicH.asText(body), 160)}
@@ -191,8 +195,8 @@ const SketchplanationPage = ({
 				]}
 			/>
 
-			<Modal isOpen={pwywModalOpen} onClose={() => setPwywModalOpen(false)}>
-				<PayWhatYouWant
+			<Modal isOpen={downloadModalOpen} onClose={() => setDownloadModalOpen(false)}>
+				<DownloadModal
 					sketchplanationUid={sketchplanation.uid}
 					sketchplanationTitle={title}
 				/>
@@ -232,7 +236,7 @@ const SketchplanationPage = ({
 								image={image}
 								title={title}
 								priority={true}
-								onDownload={() => setPwywModalOpen(true)}
+								onDownload={() => setDownloadModalOpen(true)}
 							>
 								<SketchplanationCtas {...commonProps} variant="lightbox" />
 							</SketchplanationImage>
@@ -242,11 +246,14 @@ const SketchplanationPage = ({
 							<SketchplanationCtas {...commonProps} />
 						</div>
 
+						{/* <div className={styles["book-banner"]}>
+							<BookBanner />
+						</div> */}
+
 						<div className={styles.main}>
 							<div
 								className={classNames(
 									styles.body,
-									// "prose lg:prose-lg mx-auto md:mx-0",
 									"prose lg:prose-lg",
 								)}
 							>
@@ -268,7 +275,7 @@ const SketchplanationPage = ({
 						</div>
 						<aside className={styles.sidebar}>
 							<div className={styles.cards}>
-								<SubscribeInline doc={subscribeInlineDoc} />
+								<SubscribeInline />
 								<Cards />
 							</div>
 
@@ -288,15 +295,6 @@ const SketchplanationPage = ({
 									</div>
 								)}
 
-								{/* <div className="mt-10">
-									<p className="font-semibold text-base">{randomTitle}</p>
-									<Link
-										href={`/${randomHandle}`}
-										className="btn-secondary text-base mt-4 rounded-lg"
-									>
-										Random sketch <Shuffle size={16} />
-									</Link>
-								</div> */}
 
 								<div className="mt-10">
 									<div className="flex gap-4">
@@ -398,7 +396,6 @@ export async function getStaticProps({ params: { uid } }) {
 		).results,
 	);
 
-	const subscribeInlineDoc = await client.getSingle("subscribe_inline");
 	const licenceDoc = await client.getSingle("licence");
 
 	const tags = sketchplanation.data.tags;
@@ -406,7 +403,6 @@ export async function getStaticProps({ params: { uid } }) {
 	return {
 		props: {
 			sketchplanation,
-			subscribeInlineDoc,
 			similarSketchplanations,
 			licenceDoc,
 			tags,

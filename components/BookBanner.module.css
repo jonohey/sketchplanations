@@ -1,0 +1,40 @@
+.root {
+  @apply block w-full bg-blueLight backdrop-blur-sm rounded-lg overflow-hidden transition-all;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: var(--maxWidth, 40rem);
+}
+
+.content {
+  @apply flex items-center gap-4 p-4;
+}
+
+.imageWrapper {
+  @apply flex-none;
+}
+
+.image {
+  @apply w-20 h-auto md:w-20;
+}
+
+.text {
+  @apply flex-1 flex flex-col;
+}
+
+.title {
+  @apply font-semibold mb-0 text-gray-900 dark:text-gray-900;
+}
+
+.leadCopy {
+  @apply mt-0 text-gray-900 dark:text-gray-900;
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size 0.3s;
+}
+
+.root:hover .leadCopy {
+  background-size: 100% 1px;
+}

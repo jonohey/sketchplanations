@@ -32,6 +32,7 @@
     'title'
     'image'
     'ctas'
+    'book-banner'
     'main'
     'sidebar';
 
@@ -51,6 +52,7 @@
       'title sidebar'
       'image sidebar'
       'ctas sidebar'
+      'book-banner sidebar'
       'main sidebar'
       '. sidebar';
   }
@@ -218,9 +220,12 @@
 
 .ctas-area {
   grid-area: ctas;
-  /* @apply py-3 mx-5 sm:mx-0 mb-5 border-t border-b border-border; */
-  @apply px-5 sm:px-0 mb-7 mx-auto lg:mx-0;
-  max-width: var(--maxWidth);
+  @apply px-0 sm:px-5 mb-7 mx-auto lg:mx-0;
+  max-width: none;
+
+  @screen sm {
+    max-width: var(--maxWidth);
+  }
 }
 
 .image {
@@ -323,4 +328,17 @@
 
 .footer {
   @apply grid gap-y-4 mx-auto pb-6;
+}
+
+.book-banner {
+  grid-area: book-banner;
+  @apply mx-auto md:mx-0 mb-8;
+  max-width: var(--maxWidth);
+  padding-left: var(--edgeInset);
+  padding-right: var(--edgeInset);
+
+  @screen md {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }

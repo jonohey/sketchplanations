@@ -1,5 +1,5 @@
-import fs from "node:fs";
 import * as prismicH from "@prismicio/helpers";
+import fs from "node:fs";
 import { create } from "xmlbuilder2";
 
 import { client } from "../services/prismic.mjs";
@@ -26,7 +26,7 @@ async function buildRss() {
 	console.time("[buildRss]");
 	console.log("[buildRss] Starting...");
 
-	const sketchplanations = await client.getAllByType("sketchplanation", {
+	const sketchplanations = await client.getByType("sketchplanation", {
 		fetch: [
 			"sketchplanation.uid",
 			"sketchplanation.title",
@@ -40,9 +40,10 @@ async function buildRss() {
 				direction: "desc",
 			},
 		],
+		pageSize: 20
 	});
 
-	const items = sketchplanations.map(
+	const items = sketchplanations.results.map(
 		({
 			uid,
 			data: {
@@ -53,7 +54,8 @@ async function buildRss() {
 			},
 		}) => {
 			const url = `https://sketchplanations.com/${uid}`;
-			const html = `<img src="${image_url}&w=798" />${prismicH.asHTML(body)}`;
+			const escapedImageUrl = image_url.replace(/&/g, '&amp;');
+			const html = `<img src="${escapedImageUrl}&amp;w=798" />${prismicH.asHTML(body)}`;
 
 			return {
 				guid: url,
@@ -61,7 +63,7 @@ async function buildRss() {
 				pubDate: pubDate(published_at),
 				link: url,
 				description: {
-					$: html,
+					$: html
 				},
 			};
 		},
@@ -73,7 +75,7 @@ async function buildRss() {
 			"@xmlns:atom": "http://www.w3.org/2005/Atom",
 			channel: {
 				"atom:link": {
-					"@href": "https://sketchplanations.com/rss",
+					"@href": "https://sketchplanations.com/rss.xml",
 					"@rel": "self",
 					"@type": "application/rss+xml",
 				},
@@ -87,7 +89,7 @@ async function buildRss() {
 
 	const doc = create({ encoding: "UTF-8" }, obj);
 	const xml = doc.end();
-	fs.writeFileSync("public/rss", xml);
+	fs.writeFileSync("public/rss.xml", xml);
 
 	console.timeEnd("[buildRss]");
 }

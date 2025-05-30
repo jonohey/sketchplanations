@@ -25,6 +25,10 @@
     }
   }
 
+  .btn-outline {
+    @apply inline-block px-6 py-2 rounded-full border border-blue dark:border-white text-blue dark:text-white hover:bg-blueLight dark:hover:bg-white/10 transition-colors;
+  }
+
   .masked-image {
     mask-image: var(--mask-image);
   }
@@ -45,6 +49,7 @@
   --color-red: hsl(359, 51.2%, 48.2%);
   --color-brightRed: hsl(9.4, 98.1%, 58%);
   --color-blue: hsl(216.1, 81.9%, 39%);
+  --color-blueLight: hsl(197.65, 100%, 90%);
 
   --color-bg: hsl(0, 0%, 100%);
   --color-bgButton: hsl(216.1, 81.9%, 39%);
@@ -63,6 +68,7 @@
 
   --color-text: hsl(0, 0%, 13.3%);
   --color-textSubdued: hsl(0, 0%, 44.9%);
+  --color-textSubduedMore: hsl(0, 0%, 70%);
 
   --color-overlay: hsla(0, 0%, 0%, 0.9);
 
@@ -101,7 +107,7 @@
     --color-red: hsl(359, 51.2%, 48.2%);
     --color-brightRed: hsl(9.4, 98.1%, 58%);
     --color-blue: hsl(215.8, 81.7%, 67.8%);
-    --color-blueLight: hsl(216, 82%, 76.1%); /* Odd dark mode color */
+    --color-blueLight: hsl(197.65, 100%, 90%);
 
     --color-bg: hsl(228, 4.5%, 21.8%);
     --color-bgButton: hsl(216.1, 81.9%, 39%);
@@ -120,6 +126,7 @@
 
     --color-text: hsl(0, 0%, 98.8%);
     --color-textSubdued: hsl(0, 0%, 77.6%);
+    --color-textSubduedMore: hsl(0, 0%, 40%);
 
     --color-overlay: hsla(0, 0%, 7%, 0.9);
   }

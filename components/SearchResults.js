@@ -82,17 +82,19 @@ const SearchResults = () => {
 
 	if (!called) {
 		return (
-			<div className={styles["search-results"]}>
-				<div className={styles.links}>
-					<FancyLink href="/categories" className={styles.link}>
-						Categories
-					</FancyLink>
-					<FancyLink href="/archive" className={styles.link}>
-						Archive
-					</FancyLink>
+			<>
+				<div className="text-center mt-8 mb-8">
+					<p className="text-textSubdued text-sm mb-2">More ways to explore</p>
+					<FancyLink href="/categories">Categories</FancyLink>
+					<span className="mx-2">·</span>
+					<FancyLink href="/archive">Archive</FancyLink>
+					<span className="mx-2">·</span>
+					<FancyLink href="/list">List</FancyLink>
 				</div>
-				<SketchplanationsGrid prismicDocs={initialResults} />
-			</div>
+				<div className={styles["search-results"]}>				
+					<SketchplanationsGrid prismicDocs={initialResults} />
+				</div>
+			</>
 		);
 	}
 

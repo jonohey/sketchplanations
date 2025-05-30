@@ -39,19 +39,20 @@ const TextHeader = ({ as = "h1", children, ...props }) => {
 		<div className={styles.root}>
 			{createElement(
 				as,
-				props,
+				{
+					...props,
+					style: { position: 'relative', display: 'inline-block' }
+				},
 				<RoughNotation
 					show={show}
 					iterations={1}
 					animate={false}
-					// animationDuration={500}
-					// animationDelay={250}
 					strokeWidth={2}
-					multiline
 					padding={2}
+					type="underline"
 				>
 					{children}
-				</RoughNotation>,
+				</RoughNotation>
 			)}
 		</div>
 	);

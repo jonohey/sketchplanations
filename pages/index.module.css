@@ -12,6 +12,83 @@
 
 @screen lg {
   .sketchplanations {
-    @apply pb-12;
+    @apply pb-4;
   }
+}
+
+.section {
+  @apply pt-12;
+  --edgeInset: 1.5em;
+
+  @screen md {
+    --edgeInset: 2em;
+  }
+
+  @screen lg {
+    --edgeInset: 3em;
+  }
+  padding-left: var(--edgeInset);
+  padding-right: var(--edgeInset);
+}
+
+.ident {
+  @apply flex-none flex items-center mb-3;
+}
+
+@screen dark {
+  .ident {
+    @apply invert;
+  }
+}
+
+.ident__svg {
+  @apply block;
+  width: 100%;
+  max-width: var(--lr-width);
+  height: 100%;
+  max-height: 2rem;
+  fill: currentColor;
+}
+
+.bookSection {
+  @apply relative;
+}
+
+.bookImage {
+  @apply relative w-full h-auto max-w-[400px];
+
+  /* Small screens - offset from left */
+  @apply ml-[1.5rem];
+
+  /* Medium+ screens - align right with offset */
+  @apply md:ml-auto md:mr-[-3.5rem];
+
+  @apply lg:m-auto lg:translate-x-[20%];
+}
+
+.quoteCircle {
+  @apply absolute bg-red rounded-full flex items-center justify-center transform;
+
+  /* Base styles (small screens) */
+  @apply w-32 h-32 left-[1rem] bottom-[1rem] rotate-[-8deg];
+
+  /* Medium screens */
+  @apply md:w-40 md:h-40 md:left-[2rem] md:bottom-[-1rem];
+
+  /* Large screens - position in center then offset slightly left */
+  @apply lg:w-44 lg:h-44 lg:left-[50%] lg:top-[50%] lg:bottom-auto lg:translate-y-[0%] lg:translate-x-[-90%];
+}
+
+.quoteText {
+  @apply text-white text-center leading-tight;
+
+  /* Base/small screens */
+  @apply text-base;
+
+  /* Medium+ screens */
+  @apply md:text-lg;
+}
+
+.quoteAttribution {
+  @apply mt-1 block;
 }

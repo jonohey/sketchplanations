@@ -1,13 +1,23 @@
 export default [
 	{
+		source: "/rss",
+		destination: "/rss.xml",
+		permanent: true,
+	},
+	{
+		source: "/subscribe",
+		destination: "https://sketchplanations.substack.com/subscribe",
+		permanent: false,
+	},
+	{
 		source: "/explore",
 		destination: "/search",
-		permanent: false,
+		permanent: true,
 	},
 	{
 		source: "/podcast",
 		destination: "https://podcast.sketchplanations.com/",
-		permanent: false,
+		permanent: true,
 	},
 	{
 		source: "/book",
@@ -22,6 +32,16 @@ export default [
 	{
 		source: "/styleguide",
 		destination: "https://company-208276.frontify.com/d/iATaeFQL51Lv",
+		permanent: false,
+	},
+	{
+		source: "/travel-journal",
+		destination: "https://issuu.com/palojono/docs/mindmap_travel_journal_hey",
+		permanent: false,
+	},
+	{
+		source: "/bigthink",
+		destination: "https://bigthink.com/business/better-leadership-in-3-sketchplanations/",
 		permanent: false,
 	},
 	{
@@ -52,26 +72,37 @@ export default [
 	{
 		source: "/tags",
 		destination: "/categories",
-		permanent: false,
+		permanent: true,
 	},
 	{
 		source: "/tags/:tag",
 		destination: "/categories/:tag",
-		permanent: false,
+		permanent: true,
+	},
+	{
+		source: "/tagged/:tag",
+		destination: "/categories/:tag",
+		permanent: true,
 	},
 	{
 		source: "/sketchplanations",
 		destination: "/",
-		permanent: false,
+		permanent: true,
 	},
 	{
 		source: "/sketchplanator",
 		destination: "/",
-		permanent: false,
+		permanent: true,
 	},
 	{
 		source: "/microadventures",
 		destination: "/microadventure",
+		permanent: true,
+	},
+	{
+		source:
+			"/great-britain-the-united-kingdom-and-the-british-isles-whats-the-difference",
+		destination: "/great-britain-the-united-kingdom-whats-the-difference",
 		permanent: true,
 	},
 	{
@@ -732,7 +763,12 @@ export default [
 	},
 	{
 		source: "/post/175913353056/2-factor-authentication-two-factor",
-		destination: "/2-factor-authentication",
+		destination: "/2fa",
+		permanent: true,
+	},
+	{
+		source: "/2-factor-authentication",
+		destination: "/2fa",
 		permanent: true,
 	},
 	{
@@ -808,6 +844,11 @@ export default [
 		permanent: true,
 	},
 	{
+		source: "/post/173170554411/the-virtuous-cycles-of-amazon-and-uber/amp",
+		destination: "/virtuous-cycle",
+		permanent: true,
+	},
+	{
 		source: "/the-virtuous-cycles-of-amazon-and-uber",
 		destination: "/virtuous-cycle",
 		permanent: true,
@@ -845,6 +886,11 @@ export default [
 	},
 	{
 		source: "/post/171737232566/seasons-are-caused-by-the-earths-tilt-as-the",
+		destination: "/seasons",
+		permanent: true,
+	},
+	{
+		source: "/post/145680217621/seasons-are-caused-by-the-earths-tilt-update/amp",
 		destination: "/seasons",
 		permanent: true,
 	},
@@ -1325,6 +1371,11 @@ export default [
 	},
 	{
 		source: "/post/146720668266/respect-sleep-one-of-the-best-virtuous-circles",
+		destination: "/exercise-and-sleep",
+		permanent: true,
+	},
+	{
+		source: "/post/146720668266/respect-sleep-one-of-the-best-virtuous-circles/amp",
 		destination: "/exercise-and-sleep",
 		permanent: true,
 	},
@@ -2082,6 +2133,11 @@ export default [
 		permanent: true,
 	},
 	{
+		source: "/post/79603172723/travel-and-new-foods-a-pattern-i-have-observed/amp",
+		destination: "/travel-and-new-foods",
+		permanent: true,
+	},
+	{
 		source: "/post/79507636455/think-cradle-to-cradle-from-michael-braungart",
 		destination: "/cradle-to-cradle",
 		permanent: true,
@@ -2141,6 +2197,11 @@ export default [
 	},
 	{
 		source: "/post/78492318323/london-running-kit-this-lot-will-have-you-set",
+		destination: "/london-running-kit",
+		permanent: true,
+	},
+	{
+		source: "/post/78492318323/london-running-kit-this-lot-will-have-you-set/amp",
 		destination: "/london-running-kit",
 		permanent: true,
 	},
@@ -3565,6 +3626,12 @@ export default [
 		permanent: true,
 	},
 	{
+		source:
+			"/post/53954788097/post-process-a-portrait-thanks-to-one-of-the-best/amp",
+		destination: "/post-process-a-portrait",
+		permanent: true,
+	},
+	{
 		source: "/post/53788634783/enjoy-your-hotel-room-more",
 		destination: "/enjoy-your-hotel-room-more",
 		permanent: true,
@@ -3863,6 +3930,11 @@ export default [
 		permanent: true,
 	},
 	{
+		source: "/post/53020915297/poach-an-egg-in-the-microwave-taught-to-me-by/amp",
+		destination: "/poach-an-egg-in-the-microwave",
+		permanent: true,
+	},
+	{
 		source: "/post/53020842174/santa-has-special-wrapping-that-doesnt-mix-with",
 		destination: "/santa-has-special-wrapping",
 		permanent: true,
@@ -3920,6 +3992,11 @@ export default [
 	},
 	{
 		source: "/post/53018718378/how-to-get-off-at-russell-square-because-theres",
+		destination: "/how-to-get-off-at-russell-square",
+		permanent: true,
+	},
+	{
+		source: "/post/53018718378/how-to-get-off-at-russell-square-because-theres/amp",
 		destination: "/how-to-get-off-at-russell-square",
 		permanent: true,
 	},
