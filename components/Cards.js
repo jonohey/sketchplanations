@@ -86,24 +86,11 @@ export const Cards = () => (
 			content={
 				<div className={styles.supportCard}>
 					<div>
-						<strong>Sketchplanations is ad-free</strong>
-						<br />
-						<strong>thanks to supporters like you.</strong>
-					</div>
-					<div>
+						<strong>🎉 Sketchplanations is </strong>
 						<FancyLink 
-							href="https://www.patreon.com/sketchplanations"
-							target="_blank"
-							rel="noopener noreferrer"
-							onClick={() => {
-								track('Patreon-site-link', { location: 'card' });
-							}}
+							href="/subscribe"
 						>
-							See more on Patreon{" "}
-							<ExternalLink
-								size={16}
-								className="inline relate -translate-y-[2px]"
-							/>
+							reader supported
 						</FancyLink>
 					</div>
 				</div>

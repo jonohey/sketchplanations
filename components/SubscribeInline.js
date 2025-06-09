@@ -3,7 +3,9 @@ import styles from "./SubscribeInline.module.css";
 const SubscribeInline = () => {
 	return (
 		<div className={styles.root}>
+			<p className="text-center mb-3">👇 Get new sketches each week</p>
 			<iframe 
+				className={styles.shadow}
 				src="https://sketchplanations.substack.com/embed" 
 				title="Substack subscription"
 				width="100%" 
