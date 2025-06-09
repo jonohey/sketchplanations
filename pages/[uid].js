@@ -251,6 +251,9 @@ const SketchplanationPage = ({
 						</div> */}
 
 						<div className={styles.main}>
+							<div className="my-6">
+								<SubscribeInline />
+							</div>
 							<div
 								className={classNames(
 									styles.body,
@@ -275,7 +278,6 @@ const SketchplanationPage = ({
 						</div>
 						<aside className={styles.sidebar}>
 							<div className={styles.cards}>
-								<SubscribeInline />
 								<Cards />
 							</div>
 

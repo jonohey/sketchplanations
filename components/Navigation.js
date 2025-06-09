@@ -77,7 +77,6 @@ const Navigation = () => {
 			>
 				<span className="inline-flex items-center gap-2">
 					<span>Subscribe</span>
-					<ExternalLink size={16} className="inline" />
 				</span>
 			</a>
 			<a

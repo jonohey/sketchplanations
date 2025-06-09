@@ -18,6 +18,10 @@
   @apply flex-none bg-bgButton text-white p-3 rounded;
 }
 
+.shadow {
+  @apply shadow-lg;
+}
+
 @container (min-width: 300px) {
   .form {
     @apply flex-row;
