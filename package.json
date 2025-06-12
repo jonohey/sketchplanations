@@ -19,7 +19,7 @@
 		"@sentry/tracing": "^7.120.3",
 		"@trivago/prettier-plugin-sort-imports": "^4.3.0",
 		"@vercel/analytics": "^1.5.0",
-		"@vercel/kv": "^1.0.1",
+		"@vercel/kv": "^3.0.0",
 		"classnames": "^2.5.1",
 		"easing-coordinates": "^2.0.2",
 		"fast-sort": "^3.4.1",
