@@ -51,11 +51,6 @@ class MyDocument extends Document {
 						href="https://fonts.gstatic.com"
 						crossOrigin="true"
 					/>
-					<link
-						rel="preconnect"
-						href="https://js.stripe.com"
-						crossOrigin="true"
-					/>
 					<link rel="preconnect" href="https://images.prismic.io" />
 				</Head>
 				<body>
