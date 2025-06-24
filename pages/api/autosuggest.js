@@ -21,6 +21,7 @@ export default async function autosuggestHandler(req, res) {
 
 		res.status(200).json({ results });
 	} catch (error) {
+		console.error(error);
 		res.status(500).json({ results: [] });
 	}
 }

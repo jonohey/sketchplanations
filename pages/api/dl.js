@@ -21,6 +21,7 @@ export default async (req, res) => {
 		const buffer = Buffer.from(arrayBuffer);
 		res.send(buffer);
 	} catch (e) {
+		console.error(e);
 		res.status(404);
 	}
 };
