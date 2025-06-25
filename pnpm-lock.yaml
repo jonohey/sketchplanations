@@ -193,8 +193,8 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17(ts-node@10.9.2(@types/node@16.18.11)(typescript@4.9.5))
       vercel:
-        specifier: ^44.2.1
-        version: 44.2.1
+        specifier: ^44.2.4
+        version: 44.2.4
       webpack:
         specifier: ^5.99.9
         version: 5.99.9
@@ -4797,8 +4797,8 @@ packages:
   vanilla-cookieconsent@3.1.0:
     resolution: {integrity: sha512-/McNRtm/3IXzb9dhqMIcbquoU45SzbN2VB+To4jxEPqMmp7uVniP6BhGLjU8MC7ZCDsNQVOp27fhQTM/ruIXAA==}
 
-  vercel@44.2.1:
-    resolution: {integrity: sha512-zGduoWGBCO72R48QUbfTkI43Qxc9DCGGmC516fj9fEj+Np8tLdZYDJjbWeqSmr7DpQedpWUwRZfmCIoo6saCog==}
+  vercel@44.2.4:
+    resolution: {integrity: sha512-BZZxPse/XyTRgo8SewG/BbmyVQL7BHAGsmXUttT+ntKPexDcgWoDLmG6nE+1jr/j/TrGg6RkbNFu2kO59AOIFA==}
     engines: {node: '>= 18'}
     hasBin: true
 
@@ -10305,7 +10305,7 @@ snapshots:
 
   vanilla-cookieconsent@3.1.0: {}
 
-  vercel@44.2.1:
+  vercel@44.2.4:
     dependencies:
       '@vercel/blob': 1.0.2
       '@vercel/build-utils': 10.6.1
