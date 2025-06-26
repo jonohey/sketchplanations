@@ -31,7 +31,7 @@ const Header = () => {
 	useHotkeys("/", (e) => {
 		e.preventDefault();
 		enterSearch();
-	});
+	}, { useKey: true });
 
 	useEffect(() => {
 		const handleRouteChange = () => setIsOpen(false);
