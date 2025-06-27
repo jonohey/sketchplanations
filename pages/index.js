@@ -65,13 +65,12 @@ const Home = ({ sketchplanations }) => {
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12" id="hero">
 				<div className="prose sm:prose-lg lg:prose-xl mx-auto text-center">
 					<h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-						Explaining the world one sketch at a time
+						Explaining the world<span className="hidden md:inline"><br /></span> one sketch at a time
 					</h1>
 					<p className="lead text-base sm:text-lg lg:text-xl mb-2">
-						Simplifying complex ideas through fun and insightful sketches.
+						Simplifying ideas through fun and insightful sketches.
 						<span className="hidden sm:inline">{' '}
-							Explore topics from science, creativity, psychology, and more
-							explained in pictures.
+							Visual explanations that are fast to read, fun to share, and hard to forget.
 						</span>
 					</p>
 				</div>
@@ -129,7 +128,7 @@ const Home = ({ sketchplanations }) => {
 								track('Book-page-link', { location: 'home-book-text' });
 							}}
 						>
-							<h2 className="mt-2 sm:mt-6 hover:text-blue">Big Ideas Little Pictures: Explaining the world one sketch at a time</h2>
+							<h2 className="mt-2 sm:mt-6 hover:text-blue">In a Book: Big Ideas Little Pictures</h2>
 						</Link>
 						<div>
 							<p className="font-bold text-xl">
