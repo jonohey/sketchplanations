@@ -1,7 +1,7 @@
+import { PrismicNextImage } from "@prismicio/next";
 import { AnimatePresence, motion } from "framer-motion";
 import { debounce } from "lodash";
 import { LoaderCircle } from "lucide-react";
-import Image from "next/image";
 import {
 	useCallback,
 	useContext,
@@ -14,12 +14,12 @@ import { Dialog, Modal, ModalOverlay } from "react-aria-components";
 
 const MotionModal = motion.create(Modal);
 // const MotionDialog = motion.create(Dialog);
-const MotionImage = motion.create(Image);
+const MotionImage = motion.create(PrismicNextImage);
 
 import Context from "context";
 
 const SketchplanationImage = ({ image, title, priority = false, children }) => {
-	const { width, height } = image.dimensions;
+	const { width, height, url } = image.dimensions ? image : { width: undefined, height: undefined, url: image?.url };
 
 	const { setDecorationHidden } = useContext(Context);
 
@@ -79,13 +79,18 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 
 	const dialog = useRef(null);
 
+	// Determine imgixParams based on file extension
+	const isJpg = image.url.match(/\.jpe?g($|[?&])/i);
+	const imgixParams = isJpg ? { auto: "format" } : undefined;
+	const quality = isJpg ? 95 : undefined;
+
 	return (
 		<>
 			<div className="relative">
-				<Image
+				<PrismicNextImage
+					field={image}
 					className="bg-paper cursor-zoom-in mx-auto"
 					ref={imageRef}
-					src={image.url}
 					width={width}
 					height={height}
 					alt={image.alt || `${title} - Sketchplanations`}
@@ -96,9 +101,10 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					tabIndex="0"
 					style={{
 						opacity,
-						// boxShadow: "0 2.3rem 1rem -2rem var(--color-sketchShadow)",
 						boxShadow: "0 2.3rem 1rem -2rem hsla(0, 0%, 0%, 0.1)",
 					}}
+					imgixParams={imgixParams}
+					quality={quality}
 				/>
 				<motion.div
 					className="absolute inset-0 flex items-center justify-center text-bg pointer-events-none backdrop-blur-lg"
@@ -164,17 +170,17 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					animate={
 						isOpen && !isLoading
 							? {
-									top: "1.5rem",
-									left: "0",
-									width: "100vw",
-									height: "calc(var(--visual-viewport-height) - 6rem)",
-								}
+								top: "1.5rem",
+								left: "0",
+								width: "100vw",
+								height: "calc(var(--visual-viewport-height) - 6rem)",
+							}
 							: {
-									top: initialImageRect.top,
-									left: initialImageRect.left,
-									width: initialImageRect.width,
-									height: initialImageRect.height,
-								}
+								top: initialImageRect.top,
+								left: initialImageRect.left,
+								width: initialImageRect.width,
+								height: initialImageRect.height,
+							}
 					}
 					transition={{
 						type: "spring",
@@ -186,50 +192,18 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					<Dialog
 						ref={dialog}
 						className="w-full h-full"
-						// drag="y"
-						// dragMomentum={false}
-						// onDragEnd={(e, { offset, velocity }) => {
-						// 	if (
-						// 		offset.y > window.innerHeight * 0.75 ||
-						// 		velocity.y > 10 ||
-						// 		offset.y < -window.innerHeight * 0.75 ||
-						// 		velocity.y < -10
-						// 	) {
-						// 		// Animate back to original position
-						// 		animate(
-						// 			dialog.current,
-						// 			{ y: 0 },
-						// 			{
-						// 				type: "spring",
-						// 				damping: 10,
-						// 				stiffness: 200,
-						// 				mass: 0.1,
-						// 			},
-						// 		);
-						// 		close();
-						// 	} else {
-						// 		animate(
-						// 			dialog.current,
-						// 			{ y: 0 },
-						// 			{
-						// 				type: "spring",
-						// 				damping: 10,
-						// 				stiffness: 200,
-						// 				mass: 0.1,
-						// 			},
-						// 		);
-						// 	}
-						// }}
 					>
-						<MotionImage
+						<PrismicNextImage
+							field={image}
 							className="object-contain cursor-zoom-out"
-							src={image.url}
 							alt={image.alt || `${title} - Sketchplanations`}
 							sizes="calc(100w - 3rem)"
 							fill={true}
 							onClick={close}
 							priority
 							onLoad={() => setIsLoading(false)}
+							imgixParams={imgixParams}
+							quality={quality}
 						/>
 					</Dialog>
 					<AnimatePresence>
