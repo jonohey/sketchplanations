@@ -93,7 +93,6 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					ref={imageRef}
 					width={width}
 					height={height}
-					alt={image.alt || `${title} - Sketchplanations`}
 					sizes="(min-width: 66rem) 645px, (min-width: 64rem) 62w, (min-width: 40rem) calc(100w - 3rem), 100w"
 					priority={priority}
 					onClick={open}
@@ -196,7 +195,6 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 						<PrismicNextImage
 							field={image}
 							className="object-contain cursor-zoom-out"
-							alt={image.alt || `${title} - Sketchplanations`}
 							sizes="calc(100w - 3rem)"
 							fill={true}
 							onClick={close}
