@@ -352,53 +352,29 @@ const SketchplanationPage = ({
 export async function getStaticProps({ params: { uid } }) {
 	const sketchplanation = await client.getByUID("sketchplanation", uid);
 
-	const olderUid =
-		(
-			await client.getByType("sketchplanation", {
-				pageSize: 1,
-				after: sketchplanation.id,
-				graphQuery: `{
-					sketchplanation {
-						uid
-					}
-				}`,
-				orderings: [
-					{
-						field: "my.sketchplanation.published_at",
-						direction: "desc",
-					},
-				],
-			})
-		)?.results?.[0]?.uid || null;
+	const [older, newer, similar, licenceDoc] = await Promise.all([
+		client.getByType("sketchplanation", {
+			pageSize: 1,
+			after: sketchplanation.id,
+			fetch: ['sketchplanation.uid'],
+			orderings: [{ field: "my.sketchplanation.published_at", direction: "desc" }],
+		}),
+		client.getByType("sketchplanation", {
+			pageSize: 1,
+			after: sketchplanation.id,
+			fetch: ['sketchplanation.uid'],
+			orderings: [{ field: "my.sketchplanation.published_at" }],
+		}),
+		client.getByType("sketchplanation", {
+			filters: [prismic.filter.similar(sketchplanation.id, 10)],
+			pageSize: 6,
+		}),
+		client.getSingle("licence"),
+	]);
 
-	const newerUid =
-		(
-			await client.getByType("sketchplanation", {
-				pageSize: 1,
-				after: sketchplanation.id,
-				graphQuery: `{
-					sketchplanation {
-						uid
-					}
-				}`,
-				orderings: [
-					{
-						field: "my.sketchplanation.published_at",
-					},
-				],
-			})
-		)?.results?.[0]?.uid || null;
-
-	const similarSketchplanations = shuffle(
-		(
-			await client.getByType("sketchplanation", {
-				filters: [prismic.filter.similar(sketchplanation.id, 10)],
-				pageSize: 6,
-			})
-		).results,
-	);
-
-	const licenceDoc = await client.getSingle("licence");
+	const olderUid = older.results?.[0]?.uid || null;
+	const newerUid = newer.results?.[0]?.uid || null;
+	const similarSketchplanations = shuffle(similar.results);
 
 	const tags = sketchplanation.data.tags;
 
