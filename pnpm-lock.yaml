@@ -193,8 +193,8 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17(ts-node@10.9.2(@types/node@16.18.11)(typescript@4.9.5))
       vercel:
-        specifier: ^44.2.1
-        version: 44.2.1
+        specifier: ^44.2.7
+        version: 44.2.7
       webpack:
         specifier: ^5.99.9
         version: 5.99.9
@@ -834,6 +834,9 @@ packages:
 
   '@jridgewell/sourcemap-codec@1.5.0':
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
+
+  '@jridgewell/sourcemap-codec@1.5.3':
+    resolution: {integrity: sha512-AiR5uKpFxP3PjO4R19kQGIMwxyRyPuXmKEEy301V1C0+1rVjS94EZQXf1QKZYN8Q0YM+estSPhmx5JwNftv6nw==}
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
@@ -1710,8 +1713,8 @@ packages:
   '@types/node@16.18.11':
     resolution: {integrity: sha512-3oJbGBUWuS6ahSnEq1eN2XrCyf4YsWI8OyCvo7c64zQJNplk3mO84t53o8lfTk+2ji59g5ycfc6qQ3fdHliHuA==}
 
-  '@types/node@24.0.4':
-    resolution: {integrity: sha512-ulyqAkrhnuNq9pB76DRBTkcS6YsmDALy6Ua63V8OhrOBgbcYt6IOdzpw5P1+dyRIyMerzLkeYWBeOXPpA9GMAA==}
+  '@types/node@24.0.8':
+    resolution: {integrity: sha512-WytNrFSgWO/esSH9NbpWUfTMGQwCGIKfCmNlmFDNiI5gGhgMmEA+V1AEvKLeBNvvtBnailJtkrEa2OIISwrVAA==}
 
   '@types/nprogress@0.2.3':
     resolution: {integrity: sha512-k7kRA033QNtC+gLc4VPlfnue58CM1iQLgn1IMAU8VPHGOj7oIHPp9UlhedEnD/Gl8evoCjwkZjlBORtZ3JByUA==}
@@ -1935,8 +1938,8 @@ packages:
     resolution: {integrity: sha512-pKT8fRnfyYk2MgvyB6fn6ipJPCdfZwiKDdw7vB+HL50rjboEBHDVBEcnwfkEpVSp2AjNtoaOUH7zG+bVC/rvSg==}
     engines: {node: '>=14.6'}
 
-  '@vercel/next@4.9.1':
-    resolution: {integrity: sha512-mQ+N5Srm79nSO6roV9Wr0rX91nqV84zbXZeTQf7lJKZtVCzZaj2vvAP55smDgpkUy8KNDizMz6nDaPAyN+jzEw==}
+  '@vercel/next@4.9.2':
+    resolution: {integrity: sha512-1vnmJg5c6AsJEMYZTHOXSXG232LO2YHNLGhfAPLaEd7nrAf8bnC9TSbYoGkksTw719w1O5WYhMXay3QHnJoGjw==}
 
   '@vercel/nft@0.29.2':
     resolution: {integrity: sha512-A/Si4mrTkQqJ6EXJKv5EYCDQ3NL6nJXxG8VGXePsaiQigsomHYQC9xSpX8qGk7AEZk4b1ssbYIqJ0ISQQ7bfcA==}
@@ -4797,8 +4800,8 @@ packages:
   vanilla-cookieconsent@3.1.0:
     resolution: {integrity: sha512-/McNRtm/3IXzb9dhqMIcbquoU45SzbN2VB+To4jxEPqMmp7uVniP6BhGLjU8MC7ZCDsNQVOp27fhQTM/ruIXAA==}
 
-  vercel@44.2.1:
-    resolution: {integrity: sha512-zGduoWGBCO72R48QUbfTkI43Qxc9DCGGmC516fj9fEj+Np8tLdZYDJjbWeqSmr7DpQedpWUwRZfmCIoo6saCog==}
+  vercel@44.2.7:
+    resolution: {integrity: sha512-Y4RvCHxYSL82K5qp7l8jmAkHohJO/dBBuXb736RhD+LK8hD8ivOs2fGb9cvuEikkv57CK7iG2RsBZw7kAh22eg==}
     engines: {node: '>= 18'}
     hasBin: true
 
@@ -5522,6 +5525,8 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.5.0': {}
 
+  '@jridgewell/sourcemap-codec@1.5.3': {}
+
   '@jridgewell/trace-mapping@0.3.25':
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
@@ -5530,7 +5535,7 @@ snapshots:
   '@jridgewell/trace-mapping@0.3.9':
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
-      '@jridgewell/sourcemap-codec': 1.5.0
+      '@jridgewell/sourcemap-codec': 1.5.3
 
   '@mapbox/node-pre-gyp@2.0.0':
     dependencies:
@@ -6839,7 +6844,7 @@ snapshots:
 
   '@types/node@16.18.11': {}
 
-  '@types/node@24.0.4':
+  '@types/node@24.0.8':
     dependencies:
       undici-types: 7.8.0
 
@@ -7070,7 +7075,7 @@ snapshots:
     dependencies:
       '@upstash/redis': 1.35.0
 
-  '@vercel/next@4.9.1':
+  '@vercel/next@4.9.2':
     dependencies:
       '@vercel/nft': 0.29.2
     transitivePeerDependencies:
@@ -8680,7 +8685,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 24.0.4
+      '@types/node': 24.0.8
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -10305,14 +10310,14 @@ snapshots:
 
   vanilla-cookieconsent@3.1.0: {}
 
-  vercel@44.2.1:
+  vercel@44.2.7:
     dependencies:
       '@vercel/blob': 1.0.2
       '@vercel/build-utils': 10.6.1
       '@vercel/fun': 1.1.6
       '@vercel/go': 3.2.1
       '@vercel/hydrogen': 1.2.2
-      '@vercel/next': 4.9.1
+      '@vercel/next': 4.9.2
       '@vercel/node': 5.3.0
       '@vercel/python': 4.7.2
       '@vercel/redwood': 2.3.3
