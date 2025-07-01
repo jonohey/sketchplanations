@@ -17,7 +17,7 @@ const MotionModal = motion.create(Modal);
 
 import Context from "context";
 
-const SketchplanationImage = ({ image, priority = false, children }) => {
+const SketchplanationImage = ({ image, title, priority = false, children }) => {
 	const { width, height } = image.dimensions ? image : { width: undefined, height: undefined };
 
 	const { setDecorationHidden } = useContext(Context);
@@ -83,11 +83,17 @@ const SketchplanationImage = ({ image, priority = false, children }) => {
 	const imgixParams = isJpg ? { auto: "format" } : undefined;
 	const quality = isJpg ? 95 : undefined;
 
+	const fallbackAlt = `${title} - Sketchplanations`;
+	const imageWithAlt = {
+		...image,
+		alt: image.alt || fallbackAlt,
+	};
+
 	return (
 		<>
 			<div className="relative">
 				<PrismicNextImage
-					field={image}
+					field={imageWithAlt}
 					className="bg-paper cursor-zoom-in mx-auto"
 					ref={imageRef}
 					width={width}
@@ -192,7 +198,7 @@ const SketchplanationImage = ({ image, priority = false, children }) => {
 						className="w-full h-full"
 					>
 						<PrismicNextImage
-							field={image}
+							field={imageWithAlt}
 							className="object-contain cursor-zoom-out"
 							sizes="calc(100w - 3rem)"
 							fill={true}
