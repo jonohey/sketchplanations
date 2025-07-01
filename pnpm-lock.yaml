@@ -12,17 +12,17 @@ importers:
         specifier: ^0.27.12
         version: 0.27.12(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@prismicio/client':
-        specifier: ^7.17.3
-        version: 7.17.3
+        specifier: ^7.18.0
+        version: 7.18.0
       '@prismicio/helpers':
         specifier: ^2.3.9
         version: 2.3.9
       '@prismicio/next':
         specifier: ^1.7.2
-        version: 1.7.2(@prismicio/client@7.17.3)(next@15.3.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
+        version: 1.7.2(@prismicio/client@7.18.0)(next@15.3.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
       '@prismicio/react':
         specifier: ^2.9.2
-        version: 2.9.2(@prismicio/client@7.17.3)(react@19.1.0)
+        version: 2.9.2(@prismicio/client@7.18.0)(react@19.1.0)
       '@sentry/react':
         specifier: ^9.31.0
         version: 9.31.0(react@19.1.0)
@@ -949,8 +949,8 @@ packages:
   '@popperjs/core@2.11.8':
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
 
-  '@prismicio/client@7.17.3':
-    resolution: {integrity: sha512-xzJslxmPdnVq7VG+6tSsbWgtmZNiTo+qxANF4kz/Il0DiPrsnVc18jXkzBkIC44GAJPl/mHBorHL7CDuYua2Vg==}
+  '@prismicio/client@7.18.0':
+    resolution: {integrity: sha512-x6QNrntAsNc5mvClg0YpDLFsqeVA89963HbNtLBDzDWfIFdNXYRQARxo0aUjjUxn1e7fSynIaVdBht7DsQGxjQ==}
     engines: {node: '>=14.15.0'}
 
   '@prismicio/helpers@2.3.9':
@@ -5625,7 +5625,7 @@ snapshots:
 
   '@popperjs/core@2.11.8': {}
 
-  '@prismicio/client@7.17.3':
+  '@prismicio/client@7.18.0':
     dependencies:
       imgix-url-builder: 0.0.6
 
@@ -5635,18 +5635,18 @@ snapshots:
       '@prismicio/types': 0.2.9
       imgix-url-builder: 0.0.3
 
-  '@prismicio/next@1.7.2(@prismicio/client@7.17.3)(next@15.3.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)':
+  '@prismicio/next@1.7.2(@prismicio/client@7.18.0)(next@15.3.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@formatjs/intl-localematcher': 0.5.10
-      '@prismicio/client': 7.17.3
+      '@prismicio/client': 7.18.0
       imgix-url-builder: 0.0.4
       negotiator: 0.6.4
       next: 15.3.4(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react: 19.1.0
 
-  '@prismicio/react@2.9.2(@prismicio/client@7.17.3)(react@19.1.0)':
+  '@prismicio/react@2.9.2(@prismicio/client@7.18.0)(react@19.1.0)':
     dependencies:
-      '@prismicio/client': 7.17.3
+      '@prismicio/client': 7.18.0
       '@prismicio/richtext': 2.1.5
       react: 19.1.0
 
