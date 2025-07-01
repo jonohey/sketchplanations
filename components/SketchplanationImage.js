@@ -14,12 +14,11 @@ import { Dialog, Modal, ModalOverlay } from "react-aria-components";
 
 const MotionModal = motion.create(Modal);
 // const MotionDialog = motion.create(Dialog);
-const MotionImage = motion.create(PrismicNextImage);
 
 import Context from "context";
 
-const SketchplanationImage = ({ image, title, priority = false, children }) => {
-	const { width, height, url } = image.dimensions ? image : { width: undefined, height: undefined, url: image?.url };
+const SketchplanationImage = ({ image, priority = false, children }) => {
+	const { width, height } = image.dimensions ? image : { width: undefined, height: undefined };
 
 	const { setDecorationHidden } = useContext(Context);
 
