@@ -1,9 +1,10 @@
 .root {
-  --lr-width: 12rem;
-  --min-search-toggle-width: 4rem;
+  --lr-width: 10rem;
+  --min-search-toggle-width: 3rem;
   --spacer-width: 0;
 
   @screen sm {
+    --lr-width: 12rem;
     --min-search-toggle-width: 5rem;
   }
 
