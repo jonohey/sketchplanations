@@ -54,11 +54,12 @@ export default [
 		destination: "https://www.patreon.com/sketchplanations",
 		permanent: false,
 	},
-	{
-		source: "/shop",
-		destination: "https://www.redbubble.com/people/sketchplanator/shop?asc=u",
-		permanent: false,
-	},
+	// Temporarily commented out to enable local shop page
+	// {
+	// 	source: "/shop",
+	// 	destination: "https://www.redbubble.com/people/sketchplanator/shop?asc=u",
+	// 	permanent: false,
+	// },
 	{
 		source: "/prints",
 		destination: "https://www.redbubble.com/people/sketchplanator/shop?asc=u",
