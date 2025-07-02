@@ -94,7 +94,7 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 			<div className="relative">
 				<PrismicNextImage
 					field={imageWithAlt}
-					className="bg-paper cursor-zoom-in mx-auto"
+					className="bg-paper cursor-zoom-in mx-auto transition-all duration-300 ease-out hover:scale-[1.02] hover:-translate-y-1"
 					ref={imageRef}
 					width={width}
 					height={height}
@@ -103,12 +103,25 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					onClick={open}
 					role="button"
 					tabIndex="0"
+					onKeyDown={(e) => {
+						if (e.key === 'Enter' || e.key === ' ') {
+							e.preventDefault();
+							open();
+						}
+					}}
 					style={{
 						opacity,
 						boxShadow: "0 2.3rem 1rem -2rem hsla(0, 0%, 0%, 0.1)",
+						willChange: "transform, box-shadow",
 					}}
 					imgixParams={imgixParams}
 					quality={quality}
+					onMouseEnter={(e) => {
+						e.target.style.boxShadow = "0 3rem 2rem -2rem hsla(0, 0%, 0%, 0.15)";
+					}}
+					onMouseLeave={(e) => {
+						e.target.style.boxShadow = "0 2.3rem 1rem -2rem hsla(0, 0%, 0%, 0.1)";
+					}}
 				/>
 				<motion.div
 					className="absolute inset-0 flex items-center justify-center text-bg pointer-events-none backdrop-blur-lg"
