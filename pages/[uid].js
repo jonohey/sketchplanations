@@ -173,7 +173,7 @@ const SketchplanationPage = ({
 					{
 						contentUrl: `${image.url}&w=1200`,
 						thumbnail: {
-							type: "ImageObject",
+							"@type": "ImageObject",
 							url: `${image.url}&w=200`,
 						},
 						creator: {
@@ -188,6 +188,8 @@ const SketchplanationPage = ({
 						name: title,
 						caption: image.alt,
 						description: prismicH.asText(body),
+						width: image.dimensions.width,
+						height: image.dimensions.height,
 						isFamilyFriendly: true,
 						representativeOfPage: true,
 						datePublished: publishedAt,
