@@ -5,7 +5,13 @@
 
 @screen md {
   .root {
-    @apply -mx-3 flex-row;
+    @apply -mx-2 flex-row;
+  }
+}
+
+@screen lg {
+  .root {
+    @apply -mx-3;
   }
 }
 
@@ -15,7 +21,13 @@
 
 @screen md {
   .item {
-    @apply px-3 py-0 text-base;
+    @apply px-2 py-0 text-sm;
+  }
+}
+
+@screen lg {
+  .item {
+    @apply px-3 text-base;
   }
 }
 

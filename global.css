@@ -135,6 +135,11 @@
 html {
   @apply bg-bg text-text font-light;
   font-optical-sizing: auto;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 h1,

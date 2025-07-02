@@ -1,9 +1,20 @@
 .root {
-  --lr-width: 12rem;
-  --min-search-toggle-width: 4rem;
+  --lr-width: 11rem;
+  --min-search-toggle-width: 3rem;
   --spacer-width: 0;
 
   @screen sm {
+    --lr-width: 11rem;
+    --min-search-toggle-width: 4rem;
+  }
+
+  @screen md {
+    --lr-width: 9rem;
+    --min-search-toggle-width: 4rem;
+  }
+
+  @screen lg {
+    --lr-width: 12rem;
     --min-search-toggle-width: 5rem;
   }
 
@@ -31,12 +42,18 @@
 @screen md {
   .root {
     /* @apply gap-x-6 sticky top-0 items-center justify-between z-50; */
-    @apply gap-x-6 items-center justify-between z-50;
+    @apply gap-x-4 items-center justify-between z-50;
     grid-template-areas:
       'spacer-left ident navigation search-toggle spacer-right'
       'divider divider divider divider divider';
     grid-template-columns: min-content var(--lr-width) 1fr minmax(var(--min-search-toggle-width), var(--lr-width)) min-content;
     grid-template-rows: auto 1px;
+  }
+}
+
+@screen lg {
+  .root {
+    @apply gap-x-6;
   }
 }
 
@@ -67,27 +84,45 @@
 }
 
 .search-toggle-button {
-  @apply flex items-center justify-center lg:justify-start gap-x-2 w-full py-2 px-4 bg-bgInput border border-borderInput rounded-lg;
+  @apply flex items-center justify-center lg:justify-start gap-x-1 w-full py-2 px-3 bg-bgInput border border-borderInput rounded-full;
 }
 
 @screen sm {
   .search-toggle-button {
-    @apply py-3 px-6 rounded-full;
+    @apply py-2 px-4 gap-x-2;
+  }
+}
+
+@screen md {
+  .search-toggle-button {
+    @apply py-2 px-3 gap-x-1;
   }
 }
 
 @screen lg {
   .search-toggle-button {
-    @apply mx-auto;
+    @apply mx-auto py-3 px-6 gap-x-2;
   }
 }
 
 .search-toggle-button__icon {
   @apply flex items-center text-textSubdued;
-  height: 24px;
+  height: 20px;
 }
 
 @screen sm {
+  .search-toggle-button__icon {
+    height: 22px;
+  }
+}
+
+@screen md {
+  .search-toggle-button__icon {
+    height: 20px;
+  }
+}
+
+@screen lg {
   .search-toggle-button__icon {
     height: 28px;
   }
@@ -102,6 +137,18 @@
 }
 
 @screen sm {
+  .search-toggle-button__text {
+    @apply text-base;
+  }
+}
+
+@screen md {
+  .search-toggle-button__text {
+    @apply text-sm;
+  }
+}
+
+@screen lg {
   .search-toggle-button__text {
     @apply text-lg;
   }
@@ -163,7 +210,13 @@
 
 @screen md {
   .navigation {
-    @apply flex flex-row h-auto self-stretch border-t-0 pr-4;
+    @apply flex flex-row h-auto self-stretch border-t-0 pr-2;
+  }
+}
+
+@screen lg {
+  .navigation {
+    @apply pr-4;
   }
 }
 
