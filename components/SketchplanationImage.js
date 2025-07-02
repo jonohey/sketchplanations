@@ -209,6 +209,12 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					<Dialog
 						ref={dialog}
 						className="w-full h-full"
+						onKeyDown={(e) => {
+							if (e.key === 'Enter' || e.key === ' ') {
+								e.preventDefault();
+								close();
+							}
+						}}
 					>
 						<PrismicNextImage
 							field={imageWithAlt}
