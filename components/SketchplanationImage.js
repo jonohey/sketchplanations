@@ -78,6 +78,24 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 
 	const dialog = useRef(null);
 
+	// Add global keyboard event listener when modal is open
+	useEffect(() => {
+		const handleKeyDown = (e) => {
+			if (isOpen && !isLoading && (e.key === 'Enter' || e.key === ' ')) {
+				e.preventDefault();
+				close();
+			}
+		};
+
+		if (isOpen && !isLoading) {
+			document.addEventListener('keydown', handleKeyDown);
+		}
+
+		return () => {
+			document.removeEventListener('keydown', handleKeyDown);
+		};
+	}, [isOpen, isLoading, close]);
+
 	// Determine imgixParams based on file extension
 	const isJpg = image.url.match(/\.jpe?g($|[?&])/i);
 	const imgixParams = isJpg ? { auto: "format" } : undefined;
@@ -209,12 +227,6 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					<Dialog
 						ref={dialog}
 						className="w-full h-full"
-						onKeyDown={(e) => {
-							if (e.key === 'Enter' || e.key === ' ') {
-								e.preventDefault();
-								close();
-							}
-						}}
 					>
 						<PrismicNextImage
 							field={imageWithAlt}
