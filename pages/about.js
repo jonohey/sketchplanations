@@ -704,7 +704,7 @@ const About = () => {
 					<hr />
 
 					<div id="subscribe">
-						<h2>Don't Forget to <FancyLink href="/subscribe">Subscribe</FancyLink></h2>
+						<h2>Don&apos;t forget to <FancyLink href="/subscribe">subscribe</FancyLink></h2>
 					</div>
 				</div>
 			</div>
