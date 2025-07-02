@@ -3,7 +3,7 @@
   @apply flex-col;
 }
 
-@screen md {
+@screen lg {
   .root {
     @apply -mx-3 flex-row;
   }
@@ -13,7 +13,7 @@
   @apply relative flex items-center px-5 py-3 hover:text-blue text-xl;
 }
 
-@screen md {
+@screen lg {
   .item {
     @apply px-3 py-0 text-base;
   }
@@ -28,7 +28,7 @@
 }
 
 .item--home {
-  @apply md:hidden;
+  @apply lg:hidden;
 }
 
 .external-link-icon {

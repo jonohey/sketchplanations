@@ -29,7 +29,7 @@
   width: var(--spacer-width);
 }
 
-@screen md {
+@screen lg {
   .root {
     /* @apply gap-x-6 sticky top-0 items-center justify-between z-50; */
     @apply gap-x-6 items-center justify-between z-50;
@@ -41,7 +41,7 @@
   }
 }
 
-@screen maxMd {
+@screen maxLg {
   .root--is-open {
     @apply fixed inset-0 z-40 items-start;
   }
@@ -53,7 +53,7 @@
 }
 
 .cards {
-  @apply md:hidden px-5 py-8;
+  @apply lg:hidden px-5 py-8;
 }
 
 .divider {
@@ -131,7 +131,7 @@
   grid-area: menu;
 }
 
-@screen md {
+@screen lg {
   .menu {
     @apply hidden;
   }
@@ -162,13 +162,13 @@
   grid-area: navigation;
 }
 
-@screen md {
+@screen lg {
   .navigation {
     @apply flex flex-row h-auto self-stretch border-t-0 pr-4;
   }
 }
 
-@screen maxMd {
+@screen maxLg {
   .navigation--is-open {
     @apply block overflow-auto overscroll-contain;
   }
