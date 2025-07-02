@@ -1,9 +1,19 @@
 .root {
-  --lr-width: 10rem;
+  --lr-width: 8rem;
   --min-search-toggle-width: 3rem;
   --spacer-width: 0;
 
   @screen sm {
+    --lr-width: 10rem;
+    --min-search-toggle-width: 4rem;
+  }
+
+  @screen md {
+    --lr-width: 9rem;
+    --min-search-toggle-width: 4rem;
+  }
+
+  @screen lg {
     --lr-width: 12rem;
     --min-search-toggle-width: 5rem;
   }
@@ -29,10 +39,10 @@
   width: var(--spacer-width);
 }
 
-@screen lg {
+@screen md {
   .root {
     /* @apply gap-x-6 sticky top-0 items-center justify-between z-50; */
-    @apply gap-x-6 items-center justify-between z-50;
+    @apply gap-x-4 items-center justify-between z-50;
     grid-template-areas:
       'spacer-left ident navigation search-toggle spacer-right'
       'divider divider divider divider divider';
@@ -41,7 +51,13 @@
   }
 }
 
-@screen maxLg {
+@screen lg {
+  .root {
+    @apply gap-x-6;
+  }
+}
+
+@screen maxMd {
   .root--is-open {
     @apply fixed inset-0 z-40 items-start;
   }
@@ -53,7 +69,7 @@
 }
 
 .cards {
-  @apply lg:hidden px-5 py-8;
+  @apply md:hidden px-5 py-8;
 }
 
 .divider {
@@ -77,9 +93,15 @@
   }
 }
 
+@screen md {
+  .search-toggle-button {
+    @apply py-2 px-3 gap-x-1;
+  }
+}
+
 @screen lg {
   .search-toggle-button {
-    @apply mx-auto;
+    @apply mx-auto py-3 px-6 gap-x-2;
   }
 }
 
@@ -94,6 +116,18 @@
   }
 }
 
+@screen md {
+  .search-toggle-button__icon {
+    height: 20px;
+  }
+}
+
+@screen lg {
+  .search-toggle-button__icon {
+    height: 28px;
+  }
+}
+
 .search-toggle-button__text {
   @apply text-textSubdued select-none overflow-hidden text-ellipsis whitespace-nowrap pr-1;
 }
@@ -103,6 +137,18 @@
 }
 
 @screen sm {
+  .search-toggle-button__text {
+    @apply text-lg;
+  }
+}
+
+@screen md {
+  .search-toggle-button__text {
+    @apply text-sm;
+  }
+}
+
+@screen lg {
   .search-toggle-button__text {
     @apply text-lg;
   }
@@ -131,7 +177,7 @@
   grid-area: menu;
 }
 
-@screen lg {
+@screen md {
   .menu {
     @apply hidden;
   }
@@ -162,13 +208,19 @@
   grid-area: navigation;
 }
 
-@screen lg {
+@screen md {
   .navigation {
-    @apply flex flex-row h-auto self-stretch border-t-0 pr-4;
+    @apply flex flex-row h-auto self-stretch border-t-0 pr-2;
   }
 }
 
-@screen maxLg {
+@screen lg {
+  .navigation {
+    @apply pr-4;
+  }
+}
+
+@screen maxMd {
   .navigation--is-open {
     @apply block overflow-auto overscroll-contain;
   }

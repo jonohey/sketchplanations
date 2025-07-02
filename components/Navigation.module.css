@@ -3,9 +3,15 @@
   @apply flex-col;
 }
 
+@screen md {
+  .root {
+    @apply -mx-2 flex-row;
+  }
+}
+
 @screen lg {
   .root {
-    @apply -mx-3 flex-row;
+    @apply -mx-3;
   }
 }
 
@@ -13,9 +19,15 @@
   @apply relative flex items-center px-5 py-3 hover:text-blue text-xl;
 }
 
+@screen md {
+  .item {
+    @apply px-2 py-0 text-sm;
+  }
+}
+
 @screen lg {
   .item {
-    @apply px-3 py-0 text-base;
+    @apply px-3 text-base;
   }
 }
 
@@ -28,7 +40,7 @@
 }
 
 .item--home {
-  @apply lg:hidden;
+  @apply md:hidden;
 }
 
 .external-link-icon {
