@@ -1,5 +1,5 @@
 .root {
-  --lr-width: 10rem;
+  --lr-width: 11rem;
   --min-search-toggle-width: 3rem;
   --spacer-width: 0;
 
@@ -95,13 +95,13 @@
 
 @screen md {
   .search-toggle-button {
-    @apply py-2 px-3 gap-x-1 rounded-lg;
+    @apply py-2 px-3 gap-x-1;
   }
 }
 
 @screen lg {
   .search-toggle-button {
-    @apply mx-auto py-3 px-6 gap-x-2 rounded-full;
+    @apply mx-auto py-3 px-6 gap-x-2;
   }
 }
 
