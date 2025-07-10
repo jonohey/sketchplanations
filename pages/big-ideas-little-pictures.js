@@ -339,6 +339,9 @@ const Book = ({ country }) => {
                   target='_blank'
                   rel='noopener noreferrer'
                   aria-label='Order a signed copy of Big Ideas Little Pictures'
+                  onClick={() => {
+                    track('Book-store-link', { location: 'Signed copy' })
+                  }}
                 >
                   Order an exclusive <RoughNotation type="circle" show={true} color="var(--color-brightRed)">signed copy</RoughNotation>
                 </Link>
