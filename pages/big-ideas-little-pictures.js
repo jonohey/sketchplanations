@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import { RoughNotation } from 'react-rough-notation'
 import styles from './big-ideas-little-pictures.module.css'
 
 import { pageTitle } from 'helpers'
@@ -333,12 +334,16 @@ const Book = ({ country }) => {
 
             <div className='prose dark:prose-invert mx-auto text-center'>
               <p className='mt-8'>
-                <FancyLink 
-                  href='https://forms.gle/btggtcZZuBqJb58U8'
+                <Link 
+                  href='https://www.kensingtonbooks.co.uk/product-page/big-ideas-little-pictures?utm_source=sketchplanations&utm_medium=website&utm_campaign=book_page&utm_content=signed_copy'
                   target='_blank'
                   rel='noopener noreferrer'
                   aria-label='Order a signed copy of Big Ideas Little Pictures'
-                >Order a signed copy from me</FancyLink>
+                >
+                  Order an exclusive <RoughNotation type="circle" show={true} color="var(--color-brightRed)">signed copy</RoughNotation>
+                </Link>
+                <br/>
+                from my friends at South Kensington Books in London
               </p>
               <p className='mt-8'>
                 Or order from your local bookshop because we 💙 them.
