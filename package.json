@@ -15,7 +15,7 @@
 		"@prismicio/helpers": "^2.3.9",
 		"@prismicio/next": "^1.7.2",
 		"@prismicio/react": "^2.9.2",
-		"@sentry/react": "^9.31.0",
+		"@sentry/react": "^9.38.0",
 		"@sentry/tracing": "^7.120.3",
 		"@trivago/prettier-plugin-sort-imports": "^5.2.2",
 		"@vercel/analytics": "^1.5.0",
