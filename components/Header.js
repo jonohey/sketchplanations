@@ -11,6 +11,7 @@ import styles from "./Header.module.css";
 
 import GradientBlur from "components/GradientBlur";
 import Navigation from "components/Navigation";
+import useScrollDirection from "hooks/useScrollDirection";
 import useSearch from "hooks/useSearch";
 
 import Context from "context";
