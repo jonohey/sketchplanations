@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const useScrollDirection = () => {
   const [scrollDirection, setScrollDirection] = useState('up');
   const [isAtTop, setIsAtTop] = useState(true);
+  const scrollDirectionRef = useRef('up');
+  const isAtTopRef = useRef(true);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -11,15 +13,19 @@ const useScrollDirection = () => {
     const updateScrollDirection = () => {
       const scrollY = window.scrollY;
       const direction = scrollY > lastScrollY ? 'down' : 'up';
-      const atTop = scrollY < 10;
+      const atTop = scrollY < 50;
 
       // More responsive threshold for direction changes
-      if (direction !== scrollDirection && Math.abs(scrollY - lastScrollY) > 5) {
+      if (direction !== scrollDirectionRef.current && Math.abs(scrollY - lastScrollY) > 2) {
+        scrollDirectionRef.current = direction;
         setScrollDirection(direction);
+        console.log('Scroll direction changed to:', direction, 'at scrollY:', scrollY);
       }
       
-      if (atTop !== isAtTop) {
+      if (atTop !== isAtTopRef.current) {
+        isAtTopRef.current = atTop;
         setIsAtTop(atTop);
+        console.log('isAtTop changed to:', atTop, 'at scrollY:', scrollY);
       }
 
       lastScrollY = scrollY > 0 ? scrollY : 0;
@@ -36,7 +42,7 @@ const useScrollDirection = () => {
     window.addEventListener('scroll', onScroll);
 
     return () => window.removeEventListener('scroll', onScroll);
-  }, [scrollDirection, isAtTop]);
+  }, []); // Empty dependency array to avoid re-registering
 
   return { scrollDirection, isAtTop };
 };
