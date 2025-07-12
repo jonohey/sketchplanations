@@ -23,6 +23,10 @@ const Header = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const { isSearchPage } = useSearch();
+	const { scrollDirection, isAtTop } = useScrollDirection();
+
+	// Hide header when scrolling down and not at top, show when scrolling up or at top
+	const shouldHideHeader = decorationHidden || (scrollDirection === 'down' && !isAtTop && !isOpen);
 
 	const enterSearch = () => {
 		router.push("/search", undefined, { shallow: true });
@@ -66,7 +70,7 @@ const Header = () => {
 			<motion.div
 				variants={variants}
 				initial="visible"
-				animate={decorationHidden ? "hidden" : "visible"}
+				animate={shouldHideHeader ? "hidden" : "visible"}
 				className={classNames(styles.root, isOpen && styles["root--is-open"])}
 			>
 				<button
