@@ -40,7 +40,7 @@ const Archive = ({ initialSketchplanations }) => {
 			<div className="pt-6 px-6 text-center">
 				<TextHeader>Archive</TextHeader>
 				<p className="prose mx-auto mt-4 mb-8 max-w-2xl text-textSubdued">
-					Explore the full visual archive of over a decade of Sketchplanations and discover sketches that interest and inspire you.
+					Explore the full visual archive of over a decade of Sketchplanations and discover sketches that interest and inspire you. Use them to have great conversations about ideas.
 				</p>
 			</div>
 			<div className="text-center mt-8 mb-8">

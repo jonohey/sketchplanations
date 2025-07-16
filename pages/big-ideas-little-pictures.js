@@ -230,7 +230,7 @@ const Book = ({ country }) => {
             <p className='text-lg leading-relaxed'>
               Sketchplanations in a book! And <span aria-hidden="true">✨</span> news flash <span aria-hidden="true">✨</span> now an eBook too! In this 288-page collection, Jono Hey collects together over 130
               inspiring, funny and relatable sketches about life. Combining existing and new topics, Big Ideas Little
-              Pictures is a perfect gift of the wisdom and joy of Sketchplanations.
+              Pictures is a perfect gift of the wisdom and joy of Sketchplanations. Pop it on the table and start having great conversations about ideas.
             </p>
           </div>
 
