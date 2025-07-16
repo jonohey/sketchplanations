@@ -68,7 +68,7 @@ const Home = ({ sketchplanations }) => {
 						Explaining the world<span className="hidden md:inline"><br /></span> one sketch at a time
 					</h1>
 					<p className="lead text-base sm:text-lg lg:text-xl mb-2">
-						Simplifying ideas through fun and insightful sketches.
+						Have great conversations about ideas through simple and insightful sketches.
 						<span className="hidden sm:inline">{' '}
 							Visual explanations that are fast to read, fun to share, and hard to forget.
 						</span>
