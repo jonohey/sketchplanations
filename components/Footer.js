@@ -185,8 +185,7 @@ const Footer = () => {
 			</div>
 
 			<div className="text-center pt-4 text-sm text-gray-600">
-				Combining 🧠 and ♥️ and 🖼️<br />
-				since 2013
+				Combining 🧠 curiosity, ♥️ heart, and ✍️ art since 2013
 			</div>
 		</footer>
 	);
