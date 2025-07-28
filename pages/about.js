@@ -2,6 +2,7 @@ import FancyLink from "components/FancyLink";
 import SubscribeFull from "components/SubscribeFull";
 import { pageTitle } from "helpers";
 import Head from "next/head";
+import Image from "next/image";
 
 const About = () => {
 	return (
@@ -96,10 +97,12 @@ const About = () => {
 								rel="noopener noreferrer"
 								className="text-blue">Stripe Climate projects
 							</a>{" "}
-							<img 
+							<Image 
 								src="/images/stripe-climate-badge.svg" 
 								alt="Stripe Climate" 
-								className="inline-block w-5 h-5 align-middle mx-1"
+								width={20}
+								height={20}
+								className="inline-block align-middle mx-1"
 							/>
 						</p>
 					</div>
@@ -109,7 +112,7 @@ const About = () => {
 					<div id="follow">
 						<h2>Follow</h2>
 						<p>
-							The best way to follow is by signing up to the weekly newsletter. But if you'd like to share or repost on a platform that you use, I try to share (albeit with less commentary) on:
+							The best way to follow is by signing up to the weekly newsletter. But if you&apos;d like to share or repost on a platform that you use, I try to share (albeit with less commentary) on:
 						</p>
 						
 						<ul className="space-y-2">
@@ -374,7 +377,7 @@ const About = () => {
 						</p>
 
 						<p>
-							I&apos;m a father of two living in London. For many years, I&apos;ve worked in startups, product design, and software engineering. I do some advising and mentoring if that's of interest to you.
+							I&apos;m a father of two living in London. For many years, I&apos;ve worked in startups, product design, and software engineering. I do some advising and mentoring if that&apos;s of interest to you.
 						</p>
 
 						<p>
@@ -403,7 +406,7 @@ const About = () => {
 							>
 								Jump Associates
 							</FancyLink>
-							. I got a PhD from the University of California at Berkeley in the San Francisco Bay Area on "Framing in Design". However, I mostly like drawing and playing the piano.
+							. I got a PhD from the University of California at Berkeley in the San Francisco Bay Area on &quot;Framing in Design&quot;. However, I mostly like drawing and playing the piano.
 						</p>
 					</div>
 
@@ -427,7 +430,7 @@ const About = () => {
 						</p>
 
 						<p>
-							If you buy something using links from the sketches—for example, buying a book I've referenced from Amazon that explains a topic in depth—I may earn a commission as an Amazon affiliate. This helps me keep making them, but feel free to buy elsewhere.
+							If you buy something using links from the sketches—for example, buying a book I&apos;ve referenced from Amazon that explains a topic in depth—I may earn a commission as an Amazon affiliate. This helps me keep making them, but feel free to buy elsewhere.
 						</p>
 					</div>
 
