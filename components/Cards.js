@@ -79,9 +79,9 @@ export const Cards = () => (
 			}
 		/>
 		<Card
-			href="https://www.patreon.com/sketchplanations"
+			href="/subscribe"
 			onImageClick={() => {
-				track('Patreon-site-link', { location: 'card-image' });
+				track('Subscribe', { location: 'card-image' });
 			}}
 			content={
 				<div className={styles.supportCard}>

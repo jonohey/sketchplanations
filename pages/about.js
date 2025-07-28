@@ -1,7 +1,7 @@
 import FancyLink from "components/FancyLink";
+import SubscribeFull from "components/SubscribeFull";
 import { pageTitle } from "helpers";
 import Head from "next/head";
-import Image from "next/image";
 
 const About = () => {
 	return (
@@ -23,7 +23,7 @@ const About = () => {
 						</p>
 					</div>
 
-					<div className="py-4" id="book-support">
+					<div className="py-4">
 						<p>
 							<strong>Sketchplanations is now a book!</strong> I think you&apos;ll love{" "}
 							<FancyLink href="/big-ideas-little-pictures">
@@ -39,17 +39,6 @@ const About = () => {
 								Sketchplanations Wave
 							</FancyLink>{" "}
 							from the cover)
-						</p>
-
-						<p>
-							<strong>My members on Patreon </strong>enable me to keep creating new sketches.{" "}
-							<FancyLink
-								href="/patreon"
-								target="_blank"
-								rel="noreferrer"
-							>
-								Support at any level is amazing</FancyLink>{" "}
-							🙏
 						</p>
 
 						<p>
@@ -70,24 +59,59 @@ const About = () => {
 
 					<hr />
 
-					<div id="follow">
-						<h2>Follow</h2>
+					<div id="support-me">
+						<h2>Supporting Sketchplanations</h2>
 						<p>
-							The best way to follow is by signing up to the weekly newsletter. I send one sketch a week with short commentary and sometimes a personal touch.
+							Get each new weekly sketchplanation by{" "}
+							<FancyLink href="/subscribe">
+								subscribing for free.
+							</FancyLink>
+						</p>
+						<p>
+							You can also support me and the project with a paid subscription.
+						</p>
+						<p>
+							<strong>Paid subscribers get:</strong>
+						</p>
+						<ul className="space-y-2">
+							<li>Behind-the-scenes posts and reflections</li>
+							<li>The full archive of high-res sketches, named and sorted for personal use</li>
+							<li>Full access to the newsletter archives</li>
+							<li><em>At the top tier:</em> access to the unique, handmade Sketchplanations font</li>
+						</ul>
+						<p>
+							Going paid helps me keep the project going—and it means a lot.
 						</p>
 						<p>
 							👉{" "}
-							<a 
-								href="https://sketchplanations.substack.com/subscribe" 
-								target="_blank" 
-								rel="noopener noreferrer" 
-								className="text-blue"
-							>
-								Subscribe to the weekly Sketchplanations newsletter
-							</a>
+							<FancyLink href="/subscribe">
+								Explore paid options or support the project
+							</FancyLink>
 						</p>
+						<p className="bg-gray-50 px-2 py-0.5 rounded text-sm inline-block">
+							5% of contributions go towards{" "}
+							<a
+								href="https://stripe.com/climate"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-blue">Stripe Climate projects
+							</a>{" "}
+							<img 
+								src="/images/stripe-climate-badge.svg" 
+								alt="Stripe Climate" 
+								className="inline-block w-5 h-5 align-middle mx-1"
+							/>
+						</p>
+					</div>
+					
+					<hr />
 
-						<p>I also try to share sketches on social media, albeit with less commentary:</p>
+					<div id="follow">
+						<h2>Follow</h2>
+						<p>
+							The best way to follow is by signing up to the weekly newsletter. But if you'd like to share or repost on a platform that you use, I try to share (albeit with less commentary) on:
+						</p>
+						
 						<ul className="space-y-2">
 							<li>
 								<a 
@@ -121,12 +145,12 @@ const About = () => {
 							</li>
 							<li>
 								<a 
-									href="https://twitter.com/sketchplanator" 
+									href="https://bsky.app/profile/sketchplanations.bsky.social" 
 									target="_blank" 
 									rel="noopener noreferrer" 
 									className="text-blue"
 								>
-									X (Twitter)
+									Bluesky
 								</a>
 							</li>
 							<li>
@@ -136,18 +160,17 @@ const About = () => {
 									rel="noopener noreferrer" 
 									className="text-blue"
 								>
-									Follow on Pinterest
+									Pinterest
 								</a>
 							</li>
 							<li>
-								A newsletter app like{" "}
 								<a 
-									href="https://www.meco.app/get/95u7" 
+									href="https://twitter.com/sketchplanator" 
 									target="_blank" 
 									rel="noopener noreferrer" 
 									className="text-blue"
 								>
-									Meco
+									X (Twitter)
 								</a>
 							</li>
 						</ul>
@@ -180,7 +203,7 @@ const About = () => {
 							<li><FancyLink href="/categories/weather">Weather</FancyLink></li>
 							<li><FancyLink href="/categories/whats-the-difference-between">What&apos;s the difference between</FancyLink></li>
 						</ul>
-						<p>
+						<p>🔍{" "}
 							<FancyLink href="/categories">
 								Explore more themes
 							</FancyLink>
@@ -189,32 +212,13 @@ const About = () => {
 
 					<hr />
 
-					<div id="support">
-						<h2>Support Sketchplanations</h2>
-						<p>
-							Sketchplanations is a side project. Some people choose to support me to pay for the costs of the emails, website and time to do a good job. It makes an enormous difference.
-						</p>
-						<p>
-							If you&apos;re in a position to support and like what I&apos;m doing, please consider supporting me by becoming a patron for a mere dollar a month or whatever you can:
-						</p>
-						<p>
-							<a 
-								href="/patreon" 
-								target="_blank" 
-								rel="noreferrer" 
-								className="text-blue"
-							>
-								Become a patron
-							</a>
-						</p>
-					</div>
-
-					<hr />
-
 					<div id="podcast">
 						<h2>Sketchplanations the Podcast</h2>
 						<p>
-							In 2023, together with{" "}
+							I&apos;ve learned that Sketchplanations helps you have great conversations about ideas. In 2023, we started doing just that with the Sketchplanations podcast.
+						</p>
+						<p>
+							Together with{" "}
 							<a 
 								href="https://www.robbell.tv/" 
 								target="_blank" 
@@ -232,9 +236,12 @@ const About = () => {
 							>
 								Tom Pellereau
 							</a>{" "}
-							(inventor and former Apprentice UK winner), we launched a podcast to accompany the sketches. In each episode, we take a sketch or several and dive into more detail. It might sound a little crazy to have a podcast about a sketch site, but, somewhat to my surprise, it works rather well. I hope you enjoy it!
+							(inventor and former Apprentice UK winner), we take a sketch or several and dive into it.
 						</p>
 						<p>
+							It sounded a little crazy to have a podcast about a sketch, but, somewhat to my surprise, it works brilliantly. I hope you enjoy it!
+						</p>
+						<p>🎧{" "}
 							<FancyLink
 								href="/podcast" 
 								target="_blank" 
@@ -261,7 +268,8 @@ const About = () => {
 							for a year for a sketch. I used it to practise my drawing.
 						</p>
 						<p>
-							When I finished it I needed a new challenge. So I set myself the challenge of explaining something with a sketch — as explaining is a handy skill. Over 2013 -14 I posted one sketchplanation a day. Since then I switched to one per week, and the quality improved.
+							When I finished it I needed a new challenge. So I set myself the challenge of explaining something with a sketch—as explaining is a handy skill.
+							Over 2013–14 I posted one sketchplanation a day. Since then I switched to one per week, and the quality improved.
 						</p>
 						<p>
 							I draw them using{" "}
@@ -317,17 +325,6 @@ const About = () => {
 							</FancyLink>{" "}
 							for the grey. I think it is the best combination of pens there is.
 						</p>
-						<p>At its best, making sketchplanations looks a bit like this:</p>
-						
-						<div className="w-full max-w-[30rem] mx-auto my-8">
-							<Image 
-								src="https://images.prismic.io/sketchplanations/fff10711-e476-4e15-957d-c39f41a47a60_Making+sketchplanations.jpg?auto=compress,format&fit=max&w=500" 
-								alt="Notebook, pens, coffee — making Sketchplanations at its best" 
-								className="block w-full rounded"
-								width={500}
-								height={300}
-							/>
-						</div>
 
 						<p>
 							Curious to see how I make them now?{" "}
@@ -346,37 +343,19 @@ const About = () => {
 								jono.hey@gmail.com
 							</FancyLink>
 						</p>
+					</div>
 
-						<p>
-							If you would like to use a sketchplanation in a blog post or for non-commercial purposes, please go ahead. If you have a moment to email me where you used one, it makes me very happy. Check out the{" "}
-							<FancyLink href="/licence">
-								licence
-							</FancyLink>{" "}
-							page for details.
-						</p>
+					<hr />
 
-						<p>
-							As is probably pretty obvious I don&apos;t accept guest posts, so please don&apos;t bother contacting me about it.
-						</p>
-
-						<p>
-							I don&apos;t do anything with your data except store your email address in Mailjet (previously Mailchimp until they got too expensive) if you choose to{" "}
-							<FancyLink
-								href="https://sketchplanations.substack.com/subscribe" 
-								target="_blank" 
-								rel="noopener noreferrer"
-							>
-								subscribe
-							</FancyLink>
-							. See more:{" "}
-							<FancyLink href="/privacy">
-								sketchplanations.com/privacy
-							</FancyLink>
-						</p>
-
-						<p>
-							If you buy something using links from the sketches — for example, buying a book that explains a topic in depth — I may earn a commission. Anything I earn directly or indirectly from sketchplanations helps me keep making them.
-						</p>
+					<div id="using-sketchplanations">
+							<h2>Using sketchplanations</h2>
+							<p>
+								If you would like to use a sketchplanation in a blog post or for non-commercial purposes, please go ahead. If you have a moment to email me where you used one, it makes me very happy. Check out the{" "}
+								<FancyLink href="/licence">
+									licence
+								</FancyLink>{" "}
+								page for details.
+							</p>
 					</div>
 
 					<hr />
@@ -384,19 +363,18 @@ const About = () => {
 					<div id="about-me">
 						<h2>About me</h2>
 						<p>
-							👋 I&apos;m Jono Hey.{" "}
+							👋 I&apos;m Jono Hey.{" "}(
 							<FancyLink
 								href="http://uk.linkedin.com/in/jonohey" 
 								target="_blank" 
 								rel="noopener noreferrer"
 							>
 								Find me on LinkedIn
-							</FancyLink>{" "}
-							— where you can also follow me for the weekly sketches and midweek reposts from the archives.
+							</FancyLink>){" "}
 						</p>
 
 						<p>
-							I&apos;m a father of two living in London. For many years, I&apos;ve worked in startups, product design, and software engineering.
+							I&apos;m a father of two living in London. For many years, I&apos;ve worked in startups, product design, and software engineering. I do some advising and mentoring if that's of interest to you.
 						</p>
 
 						<p>
@@ -425,7 +403,31 @@ const About = () => {
 							>
 								Jump Associates
 							</FancyLink>
-							. I also have a PhD from the University of California at Berkeley in the San Francisco Bay Area. However, I mostly like drawing and playing the piano.
+							. I got a PhD from the University of California at Berkeley in the San Francisco Bay Area on "Framing in Design". However, I mostly like drawing and playing the piano.
+						</p>
+					</div>
+
+					<hr />
+
+					<div id="other-bits">
+						<h2>Other bits</h2>
+						<p>
+							I don&apos;t do anything with your data except your email address is stored by Substack if you{" "}
+							<FancyLink
+								href="https://sketchplanations.substack.com/subscribe" 
+								target="_blank" 
+								rel="noopener noreferrer"
+							>
+								subscribe
+							</FancyLink>
+							. See more:{" "}
+							<FancyLink href="/privacy">
+								sketchplanations.com/privacy
+							</FancyLink>
+						</p>
+
+						<p>
+							If you buy something using links from the sketches—for example, buying a book I've referenced from Amazon that explains a topic in depth—I may earn a commission as an Amazon affiliate. This helps me keep making them, but feel free to buy elsewhere.
 						</p>
 					</div>
 
@@ -704,8 +706,10 @@ const About = () => {
 					<hr />
 
 					<div id="subscribe">
-						<h2>Don&apos;t forget to <FancyLink href="/subscribe">subscribe</FancyLink></h2>
+						<h2>Why not give it a try?</h2>
 					</div>
+
+					<SubscribeFull />
 				</div>
 			</div>
 		</>

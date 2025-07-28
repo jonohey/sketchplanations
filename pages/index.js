@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 
 import FancyLink from "components/FancyLink";
+import SubscribeFull from "components/SubscribeFull";
 import Image from "next/image";
 import Link from "next/link";
 import bigIdeasLittlePicturesCoverTransparentImage from "../images/big-ideas-little-pictures-cover-transparent.png";
@@ -77,17 +78,7 @@ const Home = ({ sketchplanations }) => {
 			</div>
 
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-center" id="substack-subscribe-strip">
-				<iframe 
-					src="https://sketchplanations.substack.com/embed" 
-					title="Substack subscription form"
-					width="480" 
-					height="320" 
-					style={{ 
-						border: '1px solid #EEE', 
-						background: 'white',
-						overflow: 'hidden'
-					}}
-				/>
+				<SubscribeFull />
 			</div>
 
 			<section className={styles.section} aria-label="Book promotion" id="big-ideas-little-pictures-strip">
