@@ -351,14 +351,41 @@ const About = () => {
 					<hr />
 
 					<div id="using-sketchplanations">
-							<h2>Using sketchplanations</h2>
-							<p>
-								If you would like to use a sketchplanation in a blog post or for non-commercial purposes, please go ahead. If you have a moment to email me where you used one, it makes me very happy. Check out the{" "}
-								<FancyLink href="/licence">
-									licence
-								</FancyLink>{" "}
-								page for details.
-							</p>
+						<h2>Using sketchplanations</h2>
+						<p>
+							If you would like to use a sketchplanation in a blog post or for non-commercial purposes, please go ahead. If you have a moment to email me where you used one, it makes me very happy. Check out the{" "}
+							<FancyLink href="/licence">
+								licence
+							</FancyLink>{" "}
+							page for details.
+						</p>
+					</div>
+					
+					<hr />
+
+					<div id="translating-sketchplanations">
+						<h2>Translating sketchplanations</h2>
+						<p>
+							I&apos;d love to make sketchplanations available in more languages! If you want to submit a translated sketchplanation, I&apos;ve started to add them to a{" "}
+							<FancyLink
+								target="_blank"
+								rel="noopener noreferrer"
+								href="https://drive.google.com/drive/folders/1gGCCObciyjjd-3KHOUv-jm8PJAs2QuFy?usp=drive_link">
+								translations folder
+							</FancyLink>{" "}and plan to add them to the site.
+						</p>
+						<p>
+							Have you translated a sketch or seen one around? Email translations to me at{" "}
+							<FancyLink href="mailto:jono.hey@gmail.com?subject=Sketchplanation%20Translation">
+								jono.hey@gmail.com
+							</FancyLink>.
+						</p>
+						<p>
+							For licensing details and translation guidelines, see the{" "}
+							<FancyLink href="/licence">
+								licence page
+							</FancyLink>.
+						</p>
 					</div>
 
 					<hr />
