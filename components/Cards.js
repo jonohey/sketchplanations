@@ -86,11 +86,13 @@ export const Cards = () => (
 			content={
 				<div className={styles.supportCard}>
 					<div>
-						<strong>🎉 Sketchplanations is </strong>
+						<span className="inline sm:hidden">🎉 Help keep Sketchplanations ad-free </span>
+						<span className="hidden sm:inline xl:hidden">🎉 Keep this ad-free </span>
+						<span className="hidden xl:inline">🎉 Help keep Sketchplanations ad-free </span>
 						<FancyLink 
 							href="/subscribe"
 						>
-							reader supported
+							by supporting me
 						</FancyLink>
 					</div>
 				</div>
