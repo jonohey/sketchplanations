@@ -154,7 +154,10 @@ const ImageGallery = ({
           {images.length > 1 && (
             <>
               <button
-                onClick={goToPrevious}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToPrevious();
+                }}
                 className={styles.navButton}
                 style={{ left: '1rem' }}
                 aria-label="Previous image"
@@ -162,7 +165,10 @@ const ImageGallery = ({
                 <ChevronLeft size={32} />
               </button>
               <button
-                onClick={goToNext}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToNext();
+                }}
                 className={styles.navButton}
                 style={{ right: '1rem' }}
                 aria-label="Next image"
