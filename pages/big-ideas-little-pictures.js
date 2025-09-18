@@ -212,13 +212,13 @@ const Book = ({ country }) => {
             <div className='w-full md:w-1/2'>
               <blockquote className='text-lg md:text-xl mb-4 font-medium'>
                 <p className='mb-4'>
-                  &quot;This is such a cool book.
+                  This is such a cool book.
                 </p>
                 <p className='mb-4'>
                   The range of Jono&apos;s knowledge is astounding, and so is his ability to digest complex ideas into deceptively simple drawings.
                 </p>
                 <p className='mb-4'>
-                  You&apos;ll learn something on every page—and be entertained too.&quot;
+                  You&apos;ll learn something on every page—and be entertained too.
                 </p>
               </blockquote>
               <cite className={`text-gray-800 dark:text-gray-200 block text-2xl font-semibold ${styles.cite}`}>— Bill Gates</cite>
@@ -229,7 +229,7 @@ const Book = ({ country }) => {
             <h1 className='text-4xl font-bold mb-2'>Big Ideas Little Pictures</h1>
             <p className='text-xl text-gray-600 dark:text-gray-300 mb-8'>Explaining the world one sketch at a time</p>
             <p className='text-lg leading-relaxed'>
-              Sketchplanations in a book! And <span aria-hidden="true">✨</span> news flash <span aria-hidden="true">✨</span> now an eBook too! In this 288-page collection, Jono Hey collects together over 130
+              Sketchplanations in a book! And now an eBook too. In this 288-page collection, Jono Hey collects together over 130
               inspiring, funny and relatable sketches about life. Combining existing and new topics, Big Ideas Little
               Pictures is a perfect gift of the wisdom and joy of Sketchplanations. Pop it on the table and start having great conversations about ideas.
             </p>
@@ -260,7 +260,7 @@ const Book = ({ country }) => {
 
               {/* US Section */}
               <div className='text-center'>
-                <h3 className='text-xl font-semibold mb-4'>United States</h3>
+                <h3 className='text-xl font-semibold mb-4'>United States 🇺🇸</h3>
                 <div className='flex flex-wrap gap-4 justify-center'>
                   {storeLinks.US.map((store) => (
                     <OrderLink key={store.label} href={store.href}>
@@ -272,7 +272,7 @@ const Book = ({ country }) => {
 
               {/* UK Section */}
               <div className='text-center'>
-                <h3 className='text-xl font-semibold mb-4'>United Kingdom</h3>
+                <h3 className='text-xl font-semibold mb-4'>United Kingdom 🇬🇧</h3>
                 <div className='flex flex-wrap gap-4 justify-center'>
                   {storeLinks.GB.map((store) => (
                     <OrderLink key={store.label} href={store.href}>
@@ -372,63 +372,66 @@ const Book = ({ country }) => {
             <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 mb-16'>
               <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
                 <h3 className='text-2xl font-bold mb-6 text-center'>Table of Contents</h3>
-                <p>Sections of the book with a few sample sketches for each.</p>
+                <p className='text-center'>Explore everything from cloud shapes to cognitive biases, from paradoxes to practical tips. These ten sections span the profound, the peculiar, and the playful — all explained in simple, memorable sketches.</p>
                 <div className='max-w-none'>
                   
                   <ol className={styles.tocGrid}>
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Nature&apos;s Nuances</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> The Coastline Paradox, Autumn Leaves, The Golden Ratio, The Moon Illusion</p>
+                      <p className={styles.tocDescription}><i>Including:</i> The Coastline Paradox, Autumn Leaves, The Golden Ratio, The Moon Illusion...</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Health and Healing</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> The Swiss Cheese Model, Microadventures, The Three-Day Effect, Sleep Basics</p>
+                      <p className={styles.tocDescription}><i>Including:</i> The Swiss Cheese Model, Microadventures, The Three-Day Effect, Sleep Basics...</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>There&apos;s a Word for That</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> Schadenfreude, Emotional Hot Potato, Tsundoku, Yak shaving</p>
+                      <p className={styles.tocDescription}><i>Including:</i> Schadenfreude, Emotional Hot Potato, Tsundoku, Yak shaving...</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Motivation and Inspiration</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> The Road to Success, Motivation Doesn&apos;t Last, 9,000 shots, Sleeping with a Mosquito</p>
+                      <p className={styles.tocDescription}><i>Including:</i> The Road to Success, Motivation Doesn&apos;t Last, 9,000 shots, Sleeping with a Mosquito...</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Blind Spots</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> You Get What You Measure, The Paradox of Choice, The Spotlight Effect, Chesterton&apos;s Fence</p>
+                      <p className={styles.tocDescription}><i>Including:</i> You Get What You Measure, The Paradox of Choice, The Spotlight Effect, Chesterton&apos;s Fence...</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Starry-Eyed Surprises</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> Atmospheric Perspective, Phases of the Moon, Know Your Clouds, The Potato Radius</p>
+                      <p className={styles.tocDescription}><i>Including:</i> Atmospheric Perspective, Phases of the Moon, Know Your Clouds, The Potato Radius...</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Business and Bytes</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> The Traveling Salesman Problem, Starting a Company, The Trust Equation, The Long Nose of Innovation</p>
+                      <p className={styles.tocDescription}><i>Including:</i> The Traveling Salesman Problem, Starting a Company, The Trust Equation, The Long Nose of Innovation...</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Thinking About Thinking</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> Thesis, Antithesis, Synthesis, Solvitur Ambulando, The BS Asymmetry Principle, The 20/40/60 Rule</p>
+                      <p className={styles.tocDescription}><i>Including:</i> Thesis, Antithesis, Synthesis, Solvitur Ambulando, The BS Asymmetry Principle, The 20/40/60 Rule...</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>The Big Picture</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> Solar System Sizes, The Overview Effect, The Continental Axis Hypothesis, 1.5 Billion Heartbeats</p>
+                      <p className={styles.tocDescription}><i>Including:</i> Solar System Sizes, The Overview Effect, The Continental Axis Hypothesis, 1.5 Billion Heartbeats...</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Life&apos;s Little Manuals</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> How to Win at Monopoly, Skip Rocks Like a Pro, The 60-30-10 Color Rule, The Awkwardness Vortex</p>
+                      <p className={styles.tocDescription}><i>Including:</i> How to Win at Monopoly, Skip Rocks Like a Pro, The 60-30-10 Color Rule, The Awkwardness Vortex...</p>
                     </li>
                   </ol>
 
-                  <p className='mt-6 '>
-                    …and many more.
+                  <p className='text-2xl font-bold mb-6 text-center'>
+                    …and much, much more.
+                  </p>
+                  <p className='mb-6 text-center'>
+                    The perfect coffee table book for sparking great conversations.
                   </p>
                 </div>
               </div>
@@ -515,7 +518,7 @@ const Book = ({ country }) => {
             <div className='max-w-5xl mx-auto px-4 sm:px-6 lg:px-8'>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
                 {/* Bill Gates Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
                   <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     &quot;This is such a cool book. The range of Jono&apos;s knowledge is astounding, and so is his
                     ability to digest complex ideas into deceptively simple drawings. You&apos;ll learn something on
@@ -526,8 +529,60 @@ const Book = ({ country }) => {
                   </div>
                 </div>
 
+                {/* Katy Milkman Quote */}
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
+                    &quot;I&apos;m an enormous fan of the wonderful way Jono&apos;s sketches bring scientific insights
+                    to life for a wide audience.&quot;
+                  </blockquote>
+                  <div className='flex items-center gap-4'>
+                    <div>
+                      <cite className={`${styles.cite} font-semibold block`}>Katy Milkman</cite>
+                      <div className='text-sm text-gray-600 dark:text-gray-300'>
+                        Professor at the Wharton School of the University of Pennsylvania and author of the
+                        international bestseller How to Change
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                {/* Mark Frauenfelder Quote */}
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
+                    &quot;Jono&apos;s superpower is the ability to break down complex concepts into digestible, visually
+                    appealing explanations.&quot;
+                  </blockquote>
+                  <div className='flex items-center gap-4'>
+                    <div>
+                      <cite className={`${styles.cite} font-semibold block`}>Mark Frauenfelder</cite>
+                      <div className='text-sm text-gray-600 dark:text-gray-300'>
+                        Founder of Boing Boing, Recomendo, Make and Wired magazines
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mike Rohde Quote */}
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
+                    &quot;Big Ideas, Little Pictures is a magical collection of ideas, concepts, and wisdom—some that
+                    I&apos;ve wondered about and others I&apos;ve never thought about before—presented in a clear
+                    visual way that makes Jono&apos;s sketchplanations a joy to read, reference, and share. It&apos;s a
+                    fantastic book!&quot;
+                  </blockquote>
+                  <div className='flex items-center gap-4'>
+                    <div>
+                      <cite className={`${styles.cite} font-semibold block`}>Mike Rohde</cite>
+                      <div className='text-sm text-gray-600 dark:text-gray-300'>
+                        Bestselling author of The Sketchnote Handbook and illustrator of REWORK
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Dan Roam Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
                   <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     <p>
                       As the world becomes more complex and fraught, the more we need clear and honest pictures to
@@ -553,57 +608,8 @@ const Book = ({ country }) => {
                   </div>
                 </div>
 
-                {/* Mike Rohde Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    &quot;Big Ideas, Little Pictures is a magical collection of ideas, concepts, and wisdom—some that
-                    I&apos;ve wondered about and others I&apos;ve never thought about before—presented in a clear
-                    visual way that makes Jono&apos;s sketchplanations a joy to read, reference, and share. It&apos;s a
-                    fantastic book!&quot;
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <div>
-                      <cite className={`${styles.cite} font-semibold block`}>Mike Rohde</cite>
-                      <div className='text-sm text-gray-600 dark:text-gray-300'>
-                        Bestselling author of The Sketchnote Handbook and illustrator of REWORK
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Katy Milkman Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    &quot;I&apos;m an enormous fan of the wonderful way Jono&apos;s sketches bring scientific insights
-                    to life for a wide audience.&quot;
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <div>
-                      <cite className={`${styles.cite} font-semibold block`}>Katy Milkman</cite>
-                      <div className='text-sm text-gray-600 dark:text-gray-300'>
-                        Professor at the Wharton School of the University of Pennsylvania and author of the
-                        international bestseller How to Change
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Richard Shotton Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    &quot;Brilliant! It distills a variety of complex and profound ideas into simple to understand and
-                    beautifully drawn sketches.&quot;
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <div>
-                      <cite className={`${styles.cite} font-semibold block`}>Richard Shotton</cite>
-                      <div className='text-sm text-gray-600 dark:text-gray-300'>Author of The Choice Factory</div>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Brendan Leonard Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
                   <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     &quot;Jono Hey&apos;s Big Ideas Little Pictures is the kind of book that I want to devour all at
                     once, with his brilliantly efficient illustrations breaking down complex ideas—but that I make
@@ -620,24 +626,23 @@ const Book = ({ country }) => {
                   </div>
                 </div>
 
-                {/* Mark Frauenfelder Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+
+                {/* Richard Shotton Quote */}
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
                   <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    &quot;Jono&apos;s superpower is the ability to break down complex concepts into digestible, visually
-                    appealing explanations.&quot;
+                    &quot;Brilliant! It distills a variety of complex and profound ideas into simple to understand and
+                    beautifully drawn sketches.&quot;
                   </blockquote>
                   <div className='flex items-center gap-4'>
                     <div>
-                      <cite className={`${styles.cite} font-semibold block`}>Mark Frauenfelder</cite>
-                      <div className='text-sm text-gray-600 dark:text-gray-300'>
-                        Founder of Boing Boing, Recomendo, Make and Wired magazines
-                      </div>
+                      <cite className={`${styles.cite} font-semibold block`}>Richard Shotton</cite>
+                      <div className='text-sm text-gray-600 dark:text-gray-300'>Author of The Choice Factory</div>
                     </div>
                   </div>
                 </div>
 
                 {/* Trenton Moss Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
                   <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     &quot;I&apos;ve loved following Sketchplanations for years. And finally, Jono has brought it all
                     together in this wonderful book. Keep a copy in your home and show it to everyone who comes
@@ -653,8 +658,62 @@ const Book = ({ country }) => {
                   </div>
                 </div>
 
+                {/* Eva-Lotta Lamm Quote */}
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
+                    <p>
+                      <i>Big Ideas, Little Pictures</i> by Jono Hey is a beautiful and powerful book at the
+                      same time. On each page, Jono visualises a complex concept into a clear, engaging little drawing.
+                      His sketches don&apos;t just simplify ideas, they bring them to life and make them understandable at
+                      a glance.
+                    </p>
+                    <p>
+                      This large collection of concepts, scientific findings and interesting frameworks is
+                      delightful and a real testament to the power of communicating through simple visuals. This body of
+                      work is even more impressive as it was created by Jono over years of drawing one concept per week.
+                    </p>
+                    <p>
+                      As a fellow visual thinker I&apos;m in love with this wonderful book. It&apos;s a joy to dive in at
+                      any page, to get drawn in by the pictures and to learn a new fact with every turn of the page.
+                    </p>
+                  </blockquote>
+                  <div className='flex items-center gap-4'>
+                    <div>
+                      <cite className={`${styles.cite} font-semibold block`}>Eva-Lotta Lamm</cite>
+                      <div className='text-sm text-gray-600 dark:text-gray-300'>Designer and Visual Thinker</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Gillian Cross Quote */}
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
+                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
+                    <p>
+                      I love this book. It will delight adults, fascinate children and help us all to grasp
+                      important ideas.
+                    </p>
+                    <p>Want to understand the four horsemen of relationship apocalypse? Or different types
+                      of phishing? Or the ten essentials for wilderness safety? Jono Hey&apos;s explanations are brief and
+                      clear – but it&apos;s his pictures that stick in your head. Every time you turn over a page,
+                      there&apos;s something new. I can&apos;t wait to try out the instructions for skipping rocks like a
+                      pro and taking better photographs—and I&apos;ll certainly take up the Dracula sneeze.
+                    </p>
+                    <p>
+                      I meant to read it slowly, a few pages at a time, but it&apos;s such fun that I kept thinking,
+                      Just one more picture and finished it in one sitting. I&apos;m looking forward to re-reading it very
+                      soon.
+                    </p>
+                  </blockquote>
+                  <div className='flex items-center gap-4'>
+                    <div>
+                      <cite className={`${styles.cite} font-semibold block`}>Gillian Cross</cite>
+                      <div className='text-sm text-gray-600 dark:text-gray-300'>Multi-award-winning children&apos;s book author</div>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Jason Barron Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
                   <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     &quot;Jono&apos;s delightful book is a fantastic blend of text and visuals, making the topics easy
                     to understand and remember. I found myself eager to turn each page, learning things I had never
@@ -669,62 +728,8 @@ const Book = ({ country }) => {
                   </div>
                 </div>
 
-                {/* Gillian Cross Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    <p>
-                      &quot;I love this book. It will delight adults, fascinate children and help us all to grasp
-                      important ideas.
-                    </p>
-                    <p>Want to understand the four horsemen of relationship apocalypse? Or different types
-                      of phishing? Or the ten essentials for wilderness safety? Jono Hey&apos;s explanations are brief and
-                      clear – but it&apos;s his pictures that stick in your head. Every time you turn over a page,
-                      there&apos;s something new. I can&apos;t wait to try out the instructions for skipping rocks like a
-                      pro and taking better photographs—and I&apos;ll certainly take up the Dracula sneeze.
-                    </p>
-                    <p>
-                      I meant to read it slowly, a few pages at a time, but it&apos;s such fun that I kept thinking,
-                      Just one more picture and finished it in one sitting. I&apos;m looking forward to re-reading it very
-                      soon.&quot;
-                    </p>
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <div>
-                      <cite className={`${styles.cite} font-semibold block`}>Gillian Cross</cite>
-                      <div className='text-sm text-gray-600 dark:text-gray-300'>Multi-award-winning children&apos;s book author</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Eva-Lotta Lamm Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    <p>
-                      &quot;<i>Big Ideas, Little Pictures</i> by Jono Hey is a beautiful and powerful book at the
-                      same time. On each page, Jono visualises a complex concept into a clear, engaging little drawing.
-                      His sketches don&apos;t just simplify ideas, they bring them to life and make them understandable at
-                      a glance.
-                    </p>
-                    <p>
-                      This large collection of concepts, scientific findings and interesting frameworks is
-                      delightful and a real testament to the power of communicating through simple visuals. This body of
-                      work is even more impressive as it was created by Jono over years of drawing one concept per week.
-                    </p>
-                    <p>
-                      As a fellow visual thinker I&apos;m in love with this wonderful book. It&apos;s a joy to dive in at
-                      any page, to get drawn in by the pictures and to learn a new fact with every turn of the page.&quot;
-                    </p>
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <div>
-                      <cite className={`${styles.cite} font-semibold block`}>Eva-Lotta Lamm</cite>
-                      <div className='text-sm text-gray-600 dark:text-gray-300'>Designer and Visual Thinker</div>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Dad Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
                   <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
                     &quot;I resent our bedroom looking so messy in the <FancyLink href='/tsundoku' aria-label='Learn more about Tsundoku'>tsundoku</FancyLink> sketch.&quot;
                   </blockquote>
