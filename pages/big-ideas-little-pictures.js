@@ -183,7 +183,7 @@ const Book = ({ country }) => {
           }}
         />
       </Head>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 prose dark:prose-invert'>
         <div className='py-12'>
           <div id='hero' className='flex flex-col md:flex-row items-center gap-8 md:gap-12'>
             <div className='w-full md:w-1/2'>
@@ -332,7 +332,7 @@ const Book = ({ country }) => {
               )}
             </div>
 
-            <div className='prose dark:prose-invert mx-auto text-center'>
+            <div className='mx-auto text-center'>
               <p className='mt-8'>
                 <Link 
                   href='https://www.kensingtonbooks.co.uk/product-page/big-ideas-little-pictures?utm_source=sketchplanations&utm_medium=website&utm_campaign=book_page&utm_content=signed_copy'
@@ -357,13 +357,84 @@ const Book = ({ country }) => {
             </div>
           </div>
 
-          <div id='whats-inside' className='mt-24'>
-            <h2 className='text-3xl font-bold mb-4 text-center'>What&apos;s inside Big Ideas Little Pictures?</h2>
+          <div id='whats-inside' className='mt-24 max-w-3xl mx-auto scroll-mt-24'>
+            <h2 className='text-3xl font-bold mb-4 text-center'>What Will You Find Inside?</h2>
             <p className='text-xl text-gray-600 dark:text-gray-300 mb-12 text-center'>
-              Sample pages from Big Ideas Little Pictures
+              10 sections, 130+ ideas
             </p>
 
+            <p className='text-lg mb-6'>
+              <strong>Big Ideas Little Pictures</strong> brings together over 130 sketches across science, psychology, nature, technology, and everyday life. Here&apos;s a glimpse of what you&apos;ll find inside:
+            </p>
+
+            {/* Table of Contents Excerpt */}
+            <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 mb-16'>
+              <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg'>
+                <h3 className='text-2xl font-bold mb-6 text-center'>Table of Contents</h3>
+                <p>Sections of the book with a few sample sketches for each.</p>
+                <div className='max-w-none'>
+                  
+                  <ol className={styles.tocGrid}>
+                    <li className={styles.tocSection}>
+                      <h4 className={styles.tocTitle}>Nature&apos;s Nuances</h4>
+                      <p className={styles.tocDescription}><i>Including:</i> The Coastline Paradox, Autumn Leaves, The Golden Ratio The Moon Illusion</p>
+                    </li>
+
+                    <li className={styles.tocSection}>
+                      <h4 className={styles.tocTitle}>Health and Healing</h4>
+                      <p className={styles.tocDescription}><i>Including:</i> The Swiss Cheese Model, Microadventures, The Three-Day Effect, Sleep Basics</p>
+                    </li>
+
+                    <li className={styles.tocSection}>
+                      <h4 className={styles.tocTitle}>There&apos;s a Word for That</h4>
+                      <p className={styles.tocDescription}><i>Including:</i> Schadenfreude, Emotional Hot Potato, Tsundoku, Yak shaving</p>
+                    </li>
+
+                    <li className={styles.tocSection}>
+                      <h4 className={styles.tocTitle}>Motivation and Inspiration</h4>
+                      <p className={styles.tocDescription}><i>Including:</i> The Road to Success, Motivation Doesn&apos;t Last, 9,000 shots, Sleeping with a Mosquito</p>
+                    </li>
+
+                    <li className={styles.tocSection}>
+                      <h4 className={styles.tocTitle}>Blind Spots</h4>
+                      <p className={styles.tocDescription}><i>Including:</i> You Get What You Measure, The Paradox of Choice, The Spotlight Effect, Chesterton&apos;s Fence</p>
+                    </li>
+
+                    <li className={styles.tocSection}>
+                      <h4 className={styles.tocTitle}>Starry-Eyed Surprises</h4>
+                      <p className={styles.tocDescription}><i>Including:</i> Atmospheric Perspective, Phases of the Moon, Know Your Clouds, The Potato Radius</p>
+                    </li>
+
+                    <li className={styles.tocSection}>
+                      <h4 className={styles.tocTitle}>Business and Bytes</h4>
+                      <p className={styles.tocDescription}><i>Including:</i> The Traveling Salesman Problem, Starting a Company, The Trust Equation, The Long Nose of Innovation</p>
+                    </li>
+
+                    <li className={styles.tocSection}>
+                      <h4 className={styles.tocTitle}>Thinking About Thinking</h4>
+                      <p className={styles.tocDescription}><i>Including:</i> Thesis, Antithesis, Synthesis, Solvitur Ambulando, The BS Asymmetry Principle, The 20/40/60 Rule</p>
+                    </li>
+
+                    <li className={styles.tocSection}>
+                      <h4 className={styles.tocTitle}>The Big Picture</h4>
+                      <p className={styles.tocDescription}><i>Including:</i> Solar System Sizes, The Overview Effect, The Continental Axis Hypothesis, 1.5 Billion Heartbeats</p>
+                    </li>
+
+                    <li className={styles.tocSection}>
+                      <h4 className={styles.tocTitle}>Life&apos;s Little Manuals</h4>
+                      <p className={styles.tocDescription}><i>Including:</i> How to Win at Monopoly, Skip Rocks Like a Pro, The 60-30-10 Color Rule, The Awkwardness Vortex</p>
+                    </li>
+                  </ol>
+
+                  <p className='mt-6 '>
+                    …and many more.
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {/* Gallery in What's Inside section */}
+            <h3 id ='sample-pages' className='text-2xl font-bold text-center'>Sample pages</h3>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-8 mb-16'>
               <div className='aspect-[3/2] relative'>
                 <Image
@@ -668,7 +739,7 @@ const Book = ({ country }) => {
 
           <div id='faq' className='mt-24 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8'>
             <h2 className='text-3xl font-bold mb-8 text-center'>FAQ</h2>
-            <div className='space-y-8 prose dark:prose-invert max-w-none'>
+            <div className='space-y-8 max-w-none'>
               <div>
                 <h3>Can I order in a different country?</h3>
                 <p>
@@ -769,7 +840,7 @@ const Book = ({ country }) => {
 
           <div id='why' className='mt-24 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8'>
             <h2 className='text-3xl font-bold mb-8'>Why a book?</h2>
-            <div className='space-y-6 prose'>
+            <div className='space-y-6'>
               <p>
                 I started making sketchplanations in 2013 by sketching them in actual books. While putting the sketches
                 online has helped them reach so many more people there&apos;s something about browsing through the
