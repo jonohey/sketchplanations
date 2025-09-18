@@ -364,7 +364,7 @@ const Book = ({ country }) => {
             </p>
 
             <p className='text-lg mb-6'>
-              <strong>Big Ideas Little Pictures</strong> brings together over 130 sketches across science, psychology, nature, technology, and everyday life. Here's a glimpse of what you'll find inside:
+              <strong>Big Ideas Little Pictures</strong> brings together over 130 sketches across science, psychology, nature, technology, and everyday life. Here&apos;s a glimpse of what you&apos;ll find inside:
             </p>
 
             {/* Table of Contents Excerpt */}
@@ -376,7 +376,7 @@ const Book = ({ country }) => {
                   
                   <ol className={styles.tocGrid}>
                     <li className={styles.tocSection}>
-                      <h4 className={styles.tocTitle}>Nature's Nuances</h4>
+                      <h4 className={styles.tocTitle}>Nature&apos;s Nuances</h4>
                       <p className={styles.tocDescription}><i>Including:</i> The Coastline Paradox, Autumn Leaves, The Golden Ratio, The Golden Ratio, The Moon Illusion</p>
                     </li>
 
@@ -386,18 +386,18 @@ const Book = ({ country }) => {
                     </li>
 
                     <li className={styles.tocSection}>
-                      <h4 className={styles.tocTitle}>There's a Word for That</h4>
+                      <h4 className={styles.tocTitle}>There&apos;s a Word for That</h4>
                       <p className={styles.tocDescription}><i>Including:</i> Schadenfreude, Emotional Hot Potato, Tsundoku, Yak shaving</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Motivation and Inspiration</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> The Road to Success, Motivation Doesn't Last, 9,000 shots, Sleeping with a Mosquito</p>
+                      <p className={styles.tocDescription}><i>Including:</i> The Road to Success, Motivation Doesn&apos;t Last, 9,000 shots, Sleeping with a Mosquito</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Blind Spots</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> You Get What You Measure, The Paradox of Choice, The Spotlight Effect, Chesterton's Fence</p>
+                      <p className={styles.tocDescription}><i>Including:</i> You Get What You Measure, The Paradox of Choice, The Spotlight Effect, Chesterton&apos;s Fence</p>
                     </li>
 
                     <li className={styles.tocSection}>
@@ -421,7 +421,7 @@ const Book = ({ country }) => {
                     </li>
 
                     <li className={styles.tocSection}>
-                      <h4 className={styles.tocTitle}>Life's Little Manuals</h4>
+                      <h4 className={styles.tocTitle}>Life&apos;s Little Manuals</h4>
                       <p className={styles.tocDescription}><i>Including:</i> How to Win at Monopoly, Skip Rocks Like a Pro, The 60-30-10 Color Rule, The Awkwardness Vortex</p>
                     </li>
                   </ol>
