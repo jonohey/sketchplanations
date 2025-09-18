@@ -377,42 +377,42 @@ const Book = ({ country }) => {
                   <ol className={styles.tocGrid}>
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Nature's Nuances</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> The Coastline Paradox, Autumn Leaves, The Golden Ratio, The Golden Ratio, The Moon Illusion, and more.</p>
+                      <p className={styles.tocDescription}><i>Including:</i> The Coastline Paradox, Autumn Leaves, The Golden Ratio, The Golden Ratio, The Moon Illusion</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Health and Healing</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> The Swiss Cheese Model, Microadventures, The Three-Day Effect, Sleep Basics, and more.</p>
+                      <p className={styles.tocDescription}><i>Including:</i> The Swiss Cheese Model, Microadventures, The Three-Day Effect, Sleep Basics</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>There's a Word for That</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> Schadenfreude, Emotional Hot Potato, Tsundoku, Yak shaving, and more.</p>
+                      <p className={styles.tocDescription}><i>Including:</i> Schadenfreude, Emotional Hot Potato, Tsundoku, Yak shaving</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Motivation and Inspiration</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> The Road to Success, Motivation Doesn't Last, 9,000 shots, Sleeping with a Mosquito, and more.</p>
+                      <p className={styles.tocDescription}><i>Including:</i> The Road to Success, Motivation Doesn't Last, 9,000 shots, Sleeping with a Mosquito</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Blind Spots</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> You Get What You Measure, The Paradox of Choice, The Spotlight Effect, Chesterton's Fence, and more.</p>
+                      <p className={styles.tocDescription}><i>Including:</i> You Get What You Measure, The Paradox of Choice, The Spotlight Effect, Chesterton's Fence</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Starry-Eyed Surprises</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> Atmospheric Perspective, Phases of the Moon, Know Your Clouds, The Potato Radius, and more.</p>
+                      <p className={styles.tocDescription}><i>Including:</i> Atmospheric Perspective, Phases of the Moon, Know Your Clouds, The Potato Radius</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Business and Bytes</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> The Traveling Salesman Problem, Starting a Company, The Trust Equation, The Long Nose of Innovation, and more.</p>
+                      <p className={styles.tocDescription}><i>Including:</i> The Traveling Salesman Problem, Starting a Company, The Trust Equation, The Long Nose of Innovation</p>
                     </li>
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Thinking About Thinking</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> Thesis, Antithesis, Synthesis, Solvitur Ambulando, The BS Asymmetry Principle, The 20/40/60 Rule, and more.</p>
+                      <p className={styles.tocDescription}><i>Including:</i> Thesis, Antithesis, Synthesis, Solvitur Ambulando, The BS Asymmetry Principle, The 20/40/60 Rule</p>
                     </li>
 
                     <li className={styles.tocSection}>
@@ -422,7 +422,7 @@ const Book = ({ country }) => {
 
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Life's Little Manuals</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> How to Win at Monopoly, Skip Rocks Like a Pro, The 60-30-10 Color Rule, The Awkwardness Vortex, and more.</p>
+                      <p className={styles.tocDescription}><i>Including:</i> How to Win at Monopoly, Skip Rocks Like a Pro, The 60-30-10 Color Rule, The Awkwardness Vortex</p>
                     </li>
                   </ol>
 
