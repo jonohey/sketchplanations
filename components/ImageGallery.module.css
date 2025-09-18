@@ -10,41 +10,6 @@
   @apply absolute top-4 left-1/2 -translate-x-1/2 z-30 px-3 py-1 bg-gray-800/80 text-white text-sm rounded-full backdrop-blur-sm;
 }
 
-.imageContainer {
-  @apply relative w-full h-full flex items-center justify-center overflow-hidden;
-  min-height: 0;
-}
-
-.imageWrapper {
-  @apply relative w-full h-full;
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.thumbnailStrip {
-  @apply absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex gap-2 p-2 bg-gray-800/80 rounded-lg backdrop-blur-sm;
-  max-width: calc(100vw - 2rem);
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.thumbnailStrip::-webkit-scrollbar {
-  display: none;
-}
-
-.thumbnail {
-  @apply relative w-16 h-12 flex-shrink-0 rounded overflow-hidden border-2 border-transparent transition-colors duration-200;
-}
-
-.thumbnail:hover {
-  @apply border-gray-400;
-}
-
-.thumbnailActive {
-  @apply border-white;
-}
-
 /* Mobile optimizations */
 @media (max-width: 768px) {
   .closeButton {
@@ -66,15 +31,6 @@
   .imageCounter {
     @apply top-2 text-xs px-2 py-1;
   }
-
-  .thumbnailStrip {
-    @apply bottom-2 left-2 right-2 -translate-x-0;
-    max-width: none;
-  }
-
-  .thumbnail {
-    @apply w-12 h-9;
-  }
 }
 
 /* Touch device optimizations */
@@ -83,22 +39,13 @@
   .closeButton:hover {
     @apply bg-gray-800/80;
   }
-
-  .thumbnail:hover {
-    @apply border-transparent;
-  }
-
-  .thumbnailActive {
-    @apply border-white;
-  }
 }
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .closeButton,
   .navButton,
-  .imageCounter,
-  .thumbnailStrip {
+  .imageCounter {
     @apply bg-gray-900 border border-white;
   }
 }
@@ -106,8 +53,7 @@
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   .closeButton,
-  .navButton,
-  .thumbnail {
+  .navButton {
     @apply transition-none;
   }
 }

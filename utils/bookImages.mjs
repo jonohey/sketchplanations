@@ -2,6 +2,8 @@
 // This creates a mapping of image names to their imported paths
 
 // Import all images from the big-ideas-pages folder
+import bigIdeasBookSpread1Toc from '../images/big-ideas-pages/big-ideas-book-spread-1-table-of-contents.jpg';
+import bigIdeasBookSpread2Toc from '../images/big-ideas-pages/big-ideas-book-spread-2-table-of-contents.jpg';
 import bigIdeasBookSpreadAwkwardnessVortex from '../images/big-ideas-pages/big-ideas-book-spread-Awkwardness-Vortex.png';
 import bigIdeasBookSpreadCoastlineParadox from '../images/big-ideas-pages/big-ideas-book-spread-coastline-paradox.png';
 import bigIdeasBookSpreadDaysOfTheWeek from '../images/big-ideas-pages/big-ideas-book-spread-Days-of-the-week.png';
@@ -22,23 +24,25 @@ import bigIdeasBookSpreadTsundoku from '../images/big-ideas-pages/big-ideas-book
 
 // Create a mapping of image names to their imported paths
 const bookImages = {
-  'big-ideas-book-spread-Awkwardness-Vortex.png': bigIdeasBookSpreadAwkwardnessVortex,
+  'big-ideas-book-spread-1-table-of-contents.jpg': bigIdeasBookSpread1Toc,
+  'big-ideas-book-spread-2-table-of-contents.jpg': bigIdeasBookSpread2Toc,
   'big-ideas-book-spread-coastline-paradox.png': bigIdeasBookSpreadCoastlineParadox,
+  'big-ideas-book-spread-Tsundoku.png': bigIdeasBookSpreadTsundoku,
+  'big-ideas-book-spread-How-to-win-at-Monopoly.png': bigIdeasBookSpreadHowToWinAtMonopoly,
+  'big-ideas-book-spread-Swiss-cheese-model.png': bigIdeasBookSpreadSwissCheeseModel,
+  'big-ideas-book-spread-Awkwardness-Vortex.png': bigIdeasBookSpreadAwkwardnessVortex,
   'big-ideas-book-spread-Days-of-the-week.png': bigIdeasBookSpreadDaysOfTheWeek,
   'big-ideas-book-spread-Flow.png': bigIdeasBookSpreadFlow,
   'big-ideas-book-spread-Goldilocks-zone.png': bigIdeasBookSpreadGoldilocksZone,
   'big-ideas-book-spread-Hope.png': bigIdeasBookSpreadHope,
-  'big-ideas-book-spread-How-to-win-at-Monopoly.png': bigIdeasBookSpreadHowToWinAtMonopoly,
   'big-ideas-book-spread-RACI.png': bigIdeasBookSpreadRACI,
   'big-ideas-book-spread-Seasons.png': bigIdeasBookSpreadSeasons,
   'big-ideas-book-spread-Solar-system-sizes.png': bigIdeasBookSpreadSolarSystemSizes,
   'big-ideas-book-spread-Starting-a-company.png': bigIdeasBookSpreadStartingACompany,
   'big-ideas-book-spread-Survivorship-bias.png': bigIdeasBookSpreadSurvivorshipBias,
-  'big-ideas-book-spread-Swiss-cheese-model.png': bigIdeasBookSpreadSwissCheeseModel,
   'big-ideas-book-spread-the-Doppler-effect.png': bigIdeasBookSpreadTheDopplerEffect,
   'big-ideas-book-spread-the-paradox-of-choice.png': bigIdeasBookSpreadTheParadoxOfChoice,
   'big-ideas-book-spread-The-potato-radius.png': bigIdeasBookSpreadThePotatoRadius,
-  'big-ideas-book-spread-Tsundoku.png': bigIdeasBookSpreadTsundoku,
 };
 
 // Create an array of image objects with metadata
@@ -47,6 +51,7 @@ export const bookPageImages = Object.entries(bookImages).map(([filename, src]) =
   const conceptName = filename
     .replace('big-ideas-book-spread-', '')
     .replace('.png', '')
+    .replace('.jpg', '')
     .replace(/-/g, ' ')
     .replace(/\b\w/g, l => l.toUpperCase());
 

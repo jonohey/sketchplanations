@@ -1,6 +1,7 @@
 import { track } from '@vercel/analytics'
 import FancyLink from 'components/FancyLink'
 import ImageGallery from 'components/ImageGallery'
+import { ZoomIn } from 'lucide-react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -436,7 +437,7 @@ const Book = ({ country }) => {
             {/* Gallery in What's Inside section */}
             <h3 id='sample-pages' className='text-2xl font-bold text-center mb-8'>Sample pages</h3>
             <p className='text-center text-gray-600 dark:text-gray-300 mb-8'>
-              Click on any image to view it in full size with zoom and navigation
+              A peek inside. Click to zoom in.
             </p>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16'>
               {bookPageImages.map((image, index) => (
@@ -471,8 +472,8 @@ const Book = ({ country }) => {
                     />
                   </div>
                   <div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center'>
-                    <div className='opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 dark:bg-gray-800/90 px-3 py-1 rounded-full text-sm font-medium'>
-                      Click to view
+                    <div className='opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 dark:bg-gray-800/90 p-2 rounded-full'>
+                      <ZoomIn size={24} className="text-gray-700 dark:text-gray-200" />
                     </div>
                   </div>
                 </div>
