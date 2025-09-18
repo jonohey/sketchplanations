@@ -1,0 +1,59 @@
+.closeButton {
+  @apply absolute top-4 right-4 z-30 flex items-center justify-center w-12 h-12 bg-gray-800/80 hover:bg-gray-700/80 text-white rounded-full transition-colors duration-200 backdrop-blur-sm;
+}
+
+.navButton {
+  @apply absolute top-1/2 -translate-y-1/2 z-30 flex items-center justify-center w-12 h-12 bg-gray-800/80 hover:bg-gray-700/80 text-white rounded-full transition-colors duration-200 backdrop-blur-sm;
+}
+
+.imageCounter {
+  @apply absolute top-4 left-1/2 -translate-x-1/2 z-30 px-3 py-1 bg-gray-800/80 text-white text-sm rounded-full backdrop-blur-sm;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .closeButton {
+    @apply w-10 h-10 top-2 right-2;
+  }
+
+  .navButton {
+    @apply w-10 h-10;
+  }
+
+  .navButton[style*='left'] {
+    @apply left-2;
+  }
+
+  .navButton[style*='right'] {
+    @apply right-2;
+  }
+
+  .imageCounter {
+    @apply top-2 text-xs px-2 py-1;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .navButton:hover,
+  .closeButton:hover {
+    @apply bg-gray-800/80;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .closeButton,
+  .navButton,
+  .imageCounter {
+    @apply bg-gray-900 border border-white;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .closeButton,
+  .navButton {
+    @apply transition-none;
+  }
+}

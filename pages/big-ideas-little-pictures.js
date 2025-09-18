@@ -1,5 +1,7 @@
 import { track } from '@vercel/analytics'
 import FancyLink from 'components/FancyLink'
+import ImageGallery from 'components/ImageGallery'
+import { ZoomIn } from 'lucide-react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -9,10 +11,7 @@ import styles from './big-ideas-little-pictures.module.css'
 
 import { pageTitle } from 'helpers'
 import bigIdeasLittlePicturesCoverTransparentImage from 'images/big-ideas-little-pictures-cover-transparent.png'
-import startingCompany from 'images/big-ideas-pages/big-ideas-book-spread-Starting-a-company.png'
-import swissCheeseModel from 'images/big-ideas-pages/big-ideas-book-spread-Swiss-cheese-model.png'
-import tsundoku from 'images/big-ideas-pages/big-ideas-book-spread-Tsundoku.png'
-import coastlineParadox from 'images/big-ideas-pages/big-ideas-book-spread-coastline-paradox.png'
+import { bookPageImages } from 'utils/bookImages.mjs'
 
 // Store links organized by country
 const storeLinks = {
@@ -92,6 +91,8 @@ export async function getServerSideProps({ req }) {
 
 const Book = ({ country }) => {
   const [showAllStores, setShowAllStores] = useState(false)
+  const [galleryOpen, setGalleryOpen] = useState(false)
+  const [galleryIndex, setGalleryIndex] = useState(0)
   
   return (
     <>
@@ -377,7 +378,7 @@ const Book = ({ country }) => {
                   <ol className={styles.tocGrid}>
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Nature&apos;s Nuances</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> The Coastline Paradox, Autumn Leaves, The Golden Ratio The Moon Illusion</p>
+                      <p className={styles.tocDescription}><i>Including:</i> The Coastline Paradox, Autumn Leaves, The Golden Ratio, The Moon Illusion</p>
                     </li>
 
                     <li className={styles.tocSection}>
@@ -434,78 +435,76 @@ const Book = ({ country }) => {
             </div>
 
             {/* Gallery in What's Inside section */}
-            <h3 id ='sample-pages' className='text-2xl font-bold text-center'>Sample pages</h3>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-8 mb-16'>
-              <div className='aspect-[3/2] relative'>
-                <Image
-                  src={coastlineParadox}
-                  alt='The Coastline Paradox - How the length of a coastline depends on how you measure it'
-                  fill
-                  className='object-contain rounded-lg'
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  loading="lazy"
-                  quality={75}
-                />
-              </div>
-              <div className='aspect-[3/2] relative'>
-                <Image
-                  src={tsundoku}
-                  alt='Tsundoku - The act of acquiring books and letting them pile up without reading them'
-                  fill
-                  className='object-contain rounded-lg'
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  loading="lazy"
-                  quality={75}
-                />
-              </div>
-              <div className='aspect-[3/2] relative'>
-                <Image
-                  src={swissCheeseModel}
-                  alt='The Swiss Cheese Model - For understanding accidents and improving safety'
-                  fill
-                  className='object-contain rounded-lg'
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  loading="lazy"
-                  quality={75}
-                />
-              </div>
-              <div className='aspect-[3/2] relative'>
-                <Image
-                  src={startingCompany}
-                  alt='Starting a Company - Is like jumping off a cliff and assembling the plane on the way down'
-                  fill
-                  className='object-contain rounded-lg'
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  loading="lazy"
-                  quality={75}
-                />
-              </div>
+            <h3 id='sample-pages' className='text-2xl font-bold text-center mb-8'>Sample pages</h3>
+            <p className='text-center text-gray-600 dark:text-gray-300 mb-8'>
+              A peek inside. Click to zoom in.
+            </p>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16'>
+              {bookPageImages.map((image, index) => (
+                <div
+                  key={image.filename}
+                  className={`aspect-[3/2] relative group cursor-pointer rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ${styles.bookPageContainer}`}
+                  onClick={() => {
+                    setGalleryIndex(index)
+                    setGalleryOpen(true)
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      setGalleryIndex(index)
+                      setGalleryOpen(true)
+                    }
+                  }}
+                  aria-label={`View ${image.conceptName} in gallery`}
+                >
+                  <div className="absolute inset-0 flex items-center justify-center p-2">
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      width={400}
+                      height={600}
+                      className={`${styles.bookPageImageAlt} group-hover:scale-105 transition-transform duration-300`}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      loading="lazy"
+                      quality={75}
+                    />
+                  </div>
+                  <div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center'>
+                    <div className='opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 dark:bg-gray-800/90 p-2 rounded-full'>
+                      <ZoomIn size={24} className="text-gray-700 dark:text-gray-200" />
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
 
-            {/* Videos stacked vertically */}
-            <div className='max-w-3xl mx-auto px-4 sm:px-6 lg:px-8'>
-              <div className='space-y-8'>
-                <div className={styles.youtube_container}>
-                  <iframe
-                    src='https://www.youtube.com/embed/dQqP6aBLHYc?si=oogeEYEXru3cs53s&controls=0&rel=0'
-                    title='YouTube video player'
-                    frameBorder='0'
-                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-                    allowFullScreen
-                    loading="lazy"
-                  ></iframe>
-                </div>
-                <div className={styles.youtube_container}>
-                  <iframe
-                    src='https://www.youtube.com/embed/1NQqM5ZjR2g?si=BOQLpNP4RDwVLnQ4'
-                    title='YouTube video player'
-                    frameBorder='0'
-                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-                    referrerPolicy='strict-origin-when-cross-origin'
-                    allowFullScreen
-                    loading="lazy"
-                  ></iframe>
-                </div>
+          </div>
+
+          <div id='video-previews' className='mt-24 max-w-3xl mx-auto scroll-mt-24'>
+            <h2 className='text-3xl font-bold mb-8 text-center'>Video previews</h2>
+            <div className='space-y-8'>
+              <div className={styles.youtube_container}>
+                <iframe
+                  src='https://www.youtube.com/embed/dQqP6aBLHYc?si=oogeEYEXru3cs53s&controls=0&rel=0'
+                  title='YouTube video player'
+                  frameBorder='0'
+                  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                  allowFullScreen
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <div className={styles.youtube_container}>
+                <iframe
+                  src='https://www.youtube.com/embed/1NQqM5ZjR2g?si=BOQLpNP4RDwVLnQ4'
+                  title='YouTube video player'
+                  frameBorder='0'
+                  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+                  referrerPolicy='strict-origin-when-cross-origin'
+                  allowFullScreen
+                  loading="lazy"
+                ></iframe>
               </div>
             </div>
           </div>
@@ -865,6 +864,14 @@ const Book = ({ country }) => {
           </div>
         </div>
       </div>
+
+      {/* Image Gallery Modal */}
+      <ImageGallery
+        images={bookPageImages}
+        initialIndex={galleryIndex}
+        isOpen={galleryOpen}
+        onClose={() => setGalleryOpen(false)}
+      />
     </>
   )
 }
