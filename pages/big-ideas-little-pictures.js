@@ -377,7 +377,7 @@ const Book = ({ country }) => {
                   <ol className={styles.tocGrid}>
                     <li className={styles.tocSection}>
                       <h4 className={styles.tocTitle}>Nature&apos;s Nuances</h4>
-                      <p className={styles.tocDescription}><i>Including:</i> The Coastline Paradox, Autumn Leaves, The Golden Ratio, The Golden Ratio, The Moon Illusion</p>
+                      <p className={styles.tocDescription}><i>Including:</i> The Coastline Paradox, Autumn Leaves, The Golden Ratio The Moon Illusion</p>
                     </li>
 
                     <li className={styles.tocSection}>
