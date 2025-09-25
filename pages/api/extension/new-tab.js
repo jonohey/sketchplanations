@@ -27,8 +27,27 @@ export default async (req, res) => {
     return res.status(405).json({ error: "Method not allowed" });
   }
   try {
-    // Get random handle from KV store
-    const handle = await kv.srandmember("sketchplanations");
+    // Fast weighted selection using KV store
+    // 70% chance of newer sketches, 30% chance of older sketches
+    const useNewerSketches = Math.random() < 0.7;
+    
+    let handle;
+    if (useNewerSketches) {
+      // Try to get from newer sketches set (if it exists)
+      try {
+        handle = await kv.srandmember("sketchplanations_newer");
+      } catch (error) {
+        // KV store not available locally, fallback to all sketches
+        handle = await kv.srandmember("sketchplanations");
+      }
+      // Fallback to all sketches if newer set doesn't exist
+      if (!handle) {
+        handle = await kv.srandmember("sketchplanations");
+      }
+    } else {
+      // Get from all sketches (includes older ones)
+      handle = await kv.srandmember("sketchplanations");
+    }
     
     if (!handle) {
       return res.status(404).json({ error: "No sketchplanations found" });
