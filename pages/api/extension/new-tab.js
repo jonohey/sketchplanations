@@ -36,7 +36,7 @@ export default async (req, res) => {
       // Try to get from newer sketches set (if it exists)
       try {
         handle = await kv.srandmember("sketchplanations_newer");
-      } catch (error) {
+      } catch {
         // KV store not available locally, fallback to all sketches
         handle = await kv.srandmember("sketchplanations");
       }
