@@ -32,35 +32,34 @@ const storeLinks = {
 
 const otherStores = {
   AU: [
-	{ href: 'https://amzn.to/4cVgP7I', label: 'Australia (Amazon)'},
-	{ href: 'https://www.booktopia.com.au/big-ideas-little-pictures-jono-hey/book/9781956403572.html', label: 'Australia (Booktopia)'},
-	{ href: 'https://www.dymocks.com.au/big-ideas-little-pictures-by-jono-hey-9781956403572', label: 'Australia (Dymocks)'},
-	{ href: 'https://www.thenile.com.au/books/jono-hey/big-ideas-little-pictures/9781956403572', label: 'Australia (The Nile)'},
-	{ href: 'https://www.readings.com.au/product/9781956403572/big-ideas-little-pictures--jono-hey--2024--9781956403572', label: 'Australia (Readings)'},
+    { href: 'https://amzn.to/4cVgP7I', label: 'Australia (Amazon)'},
+	  { href: 'https://www.booktopia.com.au/big-ideas-little-pictures-jono-hey/book/9781956403572.html', label: 'Australia (Booktopia)'},
+	  { href: 'https://www.dymocks.com.au/big-ideas-little-pictures-by-jono-hey-9781956403572', label: 'Australia (Dymocks)'},
   ],
   BE: { href: 'https://www.amazon.com.be/-/en/Jono-Hey/dp/1956403574/ref=sr_1_4', label: 'Belgium' },
   BR: { href: 'https://www.amazon.com.br/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'Brazil' },
   CA: [
-    { href: 'https://amzn.to/4nSmfpT', label: 'Canada (Amazon)' },
+    { href: 'https://amzn.to/3VJ5G3M', label: 'Canada (Amazon)' },
     { href: 'https://www.indigo.ca/en-ca/big-ideas-little-pictures-explaining-the-world-one-sketch-at-a-time/9781956403572.html', label: 'Canada (Indigo)' },
   ],
   CN: { href: 'https://3.cn/1Zj-dhXh', label: 'China (JD)' },
-  FR: { href: 'https://www.amazon.fr/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'France' },
-  DE: { href: 'https://www.amazon.de/-/en/Jono-Hey/dp/1956403574/ref=sr_1_1', label: 'Germany' },
+  FR: { href: 'https://amzn.to/46qIPAa', label: 'France' },
+  DE: { href: 'https://amzn.to/3IMVX9E', label: 'Germany' },
   IN: { href: 'https://www.amazon.in/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'India' },
-  IT: { href: 'https://www.amazon.it/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'Italy' },
+  IT: { href: 'https://amzn.to/4gWdYPx', label: 'Italy' },
+  JP: { href: 'https://amzn.to/4mBxMc3', label: 'Japan' },
   MX: { href: 'https://www.amazon.com.mx/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'Mexico' },
-  NL: { href: 'https://www.amazon.nl/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'Netherlands' },
+  NL: { href: 'https://amzn.to/42hslI7', label: 'Netherlands' },
   NZ: { href: 'https://www.mightyape.co.nz/product/big-ideas-little-pictures-hardback/36769294', label: 'New Zealand (Mighty Ape)' },
-  PL: { href: 'https://www.amazon.pl/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'Poland' },
+  PL: { href: 'https://amzn.to/3W0eanr', label: 'Poland' },
   SA: { href: 'https://www.amazon.sa/Jono-Hey/dp/1956403574/ref=sr_1_1', label: 'Saudi Arabia' },
-  SG: { href: 'https://www.amazon.sg/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'Singapore' },
+  SG: { href: 'https://amzn.to/4nrhfJ3', label: 'Singapore' },
   ZA: [
 	{ href: 'https://www.amazon.co.za/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'South Africa (Amazon)' },
 	{ href: 'https://www.takealot.com/big-ideas-little-pictures-explaining-the-world-once-sketch-at-a-/PLID92989211', label: 'South Africa (Takealot)' },
   ],
-  ES: { href: 'https://www.amazon.es/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'Spain' },
-  SE: { href: 'https://www.amazon.se/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'Sweden' },
+  ES: { href: 'https://amzn.to/4ofbqP9', label: 'Spain' },
+  SE: { href: 'https://amzn.to/3VGNQyu', label: 'Sweden' },
   CH: {
     href: 'https://www.exlibris.ch/de/buecher-buch/english-books/jono-hey/big-ideas-little-pictures/id/9781956403572/',
     label: 'Switzerland (Ex Libris)',
@@ -93,6 +92,13 @@ const Book = ({ country }) => {
   const [showAllStores, setShowAllStores] = useState(false)
   const [galleryOpen, setGalleryOpen] = useState(false)
   const [galleryIndex, setGalleryIndex] = useState(0)
+  
+  // Debug: Log the country value (only in development)
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Detected country:', country)
+    console.log('Available countries in otherStores:', Object.keys(otherStores))
+    console.log('Has FR in otherStores:', 'FR' in otherStores)
+  }
   
   return (
     <>
