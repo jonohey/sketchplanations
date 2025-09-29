@@ -41,7 +41,7 @@ const otherStores = {
   BE: { href: 'https://www.amazon.com.be/-/en/Jono-Hey/dp/1956403574/ref=sr_1_4', label: 'Belgium' },
   BR: { href: 'https://www.amazon.com.br/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'Brazil' },
   CA: [
-    { href: 'https://amzn.to/3WnM6uQ', label: 'Canada (Amazon)' },
+    { href: 'https://amzn.to/4nSmfpT', label: 'Canada (Amazon)' },
     { href: 'https://www.indigo.ca/en-ca/big-ideas-little-pictures-explaining-the-world-one-sketch-at-a-time/9781956403572.html', label: 'Canada (Indigo)' },
   ],
   CN: { href: 'https://3.cn/1Zj-dhXh', label: 'China (JD)' },
