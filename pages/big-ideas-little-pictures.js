@@ -32,11 +32,9 @@ const storeLinks = {
 
 const otherStores = {
   AU: [
-	{ href: 'https://amzn.to/4cVgP7I', label: 'Australia (Amazon)'},
-	{ href: 'https://www.booktopia.com.au/big-ideas-little-pictures-jono-hey/book/9781956403572.html', label: 'Australia (Booktopia)'},
-	{ href: 'https://www.dymocks.com.au/big-ideas-little-pictures-by-jono-hey-9781956403572', label: 'Australia (Dymocks)'},
-	{ href: 'https://www.thenile.com.au/books/jono-hey/big-ideas-little-pictures/9781956403572', label: 'Australia (The Nile)'},
-	{ href: 'https://www.readings.com.au/product/9781956403572/big-ideas-little-pictures--jono-hey--2024--9781956403572', label: 'Australia (Readings)'},
+    { href: 'https://amzn.to/4cVgP7I', label: 'Australia (Amazon)'},
+	  { href: 'https://www.booktopia.com.au/big-ideas-little-pictures-jono-hey/book/9781956403572.html', label: 'Australia (Booktopia)'},
+	  { href: 'https://www.dymocks.com.au/big-ideas-little-pictures-by-jono-hey-9781956403572', label: 'Australia (Dymocks)'},
   ],
   BE: { href: 'https://www.amazon.com.be/-/en/Jono-Hey/dp/1956403574/ref=sr_1_4', label: 'Belgium' },
   BR: { href: 'https://www.amazon.com.br/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'Brazil' },
