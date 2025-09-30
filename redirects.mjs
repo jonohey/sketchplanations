@@ -35,6 +35,11 @@ export default [
 		permanent: false,
 	},
 	{
+		source: "/browser-extension",
+		destination: "https://climbing-error-fa3.notion.site/New-Tab-Chrome-Extension-Sketchplanations-27ebf3f5521a80b797f3cffb0a8ec2f1?pvs=143",
+		permanent: false,
+	},
+	{
 		source: "/styleguide",
 		destination: "https://company-208276.frontify.com/d/iATaeFQL51Lv",
 		permanent: false,
