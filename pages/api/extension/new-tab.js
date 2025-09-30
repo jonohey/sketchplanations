@@ -80,6 +80,8 @@ export default async (req, res) => {
       imageUrl,
       imageUrlOptimised,
       imageAlt: data.image.alt || data.title,
+      imageWidth: data.image.dimensions.width,
+      imageHeight: data.image.dimensions.height,
       pageUrl: `https://sketchplanations.com/${uid}`,
       redbubbleUrl: data.redbubble_link_url || null,
       podcastUrl: data.podcast_link_url,
