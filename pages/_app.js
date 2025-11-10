@@ -2,6 +2,7 @@ import { PrismicPreview } from "@prismicio/next";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import BuyMeACoffee from "components/BuyMeACoffee";
 import Footer from "components/Footer";
 import Header from "components/Header";
@@ -108,6 +109,7 @@ const Sketchplanations = ({ Component, pageProps }) => {
 					<Footer />
 				</div>
 				<Analytics />
+				<SpeedInsights />
 			</Context.Provider>
 		</PrismicPreview>
 	);
