@@ -1,4 +1,4 @@
-// Legacy endpoint for beta testers - uses shared v1 handler
-import handler from "./_shared/new-tab-handler";
+// Legacy endpoint for beta testers - uses shared handler
+import createNewTabHandler from "./_shared/new-tab-handler";
 
-export default handler;
+export default createNewTabHandler({ apiVersion: "legacy" });

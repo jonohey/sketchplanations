@@ -11,9 +11,31 @@ const CACHE_HEADERS = {
   "Expires": "0",
 };
 
+const createTracker = (apiVersion) => {
+  return (status, attributes = {}) => {
+    try {
+      const analyticsResult = track("extension_new_tab_request", {
+        apiVersion,
+        status,
+        ...attributes,
+      });
+
+      if (analyticsResult?.catch) {
+        analyticsResult.catch((analyticsError) => {
+          console.warn("Analytics tracking failed:", analyticsError);
+        });
+      }
+    } catch (analyticsError) {
+      console.warn("Analytics tracking failed:", analyticsError);
+    }
+  };
+};
+
 // Shared handler for extension API endpoints
-// Used by both unversioned (beta testers) and v1 (production) endpoints
-export default async (req, res) => {
+// Used by both unversioned (beta testers) and versioned endpoints
+const createNewTabHandler = ({ apiVersion }) => async (req, res) => {
+  const trackEvent = createTracker(apiVersion);
+
   // Set CORS headers for browser extensions
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET");
@@ -26,6 +48,7 @@ export default async (req, res) => {
   
   // Only allow GET requests
   if (req.method !== "GET") {
+    trackEvent("invalid_method", { method: req.method });
     return res.status(405).json({ error: "Method not allowed" });
   }
   try {
@@ -52,6 +75,7 @@ export default async (req, res) => {
     }
     
     if (!handle) {
+      trackEvent("not_found");
       return res.status(404).json({ error: "No sketchplanations found" });
     }
 
@@ -91,12 +115,9 @@ export default async (req, res) => {
     };
 
     // Track the event for analytics (non-blocking)
-    try {
-      track('browser-extension', { sketch: data.title });
-    } catch (analyticsError) {
-      // Don't fail the request if analytics fails
-      console.warn("Analytics tracking failed:", analyticsError);
-    }
+    trackEvent("success", {
+      sketchTitle: data.title || null,
+    });
 
     // Set cache headers
     res.setHeader("Cache-Control", CACHE_HEADERS["Cache-Control"]);
@@ -106,6 +127,7 @@ export default async (req, res) => {
     res.status(200).json(response);
   } catch (error) {
     console.error("Extension API error:", error);
+    trackEvent("error", { errorType: error.name || "unknown" });
     
     // Don't expose internal error details in production
     const errorMessage = process.env.NODE_ENV === "production" 
@@ -115,3 +137,5 @@ export default async (req, res) => {
     res.status(500).json({ error: errorMessage });
   }
 };
+
+export default createNewTabHandler;
