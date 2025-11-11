@@ -7,7 +7,7 @@ const { trackMock, kvMock, prismicClientMock } = vi.hoisted(() => ({
 	prismicClientMock: { getByUID: vi.fn() },
 }));
 
-vi.mock("@vercel/analytics", () => ({ track: trackMock }));
+vi.mock("@vercel/analytics/server", () => ({ track: trackMock }));
 vi.mock("@vercel/kv", () => ({ kv: kvMock }));
 vi.mock("services/prismic", () => ({ client: prismicClientMock }));
 vi.mock("@prismicio/helpers", () => ({
@@ -38,6 +38,18 @@ const createResponse = () => {
 	};
 };
 
+const createRequest = (method, overrides = {}) => ({
+	method,
+	headers: {
+		host: "test.local",
+		cookie: "",
+		"user-agent": "vitest",
+		"x-forwarded-for": "127.0.0.1",
+		...overrides.headers,
+	},
+	...overrides,
+});
+
 describe("createNewTabHandler", () => {
 	let originalMathRandom;
 	let consoleErrorSpy;
@@ -57,7 +69,7 @@ describe("createNewTabHandler", () => {
 
 	it("returns a sketch and tracks success with the api version", async () => {
 		const handler = createNewTabHandler({ apiVersion: "v1" });
-		const req = { method: "GET" };
+		const req = createRequest("GET");
 		const res = createResponse();
 
 		Math.random = vi.fn(() => 0.1);
@@ -96,16 +108,20 @@ describe("createNewTabHandler", () => {
 			redbubbleUrl: "https://prints.test",
 		});
 
-		expect(trackMock).toHaveBeenCalledWith("extension_new_tab_request", {
-			apiVersion: "v1",
-			status: "success",
-			sketchTitle: "Daily habits",
-		});
+		expect(trackMock).toHaveBeenCalledWith(
+			"extension_new_tab_request",
+			{
+				apiVersion: "v1",
+				status: "success",
+				sketchTitle: "Daily habits",
+			},
+			{ headers: req.headers },
+		);
 	});
 
 	it("handles OPTIONS requests without tracking events", async () => {
 		const handler = createNewTabHandler({ apiVersion: "v1" });
-		const req = { method: "OPTIONS" };
+		const req = createRequest("OPTIONS");
 		const res = createResponse();
 
 		await handler(req, res);
@@ -117,23 +133,27 @@ describe("createNewTabHandler", () => {
 
 	it("returns 405 for non-GET methods and tracks invalid_method", async () => {
 		const handler = createNewTabHandler({ apiVersion: "legacy" });
-		const req = { method: "POST" };
+		const req = createRequest("POST");
 		const res = createResponse();
 
 		await handler(req, res);
 
 		expect(res.statusCode).toBe(405);
 		expect(res.body).toEqual({ error: "Method not allowed" });
-		expect(trackMock).toHaveBeenCalledWith("extension_new_tab_request", {
-			apiVersion: "legacy",
-			status: "invalid_method",
-			method: "POST",
-		});
+		expect(trackMock).toHaveBeenCalledWith(
+			"extension_new_tab_request",
+			{
+				apiVersion: "legacy",
+				status: "invalid_method",
+				method: "POST",
+			},
+			{ headers: req.headers },
+		);
 	});
 
 	it("returns 404 when no sketch handles are available", async () => {
 		const handler = createNewTabHandler({ apiVersion: "v1" });
-		const req = { method: "GET" };
+		const req = createRequest("GET");
 		const res = createResponse();
 
 		Math.random = vi.fn(() => 0.8);
@@ -143,15 +163,19 @@ describe("createNewTabHandler", () => {
 
 		expect(res.statusCode).toBe(404);
 		expect(res.body).toEqual({ error: "No sketchplanations found" });
-		expect(trackMock).toHaveBeenCalledWith("extension_new_tab_request", {
-			apiVersion: "v1",
-			status: "not_found",
-		});
+		expect(trackMock).toHaveBeenCalledWith(
+			"extension_new_tab_request",
+			{
+				apiVersion: "v1",
+				status: "not_found",
+			},
+			{ headers: req.headers },
+		);
 	});
 
 	it("returns 500 on unexpected errors and tracks error result", async () => {
 		const handler = createNewTabHandler({ apiVersion: "v1" });
-		const req = { method: "GET" };
+		const req = createRequest("GET");
 		const res = createResponse();
 
 		Math.random = vi.fn(() => 0.1);
@@ -162,16 +186,20 @@ describe("createNewTabHandler", () => {
 
 		expect(res.statusCode).toBe(500);
 		expect(res.body?.error).toBeDefined();
-		expect(trackMock).toHaveBeenCalledWith("extension_new_tab_request", {
-			apiVersion: "v1",
-			status: "error",
-			errorType: "Error",
-		});
+		expect(trackMock).toHaveBeenCalledWith(
+			"extension_new_tab_request",
+			{
+				apiVersion: "v1",
+				status: "error",
+				errorType: "Error",
+			},
+			{ headers: req.headers },
+		);
 	});
 
 	it("returns null for optional URLs when missing", async () => {
 		const handler = createNewTabHandler({ apiVersion: "v1" });
-		const req = { method: "GET" };
+		const req = createRequest("GET");
 		const res = createResponse();
 
 		Math.random = vi.fn(() => 0.1);

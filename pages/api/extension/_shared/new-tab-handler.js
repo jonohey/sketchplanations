@@ -1,5 +1,5 @@
 import * as prismicH from "@prismicio/helpers";
-import { track } from "@vercel/analytics";
+import { track } from "@vercel/analytics/server";
 import { kv } from "@vercel/kv";
 import { client } from "services/prismic";
 
@@ -11,14 +11,18 @@ const CACHE_HEADERS = {
   "Expires": "0",
 };
 
-const createTracker = (apiVersion) => {
+const createTracker = (apiVersion, headers) => {
   return (status, attributes = {}) => {
+    if (!headers || Object.keys(headers).length === 0) {
+      console.warn("Analytics tracking skipped: request headers unavailable");
+      return;
+    }
     try {
       const analyticsResult = track("extension_new_tab_request", {
         apiVersion,
         status,
         ...attributes,
-      });
+      }, { headers });
 
       if (analyticsResult?.catch) {
         analyticsResult.catch((analyticsError) => {
@@ -34,7 +38,7 @@ const createTracker = (apiVersion) => {
 // Shared handler for extension API endpoints
 // Used by both unversioned (beta testers) and versioned endpoints
 const createNewTabHandler = ({ apiVersion }) => async (req, res) => {
-  const trackEvent = createTracker(apiVersion);
+  const trackEvent = createTracker(apiVersion, req?.headers);
 
   // Set CORS headers for browser extensions
   res.setHeader("Access-Control-Allow-Origin", "*");
