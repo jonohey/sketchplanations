@@ -11,28 +11,24 @@ const CACHE_HEADERS = {
   "Expires": "0",
 };
 
-const createTracker = (apiVersion, headers) => {
-  return (status, attributes = {}) => {
-    if (!headers || Object.keys(headers).length === 0) {
-      console.warn("Analytics tracking skipped: request headers unavailable");
-      return;
-    }
-    try {
-      const analyticsResult = track("extension_new_tab_request", {
+const createTracker = (apiVersion, headers) => async (status, attributes = {}) => {
+  if (!headers || Object.keys(headers).length === 0) {
+    console.warn("Analytics tracking skipped: request headers unavailable");
+    return;
+  }
+  try {
+    await track(
+      "extension_new_tab_request",
+      {
         apiVersion,
         status,
         ...attributes,
-      }, { headers });
-
-      if (analyticsResult?.catch) {
-        analyticsResult.catch((analyticsError) => {
-          console.warn("Analytics tracking failed:", analyticsError);
-        });
-      }
-    } catch (analyticsError) {
-      console.warn("Analytics tracking failed:", analyticsError);
-    }
-  };
+      },
+      { headers },
+    );
+  } catch (analyticsError) {
+    console.warn("Analytics tracking failed:", analyticsError);
+  }
 };
 
 // Shared handler for extension API endpoints
@@ -52,7 +48,7 @@ const createNewTabHandler = ({ apiVersion }) => async (req, res) => {
   
   // Only allow GET requests
   if (req.method !== "GET") {
-    trackEvent("invalid_method", { method: req.method });
+    await trackEvent("invalid_method", { method: req.method });
     return res.status(405).json({ error: "Method not allowed" });
   }
   try {
@@ -79,7 +75,7 @@ const createNewTabHandler = ({ apiVersion }) => async (req, res) => {
     }
     
     if (!handle) {
-      trackEvent("not_found");
+      await trackEvent("not_found");
       return res.status(404).json({ error: "No sketchplanations found" });
     }
 
@@ -119,7 +115,7 @@ const createNewTabHandler = ({ apiVersion }) => async (req, res) => {
     };
 
     // Track the event for analytics (non-blocking)
-    trackEvent("success", {
+    await trackEvent("success", {
       sketchTitle: data.title || null,
     });
 
@@ -131,7 +127,7 @@ const createNewTabHandler = ({ apiVersion }) => async (req, res) => {
     res.status(200).json(response);
   } catch (error) {
     console.error("Extension API error:", error);
-    trackEvent("error", { errorType: error.name || "unknown" });
+    await trackEvent("error", { errorType: error.name || "unknown" });
     
     // Don't expose internal error details in production
     const errorMessage = process.env.NODE_ENV === "production" 
