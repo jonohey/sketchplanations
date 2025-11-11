@@ -168,5 +168,33 @@ describe("createNewTabHandler", () => {
 			errorType: "Error",
 		});
 	});
+
+	it("returns null for optional URLs when missing", async () => {
+		const handler = createNewTabHandler({ apiVersion: "v1" });
+		const req = { method: "GET" };
+		const res = createResponse();
+
+		Math.random = vi.fn(() => 0.1);
+		kvMock.srandmember.mockResolvedValue("missing-links");
+		prismicClientMock.getByUID.mockResolvedValue({
+			uid: "missing-links",
+			data: {
+				title: "Missing links",
+				body: [{ type: "paragraph", text: "No links here" }],
+				image: {
+					url: "https://imgix.net/missing.png",
+					alt: "No links",
+					dimensions: { width: 400, height: 300 },
+				},
+				published_at: "2024-02-02",
+			},
+		});
+
+		await handler(req, res);
+
+		expect(res.statusCode).toBe(200);
+		expect(res.body.redbubbleUrl).toBeNull();
+		expect(res.body.podcastUrl).toBeNull();
+	});
 });
 

@@ -110,7 +110,7 @@ const createNewTabHandler = ({ apiVersion }) => async (req, res) => {
       imageHeight: data.image.dimensions.height,
       pageUrl: `https://sketchplanations.com/${uid}`,
       redbubbleUrl: data.redbubble_link_url || null,
-      podcastUrl: data.podcast_link_url,
+      podcastUrl: data.podcast_link_url || null,
       publishedAt: data.published_at,
     };
 
