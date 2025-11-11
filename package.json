@@ -61,7 +61,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.0.5",
-		"@fullhuman/postcss-purgecss": "^5.0.0",
+		"@fullhuman/postcss-purgecss": "^7.0.2",
 		"@tailwindcss/typography": "^0.5.16",
 		"autoprefixer": "^10.4.21",
 		"eslint": "^9.29.0",
