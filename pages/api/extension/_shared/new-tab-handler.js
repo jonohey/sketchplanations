@@ -11,7 +11,44 @@ const CACHE_HEADERS = {
   "Expires": "0",
 };
 
-const createTracker = (apiVersion, headers) => async (status, attributes = {}) => {
+const normalizeHeaders = (headers = {}) => {
+  const normalizedHeaders = {};
+  for (const [key, value] of Object.entries(headers)) {
+    if (value === undefined || value === null) {
+      continue;
+    }
+    normalizedHeaders[key] = Array.isArray(value) ? value.join(", ") : value;
+  }
+  return normalizedHeaders;
+};
+
+const buildTrackingHeaders = (req) => {
+  const headers = normalizeHeaders(req?.headers || {});
+
+  if (!headers["user-agent"]) {
+    headers["user-agent"] = "server";
+  }
+
+  if (!headers.referer) {
+    const host = headers.host || process.env.VERCEL_URL;
+    if (host) {
+      const origin = host.startsWith("http") ? host : `https://${host}`;
+      const path = req?.url || "";
+      const fullUrl = path.startsWith("http") ? path : `${origin}${path}`;
+      headers.referer = fullUrl;
+    }
+  }
+
+  if (!headers["x-forwarded-for"] && req?.socket?.remoteAddress) {
+    headers["x-forwarded-for"] = req.socket.remoteAddress;
+  }
+
+  return headers;
+};
+
+const createTracker = (apiVersion, req) => async (status, attributes = {}) => {
+  const headers = buildTrackingHeaders(req);
+
   if (!headers || Object.keys(headers).length === 0) {
     console.warn("Analytics tracking skipped: request headers unavailable");
     return;
@@ -34,7 +71,7 @@ const createTracker = (apiVersion, headers) => async (status, attributes = {}) =
 // Shared handler for extension API endpoints
 // Used by both unversioned (beta testers) and versioned endpoints
 const createNewTabHandler = ({ apiVersion }) => async (req, res) => {
-  const trackEvent = createTracker(apiVersion, req?.headers);
+  const trackEvent = createTracker(apiVersion, req);
 
   // Set CORS headers for browser extensions
   res.setHeader("Access-Control-Allow-Origin", "*");
