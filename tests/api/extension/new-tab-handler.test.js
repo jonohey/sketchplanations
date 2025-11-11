@@ -27,6 +27,10 @@ const createResponse = () => {
 			this.statusCode = code;
 			return this;
 		},
+		end() {
+			this.ended = true;
+			return this;
+		},
 		json(payload) {
 			this.body = payload;
 			return this;
@@ -97,6 +101,18 @@ describe("createNewTabHandler", () => {
 			status: "success",
 			sketchTitle: "Daily habits",
 		});
+	});
+
+	it("handles OPTIONS requests without tracking events", async () => {
+		const handler = createNewTabHandler({ apiVersion: "v1" });
+		const req = { method: "OPTIONS" };
+		const res = createResponse();
+
+		await handler(req, res);
+
+		expect(res.statusCode).toBe(200);
+		expect(res.ended).toBe(true);
+		expect(trackMock).not.toHaveBeenCalled();
 	});
 
 	it("returns 405 for non-GET methods and tracks invalid_method", async () => {
