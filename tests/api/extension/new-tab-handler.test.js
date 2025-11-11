@@ -38,17 +38,22 @@ const createResponse = () => {
 	};
 };
 
-const createRequest = (method, overrides = {}) => ({
-	method,
-	headers: {
-		host: "test.local",
-		cookie: "",
-		"user-agent": "vitest",
-		"x-forwarded-for": "127.0.0.1",
-		...overrides.headers,
-	},
-	...overrides,
-});
+const createRequest = (method, overrides = {}) => {
+	const url = overrides.url ?? "/api/extension/new-tab";
+	return {
+		method,
+		url,
+		socket: { remoteAddress: "203.0.113.99" },
+		headers: {
+			host: "test.local",
+			cookie: "",
+			"user-agent": "vitest",
+			"x-forwarded-for": "127.0.0.1",
+			...overrides.headers,
+		},
+		...overrides,
+	};
+};
 
 describe("createNewTabHandler", () => {
 	let originalMathRandom;
@@ -115,7 +120,14 @@ describe("createNewTabHandler", () => {
 				status: "success",
 				sketchTitle: "Daily habits",
 			},
-			{ headers: req.headers },
+			{
+				headers: expect.objectContaining({
+					...req.headers,
+					referer: "https://test.local/api/extension/new-tab",
+					"user-agent": "vitest",
+					"x-forwarded-for": "127.0.0.1",
+				}),
+			},
 		);
 	});
 
@@ -147,7 +159,12 @@ describe("createNewTabHandler", () => {
 				status: "invalid_method",
 				method: "POST",
 			},
-			{ headers: req.headers },
+			{
+				headers: expect.objectContaining({
+					...req.headers,
+					referer: "https://test.local/api/extension/new-tab",
+				}),
+			},
 		);
 	});
 
@@ -169,7 +186,12 @@ describe("createNewTabHandler", () => {
 				apiVersion: "v1",
 				status: "not_found",
 			},
-			{ headers: req.headers },
+			{
+				headers: expect.objectContaining({
+					...req.headers,
+					referer: "https://test.local/api/extension/new-tab",
+				}),
+			},
 		);
 	});
 
@@ -193,7 +215,12 @@ describe("createNewTabHandler", () => {
 				status: "error",
 				errorType: "Error",
 			},
-			{ headers: req.headers },
+			{
+				headers: expect.objectContaining({
+					...req.headers,
+					referer: "https://test.local/api/extension/new-tab",
+				}),
+			},
 		);
 	});
 
