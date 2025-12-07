@@ -11,7 +11,7 @@
 		"test": "vitest run"
 	},
 	"dependencies": {
-		"@floating-ui/react": "^0.27.12",
+		"@floating-ui/react": "^0.27.16",
 		"@prismicio/client": "^7.18.0",
 		"@prismicio/helpers": "^2.3.9",
 		"@prismicio/next": "^1.7.2",
