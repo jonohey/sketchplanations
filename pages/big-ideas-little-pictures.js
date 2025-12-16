@@ -46,6 +46,7 @@ const otherStores = {
   FR: { href: 'https://amzn.to/46qIPAa', label: 'France' },
   DE: { href: 'https://amzn.to/3IMVX9E', label: 'Germany' },
   IN: { href: 'https://www.amazon.in/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'India' },
+  IE: { href: 'https://amzn.to/48U2cSa', label: 'Ireland' },
   IT: { href: 'https://amzn.to/4gWdYPx', label: 'Italy' },
   JP: { href: 'https://amzn.to/4mBxMc3', label: 'Japan' },
   MX: { href: 'https://www.amazon.com.mx/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'Mexico' },
