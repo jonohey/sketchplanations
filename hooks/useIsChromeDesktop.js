@@ -66,14 +66,14 @@ const useIsChromeDesktop = () => {
 		// Primary method: User-Agent Client Hints API (most reliable)
 		// Only trust this if it explicitly identifies as "Google Chrome"
 		let isChrome = false;
-		const hasClientHints = navigator.userAgentData?.brands !== undefined;
+		const hasClientHints = !!navigator.userAgentData?.brands;
 
 		if (hasClientHints) {
 			// Check for "Google Chrome" brand specifically
 			// This is the most reliable way to detect actual Google Chrome
-			isChrome = navigator.userAgentData.brands.some(
+			isChrome = navigator.userAgentData.brands?.some(
 				(brand) => brand.brand === "Google Chrome",
-			);
+			) ?? false;
 			// If Client Hints are available but don't identify as Chrome, it's not Chrome
 			// Don't fall back to user-agent string in this case
 		} else {
