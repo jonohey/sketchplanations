@@ -693,7 +693,7 @@ const About = () => {
 								width="100%"
 								height="352"
 								frameBorder="0"
-								allowfullscreen={true}
+								allowFullScreen={true}
 								allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 								loading="lazy">
 							</iframe>
