@@ -1,3 +1,4 @@
+import ChromeExtensionPromo from "components/ChromeExtensionPromo";
 import FancyLink from "components/FancyLink";
 import SubscribeFull from "components/SubscribeFull";
 import { pageTitle } from "helpers";
@@ -57,6 +58,8 @@ const About = () => {
 							for details.
 						</p>
 					</div>
+
+					<ChromeExtensionPromo />
 
 					<hr />
 
