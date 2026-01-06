@@ -278,58 +278,7 @@ const About = () => {
 							Over 2013–14 I posted one sketchplanation a day. Since then I switched to one per week, and the quality improved.
 						</p>
 						<p>
-							I draw them using{" "}
-							<FancyLink
-								href="https://www.sketchbook.com/?locale=en" 
-								target="_blank" 
-								rel="noopener noreferrer"
-							>
-								Sketchbook Pro
-							</FancyLink>{" "}
-							on an{" "}
-							<FancyLink
-								href="https://www.apple.com/ipad-pro/" 
-								target="_blank" 
-								rel="noopener noreferrer"
-							>
-								iPad Pro
-							</FancyLink>{" "}
-							with the{" "}
-							<FancyLink
-								href="https://www.apple.com/apple-pencil/" 
-								target="_blank" 
-								rel="noopener noreferrer"
-							>
-								Apple Pencil
-							</FancyLink>
-							. It took me a long time to go all fancy and digital, and I still kind of miss the analogue touch of the originals.
-						</p>
-						<p>
-							The original ones are drawn in{" "}
-							<FancyLink
-								href="https://www.google.co.uk/search?q=moleskine+storyboard+notebook" 
-								target="_blank" 
-								rel="noopener noreferrer"
-							>
-								Moleskine storyboard sketchbooks
-							</FancyLink>{" "}
-							(quite hard to find in stores). I used three{" "}
-							<FancyLink
-								href="https://www.staples.com/uni-ball-Vision-Elite-Rollerball-Pens-Micro-Point-Assorted-8-pk-58092PP/product_578480" 
-								target="_blank" 
-								rel="noopener noreferrer"
-							>
-								Uniball Vision Elites
-							</FancyLink>{" "}
-							and a{" "}
-							<FancyLink
-								href="https://amzn.to/3jcEYf2" 
-								target="_blank" 
-								rel="noopener noreferrer"
-							>
-								Copic marker
-							</FancyLink>{" "}
-							for the grey. I think it is the best combination of pens there is.
+							If you're interested in the tools I use, I listed them in the <FancyLink href="/resources">Resources</FancyLink> page
 						</p>
 
 						<p>
