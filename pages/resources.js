@@ -19,7 +19,10 @@ const Resources = () => {
 				<meta property="og:url" content="https://sketchplanations.com/resources" />
 				<meta property="og:image" content="https://sketchplanations.com/images/sketchplanations-studio-setup.jpg" />
 				<meta name="twitter:card" content="summary_large_image" />
-				<meta name="twitter:image:alt" content="Resources" />
+                <meta property="twitter:title" content="Recommended gear, products and podcast tools that I use for Sketchplanations" />
+                <meta property="twitter:image" content="https://sketchplanations.com/images/sketchplanations-studio-setup.jpg" />
+				<meta name="twitter:image:alt" content="Sketchplanations studio setup" />
+                <meta property="twitter:description" content="Recommended gear, products and podcast tools that I use for Sketchplanations" />
 			</Head>
 			<div className="max-w-3xl mx-auto px-5 pb-16">
 				<main className="prose max-w-none">
@@ -34,8 +37,9 @@ const Resources = () => {
 							src={sketchplanationsStudioSetupImage}
 							alt="Sketchplanations studio setup"
 							priority
+							fetchPriority="high"
 							placeholder="blur"
-							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 768px, 768px"
+							sizes="(max-width: 768px) calc(100vw - 2.5rem), 728px"
 							quality={75}
 							className="w-full h-auto mb-1"
 						/>
