@@ -109,7 +109,7 @@ const Sketchplanations = ({ Component, pageProps }) => {
 					<Footer />
 				</div>
 				<Analytics />
-				<SpeedInsights />
+				<SpeedInsights sampleRate={0.5} />
 			</Context.Provider>
 		</PrismicPreview>
 	);
