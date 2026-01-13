@@ -92,7 +92,7 @@
 			"js-yaml": "^4.1.1",
 			"brace-expansion": "^4.0.1",
 			"esbuild": "^0.27.2",
-			"path-to-regexp": ">=6.3.0"
+			"path-to-regexp": "^8.3.0"
 		}
 	}
 }
