@@ -78,7 +78,7 @@
 		"prettier": "^3.6.1",
 		"styled-jsx-plugin-postcss": "^4.0.1",
 		"tailwindcss": "^3.4.17",
-		"vercel": "^44.5.5",
+		"vercel": "^50.3.0",
 		"vitest": "^4.0.8",
 		"webpack": "^5.99.9",
 		"xmlbuilder2": "^3.1.1"
@@ -91,7 +91,8 @@
 			"undici": "^7.18.2",
 			"js-yaml": "^4.1.1",
 			"brace-expansion": "^4.0.1",
-			"esbuild": "^0.27.2"
+			"esbuild": "^0.27.2",
+			"path-to-regexp": ">=6.3.0"
 		}
 	}
 }
