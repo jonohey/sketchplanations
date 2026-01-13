@@ -34,7 +34,7 @@
 		"nextjs-progressbar": "^0.0.16",
 		"node-fetch": "^3.3.2",
 		"node-html-parser": "^7.0.1",
-		"path-to-regexp": "^8.2.0",
+		"path-to-regexp": "^8.3.0",
 		"polished": "^4.3.1",
 		"postcss-flexbugs-fixes": "^5.0.2",
 		"postgres": "^3.4.7",
@@ -64,7 +64,7 @@
 		"@fullhuman/postcss-purgecss": "^5.0.0",
 		"@tailwindcss/typography": "^0.5.16",
 		"autoprefixer": "^10.4.21",
-		"eslint": "^9.29.0",
+		"eslint": "^9.39.2",
 		"eslint-config-next": "^15.5.9",
 		"eslint-config-prettier": "^10.1.5",
 		"eslint-plugin-prettier": "^5.5.0",
@@ -79,5 +79,16 @@
 		"vitest": "^4.0.8",
 		"webpack": "^5.99.9",
 		"xmlbuilder2": "^3.1.1"
+	},
+	"pnpm": {
+		"overrides": {
+			"form-data": "^4.0.5",
+			"axios": "^1.13.2",
+			"glob": "^13.0.0",
+			"undici": "^7.18.2",
+			"js-yaml": "^4.1.1",
+			"brace-expansion": "^4.0.1",
+			"esbuild": "^0.27.2"
+		}
 	}
 }
