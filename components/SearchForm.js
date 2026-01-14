@@ -5,6 +5,7 @@ import { useRef } from "react";
 import styles from "./SearchForm.module.css";
 
 import { isPresent } from "helpers";
+import KeyboardShortcut from "./KeyboardShortcut";
 
 const SearchForm = ({
 	value,
@@ -34,6 +35,11 @@ const SearchForm = ({
 				onChange={(e) => onChange(e.target.value)}
 				{...props}
 			/>
+			{!isBusy && !isPresent(value) && (
+				<div className={styles["shortcut-indicator"]}>
+					<KeyboardShortcut shortcut="F" />
+				</div>
+			)}
 			{isBusy && (
 				<div className={styles["loading-indicator"]}>
 					<svg

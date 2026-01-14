@@ -15,12 +15,12 @@
 }
 
 .input {
-  @apply block py-2 pr-4 pl-10 w-full bg-bgInput border border-borderInput border-r-0 outline-none grow rounded-lg rounded-r-none placeholder-textSubdued;
+  @apply block py-2 pr-10 pl-10 w-full bg-bgInput border border-borderInput border-r-0 outline-none grow rounded-lg rounded-r-none placeholder-textSubdued;
 }
 
 @screen sm {
   .input {
-    @apply py-3 pr-6 pl-12 text-lg rounded-full rounded-r-none;
+    @apply py-3 pr-12 pl-12 text-lg rounded-full rounded-r-none;
   }
 }
 
@@ -66,6 +66,16 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.shortcut-indicator {
+  @apply absolute top-0 right-3 h-full flex items-center pointer-events-none;
+}
+
+@screen sm {
+  .shortcut-indicator {
+    @apply right-5;
   }
 }
 
