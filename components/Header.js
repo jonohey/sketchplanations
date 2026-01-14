@@ -33,6 +33,16 @@ const Header = () => {
 		enterSearch();
 	}, { useKey: true });
 
+	useHotkeys("f", (e) => {
+		e.preventDefault();
+		enterSearch();
+	}, { useKey: true });
+
+	useHotkeys("s", (e) => {
+		e.preventDefault();
+		enterSearch();
+	}, { useKey: true });
+
 	useEffect(() => {
 		const handleRouteChange = () => setIsOpen(false);
 
@@ -115,7 +125,7 @@ const Header = () => {
 							<span className={styles["search-toggle-button__text"]}>
 								Search…
 							</span>
-							<KeyboardShortcut shortcut="/" />
+							<KeyboardShortcut shortcut="F" />
 						</button>
 					)}
 				</div>

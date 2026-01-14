@@ -1,10 +1,13 @@
 import classNames from "classnames";
 import { Search } from "lucide-react";
+import { useRouter } from "next/router";
 import { useRef } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 
 import styles from "./SearchForm.module.css";
 
 import { isPresent } from "helpers";
+import KeyboardShortcut from "./KeyboardShortcut";
 
 const SearchForm = ({
 	value,
@@ -13,12 +16,24 @@ const SearchForm = ({
 	onClear = () => {},
 	...props
 }) => {
+	const router = useRouter();
 	const inputRef = useRef(null);
 
 	const handleClear = () => {
 		onClear();
 		inputRef.current.focus();
 	};
+
+	const focusInput = (e) => {
+		if (router.pathname === "/search") {
+			e.preventDefault();
+			inputRef.current?.focus();
+		}
+	};
+
+	useHotkeys("f", focusInput, { useKey: true });
+	useHotkeys("s", focusInput, { useKey: true });
+	useHotkeys("/", focusInput, { useKey: true });
 
 	return (
 		<div className={styles.root}>
@@ -34,6 +49,11 @@ const SearchForm = ({
 				onChange={(e) => onChange(e.target.value)}
 				{...props}
 			/>
+			{!isBusy && !isPresent(value) && (
+				<div className={styles["shortcut-indicator"]}>
+					<KeyboardShortcut shortcut="F" />
+				</div>
+			)}
 			{isBusy && (
 				<div className={styles["loading-indicator"]}>
 					<svg
