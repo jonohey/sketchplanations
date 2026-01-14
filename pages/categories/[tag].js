@@ -1,8 +1,9 @@
 import * as prismic from "@prismicio/client";
+import FancyLink from "components/FancyLink";
 import SketchplanationsGrid from "components/SketchplanationsGrid";
 import TextHeader from "components/TextHeader";
 import { humanizeTag, pageTitle } from "helpers";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Lightbulb } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -20,10 +21,10 @@ const Tag = ({ tag, sketchplanations }) => {
 	return (
 		<>
 			<Head>
-				<title>{pageTitle(`${tag} sketches`)}</title>
+				<title>{pageTitle(`${tag}: ideas, frameworks and examples`)}</title>
 				<meta
 					name="description"
-					content={`Discover sketches, drawings, illustrations, and pictures that explain key ideas related to ${tag}. Explore visual explanations that make understanding the topic of ${tag} simple.`}
+					content={`Practical ideas, frameworks and techniques related to ${tag}, explained simply with visual examples. Browse the collection and find concepts to learn, use and share.`}
 				/>
 				<link rel="canonical" href={`https://sketchplanations.com/categories/${router.query.tag}`} />
 				<script
@@ -66,15 +67,29 @@ const Tag = ({ tag, sketchplanations }) => {
 					</div>
 				</nav>
 				<div className="pt-2 px-6 text-center">
-					<TextHeader className={styles.header}>{tag} sketches</TextHeader>
+					<TextHeader className={styles.header}>{tag}: ideas and frameworks explained</TextHeader>
 					<p className="prose mx-auto mt-2 sm:mt-3 mb-8 max-w-2xl text-textSubdued">
-						Explore sketches, drawings, and illustrations that simplify ideas related to {tag}.
+						A collection of ideas, frameworks and techniques related to {tag}, explained clearly so they are easy to understand and share.
 						<span className="hidden md:inline">
-							{" "}Discover the frameworks, principles, and tips I&apos;ve sketched to make {tag} topics easy to understand and share.
+							{" "}Browse practical concepts, principles and tips, with visual examples to make them memorable.
 						</span>
 					</p>
 				</div>
 				<SketchplanationsGrid prismicDocs={sketchplanations} />
+				<div className="text-center mt-8 mb-8">
+					<p>
+						<FancyLink
+							href="https://forms.gle/c6LymLW5vLx9FUeW6"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<span className="inline-flex items-center gap-2">
+								<Lightbulb size={16} />
+								Suggest an idea
+							</span>
+						</FancyLink>
+					</p>
+				</div>
 			</div>
 		</>
 	);
