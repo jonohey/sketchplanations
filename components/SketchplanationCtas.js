@@ -11,6 +11,7 @@ const SketchplanationCtas = ({
 	onDownload,
 	redbubbleLinkUrl,
 	onViewLicence,
+	sketchplanationUid,
 	variant = "normal",
 }) => {
 	const [copied, setCopied] = useState(false);
@@ -49,26 +50,27 @@ const SketchplanationCtas = ({
 					</RoughNotation>
 				</li>
 			)}
-			<li>
-				<button
-					className={classNames(
-						styles.cta,
-						variant === "normal" && styles.ctaNormal,
-						variant === "lightbox" && styles.ctaLightbox,
-						variant === "lightbox" ? styles.ctaHoverLightbox : styles.ctaHover
-					)}
-					type="button"
-					onClick={() => {
-						track('Sketch-link-download', { sketch: `${title}` });
-						onDownload();
-					}}
-				>
-					<span className="flex items-center gap-x-1">
-						Download
-						<Download size={16} />
-					</span>
-				</button>
-			</li>
+		<li>
+			<a
+				className={classNames(
+					styles.cta,
+					variant === "normal" && styles.ctaNormal,
+					variant === "lightbox" && styles.ctaLightbox,
+					variant === "lightbox" ? styles.ctaHoverLightbox : styles.ctaHover
+				)}
+				href={`/api/dl?uid=${sketchplanationUid}`}
+				download
+				onClick={() => {
+					track("Sketch-link-download", { sketch: `${title}` });
+					onDownload();
+				}}
+			>
+				<span className="flex items-center gap-x-1">
+					Download
+					<Download size={16} />
+				</span>
+			</a>
+		</li>
 			{redbubbleLinkUrl && (
 				<li>
 					<a

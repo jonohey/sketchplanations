@@ -94,7 +94,7 @@ const Modal = ({ isOpen: isOpenProp, onClose, children, ...props }) => {
 			>
 				<Dialog className="relative w-[calc(100%-2rem)] max-w-xl max-h-full bg-bg border border-border rounded pointer-events-auto">
 					<button type="button" className={styles.close} onClick={close}>
-						Close
+						Done
 						<X />
 					</button>
 					<div className="w-full  max-h-[calc(var(--visual-viewport-height)-4rem)] overflow-auto py-8 px-10">

@@ -106,6 +106,7 @@ const SketchplanationPage = ({
 		onDownload: () => setDownloadModalOpen(true),
 		redbubbleLinkUrl,
 		onViewLicence: () => setLicenceModalOpen(true),
+		sketchplanationUid: uid,
 	};
 
 	useHotkeys(
@@ -199,7 +200,6 @@ const SketchplanationPage = ({
 
 			<Modal isOpen={downloadModalOpen} onClose={() => setDownloadModalOpen(false)}>
 				<DownloadModal
-					sketchplanationUid={sketchplanation.uid}
 					sketchplanationTitle={title}
 				/>
 			</Modal>

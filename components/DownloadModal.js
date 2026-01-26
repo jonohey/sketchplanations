@@ -1,44 +1,48 @@
 import { track } from "@vercel/analytics";
-import { Download, ExternalLink } from "lucide-react";
+import { Smile, SquareCheckBig } from "lucide-react";
 import Link from 'next/link';
 
 import styles from "./DownloadModal.module.css";
 
-const DownloadModal = ({ sketchplanationUid, sketchplanationTitle }) => {
+const DownloadModal = ({ sketchplanationTitle }) => {
 	return (
 		<div>
 			<h2 className={styles.header}>
-				Download
+				<SquareCheckBig size={24} className="inline-block mr-2" />
+				Download started
 			</h2>
 			<div className={styles.main}>
 				<div className="space-y-6">
 					<div>
 						<p className="mb-4">
-							Here&apos;s a high resolution version of the sketch:
+							A high-resolution file for <strong>{sketchplanationTitle}</strong> is on its way. Please check your downloads.
 						</p>
-						<button className="btn-primary inline-block hover:brightness-110 dark:hover:brightness-125 transition-all duration-200 transform hover:scale-105">
-							<a
-								href={`/api/dl?uid=${sketchplanationUid}`}
-								download
-								rel="noreferrer"
-								target="_blank"
-								className="flex items-center"
-								onClick={() => {
-									track('Downloaded-sketch', { sketch: `${sketchplanationTitle}` });
-								}}
-							>
-								<Download size={18} className="mr-2" />
-								Download {sketchplanationTitle}
-							</a>
-						</button>
-						<p className="mb-2 mt-4">
+						<p className="mb-2">
+							<Smile size={16} className="inline-block mr-1 -mt-1" />
 							Enjoying the sketches?
 						</p>
 						<ul className="list-disc list-inside space-y-2 mb-2">
 							<li>
+								<a
+									href="https://buymeacoffee.com/sketchplanator"
+									className="text-blue-600 hover:underline"
+									target="_blank"
+									rel="noreferrer noopener"
+									onClick={() => {
+										track('Buy-me-a-coffee', { location: 'download-modal', sketch: sketchplanationTitle });
+									}}
+								>
+									Buy Me a Coffee
+								</a>
+							</li>
+							<li>
 								<Link
 									href="/big-ideas-little-pictures"
 									className="text-blue-600 hover:underline"
+									target="_blank"
+									onClick={() => {
+										track('Book-page-link', { location: 'download-modal', sketch: sketchplanationTitle });
+									}}
 								>
 									Get the book
 								</Link>
@@ -49,6 +53,9 @@ const DownloadModal = ({ sketchplanationUid, sketchplanationTitle }) => {
 									className="text-blue-600 hover:underline"
 									target="_blank"
 									rel="noreferrer noopener"
+									onClick={() => {
+										track('Subscribe', { location: 'download-modal', sketch: sketchplanationTitle });
+									}}
 								>
 									Consider a paid subscription
 								</Link>
@@ -61,9 +68,11 @@ const DownloadModal = ({ sketchplanationUid, sketchplanationTitle }) => {
 								target="_blank"
 								rel="noreferrer"
 								className="text-blue-600 hover:underline"
+								onClick={() => {
+									track('Licence-page-link', { location: 'download-modal', sketch: sketchplanationTitle });
+								}}
 							>
 								licence
-								<ExternalLink size={14} className="inline-block ml-1 mb-1" />
 							</Link>
 						</p>
 					</div>
