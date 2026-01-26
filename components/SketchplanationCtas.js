@@ -61,7 +61,7 @@ const SketchplanationCtas = ({
 				href={`/api/dl?uid=${sketchplanationUid}`}
 				download
 				onClick={() => {
-					track('Sketch-link-download', { sketch: `${title}` });
+					track("Sketch-link-download", { sketch: `${title}` });
 					onDownload();
 				}}
 			>
