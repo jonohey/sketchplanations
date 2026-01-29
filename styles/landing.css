@@ -1,0 +1,452 @@
+/* ===================================
+   LANDING PAGE STYLES
+   
+   All styles scoped under .landing-page wrapper
+   All utility classes prefixed with lp-
+   
+   Usage: Wrap your landing page in <div className="landing-page">
+   Note: Google Fonts (Inter, Libre Baskerville) are loaded in the page Head
+   =================================== */
+
+/* ===================================
+   CSS VARIABLES (scoped to .landing-page)
+   =================================== */
+
+.landing-page {
+  /* Warm color palette */
+  --lp-background: hsl(45 33% 97%);
+  --lp-foreground: hsl(220 30% 18%);
+  --lp-primary: hsl(220 45% 22%);
+  --lp-primary-foreground: hsl(45 33% 97%);
+  --lp-accent: hsl(15 85% 57%);
+  --lp-accent-foreground: hsl(0 0% 100%);
+  --lp-highlight: hsl(48 95% 76%);
+  --lp-highlight-foreground: hsl(220 30% 18%);
+  --lp-muted: hsl(220 15% 45%);
+  --lp-secondary: hsl(45 35% 92%);
+  --lp-card: hsl(45 40% 99%);
+  --lp-border: hsl(45 25% 88%);
+
+  /* Shadows */
+  --lp-shadow-soft: 0 4px 20px -4px hsl(220 30% 18% / 0.08);
+  --lp-shadow-medium: 0 8px 30px -6px hsl(220 30% 18% / 0.12);
+  --lp-shadow-lg: 0 20px 50px -12px hsl(220 30% 18% / 0.15);
+
+  /* Typography */
+  /* Font variables are set by next/font in explainer-kit.js */
+  /* Fallbacks for when variables aren't set */
+  --lp-font-serif-fallback: Georgia, serif;
+  --lp-font-sans-fallback: system-ui, sans-serif;
+
+  /* Border radius */
+  --lp-radius: 0.75rem;
+  --lp-radius-lg: 1rem;
+  --lp-radius-xl: 1.5rem;
+
+  /* Apply base styles to wrapper */
+  background-color: var(--lp-background);
+  color: var(--lp-foreground);
+  font-family: var(--lp-font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===================================
+   LAYOUT UTILITIES
+   =================================== */
+
+.lp-section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+  .lp-section {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.lp-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* ===================================
+   TYPOGRAPHY
+   =================================== */
+
+.lp-heading {
+  font-family: var(--lp-font-serif), Georgia, serif;
+  color: var(--lp-primary);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.lp-heading-xl {
+  font-family: var(--lp-font-serif), Georgia, serif;
+  color: var(--lp-primary);
+  font-weight: 700;
+  line-height: 1.1;
+  font-size: 2.25rem;
+}
+
+@media (min-width: 768px) {
+  .lp-heading-xl {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lp-heading-xl {
+    font-size: 3.75rem;
+  }
+}
+
+.lp-text-muted {
+  color: var(--lp-muted);
+}
+
+.lp-text-primary {
+  color: var(--lp-primary);
+}
+
+.lp-prose {
+  color: hsl(220 30% 18% / 0.9);
+  line-height: 1.7;
+}
+
+.lp-prose strong {
+  color: var(--lp-foreground);
+  font-weight: 600;
+}
+
+/* ===================================
+   BUTTONS
+   =================================== */
+
+.lp-btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background-color: var(--lp-accent);
+  color: var(--lp-accent-foreground);
+  font-family: var(--lp-font-sans), system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--lp-radius);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: var(--lp-shadow-medium);
+  transition: all 0.2s ease;
+}
+
+.lp-btn-cta:hover {
+  background-color: hsl(15 85% 50%);
+  box-shadow: var(--lp-shadow-lg);
+  transform: scale(1.02);
+}
+
+.lp-btn-cta:active {
+  transform: scale(0.98);
+}
+
+.lp-btn-cta-lg {
+  padding: 1rem 2.5rem;
+  font-size: 1.125rem;
+  border-radius: var(--lp-radius-lg);
+}
+
+.lp-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background-color: transparent;
+  color: var(--lp-primary);
+  font-family: var(--lp-font-sans), system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--lp-radius);
+  border: 2px solid var(--lp-primary);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.lp-btn-outline:hover {
+  background-color: var(--lp-primary);
+  color: var(--lp-primary-foreground);
+}
+
+.lp-btn-highlight {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background-color: var(--lp-highlight);
+  color: var(--lp-highlight-foreground);
+  font-family: var(--lp-font-sans), system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--lp-radius);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: var(--lp-shadow-soft);
+  transition: all 0.2s ease;
+}
+
+.lp-btn-highlight:hover {
+  background-color: hsl(48 95% 68%);
+  box-shadow: var(--lp-shadow-medium);
+}
+
+/* ===================================
+   BACKGROUND VARIANTS
+   =================================== */
+
+.lp-bg-default {
+  background-color: var(--lp-background);
+}
+
+.lp-bg-secondary {
+  background-color: hsl(45 35% 92% / 0.3);
+}
+
+.lp-bg-primary {
+  background-color: var(--lp-primary);
+  color: var(--lp-primary-foreground);
+}
+
+.lp-bg-primary .lp-heading {
+  color: var(--lp-primary-foreground);
+}
+
+.lp-bg-primary .lp-text-muted {
+  color: hsl(45 33% 97% / 0.8);
+}
+
+.lp-bg-highlight {
+  background-color: hsl(48 95% 76% / 0.3);
+}
+
+.lp-bg-gradient {
+  background: linear-gradient(to bottom, var(--lp-background), hsl(45 35% 92% / 0.3));
+}
+
+/* ===================================
+   CARDS
+   =================================== */
+
+.lp-card {
+  background-color: var(--lp-card);
+  border: 1px solid hsl(45 25% 88% / 0.5);
+  border-radius: var(--lp-radius-lg);
+  box-shadow: var(--lp-shadow-soft);
+  transition: box-shadow 0.2s ease;
+}
+
+.lp-card:hover {
+  box-shadow: var(--lp-shadow-medium);
+}
+
+.lp-card-primary {
+  background-color: hsl(45 33% 97% / 0.1);
+  backdrop-filter: blur(4px);
+  border: 1px solid hsl(45 33% 97% / 0.1);
+  border-radius: var(--lp-radius-lg);
+}
+
+/* ===================================
+   VISUAL EFFECTS
+   =================================== */
+
+/* Yellow marker highlight effect */
+.lp-highlight-marker {
+  position: relative;
+  display: inline-block;
+}
+
+.lp-highlight-marker::after {
+  content: '';
+  position: absolute;
+  bottom: 0.125rem;
+  left: 0;
+  right: 0;
+  height: 0.75rem;
+  background-color: var(--lp-highlight);
+  opacity: 0.6;
+  z-index: -1;
+}
+
+/* Icon container */
+.lp-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background-color: hsl(15 85% 57% / 0.1);
+}
+
+.lp-icon-container svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--lp-accent);
+}
+
+.lp-icon-container-lg {
+  width: 3rem;
+  height: 3rem;
+}
+
+.lp-icon-container-lg svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.lp-icon-container-highlight {
+  background-color: hsl(48 95% 76% / 0.5);
+}
+
+.lp-icon-container-highlight svg {
+  color: var(--lp-primary);
+}
+
+/* Stats display */
+.lp-stat {
+  text-align: center;
+}
+
+.lp-stat-value {
+  font-family: var(--lp-font-serif), Georgia, serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--lp-accent);
+  line-height: 1;
+}
+
+.lp-stat-label {
+  font-size: 0.875rem;
+  color: var(--lp-muted);
+  margin-top: 0.25rem;
+}
+
+/* Strikethrough price */
+.lp-price-original {
+  font-size: 1.5rem;
+  color: hsl(45 33% 97% / 0.6);
+  text-decoration: line-through;
+}
+
+.lp-price-current {
+  font-family: var(--lp-font-serif), Georgia, serif;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+/* Check list item */
+.lp-check-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lp-check-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  background-color: hsl(15 85% 57% / 0.2);
+}
+
+.lp-check-icon svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  color: var(--lp-accent);
+}
+
+/* Format badge/pill */
+.lp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: hsl(45 33% 97% / 0.1);
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+/* ===================================
+   HEADER & FOOTER (Landing page specific)
+   =================================== */
+
+.lp-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: hsl(45 33% 97% / 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--lp-border);
+}
+
+.lp-footer {
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--lp-border);
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--lp-muted);
+}
+
+.lp-footer a {
+  color: var(--lp-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.lp-footer a:hover {
+  color: var(--lp-accent);
+}
+
+/* ===================================
+   RESPONSIVE UTILITIES
+   =================================== */
+
+@media (min-width: 640px) {
+  .lp-btn-cta {
+    width: auto;
+  }
+}
+
+/* ===================================
+   DARK MODE SUPPORT (optional, for future)
+   =================================== */
+
+@media (prefers-color-scheme: dark) {
+  .landing-page {
+    --lp-background: hsl(220 30% 10%);
+    --lp-foreground: hsl(45 20% 95%);
+    --lp-primary: hsl(45 30% 90%);
+    --lp-primary-foreground: hsl(220 30% 10%);
+    --lp-card: hsl(220 28% 14%);
+    --lp-border: hsl(220 20% 22%);
+    --lp-muted: hsl(45 15% 65%);
+    --lp-secondary: hsl(220 25% 18%);
+  }
+}
