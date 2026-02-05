@@ -1,4 +1,8 @@
 import { pageTitle } from 'helpers'
+import explainerKitCopyPasteImage from 'images/explainer-kit/explainer-kit-copy-paste.png'
+import explainerKitFolderImage from 'images/explainer-kit/explainer-kit-folder.png'
+import explainerKitHeroImage from 'images/explainer-kit/explainer-kit-hero.png'
+import explainerKitPowerpointImage from 'images/explainer-kit/explariner-kit-powerpoint.png'
 import { AlertCircle, Check, FileText, Layers, Lightbulb, Palette, Shield, Target } from 'lucide-react'
 import { Inter, Libre_Baskerville } from 'next/font/google'
 import Head from 'next/head'
@@ -105,12 +109,11 @@ const ExplainerKit = () => {
               <div className="relative">
                 <div className="relative z-10 rounded-2xl overflow-hidden shadow-lg">
                   <Image
-                    src="/images/explainer-kit-hero.png"
+                    src={explainerKitHeroImage}
                     alt="Sketchplanations Explainer Kit - Ready to get your message across?"
-                    width={1124}
-                    height={632}
                     className="w-full h-auto"
                     priority
+                    placeholder="blur"
                   />
                 </div>
                 <div 
@@ -282,6 +285,40 @@ const ExplainerKit = () => {
             <p className="text-center mt-8 opacity-80">
               All content is designed to be mixed, reused, and adapted across your talks, workshops, and internal communication. Make it work for you.
             </p>
+          </div>
+        </section>
+
+        {/* Dead simple to use */}
+        <section id="how-to-use" className="lp-section">
+          <div className="lp-container max-w-5xl">
+            <div className="text-center mb-12">
+              <h2 className="lp-heading text-3xl md:text-4xl mb-4">
+                Dead simple to use
+              </h2>
+              <p className="text-lg lp-text-muted">
+                No learning curve. Just find what you need and drop it in.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                { image: explainerKitPowerpointImage, caption: 'Choose what you want direct from PowerPoint, Slides or Keynote' },
+                { image: explainerKitCopyPasteImage, caption: 'Copy/paste or drag into your work' },
+                { image: explainerKitFolderImage, caption: 'An organised library to pull from' },
+              ].map((item, index) => (
+                <div key={index} className="text-center">
+                  <div className="rounded-xl overflow-hidden shadow-md mb-4">
+                    <Image
+                      src={item.image}
+                      alt={item.caption}
+                      className="w-full h-auto"
+                      placeholder="blur"
+                    />
+                  </div>
+                  <p className="text-sm lp-text-muted">{item.caption}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
