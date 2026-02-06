@@ -43,6 +43,19 @@
   --lp-radius-lg: 1rem;
   --lp-radius-xl: 1.5rem;
 
+  /* Additional colors for gradients and decorative elements */
+  --lp-gradient-warm-start: hsl(48 95% 76% / 0.3);
+  --lp-gradient-warm-end: hsl(15 85% 57% / 0.1);
+  --lp-subtle-bg: hsl(45 35% 92% / 0.5);
+  --lp-subtle-highlight: hsl(48 95% 76% / 0.2);
+  --lp-accent-soft: hsl(15 85% 57% / 0.1);
+  --lp-accent-muted: hsl(15 85% 57% / 0.2);
+  --lp-highlight-soft: hsl(48 95% 76% / 0.4);
+  --lp-skeleton: hsl(45 20% 90%);
+  --lp-skeleton-dark: hsl(220 45% 22% / 0.2);
+  --lp-header-bg: hsl(45 33% 97% / 0.95);
+  --lp-prose-color: hsl(220 30% 18% / 0.9);
+
   /* Apply base styles to wrapper */
   background-color: var(--lp-background);
   color: var(--lp-foreground);
@@ -117,7 +130,7 @@
 }
 
 .lp-prose {
-  color: hsl(220 30% 18% / 0.9);
+  color: var(--lp-prose-color);
   line-height: 1.7;
 }
 
@@ -221,7 +234,7 @@
 }
 
 .lp-bg-secondary {
-  background-color: hsl(45 35% 92% / 0.3);
+  background-color: var(--lp-subtle-bg);
 }
 
 .lp-bg-primary {
@@ -237,12 +250,20 @@
   color: hsl(45 33% 97% / 0.8);
 }
 
+/* Dark mode: keep .lp-bg-primary dark (don't invert) */
+@media (prefers-color-scheme: dark) {
+  .lp-bg-primary {
+    --lp-primary: hsl(220 45% 22%);
+    --lp-primary-foreground: hsl(45 33% 97%);
+  }
+}
+
 .lp-bg-highlight {
-  background-color: hsl(48 95% 76% / 0.3);
+  background-color: var(--lp-gradient-warm-start);
 }
 
 .lp-bg-gradient {
-  background: linear-gradient(to bottom, var(--lp-background), hsl(45 35% 92% / 0.3));
+  background: linear-gradient(to bottom, var(--lp-background), var(--lp-subtle-bg));
 }
 
 /* ===================================
@@ -299,7 +320,7 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 9999px;
-  background-color: hsl(15 85% 57% / 0.1);
+  background-color: var(--lp-accent-soft);
 }
 
 .lp-icon-container svg {
@@ -319,7 +340,7 @@
 }
 
 .lp-icon-container-highlight {
-  background-color: hsl(48 95% 76% / 0.5);
+  background-color: var(--lp-highlight-soft);
 }
 
 .lp-icon-container-highlight svg {
@@ -373,7 +394,7 @@
   width: 1.25rem;
   height: 1.25rem;
   border-radius: 9999px;
-  background-color: hsl(15 85% 57% / 0.2);
+  background-color: var(--lp-accent-muted);
 }
 
 .lp-check-icon svg {
@@ -388,7 +409,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background-color: hsl(45 33% 97% / 0.1);
+  background-color: var(--lp-accent-soft);
   border-radius: 9999px;
   font-size: 0.875rem;
 }
@@ -401,7 +422,7 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background-color: hsl(45 33% 97% / 0.95);
+  background-color: var(--lp-header-bg);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--lp-border);
 }
@@ -425,6 +446,61 @@
 }
 
 /* ===================================
+   COLOR UTILITIES
+   =================================== */
+
+/* Text colors */
+.lp-text-accent {
+  color: var(--lp-accent);
+}
+
+.lp-text-highlight {
+  color: var(--lp-highlight);
+}
+
+.lp-text-highlight-foreground {
+  color: var(--lp-highlight-foreground);
+}
+
+/* Background colors */
+.lp-bg-accent-soft {
+  background-color: var(--lp-accent-soft);
+}
+
+.lp-bg-accent-muted {
+  background-color: var(--lp-accent-muted);
+}
+
+.lp-bg-highlight {
+  background-color: var(--lp-gradient-warm-start);
+}
+
+.lp-bg-highlight-solid {
+  background-color: var(--lp-highlight);
+}
+
+.lp-bg-highlight-soft {
+  background-color: var(--lp-highlight-soft);
+}
+
+.lp-bg-skeleton {
+  background-color: var(--lp-skeleton);
+}
+
+.lp-bg-skeleton-dark {
+  background-color: var(--lp-skeleton-dark);
+}
+
+/* Gradients */
+.lp-gradient-warm {
+  background: linear-gradient(to bottom right, var(--lp-gradient-warm-start), var(--lp-gradient-warm-end));
+}
+
+.lp-gradient-subtle {
+  background: linear-gradient(to right, var(--lp-subtle-bg), var(--lp-subtle-highlight));
+}
+
+/* ===================================
    RESPONSIVE UTILITIES
    =================================== */
 
@@ -435,18 +511,41 @@
 }
 
 /* ===================================
-   DARK MODE SUPPORT (optional, for future)
+   DARK MODE SUPPORT
    =================================== */
 
 @media (prefers-color-scheme: dark) {
   .landing-page {
+    /* Core colors */
     --lp-background: hsl(220 30% 10%);
-    --lp-foreground: hsl(45 20% 95%);
+    --lp-foreground: hsl(45 15% 92%);
     --lp-primary: hsl(45 30% 90%);
     --lp-primary-foreground: hsl(220 30% 10%);
+    --lp-accent: hsl(15 80% 60%);
+    --lp-accent-foreground: hsl(0 0% 100%);
+    --lp-highlight: hsl(48 90% 65%);
+    --lp-highlight-foreground: hsl(220 30% 10%);
     --lp-card: hsl(220 28% 14%);
-    --lp-border: hsl(220 20% 22%);
-    --lp-muted: hsl(45 15% 65%);
+    --lp-border: hsl(220 20% 25%);
+    --lp-muted: hsl(45 12% 75%);
     --lp-secondary: hsl(220 25% 18%);
+
+    /* Gradients and decorative colors */
+    --lp-gradient-warm-start: hsl(48 70% 45% / 0.25);
+    --lp-gradient-warm-end: hsl(15 70% 45% / 0.2);
+    --lp-subtle-bg: hsl(220 25% 15% / 0.6);
+    --lp-subtle-highlight: hsl(48 70% 50% / 0.2);
+    --lp-accent-soft: hsl(15 70% 55% / 0.2);
+    --lp-accent-muted: hsl(15 75% 55% / 0.35);
+    --lp-highlight-soft: hsl(48 75% 55% / 0.35);
+    --lp-skeleton: hsl(220 18% 35%);
+    --lp-skeleton-dark: hsl(220 15% 45%);
+    --lp-header-bg: hsl(220 30% 10% / 0.95);
+    --lp-prose-color: hsl(45 12% 88%);
+
+    /* Shadows for dark mode */
+    --lp-shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
+    --lp-shadow-medium: 0 8px 30px -6px hsl(0 0% 0% / 0.4);
+    --lp-shadow-lg: 0 20px 50px -12px hsl(0 0% 0% / 0.5);
   }
 }
