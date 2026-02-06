@@ -74,7 +74,7 @@ const ExplainerKit = () => {
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               {/* Text content */}
               <div>
-                <p className="text-sm font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--lp-accent)' }}>
+                <p className="text-sm font-semibold uppercase tracking-wider mb-4 lp-text-accent">
                   Pre-order now available
                 </p>
                 <h1 className="lp-heading-xl mb-6">
@@ -100,7 +100,7 @@ const ExplainerKit = () => {
                   50% off &middot; Limited to 30 early supporters
                 </p>
                 <p className="text-sm lp-text-muted mt-2 flex items-center gap-1">
-                  <Check className="w-4 h-4" style={{ color: 'var(--lp-accent)' }} />
+                  <Check className="w-4 h-4 lp-text-accent" />
                   30-day money-back guarantee
                 </p>
               </div>
@@ -117,8 +117,7 @@ const ExplainerKit = () => {
                   />
                 </div>
                 <div 
-                  className="absolute -bottom-4 -right-4 w-full h-full rounded-2xl -z-10"
-                  style={{ backgroundColor: 'hsl(15 85% 57% / 0.1)' }}
+                  className="absolute -bottom-4 -right-4 w-full h-full rounded-2xl -z-10 lp-bg-accent-soft"
                 />
               </div>
             </div>
@@ -205,23 +204,22 @@ const ExplainerKit = () => {
               </div>
 
               <div 
-                className="rounded-2xl p-8 md:p-12"
-                style={{ background: 'linear-gradient(to bottom right, hsl(48 95% 76% / 0.3), hsl(15 85% 57% / 0.1))' }}
+                className="rounded-2xl p-8 md:p-12 lp-gradient-warm"
               >
                 <div className="space-y-4">
                   <div className="lp-card p-4">
-                    <div className="h-3 w-24 rounded mb-2" style={{ backgroundColor: 'hsl(220 45% 22% / 0.2)' }} />
-                    <div className="h-2 w-full rounded" style={{ backgroundColor: 'hsl(45 20% 90%)' }} />
-                    <div className="h-2 w-3/4 rounded mt-1" style={{ backgroundColor: 'hsl(45 20% 90%)' }} />
+                    <div className="h-3 w-24 rounded mb-2 lp-bg-skeleton-dark" />
+                    <div className="h-2 w-full rounded lp-bg-skeleton" />
+                    <div className="h-2 w-3/4 rounded mt-1 lp-bg-skeleton" />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="lp-card p-4">
-                      <div className="w-12 h-12 rounded-lg mb-2" style={{ backgroundColor: 'hsl(15 85% 57% / 0.2)' }} />
-                      <div className="h-2 w-full rounded" style={{ backgroundColor: 'hsl(45 20% 90%)' }} />
+                      <div className="w-12 h-12 rounded-lg mb-2 lp-bg-accent-muted" />
+                      <div className="h-2 w-full rounded lp-bg-skeleton" />
                     </div>
                     <div className="lp-card p-4">
-                      <div className="w-12 h-12 rounded-lg mb-2" style={{ backgroundColor: 'hsl(48 95% 76% / 0.4)' }} />
-                      <div className="h-2 w-full rounded" style={{ backgroundColor: 'hsl(45 20% 90%)' }} />
+                      <div className="w-12 h-12 rounded-lg mb-2 lp-bg-highlight-soft" />
+                      <div className="h-2 w-full rounded lp-bg-skeleton" />
                     </div>
                   </div>
                 </div>
@@ -250,10 +248,9 @@ const ExplainerKit = () => {
                 <div key={index} className="lp-card-primary p-6">
                   <div className="flex gap-4">
                     <div 
-                      className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
-                      style={{ backgroundColor: 'var(--lp-highlight)' }}
+                      className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center lp-bg-highlight-solid"
                     >
-                      <item.icon className="w-6 h-6" style={{ color: 'var(--lp-highlight-foreground)' }} />
+                      <item.icon className="w-6 h-6 lp-text-highlight-foreground" />
                     </div>
                     <div>
                       <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
@@ -275,7 +272,7 @@ const ExplainerKit = () => {
                   'Simple backgrounds',
                 ].map((format, index) => (
                   <span key={index} className="lp-badge">
-                    <Check className="w-4 h-4" style={{ color: 'var(--lp-highlight)' }} />
+                    <Check className="w-4 h-4 lp-text-highlight" />
                     {format}
                   </span>
                 ))}
@@ -344,8 +341,7 @@ const ExplainerKit = () => {
               ].map((benefit, index) => (
                 <div 
                   key={index} 
-                  className="p-6 rounded-xl"
-                  style={{ background: 'linear-gradient(to right, hsl(45 35% 92% / 0.5), hsl(48 95% 76% / 0.2))' }}
+                  className="p-6 rounded-xl lp-gradient-subtle"
                 >
                   <div className="flex items-center gap-4">
                     <div className="lp-icon-container">
@@ -380,8 +376,7 @@ const ExplainerKit = () => {
               ].map((benefit, index) => (
                 <div 
                   key={index} 
-                  className="flex items-center gap-4 p-5 rounded-xl"
-                  style={{ background: 'linear-gradient(to right, hsl(45 35% 92% / 0.5), hsl(48 95% 76% / 0.2))' }}
+                  className="flex items-center gap-4 p-5 rounded-xl lp-gradient-subtle"
                 >
                   <div className="lp-icon-container">
                     <Check />
@@ -427,8 +422,7 @@ const ExplainerKit = () => {
           <div className="lp-container max-w-md">
             <div className="lp-card rounded-3xl overflow-hidden">
               <div 
-                className="p-8 text-center"
-                style={{ background: 'linear-gradient(to right, var(--lp-primary), hsl(220 45% 22% / 0.9))', color: 'var(--lp-primary-foreground)' }}
+                className="p-8 text-center lp-bg-primary"
               >
                 <p className="text-sm font-semibold uppercase tracking-wider opacity-80 mb-2">
                   Pre-order pricing
@@ -480,10 +474,9 @@ const ExplainerKit = () => {
         <section id="guarantee" className="lp-section lp-bg-highlight">
           <div className="lp-container max-w-3xl text-center">
             <div 
-              className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6"
-              style={{ backgroundColor: 'hsl(15 85% 57% / 0.1)' }}
+              className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6 lp-bg-accent-soft"
             >
-              <Shield className="w-8 h-8" style={{ color: 'var(--lp-accent)' }} />
+              <Shield className="w-8 h-8 lp-text-accent" />
             </div>
 
             <h2 className="lp-heading text-2xl md:text-3xl mb-4">
