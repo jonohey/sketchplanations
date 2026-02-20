@@ -40,6 +40,11 @@ export default [
 		permanent: false,
 	},
 	{
+		source: "/projects",
+		destination: "https://jonohey.github.io/sketchplanations-projects/",
+		permanent: true,
+	},
+	{
 		source: "/styleguide",
 		destination: "https://company-208276.frontify.com/d/iATaeFQL51Lv",
 		permanent: false,
