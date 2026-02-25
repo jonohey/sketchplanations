@@ -78,11 +78,9 @@ const ExplainerKit = () => {
                   Pre-order now available
                 </p>
                 <h1 className="lp-heading-xl mb-6">
-                  The Sketchplanations{' '}
-                  <span className="lp-highlight-marker">Explainer Kit</span>
-                </h1>
+                    Elevate your content                </h1>
                 <p className="text-lg md:text-xl lp-text-muted leading-relaxed mb-6">
-                  Get your message across more clearly.
+                  Get your message across clearly with the Sketchplanations Explainer Kit
                 </p>
                 <p className="text-lg lp-prose mb-8 max-w-xl">
                   Unlock reputation and career growth by getting your message across effectively, using
@@ -414,6 +412,41 @@ const ExplainerKit = () => {
                 <div className="lp-stat-label">Years of visuals</div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section id="faq" className="lp-section lp-bg-secondary">
+          <div className="lp-container max-w-3xl">
+            <h2 className="lp-heading text-3xl md:text-4xl mb-8 text-center">
+              FAQ
+            </h2>
+            <dl className="space-y-6">
+              <div>
+                <dt className="font-semibold lp-text-primary text-lg mb-1">
+                  How is this different from the website?
+                </dt>
+                <dd className="lp-prose lp-text-muted">
+                  The explainer kit includes high-resolution, presentation-ready, transparent background elements that combined to share your message.
+                </dd>
+              </div>
+              <div>
+                <dt className="font-semibold lp-text-primary text-lg mb-1">
+                  Can I use it commercially?
+                </dt>
+                <dd className="lp-prose lp-text-muted">
+                  Yes. For client decks, internal and external presentations, and workshops, go wild.
+                </dd>
+              </div>
+              <div>
+                <dt className="font-semibold lp-text-primary text-lg mb-1">
+                  Will colours be customisable?
+                </dt>
+                <dd className="lp-prose lp-text-muted">
+                  Not yet, but planned
+                </dd>
+              </div>
+            </dl>
           </div>
         </section>
 
