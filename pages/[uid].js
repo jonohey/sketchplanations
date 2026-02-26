@@ -201,6 +201,7 @@ const SketchplanationPage = ({
 			<Modal isOpen={downloadModalOpen} onClose={() => setDownloadModalOpen(false)}>
 				<DownloadModal
 					sketchplanationTitle={title}
+					sketchplanationUid={uid}
 				/>
 			</Modal>
 

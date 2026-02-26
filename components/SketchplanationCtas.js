@@ -58,7 +58,7 @@ const SketchplanationCtas = ({
 					variant === "lightbox" && styles.ctaLightbox,
 					variant === "lightbox" ? styles.ctaHoverLightbox : styles.ctaHover
 				)}
-				href={`/api/dl?uid=${sketchplanationUid}`}
+				href={`/api/dl?uid=${sketchplanationUid}&format=medium`}
 				download
 				onClick={() => {
 					track("Sketch-link-download", { sketch: `${title}` });
