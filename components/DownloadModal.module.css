@@ -7,17 +7,37 @@
 }
 
 .main a {
-  @apply text-blue;
+  @apply text-blue dark:text-blueLight;
 }
 
-.main button a {
-  @apply text-white;
+.highResWrapper {
+  @apply rounded border border-border overflow-hidden;
 }
 
-.form {
-  @apply -m-2 mt-3;
+.highResTrigger {
+  @apply w-full flex items-center justify-between gap-x-2 py-3 px-4 text-text text-left cursor-pointer hover:bg-bgDarker transition-colors;
 }
 
-.form :global(> *) {
-  @apply p-2;
+.highResTriggerIcon {
+  @apply flex-shrink-0 transition-transform duration-200;
+}
+
+.highResTriggerIconOpen {
+  @apply rotate-180;
+}
+
+.highResSection {
+  @apply space-y-3 px-4 pb-4 pt-3 border-t border-border bg-bgHighlight;
+}
+
+.supportButtons {
+  @apply flex flex-wrap gap-2;
+}
+
+.supportButtons a {
+  @apply text-white min-w-[4rem] text-center;
+}
+
+.highResCta {
+  @apply flex items-center justify-center gap-x-2 w-full py-2 px-4 rounded border border-border bg-bg text-blue dark:text-blueLight text-sm font-semibold hover:bg-bgDarker transition-colors;
 }
