@@ -49,7 +49,7 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 						{highResOpen && (
 							<div id="high-res-content" className={styles.highResSection}>
 								<p>
-									If it's useful to you, please consider supporting my work.
+									If this download is useful, a contribution is welcome.
 								</p>
 								<div className={styles.supportButtons}>
 									<a
