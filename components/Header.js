@@ -11,6 +11,7 @@ import styles from "./Header.module.css";
 
 import GradientBlur from "components/GradientBlur";
 import Navigation from "components/Navigation";
+import useScrollDirection from "hooks/useScrollDirection";
 import useSearch from "hooks/useSearch";
 
 import Context from "context";
@@ -23,6 +24,21 @@ const Header = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const { isSearchPage } = useSearch();
+	const { scrollDirection, isAtTop } = useScrollDirection();
+
+	// Hide header when scrolling down and not at top, show when scrolling up or at top
+	const shouldHideHeader = decorationHidden || (scrollDirection === 'down' && !isAtTop && !isOpen);
+
+	// Debug logging (remove in production)
+	useEffect(() => {
+		console.log('Header state:', {
+			scrollDirection,
+			isAtTop,
+			decorationHidden,
+			isOpen,
+			shouldHideHeader
+		});
+	}, [scrollDirection, isAtTop, decorationHidden, isOpen, shouldHideHeader]);
 
 	const enterSearch = () => {
 		router.push("/search", undefined, { shallow: true });
@@ -76,8 +92,12 @@ const Header = () => {
 			<motion.div
 				variants={variants}
 				initial="visible"
-				animate={decorationHidden ? "hidden" : "visible"}
+				animate={shouldHideHeader ? "hidden" : "visible"}
 				className={classNames(styles.root, isOpen && styles["root--is-open"])}
+				style={{ 
+					// Debug: add a visual indicator
+					backgroundColor: shouldHideHeader ? 'rgba(255, 0, 0, 0.1)' : 'rgba(0, 255, 0, 0.1)'
+				}}
 			>
 				<button
 					type="button"
