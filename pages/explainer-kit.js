@@ -1,3 +1,4 @@
+import DraggableIconsCanvas from 'components/DraggableIconsCanvas'
 import { pageTitle } from 'helpers'
 import explainerKitCopyPasteImage from 'images/explainer-kit/explainer-kit-copy-paste.png'
 import explainerKitFolderImage from 'images/explainer-kit/explainer-kit-folder.png'
@@ -21,6 +22,31 @@ const libreBaskerville = Libre_Baskerville({
   style: ['normal', 'italic'],
   variable: '--lp-font-serif',
 })
+
+const sketchIcons = [
+  '/images/explainer-kit/sketch-icons/Angry.svg',
+  '/images/explainer-kit/sketch-icons/Anxious.svg',
+  '/images/explainer-kit/sketch-icons/Blue check 2.svg',
+  '/images/explainer-kit/sketch-icons/Bored on phone.svg',
+  '/images/explainer-kit/sketch-icons/Calendar plan.svg',
+  '/images/explainer-kit/sketch-icons/Checkbox red.svg',
+  '/images/explainer-kit/sketch-icons/Cogs 2.svg',
+  '/images/explainer-kit/sketch-icons/Impatient.svg',
+  '/images/explainer-kit/sketch-icons/Knotty thought 2.svg',
+  '/images/explainer-kit/sketch-icons/Lightbulb partial.svg',
+  '/images/explainer-kit/sketch-icons/Metal detecting.svg',
+  '/images/explainer-kit/sketch-icons/Puzzling.svg',
+  '/images/explainer-kit/sketch-icons/Red check 1.svg',
+  '/images/explainer-kit/sketch-icons/Sad.svg',
+  '/images/explainer-kit/sketch-icons/Singing.svg',
+  '/images/explainer-kit/sketch-icons/Slot machine.svg',
+  '/images/explainer-kit/sketch-icons/Thinking bubble.svg',
+  '/images/explainer-kit/sketch-icons/Thinking hard person.svg',
+  '/images/explainer-kit/sketch-icons/Thought bubble 3.svg',
+  '/images/explainer-kit/sketch-icons/Up down chart.svg',
+  '/images/explainer-kit/sketch-icons/Wide end arrow.svg',
+  '/images/explainer-kit/sketch-icons/Writing.svg',
+]
 
 const ExplainerKit = () => {
   const checkoutUrl = 'https://pzpzck-rt.myshopify.com/products/sketchplanations-explainer-kit-pre-order?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'
@@ -83,8 +109,7 @@ const ExplainerKit = () => {
                   Get your message across clearly with the Sketchplanations Explainer Kit
                 </p>
                 <p className="text-lg lp-prose mb-8 max-w-xl">
-                  Unlock reputation and career growth by getting your message across effectively, using
-                  plug-and-play visuals, frameworks, and examples to elevate your content.
+                  Use plug-and-play visuals, frameworks, and examples to explain ideas clearly and make your content easier to understand.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a href={checkoutUrl} className="lp-btn-cta lp-btn-cta-lg">
@@ -129,8 +154,11 @@ const ExplainerKit = () => {
               <h2 className="lp-heading text-3xl md:text-4xl mb-4">
                 The problems you&apos;re facing
               </h2>
+              <p className="text-lg lp-text-muted max-w-2xl mx-auto mb-2">
+                You know what you want to say. But getting it to land is harder, and can be more work, than you'd like it to be.
+              </p>
               <p className="text-lg lp-text-muted max-w-2xl mx-auto">
-                You know what you want to say. But getting it to land is harder than it should be. This kit is for you if:
+                This kit is for you if:
               </p>
             </div>
 
@@ -156,11 +184,8 @@ const ExplainerKit = () => {
             </div>
 
             <div className="text-center lp-prose">
-              <p className="mb-2">
-                <strong>Your thinking is strong.</strong>
-              </p>
               <p>
-                You just need to support your ideas effectively.
+                Sometimes the hard part isn’t the idea—it’s explaining it well.
               </p>
             </div>
           </div>
@@ -176,12 +201,12 @@ const ExplainerKit = () => {
                 </h2>
                 <p className="text-lg lp-prose mb-6">
                   The Sketchplanations Explainer Kit is a growing library of{' '}
-                  <strong>clear, human, reusable visuals</strong> you can drop straight into your
-                  slides to help ideas land.
+                  <strong>clear, approachable, reusable visuals</strong> you can drop straight into your
+                  slides or articles to help your ideas land.
                 </p>
                 <p className="text-lg lp-prose mb-8">
                   It is designed for people who already know what they want to say, but want help
-                  saying it more clearly, memorably, and confidently.
+                  saying it more clearly, memorably, and confidently, without the hassle of drawing.
                 </p>
 
                 <p className="text-lg font-semibold lp-text-primary mb-4">Use it to:</p>
@@ -260,7 +285,7 @@ const ExplainerKit = () => {
             </div>
 
             <div className="lp-card-primary rounded-2xl p-8 text-center">
-              <h3 className="text-xl font-semibold mb-6">I thought about the types of visuals that help most in presentations. Visual types include:</h3>
+              <h3 className="text-xl font-semibold mb-6">I thought about the types of visuals that help most in presentations.<br />Visual types include:</h3>
               <div className="flex flex-wrap justify-center gap-3">
                 {[
                   'People and characters',
@@ -276,6 +301,8 @@ const ExplainerKit = () => {
                 ))}
               </div>
             </div>
+
+            <DraggableIconsCanvas icons={sketchIcons} />
 
             <p className="text-center mt-8 opacity-80">
               All content is designed to be mixed, reused, and adapted across your talks, workshops, and internal communication. Make it work for you.
@@ -295,13 +322,13 @@ const ExplainerKit = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="flex flex-col items-center gap-10 max-w-lg mx-auto">
               {[
                 { image: explainerKitPowerpointImage, caption: 'Choose what you want direct from PowerPoint, Slides or Keynote' },
                 { image: explainerKitCopyPasteImage, caption: 'Copy/paste or drag into your work' },
                 { image: explainerKitFolderImage, caption: 'An organised library to pull from' },
               ].map((item, index) => (
-                <div key={index} className="text-center">
+                <div key={index} className="text-center w-full">
                   <div className="rounded-xl overflow-hidden shadow-md mb-4">
                     <Image
                       src={item.image}
@@ -325,7 +352,7 @@ const ExplainerKit = () => {
                 Why this helps your ideas land
               </h2>
               <p className="text-lg lp-text-muted">
-                These visuals are not just decoration.
+                Visuals are not just decoration.
               </p>
             </div>
 
@@ -357,11 +384,11 @@ const ExplainerKit = () => {
           </div>
         </section>
 
-        <section id="what-changes" className="lp-section lp-bg-secondary">
+        <section id="what-it-helps-you-do" className="lp-section lp-bg-secondary">
           <div className="lp-container max-w-4xl">
             <div className="text-center mb-12">
               <h2 className="lp-heading text-3xl md:text-4xl mb-4">
-                What changes when you use it
+                What the Explainer Kit helps you do
               </h2>
             </div>
 
@@ -427,7 +454,8 @@ const ExplainerKit = () => {
                   How is this different from the website?
                 </dt>
                 <dd className="lp-prose lp-text-muted">
-                  The explainer kit includes high-resolution, presentation-ready, transparent background elements that combined to share your message.
+                  The Explainer Kit includes high-resolution, presentation-ready elements with transparent backgrounds that you can combine to explain ideas clearly.
+                  You can still find individual concept sketches on the website.
                 </dd>
               </div>
               <div>
@@ -440,10 +468,18 @@ const ExplainerKit = () => {
               </div>
               <div>
                 <dt className="font-semibold lp-text-primary text-lg mb-1">
-                  Will colours be customisable?
+                  Can I customise the visuals?
                 </dt>
                 <dd className="lp-prose lp-text-muted">
-                  Not yet, but planned
+                  The first version focuses on ready-to-use visuals that work out of the box. Customisable versions may come later based on feedback.
+                </dd>
+              </div>
+              <div>
+                <dt className="font-semibold lp-text-primary text-lg mb-1">
+                  What format do the visuals come in?
+                </dt>
+                <dd className="lp-prose lp-text-muted">
+                  PowerPoint-ready assets with transparent backgrounds, designed to drop straight into slides.
                 </dd>
               </div>
             </dl>
@@ -475,7 +511,7 @@ const ExplainerKit = () => {
                   {[
                     '$29 pre-order price (future price $59)',
                     'Limited to 30 early supporters',
-                    'Buying early helps shape what goes into the kit',
+                    'Early supporters help shape what goes into the kit',
                   ].map((perk, index) => (
                     <li key={index} className="lp-check-item">
                       <div className="lp-check-icon">
@@ -487,7 +523,7 @@ const ExplainerKit = () => {
                 </ul>
 
                 <p className="text-sm lp-text-muted mb-6">
-                  If there is sufficient demand, the full kit will be completed and delivered.
+                  If demand isn’t sufficient to complete the project, all pre-orders will be refunded.
                 </p>
 
                 <a href={checkoutUrl} className="lp-btn-cta w-full mb-4">
