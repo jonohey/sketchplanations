@@ -86,6 +86,7 @@ const ExplainerKit = () => {
       <header className={styles['lp-header']}>
         <div className={`${styles['lp-container']} max-w-5xl px-4 h-16 flex items-center justify-between`}>
           <Link href="/">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/logo.svg"
               alt="Sketchplanations"
