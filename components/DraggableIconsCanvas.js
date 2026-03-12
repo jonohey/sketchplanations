@@ -1,10 +1,12 @@
 import useDraggable from "hooks/useDraggable";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const MIN_SIZE = 64;
-const MAX_SIZE = 80;
+const BASE_SIZE = 68;
 const PADDING = 16;
 const MAX_PLACEMENT_ATTEMPTS = 100;
+
+const normalizeIcon = (icon) =>
+	typeof icon === "string" ? { src: icon, scale: 1 } : { scale: 1, ...icon };
 
 const overlaps = (a, placed) => {
 	for (const b of placed) {
@@ -21,10 +23,10 @@ const overlaps = (a, placed) => {
 	return false;
 };
 
-const generateRandomPositions = (count, containerWidth, containerHeight) => {
+const generateRandomPositions = (icons, containerWidth, containerHeight) => {
 	const placed = [];
-	for (let i = 0; i < count; i++) {
-		const size = MIN_SIZE + Math.random() * (MAX_SIZE - MIN_SIZE);
+	for (let i = 0; i < icons.length; i++) {
+		const size = BASE_SIZE * icons[i].scale;
 		let candidate = null;
 
 		for (let attempt = 0; attempt < MAX_PLACEMENT_ATTEMPTS; attempt++) {
@@ -60,8 +62,9 @@ const DraggableIconsCanvas = ({ icons }) => {
 		if (!containerRef.current || icons.length === 0) return;
 		const { width, height } = containerRef.current.getBoundingClientRect();
 		if (width === 0 || height === 0) return;
-		const shuffled = [...icons].sort(() => Math.random() - 0.5);
-		const placed = generateRandomPositions(shuffled.length, width, height);
+		const normalized = icons.map(normalizeIcon);
+		const shuffled = [...normalized].sort(() => Math.random() - 0.5);
+		const placed = generateRandomPositions(shuffled, width, height);
 		iconsRef.current = shuffled.slice(0, placed.length);
 		setPositions(placed);
 		setReady(true);
@@ -98,7 +101,7 @@ const DraggableIconsCanvas = ({ icons }) => {
 						return (
 							<img
 								key={i}
-								src={iconsRef.current[i]}
+								src={iconsRef.current[i].src}
 								alt=""
 								draggable={false}
 								{...itemProps}

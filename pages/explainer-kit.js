@@ -24,28 +24,28 @@ const libreBaskerville = Libre_Baskerville({
 })
 
 const sketchIcons = [
-  '/images/explainer-kit/sketch-icons/Angry.svg',
-  '/images/explainer-kit/sketch-icons/Anxious.svg',
-  '/images/explainer-kit/sketch-icons/Blue check 2.svg',
-  '/images/explainer-kit/sketch-icons/Bored on phone.svg',
-  '/images/explainer-kit/sketch-icons/Calendar plan.svg',
-  '/images/explainer-kit/sketch-icons/Checkbox red.svg',
-  '/images/explainer-kit/sketch-icons/Cogs 2.svg',
-  '/images/explainer-kit/sketch-icons/Impatient.svg',
-  '/images/explainer-kit/sketch-icons/Knotty thought 2.svg',
-  '/images/explainer-kit/sketch-icons/Lightbulb partial.svg',
-  '/images/explainer-kit/sketch-icons/Metal detecting.svg',
-  '/images/explainer-kit/sketch-icons/Puzzling.svg',
-  '/images/explainer-kit/sketch-icons/Red check 1.svg',
-  '/images/explainer-kit/sketch-icons/Sad.svg',
-  '/images/explainer-kit/sketch-icons/Singing.svg',
-  '/images/explainer-kit/sketch-icons/Slot machine.svg',
-  '/images/explainer-kit/sketch-icons/Thinking bubble.svg',
-  '/images/explainer-kit/sketch-icons/Thinking hard person.svg',
-  '/images/explainer-kit/sketch-icons/Thought bubble 3.svg',
-  '/images/explainer-kit/sketch-icons/Up down chart.svg',
-  '/images/explainer-kit/sketch-icons/Wide end arrow.svg',
-  '/images/explainer-kit/sketch-icons/Writing.svg',
+  { src: '/images/explainer-kit/sketch-icons/Angry.svg', scale: 1.3 },
+  { src: '/images/explainer-kit/sketch-icons/Anxious.svg', scale: 1.3 },
+  { src: '/images/explainer-kit/sketch-icons/Blue check 2.svg', scale: 0.7 },
+  { src: '/images/explainer-kit/sketch-icons/Bored on phone.svg', scale: 1.3 },
+  { src: '/images/explainer-kit/sketch-icons/Calendar plan.svg', scale: 1.15 },
+  { src: '/images/explainer-kit/sketch-icons/Checkbox red.svg', scale: 0.75 },
+  { src: '/images/explainer-kit/sketch-icons/Cogs 2.svg', scale: 0.85 },
+  { src: '/images/explainer-kit/sketch-icons/Impatient.svg', scale: 1.3 },
+  { src: '/images/explainer-kit/sketch-icons/Knotty thought 2.svg', scale: 0.85 },
+  { src: '/images/explainer-kit/sketch-icons/Lightbulb partial.svg', scale: 0.9 },
+  { src: '/images/explainer-kit/sketch-icons/Metal detecting.svg', scale: 1.5 },
+  { src: '/images/explainer-kit/sketch-icons/Puzzling.svg', scale: 1.3 },
+  { src: '/images/explainer-kit/sketch-icons/Red check 1.svg', scale: 0.65 },
+  { src: '/images/explainer-kit/sketch-icons/Sad.svg', scale: 1 },
+  { src: '/images/explainer-kit/sketch-icons/Singing.svg', scale: 1 },
+  { src: '/images/explainer-kit/sketch-icons/Slot machine.svg', scale: 1.2 },
+  { src: '/images/explainer-kit/sketch-icons/Thinking bubble.svg', scale: 0.9 },
+  { src: '/images/explainer-kit/sketch-icons/Thinking hard person.svg', scale: 1.3 },
+  { src: '/images/explainer-kit/sketch-icons/Thought bubble 3.svg', scale: 0.85 },
+  { src: '/images/explainer-kit/sketch-icons/Up down chart.svg', scale: 1.1 },
+  { src: '/images/explainer-kit/sketch-icons/Wide end arrow.svg', scale: 1 },
+  { src: '/images/explainer-kit/sketch-icons/Writing.svg', scale: 1.1 },
 ]
 
 const ExplainerKit = () => {
@@ -101,19 +101,20 @@ const ExplainerKit = () => {
               {/* Text content */}
               <div>
                 <p className="text-sm font-semibold uppercase tracking-wider mb-4 lp-text-accent">
-                  Pre-order now available
+                  Pre-order now open
                 </p>
                 <h1 className="lp-heading-xl mb-6">
-                    Elevate your content                </h1>
+                    Visual tools to explain ideas clearly
+                </h1>
                 <p className="text-lg md:text-xl lp-text-muted leading-relaxed mb-6">
-                  Get your message across clearly with the Sketchplanations Explainer Kit
+                  A growing library of Sketchplanations visuals you can drop into your work.
                 </p>
                 <p className="text-lg lp-prose mb-8 max-w-xl">
-                  Use plug-and-play visuals, frameworks, and examples to explain ideas clearly and make your content easier to understand.
+                  Make complex ideas easier to explain and easier to remember.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a href={checkoutUrl} className="lp-btn-cta lp-btn-cta-lg">
-                    Pre-order for $29
+                    Pre-order for £19
                   </a>
                   <a href="#whats-included" className="lp-btn-outline">
                     See what&apos;s included
@@ -258,7 +259,7 @@ const ExplainerKit = () => {
               <h2 className="lp-heading text-3xl md:text-4xl mb-4">
                 What&apos;s included
               </h2>
-              <p className="text-lg opacity-80 max-w-2xl mx-auto">
+              <p className="text-lg opacity-90 max-w-2xl mx-auto">
                 Everything you need to start creating clearer explanations immediately.
               </p>
             </div>
@@ -277,7 +278,7 @@ const ExplainerKit = () => {
                     </div>
                     <div>
                       <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                      <p className="opacity-80">{item.description}</p>
+                      <p className="opacity-90">{item.description}</p>
                     </div>
                   </div>
                 </div>
@@ -295,7 +296,7 @@ const ExplainerKit = () => {
                   'Simple backgrounds',
                 ].map((format, index) => (
                   <span key={index} className="lp-badge">
-                    <Check className="w-4 h-4 lp-text-highlight" />
+                    <Check className="w-5 h-5 lp-text-highlight" />
                     {format}
                   </span>
                 ))}
@@ -304,7 +305,7 @@ const ExplainerKit = () => {
 
             <DraggableIconsCanvas icons={sketchIcons} />
 
-            <p className="text-center mt-8 opacity-80">
+            <p className="text-center mt-8 opacity-90">
               All content is designed to be mixed, reused, and adapted across your talks, workshops, and internal communication. Make it work for you.
             </p>
           </div>
@@ -337,7 +338,7 @@ const ExplainerKit = () => {
                       placeholder="blur"
                     />
                   </div>
-                  <p className="text-sm lp-text-muted">{item.caption}</p>
+                  <p className="text-base lp-text-muted">{item.caption}</p>
                 </div>
               ))}
             </div>
@@ -483,6 +484,9 @@ const ExplainerKit = () => {
                 </dd>
               </div>
             </dl>
+            <p className="text-center lp-text-muted mt-8">
+              What am I missing? Let me know: <a href="mailto:jono.hey@gmail.com" className="lp-text-accent underline">jono.hey@gmail.com</a>
+            </p>
           </div>
         </section>
 
@@ -493,14 +497,14 @@ const ExplainerKit = () => {
               <div 
                 className="p-8 text-center lp-bg-primary"
               >
-                <p className="text-sm font-semibold uppercase tracking-wider opacity-80 mb-2">
+                <p className="text-sm font-semibold uppercase tracking-wider opacity-90 mb-2">
                   Pre-order pricing
                 </p>
                 <div className="flex items-baseline justify-center gap-2 mb-2">
-                  <span className="lp-price-original">$59</span>
-                  <span className="lp-price-current">$29</span>
+                  <span className="lp-price-original">£39</span>
+                  <span className="lp-price-current">£19</span>
                 </div>
-                <p className="text-sm opacity-80">
+                <p className="text-sm opacity-90">
                   One-time purchase
                 </p>
               </div>
@@ -509,7 +513,7 @@ const ExplainerKit = () => {
                 <p className="text-lg lp-prose mb-4">This is a limited pre-order.</p>
                 <ul className="space-y-3 mb-6">
                   {[
-                    '$29 pre-order price (future price $59)',
+                    '£19 pre-order price (future price £39)',
                     'Limited to 30 early supporters',
                     'Early supporters help shape what goes into the kit',
                   ].map((perk, index) => (
@@ -527,7 +531,7 @@ const ExplainerKit = () => {
                 </p>
 
                 <a href={checkoutUrl} className="lp-btn-cta w-full mb-4">
-                  Pre-order now for $29
+                  Pre-order now for £19
                 </a>
 
                 <div className="flex items-center justify-center gap-2 text-sm lp-text-muted">
@@ -564,13 +568,13 @@ const ExplainerKit = () => {
             <h2 className="lp-heading text-3xl md:text-4xl mb-4">
               Important ideas deserve clear visuals
             </h2>
-            <p className="text-lg opacity-80 mb-8 max-w-xl mx-auto">
+            <p className="text-lg opacity-90 mb-8 max-w-xl mx-auto">
               Don't let complexity hide your best thinking. Start creating explanations that stick with the Sketchplanations Explainer Kit.
             </p>
             <a href={checkoutUrl} className="lp-btn-highlight lp-btn-cta-lg">
-              Get the Explainer Kit for $29
+              Get the Explainer Kit for £19
             </a>
-            <p className="mt-4 text-sm opacity-70">
+            <p className="mt-4 text-sm opacity-80">
               Limited early access to pre-order
             </p>
           </div>

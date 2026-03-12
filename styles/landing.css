@@ -22,7 +22,7 @@
   --lp-accent-foreground: hsl(0 0% 100%);
   --lp-highlight: hsl(48 95% 76%);
   --lp-highlight-foreground: hsl(220 30% 18%);
-  --lp-muted: hsl(220 15% 45%);
+  --lp-muted: hsl(220 20% 25%);
   --lp-secondary: hsl(45 35% 92%);
   --lp-card: hsl(45 40% 99%);
   --lp-border: hsl(45 25% 88%);
@@ -54,7 +54,7 @@
   --lp-skeleton: hsl(45 20% 90%);
   --lp-skeleton-dark: hsl(220 45% 22% / 0.2);
   --lp-header-bg: hsl(45 33% 97% / 0.95);
-  --lp-prose-color: hsl(220 30% 18% / 0.9);
+  --lp-prose-color: hsl(220 30% 20%);
 
   /* Apply base styles to wrapper */
   background-color: var(--lp-background);
@@ -247,7 +247,7 @@
 }
 
 .lp-bg-primary .lp-text-muted {
-  color: hsl(45 33% 97% / 0.8);
+  color: hsl(45 33% 97% / 0.9);
 }
 
 /* Dark mode: keep .lp-bg-primary dark (don't invert) */
@@ -369,7 +369,7 @@
 /* Strikethrough price */
 .lp-price-original {
   font-size: 1.5rem;
-  color: hsl(45 33% 97% / 0.6);
+  color: hsl(45 33% 97% / 0.75);
   text-decoration: line-through;
 }
 
@@ -408,10 +408,11 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.625rem 1.25rem;
   background-color: var(--lp-accent-soft);
   border-radius: 9999px;
-  font-size: 0.875rem;
+  font-size: 1.0625rem;
+  font-weight: 500;
 }
 
 /* ===================================
