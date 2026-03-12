@@ -95,21 +95,21 @@ const ExplainerKit = () => {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section id="hero" className="lp-section lp-bg-gradient">
+        <section id="hero" className="px-4 pt-6 pb-6 md:px-8 md:pt-10 md:pb-8 lp-bg-gradient">
           <div className="lp-container max-w-5xl">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
               {/* Text content */}
               <div>
                 <p className="text-sm font-semibold uppercase tracking-wider mb-4 lp-text-accent">
                   Pre-order now open
                 </p>
-                <h1 className="lp-heading-xl mb-6">
+                <h1 className="lp-heading-xl mb-4">
                     Visual tools to explain ideas clearly
                 </h1>
-                <p className="text-lg md:text-xl lp-text-muted leading-relaxed mb-6">
+                <p className="text-lg md:text-xl lp-text-muted leading-relaxed mb-4">
                   A growing library of Sketchplanations visuals you can drop into your work.
                 </p>
-                <p className="text-lg lp-prose mb-8 max-w-xl">
+                <p className="text-lg lp-prose mb-5 max-w-xl">
                   Make complex ideas easier to explain and easier to remember.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -141,7 +141,7 @@ const ExplainerKit = () => {
                   />
                 </div>
                 <div 
-                  className="absolute -bottom-4 -right-4 w-full h-full rounded-2xl -z-10 lp-bg-accent-soft"
+                  className="absolute -bottom-2 -right-2 w-full h-full rounded-2xl -z-10 lp-bg-accent-soft"
                 />
               </div>
             </div>
