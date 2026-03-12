@@ -78,6 +78,17 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
 const Sketchplanations = ({ Component, pageProps }) => {
 	const [decorationHidden, setDecorationHidden] = useState(false);
 
+	// Pages can define their own layout via Component.getLayout
+	// Default layout includes Header, BuyMeACoffee, and Footer
+	const getLayout = Component.getLayout ?? ((page) => (
+		<>
+			<Header />
+			{page}
+			<BuyMeACoffee />
+			<Footer />
+		</>
+	));
+
 	useEffect(() => {
 		polyfillDownloadAttr();
 	}, []);
@@ -103,10 +114,7 @@ const Sketchplanations = ({ Component, pageProps }) => {
 					/>
 				</Head>
 				<div className={inter.className}>
-					<Header />
-					<Component {...pageProps} />
-					<BuyMeACoffee />
-					<Footer />
+					{getLayout(<Component {...pageProps} />)}
 				</div>
 				<Analytics />
 				<SpeedInsights sampleRate={0.5} />

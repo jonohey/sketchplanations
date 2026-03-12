@@ -42,3 +42,6 @@ data/*
 # Misc
 .clj-kondo
 .lsp
+
+# Reference files (not part of codebase)
+_reference/
