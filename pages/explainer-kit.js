@@ -9,6 +9,7 @@ import { Inter, Libre_Baskerville } from 'next/font/google'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import styles from 'styles/landing.module.css'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -52,7 +53,7 @@ const ExplainerKit = () => {
   const checkoutUrl = 'https://pzpzck-rt.myshopify.com/products/sketchplanations-explainer-kit-pre-order?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'
 
   return (
-    <div className={`landing-page min-h-screen flex flex-col ${inter.variable} ${libreBaskerville.variable}`}>
+    <div className={`${styles['landing-page']} min-h-screen flex flex-col ${inter.variable} ${libreBaskerville.variable}`}>
       <Head>
         <title>{pageTitle('Sketchplanations Explainer Kit')}</title>
         <meta
@@ -82,12 +83,16 @@ const ExplainerKit = () => {
       </Head>
 
       {/* Landing Page Header */}
-      <header className="lp-header">
-        <div className="lp-container max-w-5xl px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="lp-heading text-xl">
-            Sketchplanations
+      <header className={styles['lp-header']}>
+        <div className={`${styles['lp-container']} max-w-5xl px-4 h-16 flex items-center justify-between`}>
+          <Link href="/">
+            <img
+              src="/logo.svg"
+              alt="Sketchplanations"
+              className={styles['lp-header-logo']}
+            />
           </Link>
-          <a href="#pre-order" className="lp-btn-cta text-sm px-4 py-2">
+          <a href="#pre-order" className={`${styles['lp-btn-cta']} text-sm px-4 py-2`}>
             Pre-order
           </a>
         </div>
@@ -95,36 +100,36 @@ const ExplainerKit = () => {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section id="hero" className="px-4 pt-6 pb-6 md:px-8 md:pt-10 md:pb-8 lp-bg-gradient">
-          <div className="lp-container max-w-5xl">
+        <section id="hero" className={`px-4 pt-6 pb-6 md:px-8 md:pt-10 md:pb-8 ${styles['lp-bg-gradient']}`}>
+          <div className={`${styles['lp-container']} max-w-5xl`}>
             <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
               {/* Text content */}
               <div>
-                <p className="text-sm font-semibold uppercase tracking-wider mb-4 lp-text-accent">
+                <p className={`text-sm font-semibold uppercase tracking-wider mb-4 ${styles['lp-text-accent']}`}>
                   Pre-order now open
                 </p>
-                <h1 className="lp-heading-xl mb-4">
+                <h1 className={`${styles['lp-heading-xl']} mb-4`}>
                     Visual tools to explain ideas clearly
                 </h1>
-                <p className="text-lg md:text-xl lp-text-muted leading-relaxed mb-4">
+                <p className={`text-lg md:text-xl ${styles['lp-text-muted']} leading-relaxed mb-4`}>
                   A growing library of Sketchplanations visuals you can drop into your work.
                 </p>
-                <p className="text-lg lp-prose mb-5 max-w-xl">
+                <p className={`text-lg ${styles['lp-prose']} mb-5 max-w-xl`}>
                   Make complex ideas easier to explain and easier to remember.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <a href={checkoutUrl} className="lp-btn-cta lp-btn-cta-lg">
+                  <a href={checkoutUrl} className={`${styles['lp-btn-cta']} ${styles['lp-btn-cta-lg']}`}>
                     Pre-order for £19
                   </a>
-                  <a href="#whats-included" className="lp-btn-outline">
+                  <a href="#whats-included" className={styles['lp-btn-outline']}>
                     See what&apos;s included
                   </a>
                 </div>
-                <p className="text-sm lp-text-muted mt-4">
+                <p className={`text-sm ${styles['lp-text-muted']} mt-4`}>
                   50% off &middot; Limited to 30 early supporters
                 </p>
-                <p className="text-sm lp-text-muted mt-2 flex items-center gap-1">
-                  <Check className="w-4 h-4 lp-text-accent" />
+                <p className={`text-sm ${styles['lp-text-muted']} mt-2 flex items-center gap-1`}>
+                  <Check className={`w-4 h-4 ${styles['lp-text-accent']}`} />
                   30-day money-back guarantee
                 </p>
               </div>
@@ -141,7 +146,7 @@ const ExplainerKit = () => {
                   />
                 </div>
                 <div 
-                  className="absolute -bottom-2 -right-2 w-full h-full rounded-2xl -z-10 lp-bg-accent-soft"
+                  className={`absolute -bottom-2 -right-2 w-full h-full rounded-2xl -z-10 ${styles['lp-bg-accent-soft']}`}
                 />
               </div>
             </div>
@@ -149,16 +154,16 @@ const ExplainerKit = () => {
         </section>
 
         {/* Problems Section */}
-        <section id="problems" className="lp-section lp-bg-secondary">
-          <div className="lp-container max-w-4xl">
+        <section id="problems" className={`${styles['lp-section']} ${styles['lp-bg-secondary']}`}>
+          <div className={`${styles['lp-container']} max-w-4xl`}>
             <div className="text-center mb-12">
-              <h2 className="lp-heading text-3xl md:text-4xl mb-4">
+              <h2 className={`${styles['lp-heading']} text-3xl md:text-4xl mb-4`}>
                 The problems you&apos;re facing
               </h2>
-              <p className="text-lg lp-text-muted max-w-2xl mx-auto mb-2">
+              <p className={`text-lg ${styles['lp-text-muted']} max-w-2xl mx-auto mb-2`}>
                 You know what you want to say. But getting it to land is harder, and can be more work, than you'd like it to be.
               </p>
-              <p className="text-lg lp-text-muted max-w-2xl mx-auto">
+              <p className={`text-lg ${styles['lp-text-muted']} max-w-2xl mx-auto`}>
                 This kit is for you if:
               </p>
             </div>
@@ -167,50 +172,50 @@ const ExplainerKit = () => {
               {[
                 { text: "You're not sure of the best way to get your message to really land" },
                 { text: "You want people to relate emotionally to your content" },
-                { text: "Your message is complex and you’d like to help people get it" },
+                { text: "Your message is complex and you'd like to help people get it" },
                 { text: "You're tired of visuals that feel stale, cheesy, or overly \"business-y\"" },
                 { text: "You'd like to add a personal, human touch — but drawing isn't your strength" },
                 { text: "You want to leverage the best of Sketchplanations for your work" },
                 { text: "You want to bring your content to life" },
               ].map((problem, index) => (
-                <div key={index} className="lp-card p-6">
+                <div key={index} className={`${styles['lp-card']} p-6`}>
                   <div className="flex gap-4">
-                    <div className="lp-icon-container">
+                    <div className={styles['lp-icon-container']}>
                       <AlertCircle />
                     </div>
-                    <p className="lp-prose">{problem.text}</p>
+                    <p className={styles['lp-prose']}>{problem.text}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="text-center lp-prose">
+            <div className={`text-center ${styles['lp-prose']}`}>
               <p>
-                Sometimes the hard part isn’t the idea—it’s explaining it well.
+                Sometimes the hard part isn't the idea—it's explaining it well.
               </p>
             </div>
           </div>
         </section>
 
         {/* What this kit is */}
-        <section id="what-it-is" className="lp-section">
-          <div className="lp-container max-w-4xl">
+        <section id="what-it-is" className={styles['lp-section']}>
+          <div className={`${styles['lp-container']} max-w-4xl`}>
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="lp-heading text-3xl md:text-4xl mb-6">
+                <h2 className={`${styles['lp-heading']} text-3xl md:text-4xl mb-6`}>
                   What this kit is
                 </h2>
-                <p className="text-lg lp-prose mb-6">
+                <p className={`text-lg ${styles['lp-prose']} mb-6`}>
                   The Sketchplanations Explainer Kit is a growing library of{' '}
                   <strong>clear, approachable, reusable visuals</strong> you can drop straight into your
                   slides or articles to help your ideas land.
                 </p>
-                <p className="text-lg lp-prose mb-8">
+                <p className={`text-lg ${styles['lp-prose']} mb-8`}>
                   It is designed for people who already know what they want to say, but want help
                   saying it more clearly, memorably, and confidently, without the hassle of drawing.
                 </p>
 
-                <p className="text-lg font-semibold lp-text-primary mb-4">Use it to:</p>
+                <p className={`text-lg font-semibold ${styles['lp-text-primary']} mb-4`}>Use it to:</p>
                 <div className="space-y-3">
                   {[
                     { icon: Lightbulb, text: 'Explain complex ideas simply' },
@@ -218,32 +223,32 @@ const ExplainerKit = () => {
                     { icon: Target, text: 'Make your thinking easier to follow' },
                   ].map((item, index) => (
                     <div key={index} className="flex items-start gap-3">
-                      <div className="lp-icon-container-highlight lp-icon-container">
+                      <div className={`${styles['lp-icon-container-highlight']} ${styles['lp-icon-container']}`}>
                         <item.icon />
                       </div>
-                      <span className="text-lg lp-prose">{item.text}</span>
+                      <span className={`text-lg ${styles['lp-prose']}`}>{item.text}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               <div 
-                className="rounded-2xl p-8 md:p-12 lp-gradient-warm"
+                className={`rounded-2xl p-8 md:p-12 ${styles['lp-gradient-warm']}`}
               >
                 <div className="space-y-4">
-                  <div className="lp-card p-4">
-                    <div className="h-3 w-24 rounded mb-2 lp-bg-skeleton-dark" />
-                    <div className="h-2 w-full rounded lp-bg-skeleton" />
-                    <div className="h-2 w-3/4 rounded mt-1 lp-bg-skeleton" />
+                  <div className={`${styles['lp-card']} p-4`}>
+                    <div className={`h-3 w-24 rounded mb-2 ${styles['lp-bg-skeleton-dark']}`} />
+                    <div className={`h-2 w-full rounded ${styles['lp-bg-skeleton']}`} />
+                    <div className={`h-2 w-3/4 rounded mt-1 ${styles['lp-bg-skeleton']}`} />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="lp-card p-4">
-                      <div className="w-12 h-12 rounded-lg mb-2 lp-bg-accent-muted" />
-                      <div className="h-2 w-full rounded lp-bg-skeleton" />
+                    <div className={`${styles['lp-card']} p-4`}>
+                      <div className={`w-12 h-12 rounded-lg mb-2 ${styles['lp-bg-accent-muted']}`} />
+                      <div className={`h-2 w-full rounded ${styles['lp-bg-skeleton']}`} />
                     </div>
-                    <div className="lp-card p-4">
-                      <div className="w-12 h-12 rounded-lg mb-2 lp-bg-highlight-soft" />
-                      <div className="h-2 w-full rounded lp-bg-skeleton" />
+                    <div className={`${styles['lp-card']} p-4`}>
+                      <div className={`w-12 h-12 rounded-lg mb-2 ${styles['lp-bg-highlight-soft']}`} />
+                      <div className={`h-2 w-full rounded ${styles['lp-bg-skeleton']}`} />
                     </div>
                   </div>
                 </div>
@@ -253,10 +258,10 @@ const ExplainerKit = () => {
         </section>
 
         {/* What's included */}
-        <section id="whats-included" className="lp-section lp-bg-primary">
-          <div className="lp-container max-w-4xl">
+        <section id="whats-included" className={`${styles['lp-section']} ${styles['lp-bg-primary']}`}>
+          <div className={`${styles['lp-container']} max-w-4xl`}>
             <div className="text-center mb-12">
-              <h2 className="lp-heading text-3xl md:text-4xl mb-4">
+              <h2 className={`${styles['lp-heading']} text-3xl md:text-4xl mb-4`}>
                 What&apos;s included
               </h2>
               <p className="text-lg opacity-90 max-w-2xl mx-auto">
@@ -269,12 +274,12 @@ const ExplainerKit = () => {
                 { icon: Layers, title: 'Over 200 visuals', description: 'Hundreds of visuals you can use to support your ideas' },
                 { icon: FileText, title: 'Multiple formats', description: 'Paste directly from PowerPoint, Google Slides, Keynote, or an image library' },
               ].map((item, index) => (
-                <div key={index} className="lp-card-primary p-6">
+                <div key={index} className={`${styles['lp-card-primary']} p-6`}>
                   <div className="flex gap-4">
                     <div 
-                      className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center lp-bg-highlight-solid"
+                      className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center ${styles['lp-bg-highlight-solid']}`}
                     >
-                      <item.icon className="w-6 h-6 lp-text-highlight-foreground" />
+                      <item.icon className={`w-6 h-6 ${styles['lp-text-highlight-foreground']}`} />
                     </div>
                     <div>
                       <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
@@ -285,7 +290,7 @@ const ExplainerKit = () => {
               ))}
             </div>
 
-            <div className="lp-card-primary rounded-2xl p-8 text-center">
+            <div className={`${styles['lp-card-primary']} rounded-2xl p-8 text-center`}>
               <h3 className="text-xl font-semibold mb-6">I thought about the types of visuals that help most in presentations.<br />Visual types include:</h3>
               <div className="flex flex-wrap justify-center gap-3">
                 {[
@@ -295,8 +300,8 @@ const ExplainerKit = () => {
                   'Frameworks and diagrams',
                   'Simple backgrounds',
                 ].map((format, index) => (
-                  <span key={index} className="lp-badge">
-                    <Check className="w-5 h-5 lp-text-highlight" />
+                  <span key={index} className={styles['lp-badge']}>
+                    <Check className={`w-5 h-5 ${styles['lp-text-highlight']}`} />
                     {format}
                   </span>
                 ))}
@@ -312,13 +317,13 @@ const ExplainerKit = () => {
         </section>
 
         {/* Dead simple to use */}
-        <section id="how-to-use" className="lp-section">
-          <div className="lp-container max-w-5xl">
+        <section id="how-to-use" className={styles['lp-section']}>
+          <div className={`${styles['lp-container']} max-w-5xl`}>
             <div className="text-center mb-12">
-              <h2 className="lp-heading text-3xl md:text-4xl mb-4">
+              <h2 className={`${styles['lp-heading']} text-3xl md:text-4xl mb-4`}>
                 Dead simple to use
               </h2>
-              <p className="text-lg lp-text-muted">
+              <p className={`text-lg ${styles['lp-text-muted']}`}>
                 No learning curve. Just find what you need and drop it in.
               </p>
             </div>
@@ -338,7 +343,7 @@ const ExplainerKit = () => {
                       placeholder="blur"
                     />
                   </div>
-                  <p className="text-base lp-text-muted">{item.caption}</p>
+                  <p className={`text-base ${styles['lp-text-muted']}`}>{item.caption}</p>
                 </div>
               ))}
             </div>
@@ -346,13 +351,13 @@ const ExplainerKit = () => {
         </section>
 
         {/* Why this helps */}
-        <section id="why-it-helps" className="lp-section">
-          <div className="lp-container max-w-4xl">
+        <section id="why-it-helps" className={styles['lp-section']}>
+          <div className={`${styles['lp-container']} max-w-4xl`}>
             <div className="text-center mb-12">
-              <h2 className="lp-heading text-3xl md:text-4xl mb-4">
+              <h2 className={`${styles['lp-heading']} text-3xl md:text-4xl mb-4`}>
                 Why this helps your ideas land
               </h2>
-              <p className="text-lg lp-text-muted">
+              <p className={`text-lg ${styles['lp-text-muted']}`}>
                 Visuals are not just decoration.
               </p>
             </div>
@@ -367,28 +372,28 @@ const ExplainerKit = () => {
               ].map((benefit, index) => (
                 <div 
                   key={index} 
-                  className="p-6 rounded-xl lp-gradient-subtle"
+                  className={`p-6 rounded-xl ${styles['lp-gradient-subtle']}`}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="lp-icon-container">
+                    <div className={styles['lp-icon-container']}>
                       <Check />
                     </div>
-                    <span className="font-semibold lp-text-primary text-lg">{benefit.text}</span>
+                    <span className={`font-semibold ${styles['lp-text-primary']} text-lg`}>{benefit.text}</span>
                   </div>
                 </div>
               ))}
             </div>
 
-            <p className="text-center text-lg lp-prose">
+            <p className={`text-center text-lg ${styles['lp-prose']}`}>
               The Explainer Kit helps people <strong>follow your thinking</strong>, not just look at it (or worse, glaze over).
             </p>
           </div>
         </section>
 
-        <section id="what-it-helps-you-do" className="lp-section lp-bg-secondary">
-          <div className="lp-container max-w-4xl">
+        <section id="what-it-helps-you-do" className={`${styles['lp-section']} ${styles['lp-bg-secondary']}`}>
+          <div className={`${styles['lp-container']} max-w-4xl`}>
             <div className="text-center mb-12">
-              <h2 className="lp-heading text-3xl md:text-4xl mb-4">
+              <h2 className={`${styles['lp-heading']} text-3xl md:text-4xl mb-4`}>
                 What the Explainer Kit helps you do
               </h2>
             </div>
@@ -402,12 +407,12 @@ const ExplainerKit = () => {
               ].map((benefit, index) => (
                 <div 
                   key={index} 
-                  className="flex items-center gap-4 p-5 rounded-xl lp-gradient-subtle"
+                  className={`flex items-center gap-4 p-5 rounded-xl ${styles['lp-gradient-subtle']}`}
                 >
-                  <div className="lp-icon-container">
+                  <div className={styles['lp-icon-container']}>
                     <Check />
                   </div>
-                  <span className="font-semibold lp-text-primary">{benefit}</span>
+                  <span className={`font-semibold ${styles['lp-text-primary']}`}>{benefit}</span>
                 </div>
               ))}
             </div>
@@ -415,94 +420,94 @@ const ExplainerKit = () => {
         </section>
 
         {/* Where this comes from */}
-        <section id="background" className="lp-section">
-          <div className="lp-container max-w-3xl text-center">
-            <h2 className="lp-heading text-3xl md:text-4xl mb-6">
+        <section id="background" className={styles['lp-section']}>
+          <div className={`${styles['lp-container']} max-w-3xl text-center`}>
+            <h2 className={`${styles['lp-heading']} text-3xl md:text-4xl mb-6`}>
               Where this comes from
             </h2>
-            <p className="text-lg lp-prose mb-6">
+            <p className={`text-lg ${styles['lp-prose']} mb-6`}>
               This kit is built on more than a decade of{' '}
               <strong>Sketchplanations</strong> — a long-running project focused on explaining
               ideas clearly through simple visuals.
             </p>
-            <p className="text-lg lp-prose mb-8">
+            <p className={`text-lg ${styles['lp-prose']} mb-8`}>
               It draws on experience explaining <strong>over 1,000 concepts</strong> to a large
               global audience, and on professional work centred on helping ideas land.
             </p>
 
             <div className="flex flex-wrap justify-center gap-8 text-center">
-              <div className="lp-stat">
-                <div className="lp-stat-value">1,000+</div>
-                <div className="lp-stat-label">Sketchplanations created</div>
+              <div className={styles['lp-stat']}>
+                <div className={styles['lp-stat-value']}>1,000+</div>
+                <div className={styles['lp-stat-label']}>Sketchplanations created</div>
               </div>
-              <div className="lp-stat">
-                <div className="lp-stat-value">13+</div>
-                <div className="lp-stat-label">Years of visuals</div>
+              <div className={styles['lp-stat']}>
+                <div className={styles['lp-stat-value']}>13+</div>
+                <div className={styles['lp-stat-label']}>Years of visuals</div>
               </div>
             </div>
           </div>
         </section>
 
         {/* FAQ */}
-        <section id="faq" className="lp-section lp-bg-secondary">
-          <div className="lp-container max-w-3xl">
-            <h2 className="lp-heading text-3xl md:text-4xl mb-8 text-center">
+        <section id="faq" className={`${styles['lp-section']} ${styles['lp-bg-secondary']}`}>
+          <div className={`${styles['lp-container']} max-w-3xl`}>
+            <h2 className={`${styles['lp-heading']} text-3xl md:text-4xl mb-8 text-center`}>
               FAQ
             </h2>
             <dl className="space-y-6">
               <div>
-                <dt className="font-semibold lp-text-primary text-lg mb-1">
+                <dt className={`font-semibold ${styles['lp-text-primary']} text-lg mb-1`}>
                   How is this different from the website?
                 </dt>
-                <dd className="lp-prose lp-text-muted">
+                <dd className={`${styles['lp-prose']} ${styles['lp-text-muted']}`}>
                   The Explainer Kit includes high-resolution, presentation-ready elements with transparent backgrounds that you can combine to explain ideas clearly.
                   You can still find individual concept sketches on the website.
                 </dd>
               </div>
               <div>
-                <dt className="font-semibold lp-text-primary text-lg mb-1">
+                <dt className={`font-semibold ${styles['lp-text-primary']} text-lg mb-1`}>
                   Can I use it commercially?
                 </dt>
-                <dd className="lp-prose lp-text-muted">
+                <dd className={`${styles['lp-prose']} ${styles['lp-text-muted']}`}>
                   Yes. For client decks, internal and external presentations, and workshops, go wild.
                 </dd>
               </div>
               <div>
-                <dt className="font-semibold lp-text-primary text-lg mb-1">
+                <dt className={`font-semibold ${styles['lp-text-primary']} text-lg mb-1`}>
                   Can I customise the visuals?
                 </dt>
-                <dd className="lp-prose lp-text-muted">
+                <dd className={`${styles['lp-prose']} ${styles['lp-text-muted']}`}>
                   The first version focuses on ready-to-use visuals that work out of the box. Customisable versions may come later based on feedback.
                 </dd>
               </div>
               <div>
-                <dt className="font-semibold lp-text-primary text-lg mb-1">
+                <dt className={`font-semibold ${styles['lp-text-primary']} text-lg mb-1`}>
                   What format do the visuals come in?
                 </dt>
-                <dd className="lp-prose lp-text-muted">
+                <dd className={`${styles['lp-prose']} ${styles['lp-text-muted']}`}>
                   PowerPoint-ready assets with transparent backgrounds, designed to drop straight into slides.
                 </dd>
               </div>
             </dl>
-            <p className="text-center lp-text-muted mt-8">
-              What am I missing? Let me know: <a href="mailto:jono.hey@gmail.com" className="lp-text-accent underline">jono.hey@gmail.com</a>
+            <p className={`text-center ${styles['lp-text-muted']} mt-8`}>
+              What am I missing? Let me know: <a href="mailto:jono.hey@gmail.com" className={`${styles['lp-text-accent']} underline`}>jono.hey@gmail.com</a>
             </p>
           </div>
         </section>
 
         {/* Pre-order */}
-        <section id="pre-order" className="lp-section">
-          <div className="lp-container max-w-md">
-            <div className="lp-card rounded-3xl overflow-hidden">
+        <section id="pre-order" className={styles['lp-section']}>
+          <div className={`${styles['lp-container']} max-w-md`}>
+            <div className={`${styles['lp-card']} rounded-3xl overflow-hidden`}>
               <div 
-                className="p-8 text-center lp-bg-primary"
+                className={`p-8 text-center ${styles['lp-bg-primary']}`}
               >
                 <p className="text-sm font-semibold uppercase tracking-wider opacity-90 mb-2">
                   Pre-order pricing
                 </p>
                 <div className="flex items-baseline justify-center gap-2 mb-2">
-                  <span className="lp-price-original">£39</span>
-                  <span className="lp-price-current">£19</span>
+                  <span className={styles['lp-price-original']}>£39</span>
+                  <span className={styles['lp-price-current']}>£19</span>
                 </div>
                 <p className="text-sm opacity-90">
                   One-time purchase
@@ -510,15 +515,15 @@ const ExplainerKit = () => {
               </div>
 
               <div className="p-8">
-                <p className="text-lg lp-prose mb-4">This is a limited pre-order.</p>
+                <p className={`text-lg ${styles['lp-prose']} mb-4`}>This is a limited pre-order.</p>
                 <ul className="space-y-3 mb-6">
                   {[
                     '£19 pre-order price (future price £39)',
                     'Limited to 30 early supporters',
                     'Early supporters help shape what goes into the kit',
                   ].map((perk, index) => (
-                    <li key={index} className="lp-check-item">
-                      <div className="lp-check-icon">
+                    <li key={index} className={styles['lp-check-item']}>
+                      <div className={styles['lp-check-icon']}>
                         <Check />
                       </div>
                       <span>{perk}</span>
@@ -526,15 +531,15 @@ const ExplainerKit = () => {
                   ))}
                 </ul>
 
-                <p className="text-sm lp-text-muted mb-6">
-                  If demand isn’t sufficient to complete the project, all pre-orders will be refunded.
+                <p className={`text-sm ${styles['lp-text-muted']} mb-6`}>
+                  If demand isn't sufficient to complete the project, all pre-orders will be refunded.
                 </p>
 
-                <a href={checkoutUrl} className="lp-btn-cta w-full mb-4">
+                <a href={checkoutUrl} className={`${styles['lp-btn-cta']} w-full mb-4`}>
                   Pre-order now for £19
                 </a>
 
-                <div className="flex items-center justify-center gap-2 text-sm lp-text-muted">
+                <div className={`flex items-center justify-center gap-2 text-sm ${styles['lp-text-muted']}`}>
                   <Shield className="w-4 h-4" />
                   <span>Secure checkout</span>
                 </div>
@@ -544,34 +549,34 @@ const ExplainerKit = () => {
         </section>
 
         {/* Guarantee */}
-        <section id="guarantee" className="lp-section lp-bg-highlight">
-          <div className="lp-container max-w-3xl text-center">
+        <section id="guarantee" className={`${styles['lp-section']} ${styles['lp-bg-highlight']}`}>
+          <div className={`${styles['lp-container']} max-w-3xl text-center`}>
             <div 
-              className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6 lp-bg-accent-soft"
+              className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-6 ${styles['lp-bg-accent-soft']}`}
             >
-              <Shield className="w-8 h-8 lp-text-accent" />
+              <Shield className={`w-8 h-8 ${styles['lp-text-accent']}`} />
             </div>
 
-            <h2 className="lp-heading text-2xl md:text-3xl mb-4">
+            <h2 className={`${styles['lp-heading']} text-2xl md:text-3xl mb-4`}>
               30-day money-back guarantee
             </h2>
 
-            <p className="text-lg lp-prose max-w-2xl mx-auto">
+            <p className={`text-lg ${styles['lp-prose']} max-w-2xl mx-auto`}>
               If you&apos;re not satisfied, contact me within 30 days for a full refund.
             </p>
           </div>
         </section>
 
         {/* Final CTA */}
-        <section id="final-cta" className="lp-section lp-bg-primary">
-          <div className="lp-container max-w-3xl text-center">
-            <h2 className="lp-heading text-3xl md:text-4xl mb-4">
+        <section id="final-cta" className={`${styles['lp-section']} ${styles['lp-bg-primary']}`}>
+          <div className={`${styles['lp-container']} max-w-3xl text-center`}>
+            <h2 className={`${styles['lp-heading']} text-3xl md:text-4xl mb-4`}>
               Important ideas deserve clear visuals
             </h2>
             <p className="text-lg opacity-90 mb-8 max-w-xl mx-auto">
               Don't let complexity hide your best thinking. Start creating explanations that stick with the Sketchplanations Explainer Kit.
             </p>
-            <a href={checkoutUrl} className="lp-btn-highlight lp-btn-cta-lg">
+            <a href={checkoutUrl} className={`${styles['lp-btn-highlight']} ${styles['lp-btn-cta-lg']}`}>
               Get the Explainer Kit for £19
             </a>
             <p className="mt-4 text-sm opacity-80">
@@ -582,8 +587,8 @@ const ExplainerKit = () => {
       </main>
 
       {/* Landing Page Footer */}
-      <footer className="lp-footer">
-        <div className="lp-container max-w-5xl">
+      <footer className={styles['lp-footer']}>
+        <div className={`${styles['lp-container']} max-w-5xl`}>
           <p>&copy; {new Date().getFullYear()} Sketchplanations. All rights reserved.</p>
           <div className="flex justify-center gap-4 mt-2">
             <Link href="/">Main site</Link>

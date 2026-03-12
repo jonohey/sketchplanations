@@ -19,7 +19,6 @@ import "vanilla-cookieconsent.css";
 import "vanilla-cookieconsent/dist/cookieconsent.css";
 
 import "global.css";
-import "styles/landing.css";
 import "swiper.css";
 
 const inter = Inter({ subsets: ["latin"], weights: [300, 600] });

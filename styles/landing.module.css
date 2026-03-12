@@ -428,6 +428,18 @@
   border-bottom: 1px solid var(--lp-border);
 }
 
+.lp-header-logo {
+  display: block;
+  height: 1.75rem;
+  width: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+  .lp-header-logo {
+    filter: invert(1);
+  }
+}
+
 .lp-footer {
   padding: 2rem 1rem;
   border-top: 1px solid var(--lp-border);
