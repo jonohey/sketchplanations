@@ -36,7 +36,7 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 								setHighResOpen(!highResOpen);
 							}}
 						>
-							Need a high-resolution file?
+							Need a high-resolution version?
 							<ChevronDown
 								size={18}
 								className={classNames(
@@ -49,7 +49,8 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 						{highResOpen && (
 							<div id="high-res-content" className={styles.highResSection}>
 								<p>
-									If this download is useful, a contribution is welcome.
+									<strong>High-resolution file for slides, articles, or print.</strong> <br/>
+									If this helps you explain an idea, consider supporting Sketchplanations.
 								</p>
 								<div className={styles.supportButtons}>
 									<a
