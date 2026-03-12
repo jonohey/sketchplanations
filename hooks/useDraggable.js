@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const useDraggable = (containerRef, positions, setPositions) => {
 	const dragState = useRef(null);
@@ -61,6 +61,13 @@ const useDraggable = (containerRef, positions, setPositions) => {
 		}),
 		[positions, containerRef, handlePointerMove, handlePointerUp, draggingIndex],
 	);
+
+	useEffect(() => {
+		return () => {
+			window.removeEventListener("pointermove", handlePointerMove);
+			window.removeEventListener("pointerup", handlePointerUp);
+		};
+	}, [handlePointerMove, handlePointerUp]);
 
 	return { getItemProps, draggingIndex };
 };
