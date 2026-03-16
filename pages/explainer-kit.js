@@ -51,6 +51,7 @@ const sketchIcons = [
 
 const ExplainerKit = () => {
   const checkoutUrl = 'https://pzpzck-rt.myshopify.com/products/sketchplanations-explainer-kit-pre-order?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'
+  const fullPriceCheckoutUrl = 'https://pzpzck-rt.myshopify.com/products/sketchplanations-explainer-kit-pre-order-full-price'
 
   return (
     <div className={`${styles['landing-page']} min-h-screen flex flex-col ${inter.variable} ${libreBaskerville.variable}`}>
@@ -132,6 +133,12 @@ const ExplainerKit = () => {
                 <p className={`text-sm ${styles['lp-text-muted']} mt-2 flex items-center gap-1`}>
                   <Check className={`w-4 h-4 ${styles['lp-text-accent']}`} />
                   30-day money-back guarantee
+                </p>
+                <p className={`text-sm ${styles['lp-text-muted']} mt-2`}>
+                  Or{' '}
+                  <a href={fullPriceCheckoutUrl} className={`${styles['lp-text-accent']} underline`}>
+                    support further with a pre-order at full price
+                  </a>
                 </p>
               </div>
 
@@ -536,14 +543,22 @@ const ExplainerKit = () => {
                   If demand isn't sufficient to complete the project, all pre-orders will be refunded.
                 </p>
 
-                <a href={checkoutUrl} className={`${styles['lp-btn-cta']} w-full mb-4`}>
-                  Pre-order now for £19
-                </a>
+                <div className="text-center mb-4">
+                  <a href={checkoutUrl} className={styles['lp-btn-cta']}>
+                    Pre-order now for £19
+                  </a>
+                </div>
 
                 <div className={`flex items-center justify-center gap-2 text-sm ${styles['lp-text-muted']}`}>
                   <Shield className="w-4 h-4" />
                   <span>Secure checkout</span>
                 </div>
+                <p className={`text-sm ${styles['lp-text-muted']} mt-4 text-center`}>
+                  Or{' '}
+                  <a href={fullPriceCheckoutUrl} className={`${styles['lp-text-accent']} underline`}>
+                    support further with a pre-order at full price
+                  </a>
+                </p>
               </div>
             </div>
           </div>
@@ -582,6 +597,12 @@ const ExplainerKit = () => {
             </a>
             <p className="mt-4 text-sm opacity-80">
               Limited early access to pre-order
+            </p>
+            <p className="mt-2 text-sm opacity-80">
+              Or{' '}
+              <a href={fullPriceCheckoutUrl} className="underline">
+                support further with a pre-order at full price
+              </a>
             </p>
           </div>
         </section>
