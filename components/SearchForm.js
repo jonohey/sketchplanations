@@ -7,6 +7,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 import styles from "./SearchForm.module.css";
 
 import { isPresent } from "helpers";
+import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
 import KeyboardShortcut from "./KeyboardShortcut";
 
 const SearchForm = ({
@@ -25,6 +26,7 @@ const SearchForm = ({
 	};
 
 	const focusInput = (e) => {
+		if (shouldIgnoreShortcut(e)) return;
 		if (router.pathname === "/search") {
 			e.preventDefault();
 			inputRef.current?.focus();
