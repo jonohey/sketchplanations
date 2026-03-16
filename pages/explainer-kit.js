@@ -598,6 +598,12 @@ const ExplainerKit = () => {
             <p className="mt-4 text-sm opacity-80">
               Limited early access to pre-order
             </p>
+            <p className="mt-2 text-sm opacity-80">
+              Or{' '}
+              <a href={fullPriceCheckoutUrl} className="underline">
+                support further with a pre-order at full price
+              </a>
+            </p>
           </div>
         </section>
       </main>
