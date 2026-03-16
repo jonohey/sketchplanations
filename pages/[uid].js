@@ -13,6 +13,7 @@ import SketchplanationsStack from "components/SketchplanationsStack";
 import SubscribeInline from "components/SubscribeInline";
 import TaggedSketchplanations from "components/TaggedSketchplanations";
 import { humanizePublishedDate, isPresent, pageTitle, shuffle } from "helpers";
+import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
 import { useRandomHandle } from "hooks/useRandomHandle";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { ImageJsonLd } from "next-seo";
@@ -111,7 +112,8 @@ const SketchplanationPage = ({
 
 	useHotkeys(
 		"right, k",
-		() => {
+		(e) => {
+			if (shouldIgnoreShortcut(e)) return;
 			if (olderUid) {
 				router.push(`/${olderUid}`);
 			}
@@ -122,7 +124,8 @@ const SketchplanationPage = ({
 
 	useHotkeys(
 		"left, j",
-		() => {
+		(e) => {
+			if (shouldIgnoreShortcut(e)) return;
 			if (newerUid) {
 				router.push(`/${newerUid}`);
 			}
@@ -133,7 +136,8 @@ const SketchplanationPage = ({
 
 	useHotkeys(
 		"r",
-		() => {
+		(e) => {
+			if (shouldIgnoreShortcut(e)) return;
 			if (randomHandle) {
 				router.push(`/${randomHandle}`);
 			}

@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -11,8 +12,10 @@ const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
 	const secondaryKeyboardKey = kind === "next" ? "left" : "right";
 	const router = useRouter();
 
-	const navigate = () =>
+	const navigate = (e) => {
+		if (shouldIgnoreShortcut(e)) return;
 		sketchplanation?.uid && router.push(`/${sketchplanation.uid}`);
+	};
 
 	useHotkeys(keyboardKey, navigate, {}, [sketchplanation]);
 	useHotkeys(secondaryKeyboardKey, navigate, {}, [sketchplanation]);

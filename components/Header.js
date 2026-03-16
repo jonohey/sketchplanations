@@ -11,6 +11,7 @@ import styles from "./Header.module.css";
 
 import GradientBlur from "components/GradientBlur";
 import Navigation from "components/Navigation";
+import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
 import useSearch from "hooks/useSearch";
 
 import Context from "context";
@@ -29,16 +30,19 @@ const Header = () => {
 	};
 
 	useHotkeys("/", (e) => {
+		if (shouldIgnoreShortcut(e)) return;
 		e.preventDefault();
 		enterSearch();
 	}, { useKey: true });
 
 	useHotkeys("f", (e) => {
+		if (shouldIgnoreShortcut(e)) return;
 		e.preventDefault();
 		enterSearch();
 	}, { useKey: true });
 
 	useHotkeys("s", (e) => {
+		if (shouldIgnoreShortcut(e)) return;
 		e.preventDefault();
 		enterSearch();
 	}, { useKey: true });
