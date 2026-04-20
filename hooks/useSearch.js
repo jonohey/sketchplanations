@@ -29,7 +29,30 @@ const useSearch = () => {
 	const debouncedSearchQuery = useDebouncedValue(query, 500);
 
 	useEffect(() => {
-		fetchIntialResults().then(setInitialResults);
+		let cancelled = false;
+		let idleHandle = null;
+		let timeoutHandle = null;
+
+		const load = () => {
+			if (cancelled) return;
+			fetchIntialResults().then((results) => {
+				if (!cancelled) setInitialResults(results);
+			});
+		};
+
+		if (typeof window !== "undefined" && typeof window.requestIdleCallback === "function") {
+			idleHandle = window.requestIdleCallback(load, { timeout: 3000 });
+		} else {
+			timeoutHandle = window.setTimeout(load, 1000);
+		}
+
+		return () => {
+			cancelled = true;
+			if (idleHandle != null && typeof window.cancelIdleCallback === "function") {
+				window.cancelIdleCallback(idleHandle);
+			}
+			if (timeoutHandle != null) window.clearTimeout(timeoutHandle);
+		};
 	}, []);
 
 	const setQuery = (query) => {

@@ -45,12 +45,6 @@ class MyDocument extends Document {
 					<meta key="og:title" property="og:title" content={pageTitle()} />
 					<meta property="og:site_name" content="Sketchplanations" />
 					<meta name="twitter:site" content="@sketchplanator" />
-					<link rel="preconnect" href="https://fonts.googleapis.com" />
-					<link
-						rel="preconnect"
-						href="https://fonts.gstatic.com"
-						crossOrigin="true"
-					/>
 					<link rel="preconnect" href="https://images.prismic.io" />
 				</Head>
 				<body>

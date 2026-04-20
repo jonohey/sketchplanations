@@ -1,5 +1,6 @@
 import { track } from '@vercel/analytics';
 import { ChevronRight, ExternalLink } from "lucide-react";
+import { useRouter } from "next/router";
 import { RoughNotation } from "react-rough-notation";
 import { Cards } from "./Cards";
 import FancyLink from "./FancyLink";
@@ -117,38 +118,43 @@ const categories = [
 ];
 
 const Footer = () => {
+	const { pathname } = useRouter();
+	const isHome = pathname === "/";
+
 	return (
 		<footer className={styles.root}>
-			<div id="footer-categories" className="pt-6 sm:pt-10 px-[var(--edgeInset)]">
-				<div className="max-w-screen-xl mx-auto">
-					<div className="mb-3 text-xl font-semibold">Explore more</div>
-					<div className="prose mb-6">
-						<p className="text-balance">
-							The sketches cover many topics. Here are some of my favourites:
-						</p>
+			{!isHome && (
+				<div id="footer-categories" className="pt-6 sm:pt-10 px-[var(--edgeInset)]">
+					<div className="max-w-screen-xl mx-auto">
+						<div className="mb-3 text-xl font-semibold">Explore more</div>
+						<div className="prose mb-6">
+							<p className="text-balance">
+								The sketches cover many topics. Here are some of my favourites:
+							</p>
+						</div>
+						<div className="columns-2 md:columns-3 lg:columns-5 -my-1">
+							{categories.map(({ title, uid }) => {
+								return (
+									<div key={uid} className="block break-inside-avoid py-1">
+										<FancyLink href={`/categories/${uid}`}>{title}</FancyLink>
+									</div>
+								);
+							})}
+						</div>
+						<FancyLink
+							href="/categories"
+							className="inline-block hover:text-blue mt-6"
+						>
+							<span className="inline-flex flex-row gap-x-1 items-center">
+								More topics
+								<ChevronRight size={16} />
+							</span>
+						</FancyLink>
 					</div>
-					<div className="columns-2 md:columns-3 lg:columns-5 -my-1">
-						{categories.map(({ title, uid }) => {
-							return (
-								<div key={uid} className="block break-inside-avoid py-1">
-									<FancyLink href={`/categories/${uid}`}>{title}</FancyLink>
-								</div>
-							);
-						})}
-					</div>
-					<FancyLink
-						href="/categories"
-						className="inline-block hover:text-blue mt-6"
-					>
-						<span className="inline-flex flex-row gap-x-1 items-center">
-							More topics
-							<ChevronRight size={16} />
-						</span>
-					</FancyLink>
 				</div>
-			</div>
+			)}
 
-			<div id="footer-subscribe-inline" className="border-t border-borderFooter pt-6 sm:pt-10 px-[var(--edgeInset)]">
+			<div id="footer-subscribe-inline" className={`${isHome ? "" : "border-t border-borderFooter "}pt-6 sm:pt-10 px-[var(--edgeInset)]`}>
 				<div className="grid sm:grid-cols-2 gap-12 max-w-screen-xl mx-auto items-center">
 					<Cards />
 					<div className="grid gap-y-8 items-start">

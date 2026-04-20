@@ -1,0 +1,230 @@
+.section {
+  @apply mb-3 sm:mb-4;
+}
+
+.groupSection {
+  @apply mt-4 sm:mt-8;
+}
+
+.groupHeading {
+  @apply text-2xl sm:text-3xl font-bold text-text mb-6 sm:mb-8;
+}
+
+.andMoreWrap {
+  @apply mt-4 mb-8 sm:mt-6 sm:mb-12 flex justify-center;
+}
+
+.andMoreLink {
+  @apply text-base sm:text-lg font-semibold;
+}
+
+.header {
+  @apply flex items-baseline justify-between gap-4 mb-2 sm:mb-3;
+}
+
+.title {
+  @apply font-bold text-text m-0;
+  font-family: inherit;
+}
+
+.titleH2 {
+  @apply text-xl sm:text-2xl;
+}
+
+.titleH3 {
+  @apply text-lg sm:text-xl;
+}
+
+.titleLink {
+  @apply text-inherit no-underline hover:text-blue transition-colors;
+}
+
+.trackOuter {
+  @apply relative;
+
+  --track-inset: 1rem;
+}
+
+@screen sm {
+  .trackOuter {
+    --track-inset: max(1.5rem, calc((100vw - 640px) / 2 + 1.5rem));
+  }
+}
+
+@screen md {
+  .trackOuter {
+    --track-inset: max(1.5rem, calc((100vw - 768px) / 2 + 1.5rem));
+  }
+}
+
+@screen lg {
+  .trackOuter {
+    --track-inset: max(2rem, calc((100vw - 1024px) / 2 + 2rem));
+  }
+}
+
+@screen xl {
+  .trackOuter {
+    --track-inset: max(2rem, calc((100vw - 1280px) / 2 + 2rem));
+  }
+}
+
+.fade {
+  @apply hidden md:block absolute top-0 bottom-0 pointer-events-none z-10 transition-opacity duration-200;
+}
+
+.fadeLeft {
+  left: 0;
+  width: calc(var(--track-inset) + 1.5rem);
+  background: linear-gradient(to right, var(--color-bg), hsla(var(--color-bgHsl), 0));
+}
+
+.fadeRight {
+  right: 0;
+  width: 3.5rem;
+  background: linear-gradient(to left, var(--color-bg), hsla(var(--color-bgHsl), 0));
+}
+
+.track {
+  @apply flex gap-2 sm:gap-3 overflow-x-auto scroll-smooth pb-2;
+
+  padding-left: var(--track-inset);
+  scroll-padding-inline-start: var(--track-inset);
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.arrow {
+  @apply hidden md:flex absolute z-20 items-center justify-center w-9 h-9 rounded-full border border-border bg-bg shadow-sm text-text hover:bg-bgDarker transition-opacity duration-200;
+  top: 5rem;
+  opacity: 0;
+}
+
+.trackOuter:hover .arrow,
+.arrow:focus-visible {
+  opacity: 1;
+}
+
+@screen sm {
+  .arrow {
+    top: 5.5rem;
+  }
+}
+
+@screen md {
+  .arrow {
+    top: 6rem;
+  }
+}
+
+@screen lg {
+  .arrow {
+    top: 6.75rem;
+  }
+}
+
+.arrowLeft {
+  left: 0.5rem;
+}
+
+.arrowRight {
+  right: 0.5rem;
+}
+
+@screen lg {
+  .arrowLeft {
+    left: 1rem;
+  }
+
+  .arrowRight {
+    right: 1rem;
+  }
+}
+
+.arrow:disabled {
+  @apply opacity-30 pointer-events-none;
+}
+
+.card {
+  @apply flex-none w-[min(15rem,calc(100vw-4.5rem))] sm:w-44 md:w-48 lg:w-52 snap-start block no-underline text-text;
+}
+
+.imageWrap {
+  @apply relative block w-full aspect-square rounded-lg overflow-hidden bg-paper;
+
+  box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow);
+
+  &::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none z-10 rounded-lg;
+
+    box-shadow: inset 0 0 0 1px hsla(0, 0%, 0%, 0.06);
+    mix-blend-mode: multiply;
+  }
+}
+
+@media (pointer: fine) {
+  .imageWrap {
+    @apply transition-transform duration-200;
+
+    transform-origin: center top;
+  }
+
+  .card:hover .imageWrap {
+    transform: translateY(-2px) scale(1.03);
+
+    box-shadow: 0 2.8rem 1rem -2.25rem var(--color-sketchShadowHover);
+  }
+}
+
+.image {
+  @apply object-cover object-top;
+}
+
+.cardTitle {
+  @apply block mt-3 text-sm leading-snug text-text line-clamp-2 transition-colors;
+}
+
+.card:hover .cardTitle {
+  @apply text-blue;
+}
+
+.cardDate {
+  @apply block mt-1 text-xs text-textSubdued;
+}
+
+.viewAllCard {
+  @apply flex-none w-[min(15rem,calc(100vw-4.5rem))] sm:w-44 md:w-48 lg:w-52 snap-start block no-underline;
+}
+
+.viewAllCardInner {
+  @apply flex items-center justify-center w-full aspect-square rounded-lg border-2 border-dashed border-border bg-bgHighlight text-blue text-center transition-colors;
+}
+
+.viewAllCard:hover .viewAllCardInner {
+  @apply border-blue;
+}
+
+.viewAllCardLabel {
+  @apply inline-flex items-center gap-1 text-sm font-semibold;
+}
+
+.skeletonTrack {
+  @apply overflow-x-hidden;
+}
+
+.skeletonShimmer {
+  @apply bg-bgHighlight animate-pulse;
+}
+
+.skeletonTitle {
+  @apply block mt-3 rounded-sm bg-bgHighlight animate-pulse;
+
+  height: 2.25rem;
+  width: 85%;
+}
