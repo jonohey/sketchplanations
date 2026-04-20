@@ -10,6 +10,7 @@ const nextConfig = {
 				hostname: "images.prismic.io",
 			},
 		],
+		imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 448, 512],
 		// loader: "custom",
 		// loaderFile: "./loader.js",
 	},

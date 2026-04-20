@@ -1,19 +1,122 @@
-import { track } from '@vercel/analytics';
-import dynamic from "next/dynamic";
+import * as prismic from "@prismicio/client";
+import { track } from "@vercel/analytics";
 import Head from "next/head";
 
 import FancyLink from "components/FancyLink";
-import SubscribeFull from "components/SubscribeFull";
+import HomeCategoryCarousels from "components/HomeCategoryCarousel";
+import { HOME_CAROUSEL_CATEGORIES } from "helpers/homeCarouselCategories";
+import { getTagDocumentBySlug } from "helpers/getTagDocumentBySlug";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import bigIdeasLittlePicturesCoverTransparentImage from "../images/big-ideas-little-pictures-cover-transparent.png";
 import styles from "./index.module.css";
 
+const SubscribeFullPlaceholder = () => (
+	<div
+		className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-center"
+		id="substack-subscribe-strip"
+	>
+		<div
+			aria-hidden="true"
+			style={{
+				width: 480,
+				height: 320,
+				maxWidth: "100%",
+				border: "1px solid #EEE",
+				background: "white",
+			}}
+		/>
+	</div>
+);
+
+const SubscribeFull = dynamic(() => import("components/SubscribeFull"), {
+	ssr: false,
+	loading: SubscribeFullPlaceholder,
+});
+
 import { client } from "services/prismic";
 
-const Sketchplanation = dynamic(() => import("../components/Sketchplanation"));
+const SKETCH_CAROUSEL_FETCH = [
+	"sketchplanation.title",
+	"sketchplanation.image",
+	"sketchplanation.published_at",
+];
 
-const Home = ({ sketchplanations }) => {
+const mapSketchForCarousel = (doc) => ({
+	uid: doc.uid,
+	title: doc.data.title,
+	image: doc.data.image,
+	publishedAt: doc.data.published_at ?? null,
+});
+
+const Home = ({ carouselRows }) => {
+	const bookSection = (
+		<section className={styles.section} aria-label="Book promotion" id="big-ideas-little-pictures-strip">
+			<div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 mb-12">
+				<div className="w-full md:w-1/2 relative">
+					<div className={styles.bookSection}>
+						<Link
+							href="/big-ideas-little-pictures"
+							className="block"
+							onClick={() => {
+								track('Book-page-link', { location: 'home-book-image' });
+							}}
+							aria-label="View Big Ideas Little Pictures book details - 5-star rated on Amazon"
+						>
+							<Image
+								src={bigIdeasLittlePicturesCoverTransparentImage}
+								alt="Big Ideas Little Pictures Book"
+								className={styles.bookImage}
+								placeholder="blur"
+							/>
+							<div className={styles.quoteCircle}>
+								<div className={styles.quoteText}>
+									<p className="font-semibold">
+										This is such<br />
+										a cool book.<br />
+										<span className={styles.quoteAttribution}>— Bill Gates</span>
+									</p>
+								</div>
+							</div>
+						</Link>
+					</div>
+				</div>
+				<div className="w-full md:w-1/2 prose">
+					<Link
+						href="/big-ideas-little-pictures"
+						className="no-underline hover:no-underline"
+						onClick={() => {
+							track('Book-page-link', { location: 'home-book-text' });
+						}}
+					>
+						<h2 className="mt-2 sm:mt-6 hover:text-blue">In a Book: Big Ideas Little Pictures</h2>
+					</Link>
+					<div>
+						<p className="font-bold text-xl">
+							5-star rated on Amazon!
+						</p>
+						<p>
+							Absorb big ideas with crystal-clear understanding through this collection of 135 visual explanations.
+							Including 24 exclusive new sketches and enhanced versions of classic favourites,
+							each page shares life-improving ideas through beautifully simple illustrations.
+						</p>
+						<p>Perfect for curious minds and visual learners alike.</p>
+						<Link
+							href="/big-ideas-little-pictures"
+							className="btn-primary inline-block px-8"
+							onClick={() => {
+								track('Book-page-link', { location: 'home-book-text-button' });
+							}}
+						>
+							See inside the book
+						</Link>
+					</div>
+				</div>
+			</div>
+		</section>
+	);
+
 	return (
 		<>
 			<Head>
@@ -77,129 +180,25 @@ const Home = ({ sketchplanations }) => {
 				</div>
 			</div>
 
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-center" id="substack-subscribe-strip">
-				<SubscribeFull />
-			</div>
-
-			<section className={styles.section} aria-label="Book promotion" id="big-ideas-little-pictures-strip">
-				<div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 mb-12">
-					<div className="w-full md:w-1/2 relative">
-						<div className={styles.bookSection}>
-							<Link 
-								href="/big-ideas-little-pictures" 
-								className="block"
-								onClick={() => {
-									track('Book-page-link', { location: 'home-book-image' });
-								}}
-								aria-label="View Big Ideas Little Pictures book details - 5-star rated on Amazon"
-							>
-								<Image 
-									src={bigIdeasLittlePicturesCoverTransparentImage} 
-									alt="Big Ideas Little Pictures Book" 
-									className={styles.bookImage}
-									placeholder="blur"
-								/>
-								<div className={styles.quoteCircle}>
-									<div className={styles.quoteText}>
-										<p className="font-semibold">
-											This is such<br />
-											a cool book.<br />
-											<span className={styles.quoteAttribution}>— Bill Gates</span>
-										</p>
-									</div>
-								</div>
-							</Link>
-						</div>
-					</div>
-					<div className="w-full md:w-1/2 prose">
-						<Link
-							href="/big-ideas-little-pictures"
-							className="no-underline hover:no-underline"
-							onClick={() => {
-								track('Book-page-link', { location: 'home-book-text' });
-							}}
-						>
-							<h2 className="mt-2 sm:mt-6 hover:text-blue">In a Book: Big Ideas Little Pictures</h2>
-						</Link>
-						<div>
-							<p className="font-bold text-xl">
-								5-star rated on Amazon!
-							</p>
-							<p>
-								Absorb big ideas with crystal-clear understanding through this collection of 135 visual explanations.
-								Including 24 exclusive new sketches and enhanced versions of classic favourites,
-								each page shares life-improving ideas through beautifully simple illustrations.
-							</p>
-							<p>Perfect for curious minds and visual learners alike.</p>
-							<Link
-								href="/big-ideas-little-pictures"
-								className="btn-primary inline-block px-8"
-								onClick={() => {
-									track('Book-page-link', { location: 'home-book-text-button' });
-								}}
-							>
-								See inside the book
-							</Link>
-						</div>
-					</div>
-				</div>
-			</section>
+			<SubscribeFull />
 
 			<section className={styles.section} aria-label="About information" id="about-strip">
-				<div className="flex flex-col md:flex-row items-start mb-12 prose max-w-none">
-					<div className="w-full md:w-1/2">
-						<div className="px-0 sm:px-12 lg:px-24">
-							<h2>Hi, I&apos;m Jono 👋</h2>
-							<p>
-								I&apos;m an author and illustrator creating one of the world&apos;s largest libraries of hand-drawn sketches explaining the world—sketch-by-sketch.
-							</p>
-							<p>
-								Sketchplanations have been shared millions of times and used in books, articles, classrooms, and more. <FancyLink href="/about">Learn more about the project</FancyLink>, <FancyLink href="/search">search for a sketch you like</FancyLink>, or see recent sketches below.
-							</p>
-						</div>
-					</div>
-					<div className="w-full md:w-1/2">
-						<div className="px-0 sm:px-12 lg:px-24">
-							<h3>Explore sketches for:</h3>
-							<ul className="columns-1 sm:columns-2 gap-x-8 list-disc ml-4 [&>li]:mt-[0.25em] [&>li:first-child]:mt-0">
-								<li><FancyLink href="/categories/learning">Teachers</FancyLink></li>
-								<li><FancyLink href="/categories/management">Managers & Leaders</FancyLink></li>
-								<li><FancyLink href="/categories/writing">Writers</FancyLink></li>
-								<li><FancyLink href="/categories/software">Developers</FancyLink></li>
-								<li><FancyLink href="/categories/entrepreneurship">Entrepreneurs</FancyLink></li>
-								<li><FancyLink href="/categories/product-management">Product managers</FancyLink></li>
-								<li><FancyLink href="/categories/parenting">Parents</FancyLink></li>
-								<li><FancyLink href="/categories/data">Data scientists</FancyLink></li>
-								<li><FancyLink href="/categories/marketing">Marketers</FancyLink></li>
-								<li><FancyLink href="/categories/design">Designers</FancyLink></li>
-								<li><FancyLink href="/categories">And loads more...</FancyLink></li>
-							</ul>
-						</div>
-					</div>
+				<div className="prose max-w-none px-0 sm:px-12 lg:px-24 mb-12">
+					<h2>Hi, I&apos;m Jono 👋</h2>
+					<p>
+						I&apos;m an author and illustrator creating one of the world&apos;s largest libraries of hand-drawn sketches explaining the world—sketch-by-sketch.
+					</p>
+					<p>
+						Sketchplanations have been shared millions of times and used in books, articles, classrooms, and more. <FancyLink href="/about">Learn more about the project</FancyLink>, <FancyLink href="/search">search for a sketch you like</FancyLink>, or browse by topic below.
+					</p>
 				</div>
 			</section>
 
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-8 mt-12 sm:mt-16 lg:mt-20">
-				<h2 className="prose prose-xl mx-auto text-center">Recent sketches</h2>
-			</div>
-
-			<div className={styles.sketchplanations} id="recent-sketches">
-				{sketchplanations.results.map((sketchplanation, index) => (
-					<Sketchplanation
-						key={sketchplanation.uid}
-						sketchplanation={sketchplanation}
-						priority={index === 0}
-					/>
-				))}
+			<div className="mt-4 sm:mt-8">
+				<HomeCategoryCarousels rows={carouselRows} interlude={bookSection} />
 			</div>
 
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8 my-12 flex flex-col items-center" id="see-more-strip">
-				<Link
-					href="/archive"
-					className="btn-primary w-full max-w-96 inline-block text-center py-2 px-4 mb-4"
-				>
-					See more
-				</Link>
 				<div className="text-center mt-4 mb-8">
 					<FancyLink href="/search" className={styles.footerLink}>
 						Search
@@ -233,13 +232,55 @@ const Home = ({ sketchplanations }) => {
 	);
 };
 
-export const getServerSideProps = async () => {
-	const sketchplanations = await client.getByType("sketchplanation", {
+export const getStaticProps = async () => {
+	const recent = await client.getByType("sketchplanation", {
 		orderings: [{ field: "my.sketchplanation.published_at", direction: "desc" }],
-		pageSize: 6,
+		pageSize: 20,
+		fetch: SKETCH_CAROUSEL_FETCH,
 	});
 
-	return { props: { sketchplanations } };
+	const categoryRows = await Promise.all(
+		HOME_CAROUSEL_CATEGORIES.map(async ({ slug, label }) => {
+			const tagDoc = await getTagDocumentBySlug(slug);
+			if (!tagDoc) return null;
+
+			const result = await client.getByType("sketchplanation", {
+				filters: [
+					prismic.filter.at("document.type", "sketchplanation"),
+					prismic.filter.at("my.sketchplanation.tags.tag", tagDoc.id),
+				],
+				orderings: [
+					{ field: "my.sketchplanation.published_at", direction: "desc" },
+				],
+				pageSize: 20,
+				fetch: SKETCH_CAROUSEL_FETCH,
+			});
+
+			if (result.results.length === 0) return null;
+
+			return {
+				kind: "category",
+				label,
+				slug,
+				viewAllHref: `/categories/${slug}`,
+				sketches: result.results.map(mapSketchForCarousel),
+			};
+		}),
+	);
+
+	const carouselRows = [];
+	if (recent.results.length > 0) {
+		carouselRows.push({
+			kind: "recent",
+			label: "Recent sketches",
+			slug: null,
+			viewAllHref: "/archive",
+			sketches: recent.results.map(mapSketchForCarousel),
+		});
+	}
+	carouselRows.push(...categoryRows.filter(Boolean));
+
+	return { props: { carouselRows } };
 };
 
 export default Home;
