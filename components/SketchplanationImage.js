@@ -1,7 +1,8 @@
 import { PrismicNextImage } from "@prismicio/next";
-import { AnimatePresence, motion } from "framer-motion";
+import { track } from "@vercel/analytics";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { debounce } from "lodash";
-import { LoaderCircle } from "lucide-react";
+import { LoaderCircle, X } from "lucide-react";
 import {
 	useCallback,
 	useContext,
@@ -11,6 +12,7 @@ import {
 	useState,
 } from "react";
 import { Dialog, Modal, ModalOverlay } from "react-aria-components";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 const MotionModal = motion.create(Modal);
 // const MotionDialog = motion.create(Dialog);
@@ -22,27 +24,55 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 
 	const { setDecorationHidden } = useContext(Context);
 
+	const shouldReduceMotion = useReducedMotion();
+	const zoomAnimationTime = shouldReduceMotion ? 0 : 200;
+
 	const imageRef = useRef(null);
+	const transformRef = useRef(null);
+	const wasPanningRef = useRef(false);
+	const tapTimerRef = useRef(null);
 
 	const [isOpen, setIsOpen] = useState(false);
 	const [initialImageRect, setInitialImageRect] = useState({});
 	const [isOpening, setIsOpening] = useState(false);
 	const [isClosing, setIsClosing] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+	const [isZoomed, setIsZoomed] = useState(false);
 
 	const open = () => {
 		setIsOpening(true);
 		setIsOpen(true);
 		setDecorationHidden(true);
 		if (!isLoading) setIsLoading(true);
+		track("lightbox_open", { sketch: title });
 	};
 
 	const close = useCallback(() => {
 		if (isOpening || !isOpen) return;
 
+		transformRef.current?.resetTransform(0);
+		setIsZoomed(false);
 		setIsClosing(true);
 		setIsOpen(false);
 	}, [isOpen, isOpening]);
+
+	const handleImageTap = useCallback(() => {
+		if (wasPanningRef.current) return;
+		if (tapTimerRef.current) {
+			clearTimeout(tapTimerRef.current);
+			tapTimerRef.current = null;
+			return;
+		}
+		tapTimerRef.current = setTimeout(() => {
+			tapTimerRef.current = null;
+			const scale = transformRef.current?.state?.scale ?? 1;
+			if (scale <= 1) {
+				close();
+			} else {
+				transformRef.current?.resetTransform(zoomAnimationTime);
+			}
+		}, 250);
+	}, [close, zoomAnimationTime]);
 
 	const getInitialImageDimensions = useCallback(() => {
 		if (!imageRef.current) return;
@@ -227,21 +257,71 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					<Dialog
 						ref={dialog}
 						className="w-full h-full"
+						aria-label={`${title} - zoomable image`}
 					>
-						<PrismicNextImage
-							field={imageWithAlt}
-							className="object-contain cursor-zoom-out"
-							sizes="calc(100w - 3rem)"
-							fill={true}
-							onClick={close}
-							priority
-							onLoad={() => setIsLoading(false)}
-							imgixParams={imgixParams}
-							quality={quality}
-						/>
+						<TransformWrapper
+							ref={transformRef}
+							minScale={1}
+							maxScale={3}
+							initialScale={1}
+							centerOnInit
+							limitToBounds
+							doubleClick={{ mode: "toggle", step: 2, animationTime: zoomAnimationTime }}
+							wheel={{ step: 0.08, smoothStep: 0.003 }}
+							onTransform={(_ref, state) => {
+								setIsZoomed(state.scale > 1.001);
+							}}
+							onPanningStart={() => {
+								wasPanningRef.current = false;
+							}}
+							onPanning={() => {
+								wasPanningRef.current = true;
+							}}
+							onPanningStop={() => {
+								setTimeout(() => {
+									wasPanningRef.current = false;
+								}, 50);
+							}}
+						>
+							<TransformComponent
+								wrapperStyle={{ width: "100%", height: "100%" }}
+								contentStyle={{
+									width: "100%",
+									height: "100%",
+									touchAction: "none",
+								}}
+							>
+								<div
+									role="presentation"
+									className={`relative w-full h-full ${isZoomed ? "cursor-grab active:cursor-grabbing" : "cursor-zoom-out"}`}
+									onClick={handleImageTap}
+								>
+									<PrismicNextImage
+										field={imageWithAlt}
+										className="object-contain pointer-events-none"
+										sizes="calc(100w - 3rem)"
+										fill={true}
+										priority
+										onLoad={() => setIsLoading(false)}
+										imgixParams={imgixParams}
+										quality={quality}
+									/>
+								</div>
+							</TransformComponent>
+						</TransformWrapper>
 					</Dialog>
+					{isOpen && !isLoading && (
+						<button
+							type="button"
+							onClick={close}
+							aria-label="Close"
+							className="fixed z-30 top-3 right-3 flex items-center justify-center w-10 h-10 rounded-full bg-black/50 text-white backdrop-blur-sm hover:bg-black/70 transition-colors"
+						>
+							<X size={20} strokeWidth={2} />
+						</button>
+					)}
 					<AnimatePresence>
-						{isOpen && !isLoading && (
+						{isOpen && !isLoading && !isZoomed && (
 							<motion.div
 								className="fixed z-20 bottom-0 left-0 right-0 flex items-center justify-center h-14 border-t border-[rgba(255,255,255,0.05)] backdrop-blur-sm"
 								initial={{
