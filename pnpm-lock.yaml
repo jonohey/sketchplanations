@@ -148,6 +148,9 @@ importers:
       react-use-cookie:
         specifier: ^1.6.1
         version: 1.6.1(react@19.1.0)
+      react-zoom-pan-pinch:
+        specifier: ^4.0.3
+        version: 4.0.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       shiitake:
         specifier: ^3.0.2
         version: 3.0.2(react@19.1.0)
@@ -4047,6 +4050,13 @@ packages:
     engines: {node: '>=8', npm: '>=5'}
     peerDependencies:
       react: '>=16.8'
+
+  react-zoom-pan-pinch@4.0.3:
+    resolution: {integrity: sha512-N2Hi6L78fFmhRra+ORpFSW7WST5x6kxpOPplIvtB0b7b+U2anpo1z1wLgaWRPS2kUSqcraRG+JgBCIlDJnqqAg==}
+    engines: {node: '>=8', npm: '>=5'}
+    peerDependencies:
+      react: '*'
+      react-dom: '*'
 
   react@19.1.0:
     resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
@@ -9092,6 +9102,11 @@ snapshots:
   react-use-cookie@1.6.1(react@19.1.0):
     dependencies:
       react: 19.1.0
+
+  react-zoom-pan-pinch@4.0.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
 
   react@19.1.0: {}
 

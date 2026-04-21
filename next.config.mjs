@@ -1,6 +1,7 @@
 import redirects from "./redirects.mjs";
 
 const nextConfig = {
+	allowedDevOrigins: ["*.trycloudflare.com"],
 	experimental: {
 		largePageDataBytes: 256 * 1000, // 128KB by default
 	},

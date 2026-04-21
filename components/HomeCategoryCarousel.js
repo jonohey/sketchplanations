@@ -278,7 +278,7 @@ function HomeCategoryCarouselRow({
 								onClick={() =>
 									track("homepage_carousel_sketch_click", {
 										category: categoryLabel,
-										sketch_title: sketch.title,
+										sketch: sketch.title,
 									})
 								}
 							>
