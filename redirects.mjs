@@ -40,11 +40,6 @@ export default [
 		permanent: false,
 	},
 	{
-		source: "/kit",
-		destination: "/explainer-kit",
-		permanent: true,
-	},
-	{
 		source: "/font",
 		destination: "https://buymeacoffee.com/sketchplanator/e/104842",
 		permanent: false,
