@@ -13,13 +13,14 @@ import {
 import Head from "next/head";
 import Image from "next/image";
 
-const About = () => {
+const About = ({ siteUrl }) => {
 	const aboutTitle = pageTitle("About");
+	const aboutSocialTitle = "About Sketchplanations";
 	const aboutDescription =
 		"Learn about the inspiration behind Sketchplanations, the process of creating weekly sketches, and how you can support the project.";
-	const aboutUrl = "https://sketchplanations.com/about";
+	const aboutUrl = `${siteUrl}/about`;
 	const aboutImageUrl =
-		"https://sketchplanations.com/images/about/jono-hey-sketchplanations-headshot.jpg";
+		`${siteUrl}/images/about/jono-hey-sketchplanations-headshot.jpg`;
 
 	const personJsonLd = {
 		"@context": "https://schema.org",
@@ -41,7 +42,7 @@ const About = () => {
 				<meta name="description" content={aboutDescription} />
 				<link rel="canonical" href={aboutUrl} />
 				<meta property="og:type" content="profile" />
-				<meta property="og:title" content={aboutTitle} />
+				<meta property="og:title" content={aboutSocialTitle} />
 				<meta property="og:description" content={aboutDescription} />
 				<meta property="og:url" content={aboutUrl} />
 				<meta property="og:image" content={aboutImageUrl} />
@@ -52,7 +53,7 @@ const About = () => {
 					content="Jono Hey, creator of Sketchplanations and author of Big Ideas Little Pictures"
 				/>
 				<meta name="twitter:card" content="summary_large_image" />
-				<meta name="twitter:title" content={aboutTitle} />
+				<meta name="twitter:title" content={aboutSocialTitle} />
 				<meta name="twitter:description" content={aboutDescription} />
 				<meta name="twitter:image" content={aboutImageUrl} />
 				<meta
@@ -868,5 +869,17 @@ const About = () => {
 		</>
 	);
 };
+
+export async function getStaticProps() {
+	const siteUrl =
+		process.env.NEXT_PUBLIC_SITE_URL ||
+		(process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://sketchplanations.com");
+
+	return {
+		props: {
+			siteUrl,
+		},
+	};
+}
 
 export default About;
