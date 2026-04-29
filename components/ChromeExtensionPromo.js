@@ -33,10 +33,10 @@ const ChromeExtensionPromo = () => {
 			</a>
 			<div className="prose max-w-none">
 				<p className="mb-2">
-					<strong>Try the Chrome Extension</strong>
+					<strong>A sketchplanation in new tabs</strong>
 				</p>
 				<p className="mb-0">
-					See a Sketchplanation on your new tab page. A lightweight, ad-free, way to
+					Try the Chrome Extension I built. A lightweight, ad-free, way to
 					discover and learn ideas throughout your day.{" "}
 					<a
 						href="https://chromewebstore.google.com/detail/sketchplanations-new-tab/noghagedafbhdmjgageamipnnpbjnppa"
