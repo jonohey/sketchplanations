@@ -2,28 +2,114 @@ import ChromeExtensionPromo from "components/ChromeExtensionPromo";
 import FancyLink from "components/FancyLink";
 import SubscribeFull from "components/SubscribeFull";
 import { pageTitle } from "helpers";
+import {
+	Cloud,
+	Instagram,
+	Lightbulb,
+	Linkedin,
+	Pin,
+	Twitter,
+} from "lucide-react";
 import Head from "next/head";
 import Image from "next/image";
 
 const About = () => {
+	const aboutTitle = pageTitle("About");
+	const aboutDescription =
+		"Learn about the inspiration behind Sketchplanations, the process of creating weekly sketches, and how you can support the project.";
+	const aboutUrl = "https://sketchplanations.com/about";
+	const aboutImageUrl =
+		"https://sketchplanations.com/images/about/jono-hey-sketchplanations-headshot.jpg";
+
+	const personJsonLd = {
+		"@context": "https://schema.org",
+		"@type": "Person",
+		name: "Jono Hey",
+		url: aboutUrl,
+		image: aboutImageUrl,
+		jobTitle: "Creator of Sketchplanations",
+		description: "Creator of Sketchplanations and author of Big Ideas Little Pictures.",
+		sameAs: [
+			"https://uk.linkedin.com/in/jonohey",
+		],
+	};
+
 	return (
 		<>
 			<Head>
-				<title>{pageTitle("About")}</title>
+				<title>{aboutTitle}</title>
+				<meta name="description" content={aboutDescription} />
+				<link rel="canonical" href={aboutUrl} />
+				<meta property="og:type" content="profile" />
+				<meta property="og:title" content={aboutTitle} />
+				<meta property="og:description" content={aboutDescription} />
+				<meta property="og:url" content={aboutUrl} />
+				<meta property="og:image" content={aboutImageUrl} />
+				<meta property="og:image:width" content="1024" />
+				<meta property="og:image:height" content="681" />
 				<meta
-					name="description"
-					content="Learn about the inspiration behind Sketchplanations, the process of creating weekly sketches, and how you can support the project."
+					property="og:image:alt"
+					content="Jono Hey, creator of Sketchplanations and author of Big Ideas Little Pictures"
 				/>
-				<link rel="canonical" href="https://sketchplanations.com/about" />
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta name="twitter:title" content={aboutTitle} />
+				<meta name="twitter:description" content={aboutDescription} />
+				<meta name="twitter:image" content={aboutImageUrl} />
+				<meta
+					name="twitter:image:alt"
+					content="Jono Hey, creator of Sketchplanations and author of Big Ideas Little Pictures"
+				/>
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+				/>
 			</Head>
-			<div className="max-w-3xl mx-auto px-5 pb-16">
+			<div id="top" className="max-w-3xl mx-auto px-5 pb-16">
 				<div className="prose max-w-none">
 					<div className="mb-4 mt-12">
 						<h1 className="text-center">About Sketchplanations</h1>
 						<p className="lead">
-							Learn about the inspiration behind Sketchplanations, what&apos;s in the archive, how to follow Sketchplanations, the process of creating weekly sketches, and how you can support the project (me).
+							Sketchplanations is my project to explain the world through simple sketches. Here you&apos;ll find how it started, how to follow and support it, and other handy information.
 						</p>
 					</div>
+
+					<figure className="not-prose my-8">
+						<Image
+							src="/images/about/jono-hey-sketchplanations-headshot.jpg"
+							alt="Jono Hey, creator of Sketchplanations and author of Big Ideas Little Pictures"
+							width={1024}
+							height={681}
+							sizes="(max-width: 768px) 100vw, 768px"
+							className="w-full h-auto rounded-2xl shadow-sm"
+						/>
+						<figcaption className="mt-3 text-sm text-textSubdued text-center">
+							Me gazing hopefully into the distance. Photo: Carin Thakrar.
+						</figcaption>
+					</figure>
+
+					<nav
+						aria-label="About page sections"
+						className="not-prose my-6 rounded-lg border border-border bg-bgHighlight px-4 py-3"
+					>
+						<p className="m-0 text-xs font-semibold uppercase tracking-wide text-textSubdued">
+							On this page
+						</p>
+						<ul className="m-0 mt-2 grid list-none gap-2 p-0 text-sm sm:grid-cols-2">
+							<li><a href="#support-me" className="text-blue dark:text-blueLight">Supporting Sketchplanations</a></li>
+							<li><a href="#follow" className="text-blue dark:text-blueLight">Follow</a></li>
+							<li><a href="#archive" className="text-blue dark:text-blueLight">Explore the archive</a></li>
+							<li><a href="#podcast" className="text-blue dark:text-blueLight">Podcast</a></li>
+							<li><a href="#backstory" className="text-blue dark:text-blueLight">The backstory</a></li>
+							<li><a href="#using-sketchplanations" className="text-blue dark:text-blueLight">Using Sketchplanations</a></li>
+							<li><a href="#translating-sketchplanations" className="text-blue dark:text-blueLight">Translating Sketchplanations</a></li>
+							<li><a href="#about-me" className="text-blue dark:text-blueLight">About me</a></li>
+							<li><a href="#other-bits" className="text-blue dark:text-blueLight">Other bits</a></li>
+							<li><a href="#guest-posts" className="text-blue dark:text-blueLight">Do you accept guest posts?</a></li>
+							<li><a href="#learn-to-sketch" className="text-blue dark:text-blueLight">Learn to sketch</a></li>
+							<li><a href="#music" className="text-blue dark:text-blueLight">Music</a></li>
+							<li><a href="#subscribe" className="text-blue dark:text-blueLight">Subscribe here</a></li>
+						</ul>
+					</nav>
 
 					<div className="py-4">
 						<p>
@@ -92,7 +178,7 @@ const About = () => {
 								Explore paid options or support the project
 							</FancyLink>
 						</p>
-						<p className="bg-gray-50 px-2 py-0.5 rounded text-sm inline-block">
+						<p className="bg-bgHighlight border border-border px-2 py-0.5 rounded text-sm inline-block">
 							5% of contributions go towards{" "}
 							<a
 								href="https://stripe.com/climate"
@@ -108,6 +194,11 @@ const About = () => {
 								className="inline-block align-middle mx-1"
 							/>
 						</p>
+						<p className="mt-4">
+							<a href="#top" className="inline-block text-sm text-blue hover:underline">
+								Back to top ↑
+							</a>
+						</p>
 					</div>
 					
 					<hr />
@@ -115,71 +206,89 @@ const About = () => {
 					<div id="follow">
 						<h2>Follow</h2>
 						<p>
-							The best way to follow is by signing up to the weekly newsletter. But if you&apos;d like to share or repost on a platform that you use, I try to share (albeit with less commentary) on:
+							The best way to follow is by signing up to the weekly newsletter:{" "}
+							<FancyLink href="/subscribe">subscribe here</FancyLink>.
 						</p>
-						
-						<ul className="space-y-2">
+						<p className="mb-2">Other ways to follow:</p>
+						<ul className="not-prose m-0 grid list-none gap-2 p-0 sm:grid-cols-2">
 							<li>
-								<a 
-									href="https://www.instagram.com/sketchplanations/" 
-									target="_blank" 
-									rel="noopener noreferrer" 
-									className="text-blue"
+								<a
+									href="https://www.instagram.com/sketchplanations/"
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="Follow Sketchplanations on Instagram"
+									className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-blue dark:text-blueLight hover:bg-bgDarker transition-colors"
 								>
+									<Instagram size={16} aria-hidden="true" />
 									Instagram
 								</a>
 							</li>
 							<li>
-								<a 
-									href="https://linkedin.com/company/sketchplanations" 
-									target="_blank" 
-									rel="noopener noreferrer" 
-									className="text-blue"
+								<a
+									href="https://linkedin.com/company/sketchplanations"
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="Follow Sketchplanations on LinkedIn"
+									className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-blue dark:text-blueLight hover:bg-bgDarker transition-colors"
 								>
+									<Linkedin size={16} aria-hidden="true" />
 									LinkedIn
 								</a>
 							</li>
 							<li>
-								<a 
-									href="https://www.threads.net/@sketchplanations" 
-									target="_blank" 
-									rel="noopener noreferrer" 
-									className="text-blue"
+								<a
+									href="https://www.threads.net/@sketchplanations"
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="Follow Sketchplanations on Threads"
+									className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-blue dark:text-blueLight hover:bg-bgDarker transition-colors"
 								>
+									<Lightbulb size={16} aria-hidden="true" />
 									Threads
 								</a>
 							</li>
 							<li>
-								<a 
-									href="https://bsky.app/profile/sketchplanations.bsky.social" 
-									target="_blank" 
-									rel="noopener noreferrer" 
-									className="text-blue"
+								<a
+									href="https://bsky.app/profile/sketchplanations.bsky.social"
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="Follow Sketchplanations on Bluesky"
+									className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-blue dark:text-blueLight hover:bg-bgDarker transition-colors"
 								>
+									<Cloud size={16} aria-hidden="true" />
 									Bluesky
 								</a>
 							</li>
 							<li>
-								<a 
-									href="https://pinterest.com/sketchplanations" 
-									target="_blank" 
-									rel="noopener noreferrer" 
-									className="text-blue"
+								<a
+									href="https://pinterest.com/sketchplanations"
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="Follow Sketchplanations on Pinterest"
+									className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-blue dark:text-blueLight hover:bg-bgDarker transition-colors"
 								>
+									<Pin size={16} aria-hidden="true" />
 									Pinterest
 								</a>
 							</li>
 							<li>
-								<a 
-									href="https://twitter.com/sketchplanator" 
-									target="_blank" 
-									rel="noopener noreferrer" 
-									className="text-blue"
+								<a
+									href="https://twitter.com/sketchplanator"
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label="Follow Sketchplanations on X (Twitter)"
+									className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-blue dark:text-blueLight hover:bg-bgDarker transition-colors"
 								>
+									<Twitter size={16} aria-hidden="true" />
 									X (Twitter)
 								</a>
 							</li>
 						</ul>
+						<p className="mt-4">
+							<a href="#top" className="inline-block text-sm text-blue hover:underline">
+								Back to top ↑
+							</a>
+						</p>
 					</div>
 
 					<hr />
@@ -214,12 +323,27 @@ const About = () => {
 								Explore more themes
 							</FancyLink>
 						</p>
+						<p className="mt-4">
+							<a href="#top" className="inline-block text-sm text-blue hover:underline">
+								Back to top ↑
+							</a>
+						</p>
 					</div>
 
 					<hr />
 
 					<div id="podcast">
-						<h2>Sketchplanations the Podcast</h2>
+						<h2>The Sketchplanations Podcast: great conversations about ideas</h2>
+						<figure className="not-prose my-6 max-w-xs sm:max-w-sm mx-auto md:my-2 md:ml-6 md:mr-0 md:w-56 md:max-w-none md:float-right">
+							<Image
+								src="/images/podcast/sketchplanations-podcast-cover-artwork.png"
+								alt="Sketchplanations The Podcast cover artwork featuring Rob Bell, Tom Pellereau, and Jono Hey"
+								width={1024}
+								height={1024}
+								sizes="(max-width: 640px) 20rem, (max-width: 768px) 24rem, 224px"
+								className="w-full h-auto rounded-xl shadow-sm"
+							/>
+						</figure>
 						<p>
 							I&apos;ve learned that Sketchplanations helps you have great conversations about ideas. In 2023, we started doing just that with the Sketchplanations podcast.
 						</p>
@@ -228,7 +352,7 @@ const About = () => {
 							<a 
 								href="https://www.robbell.tv/" 
 								target="_blank" 
-								rel="noreferrer" 
+								rel="noopener noreferrer" 
 								className="text-blue"
 							>
 								Rob Bell
@@ -237,7 +361,7 @@ const About = () => {
 							<a 
 								href="https://twitter.com/inventor_tom" 
 								target="_blank" 
-								rel="noreferrer" 
+								rel="noopener noreferrer" 
 								className="text-blue"
 							>
 								Tom Pellereau
@@ -251,10 +375,16 @@ const About = () => {
 							<FancyLink
 								href="/podcast" 
 								target="_blank" 
-								rel="noreferrer"
+								rel="noopener noreferrer"
 							>
 								Listen to the podcast
 							</FancyLink>
+						</p>
+						<div className="clear-both" />
+						<p className="mt-4">
+							<a href="#top" className="inline-block text-sm text-blue hover:underline">
+								Back to top ↑
+							</a>
 						</p>
 					</div>
 
@@ -288,7 +418,7 @@ const About = () => {
 								target="_blank" 
 								rel="noopener noreferrer"
 							>
-								Watch me draw sketchplanations on Youtube
+								Watch me draw Sketchplanations on Youtube
 							</FancyLink>
 						</p>
 
@@ -298,12 +428,17 @@ const About = () => {
 								jono.hey@gmail.com
 							</FancyLink>
 						</p>
+						<p className="mt-4">
+							<a href="#top" className="inline-block text-sm text-blue hover:underline">
+								Back to top ↑
+							</a>
+						</p>
 					</div>
 
 					<hr />
 
 					<div id="using-sketchplanations">
-						<h2>Using sketchplanations</h2>
+						<h2>Using Sketchplanations</h2>
 						<p>
 							If you would like to use a sketchplanation in a blog post or for non-commercial purposes, please go ahead. If you have a moment to email me where you used one, it makes me very happy. Check out the{" "}
 							<FancyLink href="/licence">
@@ -311,14 +446,17 @@ const About = () => {
 							</FancyLink>{" "}
 							page for details.
 						</p>
+						<p className="mt-4">
+							<a href="#top" className="inline-block text-sm text-blue hover:underline">
+								Back to top ↑
+							</a>
+						</p>
 					</div>
-					
-					<hr />
 
 					<div id="translating-sketchplanations">
-						<h2>Translating sketchplanations</h2>
+						<h2>Translating Sketchplanations</h2>
 						<p>
-							I&apos;d love to make sketchplanations available in more languages! If you want to submit a translated sketchplanation, I&apos;ve started to add them to a{" "}
+							I&apos;d love to make Sketchplanations available in more languages! If you want to submit a translated sketchplanation, I&apos;ve started to add them to a{" "}
 							<FancyLink
 								target="_blank"
 								rel="noopener noreferrer"
@@ -337,6 +475,11 @@ const About = () => {
 							<FancyLink href="/licence">
 								licence page
 							</FancyLink>.
+						</p>
+						<p className="mt-4">
+							<a href="#top" className="inline-block text-sm text-blue hover:underline">
+								Back to top ↑
+							</a>
 						</p>
 					</div>
 
@@ -372,7 +515,7 @@ const About = () => {
 							<a 
 								href="https://www.nutmeg.com" 
 								target="_blank" 
-								rel="noreferrer" 
+								rel="noopener noreferrer" 
 								className="text-blue"
 							>
 								Nutmeg
@@ -386,6 +529,11 @@ const About = () => {
 								Jump Associates
 							</FancyLink>
 							. I got a PhD from the University of California at Berkeley in the San Francisco Bay Area on &quot;Framing in Design&quot;. However, I mostly like drawing and playing the piano.
+						</p>
+						<p className="mt-4">
+							<a href="#top" className="inline-block text-sm text-blue hover:underline">
+								Back to top ↑
+							</a>
 						</p>
 					</div>
 
@@ -411,15 +559,23 @@ const About = () => {
 						<p>
 							If you buy something using links from the sketches—for example, buying a book I&apos;ve referenced from Amazon that explains a topic in depth—I may earn a commission as an Amazon affiliate. This helps me keep making them, but feel free to buy elsewhere.
 						</p>
+						<p className="mt-4">
+							<a href="#top" className="inline-block text-sm text-blue hover:underline">
+								Back to top ↑
+							</a>
+						</p>
 					</div>
-
-					<hr />
 
 					<div id="guest-posts">
 						<h2>Do you accept guest posts?</h2>
 						<p>No, I don&apos;t accept guest posts.</p>
 						<p>
 							You can probably see that unless you are planning to draw a sketch explaining something in Sketchplanations style with a topic that&apos;s not overly commercial while also being interesting and relevant to my audience, I&apos;m not interested in publishing a guest post promoting your site. Sorry.
+						</p>
+						<p className="mt-4">
+							<a href="#top" className="inline-block text-sm text-blue hover:underline">
+								Back to top ↑
+							</a>
 						</p>
 					</div>
 
@@ -616,6 +772,11 @@ const About = () => {
 							</FancyLink>
 							). It&apos;s a process. Don&apos;t give up because something looks rubbish. Keep working on it. See how you can correct it. You may learn more from figuring out why a sketch looks wrong than if you happen to get it right.
 						</p>
+						<p className="mt-4">
+							<a href="#top" className="inline-block text-sm text-blue hover:underline">
+								Back to top ↑
+							</a>
+						</p>
 					</div>
 
 					<hr />
@@ -624,66 +785,52 @@ const About = () => {
 						<h2>Music</h2>
 						<p>I know you didn&apos;t come here for this, but I also write music. Have a listen:</p>
 
-						<div className="my-8" id="deep-down-and-not-forgotten-embed">
-							<iframe 
-								style={{borderRadius: "12px"}} 
-								src="https://open.spotify.com/embed/album/7fIFrkNpX7T3C2L2EI03T6?utm_source=generator" 
-								width="100%" 
-								height="352" 
-								frameBorder="0" 
-								allowFullScreen={true}
-								allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-								loading="lazy"
-							></iframe>
-						</div>
-						
-						<div className="my-8" id="Foundling-reprise-embed">
+						<div className="my-8" id="latest-releases-playlist-embed">
 							<iframe
 								data-testid="embed-iframe"
-								style={{borderRadius: "12px"}}
-								src="https://open.spotify.com/embed/album/2BciIeBDGtRL3dQVqmCjSH?utm_source=generator"
+								style={{ borderRadius: "12px" }}
+								src="https://open.spotify.com/embed/playlist/5cavi1ykSQhqkejYZQmaLi?utm_source=generator&theme=0"
 								width="100%"
 								height="352"
 								frameBorder="0"
 								allowFullScreen={true}
 								allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-								loading="lazy">
-							</iframe>
-						</div>
-
-						<div className="my-8" id="blossom-embed">
-							<iframe 
-								style={{borderRadius: "12px"}} 
-								src="https://open.spotify.com/embed/album/2sIjVFbjnlAyMmQl4cdAZx?utm_source=generator" 
-								width="100%" 
-								height="352" 
-								frameBorder="0" 
-								allowFullScreen={true}
-								allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-								loading="lazy"
-							></iframe>
-						</div>
-
-						<div className="my-8" id="outro-embed">
-							<iframe 
-								style={{borderRadius: "12px"}} 
-								src="https://open.spotify.com/embed/album/444xXPngvFEBKhOTSuFFZB?utm_source=generator" 
-								width="100%" 
-								height="352" 
-								frameBorder="0" 
-								allowFullScreen={true}
-								allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
 								loading="lazy"
 							></iframe>
 						</div>
 
 						<p>
+							Listen on{" "}
 							<FancyLink
-								href="https://ditto.fm/deep-down-and-not-forgotten" 
-								target="_blank" 
+								href="https://open.spotify.com/artist/729QwZLCsOw3JtZmbQSFTj?si=iwTwU9USS8Cqzdy4gHyS0g"
+								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Listen on other platforms
+								Spotify
+							</FancyLink>
+							,{" "}
+							<FancyLink
+								href="https://music.apple.com/gb/artist/jono-hey/1606865649"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Apple Music
+							</FancyLink>
+							,{" "}
+							<FancyLink
+								href="https://music.youtube.com/channel/UCW0Tp2FYfHrYymIOmtdQDGA?si=tSYa_In5kafd7WWU"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								YouTube Music
+							</FancyLink>
+							,{" "}
+							<FancyLink
+								href="https://music.amazon.co.uk/artists/B09R4DKBCK/jono-hey?marketplaceId=A1F83G8C2ARO7P&musicTerritory=GB&ref=dm_sh_0xgEWCnKFSB5lWCI7dUNzqgkN"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Amazon Music
 							</FancyLink>
 						</p>
 
@@ -697,15 +844,25 @@ const About = () => {
 								download or order the sheet music
 							</FancyLink>
 						</p>
+						<p className="mt-4">
+							<a href="#top" className="inline-block text-sm text-blue hover:underline">
+								Back to top ↑
+							</a>
+						</p>
 					</div>
 
 					<hr />
 
 					<div id="subscribe">
-						<h2>Why not give it a try?</h2>
+						<h2>Subscribe here</h2>
 					</div>
 
 					<SubscribeFull />
+					<p className="mt-4">
+						<a href="#top" className="inline-block text-sm text-blue hover:underline">
+							Back to top ↑
+						</a>
+					</p>
 				</div>
 			</div>
 		</>
