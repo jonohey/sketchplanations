@@ -269,8 +269,6 @@ function HomeCategoryCarouselRow({
 								key={sketch.uid}
 								href={sketchHref}
 								className={styles.card}
-								target="_blank"
-								rel="noopener"
 								prefetch={prefetchCards ? undefined : false}
 								onMouseEnter={prefetchOnIntent}
 								onFocus={prefetchOnIntent}
@@ -314,7 +312,6 @@ function HomeCategoryCarouselRow({
 										{humanizePublishedDate(sketch.publishedAt)}
 									</time>
 								)}
-								<span className="sr-only"> (opens in new tab)</span>
 							</Link>
 						);
 					})}
