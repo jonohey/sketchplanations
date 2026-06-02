@@ -125,6 +125,7 @@ const Home = ({ carouselRows }) => {
 					content="Sketchplanations explains the world one sketch at a time. Discover clear, simple sketches that break down ideas from science, creativity, psychology, and more. Explore recent sketches, search for topics, and share your favourites. Start here."
 				/>
 				<link rel="canonical" href="https://sketchplanations.com" />
+				<meta name="robots" content="max-image-preview:large" />
 				
 				<script
 					type="application/ld+json"
@@ -183,7 +184,7 @@ const Home = ({ carouselRows }) => {
 			<SubscribeFull />
 
 			<section className={styles.section} aria-label="About information" id="about-strip">
-				<div className="prose max-w-none px-0 sm:px-12 lg:px-24 mb-12">
+				<div className="prose max-w-2xl mx-auto mb-12">
 					<h2>Hi, I&apos;m Jono 👋</h2>
 					<p>
 						I&apos;m an author and illustrator creating one of the world&apos;s largest libraries of hand-drawn sketches explaining the world—sketch-by-sketch.
@@ -275,7 +276,10 @@ export const getStaticProps = async () => {
 			label: "Recent sketches",
 			slug: null,
 			viewAllHref: "/archive",
-			sketches: recent.results.map(mapSketchForCarousel),
+			featuredSketch: mapSketchForCarousel(recent.results[0]),
+			sketches: recent.results
+				.slice(1)
+				.map(mapSketchForCarousel),
 		});
 	}
 	carouselRows.push(...categoryRows.filter(Boolean));

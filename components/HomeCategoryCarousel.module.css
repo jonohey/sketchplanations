@@ -22,6 +22,10 @@
   @apply flex items-baseline justify-between gap-4 mb-2 sm:mb-3;
 }
 
+.headerCentered {
+  @apply flex justify-center text-center mb-2 sm:mb-3;
+}
+
 .title {
   @apply font-bold text-text m-0;
   font-family: inherit;

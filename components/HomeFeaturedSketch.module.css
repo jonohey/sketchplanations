@@ -1,0 +1,55 @@
+.root {
+  @apply block mx-auto w-full mb-6 sm:mb-8 no-underline text-text;
+}
+
+@screen md {
+  .root {
+    @apply max-w-md;
+  }
+}
+
+.imageWrap {
+  @apply relative block w-full aspect-square rounded-lg overflow-hidden bg-paper;
+
+  box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow);
+
+  &::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none z-10 rounded-lg;
+
+    box-shadow: inset 0 0 0 1px hsla(0, 0%, 0%, 0.06);
+    mix-blend-mode: multiply;
+  }
+}
+
+@media (pointer: fine) {
+  .imageWrap {
+    @apply transition-transform duration-200;
+
+    transform-origin: center top;
+  }
+
+  .root:hover .imageWrap {
+    transform: translateY(-2px) scale(1.02);
+
+    box-shadow: 0 2.8rem 1rem -2.25rem var(--color-sketchShadowHover);
+  }
+}
+
+.image {
+  @apply object-cover object-top;
+}
+
+.title {
+  /* Match carousel titles, but a touch larger to balance the date */
+  @apply block mt-3 text-base font-semibold leading-snug text-text line-clamp-2 transition-colors;
+}
+
+.root:hover .title {
+  @apply text-blue;
+}
+
+.date {
+  /* Slightly larger than carousel dates for readability */
+  @apply block mt-1 text-sm font-medium text-textSubdued;
+}
