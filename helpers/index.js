@@ -131,11 +131,29 @@ const addApostrophes = (str) => {
 
 export const humanizeTag = (tag) => addApostrophes(humanizeString(tag));
 
-export const humanizePublishedDate = (publishedAt, { showYear = false } = {}) => {
+export const humanizePublishedDate = (
+	publishedAt,
+	{ showYear = false, relative = false } = {},
+) => {
 	const publishedDate = new Date(publishedAt);
 	const currentDate = new Date();
 
 	if (publishedDate > currentDate) return "✨ Latest";
+
+	if (relative) {
+		const diffMs = currentDate - publishedDate;
+		const diffHours = Math.floor(diffMs / (60 * 60 * 1000));
+
+		if (diffHours < 24) {
+			const hours = Math.max(1, diffHours);
+			return `${hours}h ago`;
+		}
+
+		const diffDays = Math.floor(diffMs / (24 * 60 * 60 * 1000));
+		if (diffDays < 7) {
+			return `${diffDays}d ago`;
+		}
+	}
 
 	const months = [
 		"Jan",

@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import FancyLink from "components/FancyLink";
+import HomeFeaturedSketch from "components/HomeFeaturedSketch";
 import { humanizePublishedDate } from "helpers";
 import styles from "./HomeCategoryCarousel.module.css";
 
@@ -99,6 +100,8 @@ function HomeCategoryCarouselRow({
 	showPublishedDate = false,
 	deferMount = false,
 	prefetchCards = false,
+	hideHeader = false,
+	wrapSection = true,
 }) {
 	const router = useRouter();
 	const scrollRef = useRef(null);
@@ -205,35 +208,32 @@ function HomeCategoryCarouselRow({
 		);
 	}
 
-	return (
-		<section
-			className={styles.section}
-			aria-labelledby={headingId}
-			id={sectionId}
-		>
-			<div className="container mx-auto px-4 sm:px-6 lg:px-8">
-				<div className={styles.header}>
-					<HeadingTag
-						className={`${styles.title} ${
-							HeadingTag === "h3" ? styles.titleH3 : styles.titleH2
-						}`}
-						id={headingId}
+	const headerBlock = !hideHeader ? (
+		<div className="container mx-auto px-4 sm:px-6 lg:px-8">
+			<div className={styles.header}>
+				<HeadingTag
+					className={`${styles.title} ${
+						HeadingTag === "h3" ? styles.titleH3 : styles.titleH2
+					}`}
+					id={headingId}
+				>
+					<Link
+						href={viewAllHref}
+						className={styles.titleLink}
+						onClick={() =>
+							track("homepage_carousel_view_all_click", {
+								category: categoryLabel,
+							})
+						}
 					>
-						<Link
-							href={viewAllHref}
-							className={styles.titleLink}
-							onClick={() =>
-								track("homepage_carousel_view_all_click", {
-									category: categoryLabel,
-								})
-							}
-						>
-							{label}
-						</Link>
-					</HeadingTag>
-				</div>
+						{label}
+					</Link>
+				</HeadingTag>
 			</div>
+		</div>
+	) : null;
 
+	const trackBlock = (
 			<div className={styles.trackOuter}>
 				{canNavigate && canScrollLeft && (
 					<span className={`${styles.fade} ${styles.fadeLeft}`} aria-hidden="true" />
@@ -344,6 +344,20 @@ function HomeCategoryCarouselRow({
 					</button>
 				)}
 			</div>
+	);
+
+	if (!wrapSection) {
+		return trackBlock;
+	}
+
+	return (
+		<section
+			className={styles.section}
+			aria-labelledby={headingId}
+			id={sectionId}
+		>
+			{headerBlock}
+			{trackBlock}
 		</section>
 	);
 }
@@ -356,20 +370,52 @@ export default function HomeCategoryCarousels({ rows, interlude = null }) {
 
 	return (
 		<div id="home-category-carousels">
-			{recentRows.map((row, index) => (
-				<HomeCategoryCarouselRow
+			{recentRows.map((row) => (
+				<section
 					key="recent"
-					label={row.label}
-					viewAllHref={row.viewAllHref}
-					sketches={row.sketches}
-					category={row.label}
-					headingId="carousel-heading-recent"
-					sectionId="recent-sketches"
-					headingAs="h2"
-					priorityImage={index === 0}
-					showPublishedDate
-					prefetchCards
-				/>
+					className={styles.section}
+					aria-labelledby="carousel-heading-recent"
+					id="recent-sketches"
+				>
+					<div className="container mx-auto px-4 sm:px-6 lg:px-8">
+						<div className={styles.headerCentered}>
+							<h2
+								className={`${styles.title} ${styles.titleH2}`}
+								id="carousel-heading-recent"
+							>
+								<Link
+									href={row.viewAllHref}
+									className={styles.titleLink}
+									onClick={() =>
+										track("homepage_carousel_view_all_click", {
+											category: row.label,
+										})
+									}
+								>
+									{row.label}
+								</Link>
+							</h2>
+						</div>
+						{row.featuredSketch && (
+							<HomeFeaturedSketch sketch={row.featuredSketch} />
+						)}
+					</div>
+					{row.sketches.length > 0 && (
+						<HomeCategoryCarouselRow
+							label={row.label}
+							viewAllHref={row.viewAllHref}
+							sketches={row.sketches}
+							category={row.label}
+							headingId="carousel-heading-recent"
+							headingAs="h2"
+							priorityImage={false}
+							showPublishedDate
+							prefetchCards
+							hideHeader
+							wrapSection={false}
+						/>
+					)}
+				</section>
 			))}
 
 			{interlude}
