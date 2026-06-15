@@ -1,0 +1,65 @@
+---
+description: Start work from Cursor — create GitHub issue, project ticket, and branch
+alwaysApply: true
+---
+
+# GitHub workflow
+
+## Start work
+
+When the user wants to start new work (e.g. "Start work on …", "New ticket for …", "Let's do …"), bootstrap the ticket before coding.
+
+1. Run `./scripts/start-work.sh "Title" ["optional body"]` from the repo root.
+   - The script syncs latest `master` (fetch + checkout + pull) **before** creating the branch.
+2. If `gh` is not authenticated, tell the user to run `gh auth login` and stop.
+   - Project board access needs `gh auth refresh -s project,read:project`.
+3. Confirm issue number, URL, and branch to the user, then implement on that branch.
+
+Derive the title from the user's message. Use their detail as the issue body when provided; otherwise the script stub is fine.
+
+## While working
+
+- Stay on the issue branch unless the user asks otherwise.
+- Do not commit until the user asks to complete or finish the work.
+
+## Complete work
+
+When the user asks to complete, finish, commit, or create a PR:
+
+### 1. Pre-commit review (required)
+
+Review all changes before staging or committing. Fix issues found; do not commit until this passes.
+
+- **Necessity**: Every changed line should be needed and used. Remove dead code, unused imports, and leftover debug code.
+- **Simplicity**: Refactor where it clearly improves readability, but avoid excessive abstraction — prefer understandable code over clever or over-optimised code.
+- **Dependencies**: New imports and packages must be trusted, reliable, and justified. Avoid adding dependencies when a simple existing solution works.
+- **Performance**: Consider impact on page load, bundle size, images, fonts, and runtime work — roughly what a Chrome Lighthouse audit would flag. Flag regressions and fix or justify them.
+- **Build**: Consider whether build time will increase substantially (`npm run build` when in doubt). If it does, ensure the trade-off is worthwhile.
+- **SEO**: Check titles, meta descriptions, headings, structured data, canonical URLs, and link behaviour. Ensure nothing is negatively affected.
+- **Tests**: Add coverage where appropriate — meaningful cases, not exhaustive edge-case sprawl. Run `npm test` and ensure tests pass.
+- **Removals**: Confirm deleted code only removes deliberately abandoned functionality. If a feature appears unused and removal wasn't in the brief, ask before removing it.
+- **Best practice**: Check accessibility, error handling, security, and consistency with surrounding code.
+
+Briefly summarise the review outcome to the user (what you checked, what you fixed, anything flagged).
+
+### 2. Commit and PR
+
+1. Review `git status` and `git diff`.
+2. Stage relevant files (never `.env` or credentials).
+3. Commit with a message that reflects what was done and why — match repo style (concise, sentence case, e.g. "Improve header mobile nav layout").
+4. Push the branch: `git push -u origin HEAD`
+5. Create a PR with `gh pr create`:
+   - **Title**: concise summary of the change
+   - **Body**: what was done, why, how to verify, and any review notes; must include `Closes #<issue-number>`
+6. Return the PR URL to the user.
+
+Draft the commit message and PR description from the actual diff and conversation — not generic placeholders.
+
+## Project config
+
+- Repo: `jonohey/sketchplanations`
+- Project: https://github.com/users/jonohey/projects/3 (project #3)
+- Default branch: `master`
+- Branch pattern: `{issue-number}-{slug}` (e.g. `701-improve-header-nav`)
+- Tests: `npm test`
+- Build: `npm run build`
