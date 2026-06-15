@@ -1,60 +1,7 @@
-import * as prismic from "@prismicio/client";
 import humanizeString from "humanize-string";
 import { complement, either, isEmpty, isNil } from "ramda";
 
-import { client } from "services/prismic";
-
 const defaultPageTitle = "Sketchplanations - Simplifying complex ideas in sketches";
-
-const fulltextDocumentSearch = async (documentType, query) => {
-	if (!query || query === "") return [];
-
-	const { results } = await client.get({
-		filters: [
-			prismic.filter.at("document.type", documentType),
-			prismic.filter.fulltext("document", query),
-		],
-		pageSize: 100,
-	});
-
-	return results;
-};
-
-export const searchSketchplanations = async (query, { limit = 100 } = {}) => {
-	if (!query || query === "") return [];
-
-	const { results: titleResults } = await client.get({
-		filters: [
-			prismic.filter.at("document.type", "sketchplanation"),
-			prismic.filter.fulltext("my.sketchplanation.title", query),
-		],
-		pageSize: limit,
-	});
-
-	const documentResults = await fulltextDocumentSearch(
-		"sketchplanation",
-		query,
-	);
-
-	// Combine the results and remove duplicates
-	const results = [...titleResults, ...documentResults].reduce(
-		(acc, result) => {
-			const existingResult = acc.find((r) => r.id === result.id);
-
-			if (!existingResult) {
-				acc.push(result);
-			}
-
-			return acc;
-		},
-		[],
-	);
-
-	return results;
-};
-
-export const searchTags = async (query) =>
-	await fulltextDocumentSearch("tag", query);
 
 export const pageTitle = (title) => {
 	if (!title) return defaultPageTitle;

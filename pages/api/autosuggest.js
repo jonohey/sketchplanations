@@ -1,4 +1,4 @@
-import { searchSketchplanations } from "helpers";
+import { searchSketchplanations } from "helpers/search/serverSearch";
 
 const ALLOWED_REFERRER = process.env.ALLOWED_REFERRER; // Store your allowed referrer in an environment variable
 
@@ -12,7 +12,7 @@ export default async function autosuggestHandler(req, res) {
 	try {
 		const { query } = req.query;
 
-		const docs = await searchSketchplanations(query, { limit: 7 });
+		const docs = searchSketchplanations(query, { limit: 7 });
 
 		const results = docs.map((result) => ({
 			title: result.data.title,

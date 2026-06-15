@@ -8,8 +8,8 @@ import useSearch from "hooks/useSearch";
 
 import { Lightbulb, Shuffle } from "lucide-react";
 import FancyLink from "./FancyLink";
+import SearchCategoryMatches from "./SearchCategoryMatches";
 import SketchplanationsGrid from "./SketchplanationsGrid";
-import Tags from "./Tags";
 
 const loadingMessages = [
 	"Finding some spectacular sketches…",
@@ -43,8 +43,30 @@ const randomLoadingMessage = () => {
 
 const MIN_LOADING_TIME = 1000;
 
+const SUGGEST_IDEA_URL = "https://forms.gle/c6LymLW5vLx9FUeW6";
+
+const SuggestMissingSketch = () => (
+	<p>
+		<FancyLink href={SUGGEST_IDEA_URL} target="_blank" rel="noopener noreferrer">
+			<span className="inline-flex items-center gap-2">
+				<Lightbulb size={16} />
+				Let me know what I&apos;m missing
+			</span>
+		</FancyLink>
+	</p>
+);
+
 const SearchResults = () => {
-	const { initialResults, results, tagResults, called, busy } = useSearch();
+	const {
+		initialResults,
+		results,
+		tagResults,
+		matchQuality,
+		correctedLabel,
+		hasExactCategoryMatch,
+		called,
+		busy,
+	} = useSearch();
 
 	const [randomHandle, setRandomHandle] = useState(null);
 	const [loadingMessage, setLoadingMessage] = useState(randomLoadingMessage());
@@ -79,7 +101,6 @@ const SearchResults = () => {
 
 		fetchRandomHandle();
 	}, []);
-
 	if (!called) {
 		return (
 			<>
@@ -98,6 +119,12 @@ const SearchResults = () => {
 		);
 	}
 
+	const hasSketches = isPresent(results);
+	const hasCategories = isPresent(tagResults);
+	const isCorrected = matchQuality === "corrected";
+	const isStretchMatch = matchQuality === "weak" && !hasExactCategoryMatch;
+	const isEmpty = !hasSketches && !hasCategories;
+
 	return (
 		<div className={styles["search-results"]}>
 			{showLoading ? (
@@ -114,14 +141,10 @@ const SearchResults = () => {
 				</div>
 			) : (
 				<>
-					<div className={styles["search-results__tags"]}>
-						<Tags tags={tagResults} align="center" />
-					</div>
-					{isPresent(results) ? (
-						<div className={styles["search-results__sketches"]}>
-							<SketchplanationsGrid prismicDocs={results} />
-						</div>
-					) : (
+					{hasCategories && (
+						<SearchCategoryMatches categories={tagResults} />
+					)}
+					{isEmpty ? (
 						<div className={styles["search-results__empty"]}>
 							<p>No sketches found</p>
 							<Link
@@ -133,19 +156,47 @@ const SearchResults = () => {
 									Try a random sketch?
 								</span>
 							</Link>
-							<p>
-								<FancyLink
-									href="https://forms.gle/c6LymLW5vLx9FUeW6"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									<span className="inline-flex items-center gap-2">
-										<Lightbulb size={16} />
-										Let me know what I&apos;m missing
-									</span>
-								</FancyLink>
-							</p>
+							<SuggestMissingSketch />
 						</div>
+					) : (
+						<>
+							{isCorrected && correctedLabel && (
+								<p className={styles["search-results__corrected-heading"]}>
+									Showing results for <strong>{correctedLabel}</strong>
+								</p>
+							)}
+							{isStretchMatch && (
+								<div className={styles["search-results__empty"]}>
+									<p>No close matches found</p>
+									<SuggestMissingSketch />
+								</div>
+							)}
+							{hasSketches && (
+								<div className={styles["search-results__sketches"]}>
+									<div
+										className={`${styles["search-results__sketches-header"]}${
+											hasCategories
+												? ` ${styles["search-results__sketches-header--bordered"]}`
+												: ""
+										}`}
+									>
+										<h2 className={styles["search-results__sketches-title"]}>
+											Sketches
+										</h2>
+										<p className={styles["search-results__sketches-count"]}>
+											{results.length}{" "}
+											{results.length === 1 ? "result" : "results"}
+										</p>
+									</div>
+									{isStretchMatch && (
+										<p className={styles["search-results__weak-heading"]}>
+											Could these be what you were looking for?
+										</p>
+									)}
+									<SketchplanationsGrid prismicDocs={results} />
+								</div>
+							)}
+						</>
 					)}
 				</>
 			)}

@@ -1,10 +1,16 @@
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { isBlank, isPresent } from "helpers";
-import { searchSketchplanations, searchTags } from "helpers";
 
 import useDebouncedValue from "./useDebouncedValue";
+import useSearchIndex from "./useSearchIndex";
+
+// A single character is never a meaningful search, so we don't run one.
+const MIN_QUERY_LENGTH = 2;
+
+const isSearchableQuery = (value) =>
+	isPresent(value) && value.trim().length >= MIN_QUERY_LENGTH;
 
 const fetchIntialResults = async () => {
 	const response = await fetch("/api/initial-search-results");
@@ -23,10 +29,14 @@ const useSearch = () => {
 	const [initialResults, setInitialResults] = useState(null);
 	const [results, setResults] = useState(null);
 	const [tagResults, setTagResults] = useState(null);
-	const [busy, setBusy] = useState(false);
+	const [matchQuality, setMatchQuality] = useState(null);
+	const [correctedLabel, setCorrectedLabel] = useState(null);
+	const [hasExactCategoryMatch, setHasExactCategoryMatch] = useState(false);
+
+	const { ready: indexReady, search } = useSearchIndex();
 
 	const prevSearchQuery = useRef(null);
-	const debouncedSearchQuery = useDebouncedValue(query, 500);
+	const debouncedSearchQuery = useDebouncedValue(query, 300);
 
 	useEffect(() => {
 		let cancelled = false;
@@ -119,45 +129,53 @@ const useSearch = () => {
 		setOriginalRoute(null);
 	};
 
-	useEffect(() => {
-		if (
-			prevSearchQuery.current === debouncedSearchQuery &&
-			isPresent(results)
-		) {
-			return undefined;
-		}
+	const runSearch = useCallback(
+		(searchQuery) => {
+			const {
+				sketches,
+				categories,
+				matchQuality: quality,
+				correctedLabel: label,
+				hasExactCategoryMatch: exactCategory,
+			} = search(searchQuery);
 
-		if (isBlank(debouncedSearchQuery)) {
+			setResults(sketches);
+			setTagResults(categories);
+			setMatchQuality(quality);
+			setCorrectedLabel(label);
+			setHasExactCategoryMatch(exactCategory);
+		},
+		[search],
+	);
+
+	useEffect(() => {
+		if (!isSearchableQuery(debouncedSearchQuery)) {
 			setResults(null);
 			setTagResults(null);
+			setMatchQuality(null);
+			setCorrectedLabel(null);
+			setHasExactCategoryMatch(false);
+			prevSearchQuery.current = null;
 
 			return undefined;
 		}
 
-		const search = async () => {
-			setBusy(true);
+		if (!indexReady) {
+			return undefined;
+		}
 
-			try {
-				const [sketchplanationResults, tagResults] = await Promise.all([
-					searchSketchplanations(debouncedSearchQuery),
-					searchTags(debouncedSearchQuery),
-				]);
-
-				setResults(sketchplanationResults);
-				setTagResults(tagResults);
-			} catch (error) {
-				console.error(error);
-			} finally {
-				setBusy(false);
-			}
-		};
+		if (prevSearchQuery.current === debouncedSearchQuery) {
+			return undefined;
+		}
 
 		prevSearchQuery.current = debouncedSearchQuery;
+		runSearch(debouncedSearchQuery);
+	}, [debouncedSearchQuery, indexReady, runSearch]);
 
-		search();
-	}, [debouncedSearchQuery]);
-
-	const called = isPresent(debouncedSearchQuery);
+	const called = isSearchableQuery(debouncedSearchQuery);
+	// Show loading while a query is waiting on the index, including the idle
+	// callback delay before indexLoading becomes true.
+	const busy = called && !indexReady;
 
 	return {
 		query,
@@ -165,6 +183,9 @@ const useSearch = () => {
 		initialResults,
 		results,
 		tagResults,
+		matchQuality,
+		correctedLabel,
+		hasExactCategoryMatch,
 		called,
 		busy,
 		reset,

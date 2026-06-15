@@ -12,7 +12,6 @@ import styles from "./Header.module.css";
 import GradientBlur from "components/GradientBlur";
 import Navigation from "components/Navigation";
 import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
-import useSearch from "hooks/useSearch";
 
 import Context from "context";
 import Cards from "./Cards";
@@ -23,7 +22,7 @@ const Header = () => {
 	const { decorationHidden } = useContext(Context);
 	const [isOpen, setIsOpen] = useState(false);
 
-	const { isSearchPage } = useSearch();
+	const isSearchPage = router.pathname === "/search";
 
 	const enterSearch = () => {
 		router.push("/search", undefined, { shallow: true });

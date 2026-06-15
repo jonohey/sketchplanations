@@ -2,13 +2,25 @@
   @apply grid grid-cols-1 gap-y-6;
 }
 
-.search-results__tags {
-  @apply px-5;
-  /* outline: solid thin blue; */
+.search-results__sketches-header {
+  @apply flex items-baseline justify-between gap-4 mb-4 px-5;
 }
 
-.search-results__sketches {
-  /* outline: solid thin red; */
+.search-results__sketches-header--bordered {
+  @apply pt-4 border-t border-border;
+}
+
+.search-results__sketches-title {
+  @apply text-base font-semibold m-0;
+}
+
+.search-results__sketches-count {
+  @apply text-sm text-textSubdued m-0 shrink-0;
+}
+
+.search-results__weak-heading,
+.search-results__corrected-heading {
+  @apply text-center text-textSubdued text-sm mb-4 px-5;
 }
 
 .search-results__empty {

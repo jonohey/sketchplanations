@@ -9,6 +9,7 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			"services/": `${path.resolve(__dirname, "services")}/`,
+			helpers: path.resolve(__dirname, "helpers"),
 		},
 	},
 });

@@ -29,6 +29,7 @@
 		"easing-coordinates": "^2.0.2",
 		"fast-sort": "^3.4.1",
 		"framer-motion": "^12.19.1",
+		"fuse.js": "^7.4.2",
 		"globby": "^14.1.0",
 		"humanize-string": "^3.0.0",
 		"lucide-react": "^0.525.0",
@@ -59,6 +60,7 @@
 		"react-use-cookie": "^1.6.1",
 		"react-zoom-pan-pinch": "^4.0.3",
 		"shiitake": "^3.0.2",
+		"stemmer": "^2.0.1",
 		"swiper": "^11.2.8",
 		"throttle-debounce": "^5.0.2",
 		"vanilla-cookieconsent": "3.1.0"
