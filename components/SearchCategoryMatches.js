@@ -19,7 +19,7 @@ const SearchCategoryMatches = ({ categories }) => {
 					className={styles.pill}
 				>
 					{identifier}
-					{count != null && <span className={styles.count}>({count})</span>}
+					{count > 0 && <span className={styles.count}>({count})</span>}
 				</Link>
 			))}
 			<Link href="/categories" className={styles["all-categories"]}>

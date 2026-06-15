@@ -33,7 +33,7 @@ const useSearch = () => {
 	const [correctedLabel, setCorrectedLabel] = useState(null);
 	const [hasExactCategoryMatch, setHasExactCategoryMatch] = useState(false);
 
-	const { ready: indexReady, loading: indexLoading, search } = useSearchIndex();
+	const { ready: indexReady, search } = useSearchIndex();
 
 	const prevSearchQuery = useRef(null);
 	const debouncedSearchQuery = useDebouncedValue(query, 300);
@@ -173,7 +173,9 @@ const useSearch = () => {
 	}, [debouncedSearchQuery, indexReady, runSearch]);
 
 	const called = isSearchableQuery(debouncedSearchQuery);
-	const busy = indexLoading && called;
+	// Show loading while a query is waiting on the index, including the idle
+	// callback delay before indexLoading becomes true.
+	const busy = called && !indexReady;
 
 	return {
 		query,
