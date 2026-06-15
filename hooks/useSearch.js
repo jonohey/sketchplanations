@@ -170,11 +170,14 @@ const useSearch = () => {
 
 		prevTrackedQuery.current = analyticsSearchQuery;
 
+		const trimmedQuery = analyticsSearchQuery.trim();
 		const { sketches } = search(analyticsSearchQuery);
-		track("Search", {
-			query: analyticsSearchQuery.trim(),
-			resultCount: sketches.length,
-		});
+
+		if (sketches.length > 0) {
+			track("Search", { query: trimmedQuery });
+		} else {
+			track("Search_no_results", { query: trimmedQuery });
+		}
 	}, [analyticsSearchQuery, indexReady, search]);
 
 	useEffect(() => {
