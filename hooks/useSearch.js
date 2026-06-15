@@ -1,3 +1,4 @@
+import { track } from "@vercel/analytics";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -144,6 +145,12 @@ const useSearch = () => {
 			setMatchQuality(quality);
 			setCorrectedLabel(label);
 			setHasExactCategoryMatch(exactCategory);
+
+			// Fires once per debounced query (2+ chars), not on every keystroke.
+			track("Search", {
+				query: searchQuery.trim(),
+				resultCount: sketches.length,
+			});
 		},
 		[search],
 	);
