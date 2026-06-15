@@ -9,6 +9,9 @@ import useSearchIndex from "./useSearchIndex";
 
 // A single character is never a meaningful search, so we don't run one.
 const MIN_QUERY_LENGTH = 2;
+const SEARCH_DEBOUNCE_MS = 300;
+// Wait longer before analytics so slow typing doesn't emit partial queries.
+const ANALYTICS_DEBOUNCE_MS = 1500;
 
 const isSearchableQuery = (value) =>
 	isPresent(value) && value.trim().length >= MIN_QUERY_LENGTH;
@@ -37,7 +40,9 @@ const useSearch = () => {
 	const { ready: indexReady, search } = useSearchIndex();
 
 	const prevSearchQuery = useRef(null);
-	const debouncedSearchQuery = useDebouncedValue(query, 300);
+	const prevTrackedQuery = useRef(null);
+	const debouncedSearchQuery = useDebouncedValue(query, SEARCH_DEBOUNCE_MS);
+	const analyticsSearchQuery = useDebouncedValue(query, ANALYTICS_DEBOUNCE_MS);
 
 	useEffect(() => {
 		let cancelled = false;
@@ -145,15 +150,32 @@ const useSearch = () => {
 			setMatchQuality(quality);
 			setCorrectedLabel(label);
 			setHasExactCategoryMatch(exactCategory);
-
-			// Fires once per debounced query (2+ chars), not on every keystroke.
-			track("Search", {
-				query: searchQuery.trim(),
-				resultCount: sketches.length,
-			});
 		},
 		[search],
 	);
+
+	useEffect(() => {
+		if (!isSearchableQuery(analyticsSearchQuery)) {
+			prevTrackedQuery.current = null;
+			return undefined;
+		}
+
+		if (!indexReady) {
+			return undefined;
+		}
+
+		if (prevTrackedQuery.current === analyticsSearchQuery) {
+			return undefined;
+		}
+
+		prevTrackedQuery.current = analyticsSearchQuery;
+
+		const { sketches } = search(analyticsSearchQuery);
+		track("Search", {
+			query: analyticsSearchQuery.trim(),
+			resultCount: sketches.length,
+		});
+	}, [analyticsSearchQuery, indexReady, search]);
 
 	useEffect(() => {
 		if (!isSearchableQuery(debouncedSearchQuery)) {
