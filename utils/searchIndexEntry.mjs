@@ -6,34 +6,30 @@ export const sketchToIndexEntry = (sketch, tagById) => {
 	const {
 		id,
 		uid,
-		data: { title, body, image, tags = [], published_at: publishedAt },
+		data: { title, body, image, tags = [] },
 	} = sketch;
 
-	const categories = tags
+	// In Prismic a sketch's categories and tags are the same linked "tag"
+	// documents, so they are indexed once as a single `categories` field.
+	const categoryText = tags
 		.map(({ tag }) => tagById.get(tag?.id))
 		.filter(Boolean)
-		.map(({ identifier, slug }) => ({ identifier, slug }));
+		.map(({ identifier }) => identifier)
+		.join(" ");
 
-	const categoryNames = categories.map(({ identifier }) => identifier);
-	const categorySlugs = categories.map(({ slug }) => slug);
 	const bodyText = prismicH.asText(body) ?? "";
 	const imageAlt = image?.alt ?? "";
 
+	// Fuse searches the raw fields below; only the title needs a normalized
+	// copy for the exact/prefix ranking boost in fuseSearch.js.
 	return {
 		id,
 		uid,
 		title,
 		titleNormalized: normalizeForSearch(title),
 		body: bodyText,
-		bodyNormalized: normalizeForSearch(bodyText),
 		imageAlt,
-		imageAltNormalized: normalizeForSearch(imageAlt),
-		categories: categoryNames.join(" "),
-		categoriesNormalized: normalizeForSearch(categoryNames.join(" ")),
-		categorySlugs: categorySlugs.join(" "),
-		tags: categoryNames.join(" "),
-		tagsNormalized: normalizeForSearch(categoryNames.join(" ")),
-		publishedAt,
+		categories: categoryText,
 		image,
 	};
 };

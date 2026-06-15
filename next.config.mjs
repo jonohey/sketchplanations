@@ -12,6 +12,7 @@ const nextConfig = {
 			},
 		],
 		imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 448, 512],
+		qualities: [75, 90, 95],
 		// loader: "custom",
 		// loaderFile: "./loader.js",
 	},

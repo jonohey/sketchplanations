@@ -6,6 +6,12 @@ import { isBlank, isPresent } from "helpers";
 import useDebouncedValue from "./useDebouncedValue";
 import useSearchIndex from "./useSearchIndex";
 
+// A single character is never a meaningful search, so we don't run one.
+const MIN_QUERY_LENGTH = 2;
+
+const isSearchableQuery = (value) =>
+	isPresent(value) && value.trim().length >= MIN_QUERY_LENGTH;
+
 const fetchIntialResults = async () => {
 	const response = await fetch("/api/initial-search-results");
 	const results = await response.json();
@@ -24,6 +30,7 @@ const useSearch = () => {
 	const [results, setResults] = useState(null);
 	const [tagResults, setTagResults] = useState(null);
 	const [matchQuality, setMatchQuality] = useState(null);
+	const [correctedLabel, setCorrectedLabel] = useState(null);
 	const [hasExactCategoryMatch, setHasExactCategoryMatch] = useState(false);
 
 	const { ready: indexReady, loading: indexLoading, search } = useSearchIndex();
@@ -128,22 +135,25 @@ const useSearch = () => {
 				sketches,
 				categories,
 				matchQuality: quality,
+				correctedLabel: label,
 				hasExactCategoryMatch: exactCategory,
 			} = search(searchQuery);
 
 			setResults(sketches);
 			setTagResults(categories);
 			setMatchQuality(quality);
+			setCorrectedLabel(label);
 			setHasExactCategoryMatch(exactCategory);
 		},
 		[search],
 	);
 
 	useEffect(() => {
-		if (isBlank(debouncedSearchQuery)) {
+		if (!isSearchableQuery(debouncedSearchQuery)) {
 			setResults(null);
 			setTagResults(null);
 			setMatchQuality(null);
+			setCorrectedLabel(null);
 			setHasExactCategoryMatch(false);
 			prevSearchQuery.current = null;
 
@@ -162,7 +172,7 @@ const useSearch = () => {
 		runSearch(debouncedSearchQuery);
 	}, [debouncedSearchQuery, indexReady, runSearch]);
 
-	const called = isPresent(debouncedSearchQuery);
+	const called = isSearchableQuery(debouncedSearchQuery);
 	const busy = indexLoading && called;
 
 	return {
@@ -172,6 +182,7 @@ const useSearch = () => {
 		results,
 		tagResults,
 		matchQuality,
+		correctedLabel,
 		hasExactCategoryMatch,
 		called,
 		busy,

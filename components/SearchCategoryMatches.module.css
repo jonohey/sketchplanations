@@ -1,0 +1,28 @@
+.root {
+  @apply px-5 flex flex-wrap items-center gap-2;
+}
+
+.label {
+  @apply flex items-center gap-1.5 text-sm text-text shrink-0 m-0;
+}
+
+.pill {
+  @apply inline-flex items-center gap-1 py-1 px-3 rounded-full border border-border text-sm text-text;
+  transition: background-color 0.1s ease-out, color 0.1s ease-out, border-color 0.1s ease-out;
+}
+
+.pill:hover {
+  @apply bg-brightRed text-white border-brightRed shadow;
+}
+
+.count {
+  @apply text-text;
+}
+
+.pill:hover .count {
+  @apply text-white;
+}
+
+.all-categories {
+  @apply text-xs text-textSubdued hover:text-text;
+}

@@ -42,7 +42,20 @@ async function buildSearchIndex() {
 	const sketches = sketchplanations.map((sketch) =>
 		sketchToIndexEntry(sketch, tagById),
 	);
-	const categories = tags.map(tagToIndexEntry);
+
+	const categoryCounts = new Map();
+	for (const sketch of sketchplanations) {
+		for (const { tag } of sketch.data.tags ?? []) {
+			if (tag?.id) {
+				categoryCounts.set(tag.id, (categoryCounts.get(tag.id) ?? 0) + 1);
+			}
+		}
+	}
+
+	const categories = tags.map((tag) => ({
+		...tagToIndexEntry(tag),
+		count: categoryCounts.get(tag.id) ?? 0,
+	}));
 
 	const index = { sketches, categories };
 	const filePath = path.join(process.cwd(), "data/search-index.json");

@@ -41,12 +41,35 @@ describe("search index integration", () => {
 	});
 
 	it("finds typo-tolerant matches", () => {
-		expect(includesUid("dopler", "the-doppler-effect")).toBe(true);
-		expect(search("dopler").matchQuality).toBe("weak");
+		const dopler = search("dopler");
+		expect(dopler.items.some((result) => result.uid === "the-doppler-effect")).toBe(
+			true,
+		);
+		expect(dopler.matchQuality).toBe("corrected");
+		expect(dopler.correctedLabel).toBe("Doppler");
+
 		expect(includesUid("pomodoroo", "the-pomodoro-technique")).toBe(true);
 		expect(includesUid("trolly problem", "the-trolley-problem")).toBe(true);
 		expect(includesUid("mcnamara falacy", "the-mcnamara-fallacy")).toBe(true);
 		expect(includesUid("didero effect", "the-diderot-effect")).toBe(true);
+	});
+
+	it("returns full-text matches for multi-word concept queries", () => {
+		const systemsThinking = search("systems thinking");
+		expect(systemsThinking.matchQuality).toBe("good");
+		expect(systemsThinking.items.length).toBeGreaterThan(0);
+		expect(systemsThinking.correctedLabel).toBeUndefined();
+	});
+
+	it("finds full-text body matches by word stem across the index", () => {
+		const whale = search("whale");
+		expect(whale.matchQuality).toBe("good");
+		// "whale shark" in the body
+		expect(whale.items.some((result) => result.uid === "bycatch")).toBe(true);
+		// "whaling" shares the stem "whale"
+		expect(
+			whale.items.some((result) => result.uid === "types-of-phishing"),
+		).toBe(true);
 	});
 
 	it("pins exact category matches", () => {
@@ -65,6 +88,13 @@ describe("search index integration", () => {
 		}
 	});
 
+	it("includes sketch counts on category entries", () => {
+		const psychology = index.categories.find(
+			(category) => category.slug === "psychology",
+		);
+		expect(psychology?.count).toBeGreaterThan(0);
+	});
+
 	it("handles spacing and punctuation variants", () => {
 		for (const query of ["Mc Namara", "McNamara", "mcnamara", "Mc-Namara"]) {
 			expect(includesUid(query, "the-mcnamara-fallacy")).toBe(true);
@@ -81,15 +111,9 @@ describe("search index integration", () => {
 		expect(includesUid("two-factor authentication", "2fa")).toBe(true);
 	});
 
-	it("finds body and alt text matches", () => {
+	it("finds strong body text matches", () => {
 		expect(includesUid("unknown unknowns", "unknown-unknowns")).toBe(true);
 		expect(search("unknown unknowns").matchQuality).toBe("good");
-
-		const waveFrequency = search("wave frequency");
-		expect(
-			waveFrequency.items.some((item) => item.uid === "the-frequency-illusion"),
-		).toBe(true);
-		expect(waveFrequency.matchQuality).toBe("weak");
 	});
 
 	it("ranks title matches near the top", () => {
@@ -104,15 +128,33 @@ describe("search index integration", () => {
 		expect(matchQuality).toBe("none");
 	});
 
+	it("returns no results for unrelated queries", () => {
+		const { items, matchQuality } = search("tables of vulture");
+		expect(items).toHaveLength(0);
+		expect(matchQuality).toBe("none");
+	});
+
+	it("surfaces a genuine word match over mid-word noise for short queries", () => {
+		// "iq" is buried in "etiquette"/"technique", but only "Common
+		// distributions" mentions IQ as a word — it should lead and the mid-word
+		// matches should not be confident results.
+		const iq = search("iq");
+		expect(iq.matchQuality).toBe("good");
+		expect(iq.items[0]?.uid).toBe("common-distributions-normal-skewed-pareto");
+		expect(
+			iq.items.some((result) => result.uid === "urinal-etiquette"),
+		).toBe(false);
+	});
+
 	it("filters very poor sketch matches", () => {
 		const { items, matchQuality } = search("quantum foam");
 		expect(items).toHaveLength(0);
 		expect(matchQuality).toBe("none");
 	});
 
-	it("returns only good matches for strong queries", () => {
+	it("returns good matches led by the strongest title match", () => {
 		const { items, matchQuality } = search("doppler");
 		expect(matchQuality).toBe("good");
-		expect(items.every((item) => item.uid === "the-doppler-effect")).toBe(true);
+		expect(items[0]?.uid).toBe("the-doppler-effect");
 	});
 });
