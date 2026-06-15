@@ -29,6 +29,7 @@
 		"easing-coordinates": "^2.0.2",
 		"fast-sort": "^3.4.1",
 		"framer-motion": "^12.19.1",
+		"fuse.js": "^7.4.2",
 		"globby": "^14.1.0",
 		"humanize-string": "^3.0.0",
 		"lucide-react": "^0.525.0",

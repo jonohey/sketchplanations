@@ -2,6 +2,7 @@ import buildInitialSearchResults from "./utils/buildInitialSearchResults.mjs";
 import buildNewerSketchplanations from "./utils/buildNewerSketchplanations.mjs";
 import buildPagesData from "./utils/buildPagesData.mjs";
 import buildRss from "./utils/buildRss.mjs";
+import buildSearchIndex from "./utils/buildSearchIndex.mjs";
 import buildSitemap from "./utils/buildSitemap.mjs";
 import buildSketchTooltipsData from "./utils/buildSketchTooltipsData.mjs";
 import prismicToKV from "./utils/prismicToKV.mjs";
@@ -9,6 +10,7 @@ import prismicToKV from "./utils/prismicToKV.mjs";
 const setup = async () => {
 	await Promise.all([
 		buildInitialSearchResults(),
+		buildSearchIndex(),
 		buildRss(),
 		buildSitemap(),
 		prismicToKV(),

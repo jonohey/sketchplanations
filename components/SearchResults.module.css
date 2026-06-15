@@ -11,6 +11,10 @@
   /* outline: solid thin red; */
 }
 
+.search-results__weak-heading {
+  @apply text-center text-textSubdued text-sm mb-4 px-5;
+}
+
 .search-results__empty {
   @apply flex items-center justify-center flex-col gap-2;
 }

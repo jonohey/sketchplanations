@@ -43,8 +43,29 @@ const randomLoadingMessage = () => {
 
 const MIN_LOADING_TIME = 1000;
 
+const SUGGEST_IDEA_URL = "https://forms.gle/c6LymLW5vLx9FUeW6";
+
+const SuggestMissingSketch = () => (
+	<p>
+		<FancyLink href={SUGGEST_IDEA_URL} target="_blank" rel="noopener noreferrer">
+			<span className="inline-flex items-center gap-2">
+				<Lightbulb size={16} />
+				Let me know what I&apos;m missing
+			</span>
+		</FancyLink>
+	</p>
+);
+
 const SearchResults = () => {
-	const { initialResults, results, tagResults, called, busy } = useSearch();
+	const {
+		initialResults,
+		results,
+		tagResults,
+		matchQuality,
+		hasExactCategoryMatch,
+		called,
+		busy,
+	} = useSearch();
 
 	const [randomHandle, setRandomHandle] = useState(null);
 	const [loadingMessage, setLoadingMessage] = useState(randomLoadingMessage());
@@ -79,7 +100,6 @@ const SearchResults = () => {
 
 		fetchRandomHandle();
 	}, []);
-
 	if (!called) {
 		return (
 			<>
@@ -98,6 +118,11 @@ const SearchResults = () => {
 		);
 	}
 
+	const hasSketches = isPresent(results);
+	const hasCategories = isPresent(tagResults);
+	const isWeakMatch = matchQuality === "weak" && !hasExactCategoryMatch;
+	const isEmpty = !hasSketches && !hasCategories;
+
 	return (
 		<div className={styles["search-results"]}>
 			{showLoading ? (
@@ -114,14 +139,12 @@ const SearchResults = () => {
 				</div>
 			) : (
 				<>
-					<div className={styles["search-results__tags"]}>
-						<Tags tags={tagResults} align="center" />
-					</div>
-					{isPresent(results) ? (
-						<div className={styles["search-results__sketches"]}>
-							<SketchplanationsGrid prismicDocs={results} />
+					{hasCategories && (
+						<div className={styles["search-results__tags"]}>
+							<Tags tags={tagResults} align="center" />
 						</div>
-					) : (
+					)}
+					{isEmpty ? (
 						<div className={styles["search-results__empty"]}>
 							<p>No sketches found</p>
 							<Link
@@ -133,19 +156,27 @@ const SearchResults = () => {
 									Try a random sketch?
 								</span>
 							</Link>
-							<p>
-								<FancyLink
-									href="https://forms.gle/c6LymLW5vLx9FUeW6"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									<span className="inline-flex items-center gap-2">
-										<Lightbulb size={16} />
-										Let me know what I&apos;m missing
-									</span>
-								</FancyLink>
-							</p>
+							<SuggestMissingSketch />
 						</div>
+					) : (
+						<>
+							{isWeakMatch && (
+								<div className={styles["search-results__empty"]}>
+									<p>No close matches found</p>
+									<SuggestMissingSketch />
+								</div>
+							)}
+							{hasSketches && (
+								<div className={styles["search-results__sketches"]}>
+									{isWeakMatch && (
+										<p className={styles["search-results__weak-heading"]}>
+											Could these be what you were looking for?
+										</p>
+									)}
+									<SketchplanationsGrid prismicDocs={results} />
+								</div>
+							)}
+						</>
 					)}
 				</>
 			)}

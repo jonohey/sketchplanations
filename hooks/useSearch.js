@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { isBlank, isPresent } from "helpers";
-import { searchSketchplanations, searchTags } from "helpers";
 
 import useDebouncedValue from "./useDebouncedValue";
+import useSearchIndex from "./useSearchIndex";
 
 const fetchIntialResults = async () => {
 	const response = await fetch("/api/initial-search-results");
@@ -23,10 +23,13 @@ const useSearch = () => {
 	const [initialResults, setInitialResults] = useState(null);
 	const [results, setResults] = useState(null);
 	const [tagResults, setTagResults] = useState(null);
-	const [busy, setBusy] = useState(false);
+	const [matchQuality, setMatchQuality] = useState(null);
+	const [hasExactCategoryMatch, setHasExactCategoryMatch] = useState(false);
+
+	const { ready: indexReady, loading: indexLoading, search } = useSearchIndex();
 
 	const prevSearchQuery = useRef(null);
-	const debouncedSearchQuery = useDebouncedValue(query, 500);
+	const debouncedSearchQuery = useDebouncedValue(query, 300);
 
 	useEffect(() => {
 		let cancelled = false;
@@ -119,45 +122,48 @@ const useSearch = () => {
 		setOriginalRoute(null);
 	};
 
-	useEffect(() => {
-		if (
-			prevSearchQuery.current === debouncedSearchQuery &&
-			isPresent(results)
-		) {
-			return undefined;
-		}
+	const runSearch = useCallback(
+		(searchQuery) => {
+			const {
+				sketches,
+				categories,
+				matchQuality: quality,
+				hasExactCategoryMatch: exactCategory,
+			} = search(searchQuery);
 
+			setResults(sketches);
+			setTagResults(categories);
+			setMatchQuality(quality);
+			setHasExactCategoryMatch(exactCategory);
+		},
+		[search],
+	);
+
+	useEffect(() => {
 		if (isBlank(debouncedSearchQuery)) {
 			setResults(null);
 			setTagResults(null);
+			setMatchQuality(null);
+			setHasExactCategoryMatch(false);
+			prevSearchQuery.current = null;
 
 			return undefined;
 		}
 
-		const search = async () => {
-			setBusy(true);
+		if (!indexReady) {
+			return undefined;
+		}
 
-			try {
-				const [sketchplanationResults, tagResults] = await Promise.all([
-					searchSketchplanations(debouncedSearchQuery),
-					searchTags(debouncedSearchQuery),
-				]);
-
-				setResults(sketchplanationResults);
-				setTagResults(tagResults);
-			} catch (error) {
-				console.error(error);
-			} finally {
-				setBusy(false);
-			}
-		};
+		if (prevSearchQuery.current === debouncedSearchQuery) {
+			return undefined;
+		}
 
 		prevSearchQuery.current = debouncedSearchQuery;
-
-		search();
-	}, [debouncedSearchQuery]);
+		runSearch(debouncedSearchQuery);
+	}, [debouncedSearchQuery, indexReady, runSearch]);
 
 	const called = isPresent(debouncedSearchQuery);
+	const busy = indexLoading && called;
 
 	return {
 		query,
@@ -165,6 +171,8 @@ const useSearch = () => {
 		initialResults,
 		results,
 		tagResults,
+		matchQuality,
+		hasExactCategoryMatch,
 		called,
 		busy,
 		reset,
