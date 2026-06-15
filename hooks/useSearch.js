@@ -16,6 +16,10 @@ const ANALYTICS_DEBOUNCE_MS = 1500;
 const isSearchableQuery = (value) =>
 	isPresent(value) && value.trim().length >= MIN_QUERY_LENGTH;
 
+// useSearch is mounted twice on /search (page + SearchResults); share dedup so
+// analytics fires once per settled query, not once per hook instance.
+const lastTrackedAnalyticsQuery = { current: null };
+
 const fetchIntialResults = async () => {
 	const response = await fetch("/api/initial-search-results");
 	const results = await response.json();
@@ -40,7 +44,6 @@ const useSearch = () => {
 	const { ready: indexReady, search } = useSearchIndex();
 
 	const prevSearchQuery = useRef(null);
-	const prevTrackedQuery = useRef(null);
 	const debouncedSearchQuery = useDebouncedValue(query, SEARCH_DEBOUNCE_MS);
 	const analyticsSearchQuery = useDebouncedValue(query, ANALYTICS_DEBOUNCE_MS);
 
@@ -156,7 +159,7 @@ const useSearch = () => {
 
 	useEffect(() => {
 		if (!isSearchableQuery(analyticsSearchQuery)) {
-			prevTrackedQuery.current = null;
+			lastTrackedAnalyticsQuery.current = null;
 			return undefined;
 		}
 
@@ -164,11 +167,11 @@ const useSearch = () => {
 			return undefined;
 		}
 
-		if (prevTrackedQuery.current === analyticsSearchQuery) {
+		if (lastTrackedAnalyticsQuery.current === analyticsSearchQuery) {
 			return undefined;
 		}
 
-		prevTrackedQuery.current = analyticsSearchQuery;
+		lastTrackedAnalyticsQuery.current = analyticsSearchQuery;
 
 		const trimmedQuery = analyticsSearchQuery.trim();
 		const { sketches } = search(analyticsSearchQuery);
