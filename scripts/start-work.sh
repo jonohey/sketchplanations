@@ -28,10 +28,20 @@ if ! gh auth status 2>&1 | grep -q "read:project\|project"; then
 fi
 
 slugify() {
-  echo "$1" \
+  local slug max=40
+  slug=$(echo "$1" \
     | tr '[:upper:]' '[:lower:]' \
-    | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g' \
-    | cut -c1-40
+    | sed -E 's/[^a-z0-9]+/-/g; s/^-+|-+$//g')
+
+  if ((${#slug} <= max)); then
+    echo "$slug"
+    return
+  fi
+
+  # Truncate at a word boundary within the limit so the slug is a complete phrase.
+  local truncated="${slug:0:max}"
+  truncated="${truncated%-}" # drop trailing hyphen when the cut landed mid-segment
+  echo "${truncated%-*}"
 }
 
 echo "Syncing latest $DEFAULT_BRANCH..."

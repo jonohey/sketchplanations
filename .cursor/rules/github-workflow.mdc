@@ -17,10 +17,13 @@ When the user wants to start new work (e.g. "Start work on …", "New ticket for
 
 Derive the title from the user's message. Use their detail as the issue body when provided; otherwise the script stub is fine.
 
+Keep issue titles concise enough to slug cleanly (under ~40 characters of slug text is ideal). The script truncates long slugs at a word boundary, never mid-word.
+
 ## While working
 
 - Stay on the issue branch unless the user asks otherwise.
 - Do not commit until the user asks to complete or finish the work.
+- Improvements to this workflow doc (e.g. tooling, conventions) may be committed alongside other work on the same branch when they come up.
 
 ## Complete work
 
@@ -36,7 +39,7 @@ Review all changes before staging or committing. Fix issues found; do not commit
 - **Performance**: Consider impact on page load, bundle size, images, fonts, and runtime work — roughly what a Chrome Lighthouse audit would flag. Flag regressions and fix or justify them.
 - **Build**: Consider whether build time will increase substantially (`npm run build` when in doubt). If it does, ensure the trade-off is worthwhile.
 - **SEO**: Check titles, meta descriptions, headings, structured data, canonical URLs, and link behaviour. Ensure nothing is negatively affected.
-- **Tests**: Add coverage where appropriate — meaningful cases, not exhaustive edge-case sprawl. Run `npm test` and ensure tests pass.
+- **Tests**: Add Vitest coverage where appropriate — meaningful cases, not exhaustive edge-case sprawl. Run `npm test` (Vitest) and ensure tests pass.
 - **Removals**: Confirm deleted code only removes deliberately abandoned functionality. If a feature appears unused and removal wasn't in the brief, ask before removing it.
 - **Best practice**: Check accessibility, error handling, security, and consistency with surrounding code.
 
@@ -60,6 +63,6 @@ Draft the commit message and PR description from the actual diff and conversatio
 - Repo: `jonohey/sketchplanations`
 - Project: https://github.com/users/jonohey/projects/3 (project #3)
 - Default branch: `master`
-- Branch pattern: `{issue-number}-{slug}` (e.g. `701-improve-header-nav`)
-- Tests: `npm test`
+- Branch pattern: `{issue-number}-{slug}` (e.g. `701-improve-header-nav`). Slugs must read as a complete phrase — the script truncates at the last hyphen within 40 characters, never mid-word.
+- Tests: `npm test` (Vitest)
 - Build: `npm run build`

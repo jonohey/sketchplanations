@@ -1,3 +1,4 @@
+import { track } from "@vercel/analytics";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -8,9 +9,16 @@ import useSearchIndex from "./useSearchIndex";
 
 // A single character is never a meaningful search, so we don't run one.
 const MIN_QUERY_LENGTH = 2;
+const SEARCH_DEBOUNCE_MS = 300;
+// Wait longer before analytics so slow typing doesn't emit partial queries.
+const ANALYTICS_DEBOUNCE_MS = 1500;
 
 const isSearchableQuery = (value) =>
 	isPresent(value) && value.trim().length >= MIN_QUERY_LENGTH;
+
+// useSearch is mounted twice on /search (page + SearchResults); share dedup so
+// analytics fires once per settled query, not once per hook instance.
+const lastTrackedAnalyticsQuery = { current: null };
 
 const fetchIntialResults = async () => {
 	const response = await fetch("/api/initial-search-results");
@@ -36,7 +44,8 @@ const useSearch = () => {
 	const { ready: indexReady, search } = useSearchIndex();
 
 	const prevSearchQuery = useRef(null);
-	const debouncedSearchQuery = useDebouncedValue(query, 300);
+	const debouncedSearchQuery = useDebouncedValue(query, SEARCH_DEBOUNCE_MS);
+	const analyticsSearchQuery = useDebouncedValue(query, ANALYTICS_DEBOUNCE_MS);
 
 	useEffect(() => {
 		let cancelled = false;
@@ -147,6 +156,32 @@ const useSearch = () => {
 		},
 		[search],
 	);
+
+	useEffect(() => {
+		if (!isSearchableQuery(analyticsSearchQuery)) {
+			lastTrackedAnalyticsQuery.current = null;
+			return undefined;
+		}
+
+		if (!indexReady) {
+			return undefined;
+		}
+
+		if (lastTrackedAnalyticsQuery.current === analyticsSearchQuery) {
+			return undefined;
+		}
+
+		lastTrackedAnalyticsQuery.current = analyticsSearchQuery;
+
+		const trimmedQuery = analyticsSearchQuery.trim();
+		const { sketches } = search(analyticsSearchQuery);
+
+		if (sketches.length > 0) {
+			track("Search", { query: trimmedQuery });
+		} else {
+			track("Search_no_results", { query: trimmedQuery });
+		}
+	}, [analyticsSearchQuery, indexReady, search]);
 
 	useEffect(() => {
 		if (!isSearchableQuery(debouncedSearchQuery)) {
