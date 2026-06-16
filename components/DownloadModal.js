@@ -137,7 +137,7 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 							</li>
 							<li>
 								<Link
-									href="/subscribe"
+									href="https://sketchplanations.substack.com/subscribe"
 									target="_blank"
 									rel="noreferrer noopener"
 									onClick={() => {

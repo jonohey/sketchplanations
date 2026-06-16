@@ -10,6 +10,11 @@ export default [
 		permanent: false,
 	},
 	{
+		source: "/subscribed",
+		destination: "https://sketchplanations.substack.com/subscribe",
+		permanent: false,
+	},
+	{
 		source: "/shop",
 		destination: "https://www.redbubble.com/people/sketchplanator/shop?asc=u",
 		permanent: false,

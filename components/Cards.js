@@ -9,6 +9,8 @@ import podcastImage from "images/podcast.jpg";
 
 import styles from "./Cards.module.css";
 
+const SUBSTACK_SUBSCRIBE_URL = "https://sketchplanations.substack.com/subscribe";
+
 const Card = ({ href, imageSrc, alt, content, onImageClick, target, rel }) => (
 	<div className={styles.card}>
 		{imageSrc && (
@@ -79,7 +81,9 @@ export const Cards = () => (
 			}
 		/>
 		<Card
-			href="/subscribe"
+			href={SUBSTACK_SUBSCRIBE_URL}
+			target="_blank"
+			rel="noopener noreferrer"
 			onImageClick={() => {
 				track('Subscribe', { location: 'card-image' });
 			}}
@@ -89,8 +93,10 @@ export const Cards = () => (
 						<span className="inline sm:hidden">🎉 Help keep Sketchplanations ad-free </span>
 						<span className="hidden sm:inline xl:hidden">🎉 Keep this ad-free </span>
 						<span className="hidden xl:inline">🎉 Help keep Sketchplanations ad-free </span>
-						<FancyLink 
-							href="/subscribe"
+						<FancyLink
+							href={SUBSTACK_SUBSCRIBE_URL}
+							target="_blank"
+							rel="noopener noreferrer"
 						>
 							by supporting me
 						</FancyLink>

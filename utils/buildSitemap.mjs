@@ -39,7 +39,6 @@ async function buildSitemap() {
 		"!pages/500.js",
 		"!pages/index.js",
 		"!pages/preview.js",
-		"!pages/subscribed.js",
 		"!pages/thanks.js",
 		"!pages/api/**/*.js",
 	]);
@@ -83,8 +82,6 @@ async function buildSitemap() {
 		} else if (path === "/big-ideas-little-pictures") {
 			priority = "0.8";
 		} else if (path === "/categories") {
-			priority = "0.8";
-		} else if (path === "/subscribe") {
 			priority = "0.8";
 		} else if (path === "/search") {
 			priority = "0.8";
