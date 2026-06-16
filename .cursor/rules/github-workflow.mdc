@@ -10,7 +10,7 @@ alwaysApply: true
 When the user wants to start new work (e.g. "Start work on …", "New ticket for …", "Let's do …"), bootstrap the ticket before coding.
 
 1. Run `./scripts/start-work.sh "Title" ["optional body"]` from the repo root.
-   - The script syncs latest `master` (fetch + checkout + pull) **before** creating the branch.
+   - The script syncs latest `main` (fetch + checkout + pull) **before** creating the branch.
 2. If `gh` is not authenticated, tell the user to run `gh auth login` and stop.
    - Project board access needs `gh auth refresh -s project,read:project`.
 3. Confirm issue number, URL, and branch to the user, then implement on that branch.
@@ -62,7 +62,7 @@ Draft the commit message and PR description from the actual diff and conversatio
 
 - Repo: `jonohey/sketchplanations`
 - Project: https://github.com/users/jonohey/projects/3 (project #3)
-- Default branch: `master`
+- Default branch: `main`
 - Branch pattern: `{issue-number}-{slug}` (e.g. `701-improve-header-nav`). Slugs must read as a complete phrase — the script truncates at the last hyphen within 40 characters, never mid-word.
 - Tests: `npm test` (Vitest)
 - Build: `npm run build`

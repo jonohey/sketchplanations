@@ -7,7 +7,7 @@ set -euo pipefail
 REPO="jonohey/sketchplanations"
 PROJECT_NUMBER=3
 PROJECT_OWNER="jonohey"
-DEFAULT_BRANCH="master"
+DEFAULT_BRANCH="main"
 
 if [[ $# -lt 1 ]]; then
   echo "Usage: $0 \"Issue title\" [\"Optional body\"]" >&2
