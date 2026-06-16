@@ -61,7 +61,7 @@
 		"react-zoom-pan-pinch": "^4.0.3",
 		"shiitake": "^3.0.2",
 		"stemmer": "^2.0.1",
-		"swiper": "^11.2.8",
+		"swiper": "^12.2.0",
 		"throttle-debounce": "^5.0.2",
 		"vanilla-cookieconsent": "3.1.0"
 	},
