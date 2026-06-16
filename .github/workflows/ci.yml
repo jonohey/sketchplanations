@@ -35,6 +35,16 @@ jobs:
       - uses: dependabot/fetch-metadata@v2
         id: metadata
 
+      - name: Update branch if behind base
+        if: |
+          github.event.pull_request.mergeable_state == 'behind' && (
+            steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+            steps.metadata.outputs.update-type == 'version-update:semver-minor'
+          )
+        run: gh api -X PUT "repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/update-branch"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Auto-merge patch and minor updates
         if: |
           steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
