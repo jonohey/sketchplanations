@@ -154,7 +154,11 @@ const About = ({ siteUrl }) => {
 						<h2>Supporting Sketchplanations</h2>
 						<p>
 							Get each new weekly sketchplanation by{" "}
-							<FancyLink href="/subscribe">
+							<FancyLink
+								href="https://sketchplanations.substack.com/subscribe"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
 								subscribing for free.
 							</FancyLink>
 						</p>
@@ -175,7 +179,11 @@ const About = ({ siteUrl }) => {
 						</p>
 						<p>
 							👉{" "}
-							<FancyLink href="/subscribe">
+							<FancyLink
+								href="https://sketchplanations.substack.com/subscribe"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
 								Explore paid options or support the project
 							</FancyLink>
 						</p>
@@ -208,7 +216,13 @@ const About = ({ siteUrl }) => {
 						<h2>Follow</h2>
 						<p>
 							The best way to follow is by signing up to the weekly newsletter:{" "}
-							<FancyLink href="/subscribe">subscribe here</FancyLink>.
+							<FancyLink
+								href="https://sketchplanations.substack.com/subscribe"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								subscribe here
+							</FancyLink>.
 						</p>
 						<p className="mb-2">Other ways to follow:</p>
 						<ul className="not-prose m-0 grid list-none gap-2 p-0 sm:grid-cols-2">

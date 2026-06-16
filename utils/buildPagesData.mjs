@@ -16,7 +16,6 @@ async function buildPagesData() {
 			"!pages/500.js",
 			"!pages/index.js",
 			"!pages/preview.js",
-			"!pages/subscribed.js",
 			"!pages/thanks.js",
 			"!pages/api/**/*.js",
 		]);
