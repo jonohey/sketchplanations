@@ -30,6 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      issues: write
       pull-requests: write
     steps:
       - uses: dependabot/fetch-metadata@v2
@@ -57,9 +58,10 @@ jobs:
       - name: Flag major updates for manual review
         if: steps.metadata.outputs.update-type == 'version-update:semver-major'
         run: |
-          gh label create "breaking-change" \
-            --description "Major dependency update requiring manual review" \
-            --color "d93f0b" 2>/dev/null || true
+          gh label list --json name --jq '.[].name' | grep -qx breaking-change || \
+            gh label create "breaking-change" \
+              --description "Major dependency update requiring manual review" \
+              --color "d93f0b"
           gh pr edit "$PR_URL" --add-label "breaking-change"
           gh pr comment "$PR_URL" --body "Major version bump — needs manual review before merge."
         env:
