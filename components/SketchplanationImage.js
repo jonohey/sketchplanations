@@ -1,7 +1,7 @@
 import { PrismicNextImage } from "@prismicio/next";
 import { track } from "@vercel/analytics";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { debounce } from "lodash";
+import { debounce } from "throttle-debounce";
 import { LoaderCircle, X } from "lucide-react";
 import {
 	useCallback,
@@ -83,7 +83,7 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 	useEffect(() => {
 		getInitialImageDimensions();
 
-		const debouncedGetDimensions = debounce(getInitialImageDimensions, 10);
+		const debouncedGetDimensions = debounce(10, getInitialImageDimensions);
 		window.addEventListener("resize", debouncedGetDimensions);
 		window.addEventListener("scroll", debouncedGetDimensions);
 
