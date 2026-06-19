@@ -90,6 +90,21 @@
   position: relative;
 }
 
+.zoomHint {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+@media (min-width: 768px) {
+  .zoomHint {
+    opacity: 0;
+  }
+
+  .bookPageContainer:hover .zoomHint {
+    opacity: 1;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .bookPageContainer {
     background-color: #1f2937;
