@@ -5,7 +5,7 @@ import { ZoomIn } from 'lucide-react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { RoughNotation } from 'react-rough-notation'
 import styles from './big-ideas-little-pictures.module.css'
 
@@ -13,58 +13,83 @@ import { pageTitle } from 'helpers'
 import bigIdeasLittlePicturesCoverTransparentImage from 'images/big-ideas-little-pictures-cover-transparent.png'
 import { bookPageImages } from 'utils/bookImages.mjs'
 
-// Store links organized by country
-const storeLinks = {
+const AMAZON_LINK = 'https://geni.us/big-ideas-book'
+
+// Non-Amazon retailers by region, sorted by click volume within each region
+const regionalStores = {
   US: [
-    { href: 'https://amzn.to/455q8Qp', label: 'Amazon.com' },
-    { href: 'https://www.barnesandnoble.com/w/big-ideas-little-pictures-jono-hey/1143331058?ean=9781956403572', label: 'Barnes & Noble' },
     { href: 'https://bookshop.org/p/books/big-ideas-little-pictures-explaining-the-world-once-sketch-at-a-time-jono-hey/19990252', label: 'Bookshop.org' },
-    { href: 'https://www.target.com/p/big-ideas-little-pictures-by-jono-hey-hardcover/-/A-89029770', label: 'Target' },
+    { href: 'https://www.barnesandnoble.com/w/big-ideas-little-pictures-jono-hey/1143331058?ean=9781956403572', label: 'Barnes & Noble' },
     { href: 'https://www.booksamillion.com/p/Big-Ideas-Little-Pictures/Jono-Hey/9781956403572?id=8965300189654', label: 'Books A Million' },
+    { href: 'https://www.target.com/p/big-ideas-little-pictures-by-jono-hey-hardcover/-/A-89029770', label: 'Target' },
   ],
   GB: [
-    { href: 'https://amzn.to/3tsd3lF', label: 'Amazon UK' },
-    { href: 'https://blackwells.co.uk/bookshop/product/Big-Ideas-Little-Pictures-by-Jono-Hey/9781956403572', label: 'Blackwells'},
     { href: 'https://www.waterstones.com/book/big-ideas-little-pictures/jono-hey/9781956403572', label: 'Waterstones' },
-    { href: 'https://www.foyles.co.uk/book/big-ideas-little-pictures/jono-hey/9781956403572', label: 'Foyles'},
+    { href: 'https://blackwells.co.uk/bookshop/product/Big-Ideas-Little-Pictures-by-Jono-Hey/9781956403572', label: 'Blackwells' },
+    { href: 'https://www.foyles.co.uk/book/big-ideas-little-pictures/jono-hey/9781956403572', label: 'Foyles' },
+  ],
+  AU: [
+    { href: 'https://www.booktopia.com.au/big-ideas-little-pictures-jono-hey/book/9781956403572.html', label: 'Australia (Booktopia)' },
+    { href: 'https://www.dymocks.com.au/big-ideas-little-pictures-by-jono-hey-9781956403572', label: 'Australia (Dymocks)' },
+  ],
+  CA: [
+    { href: 'https://www.indigo.ca/en-ca/big-ideas-little-pictures-explaining-the-world-one-sketch-at-a-time/9781956403572.html', label: 'Canada (Indigo)' },
+  ],
+  CH: [
+    { href: 'https://www.exlibris.ch/de/buecher-buch/english-books/jono-hey/big-ideas-little-pictures/id/9781956403572/', label: 'Switzerland (Ex Libris)' },
+  ],
+  CN: [
+    { href: 'https://3.cn/1Zj-dhXh', label: 'China (JD)' },
+  ],
+  NZ: [
+    { href: 'https://www.mightyape.co.nz/product/big-ideas-little-pictures-hardback/36769294', label: 'New Zealand (Mighty Ape)' },
+  ],
+  ZA: [
+    { href: 'https://www.takealot.com/big-ideas-little-pictures-explaining-the-world-once-sketch-at-a-/PLID92989211', label: 'South Africa (Takealot)' },
   ],
 }
 
-const otherStores = {
-  AU: [
-    { href: 'https://amzn.to/4cVgP7I', label: 'Australia (Amazon)'},
-	  { href: 'https://www.booktopia.com.au/big-ideas-little-pictures-jono-hey/book/9781956403572.html', label: 'Australia (Booktopia)'},
-	  { href: 'https://www.dymocks.com.au/big-ideas-little-pictures-by-jono-hey-9781956403572', label: 'Australia (Dymocks)'},
-  ],
-  BE: { href: 'https://www.amazon.com.be/-/en/Jono-Hey/dp/1956403574/ref=sr_1_4', label: 'Belgium' },
-  BR: { href: 'https://www.amazon.com.br/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'Brazil' },
-  CA: [
-    { href: 'https://amzn.to/3VJ5G3M', label: 'Canada (Amazon)' },
-    { href: 'https://www.indigo.ca/en-ca/big-ideas-little-pictures-explaining-the-world-one-sketch-at-a-time/9781956403572.html', label: 'Canada (Indigo)' },
-  ],
-  CN: { href: 'https://3.cn/1Zj-dhXh', label: 'China (JD)' },
-  FR: { href: 'https://amzn.to/46qIPAa', label: 'France' },
-  DE: { href: 'https://amzn.to/3IMVX9E', label: 'Germany' },
-  IN: { href: 'https://www.amazon.in/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'India' },
-  IE: { href: 'https://amzn.to/48U2cSa', label: 'Ireland' },
-  IT: { href: 'https://amzn.to/4gWdYPx', label: 'Italy' },
-  JP: { href: 'https://amzn.to/4mBxMc3', label: 'Japan' },
-  MX: { href: 'https://www.amazon.com.mx/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'Mexico' },
-  NL: { href: 'https://amzn.to/42hslI7', label: 'Netherlands' },
-  NZ: { href: 'https://www.mightyape.co.nz/product/big-ideas-little-pictures-hardback/36769294', label: 'New Zealand (Mighty Ape)' },
-  PL: { href: 'https://amzn.to/3W0eanr', label: 'Poland' },
-  SA: { href: 'https://www.amazon.sa/Jono-Hey/dp/1956403574/ref=sr_1_1', label: 'Saudi Arabia' },
-  SG: { href: 'https://amzn.to/4nrhfJ3', label: 'Singapore' },
-  ZA: [
-	{ href: 'https://www.amazon.co.za/Big-Ideas-Little-Pictures-Explaining/dp/1956403574/ref=sr_1_1', label: 'South Africa (Amazon)' },
-	{ href: 'https://www.takealot.com/big-ideas-little-pictures-explaining-the-world-once-sketch-at-a-/PLID92989211', label: 'South Africa (Takealot)' },
-  ],
-  ES: { href: 'https://amzn.to/4ofbqP9', label: 'Spain' },
-  SE: { href: 'https://amzn.to/3VGNQyu', label: 'Sweden' },
-  CH: {
-    href: 'https://www.exlibris.ch/de/buecher-buch/english-books/jono-hey/big-ideas-little-pictures/id/9781956403572/',
-    label: 'Switzerland (Ex Libris)',
-  },
+const regionLabels = {
+  US: 'United States 🇺🇸',
+  GB: 'United Kingdom 🇬🇧',
+  AU: 'Australia 🇦🇺',
+  CA: 'Canada 🇨🇦',
+  CH: 'Switzerland 🇨🇭',
+  CN: 'China',
+  NZ: 'New Zealand 🇳🇿',
+  ZA: 'South Africa 🇿🇦',
+}
+
+// Legacy analytics labels for Amazon clicks, keyed by detected country
+const amazonLocationByCountry = {
+  US: 'Amazon.com',
+  GB: 'Amazon UK',
+  AU: 'Australia (Amazon)',
+  CA: 'Canada (Amazon)',
+  BE: 'Belgium',
+  BR: 'Brazil',
+  FR: 'France',
+  DE: 'Germany',
+  IN: 'India',
+  IE: 'Ireland',
+  IT: 'Italy',
+  JP: 'Japan',
+  MX: 'Mexico',
+  NL: 'Netherlands',
+  PL: 'Poland',
+  SA: 'Saudi Arabia',
+  SG: 'Singapore',
+  ES: 'Spain',
+  SE: 'Sweden',
+  ZA: 'South Africa (Amazon)',
+}
+
+const getAmazonAnalyticsLocation = (country) =>
+  amazonLocationByCountry[country] ?? 'Amazon'
+
+const getHomeRegions = (country) => {
+  if (regionalStores[country]) return [country]
+  return []
 }
 
 const OrderLink = ({ href, children }) => (
@@ -82,6 +107,16 @@ const OrderLink = ({ href, children }) => (
   </a>
 )
 
+const StoreLinks = ({ stores }) => (
+  <div className='flex flex-wrap gap-3 justify-center'>
+    {stores.map((store) => (
+      <OrderLink key={store.label} href={store.href}>
+        {store.label}
+      </OrderLink>
+    ))}
+  </div>
+)
+
 export async function getServerSideProps({ req }) {
   const country = req.headers['x-country'] || 'BOTH'
   return {
@@ -91,16 +126,22 @@ export async function getServerSideProps({ req }) {
 
 const Book = ({ country }) => {
   const [showAllStores, setShowAllStores] = useState(false)
+  const [showSignedCopyNotation, setShowSignedCopyNotation] = useState(true)
   const [galleryOpen, setGalleryOpen] = useState(false)
   const [galleryIndex, setGalleryIndex] = useState(0)
-  
-  // Debug: Log the country value (only in development)
-  if (process.env.NODE_ENV === 'development') {
-    console.log('Detected country:', country)
-    console.log('Available countries in otherStores:', Object.keys(otherStores))
-    console.log('Has FR in otherStores:', 'FR' in otherStores)
-  }
-  
+
+  const homeRegions = getHomeRegions(country)
+  // Only visitors without a regional home see other bookstores (e.g. France, Germany)
+  const moreStores = homeRegions.length === 0
+    ? Object.values(regionalStores).flat()
+    : []
+
+  useEffect(() => {
+    setShowSignedCopyNotation(false)
+    const timeout = setTimeout(() => setShowSignedCopyNotation(true), 50)
+    return () => clearTimeout(timeout)
+  }, [showAllStores])
+
   return (
     <>
       <Head>
@@ -173,10 +214,10 @@ const Book = ({ country }) => {
               },
               "aggregateRating": {
                 "@type": "AggregateRating",
-                "ratingValue": "4.9",
+                "ratingValue": "4.8",
                 "bestRating": "5",
-                "ratingCount": 140,
-                "reviewCount": 140
+                "ratingCount": 228,
+                "reviewCount": 228
               },
               "review": {
                 "@type": "Review",
@@ -206,7 +247,7 @@ const Book = ({ country }) => {
                   width={600}
                   height={800}
                 />
-                <div className='flex justify-center mt-4'>
+                <div className='flex justify-center mt-4' aria-hidden='true'>
                   {[...Array(5)].map((_, i) => (
                     <span key={i} className='text-yellow-400 text-2xl'>
                       ★
@@ -243,105 +284,28 @@ const Book = ({ country }) => {
 
           <div id='order' className='mt-24 max-w-3xl mx-auto scroll-mt-24'>
             <h2 className='text-3xl font-bold mb-8 text-center'>Order Big Ideas Little Pictures</h2>
-            <div className='space-y-12'>
-              {/* User's country section (if not US/UK) */}
-              {country !== 'US' && country !== 'GB' && otherStores[country] && (
-                <div className='text-center'>
-                  <h3 className='text-xl font-semibold mb-4'>Order in your region</h3>
-                  <div className='flex flex-wrap gap-4 justify-center'>
-                    {Array.isArray(otherStores[country]) ? (
-                      otherStores[country].map((store) => (
-                        <OrderLink key={store.label} href={store.href}>
-                          {store.label}
-                        </OrderLink>
-                      ))
-                    ) : (
-                      <OrderLink href={otherStores[country].href}>
-                        {otherStores[country].label}
-                      </OrderLink>
-                    )}
-                  </div>
-                </div>
-              )}
 
-              {/* US Section */}
-              <div className='text-center'>
-                <h3 className='text-xl font-semibold mb-4'>United States 🇺🇸</h3>
-                <div className='flex flex-wrap gap-4 justify-center'>
-                  {storeLinks.US.map((store) => (
-                    <OrderLink key={store.label} href={store.href}>
-                      {store.label}
-                    </OrderLink>
-                  ))}
-                </div>
-              </div>
-
-              {/* UK Section */}
-              <div className='text-center'>
-                <h3 className='text-xl font-semibold mb-4'>United Kingdom 🇬🇧</h3>
-                <div className='flex flex-wrap gap-4 justify-center'>
-                  {storeLinks.GB.map((store) => (
-                    <OrderLink key={store.label} href={store.href}>
-                      {store.label}
-                    </OrderLink>
-                  ))}
-                </div>
-              </div>
-
-              {/* Other regions section */}
-              {!showAllStores ? (
-                <div className='text-center mt-8'>
-                  <button
-                    type="button"
-                    onClick={() => setShowAllStores(true)}
-                    className='text-blue hover:underline font-medium'
-                    aria-expanded={showAllStores}
-                    aria-controls="other-regions-stores"
-                  >
-                    Show stores in more regions →
-                  </button>
-                </div>
-              ) : (
-                <>
-                  <div className='text-center'>
-                    <h3 className='text-xl font-semibold mb-4'>Worldwide</h3>
-                    <div id="other-regions-stores" className='flex flex-wrap gap-4 justify-center'>
-                      {Object.entries(otherStores).map(([countryCode, store]) => (
-                        countryCode !== country && (
-                          Array.isArray(store) ? (
-                            store.map((s) => (
-                              <OrderLink key={s.label} href={s.href}>
-                                {s.label}
-                              </OrderLink>
-                            ))
-                          ) : (
-                            <OrderLink key={store.label} href={store.href}>
-                              {store.label}
-                            </OrderLink>
-                          )
-                        )
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div className='text-center mt-8'>
-                    <button
-                      type="button"
-                      onClick={() => setShowAllStores(false)}
-                      className='text-blue hover:underline font-medium'
-                      aria-expanded={showAllStores}
-                      aria-controls="other-regions-stores"
-                    >
-                      Show fewer stores ↑
-                    </button>
-                  </div>
-                </>
-              )}
+            <div className='text-center'>
+              <a
+                href={AMAZON_LINK}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='btn-primary inline-block w-full sm:w-auto px-8 py-3 text-lg no-underline hover:no-underline'
+                aria-label='Buy Big Ideas Little Pictures on Amazon'
+                onClick={() => {
+                  track('Book-store-link', { location: getAmazonAnalyticsLocation(country) })
+                }}
+              >
+                Buy on Amazon
+              </a>
+              <p className='text-sm text-gray-600 dark:text-gray-300 mt-2 mb-0'>
+                Redirects to your local Amazon store
+              </p>
             </div>
 
-            <div className='mx-auto text-center'>
-              <p className='mt-8'>
-                <Link 
+            <div className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mt-8 text-center'>
+              <p className='mb-0'>
+                <Link
                   href='https://www.kensingtonbooks.co.uk/product-page/big-ideas-little-pictures?utm_source=sketchplanations&utm_medium=website&utm_campaign=book_page&utm_content=signed_copy'
                   target='_blank'
                   rel='noopener noreferrer'
@@ -350,16 +314,86 @@ const Book = ({ country }) => {
                     track('Book-store-link', { location: 'Signed copy' })
                   }}
                 >
-                  Order an exclusive <RoughNotation type="circle" show={true} color="var(--color-brightRed)">signed copy</RoughNotation>
+                  Order an exclusive{' '}
+                  <RoughNotation
+                    key={showAllStores ? 'expanded' : 'collapsed'}
+                    type='circle'
+                    show={showSignedCopyNotation}
+                    color='var(--color-brightRed)'
+                    animate={false}
+                    padding={3}
+                  >
+                    <span style={{ display: 'inline-block' }}>signed copy</span>
+                  </RoughNotation>
                 </Link>
-                <br/>
+                <br />
                 from my friends at South Kensington Books in London
               </p>
-              <p className='mt-8'>
+            </div>
+
+            {homeRegions.length > 0 && (
+              <div className='space-y-10 mt-10'>
+                {homeRegions.map((regionCode) => (
+                  <div key={regionCode} className='text-center'>
+                    <h3 className='text-xl font-semibold mb-4'>
+                      {homeRegions.length === 1 ? 'Also available from' : regionLabels[regionCode]}
+                    </h3>
+                    <StoreLinks stores={regionalStores[regionCode]} />
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {moreStores.length > 0 && (
+              <div className='mt-10'>
+                {!showAllStores ? (
+                  <div className='text-center'>
+                    <button
+                      type='button'
+                      onClick={() => {
+                        setShowAllStores(true)
+                        track('Book-store-link', { location: 'Show more stores' })
+                      }}
+                      className='text-blue hover:underline font-medium'
+                      aria-expanded={showAllStores}
+                      aria-controls='more-regional-stores'
+                    >
+                      Show more bookstores →
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <div className='text-center'>
+                      <h3 className='text-xl font-semibold mb-4'>More regional bookstores</h3>
+                      <div id='more-regional-stores'>
+                        <StoreLinks stores={moreStores} />
+                      </div>
+                    </div>
+                    <div className='text-center mt-8'>
+                      <button
+                        type='button'
+                        onClick={() => {
+                          setShowAllStores(false)
+                          track('Book-store-link', { location: 'Show fewer stores' })
+                        }}
+                        className='text-blue hover:underline font-medium'
+                        aria-expanded={showAllStores}
+                        aria-controls='more-regional-stores'
+                      >
+                        Show fewer bookstores ↑
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
+
+            <div className='mx-auto text-center'>
+              <p className='mt-8 mb-0'>
                 Or order from your local bookshop because we 💙 them.
               </p>
-              <p className='text-sm mt-8'>
-                Notwithstanding, I earn from qualifying purchases through the Amazon Associates program if you use the Amazon links on this site, which helps me out if you are planning to buy from Amazon.
+              <p className='text-sm mt-8 mb-0'>
+                I earn from qualifying Amazon purchases through links on this site, including the Amazon button above.
               </p>
             </div>
           </div>
@@ -446,7 +480,7 @@ const Book = ({ country }) => {
             {/* Gallery in What's Inside section */}
             <h3 id='sample-pages' className='text-2xl font-bold text-center mb-8'>Sample pages</h3>
             <p className='text-center text-gray-600 dark:text-gray-300 mb-8'>
-              A peek inside. Click to zoom in.
+              A peek inside. <span className='hidden sm:inline'>Click to zoom in.</span><span className='sm:hidden'>Tap to zoom in.</span>
             </p>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16'>
               {bookPageImages.map((image, index) => (
@@ -480,8 +514,8 @@ const Book = ({ country }) => {
                       quality={75}
                     />
                   </div>
-                  <div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center'>
-                    <div className='opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 dark:bg-gray-800/90 p-2 rounded-full'>
+                  <div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center pointer-events-none'>
+                    <div className={`${styles.zoomHint} bg-white/90 dark:bg-gray-800/90 p-2 rounded-full`}>
                       <ZoomIn size={24} className="text-gray-700 dark:text-gray-200" />
                     </div>
                   </div>
@@ -497,8 +531,7 @@ const Book = ({ country }) => {
               <div className={styles.youtube_container}>
                 <iframe
                   src='https://www.youtube.com/embed/dQqP6aBLHYc?si=oogeEYEXru3cs53s&controls=0&rel=0'
-                  title='YouTube video player'
-                  frameBorder='0'
+                  title='Big Ideas Little Pictures — book preview'
                   allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
                   allowFullScreen
                   loading="lazy"
@@ -507,8 +540,7 @@ const Book = ({ country }) => {
               <div className={styles.youtube_container}>
                 <iframe
                   src='https://www.youtube.com/embed/1NQqM5ZjR2g?si=BOQLpNP4RDwVLnQ4'
-                  title='YouTube video player'
-                  frameBorder='0'
+                  title='Big Ideas Little Pictures — inside the book'
                   allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
                   referrerPolicy='strict-origin-when-cross-origin'
                   allowFullScreen
@@ -523,18 +555,6 @@ const Book = ({ country }) => {
 
             <div className='max-w-5xl mx-auto px-4 sm:px-6 lg:px-8'>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-                {/* Bill Gates Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    &quot;This is such a cool book. The range of Jono&apos;s knowledge is astounding, and so is his
-                    ability to digest complex ideas into deceptively simple drawings. You&apos;ll learn something on
-                    every page—and be entertained too.&quot;
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <cite className={`${styles.cite} font-semibold`}>Bill Gates</cite>
-                  </div>
-                </div>
-
                 {/* Katy Milkman Quote */}
                 <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
                   <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
@@ -753,14 +773,18 @@ const Book = ({ country }) => {
               <div>
                 <h3>Can I order in a different country?</h3>
                 <p>
-                  Please contact me at{' '}
-                  <FancyLink 
+                  Yes. The Amazon button redirects to your local Amazon store automatically. If you&apos;re in the US, UK,
+                  Australia, or another region with links on this page, you&apos;ll also see local bookstores for your area.
+                </p>
+                <p>
+                  Don&apos;t see your country? Email me at{' '}
+                  <FancyLink
                     href='mailto:jono.hey@gmail.com'
                     aria-label='Email Jono Hey'
                   >
                     jono.hey@gmail.com
-                  </FancyLink>{' '}
-                  and let me know where you are. It helps us get distribution in the right places first.
+                  </FancyLink>
+                  {' '}— it helps us prioritise distribution where it&apos;s needed most.
                 </p>
               </div>
 
@@ -772,10 +796,10 @@ const Book = ({ country }) => {
                 <p>
                   It&apos;s great for quick reference, easier to carry on your commute or a flight, and a decent amount cheaper. It&apos;s packed with nearly 150 bite-sized sketches—perfect for dipping in when you need an idea, a shift in perspective, or a smile.
                 </p>
-                <p>You can buy it on the <FancyLink 
+                <p>You can buy it via the <FancyLink
                     href='#order'
                     aria-label='Buy the eBook of Big Ideas Little Pictures'
-                  >store links above</FancyLink>, or find it on B&N, Apple Books, Kobo, and others.
+                  >order links above</FancyLink> — the Amazon button often includes the Kindle edition too, depending on your store. It&apos;s also on B&N, Apple Books, Kobo, and others.
                 </p>
               </div>
 
@@ -866,11 +890,11 @@ const Book = ({ country }) => {
           </div>
 
           <div className='mt-24 text-center'>
-            <Link 
+            <Link
               href='#order'
-              className='btn-primary inline-block px-12 py-3 text-lg'
+              className='btn-primary inline-block w-full sm:w-auto px-12 py-3 text-lg no-underline hover:no-underline'
             >
-              Order Book
+              Order now
             </Link>
           </div>
         </div>
