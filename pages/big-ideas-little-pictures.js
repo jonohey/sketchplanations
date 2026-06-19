@@ -5,7 +5,7 @@ import { ZoomIn } from 'lucide-react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { RoughNotation } from 'react-rough-notation'
 import styles from './big-ideas-little-pictures.module.css'
 
@@ -126,7 +126,6 @@ export async function getServerSideProps({ req }) {
 
 const Book = ({ country }) => {
   const [showAllStores, setShowAllStores] = useState(false)
-  const [showSignedCopyNotation, setShowSignedCopyNotation] = useState(true)
   const [galleryOpen, setGalleryOpen] = useState(false)
   const [galleryIndex, setGalleryIndex] = useState(0)
 
@@ -135,12 +134,6 @@ const Book = ({ country }) => {
   const moreStores = homeRegions.length === 0
     ? Object.values(regionalStores).flat()
     : []
-
-  useEffect(() => {
-    setShowSignedCopyNotation(false)
-    const timeout = setTimeout(() => setShowSignedCopyNotation(true), 50)
-    return () => clearTimeout(timeout)
-  }, [showAllStores])
 
   return (
     <>
@@ -316,9 +309,8 @@ const Book = ({ country }) => {
                 >
                   Order an exclusive{' '}
                   <RoughNotation
-                    key={showAllStores ? 'expanded' : 'collapsed'}
                     type='circle'
-                    show={showSignedCopyNotation}
+                    show={true}
                     color='var(--color-brightRed)'
                     animate={false}
                     padding={3}
