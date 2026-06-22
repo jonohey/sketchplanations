@@ -87,7 +87,7 @@
 		"vite": "^7.3.5",
 		"vitest": "^4.1.9",
 		"webpack": "^5.107.2",
-		"xmlbuilder2": "^3.1.1"
+		"xmlbuilder2": "^4.0.3"
 	},
 	"pnpm": {
 		"overrides": {
