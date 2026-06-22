@@ -11,7 +11,11 @@
 		"prebuild": "node setup.mjs",
 		"build": "next build",
 		"start": "next start",
-		"test": "vitest run"
+		"test": "vitest run",
+		"tag-cleanup:audit": "node scripts/tag-cleanup/index.mjs audit",
+		"tag-cleanup:migrate": "node scripts/tag-cleanup/index.mjs migrate",
+		"tag-cleanup:changelog": "node scripts/tag-cleanup/index.mjs changelog",
+		"tag-cleanup:redirects": "node scripts/tag-cleanup/index.mjs redirects"
 	},
 	"dependencies": {
 		"@floating-ui/react": "^0.27.19",
@@ -69,6 +73,7 @@
 		"@tailwindcss/typography": "^0.5.20",
 		"@trivago/prettier-plugin-sort-imports": "^6.0.2",
 		"autoprefixer": "^10.5.0",
+		"dotenv": "^17.4.2",
 		"eslint": "^9.39.2",
 		"eslint-config-next": "^15.5.9",
 		"eslint-config-prettier": "^10.1.8",

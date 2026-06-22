@@ -3,7 +3,7 @@ export const HOME_CAROUSEL_CATEGORIES = [
 	{ slug: "learning", label: "Teachers" },
 	{ slug: "management", label: "Managers & Leaders" },
 	{ slug: "writing", label: "Writers" },
-	{ slug: "software", label: "Developers" },
+	{ slug: "software-development", label: "Developers" },
 	{ slug: "entrepreneurship", label: "Entrepreneurs" },
 	{ slug: "product-management", label: "Product managers" },
 	{ slug: "parenting", label: "Parents" },
