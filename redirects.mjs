@@ -438,6 +438,355 @@ export default [
 	},
 
 	// ---------------------
+	// Category consolidation (tag cleanup #732)
+	// ---------------------
+	{
+		source: "/categories/book",
+		destination: "/categories/books",
+		permanent: true,
+	},
+	{
+		source: "/categories/chart",
+		destination: "/categories/charts",
+		permanent: true,
+	},
+	{
+		source: "/categories/idea",
+		destination: "/categories/ideas",
+		permanent: true,
+	},
+	{
+		source: "/categories/product",
+		destination: "/categories/products",
+		permanent: true,
+	},
+	{
+		source: "/categories/baby",
+		destination: "/categories/parenting",
+		permanent: true,
+	},
+	{
+		source: "/categories/babies",
+		destination: "/categories/parenting",
+		permanent: true,
+	},
+	{
+		source: "/categories/brand",
+		destination: "/categories/branding",
+		permanent: true,
+	},
+	{
+		source: "/categories/pomegranate",
+		destination: "/categories/food-and-drink",
+		permanent: true,
+	},
+	{
+		source: "/categories/barnacles",
+		destination: "/categories/animals",
+		permanent: true,
+	},
+	{
+		source: "/categories/hci",
+		destination: "/categories/ux",
+		permanent: true,
+	},
+	{
+		source: "/categories/mindmap",
+		destination: "/categories/thinking-tool",
+		permanent: true,
+	},
+	{
+		source: "/categories/model",
+		destination: "/categories/framework",
+		permanent: true,
+	},
+	{
+		source: "/categories/development",
+		destination: "/categories/software-development",
+		permanent: true,
+	},
+	{
+		source: "/categories/building",
+		destination: "/categories/architecture",
+		permanent: true,
+	},
+	{
+		source: "/categories/domestic-advice",
+		destination: "/categories/relationships",
+		permanent: true,
+	},
+	{
+		source: "/categories/holiday",
+		destination: "/categories/travel",
+		permanent: true,
+	},
+	{
+		source: "/categories/turtle",
+		destination: "/categories/animals",
+		permanent: true,
+	},
+	{
+		source: "/categories/shark",
+		destination: "/categories/animals",
+		permanent: true,
+	},
+	{
+		source: "/categories/owls",
+		destination: "/categories/animals",
+		permanent: true,
+	},
+	{
+		source: "/categories/insect",
+		destination: "/categories/animals",
+		permanent: true,
+	},
+	{
+		source: "/categories/horse",
+		destination: "/categories/animals",
+		permanent: true,
+	},
+	{
+		source: "/categories/elephant",
+		destination: "/categories/animals",
+		permanent: true,
+	},
+	{
+		source: "/categories/camel",
+		destination: "/categories/animals",
+		permanent: true,
+	},
+	{
+		source: "/categories/birds",
+		destination: "/categories/animals",
+		permanent: true,
+	},
+	{
+		source: "/categories/mammals",
+		destination: "/categories/animals",
+		permanent: true,
+	},
+	{
+		source: "/categories/climbing",
+		destination: "/categories/sport",
+		permanent: true,
+	},
+	{
+		source: "/categories/skiing",
+		destination: "/categories/sport",
+		permanent: true,
+	},
+	{
+		source: "/categories/ideation",
+		destination: "/categories/ideas",
+		permanent: true,
+	},
+	{
+		source: "/categories/food",
+		destination: "/categories/food-and-drink",
+		permanent: true,
+	},
+	{
+		source: "/categories/drink",
+		destination: "/categories/food-and-drink",
+		permanent: true,
+	},
+	{
+		source: "/categories/cooking",
+		destination: "/categories/food-and-drink",
+		permanent: true,
+	},
+	{
+		source: "/categories/cheese",
+		destination: "/categories/food-and-drink",
+		permanent: true,
+	},
+	{
+		source: "/categories/fruit",
+		destination: "/categories/food-and-drink",
+		permanent: true,
+	},
+	{
+		source: "/categories/fallacy",
+		destination: "/categories/psychology",
+		permanent: true,
+	},
+	{
+		source: "/categories/heuristic",
+		destination: "/categories/psychology",
+		permanent: true,
+	},
+	{
+		source: "/categories/cognitive-psychology",
+		destination: "/categories/psychology",
+		permanent: true,
+	},
+	{
+		source: "/categories/cognitive-bias",
+		destination: "/categories/psychology",
+		permanent: true,
+	},
+	{
+		source: "/categories/behavioral-psychology",
+		destination: "/categories/psychology",
+		permanent: true,
+	},
+	{
+		source: "/categories/vegetables",
+		destination: "/categories/food-and-drink",
+		permanent: true,
+	},
+	{
+		source: "/categories/color",
+		destination: "/categories/colour",
+		permanent: true,
+	},
+	{
+		source: "/categories/cars",
+		destination: "/categories/transport",
+		permanent: true,
+	},
+	{
+		source: "/categories/plane",
+		destination: "/categories/transport",
+		permanent: true,
+	},
+	{
+		source: "/categories/adoption",
+		destination: "/categories/strategy",
+		permanent: true,
+	},
+	{
+		source: "/categories/lessons-from-lewis",
+		destination: "/categories/parenting",
+		permanent: true,
+	},
+	{
+		source: "/categories/family",
+		destination: "/categories/parenting",
+		permanent: true,
+	},
+	{
+		source: "/categories/children",
+		destination: "/categories/parenting",
+		permanent: true,
+	},
+	{
+		source: "/categories/hygiene",
+		destination: "/categories/health",
+		permanent: true,
+	},
+	{
+		source: "/categories/germs",
+		destination: "/categories/health",
+		permanent: true,
+	},
+	{
+		source: "/categories/coronavirus",
+		destination: "/categories/health",
+		permanent: true,
+	},
+	{
+		source: "/categories/medicine",
+		destination: "/categories/health",
+		permanent: true,
+	},
+	{
+		source: "/categories/diy",
+		destination: "/categories/lifehack",
+		permanent: true,
+	},
+	{
+		source: "/categories/numbers",
+		destination: "/categories/mathematics",
+		permanent: true,
+	},
+	{
+		source: "/categories/math",
+		destination: "/categories/mathematics",
+		permanent: true,
+	},
+	{
+		source: "/categories/equation",
+		destination: "/categories/mathematics",
+		permanent: true,
+	},
+	{
+		source: "/categories/design-process",
+		destination: "/categories/design",
+		permanent: true,
+	},
+	{
+		source: "/categories/design-principle",
+		destination: "/categories/design",
+		permanent: true,
+	},
+	{
+		source: "/categories/product-design",
+		destination: "/categories/design",
+		permanent: true,
+	},
+	{
+		source: "/categories/cycle",
+		destination: "/categories/cycling",
+		permanent: true,
+	},
+	{
+		source: "/categories/bike",
+		destination: "/categories/cycling",
+		permanent: true,
+	},
+	{
+		source: "/categories/lightning",
+		destination: "/categories/weather",
+		permanent: true,
+	},
+	{
+		source: "/categories/clouds",
+		destination: "/categories/weather",
+		permanent: true,
+	},
+	{
+		source: "/categories/software",
+		destination: "/categories/software-development",
+		permanent: true,
+	},
+	{
+		source: "/categories/computing",
+		destination: "/categories/software-development",
+		permanent: true,
+	},
+	{
+		source: "/categories/computers",
+		destination: "/categories/software-development",
+		permanent: true,
+	},
+	{
+		source: "/categories/computer-science",
+		destination: "/categories/software-development",
+		permanent: true,
+	},
+	{
+		source: "/categories/agile",
+		destination: "/categories/software-development",
+		permanent: true,
+	},
+	{
+		source: "/categories/coding",
+		destination: "/categories/software-development",
+		permanent: true,
+	},
+	{
+		source: "/categories/investing",
+		destination: "/categories/money",
+		permanent: true,
+	},
+	{
+		source: "/categories/finance",
+		destination: "/categories/money",
+		permanent: true,
+	},
+
+	// ---------------------
 	// Legacy Tumblr post redirects
 	// ---------------------
 	...tumblrRedirects,

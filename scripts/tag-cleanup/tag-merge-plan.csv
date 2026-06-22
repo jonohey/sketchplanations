@@ -1,0 +1,87 @@
+action,from_tag_id,from_slug,from_identifier,to_tag_id,to_slug,to_identifier,sketch_count,status,batch_id,notes
+merge,X1FlGxAAACQAS_nC,book,book,X1FlIRAAACQAS_ng,books,books,6,published,1,pilot — published; book archived
+merge,X1FloRAAAGYIS_xq,chart,chart,X1FlpxAAACUAS_yM,charts,charts,32,published,2,published; chart archived
+merge,X1FpihAAAGYITBBB,idea,idea,X1FpkBAAACUATBBg,ideas,ideas,5,published,2,published; idea archived
+merge,X1FtbhAAACIATCRg,product,product,X1FtgBAAAGYITCS_,products,products,12,published,2,published; product archived
+merge,X1FkvhAAACIAS_fc,baby,baby,X1FsaxAAAGYITB8k,parenting,parenting,3,published,2,published; baby archived
+merge,X1FkuBAAACUAS_e-,babies,babies,X1FsaxAAAGYITB8k,parenting,parenting,3,published,2,published; babies archived
+merge,X1FlMhAAAGYIS_o3,brand,brand,X1FlOBAAACIAS_pV,branding,branding,2,published,3,published; brand archived
+merge,X1FtChAAAGYITCJe,pomegranate,pomegranate,X1FoahAAAGYITAp7,food-and-drink,food and drink,2,published,3,published; pomegranate archived
+merge,X1Fk0BAAACUAS_gz,barnacles,barnacles,X1FkcBAAAGYIS_ZK,animals,animals,2,published,3,published; barnacles archived
+merge,X1FpPxAAACIATA6_,hci,hci,X1FwUhAAACIATDNn,ux,ux,2,published,3,published; hci archived
+merge,X6MUfBAAACAAsQ_z,mindmap,mindmap,X1FvoBAAACQATC_F,thinking-tool,thinking tool,3,published,3,published; mindmap archived
+merge,X1FrohAAACIATBsg,model,model,X1FofBAAACIATArW,framework,framework,3,published,3,published; model archived
+merge,X1FnFRAAACIATAPm,development,development,X1Fu1BAAACUATCuk,software,software,11,published,3,published; development archived
+merge,X1FlShAAACIAS_qu,building,building,X1FklRAAACIAS_cL,architecture,architecture,6,published,3,published; building archived
+merge,X6MQzhAAACAAsP9k,domestic-advice,domestic advice,X3CQhRIAAEhqtfzb,relationships,relationships,9,published,3,published; domestic-advice archived
+merge,X5yBTxAAACIAk6kB,holiday,holiday,X1Fv7hAAACUATDFZ,travel,travel,10,published,3,published; holiday archived
+remove,X1FqFhAAACQATBMT,isa,isa,,,,3,published,3,published; isa archived
+remove,X1FqBBAAAGYITBK2,internet,internet,,,,6,published,3,published; internet archived
+remove,X1FpohAAACIATBC-,ikea,ikea,,,,2,published,3,published; ikea archived
+remove,X1FpnBAAACIATBCf,identity,identity,,,,2,published,3,published; identity archived
+remove,X1FnDxAAACIATAPG,design-tool,design tool,,,,7,published,3,published; design-tool archived
+remove,X1FmzhAAACIATAJ6,day,day,,,,2,published,3,published; day archived
+remove,X1FmXBAAACUATAAr,consumerism,consumerism,,,,2,published,3,published; consumerism archived
+remove,X1FlFRAAACIAS_mj,boating,boating,,,,2,published,3,published; boating archived
+remove,X1FkBBAAACQAS_Qa,2x2,2x2,,,,8,published,3,published; 2x2 archived
+remove,X1FwHRAAACQATDJR,tv,tv,,,,3,published,3,published; tv archived
+remove,X1FsjRAAACUATB_W,people,people,,,,2,published,3,published; people archived
+remove,X1FsUxAAACUATB6q,outdoors,outdoors,,,,4,published,3,published; outdoors archived
+remove,X1FsRxAAACIATB5y,organization,organization,,,,2,published,3,published; organization archived
+remove,X1FsABAAACQATB0F,networking,networking,,,,3,published,3,published; networking archived
+remove,X1Fr-xAAACQATBzn,needs,needs,,,,3,published,3,published; needs archived
+remove,X1Fr3RAAAGYITBxP,name,name,,,,2,published,3,published; name archived
+remove,X1FnLBAAACQATARZ,distance,distance,,,,4,published,3,published; distance archived
+merge,X1FwFxAAACUATDIw,turtle,turtle,X1FkcBAAAGYIS_ZK,animals,animals,2,published,4,published; turtle archived
+merge,X1FuRhAAAGYITCjB,shark,shark,X1FkcBAAAGYIS_ZK,animals,animals,2,published,4,published; shark archived
+merge,X1FsWRAAACUATB7J,owls,owls,X1FkcBAAAGYIS_ZK,animals,animals,2,published,4,published; owls archived
+merge,X1Fp8xAAACUATBJe,insect,insect,X1FkcBAAAGYIS_ZK,animals,animals,3,published,4,published; insect archived
+merge,X1FpbhAAAGYITA-u,horse,horse,X1FkcBAAAGYIS_ZK,animals,animals,3,published,4,published; horse archived
+merge,X1FnmxAAACUATAZT,elephant,elephant,X1FkcBAAAGYIS_ZK,animals,animals,2,published,4,published; elephant archived
+merge,X1FlZhAAACIAS_tD,camel,camel,X1FkcBAAAGYIS_ZK,animals,animals,2,published,4,published; camel archived
+merge,X1FlChAAAGYIS_ln,birds,birds,X1FkcBAAAGYIS_ZK,animals,animals,7,published,4,published; birds archived
+merge,YAAhyhAAACIAg1yr,mammals,mammals,X1FkcBAAAGYIS_ZK,animals,animals,2,published,4,published; mammals archived
+merge,X1Fl6RAAACUAS_3h,climbing,climbing,X1Fu5xAAACIATCwE,sport,sport,2,published,5,published; climbing archived
+merge,X7qWJBEAACQAHCfj,skiing,skiing,X1Fu5xAAACIATCwE,sport,sport,2,published,5,published; skiing archived
+merge,X1FplxAAAGYITBB-,ideation,ideation,X1FpkBAAACUATBBg,ideas,ideas,4,published,5,published; ideation archived
+merge,X1FoZBAAACUATApd,food,food,X1FoahAAAGYITAp7,food-and-drink,food and drink,56,published,5,published; food archived
+merge,X1FnWxAAAGYITAVD,drink,drink,X1FoahAAAGYITAp7,food-and-drink,food and drink,19,published,5,published; drink archived
+merge,X1FmbRAAACIATACJ,cooking,cooking,X1FoahAAAGYITAp7,food-and-drink,food and drink,20,published,5,published; cooking archived
+merge,X1FlrRAAACQAS_yr,cheese,cheese,X1FoahAAAGYITAp7,food-and-drink,food and drink,7,published,5,published; cheese archived
+merge,X1FogRAAACUATAr1,fruit,fruit,X1FoahAAAGYITAp7,food-and-drink,food and drink,5,published,5,published; fruit archived
+merge,X1FoDBAAACUATAiX,fallacy,fallacy,X1FtmRAAACIATCU-,psychology,psychology,2,published,6,published; fallacy archived
+merge,X1FpSxAAAGYITA75,heuristic,heuristic,X1FtmRAAACIATCU-,psychology,psychology,4,published,6,published; heuristic archived
+merge,X1FmFBAAAGYIS_64,cognitive-psychology,cognitive psychology,X1FtmRAAACIATCU-,psychology,psychology,7,published,6,published; cognitive-psychology archived
+merge,X1FmDhAAACIAS_6a,cognitive-bias,cognitive bias,X1FtmRAAACIATCU-,psychology,psychology,39,published,6,published; cognitive-bias archived
+merge,X1Fk5xAAAGYIS_ix,behavioral-psychology,behavioral psychology,X1FtmRAAACIATCU-,psychology,psychology,48,published,6,published; behavioral-psychology archived
+merge,X1FwZBAAAGYITDPF,vegetables,vegetables,X1FoahAAAGYITAp7,food-and-drink,food and drink,4,published,6,published; vegetables archived
+merge,X1FmGhAAACUAS_7X,color,color,X1FmIBAAACUAS_71,colour,colour,7,published,7,published; color archived
+merge,X1FlhBAAACQAS_vW,cars,cars,X1Fv6BAAAGYITDE6,transport,transport,7,published,7,published; cars archived
+merge,X2EXwBEAACIAf2Uy,plane,plane,X1Fv6BAAAGYITDE6,transport,transport,5,published,7,published; plane archived
+merge,X1FkGxAAACUAS_SS,adoption,adoption,X1FvFxAAAGYITC0B,strategy,strategy,3,published,7,published; adoption archived
+merge,X1FqmBAAACIATBW6,lessons-from-lewis,lessons from lewis,X1FsaxAAAGYITB8k,parenting,parenting,3,published,7,published; lessons-from-lewis archived
+merge,X1FoEhAAACUATAi4,family,family,X1FsaxAAAGYITB8k,parenting,parenting,6,published,7,published; family archived
+merge,X1FluRAAACQAS_zq,children,children,X1FsaxAAAGYITB8k,parenting,parenting,7,published,7,published; children archived
+merge,X1FpeRAAACUATA_q,hygiene,hygiene,X1FpRRAAACIATA7e,health,health,8,published,7,published; hygiene archived
+merge,X1FowhAAACIATAw9,germs,germs,X1FpRRAAACIATA7e,health,health,7,published,7,published; germs archived
+merge,X1FmeRAAACUATADD,coronavirus,coronavirus,X1FpRRAAACIATA7e,health,health,3,published,7,published; coronavirus archived
+merge,X1FrWxAAACIATBmx,medicine,medicine,X1FpRRAAACIATA7e,health,health,5,published,7,published; medicine archived
+merge,X1FnPhAAAGYITASp,diy,diy,X1FqnRAAACQATBXb,lifehack,lifehack,2,published,7,published; diy archived
+merge,X1FsHhAAACIATB2a,numbers,numbers,X1FrPRAAACUATBka,mathematics,mathematics,2,published,7,published; numbers archived
+merge,X1FrOBAAAGYITBj7,math,math,X1FrPRAAACUATBka,mathematics,mathematics,21,published,7,published; math archived
+merge,X1Fn0BAAACIATAdj,equation,equation,X1FrPRAAACUATBka,mathematics,mathematics,5,published,7,published; equation archived
+merge,X1Fm_RAAACUATANv,design-process,design process,X1Fm7BAAACQATAMU,design,design,8,published,8,published; design-process archived
+merge,X1Fm9xAAAGYITANQ,design-principle,design principle,X1Fm7BAAACQATAMU,design,design,5,published,8,published; design-principle archived
+merge,X2e4NhEAACMAnQcB,product-design,product design,X1Fm7BAAACQATAMU,design,design,10,published,8,published; product-design archived
+merge,X1FmqhAAACUATAHC,cycle,cycle,X1FmsBAAACIATAHg,cycling,cycling,3,published,8,published; cycle archived
+merge,X1Fk-BAAAGYIS_kJ,bike,bike,X1FmsBAAACIATAHg,cycling,cycling,5,published,8,published; bike archived
+merge,X1FqrxAAAGYITBY4,lightning,lightning,X1FwshAAAGYITDVS,weather,weather,2,published,8,published; lightning archived
+merge,X1Fl7xAAACUAS_3_,clouds,clouds,X1FwshAAAGYITDVS,weather,weather,9,published,8,published; clouds archived
+merge,X1Fu1BAAACUATCuk,software,software,ajlKhBEAACgAdHKR,software-development,software development,28,published,9,published; software kept for redirect/carousel handoff
+merge,X1FmShAAACQAS__V,computing,computing,ajlKhBEAACgAdHKR,software-development,software development,7,published,9,published; computing archived
+merge,X1FmRBAAACIAS_-z,computers,computers,ajlKhBEAACgAdHKR,software-development,software development,7,published,9,published; computers archived
+merge,X1FmPxAAACUAS_-S,computer-science,computer science,ajlKhBEAACgAdHKR,software-development,software development,3,published,9,published; computer-science archived
+merge,X1FkLBAAACUAS_Tp,agile,agile,ajlKhBEAACgAdHKR,software-development,software development,10,published,9,published; agile archived
+merge,X1FmAhAAAGYIS_5c,coding,coding,ajlKhBEAACgAdHKR,software-development,software development,9,published,9,published; coding archived
+merge,X1FqEBAAAGYITBL5,investing,investing,X1FrrhAAAGYITBtd,money,money,18,published,9,published; investing archived
+merge,X1FoPBAAACQATAmQ,finance,finance,X1FrrhAAAGYITBtd,money,money,22,published,9,published; finance archived
