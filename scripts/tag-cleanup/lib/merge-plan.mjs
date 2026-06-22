@@ -51,19 +51,27 @@ export const getPendingChangeRows = (rows) =>
 			(r.action === "merge" || r.action === "remove") && r.status === "pending",
 	);
 
-export const buildMergeMapFromPlan = (rows) => {
+export const matchesPlanFilter = (row, { pendingOnly = false, batchId = null } = {}) => {
+	if (pendingOnly && row.status !== "pending") return false;
+	if (batchId != null && String(row.batch_id) !== String(batchId)) return false;
+	return true;
+};
+
+export const buildMergeMapFromPlan = (rows, options = {}) => {
 	const map = new Map();
 	for (const row of rows) {
 		if (row.action !== "merge" || !row.from_tag_id || !row.to_tag_id) continue;
+		if (!matchesPlanFilter(row, options)) continue;
 		map.set(row.from_tag_id, row.to_tag_id);
 	}
 	return map;
 };
 
-export const buildRemoveSetFromPlan = (rows) => {
+export const buildRemoveSetFromPlan = (rows, options = {}) => {
 	const ids = new Set();
 	for (const row of rows) {
 		if (row.action === "remove" && row.from_tag_id) {
+			if (!matchesPlanFilter(row, options)) continue;
 			ids.add(row.from_tag_id);
 		}
 	}

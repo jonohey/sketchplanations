@@ -85,3 +85,26 @@ merge,X1FkLBAAACUAS_Tp,agile,agile,ajlKhBEAACgAdHKR,software-development,softwar
 merge,X1FmAhAAAGYIS_5c,coding,coding,ajlKhBEAACgAdHKR,software-development,software development,9,published,9,published; coding archived
 merge,X1FqEBAAAGYITBL5,investing,investing,X1FrrhAAAGYITBtd,money,money,18,published,9,published; investing archived
 merge,X1FoPBAAACQATAmQ,finance,finance,X1FrrhAAAGYITBtd,money,money,22,published,9,published; finance archived
+merge,X1FpAxAAACQATA2O,graphic-design,graphic design,X1Fm7BAAACQATAMU,design,design,14,published,10,published; graphic-design archived
+merge,X1Fp3BAAACUATBHj,information-design,information design,X1Fm7BAAACQATAMU,design,design,13,published,10,published; information-design archived
+merge,X1FwuBAAACQATDVx,web-design,web design,X1Fm7BAAACQATAMU,design,design,13,published,10,published; web-design archived
+merge,X1FnCRAAAGYITAOs,design-thinking,design thinking,X1Fm7BAAACQATAMU,design,design,6,published,10,published; design-thinking archived
+merge,X1FwERAAAGYITDIO,tufte,tufte,X1Fm7BAAACQATAMU,design,design,3,published,10,published; tufte archived
+merge,X1FvCxAAACQATCzD,storm,storm,X1FwshAAAGYITDVS,weather,weather,4,published,11,published; storm archived
+merge,X1FvsxAAACUATDAk,thundercloud,thundercloud,X1FwshAAAGYITDVS,weather,weather,3,published,11,published; thundercloud archived
+merge,X1FuiBAAACIATCoQ,sky,sky,X1FwshAAAGYITDVS,weather,weather,2,published,11,published; sky archived
+merge,X1FvOxAAAGYITC25,sunset,sunset,X1FwshAAAGYITDVS,weather,weather,3,published,11,published; sunset archived
+merge,X1Fu-RAAACIATCxl,stars,stars,X1FkoRAAAGYIS_dH,astronomy,astronomy,2,published,11,published; stars archived
+merge,X1Fs-RAAACQATCID,pole-star,pole star,X1FkoRAAAGYIS_dH,astronomy,astronomy,2,published,11,published; pole-star archived
+merge,YAQdCBAAACMAlNX_,recycling,recycling,X1FvRhAAACQATC33,sustainability,sustainability,3,published,11,published; recycling archived
+merge,X1FwoBAAACIATDT4,waste,waste,X1FvRhAAACQATC33,sustainability,sustainability,4,published,11,published; waste archived
+merge,X1FtFxAAACUATCKb,portfolio,portfolio,X1FrrhAAAGYITBtd,money,money,2,published,11,published; portfolio archived
+merge,X1FuEBAAACUATCep,saving,saving,X1FrrhAAAGYITBtd,money,money,3,published,11,published; saving archived
+merge,X1FoWRAAACQATAol,flying,flying,X1Fv6BAAAGYITDE6,transport,transport,2,published,11,published; flying archived
+merge,X1Ft4RAAACIATCav,reptiles,reptiles,X1FkcBAAAGYIS_ZK,animals,animals,3,published,11,published; reptiles archived
+merge,X1Fs1BAAACQATCFI,plants,plants,X1Fr7xAAACQATBys,nature,nature,2,published,11,published; plants archived
+merge,X1FrZhAAAGYITBnu,meetings,meetings,X1FrDhAAACQATBgn,management,management,2,published,11,published; meetings archived
+merge,X1FtNBAAACUATCM1,presenting,presenting,X1FqgRAAACQATBVD,leadership,leadership,2,published,11,published; presenting archived
+remove,X1FuexAAACIATCnP,sketchplanation,sketchplanation,,,,2,published,11,published; sketchplanation archived
+remove,X1FwcBAAACIATDP-,video,video,,,,2,published,11,published; video archived
+remove,aLGY7hEAACYAPjG6,persuasion,persuasion,,,,1,published,11,published; persuasion archived
