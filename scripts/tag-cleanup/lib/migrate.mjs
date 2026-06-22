@@ -10,6 +10,7 @@ import {
 	buildRemoveSetFromPlan,
 	getPendingChangeRows,
 	loadMergePlan,
+	matchesPlanFilter,
 	saveMergePlan,
 } from "./merge-plan.mjs";
 import { DATA_DIR } from "./paths.mjs";
@@ -59,26 +60,44 @@ const describeSketchChange = (sketch, mergeMap, removeIds) => {
 export const runMigrate = async (options) => {
 	const { dryRun, pairSlug, limit = 0, batchId } = options;
 	const { rows } = loadMergePlan();
-	const pendingRows = getPendingChangeRows(rows);
-	const mergeMap = buildMergeMapFromPlan(rows);
-	const removeIds = buildRemoveSetFromPlan(rows);
+	const planFilter = { pendingOnly: true, batchId };
+	const pendingRows = getPendingChangeRows(rows).filter((row) =>
+		matchesPlanFilter(row, planFilter),
+	);
+	const mergeMap = buildMergeMapFromPlan(rows, planFilter);
+	const removeIds = buildRemoveSetFromPlan(rows, planFilter);
 
-	if (mergeMap.size === 0 && removeIds.size === 0) {
+	if (pendingRows.length === 0) {
 		console.log(
-			"[tag-cleanup] No pending changes in tag-merge-plan.csv (merge or remove, status=pending).",
+			batchId
+				? `[tag-cleanup] No pending changes for batch ${batchId} in tag-merge-plan.csv.`
+				: "[tag-cleanup] No pending changes in tag-merge-plan.csv (merge or remove, status=pending).",
 		);
 		return;
 	}
 
-	const effectiveLimit = limit > 0 ? limit : dryRun ? 9999 : 20;
+	const effectiveLimit = limit > 0 ? limit : 9999;
 	const sketches = await fetchSketchesNeedingUpdate(mergeMap, removeIds, {
 		pairSlug,
 		limit: effectiveLimit,
 	});
 
+	const totalNeedingUpdate = (
+		await fetchSketchesNeedingUpdate(mergeMap, removeIds, { pairSlug, limit: 0 })
+	).length;
+
 	if (sketches.length === 0) {
 		console.log("[tag-cleanup] No sketches need updating for current merge plan.");
 		return;
+	}
+
+	if (!dryRun && totalNeedingUpdate > sketches.length) {
+		console.warn(
+			`\n[tag-cleanup] Warning: ${totalNeedingUpdate} sketch(es) need updates but only ${sketches.length} will be processed this run.`,
+		);
+		console.warn(
+			`  Re-run the same command until no sketches remain, or pass --limit ${totalNeedingUpdate}\n`,
+		);
 	}
 
 	console.log(
@@ -139,6 +158,7 @@ export const runMigrate = async (options) => {
 	for (const row of rows) {
 		if (row.status === "published") continue;
 		if (row.action !== "merge" && row.action !== "remove") continue;
+		if (batchId && String(row.batch_id) !== String(batchId)) continue;
 		const stillReferenced = allSketches.some((sketch) =>
 			(sketch.data?.tags ?? []).some(({ tag }) => tag?.id === row.from_tag_id),
 		);

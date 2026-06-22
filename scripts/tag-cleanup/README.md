@@ -63,9 +63,11 @@ node scripts/tag-cleanup/index.mjs audit
 3. **Pilot** — `npm run tag-cleanup:migrate -- --dry-run --pair <from-slug>` then migrate without `--dry-run`.  
    Publish the Migration Release in Prismic UI.
 
-4. **Batch** — Repeat migrate with `--limit 20 --batch-id N` until merge plan rows show `status=migrated`.
+4. **Batch** — `npm run tag-cleanup:migrate -- --dry-run --batch-id N` then migrate with the same `--batch-id`.  
+   Re-run until the command reports no remaining sketches (or dry-run count matches).  
+   Optional `--limit N` caps how many sketches one run updates.
 
-5. **Mark published** — After you publish each Migration Release in Prismic, set matching rows to `status=published` in the merge plan.
+5. **Mark published** — After you publish each Migration Release in Prismic **and** a dry-run shows zero sketches left for that batch, set matching rows to `status=published` in the merge plan.
 
 6. **Wrap up** — `npm run tag-cleanup:changelog` and `npm run tag-cleanup:redirects`  
    Outputs go to `data/` (local only). Copy newsletter draft out; append redirects to [`redirects.mjs`](../../redirects.mjs).

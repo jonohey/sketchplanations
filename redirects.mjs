@@ -785,6 +785,106 @@ export default [
 		destination: "/categories/money",
 		permanent: true,
 	},
+	{
+		source: "/categories/graphic-design",
+		destination: "/categories/design",
+		permanent: true,
+	},
+	{
+		source: "/categories/information-design",
+		destination: "/categories/design",
+		permanent: true,
+	},
+	{
+		source: "/categories/web-design",
+		destination: "/categories/design",
+		permanent: true,
+	},
+	{
+		source: "/categories/design-thinking",
+		destination: "/categories/design",
+		permanent: true,
+	},
+	{
+		source: "/categories/tufte",
+		destination: "/categories/design",
+		permanent: true,
+	},
+	{
+		source: "/categories/storm",
+		destination: "/categories/weather",
+		permanent: true,
+	},
+	{
+		source: "/categories/thundercloud",
+		destination: "/categories/weather",
+		permanent: true,
+	},
+	{
+		source: "/categories/sky",
+		destination: "/categories/weather",
+		permanent: true,
+	},
+	{
+		source: "/categories/sunset",
+		destination: "/categories/weather",
+		permanent: true,
+	},
+	{
+		source: "/categories/stars",
+		destination: "/categories/astronomy",
+		permanent: true,
+	},
+	{
+		source: "/categories/pole-star",
+		destination: "/categories/astronomy",
+		permanent: true,
+	},
+	{
+		source: "/categories/recycling",
+		destination: "/categories/sustainability",
+		permanent: true,
+	},
+	{
+		source: "/categories/waste",
+		destination: "/categories/sustainability",
+		permanent: true,
+	},
+	{
+		source: "/categories/portfolio",
+		destination: "/categories/money",
+		permanent: true,
+	},
+	{
+		source: "/categories/saving",
+		destination: "/categories/money",
+		permanent: true,
+	},
+	{
+		source: "/categories/flying",
+		destination: "/categories/transport",
+		permanent: true,
+	},
+	{
+		source: "/categories/reptiles",
+		destination: "/categories/animals",
+		permanent: true,
+	},
+	{
+		source: "/categories/plants",
+		destination: "/categories/nature",
+		permanent: true,
+	},
+	{
+		source: "/categories/meetings",
+		destination: "/categories/management",
+		permanent: true,
+	},
+	{
+		source: "/categories/presenting",
+		destination: "/categories/leadership",
+		permanent: true,
+	},
 
 	// ---------------------
 	// Legacy Tumblr post redirects
