@@ -885,6 +885,81 @@ export default [
 		destination: "/categories/leadership",
 		permanent: true,
 	},
+	{
+		source: "/categories/climate-change",
+		destination: "/categories/climate",
+		permanent: true,
+	},
+	{
+		source: "/categories/mental-health",
+		destination: "/categories/health",
+		permanent: true,
+	},
+	{
+		source: "/categories/marine-biology",
+		destination: "/categories/biology",
+		permanent: true,
+	},
+	{
+		source: "/categories/lateral-thinking",
+		destination: "/categories/thinking-tool",
+		permanent: true,
+	},
+	{
+		source: "/categories/social-research",
+		destination: "/categories/research",
+		permanent: true,
+	},
+	{
+		source: "/categories/gifts",
+		destination: "/categories/gift-giving",
+		permanent: true,
+	},
+	{
+		source: "/categories/story",
+		destination: "/categories/storytelling",
+		permanent: true,
+	},
+	{
+		source: "/categories/reading",
+		destination: "/categories/books",
+		permanent: true,
+	},
+	{
+		source: "/categories/ecology",
+		destination: "/categories/nature",
+		permanent: true,
+	},
+	{
+		source: "/categories/pollution",
+		destination: "/categories/climate",
+		permanent: true,
+	},
+	{
+		source: "/categories/environment",
+		destination: "/categories/sustainability",
+		permanent: true,
+	},
+	{
+		source: "/categories/branding",
+		destination: "/categories/marketing",
+		permanent: true,
+	},
+	{
+		source: "/categories/crime",
+		destination: "/categories/security",
+		permanent: true,
+	},
+	{
+		source: "/categories/etiquette",
+		destination: "/categories/lifehack",
+		permanent: true,
+	},
+	{
+		source: "/categories/toys",
+		destination: "/categories/parenting",
+		permanent: true,
+	},
 
 	// ---------------------
 	// Legacy Tumblr post redirects

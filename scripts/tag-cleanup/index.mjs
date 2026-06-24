@@ -9,12 +9,15 @@ import { runAudit } from "./lib/audit.mjs";
 import { runChangelog } from "./lib/changelog.mjs";
 import { runMigrate } from "./lib/migrate.mjs";
 import { runRedirects } from "./lib/redirects.mjs";
+import { runSketchEdits } from "./lib/sketch-edits.mjs";
+import { BATCH_ID as BATCH_12_ID, SKETCH_EDITS as BATCH_12_EDITS } from "./batch-12-edits.mjs";
 
 const HELP = `Prismic tag/category consolidation toolkit
 
 Usage:
   node scripts/tag-cleanup/index.mjs audit
   node scripts/tag-cleanup/index.mjs migrate [--dry-run] [--pair <from-slug>] [--limit N] [--batch-id N]
+  node scripts/tag-cleanup/index.mjs migrate-edits [--dry-run] [--batch-id 12]
   node scripts/tag-cleanup/index.mjs changelog [--stdout newsletter]
   node scripts/tag-cleanup/index.mjs redirects
 
@@ -61,6 +64,16 @@ const main = async () => {
 					pairSlug: args.pair,
 					limit: args.limit,
 					batchId: args.batchId,
+				});
+				break;
+			case "migrate-edits":
+				if (args.batchId && args.batchId !== BATCH_12_ID) {
+					throw new Error(`No sketch edits defined for batch ${args.batchId}`);
+				}
+				await runSketchEdits({
+					edits: BATCH_12_EDITS,
+					batchId: BATCH_12_ID,
+					dryRun: args.dryRun,
 				});
 				break;
 			case "changelog":
