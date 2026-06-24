@@ -22,6 +22,7 @@ Prismic tag/category consolidation: audit duplicate tags, approve a merge plan, 
 npm run tag-cleanup:audit
 npm run tag-cleanup:migrate -- --dry-run
 npm run tag-cleanup:migrate -- --pair sport --limit 20 --batch-id 1
+npm run tag-cleanup:migrate-edits -- --dry-run --batch-id 12
 npm run tag-cleanup:changelog
 npm run tag-cleanup:changelog -- --stdout newsletter
 npm run tag-cleanup:redirects

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
 	applyMergeMapToSketchTags,
+	applySketchTagEdits,
 	applyTagChangesToSketchTags,
 	findSingularPluralPairs,
 	normalizeIdentifier,
@@ -56,5 +57,17 @@ describe("tag-utils", () => {
 		const mergeMap = new Map([["sport-id", "sports-id"]]);
 		const result = applyMergeMapToSketchTags(tags, mergeMap);
 		expect(result.map((r) => r.tag.id)).toEqual(["sports-id"]);
+	});
+
+	it("applySketchTagEdits removes and adds without duplicates", () => {
+		const tags = [
+			{ tag: { id: "jogging-id", link_type: "Document" } },
+			{ tag: { id: "sport-id", link_type: "Document" } },
+		];
+		const result = applySketchTagEdits(tags, {
+			removeIds: new Set(["jogging-id"]),
+			addIds: ["sport-id", "health-id"],
+		});
+		expect(result.map((r) => r.tag.id)).toEqual(["sport-id", "health-id"]);
 	});
 });

@@ -92,6 +92,25 @@ export const applyTagChangesToSketchTags = (tags, { mergeMap, removeIds }) => {
 	return merged.filter((item) => !removeIds.has(item?.tag?.id));
 };
 
+/** Remove tag IDs and add new ones without duplicates. */
+export const applySketchTagEdits = (tags, { removeIds = new Set(), addIds = [] }) => {
+	const result = (tags ?? []).filter((item) => !removeIds.has(item?.tag?.id));
+	const seen = new Set(result.map((item) => item?.tag?.id).filter(Boolean));
+
+	for (const id of addIds) {
+		if (!id || seen.has(id)) continue;
+		seen.add(id);
+		result.push({
+			tag: {
+				id,
+				link_type: "Document",
+			},
+		});
+	}
+
+	return result;
+};
+
 /**
  * Find singular/plural slug pairs where both tags exist.
  */

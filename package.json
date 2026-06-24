@@ -14,6 +14,7 @@
 		"test": "vitest run",
 		"tag-cleanup:audit": "node scripts/tag-cleanup/index.mjs audit",
 		"tag-cleanup:migrate": "node scripts/tag-cleanup/index.mjs migrate",
+		"tag-cleanup:migrate-edits": "node scripts/tag-cleanup/index.mjs migrate-edits",
 		"tag-cleanup:changelog": "node scripts/tag-cleanup/index.mjs changelog",
 		"tag-cleanup:redirects": "node scripts/tag-cleanup/index.mjs redirects"
 	},

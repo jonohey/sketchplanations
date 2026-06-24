@@ -45,7 +45,6 @@ const BarItem = ({ tag, slug, count, maxCount }) => (
 const Categories = ({ tagsByName, tagsByCount }) => {
 	const [sort, setSort] = useState("chart");
 	const [cookieSort, setCookieSort] = useCookie("tagsSort", "chart");
-	const [showMore, setShowMore] = useState(false);
 	const maxCount = Math.max(...tagsByCount.map(tag => tag.count));
 
 	useEffect(() => {
@@ -92,30 +91,9 @@ const Categories = ({ tagsByName, tagsByCount }) => {
 			{sort === "chart" && (
 				<div className="p-6 pb-20">
 					<div className="space-y-2 max-w-4xl mx-auto sm:max-w-2xl">
-						{tagsByCount
-							.filter(({ count }) => count >= 10)
-							.map((tag) => (
-								<BarItem key={tag.tag} {...tag} maxCount={maxCount} />
-							))}
-
-						{!showMore && (
-							<button 
-								onClick={() => setShowMore(true)}
-								className="w-full text-center mt-4 mb-2 text-blue hover:text-text transition-colors duration-100"
-							>
-								See {(() => {
-									const count = tagsByCount.filter(tag => tag.count < 10).length;
-									if (count < 100) return count;
-									return `${Math.floor(count/100)*100}+`;
-								})()} more categories
-							</button>
-						)}
-
-						{showMore && tagsByCount
-							.filter(({ count }) => count < 10)
-							.map((tag) => (
-								<BarItem key={tag.tag} {...tag} maxCount={maxCount} />
-							))}
+						{tagsByCount.map((tag) => (
+							<BarItem key={tag.tag} {...tag} maxCount={maxCount} />
+						))}
 					</div>
 				</div>
 			)}
