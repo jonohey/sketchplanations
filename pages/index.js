@@ -187,10 +187,10 @@ const Home = ({ carouselRows }) => {
 				<div className="prose max-w-2xl mx-auto mb-12">
 					<h2>Hi, I&apos;m Jono 👋</h2>
 					<p>
-						I&apos;m an author and illustrator creating one of the world&apos;s largest libraries of hand-drawn sketches explaining the world—sketch-by-sketch.
+						I&apos;m an author and illustrator creating one of the world&apos;s largest libraries of hand-drawn sketches that make complex ideas easy to understand.
 					</p>
 					<p>
-						Sketchplanations have been shared millions of times and used in books, articles, classrooms, and more. <FancyLink href="/about">Learn more about the project</FancyLink>, <FancyLink href="/search">search for a sketch you like</FancyLink>, or browse by topic below.
+						Sketchplanations have been shared millions of times and are used in books, articles, classrooms and presentations around the world. Explore nearly 1,000 sketches explaining ideas from psychology and science to business and everyday life.
 					</p>
 				</div>
 			</section>
