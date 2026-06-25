@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { isBlank, isPresent } from "helpers";
+import { isRudeSearch } from "helpers/search/rudeSearch";
 
 import useDebouncedValue from "./useDebouncedValue";
 import useSearchIndex from "./useSearchIndex";
@@ -173,6 +174,11 @@ const useSearch = () => {
 
 		lastTrackedAnalyticsQuery.current = analyticsSearchQuery;
 
+		if (isRudeSearch(analyticsSearchQuery)) {
+			track("Search_rude_easter_egg");
+			return;
+		}
+
 		const trimmedQuery = analyticsSearchQuery.trim();
 		const { sketches } = search(analyticsSearchQuery);
 
@@ -211,6 +217,8 @@ const useSearch = () => {
 	// Show loading while a query is waiting on the index, including the idle
 	// callback delay before indexLoading becomes true.
 	const busy = called && !indexReady;
+	const showRudeSearchEasterEgg =
+		called && !busy && isRudeSearch(debouncedSearchQuery);
 
 	return {
 		query,
@@ -223,6 +231,7 @@ const useSearch = () => {
 		hasExactCategoryMatch,
 		called,
 		busy,
+		showRudeSearchEasterEgg,
 		reset,
 		clear,
 		isSearchPage,

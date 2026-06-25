@@ -1,0 +1,7 @@
+.root {
+  @apply flex justify-center px-5 py-1 sm:py-3;
+}
+
+.image {
+  @apply ml-6 h-auto w-full max-w-[104px] sm:ml-10 sm:max-w-[140px];
+}
