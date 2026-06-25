@@ -4,10 +4,15 @@ import { useEffect, useState } from "react";
 import styles from "./SearchResults.module.css";
 
 import { isPresent } from "helpers";
+import {
+	shouldShowStretchMissMessage,
+	shouldShowSuggestMissingSketch,
+} from "helpers/search/rudeSearch";
 import useSearch from "hooks/useSearch";
 
 import { Lightbulb, Shuffle } from "lucide-react";
 import FancyLink from "./FancyLink";
+import RudeSearchEasterEgg from "./RudeSearchEasterEgg";
 import SearchCategoryMatches from "./SearchCategoryMatches";
 import SketchplanationsGrid from "./SketchplanationsGrid";
 
@@ -66,6 +71,7 @@ const SearchResults = () => {
 		hasExactCategoryMatch,
 		called,
 		busy,
+		showRudeSearchEasterEgg,
 	} = useSearch();
 
 	const [randomHandle, setRandomHandle] = useState(null);
@@ -124,6 +130,12 @@ const SearchResults = () => {
 	const isCorrected = matchQuality === "corrected";
 	const isStretchMatch = matchQuality === "weak" && !hasExactCategoryMatch;
 	const isEmpty = !hasSketches && !hasCategories;
+	const showStretchMissMessage = shouldShowStretchMissMessage(
+		isStretchMatch,
+		showRudeSearchEasterEgg,
+	);
+	const showSuggestMissingSketch =
+		shouldShowSuggestMissingSketch(showRudeSearchEasterEgg);
 
 	return (
 		<div className={styles["search-results"]}>
@@ -141,6 +153,7 @@ const SearchResults = () => {
 				</div>
 			) : (
 				<>
+					{showRudeSearchEasterEgg && <RudeSearchEasterEgg />}
 					{hasCategories && (
 						<SearchCategoryMatches categories={tagResults} />
 					)}
@@ -156,7 +169,7 @@ const SearchResults = () => {
 									Try a random sketch?
 								</span>
 							</Link>
-							<SuggestMissingSketch />
+							{showSuggestMissingSketch && <SuggestMissingSketch />}
 						</div>
 					) : (
 						<>
@@ -165,7 +178,7 @@ const SearchResults = () => {
 									Showing results for <strong>{correctedLabel}</strong>
 								</p>
 							)}
-							{isStretchMatch && (
+							{showStretchMissMessage && (
 								<div className={styles["search-results__empty"]}>
 									<p>No close matches found</p>
 									<SuggestMissingSketch />
