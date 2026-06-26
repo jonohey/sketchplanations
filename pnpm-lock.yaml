@@ -82,8 +82,8 @@ importers:
         specifier: ^15.5.18
         version: 15.5.19(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       next-seo:
-        specifier: ^6.8.0
-        version: 6.8.0(next@15.5.19(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        specifier: ^7.2.0
+        version: 7.2.0(next@15.5.19(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
       nextjs-progressbar:
         specifier: ^0.0.16
         version: 0.0.16(next@15.5.19(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
@@ -2830,12 +2830,11 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  next-seo@6.8.0:
-    resolution: {integrity: sha512-zcxaV67PFXCSf8e6SXxbxPaOTgc8St/esxfsYXfQXMM24UESUVSXFm7f2A9HMkAwa0Gqn4s64HxYZAGfdF4Vhg==}
+  next-seo@7.2.0:
+    resolution: {integrity: sha512-ST7/YB8g0SXGuEKNucBz9wiP6nCYVZ4v8qJB7rAz9Vr1X98mw5orWL9COr8td/dzqtCYd4xaIg0YVCq5Yy3PQA==}
     peerDependencies:
-      next: ^8.1.1-canary.54 || >=9.0.0
-      react: '>=16.0.0'
-      react-dom: '>=16.0.0'
+      next: '>=13.4.0'
+      react: '>=18.2.0'
 
   next@15.5.19:
     resolution: {integrity: sha512-xNOW6tYshGX1/Oi3F8uuk4gpDeWsSUE/1Z0G5uUMekIxaQ0xc03UXd9II0VQHYMWviMeA0OHpJFAKsHf8bTYVg==}
@@ -6534,11 +6533,10 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next-seo@6.8.0(next@15.5.19(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+  next-seo@7.2.0(next@15.5.19(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7):
     dependencies:
       next: 15.5.19(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react: 19.2.7
-      react-dom: 19.2.7(react@19.2.7)
 
   next@15.5.19(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
     dependencies:
