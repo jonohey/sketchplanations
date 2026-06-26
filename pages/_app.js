@@ -1,4 +1,4 @@
-import { PrismicPreview } from "@prismicio/next";
+import { PrismicPreview } from "@prismicio/next/pages";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import { Analytics } from "@vercel/analytics/react";
