@@ -34,8 +34,8 @@ importers:
         specifier: ^2.3.9
         version: 2.3.9
       '@prismicio/next':
-        specifier: ^1.7.2
-        version: 1.7.2(@prismicio/client@7.21.8)(next@15.5.19(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
+        specifier: ^2.2.4
+        version: 2.2.4(@prismicio/client@7.21.8)(next@15.5.19(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
       '@prismicio/react':
         specifier: ^2.9.2
         version: 2.9.2(@prismicio/client@7.21.8)(react@19.2.7)
@@ -805,9 +805,6 @@ packages:
   '@floating-ui/utils@0.2.11':
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
 
-  '@formatjs/intl-localematcher@0.5.10':
-    resolution: {integrity: sha512-af3qATX+m4Rnd9+wHcjJ4w2ijq+rAVP3CCinJQvFv1kgSu1W6jypUmvleJxcewdxmutM8dmIRZFxO/IQBZmP2Q==}
-
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
     engines: {node: '>=18.18.0'}
@@ -1098,13 +1095,13 @@ packages:
     engines: {node: '>=12.7.0'}
     deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
-  '@prismicio/next@1.7.2':
-    resolution: {integrity: sha512-dS9fRujiqK+uyhA5vCJgvxp4k7w3s6jm5Ln4fh1NSMS00yo7lHVL4GnhNmrxqATnIn/nHLbQmO24+yZVRWvxjw==}
-    engines: {node: '>=14.15.0'}
+  '@prismicio/next@2.2.4':
+    resolution: {integrity: sha512-xeICqjZkTTVJ3xBObG0eh/D7IOa9Pfog4yQ9Qs+wgLr8GyO6B2wo8oBMJFd1k3g6fFJNL5Oij6j9B/81h/xwWA==}
+    engines: {node: '>=20'}
     peerDependencies:
-      '@prismicio/client': ^6 || ^7
-      next: ^13.4.5 || ^14 || ^15.0.0-rc.0
-      react: ^18 || ^19.0.0-rc.0
+      '@prismicio/client': ^7
+      next: ^13.4.5 || ^14 || ^15 || ^16
+      react: ^18 || ^19
 
   '@prismicio/react@2.9.2':
     resolution: {integrity: sha512-aXTIYI1DNbBMaaDd4czW8foqJku2VXVGqI4n34w2BKMBPXqugCcL1dqaKtsyreza3bo0nE5C6YhUyil4rx70BA==}
@@ -1117,6 +1114,12 @@ packages:
     resolution: {integrity: sha512-Sf6iCsciPmfK3uQeFmeY9RTRSuhrCVzyU39OkiJ1VJn8O0531pKapGoWS+5WGxouJtE5+jGqV8L+L2mKP7NkXQ==}
     engines: {node: '>=12.7.0'}
     deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+
+  '@prismicio/simulator@0.2.4':
+    resolution: {integrity: sha512-dmxqaihyUkuUbbJwe/AJuE40c6jH233plJiGza8sTGmzNKd/V8tsP11+NuBN0vuFSpZ1zBEWYsZFbsCwHuJZyA==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@prismicio/client': ^7
 
   '@prismicio/types@0.2.9':
     resolution: {integrity: sha512-1uhHnZTiGeCi+rmO507B8jtnUTCNetdgrC5sfZEw9zsCplfgBELt0+BN1RFsXWLbZbyvR9xzHcrJ87Ykqa8JZA==}
@@ -2510,10 +2513,6 @@ packages:
     resolution: {integrity: sha512-8Oc2Cn4+jF06sEfJcVPlWYfD2F6RjrwIMbk1xEzux8unoB5LsvFc/GL1BQ47HPaeE12ReX2nMUcjUslGYWLxHA==}
     engines: {node: '>=12.7.0'}
 
-  imgix-url-builder@0.0.4:
-    resolution: {integrity: sha512-JRLydfxGTTbSSOG82ewuCgnmw/CzIPzoDqpP3UYD7RE+QWS8ZZbpF87ZuRqtcbEKdxahRsExinuKRxPZVvukWA==}
-    engines: {node: '>=12.7.0'}
-
   imgix-url-builder@0.0.6:
     resolution: {integrity: sha512-lFVbvaE9vMck8qz9j+y6o7vsyc1vZhdqzWu+Wp/nlnOCi9zAErc31QMkZKYUGMNLLzxOO4YIBAUPndTPah8HFg==}
     engines: {node: '>=12.7.0'}
@@ -2763,6 +2762,10 @@ packages:
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
+  lz-string@1.5.0:
+    resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
+    hasBin: true
+
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
@@ -2823,10 +2826,6 @@ packages:
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
-
-  negotiator@0.6.4:
-    resolution: {integrity: sha512-myRT3DiWPHqho5PrJaIRyaMv2kgYf0mUVgBNOYMuCH5Ki1yEiQaf/ZJuQ62nvpc44wL5WDbTX7yGJi1Neevw8w==}
-    engines: {node: '>= 0.6'}
 
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
@@ -4498,10 +4497,6 @@ snapshots:
 
   '@floating-ui/utils@0.2.11': {}
 
-  '@formatjs/intl-localematcher@0.5.10':
-    dependencies:
-      tslib: 2.8.1
-
   '@humanfs/core@0.19.2':
     dependencies:
       '@humanfs/types': 0.15.0
@@ -4728,12 +4723,12 @@ snapshots:
       '@prismicio/types': 0.2.9
       imgix-url-builder: 0.0.3
 
-  '@prismicio/next@1.7.2(@prismicio/client@7.21.8)(next@15.5.19(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)':
+  '@prismicio/next@2.2.4(@prismicio/client@7.21.8)(next@15.5.19(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)':
     dependencies:
-      '@formatjs/intl-localematcher': 0.5.10
       '@prismicio/client': 7.21.8
-      imgix-url-builder: 0.0.4
-      negotiator: 0.6.4
+      '@prismicio/simulator': 0.2.4(@prismicio/client@7.21.8)
+      imgix-url-builder: 0.0.6
+      lz-string: 1.5.0
       next: 15.5.19(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react: 19.2.7
 
@@ -4746,6 +4741,10 @@ snapshots:
   '@prismicio/richtext@2.1.5':
     dependencies:
       '@prismicio/types': 0.2.9
+
+  '@prismicio/simulator@0.2.4(@prismicio/client@7.21.8)':
+    dependencies:
+      '@prismicio/client': 7.21.8
 
   '@prismicio/types@0.2.9': {}
 
@@ -5854,7 +5853,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.13.0(@typescript-eslint/parser@8.61.1(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-node@0.3.10)(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@1.21.7)):
+  eslint-module-utils@2.13.0(@typescript-eslint/parser@8.61.1(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-node@0.3.10)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@1.21.7)))(eslint@9.39.4(jiti@1.21.7)):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
@@ -5876,7 +5875,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 9.39.4(jiti@1.21.7)
       eslint-import-resolver-node: 0.3.10
-      eslint-module-utils: 2.13.0(@typescript-eslint/parser@8.61.1(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-node@0.3.10)(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@1.21.7))
+      eslint-module-utils: 2.13.0(@typescript-eslint/parser@8.61.1(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3))(eslint-import-resolver-node@0.3.10)(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@1.21.7)))(eslint@9.39.4(jiti@1.21.7))
       hasown: 2.0.4
       is-core-module: 2.16.2
       is-glob: 4.0.3
@@ -6235,8 +6234,6 @@ snapshots:
 
   imgix-url-builder@0.0.3: {}
 
-  imgix-url-builder@0.0.4: {}
-
   imgix-url-builder@0.0.6: {}
 
   import-cwd@2.1.0:
@@ -6482,6 +6479,8 @@ snapshots:
     dependencies:
       react: 19.2.7
 
+  lz-string@1.5.0: {}
+
   magic-string@0.30.21:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -6532,8 +6531,6 @@ snapshots:
   napi-postinstall@0.3.4: {}
 
   natural-compare@1.4.0: {}
-
-  negotiator@0.6.4: {}
 
   neo-async@2.6.2: {}
 

@@ -4,12 +4,17 @@
 
 @screen md {
   .root {
-    @apply max-w-md;
+    max-width: 33.6rem;
+  }
+
+  .image {
+    max-height: 28.8rem;
+    width: auto;
   }
 }
 
 .imageWrap {
-  @apply relative block w-full aspect-square rounded-lg overflow-hidden bg-paper;
+  @apply relative block w-fit max-w-full mx-auto rounded-lg overflow-hidden bg-paper;
 
   box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow);
 
@@ -37,7 +42,7 @@
 }
 
 .image {
-  @apply object-cover object-top;
+  @apply block w-full h-auto max-w-full object-contain;
 }
 
 .title {

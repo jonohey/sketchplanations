@@ -6,13 +6,14 @@ import { humanizePublishedDate } from "helpers";
 import styles from "./HomeFeaturedSketch.module.css";
 
 const FEATURED_IMAGE_SIZES =
-	"(max-width: 640px) calc(100vw - 2rem), 28rem";
+	"(max-width: 768px) calc(100vw - 2rem), 32rem";
 
 export default function HomeFeaturedSketch({ sketch }) {
 	const sketchHref = `/${sketch.uid}`;
 	const imageField = sketch.image?.alt
 		? sketch.image
 		: { ...sketch.image, alt: sketch.title };
+	const { width, height } = sketch.image?.dimensions ?? {};
 
 	return (
 		<article>
@@ -29,14 +30,12 @@ export default function HomeFeaturedSketch({ sketch }) {
 					<PrismicNextImage
 						field={imageField}
 						className={styles.image}
-						fill
+						width={width}
+						height={height}
 						sizes={FEATURED_IMAGE_SIZES}
 						loading="lazy"
 						imgixParams={{
-							fit: "crop",
-							crop: "top",
-							ar: "1:1",
-							w: 672,
+							format: "auto",
 						}}
 					/>
 				</span>
