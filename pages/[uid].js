@@ -343,7 +343,7 @@ const SketchplanationPage = ({
 										</div>
 									</div>
 									<div className="text-center text-sm mt-12">
-										As an Amazon Associate I earn from qualifying purchases.
+										When you buy through links on sketchplanations.com, I may earn an affiliate commission. Thanks for supporting the site!
 									</div>
 								</div>
 							</div>
