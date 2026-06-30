@@ -164,7 +164,7 @@ const Footer = () => {
 			</div>
 
 			<div className="text-center text-sm px-[var(--edgeInset)] py-4">
-				As an Amazon Associate I earn from qualifying purchases.
+				When you buy through links on sketchplanations.com, I may earn an affiliate commission. Thanks for supporting the site!
 			</div>
 
 			<div id="footer-nav-links" className="border-t border-borderFooter pt-6 sm:pt-10 px-[var(--edgeInset)]">
