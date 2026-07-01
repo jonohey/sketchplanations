@@ -25,9 +25,9 @@ const Search = () => {
 				)}
 				<link rel="canonical" href="https://sketchplanations.com/search" />
 			</Head>
-			<header className="pt-6 px-4">
+			<header className="pt-2 px-4 md:pt-6">
 				<div className="prose mx-auto text-center">
-					<h1 className="text-2xl">Search</h1>
+					<h1 className="text-2xl !mt-0 !mb-0 md:!mb-2">Search</h1>
 				</div>
 			</header>
 			<div className={styles.root}>

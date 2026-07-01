@@ -110,7 +110,7 @@ const SearchResults = () => {
 	if (!called) {
 		return (
 			<>
-				<div className="text-center mt-8 mb-8">
+				<div className="text-center mt-4 mb-4 md:mt-8 md:mb-8">
 					<p className="text-textSubdued text-sm mb-2">More ways to explore</p>
 					<FancyLink href="/categories">Categories</FancyLink>
 					<span className="mx-2">·</span>
