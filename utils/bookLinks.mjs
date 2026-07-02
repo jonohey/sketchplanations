@@ -50,6 +50,7 @@ export function bookUrlScore(url) {
 export function cleanLinkText(text) {
 	return text
 		.replace(/^see\s+/i, "")
+		.replace(/^read\s+/i, "")
 		.replace(/\s+book$/i, "")
 		.replace(/[.,;:]+$/, "")
 		.trim();
@@ -140,12 +141,17 @@ export function buildBooksIndex(linkInstances, overridesByTitle = {}) {
 
 	for (const instance of linkInstances) {
 		const parsed = parseBookLinkText(instance.text);
-		const titleKey = normalizeBookTitle(parsed.title);
+		const lookupKey = normalizeBookTitle(parsed.title);
 
-		if (!titleKey) continue;
+		if (!lookupKey) continue;
 
-		const override = overridesByTitle[titleKey] ?? overridesByTitle[parsed.title];
+		const override =
+			overridesByTitle[lookupKey] ?? overridesByTitle[parsed.title];
 		if (override?.exclude) continue;
+
+		const titleKey = override?.title
+			? normalizeBookTitle(override.title)
+			: lookupKey;
 
 		let book = booksByTitle.get(titleKey);
 

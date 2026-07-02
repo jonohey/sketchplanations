@@ -13,6 +13,7 @@
 		"start": "next start",
 		"test": "vitest run",
 		"build:books": "node utils/buildBooksIndex.mjs",
+		"fetch:book-authors": "node scripts/fetch-book-authors.mjs",
 		"tag-cleanup:audit": "node scripts/tag-cleanup/index.mjs audit",
 		"tag-cleanup:migrate": "node scripts/tag-cleanup/index.mjs migrate",
 		"tag-cleanup:migrate-edits": "node scripts/tag-cleanup/index.mjs migrate-edits",

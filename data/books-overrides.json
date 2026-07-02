@@ -7,6 +7,62 @@
 		},
 		"adjustable pliers": {
 			"exclude": true
+		},
+		"jar keys": {
+			"exclude": true
+		},
+		"leuchtterm dot grid hardcover": {
+			"exclude": true
+		},
+		"moleskine dot grid softcover": {
+			"exclude": true
+		},
+		"special grippy mats": {
+			"exclude": true
+		},
+		"sushi go": {
+			"exclude": true
+		},
+		"tools to pop the tricky childproof caps": {
+			"exclude": true
+		},
+		"ultrasomething": {
+			"exclude": true
+		},
+		"written many books": {
+			"exclude": true
+		},
+		"art cure professor daisy fancourt": {
+			"title": "The Art Cure",
+			"author": "Daisy Fancourt"
+		},
+		"dan pinks book drive": {
+			"title": "Drive",
+			"author": "Daniel H. Pink"
+		},
+		"dan pinks excellent book drive": {
+			"title": "Drive",
+			"author": "Daniel H. Pink"
+		},
+		"james clears book atomic habits": {
+			"title": "Atomic Habits",
+			"author": "James Clear"
+		},
+		"james liptons an exaltation of larks": {
+			"title": "An Exaltation of Larks",
+			"author": "James Lipton"
+		},
+		"tim marshalls prisoners of geography": {
+			"title": "Prisoners of Geography",
+			"author": "Tim Marshall"
+		},
+		"richard hammings the art of doing science and engineering learning to learn": {
+			"title": "The Art of Doing Science and Engineering",
+			"author": "Richard Hamming"
+		},
+		"charles saatchis": {
+			"title": "My Name is Charles Saatchi and I Am an Artoholic",
+			"author": "Charles Saatchi"
 		}
 	}
 }

@@ -34,6 +34,7 @@ yarn-error.log*
 data/*
 !data/.gitkeep
 !data/books-overrides.json
+!data/books-authors.json
 /public/rss.xml
 
 # Local Netlify folder

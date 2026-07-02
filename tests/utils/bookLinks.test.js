@@ -45,10 +45,13 @@ describe("parseBookLinkText", () => {
 		});
 	});
 
-	it("cleans leading see and trailing book", () => {
-		expect(cleanLinkText("see Factfulness by Hans Rosling")).toBe(
-			"Factfulness by Hans Rosling",
-		);
+		it("cleans leading see, read and trailing book", () => {
+			expect(cleanLinkText("see Factfulness by Hans Rosling")).toBe(
+				"Factfulness by Hans Rosling",
+			);
+			expect(cleanLinkText("Read Metaphors We Live By")).toBe(
+				"Metaphors We Live By",
+			);
 		expect(parseBookLinkText("Factfulness book")).toEqual({
 			title: "Factfulness",
 		});
