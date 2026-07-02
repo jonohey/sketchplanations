@@ -131,6 +131,53 @@ describe("buildBooksIndex", () => {
 		expect(books[0].sketches).toHaveLength(2);
 	});
 
+	it("sorts books by sketch reference count, then title", () => {
+		const books = buildBooksIndex([
+			{
+				url: "https://geni.us/a",
+				text: "Alpha Book",
+				uid: "one",
+				sketchTitle: "Sketch One",
+			},
+			{
+				url: "https://geni.us/b",
+				text: "Beta Book",
+				uid: "two",
+				sketchTitle: "Sketch Two",
+			},
+			{
+				url: "https://geni.us/b2",
+				text: "Beta Book",
+				uid: "three",
+				sketchTitle: "Sketch Three",
+			},
+			{
+				url: "https://geni.us/c",
+				text: "Gamma Book",
+				uid: "four",
+				sketchTitle: "Sketch Four",
+			},
+			{
+				url: "https://geni.us/c2",
+				text: "Gamma Book",
+				uid: "five",
+				sketchTitle: "Sketch Five",
+			},
+			{
+				url: "https://geni.us/c3",
+				text: "Gamma Book",
+				uid: "six",
+				sketchTitle: "Sketch Six",
+			},
+		]);
+
+		expect(books.map((book) => book.title)).toEqual([
+			"Gamma",
+			"Beta",
+			"Alpha",
+		]);
+	});
+
 	it("applies overrides and exclusions", () => {
 		const books = buildBooksIndex(
 			[

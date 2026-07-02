@@ -192,9 +192,12 @@ export function buildBooksIndex(linkInstances, overridesByTitle = {}) {
 		}
 	}
 
-	return [...booksByTitle.values()].sort((a, b) =>
-		a.title.localeCompare(b.title, undefined, { sensitivity: "base" }),
-	);
+	return [...booksByTitle.values()].sort((a, b) => {
+		const sketchDiff = b.sketches.length - a.sketches.length;
+		if (sketchDiff !== 0) return sketchDiff;
+
+		return a.title.localeCompare(b.title, undefined, { sensitivity: "base" });
+	});
 }
 
 /**
