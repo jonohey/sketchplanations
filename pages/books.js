@@ -93,13 +93,13 @@ const Books = ({ books }) => {
 				<title>{pageTitle("Books")}</title>
 				<meta
 					name="description"
-					content="A calm, browsable reading list of the books behind the sketches — collected from Sketchplanations articles."
+					content="Books that taught the ideas behind Sketchplanations — a reading list to learn more from the sketches."
 				/>
 				<link rel="canonical" href="https://sketchplanations.com/books" />
 				<meta property="og:title" content="Books" />
 				<meta
 					property="og:description"
-					content="A calm, browsable reading list of the books behind the sketches."
+					content="Books that taught the ideas behind Sketchplanations — a reading list to learn more from the sketches."
 				/>
 				<meta property="og:url" content="https://sketchplanations.com/books" />
 				<meta name="twitter:card" content="summary" />
@@ -110,8 +110,9 @@ const Books = ({ books }) => {
 						<TextHeader>Books</TextHeader>
 					</div>
 					<p className="lead mx-auto max-w-2xl">
-						A shelf, not a shop — the books behind the sketches. Wander through
-						a reading list gathered from across Sketchplanations.
+						Many sketches are of ideas I learned from reading books. Here are
+						the books that taught me the content in Sketchplanations and a
+						great start to learn more.
 					</p>
 				</div>
 
