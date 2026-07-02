@@ -3,44 +3,31 @@ import TextHeader from "components/TextHeader";
 import booksIndex from "data/books-index.json";
 import { pageTitle } from "helpers";
 import Head from "next/head";
+import Link from "next/link";
 
 import styles from "./books.module.css";
-
-const BookCover = ({ book }) => {
-	if (book.thumbnail) {
-		return (
-			<img
-				src={book.thumbnail}
-				alt=""
-				className="w-20 h-[7.5rem] sm:w-24 sm:h-36 object-cover rounded shadow-sm"
-			/>
-		);
-	}
-
-	const initial = book.title?.trim()?.[0]?.toUpperCase() ?? "?";
-
-	return (
-		<div className={styles.coverPlaceholder} aria-hidden="true">
-			<span className={styles.coverInitial}>{initial}</span>
-		</div>
-	);
-};
 
 const BookRow = ({ book }) => {
 	return (
 		<article className={styles.bookRow}>
-			<a
-				href={book.url}
-				target="_blank"
-				rel="noopener noreferrer"
-				className={styles.coverLink}
-				aria-label={`Find ${book.title}`}
-			>
-				<BookCover book={book} />
-			</a>
+			{book.thumbnail ? (
+				<a
+					href={book.url}
+					target="_blank"
+					rel="noopener noreferrer"
+					className={styles.coverLink}
+					aria-label={`Find ${book.title}`}
+				>
+					<img
+						src={book.thumbnail}
+						alt=""
+						className="w-20 h-[7.5rem] sm:w-24 sm:h-36 object-cover rounded shadow-sm"
+					/>
+				</a>
+			) : null}
 
 			<div className={`${styles.bookContent} prose max-w-none`}>
-				<div>
+				<div className={styles.bookHeading}>
 					<h2 className="mb-0">
 						<a
 							href={book.url}
@@ -56,13 +43,11 @@ const BookRow = ({ book }) => {
 					) : null}
 				</div>
 
-				{book.note ? (
-					<p className={`${styles.bookNote} not-prose`}>{book.note}</p>
-				) : null}
+				{book.note ? <p className="my-0">{book.note}</p> : null}
 
-				<div>
-					<p className="mb-2">Referenced in</p>
-					<ul>
+				<div className={styles.referencedSection}>
+					<p className="mb-2 mt-0">Referenced in</p>
+					<ul className="mt-0 mb-0">
 						{book.sketches.map((sketch) => (
 							<li key={sketch.uid}>
 								<FancyLink href={`/${sketch.uid}`}>{sketch.title}</FancyLink>
@@ -71,7 +56,7 @@ const BookRow = ({ book }) => {
 					</ul>
 				</div>
 
-				<div className="not-prose">
+				<div className="not-prose mt-3">
 					<a
 						href={book.url}
 						target="_blank"
@@ -80,6 +65,15 @@ const BookRow = ({ book }) => {
 					>
 						Find the book
 					</a>
+				</div>
+
+				<div className="not-prose mt-4">
+					<Link
+						href="#top"
+						className="inline-block text-sm text-blue hover:underline"
+					>
+						Back to top ↑
+					</Link>
 				</div>
 			</div>
 		</article>
@@ -104,7 +98,7 @@ const Books = ({ books }) => {
 				<meta property="og:url" content="https://sketchplanations.com/books" />
 				<meta name="twitter:card" content="summary" />
 			</Head>
-			<div className="max-w-3xl mx-auto px-5 pb-16">
+			<div id="top" className="max-w-3xl mx-auto px-5 pb-16 scroll-mt-24">
 				<div className="prose max-w-none text-center pt-12 pb-8">
 					<div className="not-prose">
 						<TextHeader>Books</TextHeader>
@@ -136,7 +130,6 @@ const Books = ({ books }) => {
 						articles.
 					</p>
 				)}
-
 			</div>
 		</>
 	);
