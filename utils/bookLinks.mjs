@@ -1,0 +1,222 @@
+/**
+ * Extract and normalise book affiliate links from Prismic sketchplanation bodies.
+ */
+
+export const BOOK_URL_PATTERN =
+	/^(https?:\/\/)?(geni\.us\/|amzn\.to\/|a\.co\/|(www\.)?amazon\.)/i;
+
+/** URLs that are books but shouldn't appear on the reading list. */
+export const EXCLUDED_BOOK_URLS = new Set([
+	"https://geni.us/big-ideas-book",
+	"http://geni.us/big-ideas-book",
+]);
+
+/**
+ * @param {string} url
+ */
+export function isBookAffiliateUrl(url) {
+	if (!url || typeof url !== "string") return false;
+	return BOOK_URL_PATTERN.test(url.trim());
+}
+
+/**
+ * @param {string} url
+ */
+export function normalizeBookUrl(url) {
+	try {
+		const parsed = new URL(url.trim());
+		parsed.protocol = "https:";
+		parsed.hash = "";
+		let path = parsed.pathname.replace(/\/$/, "");
+		return `${parsed.origin}${path}`.toLowerCase();
+	} catch {
+		return url.trim().toLowerCase().replace(/\/$/, "");
+	}
+}
+
+/**
+ * @param {string} url
+ */
+export function bookUrlScore(url) {
+	if (/geni\.us/i.test(url)) return 3;
+	if (/amzn\.to|a\.co/i.test(url)) return 2;
+	if (/amazon\./i.test(url)) return 1;
+	return 0;
+}
+
+/**
+ * @param {string} text
+ */
+export function cleanLinkText(text) {
+	return text
+		.replace(/^see\s+/i, "")
+		.replace(/\s+book$/i, "")
+		.replace(/[.,;:]+$/, "")
+		.trim();
+}
+
+/**
+ * @param {string} text
+ * @returns {{ title: string, author?: string }}
+ */
+export function parseBookLinkText(text) {
+	const cleaned = cleanLinkText(text);
+
+	const byMatch = cleaned.match(/^(.+?)\s+by\s+(.+)$/i);
+	if (byMatch) {
+		return {
+			title: byMatch[1].replace(/,\s*$/, "").trim(),
+			author: byMatch[2].trim(),
+		};
+	}
+
+	const commaByMatch = cleaned.match(/^(.+?),\s*by\s+(.+)$/i);
+	if (commaByMatch) {
+		return {
+			title: commaByMatch[1].trim(),
+			author: commaByMatch[2].trim(),
+		};
+	}
+
+	const possessiveMatch = cleaned.match(
+		/^(.+?)['']s\s+(?:excellent\s+)?book\s+(.+)$/i,
+	);
+	if (possessiveMatch) {
+		return {
+			title: possessiveMatch[2].trim(),
+			author: possessiveMatch[1].trim(),
+		};
+	}
+
+	return { title: cleaned };
+}
+
+/**
+ * @param {string} title
+ */
+export function normalizeBookTitle(title) {
+	return title
+		.toLowerCase()
+		.replace(/\s+book$/i, "")
+		.replace(/[^\w\s]/g, "")
+		.replace(/\s+/g, " ")
+		.trim();
+}
+
+/**
+ * Walk Prismic rich text blocks and extract hyperlink spans.
+ * @param {import('@prismicio/types').RichTextField} body
+ * @returns {{ url: string, text: string }[]}
+ */
+export function extractBookLinksFromBody(body) {
+	const links = [];
+
+	for (const block of body ?? []) {
+		if (!block.spans?.length || !block.text) continue;
+
+		for (const span of block.spans) {
+			if (span.type !== "hyperlink" || !span.data?.url) continue;
+			if (!isBookAffiliateUrl(span.data.url)) continue;
+			if (EXCLUDED_BOOK_URLS.has(span.data.url.trim())) continue;
+
+			links.push({
+				url: span.data.url.trim(),
+				text: block.text.slice(span.start, span.end).trim(),
+			});
+		}
+	}
+
+	return links;
+}
+
+/**
+ * @param {object[]} linkInstances
+ * @param {Record<string, object>} [overridesByTitle]
+ * @returns {object[]}
+ */
+export function buildBooksIndex(linkInstances, overridesByTitle = {}) {
+	/** @type {Map<string, object>} */
+	const booksByTitle = new Map();
+
+	for (const instance of linkInstances) {
+		const parsed = parseBookLinkText(instance.text);
+		const titleKey = normalizeBookTitle(parsed.title);
+
+		if (!titleKey) continue;
+
+		const override = overridesByTitle[titleKey] ?? overridesByTitle[parsed.title];
+		if (override?.exclude) continue;
+
+		let book = booksByTitle.get(titleKey);
+
+		if (!book) {
+			book = {
+				title: override?.title ?? parsed.title,
+				author: override?.author ?? parsed.author ?? null,
+				url: instance.url,
+				note: override?.note ?? null,
+				thumbnail: override?.thumbnail ?? null,
+				sketches: [],
+			};
+			booksByTitle.set(titleKey, book);
+		}
+
+		if (
+			!book.author &&
+			parsed.author &&
+			parsed.author.length > book.title.length / 2
+		) {
+			book.author = parsed.author;
+		}
+
+		if (bookUrlScore(instance.url) > bookUrlScore(book.url)) {
+			book.url = instance.url;
+		}
+
+		if (override?.url) book.url = override.url;
+		if (override?.author) book.author = override.author;
+		if (override?.note) book.note = override.note;
+		if (override?.thumbnail) book.thumbnail = override.thumbnail;
+
+		if (!book.sketches.some((s) => s.uid === instance.uid)) {
+			book.sketches.push({
+				uid: instance.uid,
+				title: instance.sketchTitle,
+			});
+		}
+	}
+
+	return [...booksByTitle.values()].sort((a, b) =>
+		a.title.localeCompare(b.title, undefined, { sensitivity: "base" }),
+	);
+}
+
+/**
+ * @param {import('@prismicio/client').Client} client
+ * @param {Record<string, object>} [overridesByTitle]
+ */
+export async function fetchBooksFromPrismic(client, overridesByTitle = {}) {
+	const sketchplanations = await client.getAllByType("sketchplanation", {
+		fetch: [
+			"sketchplanation.title",
+			"sketchplanation.body",
+			"sketchplanation.uid",
+		],
+	});
+
+	const linkInstances = [];
+
+	for (const sketch of sketchplanations) {
+		const links = extractBookLinksFromBody(sketch.data.body);
+
+		for (const link of links) {
+			linkInstances.push({
+				...link,
+				uid: sketch.uid,
+				sketchTitle: sketch.data.title,
+			});
+		}
+	}
+
+	return buildBooksIndex(linkInstances, overridesByTitle);
+}

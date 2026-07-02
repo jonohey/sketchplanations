@@ -33,6 +33,7 @@ yarn-error.log*
 .vercel
 data/*
 !data/.gitkeep
+!data/books-overrides.json
 /public/rss.xml
 
 # Local Netlify folder
