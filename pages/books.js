@@ -116,6 +116,11 @@ const Books = ({ books }) => {
 					</p>
 				</div>
 
+				<p className="prose max-w-none text-sm mb-8">
+					When you buy through links on this page, I may earn an affiliate
+					commission at no extra cost to you. Thanks for supporting the site.
+				</p>
+
 				{books.length > 0 ? (
 					<ul className={styles.bookList}>
 						{books.map((book) => (
@@ -132,10 +137,6 @@ const Books = ({ books }) => {
 					</p>
 				)}
 
-				<p className="prose max-w-none text-sm text-textSubdued mt-12">
-					When you buy through links on this page, I may earn an affiliate
-					commission at no extra cost to you. Thanks for supporting the site.
-				</p>
 			</div>
 		</>
 	);
