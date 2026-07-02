@@ -44,29 +44,30 @@ const BookRow = ({ book }) => {
 				<BookCover book={book} />
 			</a>
 
-			<div className={styles.bookContent}>
+			<div className={`${styles.bookContent} prose max-w-none`}>
 				<div>
-					<h2 className={styles.bookTitle}>
-						<FancyLink
+					<h2 className="mb-0">
+						<a
 							href={book.url}
 							target="_blank"
 							rel="noopener noreferrer"
+							className="text-text no-underline font-semibold hover:text-blue"
 						>
 							{book.title}
-						</FancyLink>
+						</a>
 					</h2>
 					{book.author ? (
-						<p className={styles.bookAuthor}>by {book.author}</p>
+						<p className="text-textSubdued mt-1 mb-0">by {book.author}</p>
 					) : null}
 				</div>
 
-				{book.note ? <p className={styles.bookNote}>{book.note}</p> : null}
+				{book.note ? (
+					<p className={`${styles.bookNote} not-prose`}>{book.note}</p>
+				) : null}
 
 				<div>
-					<p className={styles.referencedIn}>
-						Referenced in · {referencedLabel}
-					</p>
-					<ul className={styles.referencedList}>
+					<p className="mb-2">Referenced in · {referencedLabel}</p>
+					<ul>
 						{book.sketches.map((sketch) => (
 							<li key={sketch.uid}>
 								<FancyLink href={`/${sketch.uid}`}>{sketch.title}</FancyLink>
@@ -75,7 +76,7 @@ const BookRow = ({ book }) => {
 					</ul>
 				</div>
 
-				<div className={styles.bookActions}>
+				<div className="not-prose">
 					<a
 						href={book.url}
 						target="_blank"
@@ -110,9 +111,11 @@ const Books = ({ books }) => {
 				<meta name="twitter:card" content="summary" />
 			</Head>
 			<div className="max-w-3xl mx-auto px-5 pb-16">
-				<div className="pt-12 pb-8 text-center">
-					<TextHeader>Books</TextHeader>
-					<p className="prose mx-auto mt-4 mb-0 max-w-2xl text-textSubdued">
+				<div className="prose max-w-none text-center pt-12 pb-8">
+					<div className="not-prose">
+						<TextHeader>Books</TextHeader>
+					</div>
+					<p className="lead mx-auto max-w-2xl">
 						A shelf, not a shop — the books behind the sketches. Wander through
 						a reading list gathered from across Sketchplanations.
 					</p>
@@ -127,14 +130,14 @@ const Books = ({ books }) => {
 						))}
 					</ul>
 				) : (
-					<p className={styles.emptyState}>
+					<p className="prose max-w-none text-center text-textSubdued py-12">
 						No books found yet. Run{" "}
-						<code className="text-sm">npm run build:books</code> after adding
-						book links to sketch articles.
+						<code>npm run build:books</code> after adding book links to sketch
+						articles.
 					</p>
 				)}
 
-				<p className={styles.disclaimer}>
+				<p className="prose max-w-none text-sm text-textSubdued mt-12">
 					When you buy through links on this page, I may earn an affiliate
 					commission at no extra cost to you. Thanks for supporting the site.
 				</p>

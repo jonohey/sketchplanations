@@ -31,36 +31,8 @@
 	@apply flex-1 min-w-0 flex flex-col gap-3;
 }
 
-.bookTitle {
-	@apply text-xl sm:text-2xl font-semibold m-0 leading-tight;
-}
-
-.bookAuthor {
-	@apply text-textSubdued m-0 text-base;
-}
-
 .bookNote {
-	@apply rounded px-4 py-3 text-base m-0;
+	@apply rounded px-4 py-3 m-0;
 	background: var(--color-paper);
 	color: var(--color-text);
-}
-
-.referencedIn {
-	@apply text-sm text-textSubdued m-0;
-}
-
-.referencedList {
-	@apply list-none p-0 m-1 flex flex-col gap-1;
-}
-
-.bookActions {
-	@apply mt-1;
-}
-
-.emptyState {
-	@apply text-textSubdued text-center py-12;
-}
-
-.disclaimer {
-	@apply text-sm text-textSubdued mt-12;
 }
