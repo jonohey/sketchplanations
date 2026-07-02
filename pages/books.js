@@ -2,7 +2,6 @@ import FancyLink from "components/FancyLink";
 import TextHeader from "components/TextHeader";
 import booksIndex from "data/books-index.json";
 import { pageTitle } from "helpers";
-import { ExternalLink } from "lucide-react";
 import Head from "next/head";
 
 import styles from "./books.module.css";
@@ -28,10 +27,6 @@ const BookCover = ({ book }) => {
 };
 
 const BookRow = ({ book }) => {
-	const sketchCount = book.sketches.length;
-	const referencedLabel =
-		sketchCount === 1 ? "1 sketch" : `${sketchCount} sketches`;
-
 	return (
 		<article className={styles.bookRow}>
 			<a
@@ -66,7 +61,7 @@ const BookRow = ({ book }) => {
 				) : null}
 
 				<div>
-					<p className="mb-2">Referenced in · {referencedLabel}</p>
+					<p className="mb-2">Referenced in</p>
 					<ul>
 						{book.sketches.map((sketch) => (
 							<li key={sketch.uid}>
@@ -81,10 +76,9 @@ const BookRow = ({ book }) => {
 						href={book.url}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="btn-outline inline-flex items-center gap-2 no-underline"
+						className="btn-outline inline-block no-underline"
 					>
 						Find the book
-						<ExternalLink size={16} aria-hidden="true" />
 					</a>
 				</div>
 			</div>
