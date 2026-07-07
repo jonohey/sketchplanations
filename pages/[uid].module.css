@@ -323,7 +323,15 @@
 }
 
 .published-at {
-  @apply py-4 text-sm text-textSubdued;
+  @apply flex items-center justify-between gap-x-4 py-4 text-sm text-textSubdued;
+}
+
+.divider {
+  @apply border-0 border-t border-border mt-10 mb-6;
+}
+
+.back-to-top {
+  @apply inline-flex shrink-0 items-center gap-x-1 text-sm text-blue dark:text-blueLight hover:underline;
 }
 
 .footer {
