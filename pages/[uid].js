@@ -12,10 +12,16 @@ import SketchplanationImage from "components/SketchplanationImage";
 import SketchplanationsStack from "components/SketchplanationsStack";
 import SubscribeInline from "components/SubscribeInline";
 import TaggedSketchplanations from "components/TaggedSketchplanations";
-import { humanizePublishedDate, isPresent, pageTitle, shuffle } from "helpers";
+import {
+	fastScrollToTop,
+	humanizePublishedDate,
+	isPresent,
+	pageTitle,
+	shuffle,
+} from "helpers";
 import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
 import { useRandomHandle } from "hooks/useRandomHandle";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUp, ChevronLeft, ChevronRight } from "lucide-react";
 import { ImageJsonLd } from "next-seo";
 import dynamic from "next/dynamic";
 import Head from "next/head";
@@ -28,7 +34,6 @@ const TextHeader = dynamic(() => import("components/TextHeader"));
 const Modal = dynamic(() => import("components/Modal"));
 
 import InlinePage from "components/InlinePage";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import styles from "./[uid].module.css";
 
 const truncate = (string, limit) => {
@@ -219,7 +224,7 @@ const SketchplanationPage = ({
 			<div className={styles.root}>
 				<div className={styles.articleWrapper}>
 					<article className={styles.article}>
-						<div className={styles.title}>
+						<div id="top" className={classNames(styles.title, "scroll-mt-24")}>
 							<TextHeader>{title}</TextHeader>
 						</div>
 						<div className={styles.image}>
@@ -268,9 +273,28 @@ const SketchplanationPage = ({
 								)}
 							>
 								<RichText field={body} />
-								<div className={styles["published-at"]}>
-									{publishedText !== "✨ Latest" && "Published "}
-									<time dateTime={publishedAt}>{publishedText}</time>
+								<hr className={styles.divider} />
+								<div
+									className={classNames(
+										styles["published-at"],
+										"not-prose",
+									)}
+								>
+									<div>
+										{publishedText !== "✨ Latest" && "Published "}
+										<time dateTime={publishedAt}>{publishedText}</time>
+									</div>
+									<a
+										href="#top"
+										className={styles["back-to-top"]}
+										onClick={(e) => {
+											e.preventDefault();
+											fastScrollToTop();
+										}}
+									>
+										<ArrowUp size={14} strokeWidth={2} aria-hidden />
+										Back to top
+									</a>
 								</div>
 							</div>
 							{/* <ul className={styles.tags}>

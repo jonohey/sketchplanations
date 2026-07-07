@@ -36,6 +36,35 @@ export const getCookie = (name) => {
 	return null;
 };
 
+export const fastScrollToTop = ({ durationMs = 250 } = {}) => {
+	if (typeof window === "undefined") return;
+
+	const prefersReducedMotion =
+		typeof window.matchMedia === "function" &&
+		window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+	if (prefersReducedMotion) {
+		window.scrollTo(0, 0);
+		return;
+	}
+
+	const startY = window.scrollY ?? window.pageYOffset ?? 0;
+	if (startY <= 0) return;
+
+	const startTime = window.performance?.now?.() ?? Date.now();
+	const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+	const step = (now) => {
+		const elapsed = now - startTime;
+		const t = Math.min(1, elapsed / durationMs);
+		const y = Math.round(startY * (1 - easeOutCubic(t)));
+		window.scrollTo(0, y);
+		if (t < 1) window.requestAnimationFrame(step);
+	};
+
+	window.requestAnimationFrame(step);
+};
+
 const contractions = [
 	"whats",
 	"thats",

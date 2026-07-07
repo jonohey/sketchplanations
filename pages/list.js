@@ -1,7 +1,7 @@
 import FancyLink from "components/FancyLink";
 import SortButtons from "components/SortButtons";
 import TextHeader from "components/TextHeader";
-import { pageTitle } from "helpers";
+import { fastScrollToTop, pageTitle } from "helpers";
 import Head from "next/head";
 import Link from "next/link";
 import { useMemo, useState } from 'react';
@@ -130,7 +130,14 @@ const SketchList = ({ initialSketches }) => {
 								))}
 							</div>
 							<div className="mt-4 text-left">
-								<Link href="#top" className="inline-block text-sm text-blue hover:underline">
+								<Link
+									href="#top"
+									className="inline-block text-sm text-blue hover:underline"
+									onClick={(e) => {
+										e.preventDefault();
+										fastScrollToTop();
+									}}
+								>
 									Back to top ↑
 								</Link>
 							</div>

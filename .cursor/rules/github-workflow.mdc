@@ -42,6 +42,7 @@ Review all changes before staging or committing. Fix issues found; do not commit
 - **Tests**: Add Vitest coverage where appropriate — meaningful cases, not exhaustive edge-case sprawl. Run `npm test` (Vitest) and ensure tests pass.
 - **Removals**: Confirm deleted code only removes deliberately abandoned functionality. If a feature appears unused and removal wasn't in the brief, ask before removing it.
 - **Best practice**: Check accessibility, error handling, security, and consistency with surrounding code.
+- **CSS & styling**: New or changed CSS should be mobile-first, with behaviour checked on small viewports. Consider dark mode (`prefers-color-scheme`) for any colours, borders, or backgrounds. Typography should meet accessible contrast (WCAG AA) unless a deliberate subdued treatment is intended.
 
 Briefly summarise the review outcome to the user (what you checked, what you fixed, anything flagged).
 
