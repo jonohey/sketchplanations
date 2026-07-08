@@ -2,8 +2,7 @@
 	"books": {
 		"factfulness": {
 			"title": "Factfulness",
-			"author": "Hans Rosling",
-			"note": "One of the most quietly hopeful books I've read."
+			"author": "Hans Rosling"
 		},
 		"adjustable pliers": {
 			"exclude": true

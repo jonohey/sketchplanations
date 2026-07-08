@@ -148,6 +148,15 @@ const Books = ({ books }) => {
 					</p>
 				</div>
 
+				<p className="prose max-w-none text-sm mb-4">
+					This list is automatically generated from book links in my sketch
+					articles. If something looks wrong, please{" "}
+					<FancyLink href="mailto:jono.hey@gmail.com?subject=Books%20page%20correction">
+						let me know
+					</FancyLink>
+					.
+				</p>
+
 				<p className="prose max-w-none text-sm mb-6">
 					When you buy through links on this page, I may earn an affiliate
 					commission at no extra cost to you. Thanks for supporting the site.
