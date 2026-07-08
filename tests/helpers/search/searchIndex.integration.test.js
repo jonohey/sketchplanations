@@ -10,7 +10,10 @@ import {
 	searchSketches,
 } from "helpers/search/fuseSearch.js";
 
-const indexPath = path.join(process.cwd(), "data/search-index.json");
+const indexPath = path.join(
+	process.cwd(),
+	"tests/fixtures/search-index.json",
+);
 const index = JSON.parse(fs.readFileSync(indexPath, "utf8"));
 const sketchFuse = createSketchFuse(Fuse, index.sketches);
 const categoryFuse = createCategoryFuse(Fuse, index.categories);
