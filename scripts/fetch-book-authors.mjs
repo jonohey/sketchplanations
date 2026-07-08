@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { normalizeBookTitle } from "../utils/bookLinks.mjs";
+import { normalizeParsedTitle } from "../utils/bookLinks.mjs";
 
 const BOOKS_INDEX_PATH = path.join(process.cwd(), "data/books-index.json");
 const AUTHORS_PATH = path.join(process.cwd(), "data/books-authors.json");
@@ -18,10 +18,12 @@ function loadJson(filePath, fallback) {
 }
 
 function lookupTitle(title) {
-	return title
-		.replace(/^audiobook of\s+/i, "")
-		.replace(/\s+book$/i, "")
-		.trim();
+	return normalizeParsedTitle(
+		title
+			.replace(/^audiobook of\s+/i, "")
+			.replace(/\s+book$/i, "")
+			.trim(),
+	);
 }
 
 async function resolveProductId(url) {

@@ -45,16 +45,47 @@ describe("parseBookLinkText", () => {
 		});
 	});
 
-		it("cleans leading see, read and trailing book", () => {
-			expect(cleanLinkText("see Factfulness by Hans Rosling")).toBe(
-				"Factfulness by Hans Rosling",
-			);
-			expect(cleanLinkText("Read Metaphors We Live By")).toBe(
-				"Metaphors We Live By",
-			);
+	it("cleans leading see, read and trailing book", () => {
+		expect(cleanLinkText("see Factfulness by Hans Rosling")).toBe(
+			"Factfulness by Hans Rosling",
+		);
+		expect(cleanLinkText("Read Metaphors We Live By")).toBe(
+			"Metaphors We Live By",
+		);
+		expect(cleanLinkText("audiobook of Greenlights")).toBe("Greenlights");
 		expect(parseBookLinkText("Factfulness book")).toEqual({
 			title: "Factfulness",
 		});
+	});
+
+	it("strips audiobook prefix and pronoun book phrasing", () => {
+		expect(parseBookLinkText("audiobook of The Hunger Games")).toEqual({
+			title: "The Hunger Games",
+		});
+		expect(parseBookLinkText("her book The Pyramid Principle")).toEqual({
+			title: "The Pyramid Principle",
+		});
+	});
+
+	it("merges audiobook and print editions of the same book", () => {
+		const books = buildBooksIndex([
+			{
+				url: "https://amzn.to/greenlights-audio",
+				text: "audiobook of Greenlights",
+				uid: "one",
+				sketchTitle: "Sketch One",
+			},
+			{
+				url: "https://geni.us/greenlights",
+				text: "Greenlights",
+				uid: "two",
+				sketchTitle: "Sketch Two",
+			},
+		]);
+
+		expect(books).toHaveLength(1);
+		expect(books[0].title).toBe("Greenlights");
+		expect(books[0].sketches).toHaveLength(2);
 	});
 });
 

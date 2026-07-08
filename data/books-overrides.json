@@ -63,6 +63,13 @@
 		"charles saatchis": {
 			"title": "My Name is Charles Saatchi and I Am an Artoholic",
 			"author": "Charles Saatchi"
+		},
+		"popular book on relativity": {
+			"title": "Einstein's Mirror"
+		},
+		"the pyramid principle": {
+			"title": "The Pyramid Principle",
+			"author": "Barbara Minto"
 		}
 	}
 }

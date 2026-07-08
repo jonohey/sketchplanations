@@ -51,8 +51,25 @@ export function cleanLinkText(text) {
 	return text
 		.replace(/^see\s+/i, "")
 		.replace(/^read\s+/i, "")
+		.replace(
+			/^(?:audiobook|audio book|kindle edition|ebook)\s+of\s+/i,
+			"",
+		)
 		.replace(/\s+book$/i, "")
 		.replace(/[.,;:]+$/, "")
+		.trim();
+}
+
+/**
+ * @param {string} title
+ */
+export function normalizeParsedTitle(title) {
+	return title
+		.replace(
+			/^(?:audiobook|audio book|kindle edition|ebook)\s+of\s+/i,
+			"",
+		)
+		.replace(/^(?:her|his|their|my)\s+book\s+/i, "")
 		.trim();
 }
 
@@ -66,7 +83,7 @@ export function parseBookLinkText(text) {
 	const byMatch = cleaned.match(/^(.+?)\s+by\s+(.+)$/i);
 	if (byMatch) {
 		return {
-			title: byMatch[1].replace(/,\s*$/, "").trim(),
+			title: normalizeParsedTitle(byMatch[1].replace(/,\s*$/, "").trim()),
 			author: byMatch[2].trim(),
 		};
 	}
@@ -74,29 +91,41 @@ export function parseBookLinkText(text) {
 	const commaByMatch = cleaned.match(/^(.+?),\s*by\s+(.+)$/i);
 	if (commaByMatch) {
 		return {
-			title: commaByMatch[1].trim(),
+			title: normalizeParsedTitle(commaByMatch[1].trim()),
 			author: commaByMatch[2].trim(),
 		};
 	}
 
 	const possessiveMatch = cleaned.match(
-		/^(.+?)['']s\s+(?:excellent\s+)?book\s+(.+)$/i,
+		/^(.+?)['']s\s+(?:excellent\s+)?book(?:\s+(.+))?$/i,
 	);
 	if (possessiveMatch) {
+		if (possessiveMatch[2]) {
+			return {
+				title: normalizeParsedTitle(possessiveMatch[2].trim()),
+				author: possessiveMatch[1].trim(),
+			};
+		}
+	}
+
+	const pronounBookMatch = cleaned.match(
+		/^(?:her|his|their|my)\s+book\s+(.+)$/i,
+	);
+	if (pronounBookMatch) {
 		return {
-			title: possessiveMatch[2].trim(),
-			author: possessiveMatch[1].trim(),
+			title: normalizeParsedTitle(pronounBookMatch[1].trim()),
 		};
 	}
 
-	return { title: cleaned };
+	const parsedTitle = normalizeParsedTitle(cleaned);
+	return parsedTitle ? { title: parsedTitle } : { title: cleaned };
 }
 
 /**
  * @param {string} title
  */
 export function normalizeBookTitle(title) {
-	return title
+	return normalizeParsedTitle(title)
 		.toLowerCase()
 		.replace(/\s+book$/i, "")
 		.replace(/[^\w\s]/g, "")

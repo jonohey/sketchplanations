@@ -66,7 +66,16 @@ const BookRow = ({ book }) => {
 						</BookBuyLink>
 					</h2>
 					{book.author ? (
-						<p className="text-textSubdued mt-1 mb-0">by {book.author}</p>
+						<p className="text-textSubdued mt-1 mb-0">
+							by{" "}
+							<BookBuyLink
+								book={book}
+								className="text-textSubdued no-underline hover:text-blue"
+								location="author"
+							>
+								{book.author}
+							</BookBuyLink>
+						</p>
 					) : null}
 				</div>
 
