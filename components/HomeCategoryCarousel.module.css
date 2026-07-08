@@ -27,7 +27,7 @@
 }
 
 .tagline {
-  @apply mt-1 mb-0 text-sm text-textSubdued;
+  @apply mt-2 mb-0 text-base sm:text-lg font-medium text-text;
 }
 
 .title {
