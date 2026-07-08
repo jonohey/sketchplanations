@@ -367,7 +367,8 @@ const SketchplanationPage = ({
 										</div>
 									</div>
 									<div className="text-center text-sm mt-12">
-										When you buy through links on sketchplanations.com, I may earn an affiliate commission. Thanks for supporting the site!{" "}
+										When you buy through links on sketchplanations.com, I may earn an affiliate commission. Thanks for supporting the site!
+										<br />
 										<FancyLink href="/books">Browse all books</FancyLink>
 									</div>
 								</div>

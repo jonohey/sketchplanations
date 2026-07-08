@@ -1,13 +1,17 @@
 .bookList {
-	@apply list-none p-0 m-0 flex flex-col gap-10;
+	@apply list-none p-0 m-0 flex flex-col;
 }
 
 .bookRow {
-	@apply flex flex-col gap-2 pb-10 border-b border-border last:border-b-0 last:pb-0;
+	@apply py-7 border-b border-border last:border-b-0 last:pb-0;
+}
+
+.bookRowWithCover {
+	@apply flex flex-col gap-2;
 }
 
 @media (min-width: 640px) {
-	.bookRow {
+	.bookRowWithCover {
 		@apply flex-row gap-6 items-start;
 	}
 }
@@ -17,15 +21,23 @@
 }
 
 .bookContent {
-	@apply flex-1 min-w-0 flex flex-col gap-2 sm:gap-3;
+	@apply flex flex-col gap-2 min-w-0;
 }
 
-.bookHeading {
-	@apply m-0;
+.bookHeading :global(h2) {
+	margin-top: 0;
+}
+
+.buyAction {
+	@apply mt-2;
+}
+
+.backToTop {
+	@apply mt-4;
 }
 
 .referencedSection {
-	@apply mt-1 sm:mt-2;
+	@apply mt-1;
 }
 
 .referencedSection :global(p) {
