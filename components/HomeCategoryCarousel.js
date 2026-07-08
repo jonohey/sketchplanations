@@ -395,6 +395,9 @@ export default function HomeCategoryCarousels({ rows, interlude = null }) {
 									{row.label}
 								</Link>
 							</h2>
+							{row.tagline && (
+								<p className={styles.tagline}>{row.tagline}</p>
+							)}
 						</div>
 						{row.featuredSketch && (
 							<HomeFeaturedSketch sketch={row.featuredSketch} />
