@@ -1,0 +1,64 @@
+---
+description: Books page — build, curate, and extend the reading list from Prismic
+globs: pages/books.js,utils/bookLinks.mjs,utils/buildBooksIndex.mjs,data/books-overrides.json,data/books-authors.json,scripts/fetch-book-authors.mjs
+---
+
+# Books page
+
+The `/books` page is a **generated reading list** of affiliate book links found in Prismic `sketchplanation` bodies (`geni.us`, `amzn.to`, `a.co`, Amazon).
+
+## Build pipeline
+
+| Command | When |
+|---------|------|
+| `npm run build:books` | Regenerate `data/books-index.json` after new sketches or curation edits |
+| `npm run fetch:book-authors` | Fill **missing** authors via affiliate URL → Open Library ISBN lookup |
+| `predev` / `prebuild` | Runs `buildBooksIndex` automatically via `setup.mjs` |
+
+**Commit to git:** `data/books-overrides.json`, `data/books-authors.json`, code in `utils/bookLinks.mjs`.
+
+**Do not commit:** `data/books-index.json` (generated at build time).
+
+## Curation files
+
+### `data/books-overrides.json`
+
+Keyed by normalised title (see `normalizeBookTitle` in `utils/bookLinks.mjs`).
+
+Use for:
+
+- `title` — fix messy link text the parser cannot infer
+- `author` — override when link text does not include author
+- `note` — optional personal note (plain prose on the page; only add when Jono writes them)
+- `thumbnail` — cover image URL when available
+- `exclude: true` — non-book affiliate links (gear, games, etc.)
+
+### `data/books-authors.json`
+
+Flat map: `"normalised title": "Author Name"`.
+
+Used when authors are wrong or missing after `fetch:book-authors`. Merged at build time; overrides win for `author` if both set.
+
+## Typical workflow
+
+1. Publish sketch with affiliate book link in Prismic → deploy (or `npm run build:books`).
+2. If title/author wrong → edit overrides or authors JSON → `npm run build:books`.
+3. Batch author lookup → `npm run fetch:book-authors`, review diff, `npm run build:books`, commit JSON.
+
+## Title parsing
+
+Logic lives in `utils/bookLinks.mjs` (`parseBookLinkText`, `normalizeParsedTitle`):
+
+- Strips `audiobook of`, `her book`, possessive `"X's book Y"`, leading `see` / `read`
+- Merges duplicates by normalised title; prefers `geni.us` URLs
+- Sorted by sketch reference count (most referenced first)
+
+Add parser cases + tests in `tests/utils/bookLinks.test.js` for new edge cases.
+
+## Analytics
+
+Buy clicks fire `Books-buy-link` with `{ book, location }` where `location` is `title`, `author`, `button`, or `cover`.
+
+## Page links elsewhere
+
+Contextual links only (not main nav): About affiliate paragraph, About sketching-books bridge, sketch sidebar affiliate line.

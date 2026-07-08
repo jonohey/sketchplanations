@@ -572,7 +572,11 @@ const About = ({ siteUrl }) => {
 						</p>
 
 						<p>
-							If you buy something using links from the sketches—for example, buying a book I&apos;ve referenced from Amazon that explains a topic in depth—I may earn a commission as an Amazon affiliate. This helps me keep making them, but feel free to buy elsewhere.
+							If you buy something using links from the sketches—for example, buying a book I&apos;ve referenced from Amazon that explains a topic in depth—I may earn a commission as an Amazon affiliate. This helps me keep making them, but feel free to buy elsewhere. See{" "}
+							<FancyLink href="/books">
+								all the books behind the sketches
+							</FancyLink>
+							.
 						</p>
 						<p className="mt-4">
 							<a href="#top" className="inline-block text-sm text-blue hover:underline">
@@ -609,7 +613,12 @@ const About = ({ siteUrl }) => {
 							Here are a few resources that you could start with. They&apos;re not for a classical art education — more about drawing to think and communicate better.
 						</p>
 
-						<h3>Books</h3>
+						<p>
+							For books that inspired the ideas in the sketches themselves, see the{" "}
+							<FancyLink href="/books">Books</FancyLink> page.
+						</p>
+
+						<h3>Books to learn sketching</h3>
 						<ul className="space-y-2">
 							<li>
 								<FancyLink

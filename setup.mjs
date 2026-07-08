@@ -1,3 +1,4 @@
+import buildBooksIndex from "./utils/buildBooksIndex.mjs";
 import buildInitialSearchResults from "./utils/buildInitialSearchResults.mjs";
 import buildNewerSketchplanations from "./utils/buildNewerSketchplanations.mjs";
 import buildPagesData from "./utils/buildPagesData.mjs";
@@ -9,6 +10,7 @@ import prismicToKV from "./utils/prismicToKV.mjs";
 
 const setup = async () => {
 	await Promise.all([
+		buildBooksIndex(),
 		buildInitialSearchResults(),
 		buildSearchIndex(),
 		buildRss(),

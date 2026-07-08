@@ -1,0 +1,50 @@
+.bookList {
+	@apply list-none p-0 m-0 flex flex-col;
+}
+
+.bookRow {
+	@apply py-7 border-b border-border last:border-b-0 last:pb-0;
+}
+
+.bookRowWithCover {
+	@apply flex flex-col gap-2;
+}
+
+@media (min-width: 640px) {
+	.bookRowWithCover {
+		@apply flex-row gap-6 items-start;
+	}
+}
+
+.coverLink {
+	@apply flex-shrink-0 self-start;
+}
+
+.bookContent {
+	@apply flex flex-col gap-2 min-w-0;
+}
+
+.bookHeading :global(h2) {
+	margin-top: 0;
+}
+
+.buyAction {
+	@apply mt-2;
+}
+
+.backToTop {
+	@apply mt-4;
+}
+
+.referencedSection {
+	@apply mt-1;
+}
+
+.referencedSection :global(p) {
+	margin-top: 0;
+}
+
+.referencedSection :global(ul) {
+	margin-top: 0;
+	margin-bottom: 0;
+}
