@@ -273,7 +273,8 @@ export const getStaticProps = async () => {
 	if (recent.results.length > 0) {
 		carouselRows.push({
 			kind: "recent",
-			label: "Recent sketches",
+			label: "Recent",
+			tagline: "A new sketch every week since 2013 🚀",
 			slug: null,
 			viewAllHref: "/archive",
 			featuredSketch: mapSketchForCarousel(recent.results[0]),
