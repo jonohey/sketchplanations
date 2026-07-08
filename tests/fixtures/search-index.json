@@ -1,0 +1,453 @@
+{
+  "sketches": [
+    {
+      "id": "acUd9xEAALY1NhBS",
+      "uid": "the-mcnamara-fallacy",
+      "title": "The McNamara Fallacy",
+      "titleNormalized": "the mcnamara fallacy",
+      "body": "The McNamara Fallacy is a belief in easy-to-measure quantitative metrics at the expense of ignoring hard-to-measure qualitative factors. Robert McNamara was president of Ford Motor Company and later the Secretary of Defense for the USA during the war in Vietnam. He was highly intelligent and excelled at dealing with data and using it to inform strategy. Coined by social scientist Daniel Yankelovich, the McNamara Fallacy, also called the Quantitative Fallacy, involves: Prioritising easier-to-measure quantitative metrics and Disregarding hard-to-measure qualitative metrics as unimportant The fallacy can progress as follows: Measure what can be measured Disregard what we can’t measure Assume what cannot be measured is not important Conclude that what can’t be measured doesn’t exist In the words of Yankelovich: “The fallacy is: If you’re confronted by a complex problem that is full of intangibles, you decide to measure only those aspects of the problem that lend themselves to easy quantification, either because you find other aspects difficult to measure or because you assume that they can’t be very important or don’t even exist.” … “It is a short, fatal step from the statement, ‘There are many intangibles and imponderables that we can’t put on our computers,’ to the statement, ‘Let’s measure what we can and forget about the intangibles.’” Yankelovich cites working with Ford during McNamara’s time and sharing research that included both quantitative and qualitative factors. As the research was assessed, the qualitative data on the meanings people gave to small cars were discarded, and the less significant quantitative and demographic data were retained. Examples of the McNamara Fallacy I first learned about the fallacy from a reader’s article about one of the easiest to measure aspects of a bike: its weight. All things being equal, we’d probably prefer a lighter bike, but other aspects like maintenance, reliability, and handling are important yet harder to measure, report on and compare. As a result, weight often comes to the fore at the expense of the others. Other examples might include: Perhaps your hiring time is down, but how is the fit of the people you’re bringing in? Maybe more people are visiting your website, but they aren’t the right people for your service. We can calculate a country’s GDP, but GDP doesn’t account for human labour without a monetary transaction—like a home-cooked meal—and vital work done by nature, like filtering water, sequestering carbon, or lifting spirits. If food in a can gives you all the nutrients you need, what are you missing by skipping family meals? David Epstein, in his book Range, describes the highly quantitative culture at NASA at the time of the Challenger Space shuttle disaster: \"NASA was, after all, the agency that hung a framed quote in the Mission Evaluation Room: 'In God We Trust, All Others Bring Data.'\" \"The very tool that had helped make NASA so consistently successful, what Diane Vaughan called “the original technical culture” in the agency’s DNA, suddenly worked perversely in a situation where the familiar brand of data did not exist. Reason without numbers was not accepted.\" \"At NASA, accepting a qualitative argument was like being told to forget you are an engineer.\" While engineers had reservations about the safety of the launch, without quantitative data to support their views, the launch proceeded with fatal consequences. A commonly cited example of the McNamara Fallacy is the US military's approach to measuring progress in the Vietnam War. The McNamara Fallacy and the Vietnam War As the US Secretary of Defense from 1961–1968, McNamara employed similar techniques to those he had used successfully in business contexts to assess the progress of the war in Vietnam. If wars were won by inflicting damage on the enemy, then metrics measuring the damage inflicted should be decent proxies. In particular, assessing body count evolved to be the primary measure of progress. Reliance on purely quantitative metrics had significant shortcomings. In this context, enemy body count was more easily quantified than their morale, political support, or resolve to defend. Because of the interest in this measure, many officers believed that it was also often inflated (see Goodhart’s Law and Campbell’s Law below). Measuring the tons of explosives dropped is easier than measuring the reduction in capabilities they caused. Knowing the number of troops you have is easier to measure than the abilities of those troops. According to the numbers, the U.S. was winning the war, yet it failed to overcome the resistance of North Vietnam. Related Ideas to The McNamara Fallacy An over-reliance on quantitative metrics quickly leads to several other related problems to deal with: Goodhart’s Law When a measure becomes a target, it ceases to be a good measure. For example, assessing the progress of war on the numbers of enemy dead may lead to increased killing to inflate numbers. Campbell’s Law The more a metric counts for real decisions, the greater the pressure for corruption, and the more it distorts the situation it’s intended to measure. For example, if reducing crime rates matters for law enforcement jobs, it creates an incentive to under-report cases or downgrade crimes. The Streetlight Effect Looking where it’s easiest to look, rather than where it matters. Also known as the drunkard’s search or looking under the lamppost, the Streetlight Effect is named after the economists’ joke of a person scrabbling on the ground for their car keys under a street light. When asked where they lost them, the person says they dropped them “over there,” but the light’s much better over here. For example, optimising an existing product because it is known and does well, rather than working on an uncertain new product. You Get What you Measure The instrument you use to measure affects what you see. “For example, in school it is easy to measure training and hard to measure education, and hence you tend to see on final exams an emphasis on the training part and a great neglect of the education part.”—Richard Hamming The Cobra Effect When an implemented policy backfires causing the opposite of the intended outcome. Named after a British attempt to reduce cobras in Delhi by introducing a bounty on dead cobras. Seeing the lucrative bounty, people started farming cobras thereby increasing their numbers. For example, the Streisand Effect is a well-documented case of a cobra effect when Barbara Streisand tried to suppress images of the coast that included her house. The attention drawn to her attempts to suppress the images brought thousands of people to look at them who otherwise would never have considered it. And all of these are examples of the broader Law of Unintended Consequences, which comes from trying to regulate a complex system with a simple system.  More Related Ideas to The McNamara Fallacy If the ideas above aren’t enough, you might also see: In theory, practice is the same as theory, but not in practice All models are wrong but some are useful Reliability vs validity: You can hit the target but miss the point. Analytics maturity What gets measured gets better The map is not the territory (no sketch!) For a super discussion on the measurement of all sorts of things, including acute (being run over by a bus) and chronic risks (smoking), I recommend the fun podcast episode: Microlives & The Art of Uncertainty with Sir David Spiegelhalter The article about bike weight is: The McNamara Fallacy and Bikes by Peter Verdone Daniel Yankelovich, who named the McNamara Fallacy, stressed no disrespect to “one of our most distinguished citizens,” Robert McNamara, “a brilliant and dedicated man who brings a vital intensity to bear on his work.” Some of the complexities of the war and McNamara are covered in the Academy Award-winning documentary The Fog of War, which makes fascinating and, at times, uncomfortable viewing. ( Text just to aid search: Mc Namara )",
+      "imageAlt": "The McNamara Fallacy, also known as the quantitative fallacy, where we measure what is easy and ignore what is hard",
+      "categories": "eponym measurement strategy leadership data analytics war politics",
+      "image": {
+        "dimensions": {
+          "width": 3956,
+          "height": 3956
+        },
+        "alt": "The McNamara Fallacy, also known as the quantitative fallacy, where we measure what is easy and ignore what is hard",
+        "copyright": "Sketchplanations",
+        "url": "https://images.prismic.io/sketchplanations/acUgspGXnQHGY_Zs_SP971-TheMcNamaraFallacy.png?auto=format,compress",
+        "id": "acUgspGXnQHGY_Zs",
+        "edit": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1,
+          "background": "transparent"
+        }
+      }
+    },
+    {
+      "id": "abvXnhEAACMAJgvz",
+      "uid": "the-iceberg-model",
+      "title": "The Iceberg Model",
+      "titleNormalized": "the iceberg model",
+      "body": "Icebergs make powerful metaphors because much of what matters is hidden. Despite knowing the maths, it’s still genuinely surprising and sometimes hard to believe that 90% of an iceberg is beneath the surface. Icebergs are, therefore, a super metaphor for when visible outcomes are shaped by unseen forces. And where we see just a small amount that is built on top of a whole lot that’s out of sight. Even better if this “whole lot more” is unexpected. In my experience, this fits a lot of things. It’s a fair representation, for example, for the unseen work that goes into near enough anything. Icebergs have been mobilised in the name of better understanding psychology, culture, and, in this case, systems. I like the model because it prompts us to question what could be “under the surface” and, in terms of observed behaviour, what’s driving what we see? This version of the iceberg model is adapted from the work and teaching of the systems thinker Donella Meadows and the Academy for Systems Change. Layers of the Systems Thinking Iceberg Model The four layers of this iceberg are: Above the surface Events What is happening? What are the facts? What behaviours do you see? Below the Surface Patterns Are the events connected by trends over time? Do events relate to each other? Structures What influences the patterns you see? Think about routines, incentives, environments, organisations, policies, and rituals. Mental Models What are the values, assumptions and beliefs people hold that shape the system? The deeper down you go, the more leverage you have to create change. For example, changing someone’s attitudes and beliefs about eating will have far-reaching effects on a person’s behaviours around meals. Example of the Iceberg Model What might this look like in practice? Event A child steals their sibling’s toys. Patterns The behaviour only started recently. It tends to happen after swimming lessons or before bed. Structures They’re tired and hungry after swimming, lowering their tolerance and patience. Parents are often busy preparing dinner. The younger child gets more attention. Mental Models Older children are expected to be more self-sufficient. “When I act up, I get attention.” Overscheduling activities. Or Event A colleague is late to a meeting, again. Patterns They used to be on time for meetings. Being late to the first meeting in the morning is most common. Structures Meetings rarely start on time. There are no consequences to being late. Some people have many meetings, others have few, and so don’t pay close attention to the calendar. Mental Models Don’t value the meetings. They don’t understand the impact it has on others. Promptness is respect and required vs promptness doesn’t matter if you get results. In each case, looking below the surface reveals what’s really driving the behaviour. How to Use the Iceberg Model Start with an event or situation you want to understand. Work down through the iceberg, asking yourself questions at each level and writing the answers. It doesn’t have to be a big exercise. Write down patterns you see about the event and those that might be related to it. Think about what structures might be causing it. Consider physical things, organisations, policies, and rituals that all may be contributing. Write these down. Then dig into the source of these structures. What beliefs enable them? What values align with them? What attitudes or expectations keep them going? You don’t need to be exhaustive — even a quick pass can reveal useful insights.  Many solutions focus on the events. But lasting change often comes from addressing issues below the surface.  I made some blank versions of these with the blue and on white that you can use to fill out your own icebergs: Iceberg model templates  Related Ideas to the Iceberg Model Systems, thinking and systems thinking: Pace layers Rich pictures 9 Windows Powers of 10 The S-Curve Data - Information - Knowledge - Wisdom Icebergs: Overnight success Iceberg orientation — for the 90% bit Buoyancy I created this iceberg model illustration as one of a series of visuals for Kaine Ugwu about Systems Thinking.",
+      "imageAlt": "The Iceberg Model in psychology and systems thinking - above the surface and beneath the surface",
+      "categories": "framework thinking thinking tool",
+      "image": {
+        "dimensions": {
+          "width": 4080,
+          "height": 4080
+        },
+        "alt": "The Iceberg Model in psychology and systems thinking - above the surface and beneath the surface",
+        "copyright": "Sketchplanations",
+        "url": "https://images.prismic.io/sketchplanations/aeIYnp1ZCF7ETSe0_SP969-TheIcebergModel.jpg?auto=format,compress",
+        "id": "aeIYnp1ZCF7ETSe0",
+        "edit": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1,
+          "background": "transparent"
+        }
+      }
+    },
+    {
+      "id": "aIOUOhcAACUARAsS",
+      "uid": "the-trolley-problem",
+      "title": "The Trolley Problem",
+      "titleNormalized": "the trolley problem",
+      "body": "The famous moral dilemma: switch the tracks or not? (Here's a combined version of the Trolley Problem and 3 Variants) Imagine you’re the driver of a runaway trolley whose brakes have failed. Ahead on the track, five people are working and will be killed if you do nothing. But you notice a side-track—if you switch the trolley to it, you’ll avoid the five, but one person on that track would be killed instead. Should you pull the lever and switch the tracks—killing one to save five? This is the start of the famous moral dilemma of The Trolley Problem. The fictitious scenario, and others like it, are so effective because they force us to confront our internal moral compass: what seems like the right thing to do, and why? Trolley Problem Variants As we formulate a position on a scenario, it's possible to devise variant scenarios that test our moral reasoning more sharply. For example, in the original problem, many people might suggest that it's OK for the driver to choose to save five people's lives at the expense of the one person on the other track on the basis that killing five people is worse than killing one. Where would you stand on these other variants? The Bystander at the Switch Sketch of the Bystander at the Switch Variant You’re no longer the driver. This time, you’re simply passing by when you see a runaway trolley heading toward five people. The trolley is driverless, and you’re standing next to a switch that could divert the train to another track—where one person would be killed instead. Is it morally acceptable to intervene? Does it feel different when you’re not the driver but an onlooker? The Heavy Man Problem Sketch of the Heavy Man Variant Or suppose that you were on a bridge above the track when you saw the train on its way to crash through the five people working on the track. There’s no switch—but next to you stands a very heavy man. If you push him off the bridge, his body would stop the trolley and save the five. Most people react more strongly against this version, even though the outcome is similar: one life traded for five. (This variant was originally the 'Fat Man' problem, but it's not important that the person is fat, just that they're heavy enough to stop the trolley). The Mafia Problem Sketch of the Mafia Variant Suppose once again you were the bystander at the switch passing the track in this deadly scene. This time, however, you see that the five people on the track are not workmen but hardened criminals. What's more, they've tied an innocent person to the other track. If you switch the trolley, the innocent person dies. If you do nothing, the five criminals die. Does who the people are affect your decision? How to Decide? It may be clear to you what the right path to choose is. And yet, your position may differ from someone else faced with the same scenario. The philosopher Philippa Foot introduced the Trolley Problem in a 1967 paper discussing abortion (PDF), along with several options for reasoning about it. Judith Jarvis Thomson invents some of the further scenarios (such as the mafia case) and alternative arguments in a 1985 paper, The Trolley Problem (pdf). Some possible positions and distinctions you might keep in mind include: Passive vs Active Harm Is it morally different to let five people die (by doing nothing) than to actively cause one person’s death (by switching tracks or pushing someone)? Are you killing or are you failing to save? Is there a difference in what we do and what we allow? Negative Duties vs Positive Duties Some argue there’s a moral difference between duties not to harm (negative duties) and duties to help (positive duties). Avoiding Injury vs Bringing Aid Is there a difference when you are making choices that save different numbers of people rather than making choices where people will die as a direct result of your choices? For example, suppose you face a choice of rescuing a large group of people while leaving another small group to die. Or what if a villain asked you to sacrifice an innocent person, or they will kill five others. Rights vs Utility Does your action violate someone’s rights? Even if the outcome is better overall, is it acceptable to use a person as a means to an end? Is it a matter of degrees? For example, violating an individual's rights by pushing them off a bridge versus stealing from them as a route to save someone. Doctrine of Double Effect Philippa Foot discusses the Doctrine of Double Effect—that our actions may have intended consequences and other outcomes that are foreseeable but not intended—the distinction between \"direct\" and \"oblique intention\". In the case of the runaway trolley, it's \"one thing to steer towards someone foreseeing that you will kill him and another to aim at his death as part of your plan.\" Or, for example, in surgery to save a mother during childbirth, the death of a child may be foreseen but not intended. Dilemmas While fictitious moral dilemmas are intriguing thought experiments, real dilemmas surround us. A general orders his troops on a dangerous mission. Adjusting the speed limit on a dangerous road. People die from driving too fast, but walking isn't an option—what's the appropriate risk of death we're comfortable with? Who should receive aid? Who should be rescued first? Should a pilot steer a plane that's about to crash into a less populated area? I remember, in the film Beneath Hill 60 (spoiler), a commander must decide whether to detonate underground munitions to execute the battle plan, knowing that one of his team members is trapped. I find moral dilemmas to be at once fascinating, puzzling, troubling, and uncomfortable. Related Ideas to the Trolley Problem The Front Page Test Equality and Equity The Prisoner's Dilemma Learn More About the Trolley Problem You can, and should, have fun with absurd trolley problems at the brilliant neal.fun—and also see what other choices people made In Michael Sandel's course and book, Justice, he discusses the trolley problem and many other difficult questions of ethics and morals and how to reason about them Both Philippa's and Judith's original papers are quite readable: Philippa Foot, The Problem of Abortion and the Doctrine of the Double Effect (PDF) Judith Jarvis Thomson, The Trolley Problem (PDF)  Prints of the Trolley Problem Trolley Problem standalone prints Trolley Problem and Variants prints",
+      "imageAlt": "The Trolley Problem original variant with the runaway trolley and moral dilemma of switching the tracks",
+      "categories": "philosophy psychology",
+      "image": {
+        "dimensions": {
+          "width": 3424,
+          "height": 3425
+        },
+        "alt": "The Trolley Problem original variant with the runaway trolley and moral dilemma of switching the tracks",
+        "copyright": "Sketchplanations",
+        "url": "https://images.prismic.io/sketchplanations/aIOb9VGsbswqTQjY_SP935-TheTrolleyProblem.png?auto=format,compress",
+        "id": "aIOb9VGsbswqTQjY",
+        "edit": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1,
+          "background": "transparent"
+        }
+      }
+    },
+    {
+      "id": "aDAdlhMAAB8AcVl3",
+      "uid": "unknown-unknowns",
+      "title": "Unknown Unknowns",
+      "titleNormalized": "unknown unknowns",
+      "body": "In a 2002 Pentagon briefing, then U.S. Secretary of Defense Donald Rumsfeld famously said: \"Reports that say something hasn't happened are interesting to me, because as we know, there are known knowns; there are things we know we know. We also know there are known unknowns; that is to say, we know there are some things we do not know. But there are also unknown unknowns — the ones we don't know we don't know. And if one looks throughout the history of our country and other free countries, it is the latter category that tends to be the difficult ones.\"  It wasn't typical media material. It even won Rumsfeld the \"Foot in Mouth\" award from the Plain English Campaign in 2003. But the idea of unknown unknowns has endured. Awareness—Understanding examples When placed in a 2x2, somewhat like I have done, some people have referred to it as the Rumsfeld Matrix (although he didn't invent it), or the Awareness—Understanding Matrix. I prefer diving straight into Unknown Unknowns as they're the crux of it. For example: Say you find out you're going to have a baby. There's a lot you know and a lot you know you don't: Unknown Knowns — things you know that people know about being a parent and having a baby, but you just don't know them yet. Doing your research and homework transforms these into Known Knowns. Known Knowns are the things you already know (or just learned) you'll need to do when you're a parent. Your baby will need feeding and changing, clothes, a place to sleep etc. You plan for these, you buy clothes, a crib, and learn about breastfeeding or the bottle. Known Unknowns — Things like the baby's gender, or whether they'll arrive early or late. You know you don't know these yet, but you can make a plan either way. Finally, there are Unknown Unknowns — which, in this case, could be that, despite all your plans, you find yourself with twins.  Or, say you plan to start a café: Unknown Knowns What you know is knowable, but you don't know it, yet You can find data on the market, the costs, and potential customers. These things can be known through research—others know them—but you didn't know them. Known Knowns What you know you know Your costs, your product, your route to market, everything you learned in your research. You make your plan around these. Known Unknowns What you know you don't know How people will respond to your product, how fast sales will be, and whether your rent will change. Unknown Unknowns What you didn't know you didn't know Just as you launch your café, Starbucks moves in next door, or we hit a global pandemic. It's what you don't know, that you don't know, that gets you. After all, if you knew it, you'd have prepared for it. He Who Knows There's a well-known saying called \"He who knows\" which relates to Unknown Unknowns: He who knows not, and knows not he knows not, is a fool; shun him.\nHe who knows not, and knows he knows not, is simple; teach him.\nHe who knows, and knows not he knows, is asleep; awaken him.\nHe who knows, and knows he knows, is wise; follow him. Note that, like most interpretations of the Awareness/Knowledge-understanding framework, Unknown Knowns is interpreted as things you know but don't know you know. These might be implicit knowledge that you are yet to make a connection with. Quotes and Ideas Relating to Unknown Unknowns We have a host of sayings and thoughts that relate to this. Nassim Nicholas Taleb's Black Swan events: if every swan you've ever seen is white, it's easy to assume that all swans are white, but the next one you see could be black. The Lucretius problem, also from Taleb: We tend to believe the biggest event we've seen is the biggest that could happen. For example, we test our financial models against the most significant market crashes, but each was bigger than any that had hit before. In theory, practice is the same as theory, but not in practice. No plan survives contact with the enemy — from Prussian Field Marshal Helmuth von Moltke the Elder It has often and confidently been asserted, that man's origin can never be known : but ignorance more frequently begets confidence than does knowledge : it is those who know little, and not those who know much, who so positively assert that this or that problem will never be solved by science. — Charles Darwin, The Descent of Man (1871) introduction Whatever our plans, or what we think we know, or even what we think we know we don't know, we must adapt to succeed. Related Ideas to Unknown Unknowns Unknown unknowns evidently weigh heavily on me, as I seem to have drawn many more related ideas: Black Swan events The Lucretius Problem The Johari Window — for self-knowledge The Conscious Competence framework In theory, practice is the same as theory, but not in practice VUCA - Volatility, Uncertainty, Complexity, Ambiguity OODA Loop - Observe, Orient, Decide, Act, Repeat On mistakes Hindsight bias — everything is obvious after the fact Physics Envy Hofstadter's Law The Cobra Effect The Law of Unintended Consequences Do a 2x2 Matrix Kitchen Table Survival Skills",
+      "imageAlt": "Unknown Unknowns or the Awareness-Understanding matrix, or the Rumsfeld Matrix illustrated with the example of having a baby",
+      "categories": "framework knowledge planning parenting business entrepreneurship",
+      "image": {
+        "dimensions": {
+          "width": 3432,
+          "height": 3432
+        },
+        "alt": "Unknown Unknowns or the Awareness-Understanding matrix, or the Rumsfeld Matrix illustrated with the example of having a baby",
+        "copyright": "Sketchplanations",
+        "url": "https://images.prismic.io/sketchplanations/aDBh2ydWJ-7kSfhY_SP926-Unknownunknowns.png?auto=format,compress",
+        "id": "aDBh2ydWJ-7kSfhY",
+        "edit": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1,
+          "background": "transparent"
+        }
+      }
+    },
+    {
+      "id": "aCSrthEAACMAtbEL",
+      "uid": "dont-think-of-an-elephant",
+      "title": "Don't Think of an Elephant",
+      "titleNormalized": "dont think of an elephant",
+      "body": "When teaching framing at UC Berkeley, Professor George Lakoff would often begin with a simple test: \"Don't think of an elephant.\" Except everyone does. When he said elephant, like it or not, all things elephant—large, slow, floppy ears, tusks, trunk, jungle, savannah—were likely to come to mind. Lakoff gives another example: When Richard Nixon came on TV and said, \"I am not a crook,\" everyone thought about him as a crook, even though he explicitly said he wasn't. Another case he shares is when someone says tax relief, it evokes a frame whereby taxes are a burden, someone imposing those taxes is hurting people, someone relieving you of that hurt is helping you, and anyone who wants to stop that relief is a villain. Suppose you think taxes are good, not bad; if you use the term tax relief when arguing against it, you're setting yourself up as the villain. Using someone else's language draws you into their worldview. Some Framing Examples Here are some more everyday examples of framing at work: Taking sides in an argument suggests there has to be a winner and loser. When someone helps you, saying \"I owe you one\" frames the favour as a transaction to be repaid rather than a gift. Stay-at-home parent and working parent evokes a frame where staying at home isn't work. Quality time frames certain family moments as more valuable and implies that some time is less meaningful. Screen time evokes a frame of off-screen vs on-screen time, as opposed to considering the value of what you're doing, whether on-screen or off. Reframing Signage I love spotting signs that shift the frame in positive, thoughtful ways. Rather than presupposing bad behaviour, they invite good. For example, this sign from Kew Gardens: \"Respecting Significant Trees Please help us manage our trees to ensure we can enjoy them for as long as possible. This tree needs a break from adults and children climbing on it. Please don't climb.\"  Rather than setting Kew up as the rule-enforcer spoiling your fun, it frames them as caretakers—inviting you to help give a tired tree a break. Not climbing becomes an act of kindness, not a restriction. Not climbing becomes an act of respect rather than restriction. Our local wetlands has a \"Ducks only\" sign instead of an admonishing \"Keep off the grass\". Or at an ATM, even saying \"Wait\" rather than \"Don't remove your card\" helps keep removing your card further from your mind. A reader shared with me that as a lifeguard, he learned to yell \"Walk!\" rather than \"Don't run!\" A positive action to take is direct, rather than a negative that needs to be processed—see Point Positive. Language shapes and reflects how we think. Using language that negates a frame evokes the frame. What frames are you evoking? Related Ideas to Don't Think of an Elephant Everything I've learned about framing, metaphor, and how they shape our thinking continues to fascinate me. Here are some related sketches and powerful metaphors: Primary metaphor The Frog Boil Metaphor Rivers and Buckets Compliments are Gifts The Learning Pit The Swiss Cheese Model Trust Battery The Accountability Ladder Sharpen the Saw Ideas Are Locations, Objects, Food Framing Get More Participation: Instead of \"Anything Else?\" ask \"What Else?\"  See Don't Think of an Elephant by George Lakoff",
+      "imageAlt": "Don't think of an elephant framing example where even negating a frame activates it",
+      "categories": "reframe language thinking politics psychology",
+      "image": {
+        "dimensions": {
+          "width": 3426,
+          "height": 3426
+        },
+        "alt": "Don't think of an elephant framing example where even negating a frame activates it",
+        "copyright": "Sketchplanations",
+        "url": "https://images.prismic.io/sketchplanations/aCSqPydWJ-7kSGru_SP925-Don%E2%80%99tthinkofanelephant.png?auto=format,compress",
+        "id": "aCSqPydWJ-7kSGru",
+        "edit": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1,
+          "background": "transparent"
+        }
+      }
+    },
+    {
+      "id": "Ysa6khEAACoAaqvE",
+      "uid": "black-swan",
+      "title": "Black swan events",
+      "titleNormalized": "black swan events",
+      "body": "A swan in Europe was a white swan. So, naturally, swans were thought of as only white by Europeans until news came from travelers to Australia in the late 1600s where black swans are in fact relatively common. Black swan events can turn a worldview upside down. They are unprecedented, unexpected, rare, and with a significant impact. The infrequency of black swan events means prior data about them is too little to reliably guess the likelihood of one, and you may not even think to anticipate the event anyway. Except after the fact, when all of a sudden many people will claim to have predicted it — black swan events are prone to be rationalised in hindsight, believing that all the signs were there beforehand even if they weren't. The idea of black swan events is from Nassim Nicholas Taleb. He writes: \"One single observation can invalidate a general statement derived from millennia of confirmatory sightings of millions of white swans. All you need is one single black bird.\" Examples Taleb gives include the September 11 terrorist attack, the 2008 financial crisis, World War I, or the rise of the Internet. More Taleb sketches: on mistakes, the firehouse effect, and the Lucretius problem. Also, hindsight bias.",
+      "imageAlt": "Two people walk through many white swans before bumping into a black swan. One claims it was obvious all along.",
+      "categories": "economics behavioral economics animals",
+      "image": {
+        "dimensions": {
+          "width": 3424,
+          "height": 3424
+        },
+        "alt": "Two people walk through many white swans before bumping into a black swan. One claims it was obvious all along.",
+        "copyright": null,
+        "url": "https://images.prismic.io/sketchplanations/652a891d-3887-4fe2-b62e-3c3d66b07faf_SP+777+-+Black+swan.png?auto=format,compress",
+        "id": "YsdLHxYAADAAl9hD",
+        "edit": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1,
+          "background": "transparent"
+        }
+      }
+    },
+    {
+      "id": "X1GTvRAAAGYITNVi",
+      "uid": "types-of-phishing",
+      "title": "Types of phishing",
+      "titleNormalized": "types of phishing",
+      "body": "Phishing is tricking people into sharing personal details and logins by pretending to be someone else, and it's surprisingly effective. Some of the smartest people I know have been taken in by it and it only takes a moment’s lapse in concentration or uncertainty to fall for it. The maths is simple: it barely costs anything to send an email to 100,000s of people and it only needs a few people to get caught in the net for it to pay off. Also, look out for targeted spear-phishing attacks where scammers may seem to know specific details about yourself to make the attack more credible. Or what’s known as whaling — the targeting of high-profile figures such has heads of companies or celebrities with elaborately planned and sometimes very convincing schemes. Stay vigilant people. You can also check if you’ve been caught in a data breach at: Have I been Pwned.  I updated this image for my book Big Ideas Little Pictures  Also see: 2-factor authentication",
+      "imageAlt": "Types of phishing: phishing, spear-phishing, whaling explained — 3 common types of phishing communications are shown from the impersonal, wide phishing net email, thrown out to a large population; to more personalised \"spear-phishing\", picking you off with a harpoon gun; to whaling, where scammers go after high profile targets like CEOs. ",
+      "categories": "security tech fishing",
+      "image": {
+        "dimensions": {
+          "width": 3526,
+          "height": 3526
+        },
+        "alt": "Types of phishing: phishing, spear-phishing, whaling explained — 3 common types of phishing communications are shown from the impersonal, wide phishing net email, thrown out to a large population; to more personalised \"spear-phishing\", picking you off with a harpoon gun; to whaling, where scammers go after high profile targets like CEOs. ",
+        "copyright": "Sketchplanations",
+        "url": "https://images.prismic.io/sketchplanations/ZoKVHx5LeNNTwrK5_SP653-Typesofphishing.png?auto=format,compress",
+        "id": "ZoKVHx5LeNNTwrK5",
+        "edit": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1,
+          "background": "transparent"
+        }
+      }
+    },
+    {
+      "id": "X1GWDRAAAGYITN_E",
+      "uid": "the-doppler-effect",
+      "title": "The Doppler Effect",
+      "titleNormalized": "the doppler effect",
+      "body": "The Doppler effect is the change in frequency of a wave as its source moves relative to the observer.  The same effect that causes a siren's pitch to change as it drives past is also used to estimate blood flow with ultrasound, measure the speed of a passing car, and even determine the motion of the stars. Doppler shift-based satellite navigation was also the first operational use of a system that eventually led to GPS. When a siren or similar sounds approach, I try to imagine the crunching of the sound waves—the vehicle seemingly chasing after its own sound—and the stretching out of the waves as it heads past and into the distance. At least it makes it less painful on the ears. Here's an excerpt from my Dad's book, Einstein's Mirror, in a fascinating chapter discussing the speed of light: \"In 1845 in Utrecht, a troupe of trumpeters played their instruments while being transported by a train. Another group of musicians arrayed alongside the railway track were paid to listen carefully as the train and the trumpeters went by. This seemingly bizarre experiment was the invention of the Austrian physicist Johann Christian Doppler. Most readers will have noticed the drop in pitch of a whistle as a train goes by, or of a siren as an ambulance or police car passes. It was precisely this same change in pitch with motion that Doppler was investigating with his entertaining train and trumpet experiment.\" A polished version of this sketch appears in my book Big Ideas Little Pictures Related Ideas to the Doppler Effect Also see: Redshift Looking back in time The Doppler Effect Sonic Boom Einstein's Mirror Laplace’s Demon",
+      "imageAlt": "What is the Doppler Effect? Example of relative motion changes perceived frequency, with sound waves compressed ahead of a passing siren and stretched behind it.",
+      "categories": "sound physics waves eponym podcast",
+      "image": {
+        "dimensions": {
+          "width": 3361,
+          "height": 3361
+        },
+        "alt": "What is the Doppler Effect? Example of relative motion changes perceived frequency, with sound waves compressed ahead of a passing siren and stretched behind it.",
+        "copyright": "Sketchplanations",
+        "url": "https://images.prismic.io/sketchplanations/aikc-weQX7-eXHqL_SP638-TheDopplereffect-revised.png?auto=format,compress",
+        "id": "aikc-weQX7-eXHqL",
+        "edit": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1,
+          "background": "transparent"
+        }
+      }
+    },
+    {
+      "id": "X1GdZhAAAGYITQEh",
+      "uid": "the-pomodoro-technique",
+      "title": "The Pomodoro Technique: Stay Focused and Get More Done",
+      "titleNormalized": "the pomodoro technique stay focused and get more done",
+      "body": "The Pomodoro Technique® is a simple and effective time management method that helps you stay focused and get your tasks done. It's named after a kitchen timer shaped like a pomodoro (Italian for tomato) and is great for studying, working, and managing ADHD. Here's how it works: How to Use the Pomodoro Technique 1. Plan Your Tasks Decide what you want to accomplish and estimate how many pomodoros (usually 25-minute focus sessions) you'll need for each task. 2. Do One Pomodoro Set a timer for 25 minutes. Focus entirely on your task until the timer rings, then take a 5-minute break. Avoid multitasking or distractions during this time. That's one pomodoro.` 3. Repeat for Four Pomodoros After completing four pomodoros, take a longer break of about 30 minutes to recharge. Why Use the Pomodoro Technique? The Pomodoro Method is popular because it's simple and effective. It's particularly helpful for: Improved Focus: Short, timed sessions make it easier to stay on task. Better Time Management: By breaking your day into pomodoros, you can plan and track progress easily. Studying: Great for staying productive during long study sessions. ADHD: Some say it helps manage focus and provide structured breaks. Tips for Success Some tips: Protect your pomodoro from distractions— make sure you spend the full 25 minutes on your task. If people want things, tell them you'll get back to them after your pomodoro. Properly break in your breaks — no sneaky working. Step away, move around, or grab a snack. It’s flexible, not rigid — If you need longer or shorter times, that's OK. It's about what helps you focus. You only need a timer, but some simple Pomodoro technique apps can help, too. I like this nice one with a bear and natural sounds while you work: Bear Focus Timer. Francesco has also created Pomodoro timers, which you can run on the web or your computer. The Pomodoro Technique ® was created and named by Francesco Cirillo. He explains that it came to him very simply. He was struggling to stay on task as a student and challenged himself to stay productive for 2 minutes using a timer he had in the kitchen. It worked. He then tried extending the length of the focus session. An hour was too much, 10 minutes too little, and the sweet spot was right around 25 minutes. The kitchen timer was a pomodoro. More Productivity Ideas Looking for other ways to stay productive? Here are my other favourite sketches on productivity: Productivity tools and techniques Forcing Function Public Commitment Pledge Commitment Devices Implementation Intentions Checkbox To Do lists Eat the Frog The Eisenhower Matrix: Important/Urgent Thinking About Productivity Manager Time, Maker Time The First Draft is Always Perfect The Power of Streaks Goldilocks Tasks Flow Looking to get started on a new project or a daring step? Here are my sketches on Getting Started. About this site Welcome to Sketchplanations! If this is your first time here, I've packed this site with simple sketches that explain ideas in clear and engaging ways. From productivity tips to insights on science, writing, human behaviour, and wellbeing, it's becoming, I hope, a treasure trove of visual explanations.  If you like the Pomodoro Technique, I think you might also like the other sketches of my toolkit for life in my book Big Ideas Little Pictures, which even has a lovely review from Bill Gates.",
+      "imageAlt": "What is the Pomodoro Technique in 3 steps: plan your tasks, complete one 25-minute pomodoro with a 5-minute break, and repeat for four pomodoros before taking a longer break.",
+      "categories": "productivity time eponym podcast",
+      "image": {
+        "dimensions": {
+          "width": 1280,
+          "height": 1085
+        },
+        "alt": "What is the Pomodoro Technique in 3 steps: plan your tasks, complete one 25-minute pomodoro with a 5-minute break, and repeat for four pomodoros before taking a longer break.",
+        "copyright": null,
+        "url": "https://images.prismic.io/sketchplanations/62e61034-b66a-4ede-a5db-a5cbc39d55e7_SP+587+-+The+Pomodoro+technique.jpg?auto=compress,format",
+        "id": "YBP2LBAAACUAFCQh",
+        "edit": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1,
+          "background": "#fff"
+        }
+      }
+    },
+    {
+      "id": "X1GdtRAAACQATQKJ",
+      "uid": "the-diderot-effect",
+      "title": "The Diderot Effect",
+      "titleNormalized": "the diderot effect",
+      "body": "The Diderot effect describes how new purchases can lead to a negative spiral of replacing possessions that no longer live up to the new standard. In a capitalist or consumerist society, it highlights the dangers of material possessions on ourselves and our finances. \"Regrets on Parting with My Old Dressing Gown.\" The effect is named after 18th-century French philosopher Denis Diderot, who wrote the entertaining and unusually-titled essay \"Regrets on Parting with My Old Dressing Gown.\" In the essay, Diderot relates how his possessions no longer seemed up to scratch after being given a flashy new scarlet dressing gown. Seeing this, he replaced his old straw chair with a leather one, a plank bookshelf with an inlaid armoire, a clay statue with a bronze statue, and so on. In the process, he emptied his carefully earned savings. His tale is an example of the Diderot Effect in action. What's more, Diderot complains that whereas he was the master of his old dressing gown, he became a servant to the new one, needing to guard it from his clumsiness, spills, or burns. Our possessions can begin to control us rather than us control them. New and Old Identities More generally, the effect also highlights that we surround ourselves with objects that fit our sense of identity. When we receive something that reflects a new, aspirational identity, rather than rejecting the new thing, we may find ourselves replacing our old objects and selves to fit the new. Sometimes, we may be excited about embracing a new identity. Clearing out items reflecting our old selves may be a blessing and reflect aspects of our lives we wish to leave behind. Yet it perhaps pays to consider whether it's driven by the products or ourselves—whether we're still the masters or whether they are. As I learned from Dev Patnaik, products are created by culture and create culture. Examples of the Diderot Effect Here are some examples of the Diderot Effect in action that I could relate to: Denis Diderot gradually replacing his possessions with fancier more expensive ones and becoming poor as a result. Replacing my hastily bought student furniture with smarter furniture for our own home. Adding a new smart painting to a wall causing you to take down your old music posters. A new pair of shoes causing me to reconsider the whole outfit.  Notes Cultural anthropologist Grant McCracken introduced the Diderot Effect, which I learned about from James Clear's Atomic Habits. As I learned from Seth Godin's Akimbo podcast episode — The Deletionists, Diderot also played a key role in the development of the encyclopedia.  The Diderot Effect appears in my book Big Ideas Little Pictures.  Here's a translation of Denis Diderot's essay \"Regrets for my Old Dressing Gown, or A warning to those who have more taste than fortune\"  Related Ideas The paradox of choice The Streisand effect Front stage, back stage The Paradise Paradox Sharpen the saw Enough molehillls make a mountain Implementation intentions",
+      "imageAlt": "What is the Diderot Effect example explained: showing two people discussing their new sofa and deciding they have to change the room, or even move",
+      "categories": "effect money eponym habits economics behavioral economics psychology",
+      "image": {
+        "dimensions": {
+          "width": 3427,
+          "height": 3427
+        },
+        "alt": "What is the Diderot Effect example explained: showing two people discussing their new sofa and deciding they have to change the room, or even move",
+        "copyright": "Sketchplanations",
+        "url": "https://images.prismic.io/sketchplanations/Zzsp1a8jQArT093X_SP585-Dideroteffect-revised.png?auto=format,compress",
+        "id": "Zzsp1a8jQArT093X",
+        "edit": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1,
+          "background": "transparent"
+        }
+      }
+    },
+    {
+      "id": "X1GeQRAAACUATQT-",
+      "uid": "the-fun-scale",
+      "title": "The fun scale: understanding the types of fun",
+      "titleNormalized": "the fun scale understanding the types of fun",
+      "body": "The Fun Scale categorizes different types of fun experiences into distinct levels. It consists of three main types of fun: Type 1, Type 2, and Type 3. The concept behind the Fun Scale is that not all fun is created equal, and some types may be more rewarding or memorable than others. My brother, who learned it from a mountain guide, introduced me to the Fun Scale. Before then, I used to think that fun was just fun. But the Fun Scale opened my eyes to the fact that there are levels and types of fun, each with its own characteristics.  So, what are the three types of fun in the Fun Scale? The three types of fun on the fun scale Type 1 fun: fun to do, fun to remember Type 1 fun is the most straightforward type of fun. It’s the kind of activity that is fun while you’re doing it, and it stays fun when you think back on it. Picture something like eating ice cream on a hot day, riding a roller coaster, or skiing with lifts to whisk you right back to the top. Type 1 fun is carefree, pleasurable in the moment, and provides uncomplicated enjoyment. Examples of Type 1 Fun: Going to an amusement park Having a beach day with friends Skiing on groomed trails Eating your favourite dessert I'm sure you can think of a million more.  Type 2 fun: hurts a bit to do, but fun in retrospect On the other hand, Type 2 fun is a bit trickier. It's the kind of activity where you may not have a blast while you're doing it—it's probably hard work or even painful. However, once it's over, you look back on it with a sense of achievement, and it becomes fun in retrospect. This is the sort of enjoyment you get from something like running a marathon or climbing a mountain. At the time, you might question why you're doing it. Brendan Leonard in Ultra-something relates the joke, \"You know what I like most about climbing a mountain? It feels so good when I stop.\" You'll often think of Type 2 fun as ultimately more fulfilling and often somewhat addictive than Type I fun. Examples of Type 2 Fun: Completing a marathon Hiking up a challenging peak Cycling a mountain stage of the Tour de France Backpacking Cold water swimming (or maybe an ice mile) Swimrun  Type 3 fun: not fun to do, not fun in retrospect, but makes a great story Type 3 fun is usually type 1 or 2 fun that went wrong. Though it was supposed to be fun, things actually got a little hairy. Perhaps a trip started out like good Type 2 fun, but then you got lost, or it got dark, and it got cold, or things got much more serious than intended. Maybe you had to be rescued. This kind of fun is not fun while it's happening. It's probably not even fun when thinking back on it. But Type 3 fun sure makes a great story when you make it back, and, well, life is made up of great stories, so perhaps it wasn't so bad after all. Examples of Type 3 Fun: Meeting a bear in the wilderness Capsizing on a rafting trip Getting thoroughly lost Not practicing your kitchen table survival skills Getting rescued  There are rumours of Type 4 fun and Type 5 fun, but having heard some good stories of Type 3 fun and created a few myself, I can't say I recommend them =) The Fun Scale, adventure and fulfilment: why we crave Type 2 and Type 3 fun In our podcast discussing the Fun Scale, Tom, identified Rob and I as Type 2 Fun junkies. There's something intriguingly addictive about setting yourself difficult challenges, pushing through hardship, and emerging out the other side. Rob and I have signed up for a challenging endurance event pretty much every year for the last decade or so. Every single time the event on the day is really hard. And yet, once the immediate memories subside we find ourselves signing up for something similar next year. Even if it's not you, I'm sure you probably know someone who seems to keep pushing themselves to do things that they don't seem to enjoy. It reminds me of Calvin imitating his dad in Calvin and Hobbes: \"Calvin, go do something you hate! Being miserable builds character!\" Type 2 fun and type 3 fun, to some extent, help build character, life experiences and the stories that shape us and are fun to tell others. The sense of accomplishment and unforgettable stories that emerge from these experiences outweigh the discomfort in the long run. Summarising the Fun Scale In summary: Type 1 fun is fun when you do it and fun to remember. Type 2 fun is not so fun when you do it, but it is fun in retrospect and is the most fulfilling. And Type 3 fun is not fun in the moment or when you remember it—but it makes the best stories!  I have seen people write about Type A fun, Type B fun and Type C fun, or Type I fun, Type II fun and Type III fun, but I learned it as 1, 2 and 3.  The Fun Scale is probably my favourite idea that didn't make it into my new book. If you like this one, you'll love the book Big Ideas Little Pictures.  Related Ideas to The Fun Scale Also see: The 10 essentials Kitchen table survival skills Optimism bias Kaffikok - the distance you can go before needing a coffee The role of a finishing line",
+      "imageAlt": "What is the Fun scale explained showing Type 1 fun as skiing, Type 2 fun as mountaineering and Type 3 fun as surviving a bear encounter (the best story)",
+      "categories": "hiking backpacking sport nature endurance scale framework happiness podcast",
+      "image": {
+        "dimensions": {
+          "width": 3428,
+          "height": 3428
+        },
+        "alt": "What is the Fun scale explained showing Type 1 fun as skiing, Type 2 fun as mountaineering and Type 3 fun as surviving a bear encounter (the best story)",
+        "copyright": null,
+        "url": "https://images.prismic.io/sketchplanations/281df432-3a48-4e78-ac58-1ff835091f99_SP+582+-+The+fun+scale+-+revised.png?auto=format,compress",
+        "id": "ZXxT0RMAACgA6uBa",
+        "edit": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1,
+          "background": "transparent"
+        }
+      }
+    },
+    {
+      "id": "X1GgSBAAACUATQ4p",
+      "uid": "2fa",
+      "title": "What is Two-Factor Authentication (2FA)?",
+      "titleNormalized": "what is two factor authentication 2fa",
+      "body": "Two-factor authentication (2FA) adds an extra layer of security by requiring two different types of proof to verify your identity. Unlike using a single password, which could be guessed or stolen, 2FA combines multiple forms of authentication to ensure better protection against unauthorised access. How Does 2FA Work? Two-factor authentication typically involves providing two types of evidence from these three categories: • Something you know: e.g., a password or PIN. • Something you have: e.g., a physical card, a key, or a phone. • Something you are: e.g., your fingerprint, voice, or facial recognition. For example: • Logging into an account might require your password (something you know) and a verification code sent to your phone (something you have). • Using a credit card at an ATM requires the card itself (something you have) and your PIN (something you know). This combination significantly reduces the risk of unauthorised access, even if one factor is compromised. Everyday Examples of 2FA • Photo ID verification: You present a photo ID (something you have) and must match the photo (something you are). • ATM withdrawals: Using your debit card (something you have) alongside your PIN (something you know). • Smartphone logins: Entering a password (something you know) and confirming your identity with a fingerprint (something you are). Why Use Two-factor Authentication? Cybercriminals are sneaky and constantly finding new ways to breach security. Two-factor authentication (2FA) provides a vital extra layer of defence by requiring two independent forms of verification. Even if one factor, like a password, is stolen, the second factor helps keep your account secure. Multi-factor authentication (MFA) takes this even further by incorporating two or more factors, adding additional safeguards. Whether you’re protecting personal accounts or sensitive business data, 2FA and MFA are simple yet highly effective tools to reduce the risks of phishing attacks, password leaks, and unauthorised access.  This sketch features in my book Big Ideas Little Pictures  Related Ideas to Two-Factor Authentication Also see: Types of phishing: phishing, spear-phishing, whaling The bus factor Choose passwords that make you happy 8 character password combinations",
+      "imageAlt": "What is 2 factor authentication (2FA) and its meaning: using something you know, something you are, and something you have",
+      "categories": "security tech design framework",
+      "image": {
+        "dimensions": {
+          "width": 1756,
+          "height": 1756
+        },
+        "alt": "What is 2 factor authentication (2FA) and its meaning: using something you know, something you are, and something you have",
+        "copyright": "Sketchplanations",
+        "url": "https://images.prismic.io/sketchplanations/Z4jz_pbqstJ99hqI_SP570-2factorauthentication-revised.png?auto=format,compress",
+        "id": "Z4jz_pbqstJ99hqI",
+        "edit": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1,
+          "background": "transparent"
+        }
+      }
+    },
+    {
+      "id": "X1_yOhEAACIAejMX",
+      "uid": "bycatch",
+      "title": "Bycatch",
+      "titleNormalized": "bycatch",
+      "body": "Bycatch is other stuff you caught when trying to catch something else. Bycatch makes me sad. Any fish or sea creatures can be caught unintentionally during fishing, and it also affects larger animals such as sharks, turtles and of course dolphins. When learning from a whale shark expert on the island of Utila in Honduras he told us one of the simplest ways to help is to give up eating prawns. As London’s Maritime Museum puts it: “For every kilo of tropical prawns you buy, 15 kilos of unwanted sea-life may be thrown back dead as ‘by-catch’. Trawling for prawns can also trap turtles, unless a special device keeps them out of the nets. Farming prawns is often no better, since mangrove swamps may be destroyed to make room for prawn ponds.” Prawns are particularly bad as they are often caught with bottom trawling. I once read a description of it as wanting to catch a cow, and choosing to drag a net by helicopter over the entire farm, and so also catch the tree in the garden, the dog, the pigs and the farmer’s wife in the process. So we gave up prawns. Sadly. Check out the WWF bycatch page for more including a bottom trawler in action.",
+      "imageAlt": "Bycatch: a sea turtle caught in a net as bycatch",
+      "categories": "animals nature fishing biology",
+      "image": {
+        "dimensions": {
+          "width": 1802,
+          "height": 1527
+        },
+        "alt": "Bycatch: a sea turtle caught in a net as bycatch",
+        "copyright": null,
+        "url": "https://images.prismic.io/sketchplanations/fa648161-4ca6-4741-a716-727d074c72be_133956463619.jpg?auto=format,compress",
+        "id": "X1GGFhAAACQATJhA",
+        "edit": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1,
+          "background": "#fff"
+        }
+      }
+    },
+    {
+      "id": "X2AFOREAACEAeonh",
+      "uid": "common-distributions-normal-skewed-pareto",
+      "title": "Common distributions: normal, skewed, pareto",
+      "titleNormalized": "common distributions normal skewed pareto",
+      "body": "Normal (the weight of apples, measurement errors, IQ…), skewed (Number of children in a household, age at retirement…) and Pareto (80/20 rules, long-tails, size of meteorites).",
+      "imageAlt": "",
+      "categories": "charts mathematics framework statistics",
+      "image": {
+        "dimensions": {
+          "width": 320,
+          "height": 543
+        },
+        "alt": null,
+        "copyright": null,
+        "url": "https://images.prismic.io/sketchplanations/db8da712-c425-4979-a10c-b5cecdc3904f_76271826191.jpg?auto=format,compress",
+        "id": "X1GFFhAAACUATJIS",
+        "edit": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1,
+          "background": "#fff"
+        }
+      }
+    },
+    {
+      "id": "X2AeBxEAACAAevqg",
+      "uid": "urinal-etiquette",
+      "title": "Urinal etiquette",
+      "titleNormalized": "urinal etiquette",
+      "body": "I remember seeing this in some chain email nearly 15 years ago. Still relevant to this day.",
+      "imageAlt": "",
+      "categories": "observation",
+      "image": {
+        "dimensions": {
+          "width": 1917,
+          "height": 3255
+        },
+        "alt": null,
+        "copyright": null,
+        "url": "https://images.prismic.io/sketchplanations/6fa126f0-046b-41ef-b02e-a32fd267be91_59051528932.jpg?auto=compress,format",
+        "id": "X1GFRBAAACIATJOc",
+        "edit": {
+          "x": 0,
+          "y": 0,
+          "zoom": 1,
+          "background": "#fff"
+        }
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": "X1FlTxAAACQAS_rN",
+      "identifier": "business",
+      "slug": "business",
+      "identifierNormalized": "business",
+      "slugNormalized": "business",
+      "count": 46
+    },
+    {
+      "id": "X1FmkBAAAGYITAE-",
+      "identifier": "creativity",
+      "slug": "creativity",
+      "identifierNormalized": "creativity",
+      "slugNormalized": "creativity",
+      "count": 23
+    },
+    {
+      "id": "X1Fm7BAAACQATAMU",
+      "identifier": "design",
+      "slug": "design",
+      "identifierNormalized": "design",
+      "slugNormalized": "design",
+      "count": 121
+    },
+    {
+      "id": "X1FqhhAAAGYITBVj",
+      "identifier": "learning",
+      "slug": "learning",
+      "identifierNormalized": "learning",
+      "slugNormalized": "learning",
+      "count": 20
+    },
+    {
+      "id": "X1Fr7xAAACQATBys",
+      "identifier": "nature",
+      "slug": "nature",
+      "identifierNormalized": "nature",
+      "slugNormalized": "nature",
+      "count": 72
+    },
+    {
+      "id": "X1FtehAAACIATCSf",
+      "identifier": "productivity",
+      "slug": "productivity",
+      "identifierNormalized": "productivity",
+      "slugNormalized": "productivity",
+      "count": 41
+    },
+    {
+      "id": "X1FtmRAAACIATCU-",
+      "identifier": "psychology",
+      "slug": "psychology",
+      "identifierNormalized": "psychology",
+      "slugNormalized": "psychology",
+      "count": 120
+    },
+    {
+      "id": "X1Fu5xAAACIATCwE",
+      "identifier": "sport",
+      "slug": "sport",
+      "identifierNormalized": "sport",
+      "slugNormalized": "sport",
+      "count": 42
+    },
+    {
+      "id": "X1FvghAAACIATC8p",
+      "identifier": "technology",
+      "slug": "technology",
+      "identifierNormalized": "technology",
+      "slugNormalized": "technology",
+      "count": 22
+    }
+  ]
+}
