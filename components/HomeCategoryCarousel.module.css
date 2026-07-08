@@ -23,7 +23,11 @@
 }
 
 .headerCentered {
-  @apply flex justify-center text-center mb-2 sm:mb-3;
+  @apply flex flex-col items-center justify-center text-center mb-2 sm:mb-3;
+}
+
+.tagline {
+  @apply mt-1 mb-0 text-sm text-textSubdued;
 }
 
 .title {
