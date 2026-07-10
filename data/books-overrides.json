@@ -25,9 +25,6 @@
 		"tools to pop the tricky childproof caps": {
 			"exclude": true
 		},
-		"ultrasomething": {
-			"exclude": true
-		},
 		"written many books": {
 			"exclude": true
 		},
@@ -59,6 +56,10 @@
 			"title": "The Art of Doing Science and Engineering",
 			"author": "Richard Hamming"
 		},
+		"the art of doing science and engineering learning to learn": {
+			"title": "The Art of Doing Science and Engineering",
+			"author": "Richard Hamming"
+		},
 		"charles saatchis": {
 			"title": "My Name is Charles Saatchi and I Am an Artoholic",
 			"author": "Charles Saatchi"
@@ -69,6 +70,66 @@
 		"the pyramid principle": {
 			"title": "The Pyramid Principle",
 			"author": "Barbara Minto"
+		},
+		"chris andersons the long tail why the future of business is selling less of more": {
+			"title": "The Long Tail: Why the Future of Business is Selling Less of More",
+			"author": "Chris Anderson"
+		},
+		"the art of doing science and engineering": {
+			"title": "The Art of Doing Science and Engineering",
+			"author": "Richard Hamming"
+		},
+		"the long tail why the future of business is selling less of more": {
+			"title": "The Long Tail: Why the Future of Business is Selling Less of More",
+			"author": "Chris Anderson"
+		},
+		"eat that frog get more of the important things done today": {
+			"title": "Eat That Frog",
+			"author": "Brian Tracy"
+		},
+		"flow the psychology of happiness": {
+			"title": "Flow: The Psychology of Happiness"
+		},
+		"jaron lanier": {
+			"title": "You Are Not A Gadget: A Manifesto",
+			"author": "Jaron Lanier"
+		},
+		"lets make sushi": {
+			"author": "Andy Matsuda"
+		},
+		"marie kondo": {
+			"title": "The Life-Changing Magic of Tidying: A simple, effective way to banish clutter forever",
+			"author": "Marie Kondo"
+		},
+		"novak djokovics serve to win": {
+			"title": "Serve to Win",
+			"author": "Novak Djokovic"
+		},
+		"serve to win": {
+			"title": "Serve to Win",
+			"author": "Novak Djokovic"
+		},
+		"sludge": {
+			"title": "Sludge"
+		},
+		"the amazing teenage brain": {
+			"title": "The Amazing Teenage Brain"
+		},
+		"the elements of eloquence how to turn the perfect english phrase": {
+			"title": "The Elements of Eloquence",
+			"author": "Mark Forsyth"
+		},
+		"when the scientific secrets of perfect timing dan pink": {
+			"title": "When: The Scientific Secrets of Perfect Timing",
+			"author": "Daniel H. Pink"
+		},
+		"ultra": {
+			"title": "Ultra-Something",
+			"author": "Brendan Leonard"
+		},
+		"ultrasomething": {
+			"title": "Ultra-Something",
+			"author": "Brendan Leonard"
 		}
 	}
 }
