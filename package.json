@@ -54,7 +54,7 @@
 		"react-aria": "^3.50.0",
 		"react-aria-components": "^1.19.0",
 		"react-copy-to-clipboard": "^5.1.1",
-		"react-currency-input-field": "^3.10.0",
+		"react-currency-input-field": "^4.0.5",
 		"react-dom": "^19.2.7",
 		"react-headroom": "^3.2.1",
 		"react-hotkeys-hook": "^5.3.2",
