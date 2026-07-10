@@ -159,7 +159,8 @@ const Books = ({ books }) => {
 
 				<p className="prose max-w-none text-sm mb-6">
 					When you buy through links on this page, I may earn an affiliate
-					commission at no extra cost to you. Thanks for supporting the site.
+					commission at no extra cost to you. I use Amazon as it enables useful
+					links for the most people possible. Thanks for supporting the site!
 				</p>
 
 				{books.length > 0 ? (

@@ -12,6 +12,7 @@ The `/books` page is a **generated reading list** of affiliate book links found 
 | Command | When |
 |---------|------|
 | `npm run build:books` | Regenerate `data/books-index.json` after new sketches or curation edits |
+| `npm run check:books-duplicates` | Fail if the built index has likely duplicate titles (also runs in CI after build) |
 | `npm run fetch:book-authors` | Fill **missing** authors via affiliate URL → Open Library ISBN lookup |
 | `predev` / `prebuild` | Runs `buildBooksIndex` automatically via `setup.mjs` |
 

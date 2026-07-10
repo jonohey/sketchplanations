@@ -45,6 +45,13 @@ export function bookUrlScore(url) {
 }
 
 /**
+ * @param {string} author
+ */
+export function cleanAuthorName(author) {
+	return author.replace(/,?\s*\d{4}\s*$/, "").trim();
+}
+
+/**
  * @param {string} text
  */
 export function cleanLinkText(text) {
@@ -73,6 +80,9 @@ export function normalizeParsedTitle(title) {
 		.trim();
 }
 
+/** Matches straight and curly apostrophes in possessive names. */
+const POSSESSIVE_APOSTROPHE = "['\u2019]";
+
 /**
  * @param {string} text
  * @returns {{ title: string, author?: string }}
@@ -84,7 +94,7 @@ export function parseBookLinkText(text) {
 	if (byMatch) {
 		return {
 			title: normalizeParsedTitle(byMatch[1].replace(/,\s*$/, "").trim()),
-			author: byMatch[2].trim(),
+			author: cleanAuthorName(byMatch[2].trim()),
 		};
 	}
 
@@ -92,12 +102,15 @@ export function parseBookLinkText(text) {
 	if (commaByMatch) {
 		return {
 			title: normalizeParsedTitle(commaByMatch[1].trim()),
-			author: commaByMatch[2].trim(),
+			author: cleanAuthorName(commaByMatch[2].trim()),
 		};
 	}
 
 	const possessiveMatch = cleaned.match(
-		/^(.+?)['']s\s+(?:excellent\s+)?book(?:\s+(.+))?$/i,
+		new RegExp(
+			`^(.+?)${POSSESSIVE_APOSTROPHE}s\\s+(?:excellent\\s+)?book(?:\\s+(.+))?$`,
+			"i",
+		),
 	);
 	if (possessiveMatch) {
 		if (possessiveMatch[2]) {
@@ -106,6 +119,16 @@ export function parseBookLinkText(text) {
 				author: possessiveMatch[1].trim(),
 			};
 		}
+	}
+
+	const possessiveTitleMatch = cleaned.match(
+		new RegExp(`^(.+?)${POSSESSIVE_APOSTROPHE}s,?\\s+(?!book\\b)(.+)$`, "i"),
+	);
+	if (possessiveTitleMatch) {
+		return {
+			title: normalizeParsedTitle(possessiveTitleMatch[2].trim()),
+			author: possessiveTitleMatch[1].trim(),
+		};
 	}
 
 	const pronounBookMatch = cleaned.match(
@@ -125,7 +148,19 @@ export function parseBookLinkText(text) {
  * @param {string} title
  */
 export function normalizeBookTitle(title) {
-	return normalizeParsedTitle(title)
+	const withoutTrailingAuthor = title.replace(
+		/,\s+[A-Z][^.]*?(?:\s+[A-Z][^.]*?){0,2}$/,
+		"",
+	);
+
+	const colonMatch = withoutTrailingAuthor.match(/^(.+?):\s*.+$/);
+	const mainTitle =
+		colonMatch &&
+		colonMatch[1].replace(/[^\w\s]/g, "").trim().length >= 15
+			? colonMatch[1]
+			: withoutTrailingAuthor;
+
+	return normalizeParsedTitle(mainTitle)
 		.toLowerCase()
 		.replace(/\s+book$/i, "")
 		.replace(/[^\w\s]/g, "")
@@ -209,6 +244,7 @@ export function buildBooksIndex(linkInstances, overridesByTitle = {}) {
 		}
 
 		if (override?.url) book.url = override.url;
+		if (override?.title) book.title = override.title;
 		if (override?.author) book.author = override.author;
 		if (override?.note) book.note = override.note;
 		if (override?.thumbnail) book.thumbnail = override.thumbnail;
@@ -227,6 +263,75 @@ export function buildBooksIndex(linkInstances, overridesByTitle = {}) {
 
 		return a.title.localeCompare(b.title, undefined, { sensitivity: "base" });
 	});
+}
+
+/**
+ * @param {string} a
+ * @param {string} b
+ * @param {number} wordCount
+ */
+function shareWordPrefix(a, b, wordCount) {
+	const aWords = a.split(" ");
+	const bWords = b.split(" ");
+	if (aWords.length < wordCount || bWords.length < wordCount) return false;
+
+	for (let i = 0; i < wordCount; i++) {
+		if (aWords[i] !== bWords[i]) return false;
+	}
+
+	return true;
+}
+
+/**
+ * Flag likely duplicate books that should be merged via overrides or parsing.
+ * @param {object[]} books
+ * @returns {{ a: object, b: object, reason: string }[]}
+ */
+export function findPotentialDuplicateBooks(books) {
+	/** @type {{ a: object, b: object, reason: string }[]} */
+	const duplicates = [];
+
+	for (let i = 0; i < books.length; i++) {
+		for (let j = i + 1; j < books.length; j++) {
+			const bookA = books[i];
+			const bookB = books[j];
+			const keyA = normalizeBookTitle(bookA.title);
+			const keyB = normalizeBookTitle(bookB.title);
+
+			if (keyA === keyB) continue;
+
+			const minLen = Math.min(keyA.length, keyB.length);
+			if (minLen < 10) continue;
+
+			const isPrefix =
+				(keyA.length < keyB.length && keyB.startsWith(`${keyA} `)) ||
+				(keyB.length < keyA.length && keyA.startsWith(`${keyB} `));
+
+			const sameAuthor =
+				bookA.author &&
+				bookB.author &&
+				bookA.author.toLowerCase() === bookB.author.toLowerCase();
+
+			if (isPrefix) {
+				duplicates.push({
+					a: bookA,
+					b: bookB,
+					reason: "one title is a prefix of the other",
+				});
+				continue;
+			}
+
+			if (sameAuthor && shareWordPrefix(keyA, keyB, 4)) {
+				duplicates.push({
+					a: bookA,
+					b: bookB,
+					reason: "same author and very similar titles",
+				});
+			}
+		}
+	}
+
+	return duplicates;
 }
 
 /**

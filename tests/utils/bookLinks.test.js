@@ -67,6 +67,41 @@ describe("parseBookLinkText", () => {
 		});
 	});
 
+	it("parses possessive title patterns", () => {
+		expect(
+			parseBookLinkText(
+				"Chris Anderson\u2019s The Long Tail: Why the Future of Business is Selling Less of More",
+			),
+		).toEqual({
+			title: "The Long Tail: Why the Future of Business is Selling Less of More",
+			author: "Chris Anderson",
+		});
+		expect(parseBookLinkText("Novak Djokovic\u2019s Serve to Win")).toEqual({
+			title: "Serve to Win",
+			author: "Novak Djokovic",
+		});
+		expect(
+			parseBookLinkText(
+				"Richard Hamming's, The Art of Doing Science and Engineering: Learning to Learn",
+			),
+		).toEqual({
+			title: "The Art of Doing Science and Engineering: Learning to Learn",
+			author: "Richard Hamming",
+		});
+	});
+
+	it("strips publication year from parsed author names", () => {
+		expect(
+			parseBookLinkText(
+				"Wooden: A Lifetime of Observations and Reflections On and Off the Court, by John Wooden and Steve Jamison, 1997",
+			),
+		).toEqual({
+			title:
+				"Wooden: A Lifetime of Observations and Reflections On and Off the Court",
+			author: "John Wooden and Steve Jamison",
+		});
+	});
+
 	it("merges audiobook and print editions of the same book", () => {
 		const books = buildBooksIndex([
 			{
@@ -245,6 +280,27 @@ describe("normalizeBookTitle", () => {
 	it("normalizes titles for grouping", () => {
 		expect(normalizeBookTitle("Factfulness")).toBe("factfulness");
 		expect(normalizeBookTitle("Atomic Habits book")).toBe("atomic habits");
+	});
+
+	it("groups subtitle variants under the main title", () => {
+		expect(
+			normalizeBookTitle(
+				"The Elements of Eloquence: How to turn the perfect English phrase",
+			),
+		).toBe("the elements of eloquence");
+		expect(
+			normalizeBookTitle(
+				"The Art of Doing Science and Engineering: Learning to Learn",
+			),
+		).toBe("the art of doing science and engineering");
+	});
+
+	it("strips trailing author suffixes from titles", () => {
+		expect(
+			normalizeBookTitle(
+				"When: The Scientific Secrets of Perfect Timing, Dan Pink",
+			),
+		).toBe("when the scientific secrets of perfect timing");
 	});
 });
 

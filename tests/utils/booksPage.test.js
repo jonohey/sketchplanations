@@ -3,7 +3,11 @@ import path from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-import { buildBooksIndex, normalizeBookTitle } from "../../utils/bookLinks.mjs";
+import {
+	buildBooksIndex,
+	findPotentialDuplicateBooks,
+	normalizeBookTitle,
+} from "../../utils/bookLinks.mjs";
 
 const OVERRIDES_PATH = path.join(process.cwd(), "data/books-overrides.json");
 const AUTHORS_PATH = path.join(process.cwd(), "data/books-authors.json");
@@ -87,5 +91,23 @@ describe("books page index quality", () => {
 			books.find((book) => normalizeBookTitle(book.title) === "the pyramid principle")
 				?.author,
 		).toBe("Barbara Minto");
+	});
+
+	it("has no likely duplicate books in the built index", () => {
+		const indexPath = path.join(process.cwd(), "data/books-index.json");
+		if (!fs.existsSync(indexPath)) return;
+
+		const index = JSON.parse(fs.readFileSync(indexPath, "utf8"));
+		const duplicates = findPotentialDuplicateBooks(index.books ?? []);
+
+		expect(
+			duplicates,
+			duplicates
+				.map(
+					({ a, b, reason }) =>
+						`"${a.title}" / "${b.title}" (${reason})`,
+				)
+				.join("\n"),
+		).toEqual([]);
 	});
 });

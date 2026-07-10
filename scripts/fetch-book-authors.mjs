@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { normalizeParsedTitle } from "../utils/bookLinks.mjs";
+import { normalizeBookTitle, normalizeParsedTitle } from "../utils/bookLinks.mjs";
 
 const BOOKS_INDEX_PATH = path.join(process.cwd(), "data/books-index.json");
 const AUTHORS_PATH = path.join(process.cwd(), "data/books-authors.json");
