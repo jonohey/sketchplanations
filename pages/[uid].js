@@ -273,29 +273,24 @@ const SketchplanationPage = ({
 								)}
 							>
 								<RichText field={body} />
-								<hr className={styles.divider} />
-								<div
-									className={classNames(
-										styles["published-at"],
-										"not-prose",
-									)}
-								>
-									<div>
-										{publishedText !== "✨ Latest" && "Published "}
-										<time dateTime={publishedAt}>{publishedText}</time>
-									</div>
-									<a
-										href="#top"
-										className={styles["back-to-top"]}
-										onClick={(e) => {
-											e.preventDefault();
-											fastScrollToTop();
-										}}
-									>
-										<ArrowUp size={14} strokeWidth={2} aria-hidden />
-										Back to top
-									</a>
+							</div>
+							<hr className={styles.divider} />
+							<div className={styles["published-at"]}>
+								<div>
+									{publishedText !== "✨ Latest" && "Published "}
+									<time dateTime={publishedAt}>{publishedText}</time>
 								</div>
+								<a
+									href="#top"
+									className={styles["back-to-top"]}
+									onClick={(e) => {
+										e.preventDefault();
+										fastScrollToTop();
+									}}
+								>
+									<ArrowUp size={14} strokeWidth={2} aria-hidden />
+									Back to top
+								</a>
 							</div>
 							{/* <ul className={styles.tags}>
 							{tags.map((tag) => (

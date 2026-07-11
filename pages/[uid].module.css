@@ -323,11 +323,11 @@
 }
 
 .published-at {
-  @apply flex items-center justify-between gap-x-4 py-4 text-sm text-textSubdued;
+  @apply flex items-center justify-between gap-x-4 py-2 text-sm text-textSubdued;
 }
 
 .divider {
-  @apply border-0 border-t border-border mt-10 mb-6;
+  @apply border-0 border-t border-border mt-6 mb-2;
 }
 
 .back-to-top {
