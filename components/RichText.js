@@ -1,5 +1,5 @@
+import { LinkType } from "@prismicio/client";
 import { PrismicRichText } from "@prismicio/react";
-import { LinkType } from "@prismicio/types";
 import sketchTooltipsData from "data/sketch-tooltips-data.json";
 import { ExternalLink } from "lucide-react";
 import { compile, match } from "path-to-regexp";
