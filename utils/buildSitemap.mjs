@@ -40,6 +40,7 @@ async function buildSitemap() {
 		"!pages/index.js",
 		"!pages/preview.js",
 		"!pages/thanks.js",
+		"!pages/big-ideas-little-pictures-archive.js",
 		"!pages/api/**/*.js",
 	]);
 

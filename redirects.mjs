@@ -35,6 +35,11 @@ export default [
 		permanent: true,
 	},
 	{
+		source: "/big-ideas-little-pictures-archive",
+		destination: "/big-ideas-little-pictures",
+		permanent: true,
+	},
+	{
 		source: "/pay",
 		destination: "https://buy.stripe.com/bJe14n5Pf5fM2xj9nN1Fe00",
 		permanent: false,

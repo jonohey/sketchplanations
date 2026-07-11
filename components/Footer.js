@@ -9,7 +9,7 @@ import SubscribeInline from "./SubscribeInline";
 import styles from "./Footer.module.css";
 
 const Nav = () => (
-	<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-10 lg:text-center gap-x-12 gap-y-2 items-start">
+	<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 lg:text-center gap-x-12 gap-y-2 items-start">
 		<FancyLink href="/">Home</FancyLink>
 		<FancyLink href="/search">Search</FancyLink>
 		<FancyLink href="/categories">Categories</FancyLink>
@@ -21,6 +21,7 @@ const Nav = () => (
 		>
 				Book!
 		</FancyLink>
+		<FancyLink href="/books">Books</FancyLink>
 		<FancyLink
 			href="https://sketchplanations.substack.com/subscribe"
 			target="_blank"
@@ -62,6 +63,7 @@ const Nav = () => (
 		</FancyLink>
 		<FancyLink href="/about">About</FancyLink>
 		<FancyLink href="/archive">Archive</FancyLink>
+		<FancyLink href="/list">List</FancyLink>
 		<FancyLink href="/licence">Licence</FancyLink>
 	</div>
 );
