@@ -126,46 +126,6 @@ const Home = ({ carouselRows }) => {
 				/>
 				<link rel="canonical" href="https://sketchplanations.com" />
 				<meta name="robots" content="max-image-preview:large" />
-				
-				<script
-					type="application/ld+json"
-					dangerouslySetInnerHTML={{
-						__html: JSON.stringify({
-							"@context": "https://schema.org",
-							"@type": "Book",
-							"name": "Big Ideas Little Pictures: Explaining the world one sketch at a time",
-							"author": {
-								"@type": "Person",
-								"name": "Jono Hey"
-							},
-							"publisher": {
-								"@type": "Organization",
-								"name": "Sketchplanations"
-							},
-							"review": {
-								"@type": "Review",
-								"author": {
-									"@type": "Person",
-									"name": "Bill Gates"
-								},
-								"reviewBody": "This is such a cool book. The range of Jono's knowledge is astounding, and so is his ability to digest complex ideas into deceptively simple drawings. You'll learn something on every page—and be entertained too."
-							},
-							"aggregateRating": {
-								"@type": "AggregateRating",
-								"ratingValue": "5",
-								"bestRating": "5",
-								"ratingCount": 88,
-								"reviewCount": 88
-							},
-							"image": "https://sketchplanations.com/images/big-ideas-little-pictures-cover-transparent.png",
-							"description": "Transform complex ideas into crystal-clear understanding with this collection of 135 visual explanations. Including 24 exclusive new sketches and enhanced versions of classic favourites, each page shares life-improving ideas through beautifully simple illustrations.",
-							"isbn": "9781956403572",
-							"numberOfPages": 288,
-							"inLanguage": "en",
-							"bookFormat": "Hardcover"
-						})
-					}}
-				/>
 			</Head>
 			<div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12" id="hero">
 				<div className="prose sm:prose-lg lg:prose-xl mx-auto text-center">

@@ -1,17 +1,18 @@
 import { track } from '@vercel/analytics'
 import FancyLink from 'components/FancyLink'
 import ImageGallery from 'components/ImageGallery'
+import JsonLd from 'components/JsonLd'
+import { pageTitle } from 'helpers'
+import { buildBookProductGraph } from 'helpers/structuredData'
+import bigIdeasLittlePicturesCoverTransparentImage from 'images/big-ideas-little-pictures-cover-transparent.png'
 import { ZoomIn } from 'lucide-react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { RoughNotation } from 'react-rough-notation'
-import styles from './big-ideas-little-pictures.module.css'
-
-import { pageTitle } from 'helpers'
-import bigIdeasLittlePicturesCoverTransparentImage from 'images/big-ideas-little-pictures-cover-transparent.png'
 import { bookPageImages } from 'utils/bookImages.mjs'
+import styles from './big-ideas-little-pictures.module.css'
 
 const AMAZON_LINK = 'https://geni.us/big-ideas-book'
 
@@ -180,50 +181,8 @@ const Book = ({ country }) => {
         {/* Additional meta tags for better SEO */}
         <meta name="keywords" content="book, sketches, illustrations, big ideas, little pictures, jono hey, sketchplanations" />
         <meta name="author" content="Jono Hey" />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Product",
-              "name": "Big Ideas Little Pictures",
-              "description": "A delightful book that simplifies complex ideas with clear illustrations. Over 130 inspiring, funny and relatable sketches about life.",
-              "image": "https://sketchplanations.com/images/big-ideas-little-pictures-book-thumbnail-1200x630.png",
-              "isbn": "978-1956403572",
-              "author": {
-                "@type": "Person",
-                "name": "Jono Hey"
-              },
-              "publisher": {
-                "@type": "Organization",
-                "name": "Media Lab Books"
-              },
-              "offers": {
-                "@type": "Offer",
-                "availability": "https://schema.org/InStock",
-                "price": "18.99",
-                "priceCurrency": "USD"
-              },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.8",
-                "bestRating": "5",
-                "ratingCount": 228,
-                "reviewCount": 228
-              },
-              "review": {
-                "@type": "Review",
-                "author": {
-                  "@type": "Person",
-                  "name": "Bill Gates"
-                },
-                "reviewBody": "This is such a cool book. The range of Jono's knowledge is astounding, and so is his ability to digest complex ideas into deceptively simple drawings. You'll learn something on every page—and be entertained too."
-              }
-            })
-          }}
-        />
       </Head>
+      <JsonLd data={buildBookProductGraph()} />
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 prose dark:prose-invert'>
         <div className='py-12'>
           <div id='hero' className='flex flex-col md:flex-row items-center gap-8 md:gap-12'>
