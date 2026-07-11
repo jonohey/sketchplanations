@@ -62,13 +62,8 @@ describe("buildSiteGraph", () => {
 });
 
 describe("buildPerson", () => {
-	it("includes social sameAs links", () => {
+	it("includes LinkedIn in sameAs", () => {
 		const person = buildPerson();
-		expect(person.sameAs).toEqual(
-			expect.arrayContaining([
-				"https://uk.linkedin.com/in/jonohey",
-				"https://twitter.com/sketchplanator",
-			]),
-		);
+		expect(person.sameAs).toEqual(["https://uk.linkedin.com/in/jonohey"]);
 	});
 });

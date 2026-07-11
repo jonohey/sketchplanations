@@ -11,10 +11,7 @@ export const CREATOR = {
 	url: `${SITE_URL}/about`,
 };
 
-export const CREATOR_SAME_AS = [
-	"https://uk.linkedin.com/in/jonohey",
-	"https://twitter.com/sketchplanator",
-];
+export const CREATOR_SAME_AS = ["https://uk.linkedin.com/in/jonohey"];
 
 export const ORGANIZATION_SAME_AS = [
 	"https://www.instagram.com/sketchplanations/",
@@ -311,11 +308,6 @@ export const buildBookProductGraph = () => ({
 			brand: {
 				"@type": "Brand",
 				name: SITE_NAME,
-			},
-			author: CREATOR,
-			publisher: {
-				"@type": "Organization",
-				name: "Media Lab Books",
 			},
 			isRelatedTo: { "@id": `${SITE_URL}/big-ideas-little-pictures#book` },
 			offers: {
