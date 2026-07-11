@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import Image from "next/image";
-import PropTypes from "prop-types";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./ImageGallery.module.css";
 
@@ -234,18 +233,6 @@ const ImageGallery = ({
       )}
     </AnimatePresence>
   );
-};
-
-ImageGallery.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.shape({
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
-    filename: PropTypes.string,
-    conceptName: PropTypes.string
-  })).isRequired,
-  initialIndex: PropTypes.number,
-  onClose: PropTypes.func,
-  isOpen: PropTypes.bool
 };
 
 export default ImageGallery;
