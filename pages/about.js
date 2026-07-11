@@ -1,7 +1,9 @@
 import ChromeExtensionPromo from "components/ChromeExtensionPromo";
 import FancyLink from "components/FancyLink";
+import JsonLd from "components/JsonLd";
 import SubscribeFull from "components/SubscribeFull";
 import { pageTitle } from "helpers";
+import { buildPerson } from "helpers/structuredData";
 import {
 	Cloud,
 	Instagram,
@@ -22,18 +24,10 @@ const About = ({ siteUrl }) => {
 	const aboutImageUrl =
 		`${siteUrl}/images/about/jono-hey-sketchplanations-headshot.jpg`;
 
-	const personJsonLd = {
-		"@context": "https://schema.org",
-		"@type": "Person",
-		name: "Jono Hey",
+	const personJsonLd = buildPerson({
 		url: aboutUrl,
 		image: aboutImageUrl,
-		jobTitle: "Creator of Sketchplanations",
-		description: "Creator of Sketchplanations and author of Big Ideas Little Pictures.",
-		sameAs: [
-			"https://uk.linkedin.com/in/jonohey",
-		],
-	};
+	});
 
 	return (
 		<>
@@ -60,11 +54,8 @@ const About = ({ siteUrl }) => {
 					name="twitter:image:alt"
 					content="Jono Hey, creator of Sketchplanations and author of Big Ideas Little Pictures"
 				/>
-				<script
-					type="application/ld+json"
-					dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
-				/>
 			</Head>
+			<JsonLd data={personJsonLd} />
 			<div id="top" className="max-w-3xl mx-auto px-5 pb-16">
 				<div className="prose max-w-none">
 					<div className="mb-4 mt-12">

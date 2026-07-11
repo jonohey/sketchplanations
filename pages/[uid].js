@@ -12,6 +12,7 @@ import SketchplanationImage from "components/SketchplanationImage";
 import SketchplanationsStack from "components/SketchplanationsStack";
 import SubscribeInline from "components/SubscribeInline";
 import TaggedSketchplanations from "components/TaggedSketchplanations";
+import JsonLd from "components/JsonLd";
 import {
 	fastScrollToTop,
 	humanizePublishedDate,
@@ -20,9 +21,9 @@ import {
 	shuffle,
 } from "helpers";
 import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
+import { buildSketchStructuredData } from "helpers/structuredData";
 import { useRandomHandle } from "hooks/useRandomHandle";
 import { ArrowLeft, ArrowRight, ArrowUp, ChevronLeft, ChevronRight } from "lucide-react";
-import { ImageJsonLd } from "next-seo";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -105,6 +106,17 @@ const SketchplanationPage = ({
 	const randomHandle = useRandomHandle([uid]);
 
 	const publishedText = humanizePublishedDate(publishedAt, { showYear: true });
+	const description = truncate(prismicH.asText(body), 160);
+	const pageUrl = `https://sketchplanations.com/${uid}`;
+	const socialImageUrl = `${image.url}&w=1200`;
+	const structuredData = buildSketchStructuredData({
+		uid,
+		title,
+		description: prismicH.asText(body),
+		image,
+		publishedAt,
+		tags,
+	});
 
 	const commonProps = {
 		title,
@@ -161,51 +173,26 @@ const SketchplanationPage = ({
 		<Fragment key={uid}>
 			<Head>
 				<title>{pageTitle(title)}</title>
-				<link rel="canonical" href={`https://sketchplanations.com/${uid}`} />
+				<link rel="canonical" href={pageUrl} />
 				<meta name="robots" content={robotsContent} />
-				<meta
-					name="description"
-					content={truncate(prismicH.asText(body), 160)}
-				/>
+				<meta name="description" content={description} />
 				<meta key="og:title" property="og:title" content={title} />
-				<meta property="og:description" content={prismicH.asText(body)} />
-				<meta property="og:image" content={`${image.url}&w=1200`} />
-				<meta
-					property="og:url"
-					content={`https://sketchplanations.com/${uid}`}
-				/>
+				<meta property="og:type" content="article" />
+				<meta property="og:description" content={description} />
+				<meta property="og:image" content={socialImageUrl} />
+				<meta property="og:image:alt" content={image.alt || title} />
+				<meta property="og:url" content={pageUrl} />
+				{publishedAt && (
+					<meta property="article:published_time" content={publishedAt} />
+				)}
 				<meta name="twitter:card" content="summary_large_image" />
-				<meta name="twitter:image:alt" content={title} />
+				<meta name="twitter:title" content={title} />
+				<meta name="twitter:description" content={description} />
+				<meta name="twitter:image" content={socialImageUrl} />
+				<meta name="twitter:image:alt" content={image.alt || title} />
 			</Head>
 
-			<ImageJsonLd
-				images={[
-					{
-						contentUrl: `${image.url}&w=1200`,
-						thumbnail: {
-							"@type": "ImageObject",
-							url: `${image.url}&w=200`,
-						},
-						creator: {
-							"@type": "Person",
-							name: "Jono Hey",
-						},
-						creditText: "Jono Hey",
-						copyrightNotice:
-							"Creative Commons Attribution-NonCommercial 4.0 International License",
-						license: "https://creativecommons.org/licenses/by-nc/4.0/",
-						acquireLicensePage: "https://sketchplanations.com/licence",
-						name: title,
-						caption: image.alt,
-						description: prismicH.asText(body),
-						width: image.dimensions.width,
-						height: image.dimensions.height,
-						isFamilyFriendly: true,
-						representativeOfPage: true,
-						datePublished: publishedAt,
-					},
-				]}
-			/>
+			<JsonLd data={structuredData} />
 
 			<Modal isOpen={downloadModalOpen} onClose={() => setDownloadModalOpen(false)}>
 				<DownloadModal

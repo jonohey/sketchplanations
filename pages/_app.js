@@ -6,9 +6,11 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import BuyMeACoffee from "components/BuyMeACoffee";
 import Footer from "components/Footer";
 import Header from "components/Header";
+import JsonLd from "components/JsonLd";
 import Context from "context";
 import cookieConstentConfig from "cookieConstentConfig.mjs";
 import { pageTitle } from "helpers";
+import { buildSiteGraph } from "helpers/structuredData";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import { useEffect, useState } from "react";
@@ -113,6 +115,7 @@ const Sketchplanations = ({ Component, pageProps }) => {
 						content="width=device-width, initial-scale=1, minimum-scale=1"
 					/>
 				</Head>
+				<JsonLd data={buildSiteGraph()} />
 				<div className={inter.className}>
 					{getLayout(<Component {...pageProps} />)}
 				</div>

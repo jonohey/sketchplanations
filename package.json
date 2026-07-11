@@ -41,7 +41,6 @@
 		"humanize-string": "^3.1.0",
 		"lucide-react": "^0.525.0",
 		"next": "^16.2.10",
-		"next-seo": "^6.8.0",
 		"node-fetch": "^3.3.2",
 		"path-to-regexp": "^8.4.2",
 		"polished": "^4.3.1",
