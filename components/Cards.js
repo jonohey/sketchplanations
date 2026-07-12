@@ -1,5 +1,4 @@
 import { track } from '@vercel/analytics';
-import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import FancyLink from "./FancyLink";
@@ -68,13 +67,7 @@ export const Cards = () => (
 								track('Podcast-site-link', { location: 'card' });
 							}}
 						>
-							<span>
-								<span>Try the podcast</span>{" "}
-								<ExternalLink
-									size={16}
-									className="inline relate -translate-y-[2px]"
-								/>
-							</span>
+							Try the podcast
 						</FancyLink>
 					</div>
 				</>

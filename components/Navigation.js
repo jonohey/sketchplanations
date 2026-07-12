@@ -1,6 +1,5 @@
 import { track } from '@vercel/analytics';
 import classNames from "classnames";
-import { ExternalLink } from "lucide-react";
 import { useRouter } from "next/router";
 import { RoughNotation } from "react-rough-notation";
 import Link from "./Link";
@@ -88,10 +87,7 @@ const Navigation = () => {
 					track('Podcast-site-link', { location: 'header' });
 				}}
 			>
-				<span className="inline-flex items-center gap-2">
-					<span>Podcast</span>
-					<ExternalLink size={16} className="inline" />
-				</span>
+				Podcast
 			</a>
 			<a
 				href="https://www.redbubble.com/people/sketchplanator/explore?asc=u&page=1&sortOrder=top%20selling"
@@ -102,10 +98,7 @@ const Navigation = () => {
 					track('Shop', { location: 'header' });
 				}}
 			>
-				<span className="inline-flex items-center gap-2">
-					<span>Shop</span>
-					<ExternalLink size={16} className="inline" />
-				</span>
+				Shop
 			</a>
 			<Link
 				href="/about"
