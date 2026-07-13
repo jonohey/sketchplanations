@@ -13,6 +13,7 @@ import {
 	findIdentifierVariants,
 	findSingularPluralPairs,
 	getTagSlug,
+	isBrokenTagLink,
 	normalizeIdentifier,
 	suggestMergeTarget,
 } from "./tag-utils.mjs";
@@ -132,6 +133,20 @@ export const runAudit = async () => {
 
 	const { countByTagId, sketchesByTagId } = buildUsage(sketchplanations);
 
+	const brokenTagLinks = [];
+	for (const sketch of sketchplanations) {
+		for (const { tag } of sketch.data?.tags ?? []) {
+			if (!isBrokenTagLink(tag)) continue;
+			brokenTagLinks.push({
+				sketch_uid: sketch.uid,
+				sketch_id: sketch.id,
+				tag_id: tag?.id ?? "",
+				tag_slug: tag?.slug ?? "",
+				tag_type: tag?.type ?? "",
+			});
+		}
+	}
+
 	const singularPluralPairs = findSingularPluralPairs(tags);
 	const identifierPairs = findIdentifierVariants(tags);
 	const mergePairs = [...singularPluralPairs, ...identifierPairs];
@@ -161,6 +176,10 @@ export const runAudit = async () => {
 		summary: {
 			tag_count: tags.length,
 			sketch_count: sketchplanations.length,
+			broken_tag_link_count: brokenTagLinks.length,
+			sketches_with_broken_tags: new Set(
+				brokenTagLinks.map((row) => row.sketch_uid),
+			).size,
 			suggested_merge_count: suggestedMerges.length,
 			archive_candidate_count: tagRows.filter(
 				(r) => r.suggested_action === "archive_candidate",
@@ -169,6 +188,7 @@ export const runAudit = async () => {
 				(r) => r.suggestion_reason === "homepage_carousel",
 			).length,
 		},
+		broken_tag_links: brokenTagLinks,
 		tags: tags.map((tag) => ({
 			id: tag.id,
 			identifier: tag.data?.identifier ?? "",
@@ -215,10 +235,27 @@ export const runAudit = async () => {
 	console.log("\n[tag-cleanup] Audit complete\n");
 	console.log(`  Tags:              ${snapshot.summary.tag_count}`);
 	console.log(`  Sketches:          ${snapshot.summary.sketch_count}`);
+	console.log(
+		`  Broken tag links:  ${snapshot.summary.broken_tag_link_count} across ${snapshot.summary.sketches_with_broken_tags} sketch(es)`,
+	);
 	console.log(`  Suggested merges:  ${snapshot.summary.suggested_merge_count}`);
 	console.log(`  Archive candidates: ${snapshot.summary.archive_candidate_count}`);
 	console.log(`\n  JSON: ${jsonPath}`);
 	console.log(`  CSV:  ${csvPath}`);
+
+	if (brokenTagLinks.length > 0) {
+		console.log(
+			"\n  ⚠ Broken tag links (deleted/archived documents still linked on sketches):",
+		);
+		for (const row of brokenTagLinks) {
+			console.log(
+				`    ${row.sketch_uid} → tag id ${row.tag_id || "(none)"} (slug "${row.tag_slug || "-"}")`,
+			);
+		}
+		console.log(
+			"  Fix with: npm run tag-cleanup:fix-broken-tags -- --dry-run",
+		);
+	}
 
 	if (suggestedMerges.length > 0) {
 		console.log("\n  Top suggested merges (review audit CSV before acting):");

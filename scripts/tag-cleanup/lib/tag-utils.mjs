@@ -58,6 +58,21 @@ export const singularize = (word) => {
 export const getTagSlug = (tag) => tag.uid ?? tag.slugs?.[0] ?? "";
 
 /**
+ * Prismic content relationships whose target document was deleted/archived,
+ * or empty group rows with no linked document.
+ * Write stubs ({ id, link_type }) are valid — they have an id but no slug yet.
+ */
+export const isBrokenTagLink = (tag) => {
+	if (!tag?.id) return true;
+	if (tag.isBroken === true || tag.type === "broken_type") return true;
+	const slug = (tag.uid || tag.slug || "").trim();
+	return slug === "-";
+};
+
+export const stripBrokenTagLinks = (tags = []) =>
+	(tags ?? []).filter((item) => !isBrokenTagLink(item?.tag));
+
+/**
  * Replace loser tag IDs with winners and dedupe by linked document id.
  */
 export const applyMergeMapToSketchTags = (tags, mergeMapById) => {
@@ -92,9 +107,15 @@ export const applyTagChangesToSketchTags = (tags, { mergeMap, removeIds }) => {
 	return merged.filter((item) => !removeIds.has(item?.tag?.id));
 };
 
-/** Remove tag IDs and add new ones without duplicates. */
-export const applySketchTagEdits = (tags, { removeIds = new Set(), addIds = [] }) => {
-	const result = (tags ?? []).filter((item) => !removeIds.has(item?.tag?.id));
+/** Remove tag IDs and add new ones without duplicates. Always drops broken links. */
+export const applySketchTagEdits = (
+	tags,
+	{ removeIds = new Set(), addIds = [], stripBroken = true } = {},
+) => {
+	const result = (tags ?? []).filter((item) => {
+		if (stripBroken && isBrokenTagLink(item?.tag)) return false;
+		return !removeIds.has(item?.tag?.id);
+	});
 	const seen = new Set(result.map((item) => item?.tag?.id).filter(Boolean));
 
 	for (const id of addIds) {
