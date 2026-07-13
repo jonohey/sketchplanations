@@ -141,6 +141,29 @@ export const buildSketchImageObject = ({
 	};
 };
 
+/**
+ * Prismic content relationships can be broken (deleted tag docs) or empty.
+ * Those must not become breadcrumb/category URLs. CI also fails on them via
+ * `npm run check:broken-tags` — this filter is a safety net for SEO only.
+ */
+export const resolveSketchTagDocs = (tags = []) =>
+	tags
+		.map((entry) => entry?.tag)
+		.filter((tag) => {
+			if (!tag?.id || tag.isBroken === true || tag.type === "broken_type") {
+				return false;
+			}
+			const slug = (tag.uid || tag.slug || "").trim();
+			if (!slug || slug === "-") return false;
+			const name = slug.replace(/-/g, " ").trim();
+			return Boolean(name);
+		});
+
+export const tagLabelFromDoc = (tag) => {
+	const slug = (tag?.uid || tag?.slug || "").trim();
+	return slug.replace(/-/g, " ").trim();
+};
+
 export const buildSketchCreativeWork = ({
 	uid,
 	title,
@@ -149,9 +172,7 @@ export const buildSketchCreativeWork = ({
 	tags = [],
 }) => {
 	const pageUrl = absoluteUrl(`/${uid}`);
-	const keywords = tags
-		.map((tag) => tag?.tag?.slug?.replace(/-/g, " "))
-		.filter(Boolean);
+	const keywords = resolveSketchTagDocs(tags).map(tagLabelFromDoc).filter(Boolean);
 
 	return {
 		"@type": ["CreativeWork", "Article"],
@@ -175,11 +196,13 @@ export const buildSketchCreativeWork = ({
 			datePublished: publishedAt,
 			dateModified: publishedAt,
 		}),
-		...(keywords.length > 0 && { keywords: keywords.join(", ") }),
-		about: keywords.map((name) => ({
-			"@type": "Thing",
-			name,
-		})),
+		...(keywords.length > 0 && {
+			keywords: keywords.join(", "),
+			about: keywords.map((name) => ({
+				"@type": "Thing",
+				name,
+			})),
+		}),
 	};
 };
 
@@ -193,12 +216,15 @@ export const buildSketchBreadcrumbs = ({ uid, title, primaryTag } = {}) => {
 		},
 	];
 
-	if (primaryTag?.slug && primaryTag?.name) {
+	const categorySlug = primaryTag?.slug?.trim();
+	const categoryName = primaryTag?.name?.trim();
+
+	if (categorySlug && categorySlug !== "-" && categoryName) {
 		items.push({
 			"@type": "ListItem",
 			position: 2,
-			name: primaryTag.name,
-			item: absoluteUrl(`/categories/${primaryTag.slug}`),
+			name: categoryName,
+			item: absoluteUrl(`/categories/${categorySlug}`),
 		});
 		items.push({
 			"@type": "ListItem",
@@ -229,11 +255,12 @@ export const buildSketchStructuredData = ({
 	publishedAt,
 	tags = [],
 }) => {
-	const primaryTagDoc = tags?.[0]?.tag;
+	const validTags = resolveSketchTagDocs(tags);
+	const primaryTagDoc = validTags[0];
 	const primaryTag = primaryTagDoc
 		? {
-				slug: primaryTagDoc.slug,
-				name: primaryTagDoc.slug?.replace(/-/g, " "),
+				slug: (primaryTagDoc.uid || primaryTagDoc.slug).trim(),
+				name: tagLabelFromDoc(primaryTagDoc),
 			}
 		: null;
 

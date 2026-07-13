@@ -23,6 +23,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: pnpm run check:books-duplicates
+      - run: pnpm run check:broken-tags
       - run: pnpm test
 
   dependabot-auto-merge:
