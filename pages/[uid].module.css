@@ -262,16 +262,39 @@
 }
 
 .tags {
-  @apply flex flex-wrap mt-10 mb-10 gap-4;
+  @apply flex flex-wrap items-center gap-2 mt-6;
 }
 
-.tags a {
-  @apply block py-2 px-4 rounded-full border border-border text-sm;
+.tags-label {
+  @apply text-sm text-textSubdued shrink-0 mr-1;
+}
+
+.tag {
+  @apply block py-1.5 px-4 rounded-full border border-border text-sm capitalize no-underline text-text;
   transition: all 0.1s ease-out;
 }
 
-.tags a:hover {
-  @apply bg-blue border-blue;
+.tag:hover {
+  @apply bg-blue dark:bg-bgButton border-blue text-white;
+}
+
+.tag:active {
+  background: hsl(216.1, 81.9%, 33%);
+  border-color: hsl(216.1, 81.9%, 33%);
+  color: #fff;
+  transform: translateY(1px);
+}
+
+@screen dark {
+  .tag:active {
+    background: var(--color-bgButton);
+    border-color: var(--color-bgButton);
+  }
+}
+
+.tag:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 2px;
 }
 
 .after-post {

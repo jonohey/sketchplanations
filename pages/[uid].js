@@ -16,16 +16,21 @@ import JsonLd from "components/JsonLd";
 import {
 	fastScrollToTop,
 	humanizePublishedDate,
+	humanizeTag,
 	isPresent,
 	pageTitle,
 	shuffle,
 } from "helpers";
 import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
-import { buildSketchStructuredData } from "helpers/structuredData";
+import {
+	buildSketchStructuredData,
+	resolveSketchTagDocs,
+} from "helpers/structuredData";
 import { useRandomHandle } from "hooks/useRandomHandle";
 import { ArrowLeft, ArrowRight, ArrowUp, ChevronLeft, ChevronRight } from "lucide-react";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
@@ -109,6 +114,7 @@ const SketchplanationPage = ({
 	const description = truncate(prismicH.asText(body), 160);
 	const pageUrl = `https://sketchplanations.com/${uid}`;
 	const socialImageUrl = `${image.url}&w=1200`;
+	const topicTags = resolveSketchTagDocs(tags);
 	const structuredData = buildSketchStructuredData({
 		uid,
 		title,
@@ -261,6 +267,25 @@ const SketchplanationPage = ({
 							>
 								<RichText field={body} />
 							</div>
+							{isPresent(topicTags) && (
+								<nav className={styles.tags} aria-labelledby="filed-in-label">
+									<span id="filed-in-label" className={styles["tags-label"]}>
+										Filed in
+									</span>
+									{topicTags.map((tag) => {
+										const slug = tag.uid || tag.slug;
+										return (
+											<Link
+												key={tag.id}
+												href={`/categories/${slug}`}
+												className={styles.tag}
+											>
+												{humanizeTag(slug)}
+											</Link>
+										);
+									})}
+								</nav>
+							)}
 							<hr className={styles.divider} />
 							<div className={styles["published-at"]}>
 								<div>
@@ -279,15 +304,6 @@ const SketchplanationPage = ({
 									Back to top
 								</a>
 							</div>
-							{/* <ul className={styles.tags}>
-							{tags.map((tag) => (
-								<li key={tag.tag.id}>
-									<Link key={tag} href={`/categories/${tag.tag.slug}`}>
-										{tag.tag.slug.replace(/-/, " ")}
-									</Link>
-								</li>
-							))}
-						</ul> */}
 						</div>
 						<aside className={styles.sidebar}>
 							<div className={styles.cards}>

@@ -46,7 +46,7 @@ const TaggedSketchplanations = ({ tags, excludeUid }) => {
 	return (
 		<div ref={ref} className="overflow-hidden">
 			<div className={styles.header}>
-				<div className="mb-3 text-xl font-semibold">More on these topics</div>
+				<div className="mb-3 text-xl font-semibold">More sketches on these topics</div>
 			</div>
 			<Tabs>
 				<div className={styles.tabsList}>
@@ -116,7 +116,7 @@ const TaggedSketchplanations = ({ tags, excludeUid }) => {
 								</div>
 								<div className={styles.seeAllLink}>
 									<FancyLink href={`/categories/${tag.slug}`}>
-										All {humanizeTag(tag.slug)} sketches &raquo;
+										{`All ${humanizeTag(tag.slug)} sketches »`}
 									</FancyLink>
 								</div>
 							</TabPanel>
