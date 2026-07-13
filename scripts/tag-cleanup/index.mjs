@@ -2,12 +2,11 @@
 /**
  * Prismic tag/category consolidation toolkit.
  *
- * Subcommands: audit | migrate | changelog | redirects | fix-broken-tags
+ * Subcommands: audit | migrate | changelog | redirects
  * Run with --help on any subcommand for details.
  */
 import { runAudit } from "./lib/audit.mjs";
 import { runChangelog } from "./lib/changelog.mjs";
-import { runFixBrokenTags } from "./lib/fix-broken-tags.mjs";
 import { runMigrate } from "./lib/migrate.mjs";
 import { runRedirects } from "./lib/redirects.mjs";
 import { runSketchEdits } from "./lib/sketch-edits.mjs";
@@ -17,7 +16,6 @@ const HELP = `Prismic tag/category consolidation toolkit
 
 Usage:
   node scripts/tag-cleanup/index.mjs audit
-  node scripts/tag-cleanup/index.mjs fix-broken-tags [--dry-run]
   node scripts/tag-cleanup/index.mjs migrate [--dry-run] [--pair <from-slug>] [--limit N] [--batch-id N]
   node scripts/tag-cleanup/index.mjs migrate-edits [--dry-run] [--batch-id 12]
   node scripts/tag-cleanup/index.mjs changelog [--stdout newsletter]
@@ -59,9 +57,6 @@ const main = async () => {
 		switch (args.command) {
 			case "audit":
 				await runAudit();
-				break;
-			case "fix-broken-tags":
-				await runFixBrokenTags({ dryRun: args.dryRun });
 				break;
 			case "migrate":
 				await runMigrate({

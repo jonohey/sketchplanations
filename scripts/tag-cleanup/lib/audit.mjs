@@ -253,7 +253,7 @@ export const runAudit = async () => {
 			);
 		}
 		console.log(
-			"  Fix with: npm run tag-cleanup:fix-broken-tags -- --dry-run",
+			"  Fix in the Prismic UI: remove or re-link the broken tag(s) on each sketch.",
 		);
 	}
 

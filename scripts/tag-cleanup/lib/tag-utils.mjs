@@ -69,9 +69,6 @@ export const isBrokenTagLink = (tag) => {
 	return slug === "-";
 };
 
-export const stripBrokenTagLinks = (tags = []) =>
-	(tags ?? []).filter((item) => !isBrokenTagLink(item?.tag));
-
 /**
  * Replace loser tag IDs with winners and dedupe by linked document id.
  */
@@ -107,15 +104,9 @@ export const applyTagChangesToSketchTags = (tags, { mergeMap, removeIds }) => {
 	return merged.filter((item) => !removeIds.has(item?.tag?.id));
 };
 
-/** Remove tag IDs and add new ones without duplicates. Always drops broken links. */
-export const applySketchTagEdits = (
-	tags,
-	{ removeIds = new Set(), addIds = [], stripBroken = true } = {},
-) => {
-	const result = (tags ?? []).filter((item) => {
-		if (stripBroken && isBrokenTagLink(item?.tag)) return false;
-		return !removeIds.has(item?.tag?.id);
-	});
+/** Remove tag IDs and add new ones without duplicates. */
+export const applySketchTagEdits = (tags, { removeIds = new Set(), addIds = [] }) => {
+	const result = (tags ?? []).filter((item) => !removeIds.has(item?.tag?.id));
 	const seen = new Set(result.map((item) => item?.tag?.id).filter(Boolean));
 
 	for (const id of addIds) {

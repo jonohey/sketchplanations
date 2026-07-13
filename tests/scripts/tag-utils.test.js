@@ -7,7 +7,6 @@ import {
 	findSingularPluralPairs,
 	isBrokenTagLink,
 	normalizeIdentifier,
-	stripBrokenTagLinks,
 } from "../../scripts/tag-cleanup/lib/tag-utils.mjs";
 
 const tag = (id, slug, identifier = slug) => ({
@@ -73,19 +72,24 @@ describe("tag-utils", () => {
 		expect(result.map((r) => r.tag.id)).toEqual(["sport-id", "health-id"]);
 	});
 
-	it("detects and strips broken Prismic tag links", () => {
-		const tags = [
-			{ tag: { id: "broken", type: "broken_type", slug: "-", isBroken: true } },
-			{ tag: { link_type: "Document" } },
-			{ tag: { id: "games", uid: "games", slug: "games", isBroken: false } },
-		];
-		expect(isBrokenTagLink(tags[0].tag)).toBe(true);
-		expect(isBrokenTagLink(tags[1].tag)).toBe(true);
-		expect(isBrokenTagLink(tags[2].tag)).toBe(false);
-		expect(isBrokenTagLink({ id: "new", link_type: "Document" })).toBe(false);
-		expect(stripBrokenTagLinks(tags).map((t) => t.tag.id)).toEqual(["games"]);
+	it("detects broken Prismic tag links", () => {
 		expect(
-			applySketchTagEdits(tags, { addIds: ["sport"] }).map((t) => t.tag.id),
-		).toEqual(["games", "sport"]);
+			isBrokenTagLink({
+				id: "broken",
+				type: "broken_type",
+				slug: "-",
+				isBroken: true,
+			}),
+		).toBe(true);
+		expect(isBrokenTagLink({ link_type: "Document" })).toBe(true);
+		expect(
+			isBrokenTagLink({
+				id: "games",
+				uid: "games",
+				slug: "games",
+				isBroken: false,
+			}),
+		).toBe(false);
+		expect(isBrokenTagLink({ id: "new", link_type: "Document" })).toBe(false);
 	});
 });
