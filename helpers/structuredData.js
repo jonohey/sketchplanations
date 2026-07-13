@@ -1,3 +1,5 @@
+import { humanizeTag } from "helpers";
+
 export const SITE_URL = "https://sketchplanations.com";
 
 export const SITE_NAME = "Sketchplanations";
@@ -33,6 +35,37 @@ const absoluteUrl = (path = "/") => {
 	if (!path) return SITE_URL;
 	if (/^https?:\/\//i.test(path)) return path;
 	return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+};
+
+/**
+ * Prismic content links expose `slug` as "-" when the document uses uid routing.
+ * Category URLs elsewhere use uid / slugs[0], not the link's slug field.
+ */
+export const getTagSlugFromLink = (tag) => {
+	if (!tag) return null;
+
+	const slug = tag.uid ?? tag.slugs?.[0];
+	if (slug && slug !== "-") return slug;
+
+	const fallback = tag.slug;
+	return fallback && fallback !== "-" ? fallback : null;
+};
+
+export const getTagNameFromLink = (tag, slug = getTagSlugFromLink(tag)) => {
+	const identifier = tag?.data?.identifier?.trim();
+	if (identifier) return humanizeTag(identifier);
+	if (slug) return humanizeTag(slug);
+	return null;
+};
+
+export const getPrimaryTagFromLinks = (tags = []) => {
+	const tag = tags?.[0]?.tag;
+	const slug = getTagSlugFromLink(tag);
+	const name = getTagNameFromLink(tag, slug);
+
+	if (!slug || !name) return null;
+
+	return { slug, name };
 };
 
 export const buildOrganization = () => ({
@@ -150,7 +183,7 @@ export const buildSketchCreativeWork = ({
 }) => {
 	const pageUrl = absoluteUrl(`/${uid}`);
 	const keywords = tags
-		.map((tag) => tag?.tag?.slug?.replace(/-/g, " "))
+		.map((tag) => getTagNameFromLink(tag?.tag))
 		.filter(Boolean);
 
 	return {
@@ -193,7 +226,7 @@ export const buildSketchBreadcrumbs = ({ uid, title, primaryTag } = {}) => {
 		},
 	];
 
-	if (primaryTag?.slug && primaryTag?.name) {
+	if (primaryTag?.slug && primaryTag?.name?.trim()) {
 		items.push({
 			"@type": "ListItem",
 			position: 2,
@@ -229,13 +262,7 @@ export const buildSketchStructuredData = ({
 	publishedAt,
 	tags = [],
 }) => {
-	const primaryTagDoc = tags?.[0]?.tag;
-	const primaryTag = primaryTagDoc
-		? {
-				slug: primaryTagDoc.slug,
-				name: primaryTagDoc.slug?.replace(/-/g, " "),
-			}
-		: null;
+	const primaryTag = getPrimaryTagFromLinks(tags);
 
 	return {
 		"@context": "https://schema.org",
