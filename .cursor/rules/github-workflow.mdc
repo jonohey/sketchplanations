@@ -39,7 +39,7 @@ Review all changes before staging or committing. Fix issues found; do not commit
 - **Performance**: Consider impact on page load, bundle size, images, fonts, and runtime work — roughly what a Chrome Lighthouse audit would flag. Flag regressions and fix or justify them.
 - **Build**: Consider whether build time will increase substantially (`npm run build` when in doubt). If it does, ensure the trade-off is worthwhile.
 - **SEO**: Check titles, meta descriptions, headings, structured data, canonical URLs, and link behaviour. Ensure nothing is negatively affected.
-- **Broken tags**: Run `npm run check:broken-tags` (also runs in CI). Fix any orphaned Prismic tag links before opening the PR.
+- **Broken tags**: Run `npm run check:broken-tags` (also runs in CI). If any fail, fix them in the Prismic UI before opening the PR.
 - **Tests**: Add Vitest coverage where appropriate — meaningful cases, not exhaustive edge-case sprawl. Run `npm test` (Vitest) and ensure tests pass.
 - **Removals**: Confirm deleted code only removes deliberately abandoned functionality. If a feature appears unused and removal wasn't in the brief, ask before removing it.
 - **Best practice**: Check accessibility, error handling, security, and consistency with surrounding code.

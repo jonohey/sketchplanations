@@ -40,6 +40,6 @@ for (const [uid, tagIds] of bySketch) {
 	console.error(`  - ${uid}: ${tagIds.join(", ")}`);
 }
 console.error(
-	"Fix in Prismic, or run: npm run tag-cleanup:fix-broken-tags -- --dry-run",
+	"Fix in the Prismic UI: open each sketch and remove or re-link the broken tag(s).",
 );
 process.exit(1);
