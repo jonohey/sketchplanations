@@ -1436,7 +1436,7 @@ export default [
 	{
 		source:
 			"/post/126571242006/crazy-english-ghoti-ghoti-is-a-constructed-word",
-		destination: "/crazy-english-ghoti",
+		destination: "/ghoti",
 		permanent: true,
 	},
 	{
