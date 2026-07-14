@@ -39,7 +39,7 @@ import { client } from "services/prismic";
 const TextHeader = dynamic(() => import("components/TextHeader"));
 const Modal = dynamic(() => import("components/Modal"));
 
-import InlinePage from "components/InlinePage";
+import LicenceContent from "components/LicenceContent";
 import styles from "./[uid].module.css";
 
 const truncate = (string, limit) => {
@@ -211,7 +211,7 @@ const SketchplanationPage = ({
 				isOpen={licenceModalOpen}
 				onClose={() => setLicenceModalOpen(false)}
 			>
-				<InlinePage document={licenceDoc} />
+				<LicenceContent document={licenceDoc} inline showSectionNav={false} />
 			</Modal>
 
 			<div className={styles.root}>

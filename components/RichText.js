@@ -50,11 +50,12 @@ const rewriteWithRedirects = (url) => {
 	return url;
 };
 
-const RichText = ({ ...props }) => {
+const RichText = ({ components: extraComponents, ...props }) => {
 	return (
 		<PrismicRichText
 			{...props}
 			components={{
+				...extraComponents,
 				hyperlink: ({ node, children }) => {
 					let url = node.data.url;
 

@@ -160,8 +160,20 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 								track('Licence-page-link', { location: 'download-modal', sketch: sketchplanationTitle });
 							}}
 						>
-							licence
+							licence page
 						</Link>
+						, including{" "}
+						<Link
+							href="/licence#using-sketches-in-books"
+							target="_blank"
+							rel="noreferrer"
+							onClick={() => {
+								track('Licence-page-link', { location: 'download-modal-books', sketch: sketchplanationTitle });
+							}}
+						>
+							using sketches in books
+						</Link>
+						.
 					</p>
 				</div>
 			</div>
