@@ -28,7 +28,7 @@
 		"@prismicio/helpers": "^2.3.9",
 		"@prismicio/next": "^2.3.0",
 		"@prismicio/react": "^2.9.2",
-		"@sentry/react": "^9.38.0",
+		"@sentry/react": "^10.65.0",
 		"@sentry/tracing": "^7.120.4",
 		"@vercel/analytics": "^2.0.1",
 		"@vercel/kv": "^3.0.0",
