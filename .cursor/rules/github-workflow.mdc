@@ -27,7 +27,7 @@ Keep issue titles concise enough to slug cleanly (under ~40 characters of slug t
 
 ## UI patterns
 
-- **Back to top links:** Use the `BackToTop` component (`components/BackToTop.js`), which calls `fastScrollToTop()` from `helpers` and respects `prefers-reduced-motion`. Do not use a bare `#top` anchor without the scroll helper.
+- **Back to top links:** Match the existing pattern on `/books`, `/list`, and sketch pages — a `Link` (or `<a>`) to `#top` with `onClick` calling `preventDefault()` then `fastScrollToTop()` from `helpers`. Do not use a bare `#top` anchor without the scroll helper.
 
 ## Complete work
 

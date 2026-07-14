@@ -1,5 +1,6 @@
 import classNames from "classnames";
-import BackToTop from "./BackToTop";
+import { fastScrollToTop } from "helpers";
+import Link from "next/link";
 import FancyLink from "./FancyLink";
 import {
 	BOOKS_SECTION_ID,
@@ -319,7 +320,18 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 
 			<p>Thanks for checking! I appreciate it.</p>
 
-			<BackToTop />
+			<p className="mt-4">
+				<Link
+					href="#top"
+					className="inline-block text-sm text-blue hover:underline"
+					onClick={(event) => {
+						event.preventDefault();
+						fastScrollToTop();
+					}}
+				>
+					Back to top ↑
+				</Link>
+			</p>
 		</div>
 	</div>
 );
