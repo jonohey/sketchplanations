@@ -10,8 +10,4 @@ export const LICENCE_SECTIONS = [
 		id: "how-should-i-attribute-sketches",
 		label: "How to attribute sketches",
 	},
-	{
-		id: "do-you-have-an-image-consent-form-i-can-complete",
-		label: "Image consent form",
-	},
 ];

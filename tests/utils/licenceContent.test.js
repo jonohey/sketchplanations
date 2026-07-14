@@ -22,7 +22,6 @@ describe("licenceContent", () => {
 			"translations",
 			"licence-faq",
 			"how-should-i-attribute-sketches",
-			"do-you-have-an-image-consent-form-i-can-complete",
 		]);
 	});
 });
