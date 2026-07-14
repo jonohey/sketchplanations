@@ -4,14 +4,6 @@ import JsonLd from "components/JsonLd";
 import SubscribeFull from "components/SubscribeFull";
 import { pageTitle } from "helpers";
 import { buildPerson } from "helpers/structuredData";
-import {
-	Cloud,
-	Instagram,
-	Lightbulb,
-	Linkedin,
-	Pin,
-	Twitter,
-} from "lucide-react";
 import Head from "next/head";
 import Image from "next/image";
 
@@ -225,7 +217,6 @@ const About = ({ siteUrl }) => {
 									aria-label="Follow Sketchplanations on Instagram"
 									className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-blue dark:text-blueLight hover:bg-bgDarker transition-colors"
 								>
-									<Instagram size={16} aria-hidden="true" />
 									Instagram
 								</a>
 							</li>
@@ -237,7 +228,6 @@ const About = ({ siteUrl }) => {
 									aria-label="Follow Sketchplanations on LinkedIn"
 									className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-blue dark:text-blueLight hover:bg-bgDarker transition-colors"
 								>
-									<Linkedin size={16} aria-hidden="true" />
 									LinkedIn
 								</a>
 							</li>
@@ -249,7 +239,6 @@ const About = ({ siteUrl }) => {
 									aria-label="Follow Sketchplanations on Threads"
 									className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-blue dark:text-blueLight hover:bg-bgDarker transition-colors"
 								>
-									<Lightbulb size={16} aria-hidden="true" />
 									Threads
 								</a>
 							</li>
@@ -261,7 +250,6 @@ const About = ({ siteUrl }) => {
 									aria-label="Follow Sketchplanations on Bluesky"
 									className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-blue dark:text-blueLight hover:bg-bgDarker transition-colors"
 								>
-									<Cloud size={16} aria-hidden="true" />
 									Bluesky
 								</a>
 							</li>
@@ -273,7 +261,6 @@ const About = ({ siteUrl }) => {
 									aria-label="Follow Sketchplanations on Pinterest"
 									className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-blue dark:text-blueLight hover:bg-bgDarker transition-colors"
 								>
-									<Pin size={16} aria-hidden="true" />
 									Pinterest
 								</a>
 							</li>
@@ -285,7 +272,6 @@ const About = ({ siteUrl }) => {
 									aria-label="Follow Sketchplanations on X (Twitter)"
 									className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-blue dark:text-blueLight hover:bg-bgDarker transition-colors"
 								>
-									<Twitter size={16} aria-hidden="true" />
 									X (Twitter)
 								</a>
 							</li>
