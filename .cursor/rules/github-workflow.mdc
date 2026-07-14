@@ -68,3 +68,20 @@ Draft the commit message and PR description from the actual diff and conversatio
 - Branch pattern: `{issue-number}-{slug}` (e.g. `701-improve-header-nav`). Slugs must read as a complete phrase — the script truncates at the last hyphen within 40 characters, never mid-word.
 - Tests: `npm test` (Vitest)
 - Build: `npm run build`
+
+## Sentry (error monitoring)
+
+Production errors are captured with `@sentry/nextjs` (client, server, edge via `instrumentation*.js` / `sentry.*.config.js`, and `pages/_error.js`). Config is in `next.config.mjs` via `withSentryConfig`.
+
+**Plan:** Developer (free) — roughly 5k errors/month, 1 user, **email** alerts. Third-party alert integrations (e.g. Slack) and Seer require a paid plan; don’t assume they’re available.
+
+**Env (Vercel Production only — never hardcode):**
+
+- `NEXT_PUBLIC_SENTRY_DSN` — required for reporting
+- `SENTRY_ORG` / `SENTRY_PROJECT` / `SENTRY_AUTH_TOKEN` — optional; auth token is for source-map upload (mark sensitive in Vercel)
+
+SDK is production-only and uses a low `tracesSampleRate` to stay within free-plan limits. Do not enable Session Replay unless the plan and quota allow it.
+
+**When debugging production bugs:** Check [Sentry Issues](https://sketchplanations.sentry.io/issues/) first. Browser/DOM noise (e.g. `removeChild` with no frames in `pages/` or `components/`) is often safe to archive or ignore.
+
+**Resolving via GitHub (optional):** Include `Fixes SKETCHPLANATIONS-XX` in a commit or PR body (issue short ID from Sentry) so Sentry can mark it resolved after the fix ships. Don’t strip Sentry wiring without intent.
