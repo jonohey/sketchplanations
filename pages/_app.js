@@ -1,6 +1,4 @@
 import { PrismicPreview } from "@prismicio/next/pages";
-import * as Sentry from "@sentry/react";
-import { Integrations } from "@sentry/tracing";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import BuyMeACoffee from "components/BuyMeACoffee";
@@ -67,15 +65,6 @@ const polyfillDownloadAttr = () => {
 		});
 	}
 };
-
-if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
-	Sentry.init({
-		enabled: process.env.NODE_ENV === "production",
-		dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
-		integrations: [new Integrations.BrowserTracing()],
-		tracesSampleRate: 1.0,
-	});
-}
 
 const Sketchplanations = ({ Component, pageProps }) => {
 	const [decorationHidden, setDecorationHidden] = useState(false);
