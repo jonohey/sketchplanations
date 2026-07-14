@@ -17,9 +17,9 @@ describe("licenceContent", () => {
 
 	it("lists the main licence sections in order", () => {
 		expect(LICENCE_SECTIONS.map(({ id }) => id)).toEqual([
+			"using-sketches-in-books",
 			"ai-adaptations",
 			"translations",
-			"using-sketches-in-books",
 			"licence-faq",
 			"how-should-i-attribute-sketches",
 			"do-you-have-an-image-consent-form-i-can-complete",

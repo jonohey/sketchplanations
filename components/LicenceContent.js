@@ -1,13 +1,10 @@
 import classNames from "classnames";
-import dynamic from "next/dynamic";
 import FancyLink from "./FancyLink";
-import styles from "./Page.module.css";
 import {
 	BOOKS_SECTION_ID,
+	BOOKS_SECTION_TITLE,
 	LICENCE_SECTIONS,
 } from "utils/licenceContent.mjs";
-
-const TextHeader = dynamic(() => import("./TextHeader"));
 
 const IMAGE_CONSENT_FORM_URL =
 	"https://docs.google.com/document/d/1wcZty5jEoj-_AY7wdojuPB5Fh9BG5eBb/edit";
@@ -16,7 +13,7 @@ const TRANSLATIONS_FOLDER_URL =
 const ATTRIBUTION_EXAMPLE_URL = "https://sketchplanations.com/the-overview-effect";
 
 const FaqQuestion = ({ id, children }) => (
-	<h3 id={id} className="scroll-mt-24 mt-8 mb-2 text-xl font-semibold">
+	<h3 id={id} className="scroll-mt-24">
 		{children}
 	</h3>
 );
@@ -47,22 +44,21 @@ const CreativeCommonsBadge = () => (
 			I love it when people use Sketchplanations. Please respect the licence when
 			you share so more people can find sketches they like too.
 		</p>
-		<div className="mx-auto max-w-[600px]">
-			<p className="text-center">
-				<span className="inline-block align-middle">
-					<a
-						rel="license"
-						href="https://creativecommons.org/licenses/by-nc/4.0/"
-					>
-						<img
-							alt="Creative Commons Licence"
-							className="mx-auto my-[15px] border-0"
-							src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"
-						/>
-					</a>
-				</span>
+		<div className="not-prose mx-auto my-4 max-w-[600px]">
+			<p className="my-2 text-center">
+				<a
+					rel="license"
+					href="https://creativecommons.org/licenses/by-nc/4.0/"
+					className="inline-block"
+				>
+					<img
+						alt="Creative Commons Licence"
+						className="mx-auto border-0"
+						src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"
+					/>
+				</a>
 			</p>
-			<p className="text-center">
+			<p className="text-center text-sm">
 				All images and accompanying explanatory text on this website are licensed
 				under a{" "}
 				<a
@@ -77,16 +73,62 @@ const CreativeCommonsBadge = () => (
 	</>
 );
 
+const BooksSection = () => (
+	<>
+		<h2 id={BOOKS_SECTION_ID} className="scroll-mt-24">
+			{BOOKS_SECTION_TITLE}
+		</h2>
+		<p>
+			Yes—sketches can be used in books, but they are normally commercial use, so
+			they need separate permission.
+		</p>
+		<p>
+			For professionally published books or publisher-led projects, please contact
+			me—{" "}
+			<FancyLink href="mailto:jono.hey@gmail.com?subject=Book%20image%20licence%20request">
+				jono.hey@gmail.com
+			</FancyLink>
+			—and I will confirm pricing based on the publication.
+		</p>
+		<p>
+			For independent authors, I licence images at $65 per image (or £50 if paying
+			in GBP), to keep things straightforward. This is a one-off licence for use
+			inside a single book.
+		</p>
+		<p>
+			To licence a sketch for use in a book, please complete and email the Image
+			Consent Form below. I use this for all book uses so that permission, scope,
+			and attribution are clear for both of us.
+		</p>
+		<p>
+			👉{" "}
+			<FancyLink href={IMAGE_CONSENT_FORM_URL} target="_blank" rel="noopener noreferrer">
+				Image Consent Form
+			</FancyLink>
+		</p>
+		<p>
+			If the sketch appears in{" "}
+			<FancyLink href="https://geni.us/big-ideas-book" target="_blank" rel="noopener noreferrer">
+				Big Ideas Little Pictures
+			</FancyLink>
+			, I need to confirm with my publisher before approving use, but this is
+			usually straightforward.
+		</p>
+	</>
+);
+
 const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 	<div
+		id="top"
 		className={classNames(
-			styles["page-root"],
-			inline && styles["page-root--inline"],
-			"prose",
+			inline ? "px-6 pb-0" : "mx-auto max-w-3xl px-5 pb-16",
 		)}
 	>
-		<TextHeader>Licence</TextHeader>
-		<div className={styles["page-body"]}>
+		<div className="prose max-w-none">
+			<div className={classNames("mb-4", inline ? "mt-4" : "mt-12")}>
+				<h1 className="text-center">Licence</h1>
+			</div>
+
 			<CreativeCommonsBadge />
 
 			{showSectionNav && !inline && <LicenceSectionNav />}
@@ -114,11 +156,13 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 				<li>your email newsletter or the like...</li>
 			</ul>
 			<p>
-				...as long as you give credit. In fact, I&apos;d <em>love</em> you to use
-				them to make a point, help explain something for others, further your
-				career, or teach something to your students. That&apos;s what they&apos;re
-				for!
+				...as long as you give credit. In fact, I&apos;d{" "}
+				<em>love</em> you to use them to make a point, help explain something for
+				others, further your career, or teach something to your students.
+				That&apos;s what they&apos;re for!
 			</p>
+
+			<BooksSection />
 
 			<h2 id="ai-adaptations" className="scroll-mt-24">
 				AI Adaptations
@@ -158,46 +202,6 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 					See translations
 				</FancyLink>
 			</p>
-
-			<section id={BOOKS_SECTION_ID} className="scroll-mt-24">
-				<h2>Using sketches in books</h2>
-				<p>
-					Yes—sketches can be used in books, but they are normally commercial use,
-					so they need separate permission.
-				</p>
-				<p>
-					For professionally published books or publisher-led projects, please
-					contact me—{" "}
-					<FancyLink href="mailto:jono.hey@gmail.com?subject=Book%20image%20licence%20request">
-						jono.hey@gmail.com
-					</FancyLink>
-					—and I will confirm pricing based on the publication.
-				</p>
-				<p>
-					For independent authors, I licence images at $65 per image (or £50 if
-					paying in GBP), to keep things straightforward. This is a one-off
-					licence for use inside a single book.
-				</p>
-				<p>
-					To licence a sketch for use in a book, please complete and email the
-					Image Consent Form below. I use this for all book uses so that
-					permission, scope, and attribution are clear for both of us.
-				</p>
-				<p>
-					👉{" "}
-					<FancyLink href={IMAGE_CONSENT_FORM_URL} target="_blank" rel="noopener noreferrer">
-						Image Consent Form
-					</FancyLink>
-				</p>
-				<p>
-					If the sketch appears in{" "}
-					<FancyLink href="https://geni.us/big-ideas-book" target="_blank" rel="noopener noreferrer">
-						Big Ideas Little Pictures
-					</FancyLink>
-					, I need to confirm with my publisher before approving use, but this is
-					usually straightforward.
-				</p>
-			</section>
 
 			<h2 id="licence-faq" className="scroll-mt-24">
 				Licence FAQ
@@ -312,6 +316,12 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 			</p>
 
 			<p>Thanks for checking! I appreciate it.</p>
+
+			<p className="mt-4">
+				<a href="#top" className="inline-block text-sm text-blue hover:underline">
+					Back to top ↑
+				</a>
+			</p>
 		</div>
 	</div>
 );
