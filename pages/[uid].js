@@ -39,7 +39,7 @@ import { client } from "services/prismic";
 const TextHeader = dynamic(() => import("components/TextHeader"));
 const Modal = dynamic(() => import("components/Modal"));
 
-import InlinePage from "components/InlinePage";
+import LicenceContent from "components/LicenceContent";
 import styles from "./[uid].module.css";
 
 const truncate = (string, limit) => {
@@ -82,7 +82,6 @@ const truncate = (string, limit) => {
 const SketchplanationPage = ({
 	sketchplanation,
 	similarSketchplanations,
-	licenceDoc,
 	tags,
 	olderUid,
 	newerUid,
@@ -211,7 +210,7 @@ const SketchplanationPage = ({
 				isOpen={licenceModalOpen}
 				onClose={() => setLicenceModalOpen(false)}
 			>
-				<InlinePage document={licenceDoc} />
+				<LicenceContent inline showSectionNav={false} />
 			</Modal>
 
 			<div className={styles.root}>
@@ -432,15 +431,12 @@ export async function getStaticProps({ params: { uid } }) {
 		).results,
 	);
 
-	const licenceDoc = await client.getSingle("licence");
-
 	const tags = sketchplanation.data.tags;
 
 	return {
 		props: {
 			sketchplanation,
 			similarSketchplanations,
-			licenceDoc,
 			tags,
 			olderUid,
 			newerUid,

@@ -125,7 +125,11 @@ const About = ({ siteUrl }) => {
 							<FancyLink href="/licence" className="text-blue">
 								licence page
 							</FancyLink>{" "}
-							for details.
+							for details — including{" "}
+							<FancyLink href="/licence#using-sketches-in-books" className="text-blue">
+								using sketches in your book
+							</FancyLink>
+							.
 						</p>
 					</div>
 
@@ -437,6 +441,13 @@ const About = ({ siteUrl }) => {
 								licence
 							</FancyLink>{" "}
 							page for details.
+						</p>
+						<p>
+							Want to include a sketch in a book? That&apos;s often possible too — see{" "}
+							<FancyLink href="/licence#using-sketches-in-books">
+								using sketches in your book
+							</FancyLink>{" "}
+							on the licence page for pricing, permission, and the image consent form.
 						</p>
 						<p className="mt-4">
 							<a href="#top" className="inline-block text-sm text-blue hover:underline">

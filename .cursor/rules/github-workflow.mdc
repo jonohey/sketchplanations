@@ -25,6 +25,10 @@ Keep issue titles concise enough to slug cleanly (under ~40 characters of slug t
 - Do not commit until the user asks to complete or finish the work.
 - Improvements to this workflow doc (e.g. tooling, conventions) may be committed alongside other work on the same branch when they come up.
 
+## UI patterns
+
+- **Back to top links:** Match the existing pattern on `/books`, `/list`, and sketch pages — a `Link` (or `<a>`) to `#top` with `onClick` calling `preventDefault()` then `fastScrollToTop()` from `helpers`. Do not use a bare `#top` anchor without the scroll helper.
+
 ## Complete work
 
 When the user asks to complete, finish, commit, or create a PR:
