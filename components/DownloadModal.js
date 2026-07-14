@@ -171,7 +171,7 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 								track('Licence-page-link', { location: 'download-modal-books', sketch: sketchplanationTitle });
 							}}
 						>
-							using sketches in books
+							using sketches in your book
 						</Link>
 						.
 					</p>

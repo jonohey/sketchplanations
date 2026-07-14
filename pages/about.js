@@ -445,7 +445,7 @@ const About = ({ siteUrl }) => {
 						<p>
 							Want to include a sketch in a book? That&apos;s often possible too — see{" "}
 							<FancyLink href="/licence#using-sketches-in-books">
-								using sketches in books
+								using sketches in your book
 							</FancyLink>{" "}
 							on the licence page for pricing, permission, and the image consent form.
 						</p>

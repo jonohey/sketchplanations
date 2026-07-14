@@ -1,4 +1,4 @@
-export const BOOKS_SECTION_TITLE = "Using sketches in books";
+export const BOOKS_SECTION_TITLE = "Using sketches in your book";
 export const BOOKS_SECTION_ID = "using-sketches-in-books";
 
 export const LICENCE_SECTIONS = [
