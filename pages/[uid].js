@@ -82,7 +82,6 @@ const truncate = (string, limit) => {
 const SketchplanationPage = ({
 	sketchplanation,
 	similarSketchplanations,
-	licenceDoc,
 	tags,
 	olderUid,
 	newerUid,
@@ -211,7 +210,7 @@ const SketchplanationPage = ({
 				isOpen={licenceModalOpen}
 				onClose={() => setLicenceModalOpen(false)}
 			>
-				<LicenceContent document={licenceDoc} inline showSectionNav={false} />
+				<LicenceContent inline showSectionNav={false} />
 			</Modal>
 
 			<div className={styles.root}>
@@ -432,15 +431,12 @@ export async function getStaticProps({ params: { uid } }) {
 		).results,
 	);
 
-	const licenceDoc = await client.getSingle("licence");
-
 	const tags = sketchplanation.data.tags;
 
 	return {
 		props: {
 			sketchplanation,
 			similarSketchplanations,
-			licenceDoc,
 			tags,
 			olderUid,
 			newerUid,
