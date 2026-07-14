@@ -4,7 +4,7 @@ import explainerKitCopyPasteImage from 'images/explainer-kit/explainer-kit-copy-
 import explainerKitFolderImage from 'images/explainer-kit/explainer-kit-folder.png'
 import explainerKitHeroImage from 'images/explainer-kit/explainer-kit-hero.png'
 import explainerKitPowerpointImage from 'images/explainer-kit/explainer-kit-powerpoint.png'
-import { AlertCircle, Check, FileText, Layers, Lightbulb, Palette, Shield, Target } from 'lucide-react'
+import { Check, CircleAlert, FileText, Layers, Lightbulb, Palette, Shield, Target } from 'lucide-react'
 import { Inter, Libre_Baskerville } from 'next/font/google'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -189,7 +189,7 @@ const ExplainerKit = () => {
                 <div key={index} className={`${styles['lp-card']} p-6`}>
                   <div className="flex gap-4">
                     <div className={styles['lp-icon-container']}>
-                      <AlertCircle />
+                      <CircleAlert />
                     </div>
                     <p className={styles['lp-prose']}>{problem.text}</p>
                   </div>
