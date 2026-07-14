@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import BackToTop from "./BackToTop";
 import FancyLink from "./FancyLink";
 import {
 	BOOKS_SECTION_ID,
@@ -157,9 +158,10 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 			</ul>
 			<p>
 				...as long as you give credit. In fact, I&apos;d{" "}
-				<em>love</em> you to use them to make a point, help explain something for
-				others, further your career, or teach something to your students.
-				That&apos;s what they&apos;re for!
+				<em>love</em>{" "}
+				you to use them to make a point, help explain something for others,
+				further your career, or teach something to your students. That&apos;s what
+				they&apos;re for!
 			</p>
 
 			<BooksSection />
@@ -317,11 +319,7 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 
 			<p>Thanks for checking! I appreciate it.</p>
 
-			<p className="mt-4">
-				<a href="#top" className="inline-block text-sm text-blue hover:underline">
-					Back to top ↑
-				</a>
-			</p>
+			<BackToTop />
 		</div>
 	</div>
 );
