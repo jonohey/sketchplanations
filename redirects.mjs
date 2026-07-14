@@ -441,6 +441,11 @@ export default [
 		destination: "/affinities",
 		permanent: true,
 	},
+	{
+		source: "/crazy-english-ghoti",
+		destination: "/ghoti",
+		permanent: true,
+	},
 
 	// ---------------------
 	// Category consolidation (tag cleanup #732)
