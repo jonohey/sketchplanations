@@ -29,30 +29,37 @@ const BookBuyLink = ({ book, className, children, location, ...props }) => (
 	</a>
 );
 
-const BookRow = ({ book }) => {
-	const hasCover = Boolean(book.thumbnail);
+const BookCover = ({ book }) => {
+	const coverClassName = classNames(styles.coverImage, "rounded");
 
 	return (
-		<article
-			className={classNames(
-				styles.bookRow,
-				hasCover && styles.bookRowWithCover,
-			)}
+		<BookBuyLink
+			book={book}
+			className={styles.coverLink}
+			location="cover"
+			aria-label={`Buy ${book.title}`}
 		>
-			{hasCover ? (
-				<BookBuyLink
-					book={book}
-					className={styles.coverLink}
-					location="cover"
-					aria-label={`Buy ${book.title}`}
-				>
-					<img
-						src={book.thumbnail}
-						alt=""
-						className="w-20 h-[7.5rem] sm:w-24 sm:h-36 object-cover rounded shadow-sm"
-					/>
-				</BookBuyLink>
-			) : null}
+			{book.thumbnail ? (
+				<img
+					src={book.thumbnail}
+					alt=""
+					width={112}
+					height={168}
+					loading="lazy"
+					decoding="async"
+					className={coverClassName}
+				/>
+			) : (
+				<span className={classNames(coverClassName, styles.coverPlaceholder)} />
+			)}
+		</BookBuyLink>
+	);
+};
+
+const BookRow = ({ book }) => {
+	return (
+		<article className={classNames(styles.bookRow, styles.bookRowWithCover)}>
+			<BookCover book={book} />
 
 			<div className={`${styles.bookContent} prose max-w-none`}>
 				<div className={styles.bookHeading}>

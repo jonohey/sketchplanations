@@ -16,6 +16,7 @@
 		"check:books-duplicates": "node scripts/check-book-duplicates.mjs",
 		"check:broken-tags": "node scripts/check-broken-tags.mjs",
 		"fetch:book-authors": "node scripts/fetch-book-authors.mjs",
+		"fetch:book-covers": "node scripts/fetch-book-covers.mjs",
 		"tag-cleanup:audit": "node scripts/tag-cleanup/index.mjs audit",
 		"tag-cleanup:migrate": "node scripts/tag-cleanup/index.mjs migrate",
 		"tag-cleanup:migrate-edits": "node scripts/tag-cleanup/index.mjs migrate-edits",

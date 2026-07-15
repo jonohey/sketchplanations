@@ -90,6 +90,23 @@ describe("parseBookLinkText", () => {
 		});
 	});
 
+	it("keeps titles that contain 's rather than treating them as author possessives", () => {
+		expect(parseBookLinkText("Einstein's Mirror")).toEqual({
+			title: "Einstein's Mirror",
+		});
+		expect(
+			parseBookLinkText(
+				"The Failure of Risk Management: Why It's Broken and How to Fix It",
+			),
+		).toEqual({
+			title:
+				"The Failure of Risk Management: Why It's Broken and How to Fix It",
+		});
+		expect(parseBookLinkText("A History of Murphy's Law")).toEqual({
+			title: "A History of Murphy's Law",
+		});
+	});
+
 	it("strips publication year from parsed author names", () => {
 		expect(
 			parseBookLinkText(

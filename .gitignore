@@ -36,6 +36,7 @@ data/*
 !data/.gitkeep
 !data/books-overrides.json
 !data/books-authors.json
+!data/books-covers.json
 /public/rss.xml
 
 # Local Netlify folder

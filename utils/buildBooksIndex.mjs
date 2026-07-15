@@ -6,6 +6,7 @@ import { fetchBooksFromPrismic } from "./bookLinks.mjs";
 
 const OVERRIDES_PATH = path.join(process.cwd(), "data/books-overrides.json");
 const AUTHORS_PATH = path.join(process.cwd(), "data/books-authors.json");
+const COVERS_PATH = path.join(process.cwd(), "data/books-covers.json");
 
 function loadJson(filePath, fallback) {
 	try {
@@ -26,7 +27,12 @@ function loadAuthorsByTitle() {
 	return data.authors ?? {};
 }
 
-function mergeMetadataOverrides(overridesByTitle, authorsByTitle) {
+function loadCoversByTitle() {
+	const data = loadJson(COVERS_PATH, { covers: {} });
+	return data.covers ?? {};
+}
+
+function mergeMetadataOverrides(overridesByTitle, authorsByTitle, coversByTitle) {
 	const merged = { ...overridesByTitle };
 
 	for (const [titleKey, author] of Object.entries(authorsByTitle)) {
@@ -35,6 +41,16 @@ function mergeMetadataOverrides(overridesByTitle, authorsByTitle) {
 		merged[titleKey] = {
 			...(merged[titleKey] ?? {}),
 			author,
+		};
+	}
+
+	for (const [titleKey, cover] of Object.entries(coversByTitle)) {
+		const thumbnail = typeof cover === "string" ? cover : cover?.path;
+		if (!thumbnail || merged[titleKey]?.thumbnail) continue;
+
+		merged[titleKey] = {
+			...(merged[titleKey] ?? {}),
+			thumbnail,
 		};
 	}
 
@@ -48,6 +64,7 @@ async function buildBooksIndex() {
 	const overridesByTitle = mergeMetadataOverrides(
 		loadOverrides(),
 		loadAuthorsByTitle(),
+		loadCoversByTitle(),
 	);
 	const books = await fetchBooksFromPrismic(client, overridesByTitle);
 
