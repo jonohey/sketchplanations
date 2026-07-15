@@ -11,6 +11,7 @@ import {
 
 const OVERRIDES_PATH = path.join(process.cwd(), "data/books-overrides.json");
 const AUTHORS_PATH = path.join(process.cwd(), "data/books-authors.json");
+const COVERS_PATH = path.join(process.cwd(), "data/books-covers.json");
 
 function loadBooksOverrides() {
 	return JSON.parse(fs.readFileSync(OVERRIDES_PATH, "utf8")).books ?? {};
@@ -20,7 +21,12 @@ function loadBooksAuthors() {
 	return JSON.parse(fs.readFileSync(AUTHORS_PATH, "utf8")).authors ?? {};
 }
 
-function mergeMetadataOverrides(overridesByTitle, authorsByTitle) {
+function loadBooksCovers() {
+	if (!fs.existsSync(COVERS_PATH)) return {};
+	return JSON.parse(fs.readFileSync(COVERS_PATH, "utf8")).covers ?? {};
+}
+
+function mergeMetadataOverrides(overridesByTitle, authorsByTitle, coversByTitle = {}) {
 	const merged = { ...overridesByTitle };
 
 	for (const [titleKey, author] of Object.entries(authorsByTitle)) {
@@ -29,6 +35,16 @@ function mergeMetadataOverrides(overridesByTitle, authorsByTitle) {
 		merged[titleKey] = {
 			...(merged[titleKey] ?? {}),
 			author,
+		};
+	}
+
+	for (const [titleKey, cover] of Object.entries(coversByTitle)) {
+		const thumbnail = typeof cover === "string" ? cover : cover?.path;
+		if (!thumbnail || merged[titleKey]?.thumbnail) continue;
+
+		merged[titleKey] = {
+			...(merged[titleKey] ?? {}),
+			thumbnail,
 		};
 	}
 
@@ -44,6 +60,24 @@ describe("books page curation files", () => {
 			expect(key).toMatch(/^[a-z0-9 ]+$/);
 		}
 	});
+
+	it("uses normalised keys and local paths in books-covers.json", () => {
+		const covers = loadBooksCovers();
+
+		for (const [key, cover] of Object.entries(covers)) {
+			expect(key).toBe(key.toLowerCase());
+			expect(key).toMatch(/^[a-z0-9 ]+$/);
+			if (!cover.path) {
+				expect(cover.status).toBe("missing");
+				continue;
+			}
+			expect(cover.path).toMatch(/^\/books\/[a-z0-9-]+\.(jpg|jpeg|png|webp)$/);
+			const absolute = path.join(process.cwd(), "public", cover.path);
+			expect(fs.existsSync(absolute), `missing cover file for ${key}`).toBe(
+				true,
+			);
+		}
+	});
 });
 
 describe("books page index quality", () => {
@@ -51,6 +85,7 @@ describe("books page index quality", () => {
 		const overrides = mergeMetadataOverrides(
 			loadBooksOverrides(),
 			loadBooksAuthors(),
+			loadBooksCovers(),
 		);
 
 		const books = buildBooksIndex(

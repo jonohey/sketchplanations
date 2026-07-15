@@ -1,0 +1,658 @@
+{
+	"covers": {
+		"12 elements of great managing": {
+			"path": "/books/12-elements-of-great-managing.jpg",
+			"isbn": "159562998X",
+			"source": "openlibrary"
+		},
+		"50 things you should know about the first world war": {
+			"path": "/books/50-things-you-should-know-about-the-first-world-war.jpg",
+			"isbn": "1781715890",
+			"source": "openlibrary"
+		},
+		"a history of murphys law": {
+			"path": "/books/a-history-of-murphys-law.jpg",
+			"isbn": "B093YMDTNC",
+			"source": "google"
+		},
+		"a short history of nearly everything": {
+			"path": "/books/a-short-history-of-nearly-everything.jpg",
+			"isbn": "076790818X",
+			"source": "openlibrary"
+		},
+		"all the winniethepooh books": {
+			"path": "/books/all-the-winniethepooh-books.jpg",
+			"isbn": "1405255498",
+			"source": "google"
+		},
+		"an exaltation of larks": {
+			"path": "/books/an-exaltation-of-larks.jpg",
+			"isbn": "0140170960",
+			"source": "openlibrary"
+		},
+		"antifragile": {
+			"path": "/books/antifragile.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"atomic habits": {
+			"path": "/books/atomic-habits.png",
+			"isbn": "9781473537804",
+			"source": "google"
+		},
+		"autobiography of a yogi": {
+			"path": "/books/autobiography-of-a-yogi.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"behave the biology of humans at our best and worst": {
+			"path": "/books/behave-the-biology-of-humans-at-our-best-and-worst.jpg",
+			"isbn": "009957506X",
+			"source": "openlibrary"
+		},
+		"blowing the bloody doors off": {
+			"path": "/books/blowing-the-bloody-doors-off.jpg",
+			"isbn": "1473689325",
+			"source": "google"
+		},
+		"born to run": {
+			"path": "/books/born-to-run.jpg",
+			"isbn": "1861978774",
+			"source": "openlibrary"
+		},
+		"brain training for runners": {
+			"path": "/books/brain-training-for-runners.jpg",
+			"isbn": "0451222326",
+			"source": "openlibrary"
+		},
+		"cognitive surplus": {
+			"path": "/books/cognitive-surplus.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"conduct risk management": {
+			"path": "/books/conduct-risk-management.png",
+			"isbn": "0749478616",
+			"source": "google"
+		},
+		"creativity flow and the psychology of discovery and invention": {
+			"path": "/books/creativity-flow-and-the-psychology-of-discovery-and-invention.jpg",
+			"isbn": "0062283251",
+			"source": "google"
+		},
+		"cubed the puzzle of us all": {
+			"path": "/books/cubed-the-puzzle-of-us-all.jpg",
+			"isbn": "147461311X",
+			"source": "openlibrary"
+		},
+		"dare to lead": {
+			"path": "/books/dare-to-lead.jpg",
+			"isbn": "0593171128",
+			"source": "openlibrary"
+		},
+		"deep work": {
+			"path": "/books/deep-work.jpg",
+			"isbn": "0349411905",
+			"source": "openlibrary"
+		},
+		"discovering sea shells": {
+			"path": null,
+			"isbn": null,
+			"source": null,
+			"status": "missing"
+		},
+		"dont make me think": {
+			"path": "/books/dont-make-me-think.jpg",
+			"isbn": "0321344758",
+			"source": "openlibrary"
+		},
+		"dont think of an elephant": {
+			"path": "/books/dont-think-of-an-elephant.png",
+			"isbn": "160358594X",
+			"source": "google"
+		},
+		"drive": {
+			"path": "/books/drive.jpg",
+			"isbn": "184767769X",
+			"source": "openlibrary"
+		},
+		"eat that frog": {
+			"path": "/books/eat-that-frog.jpg",
+			"isbn": "1444765426",
+			"source": "openlibrary"
+		},
+		"einsteins mirror": {
+			"path": "/books/einsteins-mirror.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"envisioning information": {
+			"path": "/books/envisioning-information.jpg",
+			"isbn": "0961392118",
+			"source": "openlibrary"
+		},
+		"escher": {
+			"path": "/books/escher.jpg",
+			"isbn": "0465026567",
+			"source": "openlibrary"
+		},
+		"exactly how precision engineers created the modern world": {
+			"path": "/books/exactly-how-precision-engineers-created-the-modern-world.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"factfulness": {
+			"path": "/books/factfulness.jpg",
+			"isbn": "1250123828",
+			"source": "openlibrary"
+		},
+		"feynman lectures on computation": {
+			"path": "/books/feynman-lectures-on-computation.jpg",
+			"isbn": "0738202967",
+			"source": "openlibrary"
+		},
+		"flow the psychology of happiness": {
+			"path": "/books/flow-the-psychology-of-happiness.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"food rules": {
+			"path": "/books/food-rules.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"good to go decarbonising travel after the pandemic": {
+			"path": null,
+			"isbn": null,
+			"source": null,
+			"status": "missing"
+		},
+		"greenlights": {
+			"path": "/books/greenlights.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"how to absurd scientific advice for common realworld problems": {
+			"path": "/books/how-to-absurd-scientific-advice-for-common-realworld-problems.png",
+			"isbn": "1473680336",
+			"source": "google"
+		},
+		"how to change": {
+			"path": "/books/how-to-change.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"how to lie with statistics": {
+			"path": "/books/how-to-lie-with-statistics.jpg",
+			"isbn": "0393310728",
+			"source": "openlibrary"
+		},
+		"how to win friends and influence people": {
+			"path": "/books/how-to-win-friends-and-influence-people.jpg",
+			"isbn": "0671027034",
+			"source": "openlibrary"
+		},
+		"human kind a hopeful history": {
+			"path": "/books/human-kind-a-hopeful-history.jpg",
+			"isbn": "1408898950",
+			"source": "openlibrary"
+		},
+		"if this isnt nice": {
+			"path": "/books/if-this-isnt-nice.jpg",
+			"isbn": "1609806107",
+			"source": "google"
+		},
+		"if you want to write": {
+			"path": "/books/if-you-want-to-write.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"illustrated norse myths": {
+			"path": "/books/illustrated-norse-myths.jpg",
+			"isbn": "1409550729",
+			"source": "openlibrary"
+		},
+		"improv wisdom": {
+			"path": "/books/improv-wisdom.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"invisible women": {
+			"path": "/books/invisible-women.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"it doesnt have to be crazy at work": {
+			"path": "/books/it-doesnt-have-to-be-crazy-at-work.jpg",
+			"isbn": "0008323445",
+			"source": "openlibrary"
+		},
+		"justice": {
+			"path": "/books/justice.jpg",
+			"isbn": "0374532508",
+			"source": "openlibrary"
+		},
+		"lateral thinking": {
+			"path": "/books/lateral-thinking.jpg",
+			"isbn": "0141033088",
+			"source": "google"
+		},
+		"leaders make the future": {
+			"path": "/books/leaders-make-the-future.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"leonardo da vinci the graphic works": {
+			"path": "/books/leonardo-da-vinci-the-graphic-works.jpg",
+			"isbn": "3836554410",
+			"source": "openlibrary"
+		},
+		"lets make sushi": {
+			"path": "/books/lets-make-sushi.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"local": {
+			"path": "/books/local.jpg",
+			"isbn": "1785633678",
+			"source": "openlibrary"
+		},
+		"loserthink": {
+			"path": "/books/loserthink.jpg",
+			"isbn": "0593083520",
+			"source": "openlibrary"
+		},
+		"made to stick": {
+			"path": "/books/made-to-stick.jpg",
+			"isbn": "009950569X",
+			"source": "openlibrary"
+		},
+		"managing oneself": {
+			"path": "/books/managing-oneself.png",
+			"isbn": "163369304X",
+			"source": "google"
+		},
+		"marvellous maps": {
+			"path": null,
+			"isbn": null,
+			"source": null,
+			"status": "missing"
+		},
+		"measure what matters": {
+			"path": "/books/measure-what-matters.jpg",
+			"isbn": "024134848X",
+			"source": "openlibrary"
+		},
+		"messy": {
+			"path": "/books/messy.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"metaphors we live by": {
+			"path": "/books/metaphors-we-live-by.jpg",
+			"isbn": "0226468011",
+			"source": "openlibrary"
+		},
+		"mind children": {
+			"path": "/books/mind-children.jpg",
+			"isbn": "0674576187",
+			"source": "openlibrary"
+		},
+		"more work for mother": {
+			"path": "/books/more-work-for-mother.jpg",
+			"isbn": "0465047327",
+			"source": "openlibrary"
+		},
+		"my first summer in the sierra": {
+			"path": "/books/my-first-summer-in-the-sierra.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"my name is charles saatchi and i am an artoholic": {
+			"path": "/books/my-name-is-charles-saatchi-and-i-am-an-artoholic.jpg",
+			"isbn": "1861543336",
+			"source": "openlibrary"
+		},
+		"not the end of the world": {
+			"path": "/books/not-the-end-of-the-world.jpg",
+			"isbn": "152993124X",
+			"source": "openlibrary"
+		},
+		"on writing well": {
+			"path": "/books/on-writing-well.jpg",
+			"isbn": "0060006641",
+			"source": "google"
+		},
+		"one man and his bike": {
+			"path": "/books/one-man-and-his-bike.jpg",
+			"isbn": "0091940567",
+			"source": "openlibrary"
+		},
+		"philosophy in the flesh": {
+			"path": "/books/philosophy-in-the-flesh.jpg",
+			"isbn": "0465056741",
+			"source": "openlibrary"
+		},
+		"playful parenting": {
+			"path": "/books/playful-parenting.jpg",
+			"isbn": "0345442865",
+			"source": "openlibrary"
+		},
+		"priceless the myth of fair value and how to take advantage of it": {
+			"path": "/books/priceless-the-myth-of-fair-value-and-how-to-take-advantage-of-it.jpg",
+			"isbn": "0809078813",
+			"source": "openlibrary"
+		},
+		"prisoners of geography": {
+			"path": "/books/prisoners-of-geography.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"range": {
+			"path": "/books/range.jpg",
+			"isbn": "0735214506",
+			"source": "openlibrary"
+		},
+		"rework": {
+			"path": "/books/rework.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"scale": {
+			"path": "/books/scale.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"schadenfreude": {
+			"path": "/books/schadenfreude.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"serve to win": {
+			"path": "/books/serve-to-win.jpg",
+			"isbn": "0552170534",
+			"source": "google"
+		},
+		"simplicity parenting": {
+			"path": "/books/simplicity-parenting.jpg",
+			"isbn": "0345507983",
+			"source": "google"
+		},
+		"sludge": {
+			"path": "/books/sludge.jpg",
+			"isbn": "026254508X",
+			"source": "openlibrary"
+		},
+		"strengthsfinder 20": {
+			"path": "/books/strengthsfinder-20.jpg",
+			"isbn": "159562015X",
+			"source": "openlibrary"
+		},
+		"surely youre joking mr feynman": {
+			"path": "/books/surely-youre-joking-mr-feynman.jpg",
+			"isbn": "0393355624",
+			"source": "openlibrary"
+		},
+		"technotrends": {
+			"path": "/books/technotrends.jpg",
+			"isbn": "0887307000",
+			"source": "openlibrary"
+		},
+		"the 7 habits of highly effective people": {
+			"path": "/books/the-7-habits-of-highly-effective-people.jpg",
+			"isbn": "1982137274",
+			"source": "openlibrary"
+		},
+		"the amazing generation": {
+			"path": "/books/the-amazing-generation.jpg",
+			"isbn": "0241806585",
+			"source": "google"
+		},
+		"the amazing teenage brain": {
+			"path": "/books/the-amazing-teenage-brain.jpg",
+			"isbn": "1406346934",
+			"source": "openlibrary"
+		},
+		"the art cure": {
+			"path": "/books/the-art-cure.jpg",
+			"isbn": "9781804950791",
+			"source": "google"
+		},
+		"the art of doing science and engineering": {
+			"path": "/books/the-art-of-doing-science-and-engineering.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"the art of innovation": {
+			"path": "/books/the-art-of-innovation.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"the art of possibility": {
+			"path": "/books/the-art-of-possibility.jpg",
+			"isbn": "0142001104",
+			"source": "openlibrary"
+		},
+		"the art of spending money": {
+			"path": "/books/the-art-of-spending-money.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"the art of travel": {
+			"path": "/books/the-art-of-travel.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"the art of uncertainty": {
+			"path": "/books/the-art-of-uncertainty.png",
+			"isbn": "0241658624",
+			"source": "google"
+		},
+		"the art of war": {
+			"path": "/books/the-art-of-war.jpg",
+			"isbn": "1509827951",
+			"source": "openlibrary"
+		},
+		"the baby whisperer": {
+			"path": "/books/the-baby-whisperer.jpg",
+			"isbn": "0091902517",
+			"source": "openlibrary"
+		},
+		"the book you wish your parents had read": {
+			"path": "/books/the-book-you-wish-your-parents-had-read.jpg",
+			"isbn": "0241251028",
+			"source": "openlibrary"
+		},
+		"the clock of the long now": {
+			"path": "/books/the-clock-of-the-long-now.jpg",
+			"isbn": "0465007805",
+			"source": "openlibrary"
+		},
+		"the computing universe": {
+			"path": "/books/the-computing-universe.jpg",
+			"isbn": "0521150183",
+			"source": "openlibrary"
+		},
+		"the design of everyday things": {
+			"path": "/books/the-design-of-everyday-things.jpg",
+			"isbn": "0262525674",
+			"source": "openlibrary"
+		},
+		"the elements of eloquence": {
+			"path": "/books/the-elements-of-eloquence.jpg",
+			"isbn": "1785781723",
+			"source": "google"
+		},
+		"the elements of style": {
+			"path": "/books/the-elements-of-style.jpg",
+			"isbn": "020530902X",
+			"source": "google"
+		},
+		"the failure of risk management": {
+			"path": "/books/the-failure-of-risk-management.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"the house at pooh corner": {
+			"path": "/books/the-house-at-pooh-corner.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"the hunger games": {
+			"path": "/books/the-hunger-games.jpg",
+			"isbn": "B07HHGJSWH",
+			"source": "google"
+		},
+		"the lifechanging magic of tidying": {
+			"path": "/books/the-lifechanging-magic-of-tidying.jpg",
+			"isbn": "0091955106",
+			"source": "openlibrary"
+		},
+		"the long tail why the future of business is selling less of more": {
+			"path": "/books/the-long-tail-why-the-future-of-business-is-selling-less-of-more.jpg",
+			"isbn": "1847940366",
+			"source": "openlibrary"
+		},
+		"the new quantum universe": {
+			"path": "/books/the-new-quantum-universe.jpg",
+			"isbn": "0521564573",
+			"source": "google"
+		},
+		"the paula principle": {
+			"path": "/books/the-paula-principle.jpg",
+			"isbn": "1911344609",
+			"source": "openlibrary"
+		},
+		"the peter principle": {
+			"path": "/books/the-peter-principle.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"the practice of creativity": {
+			"path": "/books/the-practice-of-creativity.jpg",
+			"isbn": "0963878484",
+			"source": "google"
+		},
+		"the pragmatic programmer": {
+			"path": "/books/the-pragmatic-programmer.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"the presentation of self in everyday life": {
+			"path": "/books/the-presentation-of-self-in-everyday-life.jpg",
+			"isbn": "0140135715",
+			"source": "openlibrary"
+		},
+		"the prophet": {
+			"path": "/books/the-prophet.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"the psychology of hope": {
+			"path": "/books/the-psychology-of-hope.jpg",
+			"isbn": "0743254449",
+			"source": "openlibrary"
+		},
+		"the pyramid principle": {
+			"path": "/books/the-pyramid-principle.jpg",
+			"isbn": "0273710516",
+			"source": "google"
+		},
+		"the shallows": {
+			"path": "/books/the-shallows.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"the tao of pooh": {
+			"path": "/books/the-tao-of-pooh.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"things a little bird told me": {
+			"path": "/books/things-a-little-bird-told-me.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"think and grow rich": {
+			"path": "/books/think-and-grow-rich.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"thinking fast and slow": {
+			"path": "/books/thinking-fast-and-slow.jpg",
+			"isbn": "0141033576",
+			"source": "openlibrary"
+		},
+		"this is your mind on plants": {
+			"path": "/books/this-is-your-mind-on-plants.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"turn the ship around a true story of turning followers into leaders": {
+			"path": "/books/turn-the-ship-around-a-true-story-of-turning-followers-into-leaders.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"ultrasomething": {
+			"path": null,
+			"isbn": null,
+			"source": null,
+			"status": "missing"
+		},
+		"unconditional parenting": {
+			"path": "/books/unconditional-parenting.jpg",
+			"isbn": "0743487486",
+			"source": "openlibrary"
+		},
+		"user story mapping": {
+			"path": "/books/user-story-mapping.jpg",
+			"isbn": "1491904909",
+			"source": "openlibrary"
+		},
+		"wabi sabi simple": {
+			"path": "/books/wabi-sabi-simple.jpg",
+			"isbn": "1593371780",
+			"source": "openlibrary"
+		},
+		"water logic": {
+			"path": "/books/water-logic.jpg",
+			"isbn": "0140230750",
+			"source": "openlibrary"
+		},
+		"what can you stack on the back of a yak": {
+			"path": "/books/what-can-you-stack-on-the-back-of-a-yak.jpg",
+			"isbn": "1407135724",
+			"source": "openlibrary"
+		},
+		"when the scientific secrets of perfect timing": {
+			"path": "/books/when-the-scientific-secrets-of-perfect-timing.jpg",
+			"isbn": "1782119884",
+			"source": "openlibrary"
+		},
+		"when we were very young": {
+			"path": "/books/when-we-were-very-young.jpg",
+			"isbn": "1405280859",
+			"source": "openlibrary"
+		},
+		"winniethepooh": {
+			"path": "/books/winniethepooh.jpg",
+			"isbn": null,
+			"source": "openlibrary-search"
+		},
+		"wooden a lifetime of observations and reflections on and off the court": {
+			"path": "/books/wooden-a-lifetime-of-observations-and-reflections-on-and-off-the-court.jpg",
+			"isbn": "0809230410",
+			"source": "openlibrary"
+		},
+		"word perfect etymological entertainment every day": {
+			"path": "/books/word-perfect-etymological-entertainment-every-day.jpg",
+			"isbn": "1529311489",
+			"source": "openlibrary"
+		},
+		"you are not a gadget": {
+			"path": "/books/you-are-not-a-gadget.jpg",
+			"isbn": "0141049111",
+			"source": "google"
+		}
+	}
+}

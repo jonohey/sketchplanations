@@ -20,6 +20,26 @@
 	@apply flex-shrink-0 self-start;
 }
 
+.coverImage {
+	@apply w-24 h-36 sm:w-28 sm:h-[10.5rem] object-cover block;
+	/* Soft lift, related to sketch card shadows but a touch lighter for small covers */
+	box-shadow:
+		0 1px 2px rgba(0, 0, 0, 0.06),
+		0 0.65rem 1.1rem -0.55rem var(--color-sketchShadow);
+}
+
+.coverPlaceholder {
+	@apply bg-bgDarker border border-border;
+}
+
+@media (prefers-color-scheme: dark) {
+	.coverImage {
+		box-shadow:
+			0 1px 2px rgba(0, 0, 0, 0.35),
+			0 0.65rem 1.1rem -0.55rem var(--color-sketchShadow);
+	}
+}
+
 .bookContent {
 	@apply flex flex-col gap-2 min-w-0;
 }

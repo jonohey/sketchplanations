@@ -32,6 +32,22 @@
 			"title": "The Art Cure",
 			"author": "Daisy Fancourt"
 		},
+		"art cure": {
+			"title": "The Art Cure",
+			"author": "Daisy Fancourt"
+		},
+		"the art cure": {
+			"title": "The Art Cure",
+			"author": "Daisy Fancourt"
+		},
+		"law": {
+			"title": "A History of Murphy's Law",
+			"author": "Nick T. Spark"
+		},
+		"a history of murphys law": {
+			"title": "A History of Murphy's Law",
+			"author": "Nick T. Spark"
+		},
 		"dan pinks book drive": {
 			"title": "Drive",
 			"author": "Daniel H. Pink"
@@ -65,7 +81,28 @@
 			"author": "Charles Saatchi"
 		},
 		"popular book on relativity": {
-			"title": "Einstein's Mirror"
+			"title": "Einstein's Mirror",
+			"author": "Tony Hey, Patrick Walters"
+		},
+		"mirror": {
+			"title": "Einstein's Mirror",
+			"author": "Tony Hey, Patrick Walters"
+		},
+		"einsteins mirror": {
+			"title": "Einstein's Mirror",
+			"author": "Tony Hey, Patrick Walters"
+		},
+		"broken and how to fix it": {
+			"title": "The Failure of Risk Management: Why It's Broken and How to Fix It",
+			"author": "Douglas W. Hubbard"
+		},
+		"the failure of risk management": {
+			"title": "The Failure of Risk Management: Why It's Broken and How to Fix It",
+			"author": "Douglas W. Hubbard"
+		},
+		"the failure of risk management why its broken and how to fix it": {
+			"title": "The Failure of Risk Management: Why It's Broken and How to Fix It",
+			"author": "Douglas W. Hubbard"
 		},
 		"the pyramid principle": {
 			"title": "The Pyramid Principle",

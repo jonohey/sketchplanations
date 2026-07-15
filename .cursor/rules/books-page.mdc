@@ -1,6 +1,6 @@
 ---
 description: Books page — build, curate, and extend the reading list from Prismic
-globs: pages/books.js,utils/bookLinks.mjs,utils/buildBooksIndex.mjs,data/books-overrides.json,data/books-authors.json,scripts/fetch-book-authors.mjs
+globs: pages/books.js,utils/bookLinks.mjs,utils/buildBooksIndex.mjs,data/books-overrides.json,data/books-authors.json,data/books-covers.json,scripts/fetch-book-authors.mjs,scripts/fetch-book-covers.mjs
 ---
 
 # Books page
@@ -14,9 +14,10 @@ The `/books` page is a **generated reading list** of affiliate book links found 
 | `npm run build:books` | Regenerate `data/books-index.json` after new sketches or curation edits |
 | `npm run check:books-duplicates` | Fail if the built index has likely duplicate titles (also runs in CI after build) |
 | `npm run fetch:book-authors` | Fill **missing** authors via affiliate URL → Open Library ISBN lookup |
+| `npm run fetch:book-covers` | Download **missing** covers to `public/books/` (Open Library, then Google Books); writes `data/books-covers.json` |
 | `predev` / `prebuild` | Runs `buildBooksIndex` automatically via `setup.mjs` |
 
-**Commit to git:** `data/books-overrides.json`, `data/books-authors.json`, code in `utils/bookLinks.mjs`.
+**Commit to git:** `data/books-overrides.json`, `data/books-authors.json`, `data/books-covers.json`, images under `public/books/`, code in `utils/bookLinks.mjs`.
 
 **Do not commit:** `data/books-index.json` (generated at build time).
 
@@ -31,7 +32,7 @@ Use for:
 - `title` — fix messy link text the parser cannot infer
 - `author` — override when link text does not include author
 - `note` — optional personal note (plain prose on the page; only add when Jono writes them)
-- `thumbnail` — cover image URL when available
+- `thumbnail` — cover image URL/path when you want to override a fetched cover
 - `exclude: true` — non-book affiliate links (gear, games, etc.)
 
 ### `data/books-authors.json`
@@ -40,11 +41,20 @@ Flat map: `"normalised title": "Author Name"`.
 
 Used when authors are wrong or missing after `fetch:book-authors`. Merged at build time; overrides win for `author` if both set.
 
+### `data/books-covers.json`
+
+Map of normalised title → `{ path, isbn, source }`. Paths are local (`/books/…`) under `public/books/`.
+
+Filled by `fetch:book-covers` (manual; not part of every build). Merged at build time; overrides win for `thumbnail` if both set.
+
+**Quality note:** Most covers currently come from Open Library (`-L` scans). Those are free and legal but often soft, stickered, or wrong-edition. Google Books usually has sharper publisher art, but anonymous requests hit rate limits / placeholder images. Set `GOOGLE_BOOKS_API_KEY` and re-run `npm run fetch:book-covers -- --upgrade` for better results, or drop replacement files into `public/books/` and point `thumbnail` in overrides. Flags: `--limit=30` to batch; `--retry-missing`; `--upgrade --only="title fragment|other"`; `--force`.
+
 ## Typical workflow
 
 1. Publish sketch with affiliate book link in Prismic → deploy (or `npm run build:books`).
 2. If title/author wrong → edit overrides or authors JSON → `npm run build:books`.
 3. Batch author lookup → `npm run fetch:book-authors`, review diff, `npm run build:books`, commit JSON.
+4. Batch covers → `npm run fetch:book-covers` (optionally `--limit=30`), spot-check images, replace any wrong files in `public/books/`, `npm run build:books`, commit JSON + images.
 
 ## Title parsing
 

@@ -125,10 +125,32 @@ export function parseBookLinkText(text) {
 		new RegExp(`^(.+?)${POSSESSIVE_APOSTROPHE}s,?\\s+(?!book\\b)(.+)$`, "i"),
 	);
 	if (possessiveTitleMatch) {
-		return {
-			title: normalizeParsedTitle(possessiveTitleMatch[2].trim()),
-			author: possessiveTitleMatch[1].trim(),
-		};
+		const maybeAuthor = possessiveTitleMatch[1].trim();
+		const maybeTitle = normalizeParsedTitle(possessiveTitleMatch[2].trim());
+		const authorWords = maybeAuthor.split(/\s+/).filter(Boolean);
+		const lastAuthorWord = authorWords[authorWords.length - 1] ?? "";
+		// Skip contractions ("Why It's Broken…") and title-internal possessives
+		// ("Einstein's Mirror", "A History of Murphy's Law").
+		const isContraction = /^(?:it|what|that|let|here|who|there|she|he)$/i.test(
+			lastAuthorWord,
+		);
+		const looksLikeTitlePossessive =
+			authorWords.length === 1 && maybeTitle.split(/\s+/).length <= 2;
+		const authorLooksLikeTitle =
+			/^(?:the|a|an)\b/i.test(maybeAuthor) ||
+			/\b(?:history|story|art|science|diary|adventures)\b/i.test(maybeAuthor);
+
+		if (
+			!maybeAuthor.includes(":") &&
+			!isContraction &&
+			!looksLikeTitlePossessive &&
+			!authorLooksLikeTitle
+		) {
+			return {
+				title: maybeTitle,
+				author: maybeAuthor,
+			};
+		}
 	}
 
 	const pronounBookMatch = cleaned.match(
