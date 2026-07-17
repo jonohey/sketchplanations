@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 
 import styles from './FooterScene.module.css'
@@ -61,20 +62,29 @@ const FooterScene = () => {
   }, [])
 
   return (
-    <div ref={sceneRef} className={styles.scene} aria-hidden='true' data-testid='footer-scene'>
-      <div className={styles.atmosphere} />
-      <div className={styles.clouds} />
-      <div className={styles.boatPosition}>
-        <img
-          className={styles.boat}
-          src='/images/footer/boat.png'
-          alt=''
-          width='995'
-          height='966'
-          fetchPriority='low'
-        />
-      </div>
-      <div className={styles.waves} />
+    <div ref={sceneRef} className={styles.scene} data-testid='footer-scene'>
+      <div className={styles.atmosphere} aria-hidden='true' />
+      <div className={styles.clouds} aria-hidden='true' />
+      <Link
+        href='/big-ideas-little-pictures'
+        className={styles.bookLink}
+        aria-label='View the Big Ideas Little Pictures book'
+      >
+        <span className={styles.boatPosition}>
+          <picture>
+            <source srcSet='/images/footer/boat.webp' type='image/webp' />
+            <img
+              className={styles.boat}
+              src='/images/footer/boat.png'
+              alt=''
+              width='995'
+              height='966'
+              fetchPriority='low'
+            />
+          </picture>
+        </span>
+        <span className={styles.waves} />
+      </Link>
     </div>
   )
 }

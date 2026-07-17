@@ -1,7 +1,7 @@
 .root {
   --edgeInset: 1.5em;
   --footer-cream: rgb(250, 236, 203);
-  --footer-paper: #fbf7da;
+  --footer-light: hsl(54, 60%, 98%);
   --color-bg: var(--footer-cream);
   --color-bgFooter: var(--footer-cream);
   --color-blue: hsl(216.1, 81.9%, 36%);
@@ -26,5 +26,5 @@
 .content {
   @apply grid gap-y-12;
 
-  background: linear-gradient(to bottom, var(--footer-paper), var(--footer-cream));
+  background: linear-gradient(to bottom, var(--footer-light), var(--color-paper) 45%, var(--footer-cream));
 }

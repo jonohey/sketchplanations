@@ -15,12 +15,15 @@ describe('Footer', () => {
     expect(footer).toContain('<FooterScene />')
   })
 
-  it('defines one assistive-technology-hidden boat image', () => {
+  it('links the decorative scene to the book without exposing the boat image', () => {
     const scene = readComponent('FooterScene.js')
 
     expect(scene).toMatch(/data-testid=['"]footer-scene['"]/)
     expect(scene).toMatch(/aria-hidden=['"]true['"]/)
+    expect(scene).toMatch(/href=['"]\/big-ideas-little-pictures['"]/)
+    expect(scene).toMatch(/aria-label=['"]View the Big Ideas Little Pictures book['"]/)
     expect(scene.match(/\/images\/footer\/boat\.png/g)).toHaveLength(1)
+    expect(scene.match(/\/images\/footer\/boat\.webp/g)).toHaveLength(1)
     expect(scene).toMatch(/alt=(['"])\1/)
     expect(scene).toMatch(/fetchPriority=['"]low['"]/)
     expect(scene).not.toMatch(/loading=['"]lazy['"]/)
@@ -32,5 +35,13 @@ describe('Footer', () => {
     expect(css).toContain('@media (prefers-reduced-motion: reduce)')
     expect(css).toMatch(/\.boat\s*\{\s*animation: none;/)
     expect(css).toMatch(/will-change: auto;/)
+  })
+
+  it('serves optimized backgrounds with PNG fallbacks', () => {
+    const css = readComponent('FooterScene.module.css')
+
+    expect(css.match(/image-set\(/g)).toHaveLength(2)
+    expect(css).toContain('footer-repeating-great-wave-sketchplanations.webp')
+    expect(css).toContain('great-wave-cloud-background-cropped-sketchplanations.webp')
   })
 })
