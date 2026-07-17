@@ -1,0 +1,170 @@
+.scene {
+  --footer-progress: 0.5;
+  --footer-tile-width: clamp(45rem, 72vw, 70rem);
+  --footer-scene-height: clamp(20rem, 36vw, 35rem);
+  --footer-wave-height: clamp(17.2rem, 27.5vw, 26.75rem);
+  --footer-cloud-fill-height: clamp(8rem, 14vw, 10rem);
+  --footer-horizontal-offset: -10rem;
+  --footer-wave-bottom: -3rem;
+
+  position: relative;
+  height: var(--footer-scene-height);
+  margin-top: clamp(-1rem, -1vw, 0rem);
+  overflow: hidden;
+  pointer-events: none;
+  isolation: isolate;
+}
+
+.atmosphere,
+.clouds,
+.waves,
+.boatPosition {
+  position: absolute;
+  pointer-events: none;
+}
+
+.scene[data-active='true'] .atmosphere,
+.scene[data-active='true'] .clouds,
+.scene[data-active='true'] .waves,
+.scene[data-active='true'] .boatPosition {
+  will-change: transform;
+}
+
+.bookLink {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bookLink:focus-visible {
+  outline: none;
+}
+
+.bookLink:focus-visible .waves {
+  outline: 3px solid var(--color-blue);
+  outline-offset: -3px;
+}
+
+.atmosphere {
+  z-index: 1;
+  inset: 24% -1px 0;
+  background:
+    radial-gradient(
+      ellipse 70% 38% at 50% 88%,
+      hsla(205, 9%, 20%, 0.68) 0%,
+      hsla(205, 8%, 27%, 0.46) 42%,
+      hsla(205, 7%, 36%, 0.2) 62%,
+      transparent 80%
+    ),
+    linear-gradient(to bottom, transparent 30%, hsla(205, 8%, 32%, 0.12) 66%, hsla(205, 9%, 22%, 0.48) 100%);
+  transform: translate3d(0, calc((var(--footer-progress) - 0.5) * 0.375rem), 0);
+}
+
+.clouds {
+  z-index: 0;
+  right: -1px;
+  bottom: 0;
+  left: -1px;
+  height: var(--footer-cloud-fill-height);
+  background: rgb(250, 241, 228);
+  transform: translate3d(0, calc((var(--footer-progress) - 0.5) * 0.5rem), 0);
+}
+
+.clouds::before {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  left: 0;
+  height: var(--footer-scene-height);
+  background-image: url('/images/footer/great-wave-cloud-background-cropped-sketchplanations.png');
+  background-position: calc(50% + 6rem + var(--footer-horizontal-offset)) bottom;
+  background-repeat: repeat-x;
+  background-size: var(--footer-tile-width) auto;
+  content: '';
+}
+
+.boatPosition {
+  z-index: 2;
+  bottom: var(--footer-wave-bottom);
+  left: calc(50% + var(--footer-horizontal-offset));
+  width: var(--footer-tile-width);
+  aspect-ratio: 1536 / 587;
+  transform: translate3d(-50%, calc((var(--footer-progress) - 0.5) * 1rem), 0);
+}
+
+.boat {
+  position: absolute;
+  top: 24%;
+  left: 75%;
+  display: block;
+  width: 10%;
+  height: auto;
+  pointer-events: auto;
+  cursor: pointer;
+  animation: boatBob 6s ease-in-out infinite;
+}
+
+.waves {
+  z-index: 3;
+  right: -1px;
+  bottom: var(--footer-wave-bottom);
+  left: -1px;
+  height: var(--footer-wave-height);
+  background-image: url('/images/footer/footer-repeating-great-wave-sketchplanations.png');
+  background-image: image-set(
+    url('/images/footer/footer-repeating-great-wave-sketchplanations.webp') type('image/webp'),
+    url('/images/footer/footer-repeating-great-wave-sketchplanations.png') type('image/png')
+  );
+  background-position: calc(50% + var(--footer-horizontal-offset)) bottom;
+  background-repeat: repeat-x;
+  background-size: var(--footer-tile-width) auto;
+  pointer-events: auto;
+  cursor: pointer;
+  transform: translate3d(0, calc((var(--footer-progress) - 0.5) * 1rem), 0);
+}
+
+@keyframes boatBob {
+  0%,
+  100% {
+    transform: translate3d(-50%, -0.0625rem, 0) rotate(-0.15deg);
+  }
+
+  50% {
+    transform: translate3d(-50%, 0.0625rem, 0) rotate(0.15deg);
+  }
+}
+
+@media (max-width: 40rem) {
+  .scene {
+    --footer-tile-width: clamp(42rem, 190vw, 47rem);
+    --footer-scene-height: clamp(19rem, 90vw, 22rem);
+    --footer-wave-height: clamp(16rem, 72.6vw, 18rem);
+    --footer-horizontal-offset: -5rem;
+  }
+}
+
+@media (min-width: 120rem) {
+  .scene {
+    --footer-tile-width: 68rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atmosphere,
+  .clouds,
+  .waves {
+    transform: none;
+    will-change: auto;
+  }
+
+  .boatPosition {
+    transform: translate3d(-50%, 0, 0);
+    will-change: auto;
+  }
+
+  .boat {
+    animation: none;
+    transform: translate3d(-50%, 0, 0);
+  }
+}
