@@ -78,10 +78,6 @@
   left: 0;
   height: var(--footer-scene-height);
   background-image: url('/images/footer/great-wave-cloud-background-cropped-sketchplanations.png');
-  background-image: image-set(
-    url('/images/footer/great-wave-cloud-background-cropped-sketchplanations.webp') type('image/webp'),
-    url('/images/footer/great-wave-cloud-background-cropped-sketchplanations.png') type('image/png')
-  );
   background-position: calc(50% + 6rem + var(--footer-horizontal-offset)) bottom;
   background-repeat: repeat-x;
   background-size: var(--footer-tile-width) auto;

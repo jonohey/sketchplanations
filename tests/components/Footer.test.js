@@ -37,11 +37,11 @@ describe('Footer', () => {
     expect(css).toMatch(/will-change: auto;/)
   })
 
-  it('serves optimized backgrounds with PNG fallbacks', () => {
+  it('serves the wave as WebP with a PNG fallback', () => {
     const css = readComponent('FooterScene.module.css')
 
-    expect(css.match(/image-set\(/g)).toHaveLength(2)
+    expect(css.match(/image-set\(/g)).toHaveLength(1)
     expect(css).toContain('footer-repeating-great-wave-sketchplanations.webp')
-    expect(css).toContain('great-wave-cloud-background-cropped-sketchplanations.webp')
+    expect(css).not.toContain('great-wave-cloud-background-cropped-sketchplanations.webp')
   })
 })
