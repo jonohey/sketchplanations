@@ -34,7 +34,18 @@ describe('Footer', () => {
 
     expect(css).toContain('@media (prefers-reduced-motion: reduce)')
     expect(css).toMatch(/\.boat\s*\{\s*animation: none;/)
+    expect(css).toMatch(/\.clouds::before\s*\{\s*transform: none;/)
     expect(css).toMatch(/will-change: auto;/)
+  })
+
+  it('grows the cloud layer from its fill base as scroll progress increases', () => {
+    const scene = readComponent('FooterScene.js')
+    const css = readComponent('FooterScene.module.css')
+
+    expect(scene).toContain('--footer-cloud-scale')
+    expect(css).toContain('--footer-cloud-scale: 1')
+    expect(css).toContain('transform-origin: bottom center')
+    expect(css).toContain('scale(var(--footer-cloud-scale))')
   })
 
   it('serves the wave as WebP with a PNG fallback', () => {

@@ -1,11 +1,14 @@
 .scene {
   --footer-progress: 0.5;
+  --footer-enter-progress: 0;
+  --footer-cloud-scale: 1;
   --footer-tile-width: clamp(45rem, 72vw, 70rem);
   --footer-scene-height: clamp(20rem, 36vw, 35rem);
   --footer-wave-height: clamp(17.2rem, 27.5vw, 26.75rem);
   --footer-cloud-fill-height: clamp(8rem, 14vw, 10rem);
   --footer-horizontal-offset: -10rem;
   --footer-wave-bottom: -3rem;
+  --footer-side-shift: calc((1 - var(--footer-enter-progress)) * -1.5rem);
 
   position: relative;
   height: var(--footer-scene-height);
@@ -25,6 +28,7 @@
 
 .scene[data-active='true'] .atmosphere,
 .scene[data-active='true'] .clouds,
+.scene[data-active='true'] .clouds::before,
 .scene[data-active='true'] .waves,
 .scene[data-active='true'] .boatPosition {
   will-change: transform;
@@ -81,6 +85,8 @@
   background-position: calc(50% + 6rem + var(--footer-horizontal-offset)) bottom;
   background-repeat: repeat-x;
   background-size: var(--footer-tile-width) auto;
+  transform: scale(var(--footer-cloud-scale));
+  transform-origin: bottom center;
   content: '';
 }
 
@@ -90,7 +96,7 @@
   left: calc(50% + var(--footer-horizontal-offset));
   width: var(--footer-tile-width);
   aspect-ratio: 1536 / 587;
-  transform: translate3d(-50%, calc((var(--footer-progress) - 0.5) * 1rem), 0);
+  transform: translate3d(calc(-50% + var(--footer-side-shift)), calc((var(--footer-progress) - 0.5) * 1rem), 0);
 }
 
 .boat {
@@ -121,7 +127,7 @@
   background-size: var(--footer-tile-width) auto;
   pointer-events: auto;
   cursor: pointer;
-  transform: translate3d(0, calc((var(--footer-progress) - 0.5) * 1rem), 0);
+  transform: translate3d(var(--footer-side-shift), calc((var(--footer-progress) - 0.5) * 1rem), 0);
 }
 
 @keyframes boatBob {
@@ -154,6 +160,11 @@
   .atmosphere,
   .clouds,
   .waves {
+    transform: none;
+    will-change: auto;
+  }
+
+  .clouds::before {
     transform: none;
     will-change: auto;
   }
