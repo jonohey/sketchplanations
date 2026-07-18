@@ -27,8 +27,12 @@ const FooterScene = () => {
       const bounds = scene.getBoundingClientRect()
       const travel = window.innerHeight + bounds.height
       const progress = Math.min(1, Math.max(0, (window.innerHeight - bounds.top) / travel))
+      // 0 as the scene enters; 1 once its bottom sits on the viewport bottom.
+      const enterProgress = Math.min(1, Math.max(0, (window.innerHeight - bounds.top) / Math.max(bounds.height, 1)))
 
       scene.style.setProperty('--footer-progress', progress.toFixed(3))
+      scene.style.setProperty('--footer-enter-progress', enterProgress.toFixed(3))
+      scene.style.setProperty('--footer-cloud-scale', (0.88 + enterProgress * 0.12).toFixed(3))
     }
 
     const requestProgressUpdate = () => {
