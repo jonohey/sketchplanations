@@ -77,7 +77,7 @@
 		"eslint-plugin-prettier": "^5.5.6",
 		"eslint-plugin-react": "^7.37.5",
 		"postcss": "^8.5.20",
-		"postcss-preset-env": "^9.6.0",
+		"postcss-preset-env": "^11.3.2",
 		"prettier": "^3.9.5",
 		"styled-jsx-plugin-postcss": "^4.0.1",
 		"tailwindcss": "^3.4.19",
