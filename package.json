@@ -41,7 +41,7 @@
 		"globby": "^16.2.2",
 		"humanize-string": "^3.1.0",
 		"lucide-react": "^1.25.0",
-		"next": "^16.2.10",
+		"next": "^16.2.11",
 		"node-fetch": "^3.3.2",
 		"path-to-regexp": "^8.4.2",
 		"polished": "^4.3.1",
