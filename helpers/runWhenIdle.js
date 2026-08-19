@@ -1,11 +1,9 @@
 export default function runWhenIdle(callback, { timeout = 2500 } = {}) {
-	if (typeof window === "undefined") return () => {};
-
-	if (typeof window.requestIdleCallback === "function") {
-		const id = window.requestIdleCallback(() => callback(), { timeout });
-		return () => window.cancelIdleCallback(id);
+	if (typeof globalThis.requestIdleCallback === "function") {
+		const id = globalThis.requestIdleCallback(() => callback(), { timeout });
+		return () => globalThis.cancelIdleCallback(id);
 	}
 
-	const id = window.setTimeout(callback, 1);
-	return () => window.clearTimeout(id);
+	const id = globalThis.setTimeout(callback, 1);
+	return () => globalThis.clearTimeout(id);
 }

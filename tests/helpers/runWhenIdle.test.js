@@ -29,14 +29,16 @@ describe("runWhenIdle", () => {
 
 	it("falls back to setTimeout when requestIdleCallback is missing", () => {
 		vi.stubGlobal("requestIdleCallback", undefined);
-		vi.stubGlobal("setTimeout", vi.fn(() => 7));
-		vi.stubGlobal("clearTimeout", vi.fn());
+		const setTimeoutSpy = vi.spyOn(globalThis, "setTimeout").mockReturnValue(7);
+		const clearTimeoutSpy = vi
+			.spyOn(globalThis, "clearTimeout")
+			.mockImplementation(() => {});
 
 		const callback = vi.fn();
 		const cancel = runWhenIdle(callback);
 
-		expect(window.setTimeout).toHaveBeenCalledWith(callback, 1);
+		expect(setTimeoutSpy).toHaveBeenCalledWith(callback, 1);
 		cancel();
-		expect(window.clearTimeout).toHaveBeenCalledWith(7);
+		expect(clearTimeoutSpy).toHaveBeenCalledWith(7);
 	});
 });
