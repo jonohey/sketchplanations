@@ -15,6 +15,8 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { GoogleTagManager } from "../gtm";
 
+import "vanilla-cookieconsent.css";
+import "vanilla-cookieconsent/dist/cookieconsent.css";
 import "global.css";
 
 const BuyMeACoffee = dynamic(() => import("components/BuyMeACoffee"), {
@@ -86,8 +88,6 @@ const Sketchplanations = ({ Component, pageProps }) => {
 
 	useEffect(() => {
 		return runWhenIdle(async () => {
-			await import("vanilla-cookieconsent/dist/cookieconsent.css");
-			await import("../vanilla-cookieconsent.css");
 			const CookieConsent = await import("vanilla-cookieconsent");
 			CookieConsent.run(cookieConstentConfig);
 		});
