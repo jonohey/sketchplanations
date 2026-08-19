@@ -28,3 +28,10 @@
 
   background: linear-gradient(to bottom, var(--footer-light), var(--color-paper) 45%, var(--footer-cream));
 }
+
+.feedbackLink {
+  @apply text-blue;
+  background: var(--color-paper);
+  box-decoration-break: clone;
+  padding: 0.1em 0.25em;
+}

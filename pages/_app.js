@@ -1,25 +1,25 @@
 import { PrismicPreview } from "@prismicio/next/pages";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import BuyMeACoffee from "components/BuyMeACoffee";
 import Footer from "components/Footer";
 import Header from "components/Header";
 import JsonLd from "components/JsonLd";
 import Context from "context";
 import cookieConstentConfig from "cookieConstentConfig.mjs";
 import { pageTitle } from "helpers";
+import runWhenIdle from "helpers/runWhenIdle";
 import { buildSiteGraph } from "helpers/structuredData";
 import { Inter } from "next/font/google";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import * as CookieConsent from "vanilla-cookieconsent";
 import { GoogleTagManager } from "../gtm";
 
-import "vanilla-cookieconsent.css";
-import "vanilla-cookieconsent/dist/cookieconsent.css";
-
 import "global.css";
-import "swiper.css";
+
+const BuyMeACoffee = dynamic(() => import("components/BuyMeACoffee"), {
+	ssr: false,
+});
 
 const inter = Inter({ subsets: ["latin"], weights: [300, 600] });
 
@@ -85,7 +85,12 @@ const Sketchplanations = ({ Component, pageProps }) => {
 	}, []);
 
 	useEffect(() => {
-		CookieConsent.run(cookieConstentConfig);
+		return runWhenIdle(async () => {
+			await import("vanilla-cookieconsent/dist/cookieconsent.css");
+			await import("../vanilla-cookieconsent.css");
+			const CookieConsent = await import("vanilla-cookieconsent");
+			CookieConsent.run(cookieConstentConfig);
+		});
 	}, []);
 
 	return (

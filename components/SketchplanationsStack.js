@@ -10,6 +10,7 @@ import styles from "./SketchplanationsStack.module.css";
 import { isBlank } from "helpers";
 import "swiper/css";
 import "swiper/css/effect-cards";
+import "swiper.css";
 import SketchplanationCard from "./SketchplanationCard";
 
 const SketchplanationsStack = ({

@@ -1,7 +1,6 @@
 import { track } from '@vercel/analytics'
 import { ChevronRight, ExternalLink } from 'lucide-react'
 import { useRouter } from 'next/router'
-import { RoughNotation } from 'react-rough-notation'
 
 import styles from './Footer.module.css'
 
@@ -179,26 +178,17 @@ const Footer = () => {
         </div>
 
         <div id='feedback-link' className='text-center pt-4 text-sm relative'>
-          <RoughNotation
-            type='highlight'
-            show={true}
-            color='var(--color-paper)'
-            iterations={1}
-            strokeWidth={1}
-            animate={true}
+          <a
+            href='https://forms.gle/Htu1Zy1MdnpYGSV98'
+            target='_blank'
+            rel='noreferrer'
+            className={styles.feedbackLink}
+            onClick={() => {
+              track('Feedback-form', { location: 'footer' })
+            }}
           >
-            <a
-              href='https://forms.gle/Htu1Zy1MdnpYGSV98'
-              target='_blank'
-              rel='noreferrer'
-              className='text-blue'
-              onClick={() => {
-                track('Feedback-form', { location: 'footer' })
-              }}
-            >
-              Leave feedback
-            </a>
-          </RoughNotation>
+            Leave feedback
+          </a>
         </div>
 
         <div className='text-center pt-4 text-sm text-gray-600'>

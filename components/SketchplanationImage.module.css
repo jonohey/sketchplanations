@@ -6,6 +6,14 @@
   cursor: zoom-in;
 }
 
+.thumb {
+  box-shadow: 0 2.3rem 1rem -2rem hsla(0, 0%, 0%, 0.1);
+}
+
+.thumb:hover {
+  box-shadow: 0 3rem 2rem -2rem hsla(0, 0%, 0%, 0.15);
+}
+
 .lightbox {
   position: fixed;
   top: 0;

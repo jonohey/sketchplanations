@@ -1,18 +1,9 @@
 import { track } from '@vercel/analytics';
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import { RoughNotation } from "react-rough-notation";
 import Link from "./Link";
 
 import styles from "./Navigation.module.css";
-
-const roughNotationProps = {
-	iterations: 1,
-	animationDuration: 200,
-	animationDelay: 50,
-	padding: 3,
-	type: "underline",
-};
 
 const Navigation = () => {
 	const router = useRouter();
@@ -26,27 +17,21 @@ const Navigation = () => {
 				className={classNames(styles.item, styles["item--home"])}
 				aria-current={isSelected("/") ? "page" : undefined}
 			>
-				<RoughNotation show={isSelected("/")} {...roughNotationProps}>
-					Home
-				</RoughNotation>
+				Home
 			</Link>
 			<Link
 				href="/search"
 				className={classNames(styles.item, styles["item--home"])}
 				aria-current={isSelected("/search") ? "page" : undefined}
 			>
-				<RoughNotation show={isSelected("/search")} {...roughNotationProps}>
-					Search
-				</RoughNotation>
+				Search
 			</Link>
 			<Link
 				href="/categories"
 				className={styles.item}
 				aria-current={isSelected("/categories") ? "page" : undefined}
 			>
-				<RoughNotation show={isSelected("/categories")} {...roughNotationProps}>
-					Categories
-				</RoughNotation>
+				Categories
 			</Link>
 			<Link
 				href="/big-ideas-little-pictures"
@@ -58,12 +43,7 @@ const Navigation = () => {
 					track('Book-page-link', { location: 'header' });
 				}}
 			>
-				<RoughNotation
-					show={isSelected("/big-ideas-little-pictures")}
-					{...roughNotationProps}
-				>
-					Book!
-				</RoughNotation>
+				Book!
 			</Link>
 			<a
 				href="https://sketchplanations.substack.com/subscribe"
@@ -105,9 +85,7 @@ const Navigation = () => {
 				className={styles.item}
 				aria-current={isSelected("/about") ? "page" : undefined}
 			>
-				<RoughNotation show={isSelected("/about")} {...roughNotationProps}>
-					About
-				</RoughNotation>
+				About
 			</Link>
 		</nav>
 	);
