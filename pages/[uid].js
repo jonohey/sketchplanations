@@ -9,9 +9,7 @@ import KeyboardShortcut from "components/KeyboardShortcut";
 import RichText from "components/RichText";
 import SketchplanationCtas from "components/SketchplanationCtas";
 import SketchplanationImage from "components/SketchplanationImage";
-import SketchplanationsStack from "components/SketchplanationsStack";
 import SubscribeInline from "components/SubscribeInline";
-import TaggedSketchplanations from "components/TaggedSketchplanations";
 import JsonLd from "components/JsonLd";
 import {
 	fastScrollToTop,
@@ -38,6 +36,10 @@ import { client } from "services/prismic";
 
 const TextHeader = dynamic(() => import("components/TextHeader"));
 const Modal = dynamic(() => import("components/Modal"));
+const SketchplanationsStack = dynamic(() => import("components/SketchplanationsStack"));
+const TaggedSketchplanations = dynamic(() => import("components/TaggedSketchplanations"), {
+	ssr: false,
+});
 
 import LicenceContent from "components/LicenceContent";
 import styles from "./[uid].module.css";

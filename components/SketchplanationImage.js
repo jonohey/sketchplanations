@@ -1,7 +1,6 @@
 import { PrismicNextImage } from "@prismicio/next";
 import { track } from "@vercel/analytics";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { debounce } from "throttle-debounce";
 import { LoaderCircle, X } from "lucide-react";
 import {
 	useCallback,
@@ -15,9 +14,9 @@ import { Dialog, Modal, ModalOverlay } from "react-aria-components";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 const MotionModal = motion.create(Modal);
-// const MotionDialog = motion.create(Dialog);
 
 import Context from "context";
+import styles from "./SketchplanationImage.module.css";
 
 const SketchplanationImage = ({ image, title, priority = false, children }) => {
 	const { width, height } = image.dimensions ? image : { width: undefined, height: undefined };
@@ -39,7 +38,14 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isZoomed, setIsZoomed] = useState(false);
 
+	const getInitialImageDimensions = useCallback(() => {
+		if (!imageRef.current) return;
+		const rect = imageRef.current.getBoundingClientRect();
+		setInitialImageRect(rect);
+	}, []);
+
 	const open = () => {
+		getInitialImageDimensions();
 		setIsOpening(true);
 		setIsOpen(true);
 		setDecorationHidden(true);
@@ -73,26 +79,6 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 			}
 		}, 250);
 	}, [close, zoomAnimationTime]);
-
-	const getInitialImageDimensions = useCallback(() => {
-		if (!imageRef.current) return;
-		const rect = imageRef.current.getBoundingClientRect();
-		setInitialImageRect(rect);
-	}, []);
-
-	useEffect(() => {
-		getInitialImageDimensions();
-
-		const debouncedGetDimensions = debounce(10, getInitialImageDimensions);
-		window.addEventListener("resize", debouncedGetDimensions);
-		window.addEventListener("scroll", debouncedGetDimensions);
-
-		return () => {
-			window.removeEventListener("resize", debouncedGetDimensions);
-			window.removeEventListener("scroll", debouncedGetDimensions);
-			debouncedGetDimensions.cancel();
-		};
-	}, [getInitialImageDimensions]);
 
 	const opacity = useMemo(() => {
 		if (isOpen) {
@@ -142,7 +128,7 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 			<div className="relative">
 				<PrismicNextImage
 					field={imageWithAlt}
-					className="bg-paper cursor-zoom-in mx-auto transition-all duration-300 ease-out hover:scale-[1.02] hover:-translate-y-1"
+					className={`bg-paper cursor-zoom-in mx-auto transition-all duration-300 ease-out hover:scale-[1.02] hover:-translate-y-1 ${styles.thumb}`}
 					ref={imageRef}
 					width={width}
 					height={height}
@@ -159,18 +145,11 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					}}
 					style={{
 						opacity,
-						boxShadow: "0 2.3rem 1rem -2rem hsla(0, 0%, 0%, 0.1)",
-						willChange: "transform, box-shadow",
 					}}
 					imgixParams={imgixParams}
 					quality={quality}
-					onMouseEnter={(e) => {
-						e.target.style.boxShadow = "0 3rem 2rem -2rem hsla(0, 0%, 0%, 0.15)";
-					}}
-					onMouseLeave={(e) => {
-						e.target.style.boxShadow = "0 2.3rem 1rem -2rem hsla(0, 0%, 0%, 0.1)";
-					}}
 				/>
+				{(isOpening || (isOpen && isLoading)) && (
 				<motion.div
 					className="absolute inset-0 flex items-center justify-center text-bg pointer-events-none backdrop-blur-lg"
 					style={{
@@ -192,7 +171,9 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 						/>
 					</motion.div>
 				</motion.div>
+				)}
 			</div>
+			{(isOpen || isOpening || isClosing) && (
 			<ModalOverlay
 				isOpen={isOpen || isOpening || isClosing}
 				isDismissable
@@ -343,6 +324,7 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					</AnimatePresence>
 				</MotionModal>
 			</ModalOverlay>
+			)}
 		</>
 	);
 };

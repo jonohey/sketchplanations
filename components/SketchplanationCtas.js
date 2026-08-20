@@ -2,7 +2,6 @@ import { track } from '@vercel/analytics';
 import classNames from "classnames";
 import { Check, Copy, CreativeCommons, Download, Headphones, Link2, ShoppingCart } from "lucide-react";
 import { useState } from "react";
-import { RoughNotation } from "react-rough-notation";
 import styles from "./SketchplanationCtas.module.css";
 
 const SketchplanationCtas = ({
@@ -22,32 +21,27 @@ const SketchplanationCtas = ({
 		>
 			{podcastLinkUrl && (
 				<li>
-					<RoughNotation
-						type="box"
-						show={true}
-						color="var(--color-brightRed)"
+					<a
+						className={classNames(
+							styles.cta,
+							styles.ctaListen,
+							variant === "normal" && styles.ctaNormal,
+							variant === "lightbox" && styles.ctaLightbox,
+							variant === "lightbox" ? styles.ctaHoverLightbox : styles.ctaHover
+						)}
+						href={podcastLinkUrl}
+						target="_blank"
+						rel="noreferrer"
+						title={`Listen to ${title} in the podcast`}
+						onClick={() => {
+							track('Sketch-link-podcast-episode', { sketch: `${title}` });
+						}}
 					>
-						<a
-							className={classNames(
-								styles.cta,
-								variant === "normal" && styles.ctaNormal,
-								variant === "lightbox" && styles.ctaLightbox,
-								variant === "lightbox" ? styles.ctaHoverLightbox : styles.ctaHover
-							)}
-							href={podcastLinkUrl}
-							target="_blank"
-							rel="noreferrer"
-							title={`Listen to ${title} in the podcast`}
-							onClick={() => {
-								track('Sketch-link-podcast-episode', { sketch: `${title}` });
-							}}
-						>
-							<span className="flex items-center gap-x-1">
-								Listen
-								<Headphones size={16} />
-							</span>
-						</a>
-					</RoughNotation>
+						<span className="flex items-center gap-x-1">
+							Listen
+							<Headphones size={16} />
+						</span>
+					</a>
 				</li>
 			)}
 		<li>

@@ -21,12 +21,25 @@
   @apply grid gap-x-4;
   background-color: var(--color-bgTransparent);
   backdrop-filter: saturate(180%) blur(5px);
+  transition: transform 0.1s linear;
   grid-template-areas:
     'spacer-left menu ident search-toggle spacer-right'
     'divider divider divider divider divider'
     'navigation navigation navigation navigation navigation';
   grid-template-columns: min-content 24px auto var(--min-search-toggle-width) min-content;
   grid-template-rows: auto 1px 1fr;
+}
+
+.root--hidden {
+  transform: translateY(-100%);
+  transition-duration: 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root,
+  .root--hidden {
+    transition: none;
+  }
 }
 
 .spacer-left {

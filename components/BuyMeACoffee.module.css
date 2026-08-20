@@ -1,5 +1,23 @@
 .coffee {
   @apply fixed z-50 bottom-0 left-0 mb-4 ml-4 flex flex-col items-center py-3 px-4 bg-white light:border shadow-lg rounded;
+  opacity: 0;
+  transform: translateX(-100%) scale(0.8);
+  pointer-events: none;
+  transition: opacity 0.1s linear, transform 0.1s linear;
+}
+
+.coffeeVisible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition: opacity 0.2s ease-out, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coffee,
+  .coffeeVisible {
+    transition: none;
+  }
 }
 
 .image {
