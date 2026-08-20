@@ -15,6 +15,16 @@ describe("mobile INP first-pass changes", () => {
 		expect(app).not.toContain('import "swiper.css"');
 	});
 
+	it("scopes Swiper shadow CSS in a module instead of a global stylesheet", () => {
+		const stack = read("components/SketchplanationsStack.js");
+		const tagged = read("components/TaggedSketchplanations.js");
+		const stackCss = read("components/SketchplanationsStack.module.css");
+
+		expect(stack).not.toContain('import "swiper.css"');
+		expect(tagged).not.toContain('import "swiper.css"');
+		expect(stackCss).toContain(":global(.swiper-slide-shadow)");
+	});
+
 	it("keeps the header free of framer-motion and skips the blur stack on mobile", () => {
 		const header = read("components/Header.js");
 		const headerCss = read("components/Header.module.css");

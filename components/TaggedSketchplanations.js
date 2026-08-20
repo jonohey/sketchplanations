@@ -11,7 +11,6 @@ import SketchplanationCard from "./SketchplanationCard";
 import styles from "./TaggedSketchplanations.module.css";
 
 import "swiper/css";
-import "swiper.css";
 
 const TaggedSketchplanations = ({ tags, excludeUid }) => {
 	const [taggedSketchplanations, setTaggedSketchplanations] = useState([]);
