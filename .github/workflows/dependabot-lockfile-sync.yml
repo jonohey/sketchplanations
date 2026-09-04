@@ -1,0 +1,43 @@
+name: Sync Dependabot lockfile
+
+# Dependabot's npm updater regenerates pnpm-lock.yaml without the overrides
+# block from package.json, which breaks frozen installs on CI and Vercel.
+# Re-run pnpm install on Dependabot PRs to restore overrides in the lockfile.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sync-lockfile:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Restore pnpm overrides in lockfile
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Commit lockfile fix
+        run: |
+          if git diff --quiet pnpm-lock.yaml; then
+            echo "Lockfile already in sync"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pnpm-lock.yaml
+          git commit -m "Sync pnpm lockfile overrides"
+          git push
