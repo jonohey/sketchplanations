@@ -63,6 +63,9 @@ jobs:
               --description "Major dependency update requiring manual review" \
               --color "d93f0b"
           gh pr edit "$PR_URL" --add-label "breaking-change"
-          gh pr comment "$PR_URL" --body "Major version bump — needs manual review before merge."
+          COMMENT_BODY=$'Major version bump — needs manual review before merge.\n\n<!-- dependabot-major-review -->'
+          if ! gh pr view "$PR_URL" --json comments --jq '.comments[].body' | grep -q 'dependabot-major-review'; then
+            gh pr comment "$PR_URL" --body "$COMMENT_BODY"
+          fi
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}

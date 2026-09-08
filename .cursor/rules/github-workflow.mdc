@@ -5,9 +5,20 @@ alwaysApply: true
 
 # GitHub workflow
 
+## Dependabot PRs — check before start-work
+
+When the user references an open Dependabot PR (URL, number, or dependency bump already in a `dependabot/` branch), **do not** run `./scripts/start-work.sh` or open a replacement PR for the same version change.
+
+1. Review the existing Dependabot PR (CI, preview deploy, diff).
+2. If checks are green and no repo-specific fix is needed, recommend merging that PR (major bumps included when only manual review is blocking).
+3. If fixes are needed, check out the Dependabot branch and push commits there.
+4. Only run `start-work.sh` when additional changes are required **beyond** the Dependabot diff (failing tests/builds, migrations, config fix-ups).
+
+See also `AGENTS.md` → “Dependabot PRs — do not duplicate”.
+
 ## Start work
 
-When the user wants to start new work (e.g. "Start work on …", "New ticket for …", "Let's do …"), bootstrap the ticket before coding.
+When the user wants to start new work (e.g. "Start work on …", "New ticket for …", "Let's do …"), bootstrap the ticket before coding — **except** for Dependabot PRs covered above.
 
 1. Run `./scripts/start-work.sh "Title" ["optional body"]` from the repo root.
    - The script syncs latest `main` (fetch + checkout + pull) **before** creating the branch.
@@ -24,15 +35,6 @@ Keep issue titles concise enough to slug cleanly (under ~40 characters of slug t
 - Stay on the issue branch unless the user asks otherwise.
 - Do not commit until the user asks to complete or finish the work.
 - Improvements to this workflow doc (e.g. tooling, conventions) may be committed alongside other work on the same branch when they come up.
-
-## Dependabot updates
-
-When the user asks about a Dependabot PR (especially major/breaking updates), prefer the existing Dependabot branch/PR first.
-
-1. Review the existing PR status and checks (CI, preview/deploy, mergeability).
-2. If checks are green and no repo-specific fix is needed, recommend merging the Dependabot PR directly.
-3. Only create a new issue branch/PR when additional code changes are required beyond the Dependabot diff (for example, fix-ups for failing tests/builds, migration changes, or follow-up compatibility work).
-4. If a temporary branch/PR is created for verification and later deemed unnecessary, clean it up (close PR, delete branch) when the user asks.
 
 ## UI patterns
 

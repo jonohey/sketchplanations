@@ -2,6 +2,19 @@
 
 Context for Cloud Agents and other automated assistants working in this repo.
 
+## Dependabot PRs — do not duplicate
+
+**Before** running `./scripts/start-work.sh` or opening a new PR, check whether an open Dependabot PR already covers the dependency update (user link, PR number, or `dependabot/` branch).
+
+When one exists:
+
+- **Do not** cherry-pick the Dependabot bump onto a new issue branch.
+- **Do not** open a parallel PR with the same version change.
+- **Do** check out the Dependabot branch (`git fetch origin <dependabot-branch> && git checkout <dependabot-branch>`) and push fixes there if tests or config need changes beyond the bump.
+- **Do** recommend merging the Dependabot PR when CI and preview deploy are green and no extra code changes are required (including major bumps blocked only by manual-review policy).
+
+Only run `start-work.sh` when the task needs work **beyond** the Dependabot diff (failing tests, migrations, lockfile fix-ups the automation did not apply, etc.).
+
 ## Dependabot and pnpm lockfiles
 
 Weekly Dependabot PRs can fail CI and Vercel with:
