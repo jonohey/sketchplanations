@@ -7,14 +7,15 @@ export function isJpegPrismicImage(image) {
 }
 
 /**
- * imgix recompresses JPEG uploads aggressively unless we raise quality.
- * PNG uploads are left on imgix defaults. Sketch pages already did this
- * in SketchplanationImage (#565); list/home cards were still on defaults.
+ * JPEG uploads are a poor fit for flat-colour illustrations: imgix recompresses
+ * them aggressively and edges/text pick up blocky artefacts. Re-encode as WebP
+ * at higher quality instead (similar bytes, much sharper). PNG uploads are left
+ * on imgix defaults.
  */
 export function getPrismicImageOptimisation(image, baseImgixParams = {}) {
 	if (isJpegPrismicImage(image)) {
 		return {
-			imgixParams: { auto: "format", ...baseImgixParams },
+			imgixParams: { auto: "format", fm: "webp", ...baseImgixParams },
 			quality: JPEG_PRISMIC_IMAGE_QUALITY,
 		};
 	}

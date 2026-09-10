@@ -29,13 +29,13 @@ describe("isJpegPrismicImage", () => {
 });
 
 describe("getPrismicImageOptimisation", () => {
-	it("raises JPEG quality and sets auto=format", () => {
+	it("re-encodes JPEG uploads as WebP at high quality", () => {
 		expect(
 			getPrismicImageOptimisation({
 				url: "https://images.prismic.io/sketchplanations/example.jpg",
 			}),
 		).toEqual({
-			imgixParams: { auto: "format" },
+			imgixParams: { auto: "format", fm: "webp" },
 			quality: JPEG_PRISMIC_IMAGE_QUALITY,
 		});
 	});
@@ -51,6 +51,7 @@ describe("getPrismicImageOptimisation", () => {
 		).toEqual({
 			imgixParams: {
 				auto: "format",
+				fm: "webp",
 				fit: "crop",
 				crop: "top",
 				ar: "1:1",
