@@ -36,7 +36,9 @@ import { client } from "services/prismic";
 
 const TextHeader = dynamic(() => import("components/TextHeader"));
 const Modal = dynamic(() => import("components/Modal"));
-const SketchplanationsStack = dynamic(() => import("components/SketchplanationsStack"));
+const SketchplanationsStack = dynamic(() => import("components/SketchplanationsStack"), {
+	ssr: false,
+});
 const TaggedSketchplanations = dynamic(() => import("components/TaggedSketchplanations"), {
 	ssr: false,
 });

@@ -5,6 +5,12 @@
 	"engines": {
 		"node": "^24.0.0"
 	},
+	"browserslist": [
+		"chrome >= 111",
+		"edge >= 111",
+		"firefox >= 111",
+		"safari >= 16"
+	],
 	"packageManager": "pnpm@9.15.9",
 	"scripts": {
 		"predev": "node setup.mjs",
