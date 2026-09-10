@@ -62,13 +62,19 @@ describe("mobile INP first-pass changes", () => {
 		expect(subscribe).toContain("placeholder");
 	});
 
-	it("avoids measuring the sketch image on scroll and keeps the lightbox unmounted until open", () => {
+	it("keeps the lightbox code-split and avoids sync layout reads on open", () => {
 		const image = read("components/SketchplanationImage.js");
+		const lightbox = read("components/SketchplanationLightbox.js");
 
 		expect(image).not.toContain("addEventListener(\"scroll\"");
 		expect(image).not.toContain("willChange");
-		expect(image).toContain("(isOpen || isOpening || isClosing) &&");
-		expect(image).toContain("getInitialImageDimensions()");
+		expect(image).not.toContain("framer-motion");
+		expect(image).toContain("ResizeObserver");
+		expect(image).toContain('import("components/SketchplanationLightbox")');
+		expect(image).toContain("runWhenIdle(() => track(\"lightbox_open\"");
+		expect(lightbox).toContain("max-width: 767px");
+		expect(lightbox).toContain("styles.mobileRoot");
+		expect(lightbox).not.toContain("framer-motion");
 	});
 
 	it("code-splits below-the-fold sketch carousels", () => {
