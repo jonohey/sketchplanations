@@ -12,9 +12,19 @@ describe("mobile INP first-pass changes", () => {
 		expect(app).toContain("loadCookieConsent");
 		expect(app).toContain('import("vanilla-cookieconsent/dist/cookieconsent.css")');
 		expect(app).toContain('import("vanilla-cookieconsent.css")');
+		expect(app.indexOf('import("vanilla-cookieconsent/dist/cookieconsent.css")')).toBeLessThan(
+			app.indexOf('import("vanilla-cookieconsent.css")'),
+		);
 		expect(app).toContain("ssr: false");
 		expect(app).not.toMatch(/import \* as CookieConsent from ["']vanilla-cookieconsent["']/);
 		expect(app).not.toMatch(/^import ["']vanilla-cookieconsent/);
+	});
+
+	it("scopes cookie consent dark theme to prefers-color-scheme: dark", () => {
+		const theme = read("vanilla-cookieconsent.css");
+
+		expect(theme).toContain("prefers-color-scheme: dark");
+		expect(theme).not.toMatch(/^:root\s*\{/);
 	});
 
 	it("loads Swiper CSS on the client instead of blocking the initial render", () => {
