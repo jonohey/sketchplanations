@@ -1,4 +1,5 @@
 import { humanizeTag, isPresent } from "helpers";
+import { loadSwiperStyles } from "helpers/loadSwiperStyles";
 import { useEffect, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-aria-components";
 import { useInView } from "react-intersection-observer";
@@ -10,14 +11,16 @@ import FancyLink from "./FancyLink";
 import SketchplanationCard from "./SketchplanationCard";
 import styles from "./TaggedSketchplanations.module.css";
 
-import "swiper/css";
-
 const TaggedSketchplanations = ({ tags, excludeUid }) => {
 	const [taggedSketchplanations, setTaggedSketchplanations] = useState([]);
 	const { ref, inView } = useInView({
 		triggerOnce: true,
 		threshold: 0.1,
 	});
+
+	useEffect(() => {
+		loadSwiperStyles();
+	}, []);
 
 	useEffect(() => {
 		const fetchTaggedSketchplanations = async () => {

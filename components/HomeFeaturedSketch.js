@@ -3,6 +3,7 @@ import { PrismicNextImage } from "@prismicio/next";
 import Link from "next/link";
 
 import { humanizePublishedDate } from "helpers";
+import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
 import styles from "./HomeFeaturedSketch.module.css";
 
 const FEATURED_IMAGE_SIZES =
@@ -14,6 +15,7 @@ export default function HomeFeaturedSketch({ sketch }) {
 		? sketch.image
 		: { ...sketch.image, alt: sketch.title };
 	const { width, height } = sketch.image?.dimensions ?? {};
+	const { imgixParams, quality } = getPrismicImageOptimisation(sketch.image);
 
 	return (
 		<article>
@@ -34,9 +36,8 @@ export default function HomeFeaturedSketch({ sketch }) {
 						height={height}
 						sizes={FEATURED_IMAGE_SIZES}
 						loading="lazy"
-						imgixParams={{
-							format: "auto",
-						}}
+						imgixParams={imgixParams}
+						quality={quality}
 					/>
 				</span>
 				<h3 className={styles.title}>{sketch.title}</h3>

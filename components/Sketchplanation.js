@@ -7,6 +7,7 @@ import Shiitake from "shiitake";
 import styles from "./Sketchplanation.module.css";
 
 import { humanizePublishedDate } from "helpers";
+import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
 import FancyLink from "./FancyLink";
 
 const TextHeader = dynamic(() => import("./TextHeader"));
@@ -18,6 +19,7 @@ const Sketchplanation = ({ sketchplanation, priority = false }) => {
 	} = sketchplanation;
 
 	const publishedText = humanizePublishedDate(publishedAt);
+	const { imgixParams, quality } = getPrismicImageOptimisation(image);
 
 	return (
 		<article className={styles.root}>
@@ -27,9 +29,8 @@ const Sketchplanation = ({ sketchplanation, priority = false }) => {
 					title={title}
 					priority={priority}
 					sizes="(max-width: 640px) calc(100vw - 2.5rem), 38rem"
-					imgixParams={{
-						format: "auto",
-					}}
+					imgixParams={imgixParams}
+					quality={quality}
 				/>
 			</Link>
 			<div className={styles.content}>

@@ -9,19 +9,35 @@ describe("mobile INP first-pass changes", () => {
 		const app = read("pages/_app.js");
 
 		expect(app).toContain("runWhenIdle");
-		expect(app).toContain('import("vanilla-cookieconsent")');
+		expect(app).toContain("loadCookieConsent");
+		expect(app).toContain('import("vanilla-cookieconsent/dist/cookieconsent.css")');
+		expect(app).toContain('import("vanilla-cookieconsent.css")');
+		expect(app.indexOf('import("vanilla-cookieconsent/dist/cookieconsent.css")')).toBeLessThan(
+			app.indexOf('import("vanilla-cookieconsent.css")'),
+		);
 		expect(app).toContain("ssr: false");
 		expect(app).not.toMatch(/import \* as CookieConsent from ["']vanilla-cookieconsent["']/);
-		expect(app).not.toContain('import "swiper.css"');
+		expect(app).not.toMatch(/^import ["']vanilla-cookieconsent/);
 	});
 
-	it("scopes Swiper shadow CSS in a module instead of a global stylesheet", () => {
+	it("scopes cookie consent dark theme to prefers-color-scheme: dark", () => {
+		const theme = read("vanilla-cookieconsent.css");
+
+		expect(theme).toContain("prefers-color-scheme: dark");
+		expect(theme).not.toMatch(/^:root\s*\{/);
+	});
+
+	it("loads Swiper CSS on the client instead of blocking the initial render", () => {
 		const stack = read("components/SketchplanationsStack.js");
 		const tagged = read("components/TaggedSketchplanations.js");
 		const stackCss = read("components/SketchplanationsStack.module.css");
+		const swiperStyles = read("helpers/loadSwiperStyles.js");
 
-		expect(stack).not.toContain('import "swiper.css"');
-		expect(tagged).not.toContain('import "swiper.css"');
+		expect(stack).toContain("loadSwiperStyles");
+		expect(tagged).toContain("loadSwiperStyles");
+		expect(stack).not.toContain("swiper/css");
+		expect(tagged).not.toContain("swiper/css");
+		expect(swiperStyles).toContain('import("swiper/css")');
 		expect(stackCss).toContain(":global(.swiper-slide-shadow)");
 	});
 
@@ -36,10 +52,11 @@ describe("mobile INP first-pass changes", () => {
 		expect(headerCss).toContain("prefers-reduced-motion");
 	});
 
-	it("does not load rough-notation in the global header, footer, or sketch CTAs", () => {
+	it("does not load rough-notation in the global header, footer, sketch CTAs, or title", () => {
 		expect(read("components/Navigation.js")).not.toContain("react-rough-notation");
 		expect(read("components/Footer.js")).not.toContain("react-rough-notation");
 		expect(read("components/SketchplanationCtas.js")).not.toContain("react-rough-notation");
+		expect(read("components/TextHeader.js")).not.toContain("react-rough-notation");
 		expect(read("components/Footer.js")).toContain("styles.feedbackLink");
 		expect(read("components/SketchplanationCtas.js")).toContain("ctaListen");
 	});
@@ -62,13 +79,19 @@ describe("mobile INP first-pass changes", () => {
 		expect(subscribe).toContain("placeholder");
 	});
 
-	it("avoids measuring the sketch image on scroll and keeps the lightbox unmounted until open", () => {
+	it("keeps the lightbox code-split and avoids sync layout reads on open", () => {
 		const image = read("components/SketchplanationImage.js");
+		const lightbox = read("components/SketchplanationLightbox.js");
 
 		expect(image).not.toContain("addEventListener(\"scroll\"");
 		expect(image).not.toContain("willChange");
-		expect(image).toContain("(isOpen || isOpening || isClosing) &&");
-		expect(image).toContain("getInitialImageDimensions()");
+		expect(image).not.toContain("framer-motion");
+		expect(image).toContain("ResizeObserver");
+		expect(image).toContain('import("components/SketchplanationLightbox")');
+		expect(image).toContain("runWhenIdle(() => track(\"lightbox_open\"");
+		expect(lightbox).toContain("max-width: 767px");
+		expect(lightbox).toContain("styles.mobileRoot");
+		expect(lightbox).not.toContain("framer-motion");
 	});
 
 	it("code-splits below-the-fold sketch carousels", () => {
@@ -76,6 +99,6 @@ describe("mobile INP first-pass changes", () => {
 
 		expect(page).toContain('dynamic(() => import("components/SketchplanationsStack")');
 		expect(page).toContain('dynamic(() => import("components/TaggedSketchplanations")');
-		expect(page).toContain("ssr: false");
+		expect(page.match(/ssr:\s*false/g)?.length).toBeGreaterThanOrEqual(2);
 	});
 });
