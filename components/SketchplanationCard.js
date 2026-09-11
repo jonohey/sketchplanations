@@ -17,10 +17,12 @@ const SketchplanationCard = ({
 	isLoading = false,
 }) => {
 	const rootClassName = classNames(styles.root, "group");
-	const { imgixParams, quality } = getPrismicImageOptimisation(
-		sketchplanation.data.image,
-		CARD_THUMB_IMGIX_PARAMS,
-	);
+	const { imgixParams, quality } = isLoading
+		? {}
+		: getPrismicImageOptimisation(
+				sketchplanation.data.image,
+				CARD_THUMB_IMGIX_PARAMS,
+			);
 
 	const content = (
 		<>
