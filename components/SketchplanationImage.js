@@ -12,6 +12,7 @@ import {
 } from "react";
 
 import Context from "context";
+import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
 import runWhenIdle from "helpers/runWhenIdle";
 import styles from "./SketchplanationImage.module.css";
 
@@ -103,9 +104,7 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 		return 1;
 	}, [isOpen, isOpening, isClosing, isLoading]);
 
-	const isJpg = image.url.match(/\.jpe?g($|[?&])/i);
-	const imgixParams = isJpg ? { auto: "format" } : undefined;
-	const quality = isJpg ? 95 : undefined;
+	const { imgixParams, quality } = getPrismicImageOptimisation(image);
 
 	const fallbackAlt = `${title} - Sketchplanations`;
 	const imageWithAlt = {
