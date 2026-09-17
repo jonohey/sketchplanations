@@ -1,22 +1,20 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { client } from "../services/prismic.mjs";
+import {
+	INITIAL_SEARCH_RESULT_COUNT,
+	newestSketchplanations,
+} from "./fetchBuildCatalog.mjs";
 
-async function buildInitialSearchResults() {
+export function initialSearchResultsFromCatalog({ sketchplanations }) {
+	return newestSketchplanations(sketchplanations, INITIAL_SEARCH_RESULT_COUNT);
+}
+
+function buildInitialSearchResults(catalog) {
 	console.time("[buildInitialSearchResults]");
 	console.log("[buildInitialSearchResults] Starting...");
 
-	const results = await client.getAllByType("sketchplanation", {
-		orderings: [
-			{
-				field: "my.sketchplanation.published_at",
-				direction: "desc",
-			},
-		],
-		limit: 20,
-	});
-
+	const results = initialSearchResultsFromCatalog(catalog);
 	const filePath = path.join(process.cwd(), "data/initial-search-results.json");
 	fs.writeFileSync(filePath, JSON.stringify(results));
 

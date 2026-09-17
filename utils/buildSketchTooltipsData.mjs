@@ -1,16 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
-import { client } from "../services/prismic.mjs";
 
-async function buildSketchTooltipsData() {
-	console.time("[buildSketchTooltipsData]");
-	console.log("[buildSketchTooltipsData] Starting...");
-
-	const sketchplanations = await client.getAllByType("sketchplanation", {
-		fetch: ["sketchplanation.uid", "sketchplanation.image"],
-	});
-
-	const data = sketchplanations
+export function sketchTooltipEntries(sketchplanations) {
+	return sketchplanations
 		.map(({ uid, data: { image } }) => {
 			try {
 				return { uid, image };
@@ -20,7 +12,13 @@ async function buildSketchTooltipsData() {
 			}
 		})
 		.filter(Boolean);
+}
 
+function buildSketchTooltipsData({ sketchplanations }) {
+	console.time("[buildSketchTooltipsData]");
+	console.log("[buildSketchTooltipsData] Starting...");
+
+	const data = sketchTooltipEntries(sketchplanations);
 	const filePath = path.join(process.cwd(), "data/sketch-tooltips-data.json");
 	fs.writeFileSync(filePath, JSON.stringify(data));
 
