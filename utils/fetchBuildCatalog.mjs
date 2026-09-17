@@ -1,20 +1,13 @@
 import { client } from "../services/prismic.mjs";
 
 /**
- * Field union for every prebuild consumer of the sketch catalog.
- * Document metadata (id, uid, last_publication_date, slugs) is always included.
+ * Full sketch and tag documents for prebuild. Skipping Prismic `fetch` keeps
+ * new CMS fields available to builders without another catalog change.
+ * Body and image dominate payload size; extra scalars are cheap.
  *
  * Used by: search index, books index, RSS, sitemap, tooltips, KV, newer set,
  * and initial search results.
  */
-export const BUILD_CATALOG_SKETCH_FIELDS = [
-	"sketchplanation.title",
-	"sketchplanation.body",
-	"sketchplanation.image",
-	"sketchplanation.tags",
-	"sketchplanation.published_at",
-];
-
 export const RSS_ITEM_COUNT = 20;
 export const INITIAL_SEARCH_RESULT_COUNT = 20;
 export const OLDEST_SKETCHES_EXCLUDED_FROM_NEWER = 365;
@@ -24,9 +17,7 @@ export async function fetchBuildCatalog() {
 	console.log("[fetchBuildCatalog] Starting...");
 
 	const [sketchplanations, tags] = await Promise.all([
-		client.getAllByType("sketchplanation", {
-			fetch: BUILD_CATALOG_SKETCH_FIELDS,
-		}),
+		client.getAllByType("sketchplanation"),
 		client.getAllByType("tag"),
 	]);
 

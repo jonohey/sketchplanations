@@ -7,7 +7,6 @@ import { searchIndexFromCatalog } from "../../utils/buildSearchIndex.mjs";
 import { sitemapDocumentUrls } from "../../utils/buildSitemap.mjs";
 import { sketchTooltipEntries } from "../../utils/buildSketchTooltipsData.mjs";
 import {
-	BUILD_CATALOG_SKETCH_FIELDS,
 	newerSketchplanationUids,
 	newestSketchplanations,
 	sketchplanationUids,
@@ -16,18 +15,6 @@ import {
 	sortTagsByIdentifier,
 } from "../../utils/fetchBuildCatalog.mjs";
 import { buildCatalog, buildCatalogSketches } from "../fixtures/build-catalog.js";
-
-describe("BUILD_CATALOG_SKETCH_FIELDS", () => {
-	it("includes the field union every prebuild consumer needs", () => {
-		expect(BUILD_CATALOG_SKETCH_FIELDS).toEqual([
-			"sketchplanation.title",
-			"sketchplanation.body",
-			"sketchplanation.image",
-			"sketchplanation.tags",
-			"sketchplanation.published_at",
-		]);
-	});
-});
 
 describe("catalog sorting", () => {
 	it("orders sketches by published_at descending", () => {
