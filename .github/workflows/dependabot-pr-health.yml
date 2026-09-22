@@ -1,0 +1,51 @@
+name: Dependabot PR health
+
+# Catches Dependabot PRs that never received CI (e.g. opened during a sibling auto-merge)
+# or remain conflicted after a nudge. Runs on a schedule and when a Dependabot PR merges.
+on:
+  schedule:
+    - cron: '0 9 * * 1-5'
+  pull_request:
+    types: [closed]
+
+jobs:
+  check-open-dependabot-prs:
+    if: |
+      github.event_name == 'schedule' ||
+      (github.event_name == 'pull_request' &&
+        github.event.pull_request.merged == true &&
+        github.event.pull_request.user.login == 'dependabot[bot]')
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      actions: write
+    env:
+      GH_REPO: ${{ github.repository }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Flag Dependabot PRs missing CI test check
+        run: |
+          set -euo pipefail
+
+          gh pr list --author "app/dependabot" --state open --json number,headRefOid,headRefName \
+            --jq '.[] | [.number, .headRefOid, .headRefName] | @tsv' | while IFS=$'\t' read -r pr sha branch; do
+            [ -n "$pr" ] || continue
+
+            test_conclusion="$(
+              gh api "repos/${GH_REPO}/commits/${sha}/check-runs" --paginate \
+                --jq '[.check_runs[] | select(.name == "test")] | last | .conclusion // empty'
+            )"
+
+            if [ -n "$test_conclusion" ]; then
+              echo "PR #$pr has test check: $test_conclusion"
+              continue
+            fi
+
+            echo "PR #$pr ($branch) has no test check on head $sha — re-dispatching CI"
+            gh workflow run ci.yml --ref "$branch"
+          done
+
+      - name: Nudge conflicted Dependabot PRs
+        run: bash .github/scripts/nudge-conflicted-dependabot-prs.sh

@@ -4,6 +4,7 @@ on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   test:
@@ -36,6 +37,8 @@ jobs:
       GH_REPO: ${{ github.repository }}
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      - uses: actions/checkout@v5
+
       - uses: dependabot/fetch-metadata@v2
         id: metadata
 
@@ -54,6 +57,12 @@ jobs:
         run: gh pr merge --auto --squash "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
+
+      - name: Nudge conflicted sibling Dependabot PRs
+        if: |
+          steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+          steps.metadata.outputs.update-type == 'version-update:semver-minor'
+        run: bash .github/scripts/nudge-conflicted-dependabot-prs.sh
 
       - name: Flag major updates for manual review
         if: steps.metadata.outputs.update-type == 'version-update:semver-major'

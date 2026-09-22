@@ -7,10 +7,19 @@ on:
   push:
     branches: [main]
   pull_request:
-    types: [opened, reopened]
+    types: [opened, reopened, synchronize, closed]
 
 jobs:
   nudge-rebase:
+    if: |
+      github.event_name == 'push' ||
+      (github.event_name == 'pull_request' &&
+        contains(fromJSON('["opened", "reopened", "synchronize"]'), github.event.action) &&
+        github.event.pull_request.user.login == 'dependabot[bot]') ||
+      (github.event_name == 'pull_request' &&
+        github.event.action == 'closed' &&
+        github.event.pull_request.merged == true &&
+        github.event.pull_request.user.login == 'dependabot[bot]')
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -18,47 +27,15 @@ jobs:
       GH_REPO: ${{ github.repository }}
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      - uses: actions/checkout@v5
+
       - name: Nudge conflicted Dependabot PRs
         run: |
           set -euo pipefail
 
-          nudge_pr() {
-            local pr="$1"
-            local mergeable merge_state
-
-            for _ in 1 2 3 4 5 6; do
-              merge_state="$(gh pr view "$pr" --json mergeStateStatus --jq '.mergeStateStatus')"
-              mergeable="$(gh pr view "$pr" --json mergeable --jq '.mergeable')"
-              if [ "$merge_state" != "UNKNOWN" ]; then
-                break
-              fi
-              sleep 10
-            done
-
-            if [ "$merge_state" != "DIRTY" ] && [ "$mergeable" != "CONFLICTING" ]; then
-              echo "PR #$pr is mergeable (state=$merge_state, mergeable=$mergeable); skipping"
-              return 0
-            fi
-
-            if gh pr view "$pr" --json comments --jq '.comments[].body' | grep -q 'dependabot-rebase-nudge'; then
-              echo "PR #$pr already nudged"
-              return 0
-            fi
-
-            gh pr comment "$pr" --body $'@dependabot rebase\n\n<!-- dependabot-rebase-nudge -->'
-            echo "Nudged PR #$pr to rebase"
-          }
-
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            if [ "${{ github.event.pull_request.user.login }}" != "dependabot[bot]" ]; then
-              echo "Not a Dependabot PR"
-              exit 0
-            fi
-            nudge_pr "${{ github.event.pull_request.number }}"
+          if [ "${{ github.event_name }}" = "pull_request" ] && [ "${{ github.event.action }}" != "closed" ]; then
+            bash .github/scripts/nudge-conflicted-dependabot-prs.sh --single "${{ github.event.pull_request.number }}"
             exit 0
           fi
 
-          gh pr list --author "app/dependabot" --state open --json number --jq '.[].number' | while read -r pr; do
-            [ -n "$pr" ] || continue
-            nudge_pr "$pr"
-          done
+          bash .github/scripts/nudge-conflicted-dependabot-prs.sh
