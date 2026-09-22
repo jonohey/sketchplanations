@@ -1,10 +1,10 @@
 name: Dependabot PR health
 
-# Catches Dependabot PRs that never received CI (e.g. opened during a sibling auto-merge)
-# or remain conflicted after a nudge. Runs on a schedule and when a Dependabot PR merges.
+# Safety net for the weekly Monday Dependabot batch: re-dispatch CI when a PR never
+# got a test check, and nudge conflicted PRs. Also runs when a Dependabot PR merges.
 on:
   schedule:
-    - cron: '0 9 * * 1-5'
+    - cron: '0 10 * * 1'
   pull_request:
     types: [closed]
 

@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # Comment @dependabot rebase on open Dependabot PRs that conflict with main.
-# Re-nudges when still conflicted after a previous nudge (Dependabot may not rebase immediately).
+# Bounded retries during the weekly batch: 15-minute dedupe and a cap per PR per week.
+# Further nudges come from sibling Dependabot merges (workflow re-runs this script).
 set -euo pipefail
 
 NUDGE_MARKER='dependabot-rebase-nudge'
-MIN_HOURS_BETWEEN_NUDGES="${MIN_HOURS_BETWEEN_NUDGES:-6}"
+MIN_MINUTES_BETWEEN_NUDGES="${MIN_MINUTES_BETWEEN_NUDGES:-15}"
+MAX_NUDGES_PER_WEEK="${MAX_NUDGES_PER_WEEK:-5}"
 
 nudge_pr() {
   local pr="$1"
@@ -24,26 +26,38 @@ nudge_pr() {
     return 0
   fi
 
-  local last_nudge_at
+  local week_ago nudges_this_week last_nudge_at
+  week_ago="$(date -u -d '7 days ago' +%Y-%m-%dT%H:%M:%SZ)"
+
+  nudges_this_week="$(
+    gh api "repos/${GH_REPO}/issues/${pr}/comments" --paginate \
+      --jq "[.[] | select(.body | contains(\"${NUDGE_MARKER}\")) | select(.created_at >= \"${week_ago}\")] | length"
+  )"
+
+  if [ "$nudges_this_week" -ge "$MAX_NUDGES_PER_WEEK" ]; then
+    echo "PR #$pr already has ${nudges_this_week} nudges this week (max ${MAX_NUDGES_PER_WEEK}); skipping"
+    return 0
+  fi
+
   last_nudge_at="$(
     gh api "repos/${GH_REPO}/issues/${pr}/comments" --paginate \
       --jq "[.[] | select(.body | contains(\"${NUDGE_MARKER}\"))] | last | .created_at // empty"
   )"
 
   if [ -n "$last_nudge_at" ]; then
-    local now last_epoch now_epoch hours_since
+    local now last_epoch now_epoch minutes_since
     now="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
     last_epoch="$(date -d "$last_nudge_at" +%s)"
     now_epoch="$(date -d "$now" +%s)"
-    hours_since=$(( (now_epoch - last_epoch) / 3600 ))
-    if [ "$hours_since" -lt "$MIN_HOURS_BETWEEN_NUDGES" ]; then
-      echo "PR #$pr nudged ${hours_since}h ago; skipping"
+    minutes_since=$(( (now_epoch - last_epoch) / 60 ))
+    if [ "$minutes_since" -lt "$MIN_MINUTES_BETWEEN_NUDGES" ]; then
+      echo "PR #$pr nudged ${minutes_since}m ago (min ${MIN_MINUTES_BETWEEN_NUDGES}m); skipping"
       return 0
     fi
   fi
 
   gh pr comment "$pr" --body $'@dependabot rebase\n\n<!-- dependabot-rebase-nudge -->'
-  echo "Nudged PR #$pr to rebase"
+  echo "Nudged PR #$pr to rebase (${nudges_this_week} prior nudges this week)"
 }
 
 if [ "${1:-}" = "--single" ]; then

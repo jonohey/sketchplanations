@@ -39,3 +39,28 @@ jobs:
           fi
 
           bash .github/scripts/nudge-conflicted-dependabot-prs.sh
+
+  # One follow-up pass after sibling merges — covers Dependabot not rebasing immediately.
+  nudge-retry-after-wait:
+    needs: nudge-rebase
+    if: |
+      (github.event_name == 'push') ||
+      (github.event_name == 'pull_request' &&
+        github.event.action == 'closed' &&
+        github.event.pull_request.merged == true &&
+        github.event.pull_request.user.login == 'dependabot[bot]')
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    env:
+      GH_REPO: ${{ github.repository }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      MIN_MINUTES_BETWEEN_NUDGES: '15'
+    steps:
+      - name: Wait before second nudge pass
+        run: sleep 900
+
+      - uses: actions/checkout@v5
+
+      - name: Nudge conflicted Dependabot PRs again
+        run: bash .github/scripts/nudge-conflicted-dependabot-prs.sh
