@@ -4,6 +4,7 @@ on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   test:
@@ -12,8 +13,6 @@ jobs:
       - uses: actions/checkout@v5
 
       - uses: pnpm/action-setup@v6
-        with:
-          version: 9
 
       - uses: actions/setup-node@v5
         with:
@@ -28,7 +27,7 @@ jobs:
 
   dependabot-auto-merge:
     needs: test
-    if: github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -38,6 +37,8 @@ jobs:
       GH_REPO: ${{ github.repository }}
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      - uses: actions/checkout@v5
+
       - uses: dependabot/fetch-metadata@v2
         id: metadata
 
@@ -57,6 +58,12 @@ jobs:
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
 
+      - name: Nudge conflicted sibling Dependabot PRs
+        if: |
+          steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+          steps.metadata.outputs.update-type == 'version-update:semver-minor'
+        run: bash .github/scripts/nudge-conflicted-dependabot-prs.sh
+
       - name: Flag major updates for manual review
         if: steps.metadata.outputs.update-type == 'version-update:semver-major'
         run: |
@@ -65,6 +72,9 @@ jobs:
               --description "Major dependency update requiring manual review" \
               --color "d93f0b"
           gh pr edit "$PR_URL" --add-label "breaking-change"
-          gh pr comment "$PR_URL" --body "Major version bump — needs manual review before merge."
+          COMMENT_BODY=$'Major version bump — needs manual review before merge.\n\n<!-- dependabot-major-review -->'
+          if ! gh pr view "$PR_URL" --json comments --jq '.comments[].body' | grep -q 'dependabot-major-review'; then
+            gh pr comment "$PR_URL" --body "$COMMENT_BODY"
+          fi
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}

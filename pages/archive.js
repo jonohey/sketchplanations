@@ -53,20 +53,9 @@ const Archive = ({ initialSketchplanations }) => {
 			<SketchplanationsGrid prismicDocs={sketchplanations} />
 			{hasMore && (
 				<div className="pt-8 pb-12 px-6 flex flex-col gap-4 items-center justify-center">
-					<div className="w-full max-w-96 flex flex-col gap-3 px-6 items-center justify-center">
-						<div className=" text-sm text-textSubdued">
-							Showing {sketchplanations.length} of{" "}
-							{initialSketchplanations.total_results_size} sketchplanations
-						</div>
-						<div className="w-full h-0.5 bg-bgDarker">
-							<div
-								className="h-full bg-white"
-								style={{
-									width: `${(sketchplanations.length / initialSketchplanations.total_results_size) * 100}%`,
-								}}
-							/>
-						</div>
-					</div>
+					<p className="text-sm text-textSubdued">
+						Showing {sketchplanations.length} sketchplanations
+					</p>
 					<button
 						type="button"
 						className="btn-primary w-full max-w-96"

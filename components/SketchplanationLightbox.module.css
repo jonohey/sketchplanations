@@ -1,0 +1,75 @@
+.mobileRoot {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.mobileRoot--active {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.mobileOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background-color: var(--color-overlay, rgba(0, 0, 0, 0.75));
+  opacity: 0;
+  transition: opacity 0.15s ease-out;
+}
+
+.mobileOverlay--visible {
+  opacity: 1;
+}
+
+.mobileModal {
+  position: fixed;
+  z-index: 20;
+  top: 1.5rem;
+  left: 0;
+  width: 100vw;
+  height: calc(var(--visual-viewport-height, 100vh) - 6rem);
+}
+
+.mobileClose {
+  position: fixed;
+  z-index: 30;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  transition: background-color 0.15s ease-out;
+}
+
+.mobileClose:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.mobileFooter {
+  position: fixed;
+  z-index: 20;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgba(0, 0, 0, 0.45);
+}

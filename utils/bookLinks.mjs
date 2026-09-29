@@ -357,18 +357,13 @@ export function findPotentialDuplicateBooks(books) {
 }
 
 /**
- * @param {import('@prismicio/client').Client} client
+ * @param {object[]} sketchplanations
  * @param {Record<string, object>} [overridesByTitle]
  */
-export async function fetchBooksFromPrismic(client, overridesByTitle = {}) {
-	const sketchplanations = await client.getAllByType("sketchplanation", {
-		fetch: [
-			"sketchplanation.title",
-			"sketchplanation.body",
-			"sketchplanation.uid",
-		],
-	});
-
+export function booksFromSketchplanations(
+	sketchplanations,
+	overridesByTitle = {},
+) {
 	const linkInstances = [];
 
 	for (const sketch of sketchplanations) {
@@ -384,4 +379,20 @@ export async function fetchBooksFromPrismic(client, overridesByTitle = {}) {
 	}
 
 	return buildBooksIndex(linkInstances, overridesByTitle);
+}
+
+/**
+ * @param {import('@prismicio/client').Client} client
+ * @param {Record<string, object>} [overridesByTitle]
+ */
+export async function fetchBooksFromPrismic(client, overridesByTitle = {}) {
+	const sketchplanations = await client.getAllByType("sketchplanation", {
+		fetch: [
+			"sketchplanation.title",
+			"sketchplanation.body",
+			"sketchplanation.uid",
+		],
+	});
+
+	return booksFromSketchplanations(sketchplanations, overridesByTitle);
 }

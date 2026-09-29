@@ -22,6 +22,12 @@
   @apply shadow-lg;
 }
 
+.placeholder {
+  @apply shadow-lg;
+  border: 1px solid #eee;
+  background: white;
+}
+
 @container (min-width: 300px) {
   .form {
     @apply flex-row;

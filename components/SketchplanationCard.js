@@ -2,7 +2,14 @@ import { PrismicNextImage } from "@prismicio/next";
 import classNames from "classnames";
 import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
+import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
 import styles from "./SketchplanationCard.module.css";
+
+const CARD_THUMB_IMGIX_PARAMS = {
+	fit: "crop",
+	crop: "top",
+	ar: "5:3",
+};
 
 const SketchplanationCard = ({
 	sketchplanation,
@@ -10,6 +17,12 @@ const SketchplanationCard = ({
 	isLoading = false,
 }) => {
 	const rootClassName = classNames(styles.root, "group");
+	const { imgixParams, quality } = isLoading
+		? {}
+		: getPrismicImageOptimisation(
+				sketchplanation.data.image,
+				CARD_THUMB_IMGIX_PARAMS,
+			);
 
 	const content = (
 		<>
@@ -36,15 +49,8 @@ const SketchplanationCard = ({
 						field={sketchplanation.data.image}
 						className={styles.image}
 						fill={true}
-						imgixParams={{
-							fit: "crop",
-							crop: "top",
-							ar: "5:3",
-							// dpr:
-							// 	typeof window !== "undefined"
-							// 		? window.devicePixelRatio || 2
-							// 		: 2,
-						}}
+						imgixParams={imgixParams}
+						quality={quality}
 						fallbackAlt=""
 						{...imageProps}
 					/>

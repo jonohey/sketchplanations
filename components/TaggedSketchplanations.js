@@ -1,4 +1,5 @@
 import { humanizeTag, isPresent } from "helpers";
+import { loadSwiperStyles } from "helpers/loadSwiperStyles";
 import { useEffect, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-aria-components";
 import { useInView } from "react-intersection-observer";
@@ -16,6 +17,10 @@ const TaggedSketchplanations = ({ tags, excludeUid }) => {
 		triggerOnce: true,
 		threshold: 0.1,
 	});
+
+	useEffect(() => {
+		loadSwiperStyles();
+	}, []);
 
 	useEffect(() => {
 		const fetchTaggedSketchplanations = async () => {

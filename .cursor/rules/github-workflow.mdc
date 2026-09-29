@@ -5,9 +5,20 @@ alwaysApply: true
 
 # GitHub workflow
 
+## Dependabot PRs — check before start-work
+
+When the user references an open Dependabot PR (URL, number, or dependency bump already in a `dependabot/` branch), **do not** run `./scripts/start-work.sh` or open a replacement PR for the same version change.
+
+1. Review the existing Dependabot PR (CI, preview deploy, diff).
+2. If checks are green and no repo-specific fix is needed, recommend merging that PR (major bumps included when only manual review is blocking).
+3. If fixes are needed, check out the Dependabot branch and push commits there.
+4. Only run `start-work.sh` when additional changes are required **beyond** the Dependabot diff (failing tests/builds, migrations, config fix-ups).
+
+See also `AGENTS.md` → “Dependabot PRs — do not duplicate”.
+
 ## Start work
 
-When the user wants to start new work (e.g. "Start work on …", "New ticket for …", "Let's do …"), bootstrap the ticket before coding.
+When the user wants to start new work (e.g. "Start work on …", "New ticket for …", "Let's do …"), bootstrap the ticket before coding — **except** for Dependabot PRs covered above.
 
 1. Run `./scripts/start-work.sh "Title" ["optional body"]` from the repo root.
    - The script syncs latest `main` (fetch + checkout + pull) **before** creating the branch.

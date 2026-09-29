@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { client } from "../services/prismic.mjs";
-import { fetchBooksFromPrismic } from "./bookLinks.mjs";
+import { booksFromSketchplanations } from "./bookLinks.mjs";
+import { fetchBuildCatalog } from "./fetchBuildCatalog.mjs";
 
 const OVERRIDES_PATH = path.join(process.cwd(), "data/books-overrides.json");
 const AUTHORS_PATH = path.join(process.cwd(), "data/books-authors.json");
@@ -57,7 +57,7 @@ function mergeMetadataOverrides(overridesByTitle, authorsByTitle, coversByTitle)
 	return merged;
 }
 
-async function buildBooksIndex() {
+function buildBooksIndex({ sketchplanations }) {
 	console.time("[buildBooksIndex]");
 	console.log("[buildBooksIndex] Starting...");
 
@@ -66,7 +66,7 @@ async function buildBooksIndex() {
 		loadAuthorsByTitle(),
 		loadCoversByTitle(),
 	);
-	const books = await fetchBooksFromPrismic(client, overridesByTitle);
+	const books = booksFromSketchplanations(sketchplanations, overridesByTitle);
 
 	const output = {
 		generatedAt: new Date().toISOString(),
@@ -83,8 +83,10 @@ async function buildBooksIndex() {
 export default buildBooksIndex;
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-	buildBooksIndex().catch((error) => {
-		console.error("[buildBooksIndex] Failed:", error);
-		process.exit(1);
-	});
+	fetchBuildCatalog()
+		.then((catalog) => buildBooksIndex(catalog))
+		.catch((error) => {
+			console.error("[buildBooksIndex] Failed:", error);
+			process.exit(1);
+		});
 }

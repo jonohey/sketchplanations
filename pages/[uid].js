@@ -9,9 +9,7 @@ import KeyboardShortcut from "components/KeyboardShortcut";
 import RichText from "components/RichText";
 import SketchplanationCtas from "components/SketchplanationCtas";
 import SketchplanationImage from "components/SketchplanationImage";
-import SketchplanationsStack from "components/SketchplanationsStack";
 import SubscribeInline from "components/SubscribeInline";
-import TaggedSketchplanations from "components/TaggedSketchplanations";
 import JsonLd from "components/JsonLd";
 import {
 	fastScrollToTop,
@@ -38,6 +36,12 @@ import { client } from "services/prismic";
 
 const TextHeader = dynamic(() => import("components/TextHeader"));
 const Modal = dynamic(() => import("components/Modal"));
+const SketchplanationsStack = dynamic(() => import("components/SketchplanationsStack"), {
+	ssr: false,
+});
+const TaggedSketchplanations = dynamic(() => import("components/TaggedSketchplanations"), {
+	ssr: false,
+});
 
 import LicenceContent from "components/LicenceContent";
 import styles from "./[uid].module.css";
@@ -333,30 +337,62 @@ const SketchplanationPage = ({
 												shortcut="←"
 												icon={<ArrowLeft size={14} strokeWidth={1.5} />}
 											/>
-											<FancyLink href={`/${newerUid}`}>
-												<span className="flex flex-row items-center gap-x-1">
+											{newerUid ? (
+												<FancyLink href={`/${newerUid}`}>
+													<span className="flex flex-row items-center gap-x-1">
+														<ChevronLeft
+															size={16}
+															className="pointerFine:hidden"
+														/>
+														Newer
+													</span>
+												</FancyLink>
+											) : (
+												<span
+													className="flex flex-row items-center gap-x-1 text-textSubdued"
+													aria-hidden="true"
+												>
 													<ChevronLeft
 														size={16}
 														className="pointerFine:hidden"
 													/>
 													Newer
 												</span>
-											</FancyLink>
+											)}
 										</div>
 										<div className="flex flex-row mx-auto items-center gap-x-2">
 											<KeyboardShortcut shortcut="R" />
-											<FancyLink href={`/${randomHandle}`}>Random</FancyLink>
+											{randomHandle ? (
+												<FancyLink href={`/${randomHandle}`}>Random</FancyLink>
+											) : (
+												<span className="text-textSubdued" aria-hidden="true">
+													Random
+												</span>
+											)}
 										</div>
 										<div className="flex flex-row items-center gap-x-2">
-											<FancyLink href={`/${olderUid}`}>
-												<span className="flex flex-row items-center gap-x-1">
+											{olderUid ? (
+												<FancyLink href={`/${olderUid}`}>
+													<span className="flex flex-row items-center gap-x-1">
+														Older
+														<ChevronRight
+															size={16}
+															className="pointerFine:hidden"
+														/>
+													</span>
+												</FancyLink>
+											) : (
+												<span
+													className="flex flex-row items-center gap-x-1 text-textSubdued"
+													aria-hidden="true"
+												>
 													Older
 													<ChevronRight
 														size={16}
 														className="pointerFine:hidden"
 													/>
 												</span>
-											</FancyLink>
+											)}
 											<KeyboardShortcut
 												shortcut="→"
 												icon={<ArrowRight size={14} strokeWidth={1.5} />}

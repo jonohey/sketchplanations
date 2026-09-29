@@ -1,6 +1,6 @@
 import classNames from "classnames";
-import { motion } from "framer-motion";
 import { Menu, Search } from "lucide-react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
@@ -9,7 +9,6 @@ import { RemoveScroll } from "react-remove-scroll";
 
 import styles from "./Header.module.css";
 
-import GradientBlur from "components/GradientBlur";
 import Navigation from "components/Navigation";
 import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
 
@@ -17,10 +16,13 @@ import Context from "context";
 import Cards from "./Cards";
 import KeyboardShortcut from "./KeyboardShortcut";
 
+const GradientBlur = dynamic(() => import("components/GradientBlur"));
+
 const Header = () => {
 	const router = useRouter();
 	const { decorationHidden } = useContext(Context);
 	const [isOpen, setIsOpen] = useState(false);
+	const [isDesktop, setIsDesktop] = useState(false);
 
 	const isSearchPage = router.pathname === "/search";
 
@@ -56,6 +58,14 @@ const Header = () => {
 		};
 	}, [router]);
 
+	useEffect(() => {
+		const mediaQuery = window.matchMedia("(min-width: 768px)");
+		const update = () => setIsDesktop(mediaQuery.matches);
+		update();
+		mediaQuery.addEventListener("change", update);
+		return () => mediaQuery.removeEventListener("change", update);
+	}, []);
+
 	const scrollToTop = () => {
 		window.scrollTo({
 			top: 0,
@@ -63,24 +73,14 @@ const Header = () => {
 		});
 	};
 
-	const variants = {
-		visible: {
-			y: 0,
-			transition: { duration: 0.1 },
-		},
-		hidden: {
-			y: "-100%",
-			transition: { duration: 0.3 },
-		},
-	};
-
 	return (
 		<RemoveScroll enabled={isOpen} className="sticky top-0 z-10">
-			<motion.div
-				variants={variants}
-				initial="visible"
-				animate={decorationHidden ? "hidden" : "visible"}
-				className={classNames(styles.root, isOpen && styles["root--is-open"])}
+			<div
+				className={classNames(
+					styles.root,
+					isOpen && styles["root--is-open"],
+					decorationHidden && styles["root--hidden"],
+				)}
 			>
 				<button
 					type="button"
@@ -146,10 +146,12 @@ const Header = () => {
 				<div className={styles.divider} />
 				<div className={styles["spacer-left"]} />
 				<div className={styles["spacer-right"]} />
-			</motion.div>
-			<div className="absolute w-full">
-				<GradientBlur height={1.5} easing="cubic-bezier(0.7, 0, 0.84, 0)" />
 			</div>
+			{isDesktop && (
+				<div className="absolute w-full">
+					<GradientBlur height={1.5} easing="cubic-bezier(0.7, 0, 0.84, 0)" />
+				</div>
+			)}
 		</RemoveScroll>
 	);
 };

@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 
 import { PrismicNextImage } from "@prismicio/next";
 import sketchTooltipsData from "data/sketch-tooltips-data.json";
+import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
 
 const SketchTooltip = ({ uid, children }) => {
 	const [isOpen, setIsOpen] = useState();
@@ -25,6 +26,14 @@ const SketchTooltip = ({ uid, children }) => {
 	const image = sketchTooltipsData.find(({ uid: dataUid }) => dataUid === uid);
 
 	if (!uid || !image) return null;
+
+	const { imgixParams, quality } = getPrismicImageOptimisation(image.image, {
+		fit: "crop",
+		crop: "top",
+		ar: "5:3",
+		dpr:
+			typeof window !== "undefined" ? window.devicePixelRatio || 2 : 2,
+	});
 
 	const { refs, context, floatingStyles } = useFloating({
 		open: isOpen,
@@ -126,15 +135,8 @@ const SketchTooltip = ({ uid, children }) => {
 											className="w-full h-full"
 											width="10rem"
 											height="10rem"
-											imgixParams={{
-												fit: "crop",
-												crop: "top",
-												ar: "5:3",
-												dpr:
-													typeof window !== "undefined"
-														? window.devicePixelRatio || 2
-														: 2,
-											}}
+											imgixParams={imgixParams}
+											quality={quality}
 											alt={image.alt}
 											fallbackAlt=""
 											sizes="10rem"

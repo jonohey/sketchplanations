@@ -1,6 +1,7 @@
 import * as prismicH from "@prismicio/helpers";
+import { loadSwiperStyles } from "helpers/loadSwiperStyles";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Shiitake from "shiitake";
 import { EffectCards } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,8 +9,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./SketchplanationsStack.module.css";
 
 import { isBlank } from "helpers";
-import "swiper/css";
-import "swiper/css/effect-cards";
 import SketchplanationCard from "./SketchplanationCard";
 
 const SketchplanationsStack = ({
@@ -22,6 +21,10 @@ const SketchplanationsStack = ({
 	const [currentSketchplanation, setCurrentSketchplanation] = useState(
 		sketchplanations[0],
 	);
+
+	useEffect(() => {
+		loadSwiperStyles({ effectCards: true });
+	}, []);
 
 	const handleSlideChange = (swiper) => {
 		setCurrentSlide(swiper.activeIndex);

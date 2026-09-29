@@ -8,9 +8,16 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import FancyLink from "components/FancyLink";
 import HomeFeaturedSketch from "components/HomeFeaturedSketch";
 import { humanizePublishedDate } from "helpers";
+import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
 import styles from "./HomeCategoryCarousel.module.css";
 
 const SCROLL_DEBOUNCE_MS = 220;
+
+const CAROUSEL_THUMB_IMGIX_PARAMS = {
+	fit: "crop",
+	crop: "top",
+	ar: "1:1",
+};
 
 function useCarouselScrollTracking(categoryLabel, scrollRef) {
 	const reportedRef = useRef(false);
@@ -261,6 +268,10 @@ function HomeCategoryCarouselRow({
 				>
 					{sketches.map((sketch, index) => {
 						const sketchHref = `/${sketch.uid}`;
+						const { imgixParams, quality } = getPrismicImageOptimisation(
+							sketch.image,
+							CAROUSEL_THUMB_IMGIX_PARAMS,
+						);
 						const prefetchOnIntent = prefetchCards
 							? undefined
 							: () => router.prefetch(sketchHref);
@@ -295,11 +306,8 @@ function HomeCategoryCarouselRow({
 													: "lazy"
 										}
 										fetchPriority={deferMount ? "low" : undefined}
-										imgixParams={{
-											fit: "crop",
-											crop: "top",
-											ar: "1:1",
-										}}
+										imgixParams={imgixParams}
+										quality={quality}
 										fallbackAlt=""
 									/>
 								</span>

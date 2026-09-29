@@ -1,0 +1,66 @@
+name: Nudge Dependabot rebase
+
+# Weekly Dependabot opens several PRs from the same snapshot. When one auto-merges
+# (often dev-dependencies), siblings can land with a stale pnpm-lock.yaml and never
+# get CI until someone rebases. Comment @dependabot rebase on conflicted PRs.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+jobs:
+  nudge-rebase:
+    if: |
+      github.event_name == 'push' ||
+      (github.event_name == 'pull_request' &&
+        contains(fromJSON('["opened", "reopened", "synchronize"]'), github.event.action) &&
+        github.event.pull_request.user.login == 'dependabot[bot]') ||
+      (github.event_name == 'pull_request' &&
+        github.event.action == 'closed' &&
+        github.event.pull_request.merged == true &&
+        github.event.pull_request.user.login == 'dependabot[bot]')
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    env:
+      GH_REPO: ${{ github.repository }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Nudge conflicted Dependabot PRs
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" = "pull_request" ] && [ "${{ github.event.action }}" != "closed" ]; then
+            bash .github/scripts/nudge-conflicted-dependabot-prs.sh --single "${{ github.event.pull_request.number }}"
+            exit 0
+          fi
+
+          bash .github/scripts/nudge-conflicted-dependabot-prs.sh
+
+  # One follow-up pass after sibling merges — covers Dependabot not rebasing immediately.
+  nudge-retry-after-wait:
+    needs: nudge-rebase
+    if: |
+      (github.event_name == 'push') ||
+      (github.event_name == 'pull_request' &&
+        github.event.action == 'closed' &&
+        github.event.pull_request.merged == true &&
+        github.event.pull_request.user.login == 'dependabot[bot]')
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    env:
+      GH_REPO: ${{ github.repository }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      MIN_MINUTES_BETWEEN_NUDGES: '15'
+    steps:
+      - name: Wait before second nudge pass
+        run: sleep 900
+
+      - uses: actions/checkout@v5
+
+      - name: Nudge conflicted Dependabot PRs again
+        run: bash .github/scripts/nudge-conflicted-dependabot-prs.sh

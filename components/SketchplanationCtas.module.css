@@ -17,6 +17,11 @@
   @apply text-blue dark:text-blueLight font-semibold flex items-center gap-x-1;
 }
 
+.ctaListen {
+  box-shadow: inset 0 0 0 1.5px var(--color-brightRed);
+  border-radius: 4px;
+}
+
 .ctaLightbox {
   @apply text-white dark:text-white;
 }

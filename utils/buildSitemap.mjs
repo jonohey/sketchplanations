@@ -2,33 +2,50 @@ import { globby } from "globby";
 import fs from "node:fs";
 import { create } from "xmlbuilder2";
 
-import { client } from "../services/prismic.mjs";
+import {
+	sortDocsByLastPublicationDateAsc,
+	sortTagsByIdentifier,
+} from "./fetchBuildCatalog.mjs";
 
-async function buildSitemap() {
+export function sitemapDocumentUrls({ sketchplanations, tags }) {
+	const orderedSketches = sortDocsByLastPublicationDateAsc(sketchplanations);
+	const lastSketchPubDate = new Date(
+		orderedSketches[orderedSketches.length - 1].last_publication_date,
+	);
+
+	const urls = [];
+
+	urls.push({
+		loc: "https://sketchplanations.com/",
+		changefreq: "weekly",
+		lastmod: lastSketchPubDate.toISOString(),
+		priority: "1.00",
+	});
+
+	for (const sketchplanation of orderedSketches) {
+		urls.push({
+			loc: `https://sketchplanations.com/${sketchplanation.uid}`,
+			lastmod: new Date(sketchplanation.last_publication_date).toISOString(),
+			priority: "0.80",
+		});
+	}
+
+	for (const tag of sortTagsByIdentifier(tags)) {
+		urls.push({
+			loc: `https://sketchplanations.com/categories/${tag.uid}`,
+			lastmod: new Date(tag.last_publication_date).toISOString(),
+			priority: "0.64",
+		});
+	}
+
+	return urls;
+}
+
+async function buildSitemap(catalog) {
 	console.time("[buildSitemap]");
 	console.log("[buildSitemap] Starting...");
 
-	const sketchplanations = await client.getAllByType("sketchplanation", {
-		fetch: "sketchplanation.uid",
-		orderings: [
-			{
-				field: "document.last_publication_date",
-			},
-		],
-	});
-
-	const tags = await client.getAllByType("tag", {
-		fetch: "tag.identifier",
-		orderings: [
-			{
-				field: "my.tag.identifier",
-			},
-		],
-	});
-
-	const lastSketchPubDate = new Date(
-		sketchplanations[sketchplanations.length - 1].last_publication_date,
-	);
+	const urls = sitemapDocumentUrls(catalog);
 
 	const pages = await globby([
 		"pages/**/*.js",
@@ -44,40 +61,10 @@ async function buildSitemap() {
 		"!pages/api/**/*.js",
 	]);
 
-	const urls = [];
-
-	// Home page
-	urls.push({
-		loc: "https://sketchplanations.com/",
-		changefreq: "weekly",
-		lastmod: lastSketchPubDate.toISOString(),
-		priority: "1.00",
-	});
-
-	// Sketchplanations
-	sketchplanations.map((sketchplanation) => {
-		urls.push({
-			loc: `https://sketchplanations.com/${sketchplanation.uid}`,
-			lastmod: new Date(sketchplanation.last_publication_date).toISOString(),
-			priority: "0.80",
-		});
-	});
-
-	// Categories
-	tags.map((tag) => {
-		urls.push({
-			loc: `https://sketchplanations.com/categories/${tag.uid}`,
-			lastmod: new Date(tag.last_publication_date).toISOString(),
-			priority: "0.64",
-		});
-	});
-
-	// Pages
-	pages.map((page) => {
+	for (const page of pages) {
 		const path = page.replace("pages", "").replace(".js", "");
-		let priority = "0.64"; // Default priority
+		let priority = "0.64";
 
-		// Set specific priorities for certain pages
 		if (path === "/about") {
 			priority = "0.8";
 		} else if (path === "/big-ideas-little-pictures") {
@@ -102,7 +89,7 @@ async function buildSitemap() {
 			loc: `https://sketchplanations.com${path}`,
 			priority: priority,
 		});
-	});
+	}
 
 	const obj = {
 		urlset: {

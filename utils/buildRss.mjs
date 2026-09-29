@@ -2,7 +2,10 @@ import * as prismicH from "@prismicio/helpers";
 import fs from "node:fs";
 import { create } from "xmlbuilder2";
 
-import { client } from "../services/prismic.mjs";
+import {
+	RSS_ITEM_COUNT,
+	newestSketchplanations,
+} from "./fetchBuildCatalog.mjs";
 
 const pubDate = (date) => {
 	const dateObj = new Date(date);
@@ -22,28 +25,8 @@ const pubDate = (date) => {
 	return parts.join(" ");
 };
 
-async function buildRss() {
-	console.time("[buildRss]");
-	console.log("[buildRss] Starting...");
-
-	const sketchplanations = await client.getByType("sketchplanation", {
-		fetch: [
-			"sketchplanation.uid",
-			"sketchplanation.title",
-			"sketchplanation.image",
-			"sketchplanation.body",
-			"sketchplanation.published_at",
-		],
-		orderings: [
-			{
-				field: "my.sketchplanation.published_at",
-				direction: "desc",
-			},
-		],
-		pageSize: 20
-	});
-
-	const items = sketchplanations.results.map(
+export function rssItemsFromCatalog({ sketchplanations }) {
+	return newestSketchplanations(sketchplanations, RSS_ITEM_COUNT).map(
 		({
 			uid,
 			data: {
@@ -54,7 +37,7 @@ async function buildRss() {
 			},
 		}) => {
 			const url = `https://sketchplanations.com/${uid}`;
-			const escapedImageUrl = image_url.replace(/&/g, '&amp;');
+			const escapedImageUrl = image_url.replace(/&/g, "&amp;");
 			const html = `<img src="${escapedImageUrl}&amp;w=798" />${prismicH.asHTML(body)}`;
 
 			return {
@@ -63,11 +46,18 @@ async function buildRss() {
 				pubDate: pubDate(published_at),
 				link: url,
 				description: {
-					$: html
+					$: html,
 				},
 			};
 		},
 	);
+}
+
+function buildRss(catalog) {
+	console.time("[buildRss]");
+	console.log("[buildRss] Starting...");
+
+	const items = rssItemsFromCatalog(catalog);
 
 	const obj = {
 		rss: {
