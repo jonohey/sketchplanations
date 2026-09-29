@@ -847,6 +847,13 @@ const About = ({ siteUrl }) => {
 						</p>
 
 						<p>
+							You can find more about my music at{" "}
+							<FancyLink href="https://jonohey.com/music" target="_blank" rel="noopener noreferrer">
+								jonohey.com/music
+							</FancyLink>
+						</p>
+
+						<p>
 							Do you play piano? You can{" "}
 							<FancyLink
 								href="https://pzpzck-rt.myshopify.com/" 

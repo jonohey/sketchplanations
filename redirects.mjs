@@ -66,7 +66,7 @@ export default [
 	},
 	{
 		source: "/music",
-		destination: "https://linktr.ee/sketchplanations",
+		destination: "https://jonohey.com/music",
 		permanent: false,
 	},
 	{
