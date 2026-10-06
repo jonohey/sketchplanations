@@ -13,20 +13,44 @@ const COPIES = [0, 1, 2];
 const LOOP_SETTLE_MS = 120;
 const SHARE_FORM_URL = "https://forms.gle/eozBb25xsRnd6jDx7";
 
-const ReaderQuotes = ({ heading = "What people say" }) => {
+const DEFAULT_ICON = {
+	src: "/images/explainer-kit/sketch-icons/Singing.svg",
+	width: 348,
+	height: 575,
+};
+const DEFAULT_INVITE = {
+	href: SHARE_FORM_URL,
+	label: "Like Sketchplanations? Add your own comment →",
+};
+const SOURCE_LABELS = {
+	amazon: "Amazon reviewer",
+	goodreads: "Goodreads reviewer",
+};
+
+// Quotes with a `source` (and optional `rating`) get a credit line, for
+// reviews from public sites. Pass `invite={null}` to drop the invite link.
+const ReaderQuotes = ({
+	quotes = READER_QUOTES,
+	heading = "What people say",
+	id = "reader-quotes",
+	icon = DEFAULT_ICON,
+	invite = DEFAULT_INVITE,
+	analyticsPrefix = "reader_quotes",
+	className = "",
+}) => {
 	const scrollRef = useRef(null);
 	const settleRef = useRef(null);
 	const scrollTrackedRef = useRef(false);
 	const [columns, setColumns] = useState(() =>
-		arrangeReaderQuotes(READER_QUOTES, seededRandom(1)),
+		arrangeReaderQuotes(quotes, seededRandom(1)),
 	);
 	const [ready, setReady] = useState(false);
 
 	// Shuffle after hydration so the server render stays stable.
 	useEffect(() => {
-		setColumns(arrangeReaderQuotes(READER_QUOTES));
+		setColumns(arrangeReaderQuotes(quotes));
 		setReady(true);
-	}, []);
+	}, [quotes]);
 
 	const measureSet = useCallback(() => {
 		const el = scrollRef.current;
@@ -72,7 +96,7 @@ const ReaderQuotes = ({ heading = "What people say" }) => {
 		settleRef.current = setTimeout(loopIfNeeded, LOOP_SETTLE_MS);
 		if (ready && !scrollTrackedRef.current) {
 			scrollTrackedRef.current = true;
-			track("reader_quotes_scroll");
+			track(`${analyticsPrefix}_scroll`);
 		}
 	};
 
@@ -87,20 +111,20 @@ const ReaderQuotes = ({ heading = "What people say" }) => {
 
 	return (
 		<section
-			className={styles.section}
-			aria-labelledby="reader-quotes-heading"
-			id="reader-quotes"
+			className={`${styles.section} ${className}`}
+			aria-labelledby={`${id}-heading`}
+			id={id}
 		>
 			<div className={styles.header}>
 				<img
-					src="/images/explainer-kit/sketch-icons/Singing.svg"
+					src={icon.src}
 					alt=""
-					width={348}
-					height={575}
+					width={icon.width}
+					height={icon.height}
 					loading="lazy"
 					className={styles.icon}
 				/>
-				<h2 id="reader-quotes-heading" className={styles.heading}>
+				<h2 id={`${id}-heading`} className={styles.heading}>
 					{heading}
 				</h2>
 			</div>
@@ -130,6 +154,20 @@ const ReaderQuotes = ({ heading = "What people say" }) => {
 										}
 									>
 										<p>{quote.quote}</p>
+										{quote.source && (
+											<footer className={styles.credit}>
+												{quote.rating && (
+													<span
+														className={styles.stars}
+														role="img"
+														aria-label={`${quote.rating} out of 5 stars`}
+													>
+														{"★".repeat(quote.rating)}
+													</span>
+												)}
+												{SOURCE_LABELS[quote.source] ?? quote.source}
+											</footer>
+										)}
 									</blockquote>
 								))}
 							</div>
@@ -145,16 +183,18 @@ const ReaderQuotes = ({ heading = "What people say" }) => {
 					<ChevronRight size={18} strokeWidth={2} />
 				</button>
 			</div>
-			<p className={styles.invite}>
-				<a
-					href={SHARE_FORM_URL}
-					target="_blank"
-					rel="noopener noreferrer"
-					onClick={() => track("reader_quotes_share_click")}
-				>
-					Like Sketchplanations? Add your own comment →
-				</a>
-			</p>
+			{invite && (
+				<p className={styles.invite}>
+					<a
+						href={invite.href}
+						target="_blank"
+						rel="noopener noreferrer"
+						onClick={() => track(`${analyticsPrefix}_share_click`)}
+					>
+						{invite.label}
+					</a>
+				</p>
+			)}
 		</section>
 	);
 };
