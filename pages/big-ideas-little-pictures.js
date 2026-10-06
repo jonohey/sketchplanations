@@ -19,9 +19,9 @@ import styles from './big-ideas-little-pictures.module.css'
 const AMAZON_LINK = 'https://geni.us/big-ideas-book'
 
 const BOOK_REVIEWS_ICON = {
-  src: '/images/explainer-kit/sketch-icons/Lightbulb partial.svg',
-  width: 265,
-  height: 280,
+  src: '/images/explainer-kit/sketch-icons/Book stack.svg',
+  width: 385,
+  height: 432,
 }
 
 // Non-Amazon retailers by region, sorted by click volume within each region

@@ -3,6 +3,7 @@ import {
 	arrangeReaderQuotes,
 	seededRandom,
 } from "../../helpers/pickReaderQuotes";
+import { BOOK_REVIEWS } from "../../helpers/bookReviews";
 import { READER_QUOTES } from "../../helpers/readerQuotes";
 
 describe("READER_QUOTES", () => {
@@ -16,6 +17,19 @@ describe("READER_QUOTES", () => {
 
 	it("contains no email addresses", () => {
 		expect(JSON.stringify(READER_QUOTES)).not.toMatch(/\S+@\S+\.\S+/);
+	});
+});
+
+describe("BOOK_REVIEWS", () => {
+	it("has unique ids, a short quote, a source and a rating for each", () => {
+		const ids = BOOK_REVIEWS.map((review) => review.id);
+		expect(new Set(ids).size).toBe(ids.length);
+		for (const review of BOOK_REVIEWS) {
+			expect(review.quote.length, review.id).toBeGreaterThan(0);
+			expect(review.quote.length, review.id).toBeLessThanOrEqual(200);
+			expect(["amazon", "goodreads"]).toContain(review.source);
+			expect([1, 2, 3, 4, 5]).toContain(review.rating);
+		}
 	});
 });
 
