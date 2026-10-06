@@ -11,6 +11,7 @@ import styles from "./ReaderQuotes.module.css";
 // exactly one set, which looks identical.
 const COPIES = [0, 1, 2];
 const LOOP_SETTLE_MS = 120;
+const SHARE_FORM_URL = "https://forms.gle/eozBb25xsRnd6jDx7";
 
 const ReaderQuotes = ({ heading = "What people say" }) => {
 	const scrollRef = useRef(null);
@@ -144,6 +145,16 @@ const ReaderQuotes = ({ heading = "What people say" }) => {
 					<ChevronRight size={18} strokeWidth={2} />
 				</button>
 			</div>
+			<p className={styles.invite}>
+				<a
+					href={SHARE_FORM_URL}
+					target="_blank"
+					rel="noopener noreferrer"
+					onClick={() => track("reader_quotes_share_click")}
+				>
+					Like Sketchplanations? Add your own comment →
+				</a>
+			</p>
 		</section>
 	);
 };

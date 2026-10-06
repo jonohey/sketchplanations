@@ -84,6 +84,14 @@
   }
 }
 
+.invite {
+  @apply m-0 mt-1 px-4 text-center text-xs sm:text-sm text-textSubdued;
+
+  & a {
+    @apply text-inherit no-underline hover:underline hover:text-text;
+  }
+}
+
 .arrow {
   @apply hidden md:flex absolute z-10 items-center justify-center w-8 h-8 rounded-full border border-border bg-bg text-text shadow-sm hover:bg-bgHighlight transition-opacity duration-200;
 
@@ -114,7 +122,8 @@
     background: hsl(0, 0%, 41%);
   }
 
-  .heading {
+  .heading,
+  .invite {
     @apply text-white;
   }
 
