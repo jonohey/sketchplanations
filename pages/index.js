@@ -4,6 +4,7 @@ import Head from "next/head";
 
 import FancyLink from "components/FancyLink";
 import HomeCategoryCarousels from "components/HomeCategoryCarousel";
+import ReaderQuotes from "components/ReaderQuotes";
 import { HOME_CAROUSEL_CATEGORIES } from "helpers/homeCarouselCategories";
 import { getTagDocumentBySlug } from "helpers/getTagDocumentBySlug";
 import dynamic from "next/dynamic";
@@ -143,13 +144,15 @@ const Home = ({ carouselRows }) => {
 
 			<SubscribeFull />
 
+			<ReaderQuotes />
+
 			<section className={styles.section} aria-label="About information" id="about-strip">
 				<div className="prose max-w-2xl mx-auto mb-12">
 					<h2>Hi, I&apos;m Jono 👋</h2>
 					<p>
 						I&apos;m an author and illustrator creating one of the world&apos;s largest libraries of hand-drawn sketches that make complex ideas easy to understand.
 					</p>
-					<p>
+					<p className="hidden sm:block">
 						Sketchplanations have been shared millions of times and are used in books, articles, classrooms and presentations around the world. Explore nearly 1,000 sketches explaining ideas from psychology and science to business and everyday life.
 					</p>
 				</div>
