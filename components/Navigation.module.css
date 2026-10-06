@@ -47,3 +47,7 @@
 .external-link-icon {
   @apply text-textSubdued;
 }
+
+.item--mobile-only {
+  @apply md:hidden;
+}
