@@ -731,7 +731,7 @@ const Book = ({ country }) => {
           <div className='not-prose relative left-1/2 w-screen -translate-x-1/2 mt-16'>
             <ReaderQuotes
               quotes={BOOK_REVIEWS}
-              heading='Some kind words from readers'
+              heading='Some nice things people have said'
               id='from-readers'
               icon={BOOK_REVIEWS_ICON}
               invite={null}

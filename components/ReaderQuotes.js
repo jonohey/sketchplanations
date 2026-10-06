@@ -173,11 +173,6 @@ const ReaderQuotes = ({
 														target="_blank"
 														rel="noopener noreferrer"
 														tabIndex={copy !== 1 ? -1 : undefined}
-														onClick={() =>
-															track(`${analyticsPrefix}_source_click`, {
-																source: quote.source,
-															})
-														}
 													>
 														{SOURCE_LABELS[quote.source] ?? quote.source}
 													</a>
