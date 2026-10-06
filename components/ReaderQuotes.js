@@ -17,6 +17,7 @@ const ReaderQuotes = ({ heading = "What people say" }) => {
 	const scrollRef = useRef(null);
 	const settleRef = useRef(null);
 	const scrollTrackedRef = useRef(false);
+	const userIntentRef = useRef(false);
 	const [columns, setColumns] = useState(() =>
 		arrangeReaderQuotes(READER_QUOTES, seededRandom(1)),
 	);
@@ -67,10 +68,20 @@ const ReaderQuotes = ({ heading = "What people say" }) => {
 		}
 	};
 
+	// Our own scrolling (centring on load, looping) also fires scroll events,
+	// so only count a scroll once the reader has touched, swiped or clicked.
+	const markUserIntent = () => {
+		userIntentRef.current = true;
+	};
+
+	const onWheel = (event) => {
+		if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) markUserIntent();
+	};
+
 	const onScroll = () => {
 		clearTimeout(settleRef.current);
 		settleRef.current = setTimeout(loopIfNeeded, LOOP_SETTLE_MS);
-		if (ready && !scrollTrackedRef.current) {
+		if (userIntentRef.current && !scrollTrackedRef.current) {
 			scrollTrackedRef.current = true;
 			track("reader_quotes_scroll");
 		}
@@ -79,6 +90,7 @@ const ReaderQuotes = ({ heading = "What people say" }) => {
 	const scrollByDirection = (direction) => {
 		const el = scrollRef.current;
 		if (!el) return;
+		markUserIntent();
 		el.scrollBy({
 			left: Math.round(el.clientWidth * 0.6) * direction,
 			behavior: "smooth",
@@ -113,7 +125,13 @@ const ReaderQuotes = ({ heading = "What people say" }) => {
 				>
 					<ChevronLeft size={18} strokeWidth={2} />
 				</button>
-				<div ref={scrollRef} className={styles.track} onScroll={onScroll}>
+				<div
+					ref={scrollRef}
+					className={styles.track}
+					onScroll={onScroll}
+					onPointerDown={markUserIntent}
+					onWheel={onWheel}
+				>
 					{COPIES.map((copy) =>
 						columns.map((column, index) => (
 							<div
@@ -150,7 +168,7 @@ const ReaderQuotes = ({ heading = "What people say" }) => {
 					href={SHARE_FORM_URL}
 					target="_blank"
 					rel="noopener noreferrer"
-					onClick={() => track("reader_quotes_share_click")}
+					onClick={() => track("reader_quotes_submit")}
 				>
 					Like Sketchplanations? Add your own comment →
 				</a>
