@@ -72,7 +72,7 @@ jobs:
               --description "Major dependency update requiring manual review" \
               --color "d93f0b"
           gh pr edit "$PR_URL" --add-label "breaking-change"
-          COMMENT_BODY=$'Major version bump — needs manual review before merge.\n\n<!-- dependabot-major-review -->'
+          COMMENT_BODY=$'Major version bump — needs manual review before merge.\n\nA maintainer or Cloud Agent should post a full review checklist on this PR (see AGENTS.md → Dependabot major version bumps). That comment should include `<!-- dependabot-major-review-checklist -->`.\n\n<!-- dependabot-major-review -->'
           if ! gh pr view "$PR_URL" --json comments --jq '.comments[].body' | grep -q 'dependabot-major-review'; then
             gh pr comment "$PR_URL" --body "$COMMENT_BODY"
           fi

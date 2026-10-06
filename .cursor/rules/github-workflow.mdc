@@ -16,6 +16,17 @@ When the user references an open Dependabot PR (URL, number, or dependency bump 
 
 See also `AGENTS.md` → “Dependabot PRs — do not duplicate”.
 
+## Dependabot major version bumps
+
+When an open Dependabot PR is semver-**major** (label `breaking-change`), CI will not auto-merge. **Cloud Agents should complete a major-bump review** before the maintainer merges:
+
+1. Check out the Dependabot branch (never duplicate the bump on a new issue branch).
+2. Read the changelog for changes that affect **this repo’s usage** (grep the codebase).
+3. Run `pnpm test` and `pnpm build` on the branch; push **small fixes** to the same branch if required.
+4. Post a PR comment with checklist marker `<!-- dependabot-major-review-checklist -->`: risk summary, any commits pushed, and **specific preview URLs/interactions** to verify.
+
+Full steps and comment structure: `AGENTS.md` → “Dependabot major version bumps — review before merge”. Do not merge unless the user explicitly asks.
+
 ## Start work
 
 When the user wants to start new work (e.g. "Start work on …", "New ticket for …", "Let's do …"), bootstrap the ticket before coding — **except** for Dependabot PRs covered above.
