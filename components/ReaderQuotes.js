@@ -28,13 +28,15 @@ const SOURCE_LABELS = {
 };
 
 // Quotes with a `source` (and optional `rating`) get a credit line, for
-// reviews from public sites. Pass `invite={null}` to drop the invite link.
+// reviews from public sites; `sourceLinks` maps a source to the page the
+// credit links to. Pass `invite={null}` to drop the invite link.
 const ReaderQuotes = ({
 	quotes = READER_QUOTES,
 	heading = "What people say",
 	id = "reader-quotes",
 	icon = DEFAULT_ICON,
 	invite = DEFAULT_INVITE,
+	sourceLinks = {},
 	analyticsPrefix = "reader_quotes",
 	className = "",
 }) => {
@@ -165,7 +167,23 @@ const ReaderQuotes = ({
 														{"★".repeat(quote.rating)}
 													</span>
 												)}
-												{SOURCE_LABELS[quote.source] ?? quote.source}
+												{sourceLinks[quote.source] ? (
+													<a
+														href={sourceLinks[quote.source]}
+														target="_blank"
+														rel="noopener noreferrer"
+														tabIndex={copy !== 1 ? -1 : undefined}
+														onClick={() =>
+															track(`${analyticsPrefix}_source_click`, {
+																source: quote.source,
+															})
+														}
+													>
+														{SOURCE_LABELS[quote.source] ?? quote.source}
+													</a>
+												) : (
+													(SOURCE_LABELS[quote.source] ?? quote.source)
+												)}
 											</footer>
 										)}
 									</blockquote>

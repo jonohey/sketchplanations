@@ -17,6 +17,7 @@ import { bookPageImages } from 'utils/bookImages.mjs'
 import styles from './big-ideas-little-pictures.module.css'
 
 const AMAZON_LINK = 'https://geni.us/big-ideas-book'
+const GOODREADS_LINK = 'https://www.goodreads.com/book/show/127280527-big-ideas-little-pictures'
 
 const BOOK_REVIEWS_ICON = {
   src: '/images/explainer-kit/sketch-icons/Book stack.svg',
@@ -730,10 +731,11 @@ const Book = ({ country }) => {
           <div className='not-prose relative left-1/2 w-screen -translate-x-1/2 mt-16'>
             <ReaderQuotes
               quotes={BOOK_REVIEWS}
-              heading='From readers'
+              heading='Some kind words from readers'
               id='from-readers'
               icon={BOOK_REVIEWS_ICON}
               invite={null}
+              sourceLinks={{ amazon: AMAZON_LINK, goodreads: GOODREADS_LINK }}
               analyticsPrefix='book_reviews'
               className='!mt-0'
             />

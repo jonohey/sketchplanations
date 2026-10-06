@@ -72,6 +72,10 @@
   @apply flex flex-wrap items-center gap-x-2 mt-auto pt-2 text-xs text-textSubdued;
 }
 
+.credit a {
+  @apply text-inherit no-underline hover:underline;
+}
+
 .stars {
   @apply tracking-wider text-red;
 }
