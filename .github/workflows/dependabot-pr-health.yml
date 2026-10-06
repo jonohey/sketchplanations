@@ -1,7 +1,7 @@
 name: Dependabot PR health
 
 # Safety net for the weekly Monday Dependabot batch: re-dispatch CI when a PR never
-# got a test check or the latest test failed (e.g. Turbopack/next/font flake), and
+# got a test check or the latest test failed, and
 # nudge conflicted PRs. Also runs when a Dependabot PR merges.
 on:
   schedule:
