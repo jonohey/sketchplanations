@@ -16,7 +16,7 @@
 		"predev": "node setup.mjs",
 		"dev": "next dev",
 		"prebuild": "node setup.mjs",
-		"build": "next build",
+		"build": "next build || (rm -rf .next && next build)",
 		"start": "next start",
 		"test": "vitest run",
 		"build:books": "node utils/buildBooksIndex.mjs",
