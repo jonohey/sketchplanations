@@ -1,10 +1,13 @@
 name: Dependabot PR health
 
 # Safety net for the weekly Monday Dependabot batch: re-dispatch CI when a PR never
-# got a test check, and nudge conflicted PRs. Also runs when a Dependabot PR merges.
+# got a test check or the latest test failed (e.g. Turbopack/next/font flake), and
+# nudge conflicted PRs. Also runs when a Dependabot PR merges.
 on:
   schedule:
-    - cron: '0 10 * * 1'
+    # After the usual Monday ~18:00 UTC Dependabot batch (and Tuesday follow-up).
+    - cron: '0 20 * * 1'
+    - cron: '0 10 * * 2'
   pull_request:
     types: [closed]
 
@@ -38,13 +41,18 @@ jobs:
                 --jq '[.check_runs[] | select(.name == "test")] | last | .conclusion // empty'
             )"
 
-            if [ -n "$test_conclusion" ]; then
-              echo "PR #$pr has test check: $test_conclusion"
+            if [ -z "$test_conclusion" ]; then
+              echo "PR #$pr ($branch) has no test check on head $sha — re-dispatching CI"
+              gh workflow run ci.yml --ref "$branch"
               continue
             fi
 
-            echo "PR #$pr ($branch) has no test check on head $sha — re-dispatching CI"
-            gh workflow run ci.yml --ref "$branch"
+            echo "PR #$pr has test check: $test_conclusion"
+
+            if [ "$test_conclusion" = "failure" ]; then
+              echo "PR #$pr ($branch) test failed on $sha — re-dispatching CI once"
+              gh workflow run ci.yml --ref "$branch"
+            fi
           done
 
       - name: Nudge conflicted Dependabot PRs
