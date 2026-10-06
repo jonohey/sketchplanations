@@ -1,7 +1,16 @@
 .root {
-  --lr-width: 11rem;
   --min-search-toggle-width: 3rem;
   --spacer-width: 0;
+  --lr-width: 9rem;
+
+  @media (max-width: 359px) {
+    --lr-width: 7rem;
+    --min-search-toggle-width: 2.5rem;
+  }
+
+  @media (min-width: 480px) {
+    --lr-width: 11rem;
+  }
 
   @screen sm {
     --lr-width: 11rem;
@@ -18,15 +27,15 @@
     --min-search-toggle-width: 5rem;
   }
 
-  @apply grid gap-x-4;
+  @apply grid gap-x-2 sm:gap-x-4;
   background-color: var(--color-bgTransparent);
   backdrop-filter: saturate(180%) blur(5px);
   transition: transform 0.1s linear;
   grid-template-areas:
-    'spacer-left menu ident search-toggle spacer-right'
-    'divider divider divider divider divider'
-    'navigation navigation navigation navigation navigation';
-  grid-template-columns: min-content 24px auto var(--min-search-toggle-width) min-content;
+    'spacer-left menu ident search-toggle subscribe spacer-right'
+    'divider divider divider divider divider divider'
+    'navigation navigation navigation navigation navigation navigation';
+  grid-template-columns: min-content 24px auto var(--min-search-toggle-width) min-content min-content;
   grid-template-rows: auto 1px 1fr;
 }
 
@@ -57,9 +66,9 @@
     /* @apply gap-x-6 sticky top-0 items-center justify-between z-50; */
     @apply gap-x-4 items-center justify-between z-50;
     grid-template-areas:
-      'spacer-left ident navigation search-toggle spacer-right'
-      'divider divider divider divider divider';
-    grid-template-columns: min-content var(--lr-width) 1fr minmax(var(--min-search-toggle-width), var(--lr-width)) min-content;
+      'spacer-left ident navigation search-toggle subscribe spacer-right'
+      'divider divider divider divider divider divider';
+    grid-template-columns: min-content var(--lr-width) 1fr minmax(var(--min-search-toggle-width), var(--lr-width)) min-content min-content;
     grid-template-rows: auto 1px;
   }
 }
@@ -83,6 +92,30 @@
 
 .cards {
   @apply md:hidden px-5 py-8;
+}
+
+.subscribe-button {
+  @apply self-center whitespace-nowrap text-sm font-normal px-3 py-2 rounded-full;
+  grid-area: subscribe;
+}
+
+@screen sm {
+  .subscribe-button {
+    @apply text-base px-4;
+  }
+}
+
+@screen md {
+  .subscribe-button {
+    margin-left: -0.5rem;
+  }
+}
+
+@screen lg {
+  .subscribe-button {
+    @apply px-5;
+    margin-left: -0.75rem;
+  }
 }
 
 .divider {
@@ -114,7 +147,7 @@
 
 @screen lg {
   .search-toggle-button {
-    @apply mx-auto py-3 px-6 gap-x-2;
+    @apply relative h-10 py-0 pl-4 pr-10 gap-x-2 w-auto min-w-36;
   }
 }
 
@@ -137,12 +170,22 @@
 
 @screen lg {
   .search-toggle-button__icon {
-    height: 28px;
+    height: 24px;
   }
 }
 
 .search-toggle-button__text {
   @apply text-textSubdued select-none overflow-hidden text-ellipsis whitespace-nowrap pr-1;
+}
+
+.search-toggle-button__shortcut {
+  @apply hidden lg:flex absolute right-2 top-1/2 -translate-y-1/2 transition-opacity duration-150;
+  opacity: 0;
+}
+
+.search-toggle-button:hover .search-toggle-button__shortcut,
+.search-toggle-button:focus-visible .search-toggle-button__shortcut {
+  opacity: 1;
 }
 
 .search-toggle-button__keyboard-shortcut {
@@ -163,13 +206,18 @@
 
 @screen lg {
   .search-toggle-button__text {
-    @apply text-lg;
+    @apply text-base;
   }
 }
 
 @container (max-width: 191px) {
   .search-toggle-button {
-    width: var(--min-search-toggle-width);
+    @apply bg-transparent border-transparent rounded-none;
+    @apply w-auto px-2;
+  }
+
+  .search-toggle-button__icon {
+    @apply text-text;
   }
 
   .search-toggle-button__text {

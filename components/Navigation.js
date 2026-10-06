@@ -46,10 +46,8 @@ const Navigation = () => {
 				Book!
 			</Link>
 			<a
-				href="https://sketchplanations.substack.com/subscribe"
-				target="_blank"
-				rel="noopener noreferrer"
-				className={styles.item}
+				href="/subscribe"
+				className={classNames(styles.item, styles["item--mobile-only"])}
 				onClick={() => {
 					track('Subscribe', { location: 'header' });
 				}}

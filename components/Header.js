@@ -7,6 +7,8 @@ import { useContext, useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { RemoveScroll } from "react-remove-scroll";
 
+import { track } from "@vercel/analytics";
+
 import styles from "./Header.module.css";
 
 import Navigation from "components/Navigation";
@@ -126,12 +128,23 @@ const Header = () => {
 								<Search strokeWidth={1} size={22} />
 							</span>
 							<span className={styles["search-toggle-button__text"]}>
-								Search…
+								Search
 							</span>
-							<KeyboardShortcut shortcut="F" />
+							<span className={styles["search-toggle-button__shortcut"]}>
+								<KeyboardShortcut shortcut="F" />
+							</span>
 						</button>
 					)}
 				</div>
+				<a
+					href="/subscribe"
+					className={classNames("btn-primary", styles["subscribe-button"])}
+					onClick={() => {
+						track("Subscribe", { location: "header-button" });
+					}}
+				>
+					Subscribe
+				</a>
 				<div
 					className={classNames(
 						styles.navigation,
