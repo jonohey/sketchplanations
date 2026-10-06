@@ -15,6 +15,34 @@ When one exists:
 
 Only run `start-work.sh` when the task needs work **beyond** the Dependabot diff (failing tests, migrations, lockfile fix-ups the automation did not apply, etc.).
 
+## Dependabot major version bumps — review before merge
+
+CI auto-merge **skips** semver-major Dependabot PRs (see `dependabot-auto-merge` in `.github/workflows/ci.yml`). Cloud Agents and maintainers should still treat them as first-class work: review the bump, fix small breakages on the Dependabot branch, and leave a PR comment the maintainer can use before merging.
+
+**Do not** open a replacement PR for the same version. Check out the Dependabot branch and push commits there if code changes are needed.
+
+### Workflow
+
+1. **Identify** open Dependabot PRs with the `breaking-change` label or `version-update:semver-major` (Dependabot PR body / `dependabot/fetch-metadata`).
+2. **Changelog** — Read the release notes in the PR and the upstream changelog. Focus on sections that match **how this repo uses** the package (grep imports and API usage), not the whole library.
+3. **Risk** — State likelihood of problems: none / low / medium / high, with one or two sentences on why (e.g. “we only use `motion.create` and `AnimatePresence`; v14 removed internal shims we never imported”).
+4. **Code** — Run `pnpm install --frozen-lockfile`, `pnpm test`, and `pnpm build` on the Dependabot branch. If something fails, apply the **smallest** fix on that branch and push.
+5. **Preview** — Use the Vercel preview URL from the PR. List **concrete URLs and interactions** to spot-check (not “click around the site”).
+6. **Comment** — Post a single checklist comment on the PR via `gh pr comment`, including the marker `<!-- dependabot-major-review-checklist -->` so it is distinct from CI’s stub `<!-- dependabot-major-review -->`. Structure:
+
+   - **Summary** — version jump and one-line verdict (e.g. “Low risk; no code changes”).
+   - **Changelog (relevant)** — bullet points tied to this codebase.
+   - **Changes on this branch** — “None” or list commits you pushed.
+   - **Automated checks** — test/build result on the branch.
+   - **Please verify on preview** — numbered list: URL path, device (desktop/mobile if it matters), action (open lightbox, dismiss modal, etc.).
+   - **Merge** — remind that auto-merge will not run; maintainer merges when checks + preview look good.
+
+Do not merge the PR unless the user explicitly asks you to.
+
+### Example areas (framer-motion)
+
+Motion is used in `Modal`, `SketchplanationLightboxDesktop`, `ImageGallery`, and `SketchTooltip` (`motion.create`, `AnimatePresence`, `useReducedMotion`). Major bumps: exercise modal/lightbox open-close, gallery swipe, tooltip show/hide, and “Reduce motion” / prefers-reduced-motion if animations changed.
+
 ## Dependabot and pnpm lockfiles
 
 Weekly Dependabot PRs can fail CI and Vercel with:
