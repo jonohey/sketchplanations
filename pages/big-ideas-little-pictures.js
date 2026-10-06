@@ -2,7 +2,9 @@ import { track } from '@vercel/analytics'
 import FancyLink from 'components/FancyLink'
 import ImageGallery from 'components/ImageGallery'
 import JsonLd from 'components/JsonLd'
+import ReaderQuotes from 'components/ReaderQuotes'
 import { pageTitle } from 'helpers'
+import { BOOK_REVIEWS } from 'helpers/bookReviews'
 import { buildBookProductGraph } from 'helpers/structuredData'
 import bigIdeasLittlePicturesCoverTransparentImage from 'images/big-ideas-little-pictures-cover-transparent.png'
 import { ZoomIn } from 'lucide-react'
@@ -15,6 +17,13 @@ import { bookPageImages } from 'utils/bookImages.mjs'
 import styles from './big-ideas-little-pictures.module.css'
 
 const AMAZON_LINK = 'https://geni.us/big-ideas-book'
+const GOODREADS_LINK = 'https://www.goodreads.com/book/show/127280527-big-ideas-little-pictures'
+
+const BOOK_REVIEWS_ICON = {
+  src: '/images/explainer-kit/sketch-icons/Book stack.svg',
+  width: 385,
+  height: 432,
+}
 
 // Non-Amazon retailers by region, sorted by click volume within each region
 const regionalStores = {
@@ -716,6 +725,20 @@ const Book = ({ country }) => {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Full-bleed so the row and its dark-mode backdrop span the page */}
+          <div className='not-prose relative left-1/2 w-screen -translate-x-1/2 mt-16'>
+            <ReaderQuotes
+              quotes={BOOK_REVIEWS}
+              heading='Some nice things people have said'
+              id='from-readers'
+              icon={BOOK_REVIEWS_ICON}
+              invite={null}
+              sourceLinks={{ amazon: AMAZON_LINK, goodreads: GOODREADS_LINK }}
+              analyticsPrefix='book_reviews'
+              className='!mt-0'
+            />
           </div>
 
           <div id='faq' className='mt-24 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8'>
