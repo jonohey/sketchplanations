@@ -16,7 +16,7 @@
 	margin: 0;
 	background: #fbf6dc;
 	cursor: pointer;
-	filter: brightness(0.93);
+	filter: brightness(0.98);
 	/* Soft, slightly blue-tinted lift, as on the reader quote cards */
 	box-shadow:
 		0 0 0 1px hsla(240, 30%, 28%, 0.05),
