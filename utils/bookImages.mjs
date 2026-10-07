@@ -54,6 +54,9 @@ const featuredFilenames = [
   'big-ideas-book-spread-How-to-win-at-Monopoly.png',
   'big-ideas-book-spread-Solar-system-sizes.png',
   'big-ideas-book-spread-Awkwardness-Vortex.png',
+  'big-ideas-book-spread-Tsundoku.png',
+  'big-ideas-book-spread-Days-of-the-week.png',
+  'big-ideas-book-spread-Starting-a-company.png',
 ];
 
 // Create an array of image objects with metadata
