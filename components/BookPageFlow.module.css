@@ -6,11 +6,16 @@
 	user-select: none;
 }
 
-.page {
+.slot {
 	position: absolute;
-	top: 48px;
+	top: 80px;
 	left: 0;
+}
+
+.page {
 	display: block;
+	width: 100%;
+	height: 100%;
 	padding: 0;
 	border: 0;
 	margin: 0;
@@ -23,6 +28,20 @@
 		0 8px 20px -6px hsla(240, 30%, 28%, 0.14),
 		/* The page casts a little shade onto the next one along */
 		10px 0 16px -6px hsla(240, 30%, 28%, 0.26);
+	transition: transform 0.2s ease-out;
+}
+
+/* Pop up so the page's header clears the page covering it */
+@media (hover: hover) {
+	.slot:hover .page {
+		transform: translateY(-72px);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.page {
+		transition: none;
+	}
 }
 
 @media (prefers-color-scheme: dark) {
