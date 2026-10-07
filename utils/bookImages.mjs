@@ -81,4 +81,17 @@ export const bookPageImages = featuredFilenames.map(name =>
   allBookPageImages.find(image => image.filename === name)
 );
 
+// Everything except the two table-of-contents photos (they're shot on a table and
+// don't match the other spreads), curated spreads first. Used for the page stack.
+const excludedFromStack = new Set([
+  'big-ideas-book-spread-1-table-of-contents.jpg',
+  'big-ideas-book-spread-2-table-of-contents.jpg',
+]);
+
+const stackable = allBookPageImages.filter((image) => !excludedFromStack.has(image.filename));
+export const stackBookPageImages = [
+  ...bookPageImages.filter((image) => !excludedFromStack.has(image.filename)),
+  ...stackable.filter((image) => !featuredFilenames.includes(image.filename)),
+];
+
 export default bookPageImages;

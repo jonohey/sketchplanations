@@ -14,7 +14,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { bookPageImages } from 'utils/bookImages.mjs'
+import { stackBookPageImages } from 'utils/bookImages.mjs'
 import styles from './big-ideas-little-pictures.module.css'
 
 const AMAZON_LINK = 'https://geni.us/big-ideas-book'
@@ -386,7 +386,7 @@ const Book = ({ country }) => {
 
           <div id='sample-pages' className='not-prose relative left-1/2 w-screen -translate-x-1/2 mt-16 scroll-mt-24' style={{ overflowX: 'clip' }}>
             <BookPageFlow
-              images={bookPageImages}
+              images={stackBookPageImages}
               onOpen={(index) => {
                 setGalleryIndex(index)
                 setGalleryOpen(true)
@@ -821,7 +821,7 @@ const Book = ({ country }) => {
 
       {/* Image Gallery Modal */}
       <ImageGallery
-        images={bookPageImages}
+        images={stackBookPageImages}
         initialIndex={galleryIndex}
         isOpen={galleryOpen}
         onClose={() => setGalleryOpen(false)}
