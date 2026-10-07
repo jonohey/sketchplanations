@@ -1,49 +1,65 @@
 .root {
 	--page-height: 12rem;
-	--step: 6.5rem;
+	--open: 5fr;
+	--angle: 22deg;
+	max-width: 72rem;
+	margin: 0 auto;
+	padding: 0 1rem;
 	outline-offset: 4px;
-	touch-action: pan-y;
 	user-select: none;
 }
 
 @media (min-width: 768px) {
 	.root {
 		--page-height: 19rem;
-		--step: 11rem;
+		--open: 6fr;
 	}
 }
 
 .stage {
-	position: relative;
-	height: calc(var(--page-height) + 3rem);
-	padding-top: 1.5rem;
-	perspective: 1400px;
-	perspective-origin: 50% 40%;
+	display: grid;
+	gap: 0.35rem;
+	height: var(--page-height);
+	margin: 1.5rem 0;
+	transition: grid-template-columns 0.5s cubic-bezier(0.22, 0.8, 0.3, 1);
 }
 
 .page {
-	position: absolute;
-	top: 1.5rem;
-	left: 50%;
+	position: relative;
 	display: block;
+	min-width: 0;
 	padding: 0;
 	border: 0;
+	overflow: hidden;
+	border-radius: 0.375rem;
 	background: none;
-	transition: transform 0.5s cubic-bezier(0.22, 0.8, 0.3, 1), filter 0.5s, opacity 0.4s;
+	cursor: pointer;
+	box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+	transform: perspective(900px) rotateY(var(--angle));
+	transform-origin: center;
+	filter: brightness(0.92);
+	transition: filter 0.4s;
 }
 
+.pageActive {
+	cursor: zoom-in;
+	filter: none;
+}
+
+/* Anchored right so collapsed slices show the visual side, not the text */
 .image {
 	display: block;
-	height: var(--page-height);
-	width: auto;
+	width: 100%;
+	height: 100%;
 	margin: 0;
-	border-radius: 0.375rem;
-	box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+	object-fit: cover;
+	object-position: right center;
 	pointer-events: none;
 	-webkit-user-drag: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
+	.stage,
 	.page {
 		transition: none;
 	}
