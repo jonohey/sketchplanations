@@ -2,8 +2,8 @@ import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import styles from './BookPageFlow.module.css'
 
-const ANGLE = -24 // negative: right (visual) side comes forward, left (text) side recedes
-const PERSPECTIVE = 1100
+const ANGLE = -30 // negative: right (visual) side comes forward, left (text) side recedes
+const PERSPECTIVE = 1000
 // The gallery holds every spread; the stack just needs enough to look like plenty
 const MAX_STACKED = 9
 
@@ -32,7 +32,7 @@ const BookPageFlow = ({ images, onOpen }) => {
   const open = width * 0.5
   // The first page sits partly off the left of the screen (its text side is the least
   // interesting bit), which leaves more room to show each of the pages that follow
-  const startLeft = -Math.round(width * 0.4)
+  const startLeft = -Math.round(width * 0.5)
   // Run the fan out to roughly the right-hand edge of the screen
   const step = Math.max(14, (vw * 1.05 - startLeft - width - open) / (n - 1))
 
