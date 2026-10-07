@@ -9,6 +9,7 @@ import { buildBookProductGraph } from 'helpers/structuredData'
 import bigIdeasLittlePicturesCoverImage from 'images/big-ideas-little-pictures-book-cover.jpg'
 import Book3D from 'components/Book3D'
 import BookPageFlow from 'components/BookPageFlow'
+import FlickThroughVideo from 'components/FlickThroughVideo'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -795,15 +796,11 @@ const Book = ({ country }) => {
           </div>
 
           <div id='preview-video' className='mt-24 max-w-3xl mx-auto scroll-mt-24'>
-            <iframe
-              src='https://www.youtube.com/embed/dQqP6aBLHYc?si=oogeEYEXru3cs53s&controls=0&rel=0'
-              title='Big Ideas Little Pictures — flick through promo'
-              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-              referrerPolicy='strict-origin-when-cross-origin'
-              allowFullScreen
-              loading='lazy'
-              className='block w-full rounded-lg m-0'
-              style={{ aspectRatio: '16 / 9', height: 'auto' }}
+            <FlickThroughVideo
+              src='/videos/big-ideas-flick-through.mp4'
+              poster='/videos/big-ideas-flick-through-poster.jpg'
+              title='Flicking through Big Ideas Little Pictures'
+              fallbackHref='https://www.youtube.com/watch?v=dQqP6aBLHYc'
             />
           </div>
 
