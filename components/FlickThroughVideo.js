@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 const REPLAY_DELAY_MS = 3000
 
 // Silent promo that plays when scrolled into view, rests on its last frame, then replays.
-const FlickThroughVideo = ({ src, poster, title, fallbackHref }) => {
+const FlickThroughVideo = ({ src, poster, title }) => {
   const videoRef = useRef(null)
   const timerRef = useRef(null)
   const inView = useRef(false)
@@ -95,13 +95,6 @@ const FlickThroughVideo = ({ src, poster, title, fallbackHref }) => {
           <Icon size={20} aria-hidden='true' />
         </button>
       </div>
-      {fallbackHref && (
-        <p className='text-center text-sm text-gray-600 dark:text-gray-300 mt-3 mb-0'>
-          <a href={fallbackHref} target='_blank' rel='noopener noreferrer' className='text-blue hover:underline'>
-            Watch on YouTube
-          </a>
-        </p>
-      )}
     </div>
   )
 }

@@ -384,15 +384,12 @@ const Book = ({ country }) => {
             ))}
           </ul>
 
-          <div id='sample-pages' className='not-prose relative left-1/2 w-screen -translate-x-1/2 mt-16 scroll-mt-24' style={{ overflowX: 'clip' }}>
-            <BookPageFlow
-              images={stackBookPageImages}
-              onOpen={(index) => {
-                setGalleryIndex(index)
-                setGalleryOpen(true)
-              }}
+          <div id='preview-video' className='mt-16 max-w-3xl mx-auto scroll-mt-24'>
+            <FlickThroughVideo
+              src='/videos/big-ideas-flick-through.mp4'
+              poster='/videos/big-ideas-flick-through-poster.jpg'
+              title='Flicking through Big Ideas Little Pictures'
             />
-            <p className='text-center text-sm text-gray-600 dark:text-gray-300 mt-0 mb-0'>Sample pages</p>
           </div>
 
           <div id='order' className='mt-24 max-w-3xl mx-auto scroll-mt-24'>
@@ -582,7 +579,18 @@ const Book = ({ country }) => {
 
           </div>
 
-          <div id='praise' className='mt-24 max-w-5xl mx-auto scroll-mt-24'>
+          <div id='sample-pages' className='not-prose relative left-1/2 w-screen -translate-x-1/2 mt-24 scroll-mt-24' style={{ overflowX: 'clip' }}>
+            <BookPageFlow
+              images={stackBookPageImages}
+              onOpen={(index) => {
+                setGalleryIndex(index)
+                setGalleryOpen(true)
+              }}
+            />
+            <p className='text-center text-sm text-gray-600 dark:text-gray-300 mt-0 mb-0'>Sample pages</p>
+          </div>
+
+          <div id='praise' className='mt-16 max-w-5xl mx-auto scroll-mt-24'>
             <h2 className='text-3xl font-bold mb-12 text-center'>Praise for Big Ideas Little Pictures</h2>
 
             <div className='grid grid-cols-1 md:grid-cols-3 gap-6 not-prose'>
@@ -796,16 +804,7 @@ const Book = ({ country }) => {
             </div>
           </div>
 
-          <div id='preview-video' className='mt-24 max-w-3xl mx-auto scroll-mt-24'>
-            <FlickThroughVideo
-              src='/videos/big-ideas-flick-through.mp4'
-              poster='/videos/big-ideas-flick-through-poster.jpg'
-              title='Flicking through Big Ideas Little Pictures'
-              fallbackHref='https://www.youtube.com/watch?v=dQqP6aBLHYc'
-            />
-          </div>
-
-          <div className='mt-12 text-center'>
+          <div className='mt-24 text-center'>
             <a
               href='#order'
               onClick={(e) => {
