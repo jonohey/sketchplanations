@@ -1,0 +1,130 @@
+.root {
+	--book-w: 280px;
+	--book-t: 38px;
+	position: relative;
+	width: calc(var(--book-w) + var(--book-t));
+	height: var(--book-w);
+	perspective: 1400px;
+	margin: 0 auto;
+	flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+	.root {
+		--book-w: 340px;
+		--book-t: 46px;
+	}
+}
+
+.body {
+	position: absolute;
+	top: 0;
+	left: calc(var(--book-t) * 0.7);
+	width: var(--book-w);
+	height: var(--book-w);
+	transform-style: preserve-3d;
+	transform: rotateY(36deg);
+	transition: transform 0.6s ease;
+}
+
+.root:hover .body,
+.root:focus-within .body {
+	transform: rotateY(20deg);
+}
+
+.front {
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	border-radius: 0 3px 3px 0;
+	transform: translateZ(calc(var(--book-t) / 2));
+}
+
+.cover {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	margin: 0;
+}
+
+/* Hinge crease and a soft sheen */
+.sheen {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: linear-gradient(
+		90deg,
+		rgba(0, 0, 0, 0.28) 0,
+		rgba(255, 255, 255, 0.12) 2.5%,
+		transparent 7%,
+		transparent 70%,
+		rgba(255, 255, 255, 0.06) 100%
+	);
+}
+
+.spine {
+	position: absolute;
+	top: 0;
+	left: calc((var(--book-w) - var(--book-t)) / 2);
+	width: var(--book-t);
+	height: var(--book-w);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 1.5rem;
+	padding-bottom: 1.25rem;
+	writing-mode: vertical-rl;
+	background: linear-gradient(90deg, #e6dcc0, #f5eed9 45%, #ebe2c8);
+	color: #b1262b;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 9px;
+	letter-spacing: 0.08em;
+	transform: rotateY(-90deg) translateZ(calc(var(--book-w) / 2));
+}
+
+.spineTitle {
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+}
+
+.pages {
+	position: absolute;
+	top: 2px;
+	left: calc((var(--book-w) - var(--book-t) + 2px) / 2);
+	width: calc(var(--book-t) - 2px);
+	height: calc(var(--book-w) - 4px);
+	background: repeating-linear-gradient(
+		90deg,
+		#f4f1ea 0,
+		#f4f1ea 1px,
+		#d9d4c8 1px,
+		#d9d4c8 2px
+	);
+	transform: rotateY(90deg) translateZ(calc(var(--book-w) / 2 - 2px));
+}
+
+.back {
+	position: absolute;
+	inset: 0;
+	border-radius: 0 3px 3px 0;
+	background: #f3ecd6;
+	transform: rotateY(180deg) translateZ(calc(var(--book-t) / 2));
+}
+
+/* Shadow on the "table" */
+.shadow {
+	position: absolute;
+	bottom: -0.75rem;
+	left: 10%;
+	width: 85%;
+	height: 1.5rem;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.45);
+	filter: blur(14px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.body {
+		transition: none;
+	}
+}
