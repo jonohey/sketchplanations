@@ -1,4 +1,7 @@
 .root {
+	/* Room above the pages. Only devices with hover can pop a page up, so only they need
+	   some; a fully lifted page may overlap the margin above the stack a little. */
+	--headroom: 24px;
 	position: relative;
 	overflow-x: clip;
 	overflow-y: visible;
@@ -8,7 +11,7 @@
 
 .slot {
 	position: absolute;
-	top: 116px;
+	top: var(--headroom);
 	left: 0;
 }
 
@@ -33,8 +36,12 @@
 
 /* Pop up so the page's header clears the page covering it */
 @media (hover: hover) {
+	.root {
+		--headroom: 80px;
+	}
+
 	.slot:hover .page {
-		transform: translateY(-108px);
+		transform: translateY(-162px);
 	}
 }
 

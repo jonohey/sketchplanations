@@ -38,7 +38,7 @@ const BookPageFlow = ({ images, onOpen }) => {
   const step = Math.max(14, (vw * 1.05 - startLeft - width - open) / (n - 1))
 
   return (
-    <div ref={rootRef} className={styles.root} style={{ height: height + 164 }} role='group' aria-label='Sample pages from the book'>
+    <div ref={rootRef} className={styles.root} style={{ height: `calc(${height}px + var(--headroom) + 48px)` }} role='group' aria-label='Sample pages from the book'>
       {stacked.map((image, index) => (
         // The slot holds the position and lean and never moves, so the hover area is stable
         // while the page inside it pops up
