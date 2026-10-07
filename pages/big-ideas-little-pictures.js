@@ -6,7 +6,8 @@ import ReaderQuotes from 'components/ReaderQuotes'
 import { pageTitle } from 'helpers'
 import { BOOK_REVIEWS } from 'helpers/bookReviews'
 import { buildBookProductGraph } from 'helpers/structuredData'
-import bigIdeasLittlePicturesCoverTransparentImage from 'images/big-ideas-little-pictures-cover-transparent.png'
+import bigIdeasLittlePicturesCoverImage from 'images/big-ideas-little-pictures-book-cover.jpg'
+import Book3D from 'components/Book3D'
 import { ZoomIn } from 'lucide-react'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -197,18 +198,13 @@ const Book = ({ country }) => {
           <div id='hero' className='flex flex-col md:flex-row items-center gap-8 md:gap-12'>
             <div className='w-full md:w-1/2'>
               <div className='text-center'>
-                <Image
-                  src={bigIdeasLittlePicturesCoverTransparentImage}
+                <Book3D
+                  cover={bigIdeasLittlePicturesCoverImage}
                   alt='Big Ideas Little Pictures by Jono Hey'
-                  priority
-                  placeholder='blur'
-                  className='mx-auto'
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  quality={75}
-                  width={600}
-                  height={800}
+                  spineTitle='Big Ideas Little Pictures'
+                  spineAuthor='Jono Hey'
                 />
-                <div className='flex justify-center mt-4' aria-hidden='true'>
+                <div className='flex justify-center mt-8' aria-hidden='true'>
                   {[...Array(5)].map((_, i) => (
                     <span key={i} className='text-yellow-400 text-2xl'>
                       ★
@@ -218,18 +214,14 @@ const Book = ({ country }) => {
               </div>
             </div>
             <div className='w-full md:w-1/2'>
-              <blockquote className='text-lg md:text-xl mb-4 font-medium'>
-                <p className='mb-4'>
-                  This is such a cool book.
-                </p>
-                <p className='mb-4'>
-                  The range of Jono&apos;s knowledge is astounding, and so is his ability to digest complex ideas into deceptively simple drawings.
-                </p>
-                <p className='mb-4'>
-                  You&apos;ll learn something on every page—and be entertained too.
-                </p>
-              </blockquote>
-              <cite className={`text-gray-800 dark:text-gray-200 block text-2xl font-semibold ${styles.cite}`}>— Bill Gates</cite>
+              <figure className={`m-0 ${styles.heroQuote}`}>
+                <blockquote className='m-0 p-0 border-0 not-italic text-lg md:text-xl leading-relaxed font-medium'>
+                  <p className='m-0'>
+                    This is such a cool book. The range of Jono&apos;s knowledge is astounding, and so is his ability to digest complex ideas into deceptively simple drawings. You&apos;ll learn something on every page—and be entertained too.
+                  </p>
+                </blockquote>
+                <figcaption className={`mt-5 text-2xl ${styles.heroQuoteCite}`}>Bill Gates</figcaption>
+              </figure>
             </div>
           </div>
 
