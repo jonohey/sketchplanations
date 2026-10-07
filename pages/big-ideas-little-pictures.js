@@ -392,6 +392,7 @@ const Book = ({ country }) => {
                 setGalleryOpen(true)
               }}
             />
+            <p className='text-center text-sm text-gray-600 dark:text-gray-300 mt-0 mb-0'>Sample pages</p>
           </div>
 
           <div id='order' className='mt-24 max-w-3xl mx-auto scroll-mt-24'>

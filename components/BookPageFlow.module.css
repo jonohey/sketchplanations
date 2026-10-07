@@ -15,7 +15,7 @@
 	border: 0;
 	margin: 0;
 	background: #fbf6dc;
-	cursor: pointer;
+	cursor: zoom-in;
 	filter: brightness(0.98);
 	/* Soft, slightly blue-tinted lift, as on the reader quote cards */
 	box-shadow:
@@ -48,24 +48,6 @@
 			0 8px 20px -6px hsla(0, 0%, 0%, 0.35),
 			10px 0 16px -6px hsla(0, 0%, 0%, 0.45);
 	}
-}
-
-.label {
-	position: absolute;
-	left: 1rem;
-	z-index: 1000;
-	width: 5.5rem;
-	margin: 0;
-	font-size: 1.125rem;
-	font-weight: 600;
-	line-height: 1.25;
-	color: var(--color-textSubdued, #6b7280);
-	transition: opacity 0.4s;
-	pointer-events: none;
-}
-
-.labelHidden {
-	opacity: 0;
 }
 
 .end {
@@ -101,4 +83,26 @@
 	.page {
 		transition: none;
 	}
+}
+
+.playPause {
+	position: absolute;
+	right: 1rem;
+	bottom: 0.25rem;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2rem;
+	height: 2rem;
+	padding: 0;
+	border: 0;
+	border-radius: 9999px;
+	background: hsla(240, 30%, 28%, 0.55);
+	color: white;
+	cursor: pointer;
+}
+
+.playPause:hover {
+	background: hsla(240, 30%, 28%, 0.75);
 }

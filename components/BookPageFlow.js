@@ -1,17 +1,24 @@
+import { Pause, Play } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import styles from './BookPageFlow.module.css'
 
 const ANGLE = -24 // negative: right (visual) side comes forward, left (text) side recedes
 const PERSPECTIVE = 1100
+const FLIP_EVERY_MS = 1500
+const REST_AT_END_MS = 4000
 
 // Whole spreads overlap like a leaning stack. Each page covers the text side of the
-// next, so what you mostly see is the pictures. Pointing at one opens up space around it.
-// The aim is to show there are lots of text/visual spreads, not for them to be read.
+// next, so what you mostly see is the pictures. While it's on screen it flips through
+// at a steady pace; clicking any page opens the gallery. The aim is to show there are
+// lots of text/visual spreads, not for them to be read.
 const BookPageFlow = ({ images, onOpen }) => {
   const rootRef = useRef(null)
   const [active, setActive] = useState(0)
   const [vw, setVw] = useState(1200)
+  const [inView, setInView] = useState(false)
+  const [paused, setPaused] = useState(false)
+  const [reduceMotion, setReduceMotion] = useState(false)
 
   useEffect(() => {
     const el = rootRef.current
@@ -21,6 +28,22 @@ const BookPageFlow = ({ images, onOpen }) => {
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
+
+  useEffect(() => {
+    setReduceMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.5 })
+    observer.observe(rootRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  // Flip on at a fixed pace, rest on the last page, then go round again
+  const lastIndex = images.length - 1
+  useEffect(() => {
+    if (!inView || paused || reduceMotion) return
+    const delay = active === lastIndex ? REST_AT_END_MS : FLIP_EVERY_MS
+    const timer = setTimeout(() => setActive(active === lastIndex ? 0 : active + 1), delay)
+    return () => clearTimeout(timer)
+  }, [inView, paused, reduceMotion, active, lastIndex])
 
   const n = images.length
   const height = vw < 640 ? 150 : vw < 1024 ? 220 : 290
@@ -42,12 +65,13 @@ const BookPageFlow = ({ images, onOpen }) => {
   const visibleCentre = offsetOf(active) + width - shownWidth / 2
   // When the first page is open it sits at the left with nothing before it. The lean
   // pulls its left edge inwards, so start a little off-screen to compensate.
-  // On wide screens leave a gutter for the "Sample pages" label instead.
-  const showLabel = vw >= 1024
-  const leftInset = showLabel ? 90 : -Math.round(width * 0.1)
+  const leftInset = -Math.round(width * 0.1)
   const start = Math.min(leftInset, Math.max(vw - total, vw / 2 - visibleCentre))
 
-  const go = (delta) => setActive((i) => Math.min(n - 1, Math.max(0, i + delta)))
+  const go = (delta) => {
+    setPaused(true)
+    setActive((i) => Math.min(n - 1, Math.max(0, i + delta)))
+  }
 
   return (
     <div
@@ -63,11 +87,6 @@ const BookPageFlow = ({ images, onOpen }) => {
         if (e.key === 'ArrowRight') go(1)
       }}
     >
-      {showLabel && (
-        <p className={`${styles.label} ${active === 0 ? '' : styles.labelHidden}`} style={{ top: 48 + height / 2 - 24 }} aria-hidden='true'>
-          Sample pages
-        </p>
-      )}
       {images.map((image, index) => {
         const isActive = index === active
         return (
@@ -82,14 +101,8 @@ const BookPageFlow = ({ images, onOpen }) => {
               transform: `translateX(${start + offsetOf(index)}px) perspective(${PERSPECTIVE}px) rotateY(${ANGLE}deg)`,
             }}
             tabIndex={-1}
-            aria-label={isActive ? `View ${image.conceptName} in gallery` : `Show ${image.conceptName}`}
-            onPointerEnter={(e) => {
-              if (e.pointerType === 'mouse') setActive(index)
-            }}
-            onClick={() => {
-              if (isActive) onOpen(index)
-              else setActive(index)
-            }}
+            aria-label={`View ${image.conceptName} in gallery`}
+            onClick={() => onOpen(index)}
           >
             <Image src={image.src} alt={image.alt} width={width} height={height} sizes={`${width}px`} quality={70} className={styles.image} />
           </button>
@@ -112,6 +125,16 @@ const BookPageFlow = ({ images, onOpen }) => {
           Get the book for the rest →
         </a>
       </div>
+      {!reduceMotion && (
+        <button
+          type='button'
+          className={styles.playPause}
+          onClick={() => setPaused((p) => !p)}
+          aria-label={paused ? 'Resume flipping through the pages' : 'Pause flipping through the pages'}
+        >
+          {paused ? <Play size={16} aria-hidden='true' /> : <Pause size={16} aria-hidden='true' />}
+        </button>
+      )}
     </div>
   )
 }
