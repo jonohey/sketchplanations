@@ -137,23 +137,22 @@ const FACTS = [
 ]
 
 const AMAZON_RATING = 4.8
-const AMAZON_REVIEW_COUNT = 243
-const GOODREADS_RATING = 4.3
+// Kept as a rounded-down label so it doesn't go stale with every new review
+const AMAZON_REVIEWS_LABEL = '200+'
 
 // Stars filled to the real rating rather than rounded up to five
 const RatingSummary = () => (
   <a
     href='#from-readers'
-    className='inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 mt-8 no-underline hover:underline text-gray-700 dark:text-gray-200'
-    aria-label={`Rated ${AMAZON_RATING} out of 5 on Amazon from ${AMAZON_REVIEW_COUNT} reviews, ${GOODREADS_RATING} on Goodreads. Read reviews`}
+    className='inline-flex flex-col items-center gap-1 mt-8 no-underline hover:underline text-gray-600 dark:text-gray-300'
+    aria-label={`Rated ${AMAZON_RATING} out of 5 from ${AMAZON_REVIEWS_LABEL} Amazon reviews. Read reviews`}
   >
     <span className={styles.stars} style={{ '--rating': `${(AMAZON_RATING / 5) * 100}%` }} aria-hidden='true'>
       ★★★★★
     </span>
-    <span>
-      <strong>{AMAZON_RATING}</strong> from {AMAZON_REVIEW_COUNT} Amazon reviews
+    <span className='text-xs'>
+      {AMAZON_RATING} · {AMAZON_REVIEWS_LABEL} Amazon reviews
     </span>
-    <span className='text-sm text-gray-600 dark:text-gray-300'>· {GOODREADS_RATING} on Goodreads</span>
   </a>
 )
 
@@ -379,26 +378,18 @@ const Book = ({ country }) => {
                 <figcaption className={`mt-5 text-2xl ${styles.heroQuoteCite}`}>Bill Gates</figcaption>
               </figure>
               <div className='mt-8 not-prose'>
-                <div className='flex flex-col sm:flex-row sm:items-center gap-3'>
-                  <a
-                    href={AMAZON_LINK}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='btn-primary inline-block text-center px-8 py-3 text-lg no-underline hover:no-underline'
-                    aria-label='Buy Big Ideas Little Pictures on Amazon'
-                    onClick={() => {
-                      track('Book-store-link', { location: `Hero ${getAmazonAnalyticsLocation(country)}` })
-                    }}
-                  >
-                    Buy on Amazon
-                  </a>
-                  <a href='#order' className='text-center sm:text-left text-blue hover:underline font-medium'>
-                    More stores &amp; signed copies →
-                  </a>
-                </div>
-                <p className='text-sm text-gray-600 dark:text-gray-300 mt-3 mb-0'>
-                  Hardcover &amp; eBook · 288 pages
-                </p>
+                <a
+                  href='#order'
+                  className='btn-primary inline-block text-center px-8 py-3 text-lg no-underline hover:no-underline'
+                  onClick={(e) => {
+                    e.preventDefault()
+                    track('Book-hero-buy')
+                    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                    document.getElementById('order')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' })
+                  }}
+                >
+                  Buy the book
+                </a>
               </div>
             </div>
           </div>
