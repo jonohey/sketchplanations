@@ -23,8 +23,6 @@
 		0 8px 20px -6px hsla(240, 30%, 28%, 0.14),
 		/* The page casts a little shade onto the next one along */
 		10px 0 16px -6px hsla(240, 30%, 28%, 0.26);
-	/* Just enough easing to smooth out wheel notches while staying locked to the scroll */
-	transition: transform 0.12s linear;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -45,39 +43,4 @@
 	object-fit: cover;
 	pointer-events: none;
 	-webkit-user-drag: none;
-}
-
-.end {
-	position: absolute;
-	top: 48px;
-	left: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	gap: 0.75rem;
-	transition: transform 0.12s linear;
-}
-
-.endTitle {
-	margin: 0;
-	font-size: 1.75rem;
-	font-weight: 700;
-	line-height: 1.2;
-}
-
-.endLink {
-	color: var(--color-blue);
-	font-weight: 500;
-	text-decoration: none;
-}
-
-.endLink:hover {
-	text-decoration: underline;
-}
-
-@media (prefers-reduced-motion: reduce) {
-	.end,
-	.page {
-		transition: none;
-	}
 }
