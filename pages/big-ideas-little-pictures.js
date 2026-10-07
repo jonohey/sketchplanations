@@ -709,6 +709,9 @@ const Book = ({ country }) => {
                     aria-label='Buy the eBook of Big Ideas Little Pictures'
                   >order links above</FancyLink> — the Amazon button often includes the Kindle edition too, depending on your store. It&apos;s also on B&N, Apple Books, Kobo, and others.
                 </p>
+                <p>
+                  A note on Kindles: because the book is so visual, the Kindle edition is made for the Kindle app (on a phone or tablet) and doesn&apos;t work on a regular black-and-white Kindle.
+                </p>
                 </div>
               </details>
 
