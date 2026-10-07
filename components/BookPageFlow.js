@@ -10,7 +10,7 @@ const PERSPECTIVE = 1100
 // The aim is to show there are lots of text/visual spreads, not for them to be read.
 const BookPageFlow = ({ images, onOpen }) => {
   const rootRef = useRef(null)
-  const [active, setActive] = useState(Math.floor(images.length / 2))
+  const [active, setActive] = useState(0)
   const [vw, setVw] = useState(1200)
 
   useEffect(() => {
@@ -34,10 +34,18 @@ const BookPageFlow = ({ images, onOpen }) => {
   const endGap = 32
   const total = pagesWidth + endGap + endWidth
 
-  const offsetOf = (i) => i * step + (i >= active ? open : 0)
+  // Pages from the open one onwards move along to make room, except when the first
+  // page is open: nothing is in front of it, so it shows whole without moving
+  const offsetOf = (i) => i * step + (i > active || (i === active && active > 0) ? open : 0)
   // Keep the open page near the middle, without revealing empty space at either end
-  const visibleCentre = offsetOf(active) + width - (step + open) / 2
-  const start = Math.min(0, Math.max(vw - total, vw / 2 - visibleCentre))
+  const shownWidth = active === 0 ? width : step + open
+  const visibleCentre = offsetOf(active) + width - shownWidth / 2
+  // When the first page is open it sits at the left with nothing before it. The lean
+  // pulls its left edge inwards, so start a little off-screen to compensate.
+  // On wide screens leave a gutter for the "Sample pages" label instead.
+  const showLabel = vw >= 1024
+  const leftInset = showLabel ? 90 : -Math.round(width * 0.1)
+  const start = Math.min(leftInset, Math.max(vw - total, vw / 2 - visibleCentre))
 
   const go = (delta) => setActive((i) => Math.min(n - 1, Math.max(0, i + delta)))
 
@@ -55,6 +63,11 @@ const BookPageFlow = ({ images, onOpen }) => {
         if (e.key === 'ArrowRight') go(1)
       }}
     >
+      {showLabel && (
+        <p className={`${styles.label} ${active === 0 ? '' : styles.labelHidden}`} style={{ top: 48 + height / 2 - 24 }} aria-hidden='true'>
+          Sample pages
+        </p>
+      )}
       {images.map((image, index) => {
         const isActive = index === active
         return (
@@ -96,7 +109,7 @@ const BookPageFlow = ({ images, onOpen }) => {
             document.getElementById('order')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' })
           }}
         >
-          Or get the book for the rest →
+          Get the book for the rest →
         </a>
       </div>
     </div>

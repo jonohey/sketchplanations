@@ -131,7 +131,7 @@ const StoreLinks = ({ stores }) => (
 const ICON_DIR = '/images/explainer-kit/sketch-icons'
 
 const FACTS = [
-  { icon: `${ICON_DIR}/Book stack.svg`, value: '130+', label: 'sketches, old favourites and new' },
+  { icon: `${ICON_DIR}/Book stack.svg`, value: '130+', label: 'sketches, old and new' },
   { icon: `${ICON_DIR}/Puzzling.svg`, value: '10', label: 'sections, from nature to thinking' },
   { icon: `${ICON_DIR}/Lightbulb partial.svg`, value: '1', label: 'new idea on every page' },
 ]
@@ -378,7 +378,7 @@ const Book = ({ country }) => {
                 <Image src={fact.icon} alt='' width={64} height={64} className='h-16 w-16 object-contain shrink-0' unoptimized />
                 <span>
                   <span className='block text-2xl font-bold leading-tight'>{fact.value}</span>
-                  <span className='block text-gray-600 dark:text-gray-300'>{fact.label}</span>
+                  <span className='block text-gray-600 dark:text-gray-300' style={{ textWrap: 'balance' }}>{fact.label}</span>
                 </span>
               </li>
             ))}
