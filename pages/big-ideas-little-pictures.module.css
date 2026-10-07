@@ -122,8 +122,10 @@
 /* Praise quotes */
 .praiseCard {
 	position: relative;
-	padding: 0.25rem 0 0.25rem 1.5rem;
+	padding: 1.25rem 1.5rem;
 	border-left: 3px solid var(--color-blue);
+	background: var(--color-backgroundSubdued, rgba(127, 127, 127, 0.07));
+	border-radius: 0.5rem;
 }
 
 .praiseCardLarge {
@@ -137,10 +139,10 @@
 .praiseCardLarge::before {
 	content: "\201C";
 	position: absolute;
-	top: 0.25rem;
-	left: 1.25rem;
+	top: 0.75rem;
+	left: 1.4rem;
 	font-family: Georgia, "Times New Roman", serif;
-	font-size: 3.5rem;
+	font-size: 3rem;
 	line-height: 1;
 	color: var(--color-blue);
 	opacity: 0.6;
@@ -166,4 +168,18 @@
 
 .morePraise[open] .morePraiseClose {
 	display: inline;
+}
+
+.morePraiseCaret {
+	transition: transform 0.2s;
+}
+
+.morePraise[open] .morePraiseCaret {
+	transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.morePraiseCaret {
+		transition: none;
+	}
 }

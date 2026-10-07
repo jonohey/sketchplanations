@@ -1,18 +1,56 @@
 .root {
-	/* Room above the pages. Only devices with hover can pop a page up, so only they need
-	   some; a fully lifted page may overlap the margin above the stack a little. */
+	/* Room above the pages for a popped-up page: a scrolling container clips whatever pokes
+	   out of it, so the room has to be inside. Only devices with hover can pop a page up, so
+	   only they need it. The top margin pulls the container back up by the same amount, so
+	   the room costs no space at rest and a popped-up page simply sits in front of the
+	   content above. Both the headroom and the lift are proportions of the page height
+	   (--spread-height is set by the component), so a smaller stack pops up proportionally less. */
 	--headroom: 24px;
 	position: relative;
-	overflow-x: clip;
-	overflow-y: visible;
+	margin-top: calc(24px - var(--headroom));
+	overflow-x: auto;
+	overflow-y: hidden;
+	scrollbar-width: thin;
 	outline-offset: -4px;
 	user-select: none;
+}
+
+.track {
+	position: relative;
+	height: 100%;
 }
 
 .slot {
 	position: absolute;
 	top: var(--headroom);
 	left: 0;
+}
+
+.end {
+	position: absolute;
+	top: var(--headroom);
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 0.75rem;
+}
+
+.endTitle {
+	margin: 0;
+	font-size: 1.75rem;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.endLink {
+	color: var(--color-blue);
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.endLink:hover {
+	text-decoration: underline;
 }
 
 .page {
@@ -37,11 +75,13 @@
 /* Pop up so the page's header clears the page covering it */
 @media (hover: hover) {
 	.root {
-		--headroom: 80px;
+		/* The lift (0.56), amplified a little by the lean on the near edge, plus the lean making
+		   that edge taller */
+		--headroom: calc(var(--spread-height) * 0.85);
 	}
 
 	.slot:hover .page {
-		transform: translateY(-162px);
+		transform: translateY(calc(var(--spread-height) * -0.56));
 	}
 }
 

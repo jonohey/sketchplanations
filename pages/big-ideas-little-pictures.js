@@ -10,6 +10,7 @@ import bigIdeasLittlePicturesCoverImage from 'images/big-ideas-little-pictures-b
 import Book3D from 'components/Book3D'
 import BookPageFlow from 'components/BookPageFlow'
 import FlickThroughVideo from 'components/FlickThroughVideo'
+import { ChevronDown } from 'lucide-react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -245,7 +246,10 @@ const PraiseCard = ({ praise, large = false }) => (
       ))}
     </blockquote>
     <figcaption className='mt-5'>
-      <cite className='not-italic font-semibold block'>{praise.name}</cite>
+      <cite className='not-italic font-semibold block'>
+        <span aria-hidden='true'>— </span>
+        {praise.name}
+      </cite>
       {praise.role && <span className='text-sm text-gray-600 dark:text-gray-300'>{praise.role}</span>}
     </figcaption>
   </figure>
@@ -393,7 +397,10 @@ const Book = ({ country }) => {
           </div>
 
           <div id='order' className='mt-24 max-w-3xl mx-auto scroll-mt-24'>
-            <h2 className='text-3xl font-bold mb-8 text-center'>Order Big Ideas Little Pictures</h2>
+            <div className='flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 mb-8'>
+              <Image src={`${ICON_DIR}/Shopper with bags.svg`} alt='' width={523} height={496} className='h-20 w-auto m-0' unoptimized />
+              <h2 className='text-3xl font-bold m-0 text-center'>Order Big Ideas Little Pictures</h2>
+            </div>
 
             <div className='text-center'>
               <a
@@ -579,7 +586,7 @@ const Book = ({ country }) => {
 
           </div>
 
-          <div id='sample-pages' className='not-prose relative left-1/2 w-screen -translate-x-1/2 mt-24 scroll-mt-24' style={{ overflowX: 'clip' }}>
+          <div id='sample-pages' className='not-prose relative left-1/2 w-screen -translate-x-1/2 mt-16 scroll-mt-24' style={{ overflowX: 'clip' }}>
             <BookPageFlow
               images={stackBookPageImages}
               onOpen={(index) => {
@@ -600,9 +607,10 @@ const Book = ({ country }) => {
             </div>
 
             <details className={`mt-10 not-prose ${styles.morePraise}`}>
-              <summary className='text-center cursor-pointer font-medium text-blue hover:underline'>
+              <summary className='flex items-center justify-center gap-1 cursor-pointer font-medium text-blue hover:underline'>
                 <span className={styles.morePraiseOpen}>Read more praise</span>
                 <span className={styles.morePraiseClose}>Show less</span>
+                <ChevronDown size={18} aria-hidden='true' className={styles.morePraiseCaret} />
               </summary>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-8'>
                 {PRAISE.filter((q) => !q.featured).map((q) => (
@@ -804,7 +812,7 @@ const Book = ({ country }) => {
             </div>
           </div>
 
-          <div className='mt-24 text-center'>
+          <div className='mt-12 text-center'>
             <a
               href='#order'
               onClick={(e) => {
