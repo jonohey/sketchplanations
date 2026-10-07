@@ -45,8 +45,19 @@ const bookImages = {
   'big-ideas-book-spread-The-potato-radius.png': bigIdeasBookSpreadThePotatoRadius,
 };
 
+// Spreads shown on the book page, in display order. The rest stay available in
+// `allBookPageImages` but are not shown.
+const featuredFilenames = [
+  'big-ideas-book-spread-1-table-of-contents.jpg',
+  'big-ideas-book-spread-coastline-paradox.png',
+  'big-ideas-book-spread-Swiss-cheese-model.png',
+  'big-ideas-book-spread-How-to-win-at-Monopoly.png',
+  'big-ideas-book-spread-Solar-system-sizes.png',
+  'big-ideas-book-spread-Awkwardness-Vortex.png',
+];
+
 // Create an array of image objects with metadata
-export const bookPageImages = Object.entries(bookImages).map(([filename, src]) => {
+export const allBookPageImages = Object.entries(bookImages).map(([filename, src]) => {
   // Extract the concept name from the filename
   const conceptName = filename
     .replace('big-ideas-book-spread-', '')
@@ -62,5 +73,9 @@ export const bookPageImages = Object.entries(bookImages).map(([filename, src]) =
     conceptName
   };
 });
+
+export const bookPageImages = featuredFilenames.map(name =>
+  allBookPageImages.find(image => image.filename === name)
+);
 
 export default bookPageImages;
