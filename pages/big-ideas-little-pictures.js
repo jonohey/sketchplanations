@@ -626,9 +626,11 @@ const Book = ({ country }) => {
                 </summary>
                 <div className='mt-3'>
                   <p>
-                    Of course. <FancyLink href='https://www.youtube.com/watch?v=1NQqM5ZjR2g' target='_blank' rel='noopener noreferrer' aria-label='Watch a video flicking through Big Ideas Little Pictures'>Watch me flick through the book</FancyLink>, or{' '}
-                    <FancyLink href='https://www.youtube.com/watch?v=dQqP6aBLHYc' target='_blank' rel='noopener noreferrer' aria-label='Watch the Big Ideas Little Pictures book preview'>watch the book preview</FancyLink>.
-                    You can also <FancyLink href='#sample-pages' aria-label='See sample pages'>see the pages above</FancyLink>.
+                    I made a{' '}
+                    <FancyLink href='https://www.youtube.com/watch?v=1NQqM5ZjR2g' target='_blank' rel='noopener noreferrer' aria-label='Watch the preview video walking through Big Ideas Little Pictures'>
+                      preview video walking through what&apos;s in it
+                    </FancyLink>
+                    .
                   </p>
                 </div>
               </details>
@@ -792,7 +794,20 @@ const Book = ({ country }) => {
             </div>
           </div>
 
-          <div className='mt-24 text-center'>
+          <div id='preview-video' className='mt-24 max-w-3xl mx-auto scroll-mt-24'>
+            <iframe
+              src='https://www.youtube.com/embed/dQqP6aBLHYc?si=oogeEYEXru3cs53s&controls=0&rel=0'
+              title='Big Ideas Little Pictures — flick through promo'
+              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+              referrerPolicy='strict-origin-when-cross-origin'
+              allowFullScreen
+              loading='lazy'
+              className='block w-full rounded-lg m-0'
+              style={{ aspectRatio: '16 / 9', height: 'auto' }}
+            />
+          </div>
+
+          <div className='mt-12 text-center'>
             <a
               href='#order'
               onClick={(e) => {
