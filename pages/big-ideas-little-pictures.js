@@ -8,7 +8,6 @@ import { BOOK_REVIEWS } from 'helpers/bookReviews'
 import { buildBookProductGraph } from 'helpers/structuredData'
 import bigIdeasLittlePicturesCoverImage from 'images/big-ideas-little-pictures-book-cover.jpg'
 import Book3D from 'components/Book3D'
-import { ZoomIn } from 'lucide-react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -383,51 +382,32 @@ const Book = ({ country }) => {
             ))}
           </ul>
 
-          <div className='mt-16 scroll-mt-24'>
-            <h2 id='sample-pages' className='text-3xl font-bold text-center mb-4'>Have a look inside</h2>
-            <p className='text-center text-gray-600 dark:text-gray-300 mb-8'>
-              A peek inside. <span className='hidden sm:inline'>Click to zoom in.</span><span className='sm:hidden'>Tap to zoom in.</span>
-            </p>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16'>
+          {/* Full-bleed strip of spreads; tapping one opens the gallery */}
+          <div id='sample-pages' className='not-prose relative left-1/2 w-screen -translate-x-1/2 mt-16 scroll-mt-24'>
+            <ul className={styles.pageStrip}>
               {bookPageImages.map((image, index) => (
-                <div
-                  key={image.filename}
-                  className={`aspect-[3/2] relative group cursor-pointer rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ${styles.bookPageContainer}`}
-                  onClick={() => {
-                    setGalleryIndex(index)
-                    setGalleryOpen(true)
-                  }}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault()
+                <li key={image.filename} className={styles.pageStripItem}>
+                  <button
+                    type='button'
+                    className={styles.pageStripButton}
+                    onClick={() => {
                       setGalleryIndex(index)
                       setGalleryOpen(true)
-                    }
-                  }}
-                  aria-label={`View ${image.conceptName} in gallery`}
-                >
-                  <div className="absolute inset-0 flex items-center justify-center p-2">
+                    }}
+                    aria-label={`View ${image.conceptName} in gallery`}
+                  >
                     <Image
                       src={image.src}
                       alt={image.alt}
-                      width={400}
-                      height={600}
-                      className={`${styles.bookPageImageAlt} group-hover:scale-105 transition-transform duration-300`}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      loading="lazy"
+                      sizes='(max-width: 768px) 80vw, 480px'
+                      loading='lazy'
                       quality={75}
+                      className={styles.pageStripImage}
                     />
-                  </div>
-                  <div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center pointer-events-none'>
-                    <div className={`${styles.zoomHint} bg-white/90 dark:bg-gray-800/90 p-2 rounded-full`}>
-                      <ZoomIn size={24} className="text-gray-700 dark:text-gray-200" />
-                    </div>
-                  </div>
-                </div>
+                  </button>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
           <div id='order' className='mt-24 max-w-3xl mx-auto scroll-mt-24'>
@@ -665,7 +645,7 @@ const Book = ({ country }) => {
                   <p>
                     Of course. <FancyLink href='https://www.youtube.com/watch?v=1NQqM5ZjR2g' target='_blank' rel='noopener noreferrer' aria-label='Watch a video flicking through Big Ideas Little Pictures'>Watch me flick through the book</FancyLink>, or{' '}
                     <FancyLink href='https://www.youtube.com/watch?v=dQqP6aBLHYc' target='_blank' rel='noopener noreferrer' aria-label='Watch the Big Ideas Little Pictures book preview'>watch the book preview</FancyLink>.
-                    You can also <FancyLink href='#sample-pages' aria-label='See sample pages'>see sample pages above</FancyLink>.
+                    You can also <FancyLink href='#sample-pages' aria-label='See sample pages'>see the pages above</FancyLink>.
                   </p>
                 </div>
               </details>

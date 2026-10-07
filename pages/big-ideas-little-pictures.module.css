@@ -67,44 +67,6 @@
   color: var(--color-textSubdued);
 }
 
-/* Book page image gallery styles */
-.bookPageImageAlt {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-}
-
-.bookPageContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f9fafb;
-  position: relative;
-}
-
-.zoomHint {
-  opacity: 1;
-  transition: opacity 0.3s;
-}
-
-@media (min-width: 768px) {
-  .zoomHint {
-    opacity: 0;
-  }
-
-  .bookPageContainer:hover .zoomHint {
-    opacity: 1;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .bookPageContainer {
-    background-color: #1f2937;
-  }
-}
-
 .heroQuote {
 	position: relative;
 	padding-top: 2.25rem;
@@ -212,4 +174,62 @@
 
 .morePraise[open] .morePraiseClose {
 	display: inline;
+}
+
+/* Sample page strip */
+.pageStrip {
+	display: flex;
+	gap: 1rem;
+	margin: 0;
+	padding: 0.5rem max(1rem, calc((100vw - 80rem) / 2 + 1rem)) 1.5rem;
+	list-style: none;
+	overflow-x: auto;
+	scroll-snap-type: x proximity;
+	scrollbar-width: none;
+}
+
+.pageStrip::-webkit-scrollbar {
+	display: none;
+}
+
+.pageStripItem {
+	flex: none;
+	margin: 0;
+	padding: 0;
+	scroll-snap-align: center;
+}
+
+.pageStripButton {
+	display: block;
+	padding: 0;
+	border: 0;
+	background: none;
+	cursor: zoom-in;
+	border-radius: 0.5rem;
+}
+
+.pageStripImage {
+	display: block;
+	height: 13rem;
+	width: auto;
+	margin: 0;
+	border-radius: 0.5rem;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+	transition: transform 0.2s;
+}
+
+.pageStripButton:hover .pageStripImage {
+	transform: translateY(-3px);
+}
+
+@media (min-width: 768px) {
+	.pageStripImage {
+		height: 18rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.pageStripImage {
+		transition: none;
+	}
 }
