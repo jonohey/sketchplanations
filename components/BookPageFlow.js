@@ -28,8 +28,9 @@ const BookPageFlow = ({ images, onOpen }) => {
   const n = stacked.length
   const height = vw < 640 ? 150 : vw < 1024 ? 220 : 290
   const width = Math.round(height * 2)
-  // How far the first page stands clear of the second so it shows whole
-  const open = width * 0.3
+  // A little extra room for the second page, so it shows only slightly more than the
+  // pages after it; everything else shares the remaining width evenly
+  const open = width * 0.1
   // The first page sits partly off the left of the screen (its text side is the least
   // interesting bit), which leaves more room to show each of the pages that follow
   const startLeft = -Math.round(width * 0.42)
@@ -37,7 +38,7 @@ const BookPageFlow = ({ images, onOpen }) => {
   const step = Math.max(14, (vw * 1.05 - startLeft - width - open) / (n - 1))
 
   return (
-    <div ref={rootRef} className={styles.root} style={{ height: height + 128 }} role='group' aria-label='Sample pages from the book'>
+    <div ref={rootRef} className={styles.root} style={{ height: height + 164 }} role='group' aria-label='Sample pages from the book'>
       {stacked.map((image, index) => (
         // The slot holds the position and lean and never moves, so the hover area is stable
         // while the page inside it pops up
