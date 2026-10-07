@@ -28,7 +28,11 @@ const BookPageFlow = ({ images, onOpen }) => {
   const open = width * 0.5
   // Make the stack much wider than the screen so it runs off both sides
   const step = Math.max(14, (vw * 1.7 - width - open) / (n - 1))
-  const total = (n - 1) * step + open + width
+  const pagesWidth = (n - 1) * step + open + width
+  // Unframed closing note after the last page
+  const endWidth = vw < 640 ? 190 : 300
+  const endGap = 32
+  const total = pagesWidth + endGap + endWidth
 
   const offsetOf = (i) => i * step + (i >= active ? open : 0)
   // Keep the open page near the middle, without revealing empty space at either end
@@ -41,7 +45,7 @@ const BookPageFlow = ({ images, onOpen }) => {
     <div
       ref={rootRef}
       className={styles.root}
-      style={{ height: height + 48 }}
+      style={{ height: height + 96 }}
       role='group'
       aria-roledescription='carousel'
       aria-label='Sample pages from the book'
@@ -78,6 +82,23 @@ const BookPageFlow = ({ images, onOpen }) => {
           </button>
         )
       })}
+      <div
+        className={styles.end}
+        style={{ width: endWidth, height, transform: `translateX(${start + pagesWidth + endGap}px)` }}
+      >
+        <p className={styles.endTitle}>…and lots more inside.</p>
+        <a
+          href='#order'
+          className={styles.endLink}
+          onClick={(e) => {
+            e.preventDefault()
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            document.getElementById('order')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' })
+          }}
+        >
+          Or get the book for the rest →
+        </a>
+      </div>
     </div>
   )
 }

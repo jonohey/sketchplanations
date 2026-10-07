@@ -1,13 +1,14 @@
 .root {
 	position: relative;
-	overflow: hidden;
+	overflow-x: clip;
+	overflow-y: visible;
 	outline-offset: -4px;
 	user-select: none;
 }
 
 .page {
 	position: absolute;
-	top: 24px;
+	top: 48px;
 	left: 0;
 	display: block;
 	padding: 0;
@@ -16,7 +17,11 @@
 	background: #fbf6dc;
 	cursor: pointer;
 	filter: brightness(0.93);
-	box-shadow: 8px 0 16px rgba(0, 0, 0, 0.22);
+	/* Soft, slightly blue-tinted lift, as on the reader quote cards */
+	box-shadow:
+		0 0 0 1px hsla(240, 30%, 28%, 0.05),
+		0 2px 4px hsla(240, 30%, 28%, 0.05),
+		0 8px 20px -6px hsla(240, 30%, 28%, 0.14);
 	transition: transform 0.5s cubic-bezier(0.22, 0.8, 0.3, 1), filter 0.4s;
 }
 
@@ -35,7 +40,45 @@
 	-webkit-user-drag: none;
 }
 
+@media (prefers-color-scheme: dark) {
+	.page {
+		box-shadow:
+			0 0 0 1px hsla(0, 0%, 100%, 0.04),
+			0 2px 4px hsla(0, 0%, 0%, 0.12),
+			0 8px 20px -6px hsla(0, 0%, 0%, 0.35);
+	}
+}
+
+.end {
+	position: absolute;
+	top: 48px;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 0.75rem;
+	transition: transform 0.5s cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+
+.endTitle {
+	margin: 0;
+	font-size: 1.75rem;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.endLink {
+	color: var(--color-blue);
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.endLink:hover {
+	text-decoration: underline;
+}
+
 @media (prefers-reduced-motion: reduce) {
+	.end,
 	.page {
 		transition: none;
 	}
