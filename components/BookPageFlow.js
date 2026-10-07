@@ -1,49 +1,55 @@
-import { Pause, Play } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import styles from './BookPageFlow.module.css'
 
 const ANGLE = -24 // negative: right (visual) side comes forward, left (text) side recedes
 const PERSPECTIVE = 1100
-const FLIP_EVERY_MS = 1500
-const REST_AT_END_MS = 4000
+
+// Scroll progress runs from the top of the stack being near the bottom of the screen
+// to it being near the top, as fractions of the viewport height.
+const SCROLL_START = 0.95
+const SCROLL_END = 0.2
+
+const clamp = (value, min, max) => Math.min(max, Math.max(min, value))
 
 // Whole spreads overlap like a leaning stack. Each page covers the text side of the
-// next, so what you mostly see is the pictures. While it's on screen it flips through
-// at a steady pace; clicking any page opens the gallery. The aim is to show there are
-// lots of text/visual spreads, not for them to be read.
+// next, so what you mostly see is the pictures. The stack is locked to the page scroll:
+// scrolling past flips through the pages, scrolling back flips back. Clicking any page
+// opens the gallery. The aim is to show there are lots of text/visual spreads, not for
+// them to be read.
 const BookPageFlow = ({ images, onOpen }) => {
   const rootRef = useRef(null)
-  const [active, setActive] = useState(0)
   const [vw, setVw] = useState(1200)
-  const [inView, setInView] = useState(false)
-  const [paused, setPaused] = useState(false)
-  const [reduceMotion, setReduceMotion] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
     const el = rootRef.current
-    const update = () => setVw(el.clientWidth)
-    update()
-    const observer = new ResizeObserver(update)
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    let frame = null
 
-  useEffect(() => {
-    setReduceMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches)
-    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.5 })
-    observer.observe(rootRef.current)
-    return () => observer.disconnect()
-  }, [])
+    const measure = () => {
+      frame = null
+      setVw(el.clientWidth)
+      // People who prefer reduced motion get a still stack rather than one that moves as they scroll
+      if (reduceMotion) return setProgress(0.5)
+      const top = el.getBoundingClientRect().top
+      const startY = window.innerHeight * SCROLL_START
+      const endY = window.innerHeight * SCROLL_END
+      setProgress(clamp((startY - top) / (startY - endY), 0, 1))
+    }
+    const schedule = () => {
+      if (frame === null) frame = requestAnimationFrame(measure)
+    }
 
-  // Flip on at a fixed pace, rest on the last page, then go round again
-  const lastIndex = images.length - 1
-  useEffect(() => {
-    if (!inView || paused || reduceMotion) return
-    const delay = active === lastIndex ? REST_AT_END_MS : FLIP_EVERY_MS
-    const timer = setTimeout(() => setActive(active === lastIndex ? 0 : active + 1), delay)
-    return () => clearTimeout(timer)
-  }, [inView, paused, reduceMotion, active, lastIndex])
+    measure()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    return () => {
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+      if (frame !== null) cancelAnimationFrame(frame)
+    }
+  }, [])
 
   const n = images.length
   const height = vw < 640 ? 150 : vw < 1024 ? 220 : 290
@@ -57,61 +63,39 @@ const BookPageFlow = ({ images, onOpen }) => {
   const endGap = 32
   const total = pagesWidth + endGap + endWidth
 
-  // Pages from the open one onwards move along to make room, except when the first
-  // page is open: nothing is in front of it, so it shows whole without moving
-  const offsetOf = (i) => i * step + (i > active || (i === active && active > 0) ? open : 0)
-  // Keep the open page near the middle, without revealing empty space at either end
-  const shownWidth = active === 0 ? width : step + open
-  const visibleCentre = offsetOf(active) + width - shownWidth / 2
-  // When the first page is open it sits at the left with nothing before it. The lean
-  // pulls its left edge inwards, so start a little off-screen to compensate.
-  const leftInset = -Math.round(width * 0.1)
-  const start = Math.min(leftInset, Math.max(vw - total, vw / 2 - visibleCentre))
+  // Which page is "open" as a fractional index. Pages from there on are held apart by
+  // `open` so the current page shows beyond the one covering it; the first page needs no
+  // room because nothing is in front of it.
+  const current = progress * (n - 1)
+  const shiftOf = (i) => (i === 0 ? 0 : open * clamp(i - current + 1, 0, 1))
 
-  const go = (delta) => {
-    setPaused(true)
-    setActive((i) => Math.min(n - 1, Math.max(0, i + delta)))
-  }
+  // The first page starts flush left (the lean pulls its edge inwards, so start a little
+  // off-screen to compensate) and the closing note ends flush right.
+  const startLeft = -Math.round(width * 0.1)
+  const start = startLeft + (Math.min(startLeft, vw - total) - startLeft) * progress
 
   return (
-    <div
-      ref={rootRef}
-      className={styles.root}
-      style={{ height: height + 96 }}
-      role='group'
-      aria-roledescription='carousel'
-      aria-label='Sample pages from the book'
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'ArrowLeft') go(-1)
-        if (e.key === 'ArrowRight') go(1)
-      }}
-    >
-      {images.map((image, index) => {
-        const isActive = index === active
-        return (
-          <button
-            key={image.filename}
-            type='button'
-            className={`${styles.page} ${isActive ? styles.pageActive : ''}`}
-            style={{
-              width,
-              height,
-              zIndex: n - index,
-              transform: `translateX(${start + offsetOf(index)}px) perspective(${PERSPECTIVE}px) rotateY(${ANGLE}deg)`,
-            }}
-            tabIndex={-1}
-            aria-label={`View ${image.conceptName} in gallery`}
-            onClick={() => onOpen(index)}
-          >
-            <Image src={image.src} alt={image.alt} width={width} height={height} sizes={`${width}px`} quality={70} className={styles.image} />
-          </button>
-        )
-      })}
-      <div
-        className={styles.end}
-        style={{ width: endWidth, height, transform: `translateX(${start + pagesWidth + endGap}px)` }}
-      >
+    <div ref={rootRef} className={styles.root} style={{ height: height + 96 }} role='group' aria-label='Sample pages from the book'>
+      {images.map((image, index) => (
+        <button
+          key={image.filename}
+          type='button'
+          className={styles.page}
+          style={{
+            width,
+            height,
+            zIndex: n - index,
+            transform: `translateX(${start + index * step + shiftOf(index)}px) perspective(${PERSPECTIVE}px) rotateY(${ANGLE}deg)`,
+          }}
+          // One tab stop is enough; the gallery has its own arrow-key navigation
+          tabIndex={index === 0 ? 0 : -1}
+          aria-label={`View ${image.conceptName} in gallery`}
+          onClick={() => onOpen(index)}
+        >
+          <Image src={image.src} alt={image.alt} width={width} height={height} sizes={`${width}px`} quality={70} className={styles.image} />
+        </button>
+      ))}
+      <div className={styles.end} style={{ width: endWidth, height, transform: `translateX(${start + pagesWidth + endGap}px)` }}>
         <p className={styles.endTitle}>…and lots more inside.</p>
         <a
           href='#order'
@@ -125,16 +109,6 @@ const BookPageFlow = ({ images, onOpen }) => {
           Get the book for the rest →
         </a>
       </div>
-      {!reduceMotion && (
-        <button
-          type='button'
-          className={styles.playPause}
-          onClick={() => setPaused((p) => !p)}
-          aria-label={paused ? 'Resume flipping through the pages' : 'Pause flipping through the pages'}
-        >
-          {paused ? <Play size={16} aria-hidden='true' /> : <Pause size={16} aria-hidden='true' />}
-        </button>
-      )}
     </div>
   )
 }

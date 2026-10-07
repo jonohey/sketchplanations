@@ -16,28 +16,15 @@
 	margin: 0;
 	background: #fbf6dc;
 	cursor: zoom-in;
-	filter: brightness(0.98);
 	/* Soft, slightly blue-tinted lift, as on the reader quote cards */
 	box-shadow:
 		0 0 0 1px hsla(240, 30%, 28%, 0.05),
 		0 2px 4px hsla(240, 30%, 28%, 0.05),
-		0 8px 20px -6px hsla(240, 30%, 28%, 0.14);
-	transition: transform 0.5s cubic-bezier(0.22, 0.8, 0.3, 1), filter 0.4s;
-}
-
-.pageActive {
-	cursor: zoom-in;
-	filter: none;
-}
-
-.image {
-	display: block;
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	object-fit: cover;
-	pointer-events: none;
-	-webkit-user-drag: none;
+		0 8px 20px -6px hsla(240, 30%, 28%, 0.14),
+		/* The page casts a little shade onto the next one along */
+		10px 0 16px -6px hsla(240, 30%, 28%, 0.26);
+	/* Just enough easing to smooth out wheel notches while staying locked to the scroll */
+	transition: transform 0.12s linear;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -50,6 +37,16 @@
 	}
 }
 
+.image {
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	object-fit: cover;
+	pointer-events: none;
+	-webkit-user-drag: none;
+}
+
 .end {
 	position: absolute;
 	top: 48px;
@@ -58,7 +55,7 @@
 	flex-direction: column;
 	justify-content: center;
 	gap: 0.75rem;
-	transition: transform 0.5s cubic-bezier(0.22, 0.8, 0.3, 1);
+	transition: transform 0.12s linear;
 }
 
 .endTitle {
@@ -83,26 +80,4 @@
 	.page {
 		transition: none;
 	}
-}
-
-.playPause {
-	position: absolute;
-	right: 1rem;
-	bottom: 0.25rem;
-	z-index: 1000;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 2rem;
-	height: 2rem;
-	padding: 0;
-	border: 0;
-	border-radius: 9999px;
-	background: hsla(240, 30%, 28%, 0.55);
-	color: white;
-	cursor: pointer;
-}
-
-.playPause:hover {
-	background: hsla(240, 30%, 28%, 0.75);
 }
