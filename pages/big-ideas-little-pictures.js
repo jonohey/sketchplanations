@@ -364,9 +364,9 @@ const Book = ({ country }) => {
 
           <div id='intro' className='text-center mt-12 max-w-3xl mx-auto'>
             <h1 className='text-4xl font-bold mb-2'>Big Ideas Little Pictures</h1>
-            <p className='text-xl text-gray-600 dark:text-gray-300 mb-8'>Explaining the world one sketch at a time</p>
+            <p className='text-xl text-gray-600 dark:text-gray-300 mb-8'>Explaining the world one sketch at a time, by Jono Hey</p>
             <p className='text-lg leading-relaxed'>
-              Sketchplanations in a book! And now an eBook too. In this 288-page collection, Jono Hey collects together over 130
+              Sketchplanations in a book! And now an eBook too. In this 288-page collection, I&apos;ve collected over 130
               inspiring, funny and relatable sketches about life. Combining existing and new topics, Big Ideas Little
               Pictures is a perfect gift of the wisdom and joy of Sketchplanations. Pop it on the table and start having great conversations about ideas.
             </p>
