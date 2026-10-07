@@ -13,7 +13,6 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { RoughNotation } from 'react-rough-notation'
 import { bookPageImages } from 'utils/bookImages.mjs'
 import styles from './big-ideas-little-pictures.module.css'
 
@@ -234,45 +233,6 @@ const PRAISE = [
   },
 ]
 
-// Shows a poster until clicked so the page doesn't load two YouTube players up front
-const LiteYouTube = ({ id, title, params = '' }) => {
-  const [playing, setPlaying] = useState(false)
-  return (
-    <div className={`relative bg-black rounded-lg overflow-hidden ${styles.youtube_container}`}>
-      {playing ? (
-        <iframe
-          src={`https://www.youtube.com/embed/${id}?autoplay=1&${params}`}
-          title={title}
-          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-          referrerPolicy='strict-origin-when-cross-origin'
-          allowFullScreen
-        />
-      ) : (
-        <button
-          type='button'
-          className='group block w-full aspect-video relative p-0 border-0 bg-transparent cursor-pointer'
-          onClick={() => {
-            setPlaying(true)
-            track('Book-video-play', { video: id })
-          }}
-          aria-label={`Play video: ${title}`}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
-            alt=''
-            loading='lazy'
-            className='absolute inset-0 w-full h-full object-cover m-0'
-          />
-          <span className='absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors'>
-            <span className='flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-2xl text-black pl-1'>▶</span>
-          </span>
-        </button>
-      )}
-    </div>
-  )
-}
-
 const PraiseCard = ({ praise, large = false }) => (
   <figure className={`m-0 ${styles.praiseCard} ${large ? styles.praiseCardLarge : ''}`}>
     <blockquote className={`m-0 p-0 border-0 not-italic ${large ? 'text-lg' : 'text-base'} leading-relaxed`}>
@@ -294,6 +254,12 @@ export async function getServerSideProps({ req }) {
   return {
     props: { country },
   }
+}
+
+const scrollToOrder = (e) => {
+  e.preventDefault()
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  document.getElementById('order')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' })
 }
 
 const Book = ({ country }) => {
@@ -382,10 +348,8 @@ const Book = ({ country }) => {
                   href='#order'
                   className='btn-primary inline-block text-center px-8 py-3 text-lg no-underline hover:no-underline'
                   onClick={(e) => {
-                    e.preventDefault()
                     track('Book-hero-buy')
-                    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-                    document.getElementById('order')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' })
+                    scrollToOrder(e)
                   }}
                 >
                   Buy the book
@@ -484,32 +448,23 @@ const Book = ({ country }) => {
               </p>
             </div>
 
-            <div className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mt-8 text-center'>
-              <p className='mb-0'>
-                <Link
-                  href='https://www.kensingtonbooks.co.uk/product-page/big-ideas-little-pictures?utm_source=sketchplanations&utm_medium=website&utm_campaign=book_page&utm_content=signed_copy'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  aria-label='Order a signed copy of Big Ideas Little Pictures'
-                  onClick={() => {
-                    track('Book-store-link', { location: 'Signed copy' })
-                  }}
-                >
-                  Order an exclusive{' '}
-                  <RoughNotation
-                    type='circle'
-                    show={true}
-                    color='var(--color-brightRed)'
-                    animate={false}
-                    padding={3}
-                  >
-                    <span style={{ display: 'inline-block' }}>signed copy</span>
-                  </RoughNotation>
-                </Link>
-                <br />
+            <p className='mt-8 mb-0 text-center'>
+              <Link
+                href='https://www.kensingtonbooks.co.uk/product-page/big-ideas-little-pictures?utm_source=sketchplanations&utm_medium=website&utm_campaign=book_page&utm_content=signed_copy'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='btn-outline inline-block no-underline hover:no-underline'
+                aria-label='Order a signed copy of Big Ideas Little Pictures'
+                onClick={() => {
+                  track('Book-store-link', { location: 'Signed copy' })
+                }}
+              >
+                Order a signed copy
+              </Link>
+              <span className='block text-sm text-gray-600 dark:text-gray-300 mt-2'>
                 from my friends at South Kensington Books in London
-              </p>
-            </div>
+              </span>
+            </p>
 
             {homeRegions.length > 0 && (
               <div className='space-y-10 mt-10'>
@@ -659,14 +614,6 @@ const Book = ({ country }) => {
 
           </div>
 
-          <div id='video-previews' className='mt-24 max-w-3xl mx-auto scroll-mt-24'>
-            <h2 className='text-3xl font-bold mb-8 text-center'>Video previews</h2>
-            <div className='space-y-8'>
-              <LiteYouTube id='dQqP6aBLHYc' title='Big Ideas Little Pictures — book preview' params='controls=0&rel=0' />
-              <LiteYouTube id='1NQqM5ZjR2g' title='Big Ideas Little Pictures — inside the book' />
-            </div>
-          </div>
-
           <div id='praise' className='mt-24 max-w-5xl mx-auto scroll-mt-24'>
             <h2 className='text-3xl font-bold mb-12 text-center'>Praise for Big Ideas Little Pictures</h2>
 
@@ -693,7 +640,7 @@ const Book = ({ country }) => {
           <div className='not-prose relative left-1/2 w-screen -translate-x-1/2 mt-16'>
             <ReaderQuotes
               quotes={BOOK_REVIEWS}
-              heading='Some nice things people have said'
+              heading='More nice things people have said'
               id='from-readers'
               icon={BOOK_REVIEWS_ICON}
               invite={null}
@@ -706,6 +653,19 @@ const Book = ({ country }) => {
           <div id='faq' className='mt-24 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8'>
             <h2 className='text-3xl font-bold mb-8 text-center'>FAQ</h2>
             <div className='max-w-none border-t border-gray-200 dark:border-gray-700'>
+              <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
+                <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
+                  <span>Can I have a sneak preview?</span>
+                  <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
+                </summary>
+                <div className='mt-3'>
+                  <p>
+                    Of course. <FancyLink href='https://www.youtube.com/watch?v=1NQqM5ZjR2g' target='_blank' rel='noopener noreferrer' aria-label='Watch a video flicking through Big Ideas Little Pictures'>Watch me flick through the book</FancyLink>, or{' '}
+                    <FancyLink href='https://www.youtube.com/watch?v=dQqP6aBLHYc' target='_blank' rel='noopener noreferrer' aria-label='Watch the Big Ideas Little Pictures book preview'>watch the book preview</FancyLink>.
+                    You can also <FancyLink href='#sample-pages' aria-label='See sample pages'>see sample pages above</FancyLink>.
+                  </p>
+                </div>
+              </details>
               <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
                 <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
                   <span>Can I order in a different country?</span>
@@ -864,12 +824,16 @@ const Book = ({ country }) => {
           </div>
 
           <div className='mt-24 text-center'>
-            <Link
+            <a
               href='#order'
+              onClick={(e) => {
+                track('Book-footer-buy')
+                scrollToOrder(e)
+              }}
               className='btn-primary inline-block w-full sm:w-auto px-12 py-3 text-lg no-underline hover:no-underline'
             >
               Order now
-            </Link>
+            </a>
           </div>
         </div>
       </div>
