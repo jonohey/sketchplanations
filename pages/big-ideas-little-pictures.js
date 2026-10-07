@@ -8,13 +8,14 @@ import { BOOK_REVIEWS } from 'helpers/bookReviews'
 import { buildBookProductGraph } from 'helpers/structuredData'
 import bigIdeasLittlePicturesCoverImage from 'images/big-ideas-little-pictures-book-cover.jpg'
 import Book3D from 'components/Book3D'
-import { ZoomIn } from 'lucide-react'
+import BookPageFlow from 'components/BookPageFlow'
+import FlickThroughVideo from 'components/FlickThroughVideo'
+import { ChevronDown } from 'lucide-react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { RoughNotation } from 'react-rough-notation'
-import { bookPageImages } from 'utils/bookImages.mjs'
+import { stackBookPageImages } from 'utils/bookImages.mjs'
 import styles from './big-ideas-little-pictures.module.css'
 
 const AMAZON_LINK = 'https://geni.us/big-ideas-book'
@@ -128,12 +129,146 @@ const StoreLinks = ({ stores }) => (
   </div>
 )
 
+const ICON_DIR = '/images/explainer-kit/sketch-icons'
+
+const FACTS = [
+  { icon: `${ICON_DIR}/Book stack.svg`, value: '130+', label: 'sketches, old and new' },
+  { icon: `${ICON_DIR}/Puzzling.svg`, value: '10', label: 'sections, from nature to thinking' },
+  { icon: `${ICON_DIR}/Lightbulb partial.svg`, value: '1', label: 'new idea on every page' },
+]
+
+const AMAZON_RATING = 4.8
+// Kept as a rounded-down label so it doesn't go stale with every new review
+const AMAZON_REVIEWS_LABEL = '200+'
+
+// Stars filled to the real rating rather than rounded up to five
+const RatingSummary = () => (
+  <a
+    href='#from-readers'
+    onClick={scrollToId('from-readers')}
+    className='inline-flex flex-col items-center gap-1 mt-8 no-underline hover:no-underline text-gray-600 dark:text-gray-300'
+    aria-label={`Rated ${AMAZON_RATING} out of 5 from ${AMAZON_REVIEWS_LABEL} Amazon reviews. Read reviews`}
+  >
+    <span className={styles.stars} style={{ '--rating': `${(AMAZON_RATING / 5) * 100}%` }} aria-hidden='true'>
+      ★★★★★
+    </span>
+    <span className='text-xs'>
+      {AMAZON_RATING} · {AMAZON_REVIEWS_LABEL} Amazon reviews
+    </span>
+  </a>
+)
+
+const PRAISE = [
+  {
+    featured: true,
+    name: 'Katy Milkman',
+    role: 'Professor at the Wharton School of the University of Pennsylvania and author of the international bestseller How to Change',
+    quote: ["I'm an enormous fan of the wonderful way Jono's sketches bring scientific insights to life for a wide audience."],
+  },
+  {
+    featured: true,
+    name: 'Mike Rohde',
+    role: 'Bestselling author of The Sketchnote Handbook and illustrator of REWORK',
+    quote: ["Big Ideas, Little Pictures is a magical collection of ideas, concepts, and wisdom—some that I've wondered about and others I've never thought about before—presented in a clear visual way that makes Jono's sketchplanations a joy to read, reference, and share. It's a fantastic book!"],
+  },
+  {
+    featured: true,
+    name: 'Dan Roam',
+    role: 'International bestselling author of The Back of the Napkin, and Draw To Win',
+    quote: [
+      "As the world becomes more complex and fraught, the more we need clear and honest pictures to show us a better way. In his marvellous book, Big Ideas, Little Pictures, Jono Hey gives us the pictures we need.",
+      "I can't think of a better gift for my mind, and yours.",
+    ],
+  },
+  {
+    name: 'Mark Frauenfelder',
+    role: 'Founder of Boing Boing, Recomendo, Make and Wired magazines',
+    quote: ["Jono's superpower is the ability to break down complex concepts into digestible, visually appealing explanations."],
+  },
+  {
+    name: 'Brendan Leonard',
+    role: 'Creator at Semi-rad and author of Make It: 50 Myths and Truths About Creating',
+    quote: ["Jono Hey's Big Ideas Little Pictures is the kind of book that I want to devour all at once, with his brilliantly efficient illustrations breaking down complex ideas—but that I make myself ration to a few pages per day, to give myself time to absorb everything. Either way, it's the best bet I have to make myself seem more interesting as a dinner party guest."],
+  },
+  {
+    name: 'Richard Shotton',
+    role: 'Author of The Choice Factory',
+    quote: ['Brilliant! It distills a variety of complex and profound ideas into simple to understand and beautifully drawn sketches.'],
+  },
+  {
+    name: 'Trenton Moss',
+    role: 'Bestselling author of Human Powered and Founder of Team Sterka',
+    quote: ["I've loved following Sketchplanations for years. And finally, Jono has brought it all together in this wonderful book. Keep a copy in your home and show it to everyone who comes over."],
+  },
+  {
+    name: 'Eva-Lotta Lamm',
+    role: 'Designer and Visual Thinker',
+    quote: [
+      "Big Ideas, Little Pictures by Jono Hey is a beautiful and powerful book at the same time. On each page, Jono visualises a complex concept into a clear, engaging little drawing. His sketches don't just simplify ideas, they bring them to life and make them understandable at a glance.",
+      "As a fellow visual thinker I'm in love with this wonderful book. It's a joy to dive in at any page, to get drawn in by the pictures and to learn a new fact with every turn of the page.",
+    ],
+  },
+  {
+    name: 'Gillian Cross',
+    role: "Multi-award-winning children's book author",
+    quote: [
+      "I love this book. It will delight adults, fascinate children and help us all to grasp important ideas.",
+      "Want to understand the four horsemen of relationship apocalypse? Or different types of phishing? Or the ten essentials for wilderness safety? Jono Hey's explanations are brief and clear – but it's his pictures that stick in your head.",
+      "I meant to read it slowly, a few pages at a time, but it's such fun that I kept thinking, Just one more picture and finished it in one sitting.",
+    ],
+  },
+  {
+    name: 'Jason Barron',
+    role: 'Author of The Visual MBA',
+    quote: ["Jono's delightful book is a fantastic blend of text and visuals, making the topics easy to understand and remember. I found myself eager to turn each page, learning things I had never known before. I love this book and recommend it to anyone looking to enrich their knowledge at super speed with some creativity and fun."],
+  },
+  {
+    name: 'Dad',
+    quote: [
+      <>
+        I resent our bedroom looking so messy in the{' '}
+        <FancyLink href='/tsundoku' aria-label='Learn more about Tsundoku'>
+          tsundoku
+        </FancyLink>{' '}
+        sketch.
+      </>,
+    ],
+  },
+]
+
+const PraiseCard = ({ praise, large = false }) => (
+  <figure className={`m-0 ${styles.praiseCard} ${large ? styles.praiseCardLarge : ''}`}>
+    <blockquote className={`m-0 p-0 border-0 not-italic ${large ? 'text-lg' : 'text-base'} leading-relaxed`}>
+      {praise.quote.map((paragraph, i) => (
+        <p key={i} className='mt-0 mb-4 last:mb-0'>
+          {paragraph}
+        </p>
+      ))}
+    </blockquote>
+    <figcaption className='mt-5'>
+      <cite className='not-italic font-semibold block'>
+        <span aria-hidden='true'>— </span>
+        {praise.name}
+      </cite>
+      {praise.role && <span className='text-sm text-gray-600 dark:text-gray-300'>{praise.role}</span>}
+    </figcaption>
+  </figure>
+)
+
 export async function getServerSideProps({ req }) {
   const country = req.headers['x-country'] || 'BOTH'
   return {
     props: { country },
   }
 }
+
+const scrollToId = (id) => (e) => {
+  e.preventDefault()
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  document.getElementById(id)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' })
+}
+
+const scrollToOrder = scrollToId('order')
 
 const Book = ({ country }) => {
   const [showAllStores, setShowAllStores] = useState(false)
@@ -204,13 +339,7 @@ const Book = ({ country }) => {
                   spineTitle='Big Ideas Little Pictures'
                   spineAuthor='Jono Hey'
                 />
-                <div className='flex justify-center mt-8' aria-hidden='true'>
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className='text-yellow-400 text-2xl'>
-                      ★
-                    </span>
-                  ))}
-                </div>
+                <RatingSummary />
               </div>
             </div>
             <div className='w-full md:w-1/2'>
@@ -222,21 +351,56 @@ const Book = ({ country }) => {
                 </blockquote>
                 <figcaption className={`mt-5 text-2xl ${styles.heroQuoteCite}`}>Bill Gates</figcaption>
               </figure>
+              <div className='mt-8 not-prose'>
+                <a
+                  href='#order'
+                  className='btn-primary inline-block text-center px-8 py-3 text-lg no-underline hover:no-underline'
+                  onClick={(e) => {
+                    track('Book-hero-buy')
+                    scrollToOrder(e)
+                  }}
+                >
+                  Buy the book
+                </a>
+              </div>
             </div>
           </div>
 
           <div id='intro' className='text-center mt-12 max-w-3xl mx-auto'>
             <h1 className='text-4xl font-bold mb-2'>Big Ideas Little Pictures</h1>
-            <p className='text-xl text-gray-600 dark:text-gray-300 mb-8'>Explaining the world one sketch at a time</p>
+            <p className='text-xl text-gray-600 dark:text-gray-300 mb-8'>Explaining the world one sketch at a time, by Jono Hey</p>
             <p className='text-lg leading-relaxed'>
-              Sketchplanations in a book! And now an eBook too. In this 288-page collection, Jono Hey collects together over 130
+              Sketchplanations in a book! And now an eBook too. In this 288-page collection, I&apos;ve collected over 130
               inspiring, funny and relatable sketches about life. Combining existing and new topics, Big Ideas Little
               Pictures is a perfect gift of the wisdom and joy of Sketchplanations. Pop it on the table and start having great conversations about ideas.
             </p>
           </div>
 
+          <ul className='not-prose list-none p-0 mt-12 max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6'>
+            {FACTS.map((fact) => (
+              <li key={fact.label} className='flex sm:flex-col items-center gap-4 sm:gap-2 text-left sm:text-center'>
+                <Image src={fact.icon} alt='' width={64} height={64} className='h-16 w-16 object-contain shrink-0' unoptimized />
+                <span>
+                  <span className='block text-2xl font-bold leading-tight'>{fact.value}</span>
+                  <span className='block text-gray-600 dark:text-gray-300' style={{ textWrap: 'balance' }}>{fact.label}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <div id='preview-video' className='mt-16 max-w-3xl mx-auto scroll-mt-24'>
+            <FlickThroughVideo
+              src='/videos/big-ideas-flick-through.mp4'
+              poster='/videos/big-ideas-flick-through-poster.jpg'
+              title='Flicking through Big Ideas Little Pictures'
+            />
+          </div>
+
           <div id='order' className='mt-24 max-w-3xl mx-auto scroll-mt-24'>
-            <h2 className='text-3xl font-bold mb-8 text-center'>Order Big Ideas Little Pictures</h2>
+            <div className='flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 mb-8'>
+              <Image src={`${ICON_DIR}/Shopper with bags.svg`} alt='' width={523} height={496} className='h-20 w-auto m-0' unoptimized />
+              <h2 className='text-3xl font-bold m-0 text-center'>Order Big Ideas Little Pictures</h2>
+            </div>
 
             <div className='text-center'>
               <a
@@ -256,32 +420,23 @@ const Book = ({ country }) => {
               </p>
             </div>
 
-            <div className='bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mt-8 text-center'>
-              <p className='mb-0'>
-                <Link
-                  href='https://www.kensingtonbooks.co.uk/product-page/big-ideas-little-pictures?utm_source=sketchplanations&utm_medium=website&utm_campaign=book_page&utm_content=signed_copy'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  aria-label='Order a signed copy of Big Ideas Little Pictures'
-                  onClick={() => {
-                    track('Book-store-link', { location: 'Signed copy' })
-                  }}
-                >
-                  Order an exclusive{' '}
-                  <RoughNotation
-                    type='circle'
-                    show={true}
-                    color='var(--color-brightRed)'
-                    animate={false}
-                    padding={3}
-                  >
-                    <span style={{ display: 'inline-block' }}>signed copy</span>
-                  </RoughNotation>
-                </Link>
-                <br />
+            <p className='mt-8 mb-0 text-center'>
+              <Link
+                href='https://www.kensingtonbooks.co.uk/product-page/big-ideas-little-pictures?utm_source=sketchplanations&utm_medium=website&utm_campaign=book_page&utm_content=signed_copy'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='btn-outline inline-block no-underline hover:no-underline'
+                aria-label='Order a signed copy of Big Ideas Little Pictures'
+                onClick={() => {
+                  track('Book-store-link', { location: 'Signed copy' })
+                }}
+              >
+                Order a signed copy
+              </Link>
+              <span className='block text-sm text-gray-600 dark:text-gray-300 mt-2'>
                 from my friends at South Kensington Books in London
-              </p>
-            </div>
+              </span>
+            </p>
 
             {homeRegions.length > 0 && (
               <div className='space-y-10 mt-10'>
@@ -429,315 +584,80 @@ const Book = ({ country }) => {
               </div>
             </div>
 
-            {/* Gallery in What's Inside section */}
-            <h3 id='sample-pages' className='text-2xl font-bold text-center mb-8'>Sample pages</h3>
-            <p className='text-center text-gray-600 dark:text-gray-300 mb-8'>
-              A peek inside. <span className='hidden sm:inline'>Click to zoom in.</span><span className='sm:hidden'>Tap to zoom in.</span>
-            </p>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16'>
-              {bookPageImages.map((image, index) => (
-                <div
-                  key={image.filename}
-                  className={`aspect-[3/2] relative group cursor-pointer rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ${styles.bookPageContainer}`}
-                  onClick={() => {
-                    setGalleryIndex(index)
-                    setGalleryOpen(true)
-                  }}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault()
-                      setGalleryIndex(index)
-                      setGalleryOpen(true)
-                    }
-                  }}
-                  aria-label={`View ${image.conceptName} in gallery`}
-                >
-                  <div className="absolute inset-0 flex items-center justify-center p-2">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      width={400}
-                      height={600}
-                      className={`${styles.bookPageImageAlt} group-hover:scale-105 transition-transform duration-300`}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      loading="lazy"
-                      quality={75}
-                    />
-                  </div>
-                  <div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center pointer-events-none'>
-                    <div className={`${styles.zoomHint} bg-white/90 dark:bg-gray-800/90 p-2 rounded-full`}>
-                      <ZoomIn size={24} className="text-gray-700 dark:text-gray-200" />
-                    </div>
-                  </div>
-                </div>
+          </div>
+
+          <div id='sample-pages' className='not-prose relative left-1/2 w-screen -translate-x-1/2 mt-16 scroll-mt-24' style={{ overflowX: 'clip' }}>
+            <BookPageFlow
+              images={stackBookPageImages}
+              onOpen={(index) => {
+                setGalleryIndex(index)
+                setGalleryOpen(true)
+              }}
+            />
+            <p className='text-center text-sm text-gray-600 dark:text-gray-300 mt-0 mb-0'>Sample pages</p>
+          </div>
+
+          <div id='praise' className='mt-16 max-w-5xl mx-auto scroll-mt-24'>
+            <h2 className='text-3xl font-bold mb-12 text-center'>Praise for Big Ideas Little Pictures</h2>
+
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-6 not-prose'>
+              {PRAISE.filter((q) => q.featured).map((q) => (
+                <PraiseCard key={q.name} praise={q} large />
               ))}
             </div>
 
-          </div>
-
-          <div id='video-previews' className='mt-24 max-w-3xl mx-auto scroll-mt-24'>
-            <h2 className='text-3xl font-bold mb-8 text-center'>Video previews</h2>
-            <div className='space-y-8'>
-              <div className={styles.youtube_container}>
-                <iframe
-                  src='https://www.youtube.com/embed/dQqP6aBLHYc?si=oogeEYEXru3cs53s&controls=0&rel=0'
-                  title='Big Ideas Little Pictures — book preview'
-                  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-                  allowFullScreen
-                  loading="lazy"
-                ></iframe>
+            <details className={`mt-10 not-prose ${styles.morePraise}`}>
+              <summary className='flex items-center justify-center gap-1 cursor-pointer font-medium text-blue hover:underline'>
+                <span className={styles.morePraiseOpen}>Read more praise</span>
+                <span className={styles.morePraiseClose}>Show less</span>
+                <ChevronDown size={18} aria-hidden='true' className={styles.morePraiseCaret} />
+              </summary>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-8'>
+                {PRAISE.filter((q) => !q.featured).map((q) => (
+                  <PraiseCard key={q.name} praise={q} />
+                ))}
               </div>
-              <div className={styles.youtube_container}>
-                <iframe
-                  src='https://www.youtube.com/embed/1NQqM5ZjR2g?si=BOQLpNP4RDwVLnQ4'
-                  title='Big Ideas Little Pictures — inside the book'
-                  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-                  referrerPolicy='strict-origin-when-cross-origin'
-                  allowFullScreen
-                  loading="lazy"
-                ></iframe>
-              </div>
-            </div>
-          </div>
-
-          <div id='praise' className='mt-24'>
-            <h2 className='text-3xl font-bold mb-12 text-center'>Praise for Big Ideas Little Pictures</h2>
-
-            <div className='max-w-5xl mx-auto px-4 sm:px-6 lg:px-8'>
-              <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-                {/* Katy Milkman Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    &quot;I&apos;m an enormous fan of the wonderful way Jono&apos;s sketches bring scientific insights
-                    to life for a wide audience.&quot;
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <div>
-                      <cite className={`${styles.cite} font-semibold block`}>Katy Milkman</cite>
-                      <div className='text-sm text-gray-600 dark:text-gray-300'>
-                        Professor at the Wharton School of the University of Pennsylvania and author of the
-                        international bestseller How to Change
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-                {/* Mark Frauenfelder Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    &quot;Jono&apos;s superpower is the ability to break down complex concepts into digestible, visually
-                    appealing explanations.&quot;
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <div>
-                      <cite className={`${styles.cite} font-semibold block`}>Mark Frauenfelder</cite>
-                      <div className='text-sm text-gray-600 dark:text-gray-300'>
-                        Founder of Boing Boing, Recomendo, Make and Wired magazines
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Mike Rohde Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    &quot;Big Ideas, Little Pictures is a magical collection of ideas, concepts, and wisdom—some that
-                    I&apos;ve wondered about and others I&apos;ve never thought about before—presented in a clear
-                    visual way that makes Jono&apos;s sketchplanations a joy to read, reference, and share. It&apos;s a
-                    fantastic book!&quot;
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <div>
-                      <cite className={`${styles.cite} font-semibold block`}>Mike Rohde</cite>
-                      <div className='text-sm text-gray-600 dark:text-gray-300'>
-                        Bestselling author of The Sketchnote Handbook and illustrator of REWORK
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Dan Roam Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    <p>
-                      As the world becomes more complex and fraught, the more we need clear and honest pictures to
-                      show us a better way. In his marvellous book, <i>Big Ideas, Little Pictures</i>, Jono Hey gives
-                      us the pictures we need.
-                    </p>
-                    <p>
-                      Whether exploring the size of the universe, unpacking the paradox of
-                      choice, or illuminating the pure joy of the Golden Ratio, Jono&apos;s brilliant sketches make
-                      everything make more sense.
-                    </p>
-                    <p>
-                      I can&apos;t think of a better gift for my mind, and yours.
-                    </p>
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <div>
-                      <cite className={`${styles.cite} font-semibold block`}>Dan Roam</cite>
-                      <div className='text-sm text-gray-600 dark:text-gray-300'>
-                        International bestselling author of The Back of the Napkin, and Draw To Win
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Brendan Leonard Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    &quot;Jono Hey&apos;s Big Ideas Little Pictures is the kind of book that I want to devour all at
-                    once, with his brilliantly efficient illustrations breaking down complex ideas—but that I make
-                    myself ration to a few pages per day, to give myself time to absorb everything. Either way,
-                    it&apos;s the best bet I have to make myself seem more interesting as a dinner party guest.&quot;
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <div>
-                      <cite className={`${styles.cite} font-semibold block`}>Brendan Leonard</cite>
-                      <div className='text-sm text-gray-600 dark:text-gray-300'>
-                        Creator at Semi-rad and author of Make It: 50 Myths and Truths About Creating
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-                {/* Richard Shotton Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    &quot;Brilliant! It distills a variety of complex and profound ideas into simple to understand and
-                    beautifully drawn sketches.&quot;
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <div>
-                      <cite className={`${styles.cite} font-semibold block`}>Richard Shotton</cite>
-                      <div className='text-sm text-gray-600 dark:text-gray-300'>Author of The Choice Factory</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Trenton Moss Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    &quot;I&apos;ve loved following Sketchplanations for years. And finally, Jono has brought it all
-                    together in this wonderful book. Keep a copy in your home and show it to everyone who comes
-                    over.&quot;
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <div>
-                      <cite className={`${styles.cite} font-semibold block`}>Trenton Moss</cite>
-                      <div className='text-sm text-gray-600 dark:text-gray-300'>
-                        Bestselling author of Human Powered and Founder of Team Sterka
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Eva-Lotta Lamm Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    <p>
-                      <i>Big Ideas, Little Pictures</i> by Jono Hey is a beautiful and powerful book at the
-                      same time. On each page, Jono visualises a complex concept into a clear, engaging little drawing.
-                      His sketches don&apos;t just simplify ideas, they bring them to life and make them understandable at
-                      a glance.
-                    </p>
-                    <p>
-                      This large collection of concepts, scientific findings and interesting frameworks is
-                      delightful and a real testament to the power of communicating through simple visuals. This body of
-                      work is even more impressive as it was created by Jono over years of drawing one concept per week.
-                    </p>
-                    <p>
-                      As a fellow visual thinker I&apos;m in love with this wonderful book. It&apos;s a joy to dive in at
-                      any page, to get drawn in by the pictures and to learn a new fact with every turn of the page.
-                    </p>
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <div>
-                      <cite className={`${styles.cite} font-semibold block`}>Eva-Lotta Lamm</cite>
-                      <div className='text-sm text-gray-600 dark:text-gray-300'>Designer and Visual Thinker</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Gillian Cross Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    <p>
-                      I love this book. It will delight adults, fascinate children and help us all to grasp
-                      important ideas.
-                    </p>
-                    <p>Want to understand the four horsemen of relationship apocalypse? Or different types
-                      of phishing? Or the ten essentials for wilderness safety? Jono Hey&apos;s explanations are brief and
-                      clear – but it&apos;s his pictures that stick in your head. Every time you turn over a page,
-                      there&apos;s something new. I can&apos;t wait to try out the instructions for skipping rocks like a
-                      pro and taking better photographs—and I&apos;ll certainly take up the Dracula sneeze.
-                    </p>
-                    <p>
-                      I meant to read it slowly, a few pages at a time, but it&apos;s such fun that I kept thinking,
-                      Just one more picture and finished it in one sitting. I&apos;m looking forward to re-reading it very
-                      soon.
-                    </p>
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <div>
-                      <cite className={`${styles.cite} font-semibold block`}>Gillian Cross</cite>
-                      <div className='text-sm text-gray-600 dark:text-gray-300'>Multi-award-winning children&apos;s book author</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Jason Barron Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    &quot;Jono&apos;s delightful book is a fantastic blend of text and visuals, making the topics easy
-                    to understand and remember. I found myself eager to turn each page, learning things I had never
-                    known before. I love this book and recommend it to anyone looking to enrich their knowledge at super
-                    speed with some creativity and fun.&quot;
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <div>
-                      <cite className={`${styles.cite} font-semibold block`}>Jason Barron</cite>
-                      <div className='text-sm text-gray-600 dark:text-gray-300'>Author of The Visual MBA</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Dad Quote */}
-                <div className='bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-sm'>
-                  <blockquote className={`text-base mb-6 ${styles.blockquote}`}>
-                    &quot;I resent our bedroom looking so messy in the <FancyLink href='/tsundoku' aria-label='Learn more about Tsundoku'>tsundoku</FancyLink> sketch.&quot;
-                  </blockquote>
-                  <div className='flex items-center gap-4'>
-                    <cite className={`${styles.cite} font-semibold`}>Dad</cite>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </details>
           </div>
 
           {/* Full-bleed so the row and its dark-mode backdrop span the page */}
           <div className='not-prose relative left-1/2 w-screen -translate-x-1/2 mt-16'>
             <ReaderQuotes
               quotes={BOOK_REVIEWS}
-              heading='Some nice things people have said'
+              heading='More nice things people have said'
               id='from-readers'
               icon={BOOK_REVIEWS_ICON}
               invite={null}
               sourceLinks={{ amazon: AMAZON_LINK, goodreads: GOODREADS_LINK }}
               analyticsPrefix='book_reviews'
-              className='!mt-0'
+              className='!mt-0 scroll-mt-24'
             />
           </div>
 
           <div id='faq' className='mt-24 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8'>
             <h2 className='text-3xl font-bold mb-8 text-center'>FAQ</h2>
-            <div className='space-y-8 max-w-none'>
-              <div>
-                <h3>Can I order in a different country?</h3>
+            <div className='max-w-none border-t border-gray-200 dark:border-gray-700'>
+              <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
+                <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
+                  <h3 className='m-0 text-lg font-semibold'>Can I have a sneak preview?</h3>
+                  <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
+                </summary>
+                <div className='mt-3'>
+                  <p>
+                    I made a{' '}
+                    <FancyLink href='https://www.youtube.com/watch?v=1NQqM5ZjR2g' target='_blank' rel='noopener noreferrer' aria-label='Watch the preview video walking through Big Ideas Little Pictures'>
+                      preview video walking through what&apos;s in it
+                    </FancyLink>
+                    .
+                  </p>
+                </div>
+              </details>
+              <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
+                <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
+                  <h3 className='m-0 text-lg font-semibold'>Can I order in a different country?</h3>
+                  <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
+                </summary>
+                <div className='mt-3'>
                 <p>
                   Yes. The Amazon button redirects to your local Amazon store automatically. If you&apos;re in the US, UK,
                   Australia, or another region with links on this page, you&apos;ll also see local bookstores for your area.
@@ -752,10 +672,15 @@ const Book = ({ country }) => {
                   </FancyLink>
                   {' '}— it helps us prioritise distribution where it&apos;s needed most.
                 </p>
-              </div>
+                </div>
+              </details>
 
-              <div>
-                <h3>Is there an eBook version?</h3>
+              <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
+                <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
+                  <h3 className='m-0 text-lg font-semibold'>Is there an eBook version?</h3>
+                  <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
+                </summary>
+                <div className='mt-3'>
                 <p>
                   Yes! As of May 2025 there&apos;s now an eBook of Big Ideas Little Pictures.
                 </p>
@@ -767,10 +692,18 @@ const Book = ({ country }) => {
                     aria-label='Buy the eBook of Big Ideas Little Pictures'
                   >order links above</FancyLink> — the Amazon button often includes the Kindle edition too, depending on your store. It&apos;s also on B&N, Apple Books, Kobo, and others.
                 </p>
-              </div>
+                <p>
+                  A note on Kindles: because the book is so visual, the Kindle edition is made for the Kindle app (on a phone or tablet) and doesn&apos;t work on a regular black-and-white Kindle.
+                </p>
+                </div>
+              </details>
 
-              <div>
-                <h3>Do you have photos or images I can use to share?</h3>
+              <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
+                <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
+                  <h3 className='m-0 text-lg font-semibold'>Do you have photos or images I can use to share?</h3>
+                  <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
+                </summary>
+                <div className='mt-3'>
                 <p>
                   Yes. Please use images in the{' '}
                   <FancyLink 
@@ -783,23 +716,38 @@ const Book = ({ country }) => {
                   </FancyLink>
                   . Let me know if it&apos;s missing something.
                 </p>
-              </div>
+                </div>
+              </details>
 
-              <div>
-                <h3>Is it available in other languages?</h3>
+              <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
+                <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
+                  <h3 className='m-0 text-lg font-semibold'>Is it available in other languages?</h3>
+                  <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
+                </summary>
+                <div className='mt-3'>
                 <p>
                   Not yet. Do let me know if you&apos;d like it in another language—it always helps to gauge demand.
                 </p>
-              </div>
+                </div>
+              </details>
 
-              <div>
-                <h3>What is the ISBN for Big Ideas Little Pictures?</h3>
+              <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
+                <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
+                  <h3 className='m-0 text-lg font-semibold'>What is the ISBN for Big Ideas Little Pictures?</h3>
+                  <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
+                </summary>
+                <div className='mt-3'>
                 <p>The ISBN-13 is 978-1956403572</p>
                 <p>ISBN-10 is 1956403574</p>
-              </div>
+                </div>
+              </details>
 
-              <div>
-                <h3>What&apos;s the picture on the cover?</h3>
+              <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
+                <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
+                  <h3 className='m-0 text-lg font-semibold'>What&apos;s the picture on the cover?</h3>
+                  <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
+                </summary>
+                <div className='mt-3'>
                 <p>
                   The picture is my own version of Hokusai&apos;s remarkable <i>The Great Wave off
                   Kanagawa</i> or just the <i>Great Wave</i>. I once saw
@@ -821,10 +769,15 @@ const Book = ({ country }) => {
                     Buy a print of the Sketchplanations Wave
                   </FancyLink>
                 </p>
-              </div>
+                </div>
+              </details>
 
-              <div>
-                <h3>Got another question? Please contact me</h3>
+              <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
+                <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
+                  <h3 className='m-0 text-lg font-semibold'>Got another question? Please contact me</h3>
+                  <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
+                </summary>
+                <div className='mt-3'>
                 <p>
                   I&apos;m at:{' '}
                   <FancyLink 
@@ -834,12 +787,16 @@ const Book = ({ country }) => {
                     jono.hey@gmail.com
                   </FancyLink>
                 </p>
-              </div>
+                </div>
+              </details>
             </div>
           </div>
 
           <div id='why' className='mt-24 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8'>
-            <h2 className='text-3xl font-bold mb-8'>Why a book?</h2>
+            <div className='flex items-center gap-4 mb-8'>
+              <Image src={`${ICON_DIR}/Writing.svg`} alt='' width={72} height={72} className='h-16 w-16 object-contain m-0' unoptimized />
+              <h2 className='text-3xl font-bold m-0'>Why a book?</h2>
+            </div>
             <div className='space-y-6'>
               <p>
                 I started making sketchplanations in 2013 by sketching them in actual books. While putting the sketches
@@ -855,20 +812,24 @@ const Book = ({ country }) => {
             </div>
           </div>
 
-          <div className='mt-24 text-center'>
-            <Link
+          <div className='mt-12 text-center'>
+            <a
               href='#order'
+              onClick={(e) => {
+                track('Book-footer-buy')
+                scrollToOrder(e)
+              }}
               className='btn-primary inline-block w-full sm:w-auto px-12 py-3 text-lg no-underline hover:no-underline'
             >
               Order now
-            </Link>
+            </a>
           </div>
         </div>
       </div>
 
       {/* Image Gallery Modal */}
       <ImageGallery
-        images={bookPageImages}
+        images={stackBookPageImages}
         initialIndex={galleryIndex}
         isOpen={galleryOpen}
         onClose={() => setGalleryOpen(false)}

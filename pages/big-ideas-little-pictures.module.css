@@ -1,17 +1,3 @@
-.youtube_container iframe {
-  aspect-ratio: 16 / 9;
-  height: auto;
-  width: 100%;
-}
-
-.blockquote p:not(:last-child) {
-  margin-bottom: 1rem;
-}
-
-.cite {
-  font-style: normal;
-}
-
 .tocGrid {
   display: grid;
   grid-template-columns: 1fr;
@@ -73,44 +59,6 @@
   color: var(--color-textSubdued);
 }
 
-/* Book page image gallery styles */
-.bookPageImageAlt {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-}
-
-.bookPageContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f9fafb;
-  position: relative;
-}
-
-.zoomHint {
-  opacity: 1;
-  transition: opacity 0.3s;
-}
-
-@media (min-width: 768px) {
-  .zoomHint {
-    opacity: 0;
-  }
-
-  .bookPageContainer:hover .zoomHint {
-    opacity: 1;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .bookPageContainer {
-    background-color: #1f2937;
-  }
-}
-
 .heroQuote {
 	position: relative;
 	padding-top: 2.25rem;
@@ -147,4 +95,91 @@
 	width: 2rem;
 	height: 2px;
 	background: var(--color-blue);
+}
+
+/* Partial-fill rating stars: --rating sets how much of the row is gold */
+.stars {
+	--rating: 100%;
+	display: inline-block;
+	font-size: 1.75rem;
+	line-height: 1;
+	letter-spacing: 0.1em;
+	background: linear-gradient(90deg, #fbbf24 var(--rating), #d1d5db var(--rating));
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+}
+
+@media (prefers-color-scheme: dark) {
+	.stars {
+		background: linear-gradient(90deg, #fbbf24 var(--rating), #4b5563 var(--rating));
+		-webkit-background-clip: text;
+		background-clip: text;
+	}
+}
+
+/* Praise quotes */
+.praiseCard {
+	position: relative;
+	padding: 1.25rem 1.5rem;
+	border-left: 3px solid var(--color-blue);
+	background: var(--color-backgroundSubdued, rgba(127, 127, 127, 0.07));
+	border-radius: 0.5rem;
+}
+
+.praiseCardLarge {
+	padding: 2.75rem 1.5rem 1.5rem;
+	border-left: 0;
+	border-top: 3px solid var(--color-blue);
+	background: var(--color-backgroundSubdued, rgba(127, 127, 127, 0.07));
+	border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.praiseCardLarge::before {
+	content: "\201C";
+	position: absolute;
+	top: 0.75rem;
+	left: 1.4rem;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 3rem;
+	line-height: 1;
+	color: var(--color-blue);
+	opacity: 0.6;
+}
+
+.praiseCard blockquote p::before,
+.praiseCard blockquote p::after {
+	content: none;
+}
+
+.morePraise summary {
+	list-style: none;
+}
+
+.morePraise summary::-webkit-details-marker {
+	display: none;
+}
+
+.morePraiseClose,
+.morePraise[open] .morePraiseOpen {
+	display: none;
+}
+
+.morePraise[open] .morePraiseClose {
+	display: inline;
+}
+
+.morePraiseCaret {
+	transition: transform 0.2s;
+}
+
+.morePraise[open] .morePraiseCaret {
+	transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.morePraiseCaret {
+		transition: none;
+	}
 }
