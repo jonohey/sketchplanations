@@ -143,7 +143,8 @@ const AMAZON_REVIEWS_LABEL = '200+'
 const RatingSummary = () => (
   <a
     href='#from-readers'
-    className='inline-flex flex-col items-center gap-1 mt-8 no-underline hover:underline text-gray-600 dark:text-gray-300'
+    onClick={scrollToId('from-readers')}
+    className='inline-flex flex-col items-center gap-1 mt-8 no-underline hover:no-underline text-gray-600 dark:text-gray-300'
     aria-label={`Rated ${AMAZON_RATING} out of 5 from ${AMAZON_REVIEWS_LABEL} Amazon reviews. Read reviews`}
   >
     <span className={styles.stars} style={{ '--rating': `${(AMAZON_RATING / 5) * 100}%` }} aria-hidden='true'>
@@ -256,11 +257,13 @@ export async function getServerSideProps({ req }) {
   }
 }
 
-const scrollToOrder = (e) => {
+const scrollToId = (id) => (e) => {
   e.preventDefault()
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  document.getElementById('order')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' })
+  document.getElementById(id)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' })
 }
+
+const scrollToOrder = scrollToId('order')
 
 const Book = ({ country }) => {
   const [showAllStores, setShowAllStores] = useState(false)
@@ -646,7 +649,7 @@ const Book = ({ country }) => {
               invite={null}
               sourceLinks={{ amazon: AMAZON_LINK, goodreads: GOODREADS_LINK }}
               analyticsPrefix='book_reviews'
-              className='!mt-0'
+              className='!mt-0 scroll-mt-24'
             />
           </div>
 
