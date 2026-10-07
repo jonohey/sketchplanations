@@ -29,7 +29,7 @@ const BookPageFlow = ({ images, onOpen }) => {
   const height = vw < 640 ? 150 : vw < 1024 ? 220 : 290
   const width = Math.round(height * 2)
   // How far the first page stands clear of the second so it shows whole
-  const open = width * 0.5
+  const open = width * 0.35
   // The first page sits partly off the left of the screen (its text side is the least
   // interesting bit), which leaves more room to show each of the pages that follow
   const startLeft = -Math.round(width * 0.5)
