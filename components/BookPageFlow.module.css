@@ -1,0 +1,50 @@
+.root {
+	--page-height: 12rem;
+	--step: 6.5rem;
+	outline-offset: 4px;
+	touch-action: pan-y;
+	user-select: none;
+}
+
+@media (min-width: 768px) {
+	.root {
+		--page-height: 19rem;
+		--step: 11rem;
+	}
+}
+
+.stage {
+	position: relative;
+	height: calc(var(--page-height) + 3rem);
+	padding-top: 1.5rem;
+	perspective: 1400px;
+	perspective-origin: 50% 40%;
+}
+
+.page {
+	position: absolute;
+	top: 1.5rem;
+	left: 50%;
+	display: block;
+	padding: 0;
+	border: 0;
+	background: none;
+	transition: transform 0.5s cubic-bezier(0.22, 0.8, 0.3, 1), filter 0.5s, opacity 0.4s;
+}
+
+.image {
+	display: block;
+	height: var(--page-height);
+	width: auto;
+	margin: 0;
+	border-radius: 0.375rem;
+	box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+	pointer-events: none;
+	-webkit-user-drag: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.page {
+		transition: none;
+	}
+}

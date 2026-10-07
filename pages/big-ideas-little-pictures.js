@@ -8,6 +8,7 @@ import { BOOK_REVIEWS } from 'helpers/bookReviews'
 import { buildBookProductGraph } from 'helpers/structuredData'
 import bigIdeasLittlePicturesCoverImage from 'images/big-ideas-little-pictures-book-cover.jpg'
 import Book3D from 'components/Book3D'
+import BookPageFlow from 'components/BookPageFlow'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -382,32 +383,14 @@ const Book = ({ country }) => {
             ))}
           </ul>
 
-          {/* Full-bleed strip of spreads; tapping one opens the gallery */}
-          <div id='sample-pages' className='not-prose relative left-1/2 w-screen -translate-x-1/2 mt-16 scroll-mt-24'>
-            <ul className={styles.pageStrip}>
-              {bookPageImages.map((image, index) => (
-                <li key={image.filename} className={styles.pageStripItem}>
-                  <button
-                    type='button'
-                    className={styles.pageStripButton}
-                    onClick={() => {
-                      setGalleryIndex(index)
-                      setGalleryOpen(true)
-                    }}
-                    aria-label={`View ${image.conceptName} in gallery`}
-                  >
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      sizes='(max-width: 768px) 80vw, 480px'
-                      loading='lazy'
-                      quality={75}
-                      className={styles.pageStripImage}
-                    />
-                  </button>
-                </li>
-              ))}
-            </ul>
+          <div id='sample-pages' className='not-prose relative left-1/2 w-screen -translate-x-1/2 mt-16 scroll-mt-24' style={{ overflowX: 'clip' }}>
+            <BookPageFlow
+              images={bookPageImages}
+              onOpen={(index) => {
+                setGalleryIndex(index)
+                setGalleryOpen(true)
+              }}
+            />
           </div>
 
           <div id='order' className='mt-24 max-w-3xl mx-auto scroll-mt-24'>
