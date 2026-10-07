@@ -622,7 +622,7 @@ const Book = ({ country }) => {
             <div className='max-w-none border-t border-gray-200 dark:border-gray-700'>
               <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
                 <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
-                  <span>Can I have a sneak preview?</span>
+                  <h3 className='m-0 text-lg font-semibold'>Can I have a sneak preview?</h3>
                   <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
                 </summary>
                 <div className='mt-3'>
@@ -637,7 +637,7 @@ const Book = ({ country }) => {
               </details>
               <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
                 <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
-                  <span>Can I order in a different country?</span>
+                  <h3 className='m-0 text-lg font-semibold'>Can I order in a different country?</h3>
                   <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
                 </summary>
                 <div className='mt-3'>
@@ -660,7 +660,7 @@ const Book = ({ country }) => {
 
               <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
                 <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
-                  <span>Is there an eBook version?</span>
+                  <h3 className='m-0 text-lg font-semibold'>Is there an eBook version?</h3>
                   <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
                 </summary>
                 <div className='mt-3'>
@@ -683,7 +683,7 @@ const Book = ({ country }) => {
 
               <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
                 <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
-                  <span>Do you have photos or images I can use to share?</span>
+                  <h3 className='m-0 text-lg font-semibold'>Do you have photos or images I can use to share?</h3>
                   <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
                 </summary>
                 <div className='mt-3'>
@@ -704,7 +704,7 @@ const Book = ({ country }) => {
 
               <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
                 <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
-                  <span>Is it available in other languages?</span>
+                  <h3 className='m-0 text-lg font-semibold'>Is it available in other languages?</h3>
                   <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
                 </summary>
                 <div className='mt-3'>
@@ -716,7 +716,7 @@ const Book = ({ country }) => {
 
               <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
                 <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
-                  <span>What is the ISBN for Big Ideas Little Pictures?</span>
+                  <h3 className='m-0 text-lg font-semibold'>What is the ISBN for Big Ideas Little Pictures?</h3>
                   <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
                 </summary>
                 <div className='mt-3'>
@@ -727,7 +727,7 @@ const Book = ({ country }) => {
 
               <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
                 <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
-                  <span>What&apos;s the picture on the cover?</span>
+                  <h3 className='m-0 text-lg font-semibold'>What&apos;s the picture on the cover?</h3>
                   <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
                 </summary>
                 <div className='mt-3'>
@@ -757,7 +757,7 @@ const Book = ({ country }) => {
 
               <details className='group border-b border-gray-200 dark:border-gray-700 py-4'>
                 <summary className='cursor-pointer font-semibold text-lg flex justify-between gap-4 list-none [&::-webkit-details-marker]:hidden'>
-                  <span>Got another question? Please contact me</span>
+                  <h3 className='m-0 text-lg font-semibold'>Got another question? Please contact me</h3>
                   <span aria-hidden='true' className='transition-transform group-open:rotate-45 text-2xl leading-none'>+</span>
                 </summary>
                 <div className='mt-3'>

@@ -1,11 +1,3 @@
-.blockquote p:not(:last-child) {
-  margin-bottom: 1rem;
-}
-
-.cite {
-  font-style: normal;
-}
-
 .tocGrid {
   display: grid;
   grid-template-columns: 1fr;
