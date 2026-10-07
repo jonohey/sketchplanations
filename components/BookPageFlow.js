@@ -30,10 +30,11 @@ const BookPageFlow = ({ images, onOpen }) => {
   const width = Math.round(height * 2)
   // How far the first page stands clear of the second so it shows whole
   const open = width * 0.5
+  // The first page sits partly off the left of the screen (its text side is the least
+  // interesting bit), which leaves more room to show each of the pages that follow
+  const startLeft = -Math.round(width * 0.4)
   // Run the fan out to roughly the right-hand edge of the screen
-  const step = Math.max(14, (vw * 1.05 - width - open) / (n - 1))
-  // The lean pulls the first page's edge inwards, so start a little off-screen to compensate
-  const startLeft = -Math.round(width * 0.1)
+  const step = Math.max(14, (vw * 1.05 - startLeft - width - open) / (n - 1))
 
   return (
     <div ref={rootRef} className={styles.root} style={{ height: height + 96 }} role='group' aria-label='Sample pages from the book'>
