@@ -8,10 +8,15 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import FancyLink from "components/FancyLink";
 import HomeFeaturedSketch from "components/HomeFeaturedSketch";
 import { humanizePublishedDate } from "helpers";
+import {
+	getHistoryEntryCache,
+	setHistoryEntryCache,
+} from "helpers/historyEntryCache";
 import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
 import styles from "./HomeCategoryCarousel.module.css";
 
 const SCROLL_DEBOUNCE_MS = 220;
+const SCROLL_POSITIONS_CACHE_KEY = "home-carousel-scroll";
 
 const CAROUSEL_THUMB_IMGIX_PARAMS = {
 	fit: "crop",
@@ -195,6 +200,26 @@ function HomeCategoryCarouselRow({
 		return () => ro.disconnect();
 	}, [updateScrollState, scheduleUpdateScrollState, sketches, isMounted]);
 
+	// Browsers don't restore the sideways scroll of inner containers, so remember
+	// each carousel's position for this history entry and reapply it on Back.
+	useEffect(() => {
+		if (!isMounted) return;
+		const saved = getHistoryEntryCache(SCROLL_POSITIONS_CACHE_KEY)?.[
+			categoryLabel
+		];
+		if (saved > 0) {
+			scrollRef.current?.scrollTo({ left: saved, behavior: "instant" });
+		}
+	}, [isMounted, categoryLabel]);
+
+	const rememberScrollPosition = () => {
+		const el = scrollRef.current;
+		if (!el) return;
+		const positions = getHistoryEntryCache(SCROLL_POSITIONS_CACHE_KEY) ?? {};
+		positions[categoryLabel] = el.scrollLeft;
+		setHistoryEntryCache(SCROLL_POSITIONS_CACHE_KEY, positions);
+	};
+
 	const scrollByDirection = (direction) => {
 		const el = scrollRef.current;
 		if (!el) return;
@@ -264,6 +289,7 @@ function HomeCategoryCarouselRow({
 					onScroll={() => {
 						onScroll();
 						scheduleUpdateScrollState();
+						rememberScrollPosition();
 					}}
 				>
 					{sketches.map((sketch, index) => {

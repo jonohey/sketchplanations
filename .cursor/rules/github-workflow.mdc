@@ -51,6 +51,8 @@ Keep issue titles concise enough to slug cleanly (under ~40 characters of slug t
 
 - **Back to top links:** Match the existing pattern on `/books`, `/list`, and sketch pages — a `Link` (or `<a>`) to `#top` with `onClick` calling `preventDefault()` then `fastScrollToTop()` from `helpers`. Do not use a bare `#top` anchor without the scroll helper.
 
+- **Back/Forward scroll restoration:** `experimental.scrollRestoration` is on, but it only lands in the right place if the page already has its full height. Anything that changes the page after load needs handling: reserve space for late or lazy content (e.g. image aspect ratio, skeleton rows sized like real rows), and remember per-visit state per history entry with `helpers/historyEntryCache` (e.g. "Load more" results, inner carousel scroll). Focus inputs with `focus({ preventScroll: true })`, not the `autoFocus` attribute.
+
 ## Complete work
 
 When the user asks to complete, finish, commit, or create a PR:
