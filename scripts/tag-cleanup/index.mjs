@@ -5,12 +5,15 @@
  * Subcommands: audit | migrate | changelog | redirects
  * Run with --help on any subcommand for details.
  */
+import {
+	SKETCH_EDITS as BATCH_12_EDITS,
+	BATCH_ID as BATCH_12_ID,
+} from "./batch-12-edits.mjs";
 import { runAudit } from "./lib/audit.mjs";
 import { runChangelog } from "./lib/changelog.mjs";
 import { runMigrate } from "./lib/migrate.mjs";
 import { runRedirects } from "./lib/redirects.mjs";
 import { runSketchEdits } from "./lib/sketch-edits.mjs";
-import { BATCH_ID as BATCH_12_ID, SKETCH_EDITS as BATCH_12_EDITS } from "./batch-12-edits.mjs";
 
 const HELP = `Prismic tag/category consolidation toolkit
 
@@ -25,14 +28,21 @@ See scripts/tag-cleanup/README.md for the full workflow.
 `;
 
 const parseArgs = (argv) => {
-	const args = { dryRun: false, pair: null, limit: 0, batchId: null, stdoutNewsletter: false };
+	const args = {
+		dryRun: false,
+		pair: null,
+		limit: 0,
+		batchId: null,
+		stdoutNewsletter: false,
+	};
 	const positional = [];
 
 	for (let i = 0; i < argv.length; i++) {
 		const arg = argv[i];
 		if (arg === "--dry-run") args.dryRun = true;
 		else if (arg === "--pair") args.pair = argv[++i];
-		else if (arg === "--limit") args.limit = Number.parseInt(argv[++i], 10) || 0;
+		else if (arg === "--limit")
+			args.limit = Number.parseInt(argv[++i], 10) || 0;
 		else if (arg === "--batch-id") args.batchId = argv[++i];
 		else if (arg === "--stdout" && argv[i + 1] === "newsletter") {
 			args.stdoutNewsletter = true;

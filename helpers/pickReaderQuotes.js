@@ -39,8 +39,7 @@ const leadColumn = (quotes, random) => {
 		quotes.length;
 	const target = averageColumn - lead.quote.length;
 	const partner = others.reduce((best, quote) =>
-		Math.abs(quote.quote.length - target) <
-		Math.abs(best.quote.length - target)
+		Math.abs(quote.quote.length - target) < Math.abs(best.quote.length - target)
 			? quote
 			: best,
 	);

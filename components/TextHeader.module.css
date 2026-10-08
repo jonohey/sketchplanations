@@ -1,22 +1,22 @@
 .root h1 {
-  @apply text-2xl mb-4 sm:mb-6 mx-auto;
-  font-weight: 500;
+	@apply text-2xl mb-4 sm:mb-6 mx-auto;
+	font-weight: 500;
 }
 
 .root h2 {
-  @apply py-4;
+	@apply py-4;
 }
 
 @screen sm {
-  .root h1 {
-    @apply text-3xl;
-  }
+	.root h1 {
+		@apply text-3xl;
+	}
 
-  .root h2 {
-    @apply text-xl;
-  }
+	.root h2 {
+		@apply text-xl;
+	}
 }
 
 .root b {
-  font-weight: 600;
+	font-weight: 600;
 }

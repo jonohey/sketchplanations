@@ -1,18 +1,21 @@
 import classNames from "classnames";
-import { fastScrollToTop } from "helpers";
 import Link from "next/link";
-import FancyLink from "./FancyLink";
 import {
 	BOOKS_SECTION_ID,
 	BOOKS_SECTION_TITLE,
 	LICENCE_SECTIONS,
 } from "utils/licenceContent.mjs";
 
+import { fastScrollToTop } from "helpers";
+
+import FancyLink from "./FancyLink";
+
 const IMAGE_CONSENT_FORM_URL =
 	"https://docs.google.com/document/d/1wcZty5jEoj-_AY7wdojuPB5Fh9BG5eBb/edit";
 const TRANSLATIONS_FOLDER_URL =
 	"https://drive.google.com/drive/folders/1gGCCObciyjjd-3KHOUv-jm8PJAs2QuFy?usp=drive_link";
-const ATTRIBUTION_EXAMPLE_URL = "https://sketchplanations.com/the-overview-effect";
+const ATTRIBUTION_EXAMPLE_URL =
+	"https://sketchplanations.com/the-overview-effect";
 
 const FaqQuestion = ({ id, children }) => (
 	<h3 id={id} className="scroll-mt-24">
@@ -43,8 +46,8 @@ const LicenceSectionNav = () => (
 const CreativeCommonsBadge = () => (
 	<>
 		<p className="lead">
-			I love it when people use Sketchplanations. Please respect the licence when
-			you share so more people can find sketches they like too.
+			I love it when people use Sketchplanations. Please respect the licence
+			when you share so more people can find sketches they like too.
 		</p>
 		<div className="not-prose mx-auto my-4 max-w-[600px]">
 			<p className="my-2 text-center">
@@ -61,8 +64,8 @@ const CreativeCommonsBadge = () => (
 				</a>
 			</p>
 			<p className="text-center text-sm">
-				All images and accompanying explanatory text on this website are licensed
-				under a{" "}
+				All images and accompanying explanatory text on this website are
+				licensed under a{" "}
 				<a
 					rel="license"
 					href="https://creativecommons.org/licenses/by-nc/4.0/"
@@ -81,36 +84,44 @@ const BooksSection = () => (
 			{BOOKS_SECTION_TITLE}
 		</h2>
 		<p>
-			Yes—sketches can be used in books, but they are normally commercial use, so
-			they need separate permission.
+			Yes—sketches can be used in books, but they are normally commercial use,
+			so they need separate permission.
 		</p>
 		<p>
-			For professionally published books or publisher-led projects, please contact
-			me—{" "}
+			For professionally published books or publisher-led projects, please
+			contact me—{" "}
 			<FancyLink href="mailto:jono.hey@gmail.com?subject=Book%20image%20licence%20request">
 				jono.hey@gmail.com
 			</FancyLink>
 			—and I will confirm pricing based on the publication.
 		</p>
 		<p>
-			For independent authors, I licence images at $65 per image (or £50 if paying
-			in GBP), to keep things straightforward. This is a one-off licence for use
-			inside a single book.
+			For independent authors, I licence images at $65 per image (or £50 if
+			paying in GBP), to keep things straightforward. This is a one-off licence
+			for use inside a single book.
 		</p>
 		<p>
 			To licence a sketch for use in a book, please complete and email the Image
-			Consent Form below. I use this for all book uses so that permission, scope,
-			and attribution are clear for both of us.
+			Consent Form below. I use this for all book uses so that permission,
+			scope, and attribution are clear for both of us.
 		</p>
 		<p>
 			👉{" "}
-			<FancyLink href={IMAGE_CONSENT_FORM_URL} target="_blank" rel="noopener noreferrer">
+			<FancyLink
+				href={IMAGE_CONSENT_FORM_URL}
+				target="_blank"
+				rel="noopener noreferrer"
+			>
 				Image Consent Form
 			</FancyLink>
 		</p>
 		<p>
 			If the sketch appears in{" "}
-			<FancyLink href="https://geni.us/big-ideas-book" target="_blank" rel="noopener noreferrer">
+			<FancyLink
+				href="https://geni.us/big-ideas-book"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
 				Big Ideas Little Pictures
 			</FancyLink>
 			, I need to confirm with my publisher before approving use, but this is
@@ -145,8 +156,8 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 				creator make a living doing this—thank you.
 			</p>
 			<p>
-				It&apos;s great when people share Sketchplanations, so please use sketches
-				to illustrate your points in:
+				It&apos;s great when people share Sketchplanations, so please use
+				sketches to illustrate your points in:
 			</p>
 			<ul>
 				<li>a work or consulting presentation</li>
@@ -158,10 +169,9 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 				<li>your email newsletter or the like...</li>
 			</ul>
 			<p>
-				...as long as you give credit. In fact, I&apos;d{" "}
-				<em>love</em>{" "}
-				you to use them to make a point, help explain something for others,
-				further your career, or teach something to your students. That&apos;s what
+				...as long as you give credit. In fact, I&apos;d <em>love</em> you to
+				use them to make a point, help explain something for others, further
+				your career, or teach something to your students. That&apos;s what
 				they&apos;re for!
 			</p>
 
@@ -173,13 +183,13 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 			<p>
 				If you&apos;re adapting a sketch using AI or other tools, please include
 				visible attribution on the image itself (e.g.,{" "}
-				<strong>&ldquo;Adapted from Sketchplanations&rdquo;</strong>). This helps
-				the credit stay attached, even when the image is reshared without any
-				accompanying text. Images have a way of making their own way around.
+				<strong>&ldquo;Adapted from Sketchplanations&rdquo;</strong>). This
+				helps the credit stay attached, even when the image is reshared without
+				any accompanying text. Images have a way of making their own way around.
 			</p>
 			<p>
-				I don&apos;t consider AI remixes that omit attribution as appropriate use
-				under this licence.
+				I don&apos;t consider AI remixes that omit attribution as appropriate
+				use under this licence.
 			</p>
 
 			<h2 id="translations" className="scroll-mt-24">
@@ -193,15 +203,24 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 				If you translate and share a sketch, don&apos;t remove Sketchplanations
 				from the image.
 			</p>
-			<p>Ideally, include: &apos;Translated from Sketchplanations&apos; or similar.</p>
+			<p>
+				Ideally, include: &apos;Translated from Sketchplanations&apos; or
+				similar.
+			</p>
 			<p>I have .psd files of most sketches in case they are helpful to you.</p>
 			<p>
 				Have you translated a sketch? I&apos;m collecting them, intending to add
 				links to translations of each sketch on the site. Email them to me at{" "}
-				<FancyLink href="mailto:jono.hey@gmail.com">jono.hey@gmail.com</FancyLink>
+				<FancyLink href="mailto:jono.hey@gmail.com">
+					jono.hey@gmail.com
+				</FancyLink>
 			</p>
 			<p>
-				<FancyLink href={TRANSLATIONS_FOLDER_URL} target="_blank" rel="noopener noreferrer">
+				<FancyLink
+					href={TRANSLATIONS_FOLDER_URL}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
 					See translations
 				</FancyLink>
 			</p>
@@ -215,37 +234,50 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 				Instagram business post, Medium post, or course? (or the like)
 			</FaqQuestion>
 			<p>
-				Yes. Please include the source. Because content is often reshared, I prefer
-				that you don&apos;t remove the Sketchplanations logo from the sketches.
+				Yes. Please include the source. Because content is often reshared, I
+				prefer that you don&apos;t remove the Sketchplanations logo from the
+				sketches.
 			</p>
 
 			<FaqQuestion id="how-should-i-attribute-sketches">
 				How should I attribute sketches?
 			</FaqQuestion>
-			<p>If you can add a link, i.e. it&apos;s online, this works well, I think:</p>
+			<p>
+				If you can add a link, i.e. it&apos;s online, this works well, I think:
+			</p>
 			<p>
 				Image: Jono Hey,{" "}
-				<FancyLink href={ATTRIBUTION_EXAMPLE_URL} target="_blank" rel="noopener noreferrer">
+				<FancyLink
+					href={ATTRIBUTION_EXAMPLE_URL}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
 					Sketchplanations
 				</FancyLink>
 			</p>
 			<p>
-				...ideally with the word Sketchplanations linking to the sketch page as it
-				appears on the site, e.g. to{" "}
-				<FancyLink href={ATTRIBUTION_EXAMPLE_URL} target="_blank" rel="noopener noreferrer">
+				...ideally with the word Sketchplanations linking to the sketch page as
+				it appears on the site, e.g. to{" "}
+				<FancyLink
+					href={ATTRIBUTION_EXAMPLE_URL}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
 					https://sketchplanations.com/the-overview-effect
 				</FancyLink>
 			</p>
 			<p>
-				If you can&apos;t add a link, for example, because it&apos;s in a book or
-				flyer, then this works well:
+				If you can&apos;t add a link, for example, because it&apos;s in a book
+				or flyer, then this works well:
 			</p>
 			<p>Image: Jono Hey, sketchplanations.com</p>
-			<p>Context matters when adding sources, so please make it work for you.</p>
+			<p>
+				Context matters when adding sources, so please make it work for you.
+			</p>
 			<p>
 				As for AI adaptations above, if you make a new or adapted version of the
-				sketch, please include attribution on the image itself—otherwise they tend
-				to get loose and attribution gets lost.
+				sketch, please include attribution on the image itself—otherwise they
+				tend to get loose and attribution gets lost.
 			</p>
 
 			<FaqQuestion id="can-i-sell-them">Can I sell them?</FaqQuestion>
@@ -254,7 +286,9 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 				If you&apos;re thinking of publishing a collection with many
 				sketchplanations, reselling them, or some giant marketing campaign,
 				billboard, selling prints or the like, great! Please contact me at{" "}
-				<FancyLink href="mailto:jono.hey@gmail.com">jono.hey@gmail.com</FancyLink>
+				<FancyLink href="mailto:jono.hey@gmail.com">
+					jono.hey@gmail.com
+				</FancyLink>
 				, and we can find a price or arrangement that works for us both.
 			</p>
 
@@ -268,7 +302,9 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 			<p>
 				Some older sketches may only have slightly higher resolutions when you
 				download them. Feel free to contact me (
-				<FancyLink href="mailto:jono.hey@gmail.com">jono.hey@gmail.com</FancyLink>
+				<FancyLink href="mailto:jono.hey@gmail.com">
+					jono.hey@gmail.com
+				</FancyLink>
 				)—I will likely have a higher-res version.
 			</p>
 
@@ -277,7 +313,11 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 			</FaqQuestion>
 			<p>
 				Why, yes! Find it here:{" "}
-				<FancyLink href={IMAGE_CONSENT_FORM_URL} target="_blank" rel="noopener noreferrer">
+				<FancyLink
+					href={IMAGE_CONSENT_FORM_URL}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
 					Image Consent Form
 				</FancyLink>
 			</p>
@@ -287,7 +327,9 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 			</FaqQuestion>
 			<p>
 				Just contact me at{" "}
-				<FancyLink href="mailto:jono.hey@gmail.com">jono.hey@gmail.com</FancyLink>{" "}
+				<FancyLink href="mailto:jono.hey@gmail.com">
+					jono.hey@gmail.com
+				</FancyLink>{" "}
 				and explain how you plan to use sketches, and I&apos;ll happily let you
 				know.
 			</p>
@@ -295,7 +337,9 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 			<FaqQuestion id="can-i-pay-you-for-it">Can I pay you for it?</FaqQuestion>
 			<p>If the sketches have helped you, wonderful!</p>
 			<p>
-				<FancyLink href="/subscribe">Upgrading to a paid subscription</FancyLink>{" "}
+				<FancyLink href="/subscribe">
+					Upgrading to a paid subscription
+				</FancyLink>{" "}
 				makes the biggest difference, or{" "}
 				<FancyLink
 					href="https://www.buymeacoffee.com/sketchplanator"

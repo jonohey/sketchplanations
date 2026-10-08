@@ -8,6 +8,9 @@ export default function handler(req, res) {
 	// The file is already JSON, so send it as-is rather than parsing and
 	// re-serializing ~1.7MB on every cache miss.
 	res.setHeader("Content-Type", "application/json");
-	res.setHeader("Cache-Control", "public, s-maxage=3600, stale-while-revalidate=86400");
+	res.setHeader(
+		"Cache-Control",
+		"public, s-maxage=3600, stale-while-revalidate=86400",
+	);
 	res.status(200).send(fileContents);
 }

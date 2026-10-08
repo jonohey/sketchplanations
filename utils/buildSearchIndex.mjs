@@ -8,7 +8,8 @@ import {
 import { sketchToIndexEntry, tagToIndexEntry } from "./searchIndexEntry.mjs";
 
 export function searchIndexFromCatalog({ sketchplanations, tags }) {
-	const orderedSketches = sortSketchplanationsByPublishedAtDesc(sketchplanations);
+	const orderedSketches =
+		sortSketchplanationsByPublishedAtDesc(sketchplanations);
 
 	const orderedTags = sortTagsByIdentifier(tags);
 

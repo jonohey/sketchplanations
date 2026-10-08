@@ -1,61 +1,61 @@
 .page-root {
-  max-width: 800px;
-  @apply relative pt-8 pb-20 px-6 mx-auto;
+	max-width: 800px;
+	@apply relative pt-8 pb-20 px-6 mx-auto;
 }
 
 @screen sm {
-  .page-root {
-    @apply px-12;
-  }
+	.page-root {
+		@apply px-12;
+	}
 }
 
 .page-root--inline {
-  @apply pb-0 px-6;
+	@apply pb-0 px-6;
 }
 
 .page-body {
-  @apply block mx-auto;
-  max-width: 800px;
+	@apply block mx-auto;
+	max-width: 800px;
 }
 
 .page-body > * + * {
-  margin-top: 1.4em;
+	margin-top: 1.4em;
 }
 
 .page-body b,
 .page-body strong {
-  @apply font-semibold;
+	@apply font-semibold;
 }
 
 .page-body i,
 .page-body em {
-  @apply italic;
+	@apply italic;
 }
 
 .page-body a {
-  color: var(--color-blue);
+	color: var(--color-blue);
 }
 
 .page-body ul li {
-  list-style: outside disc;
-  margin-left: 1.75rem;
+	list-style: outside disc;
+	margin-left: 1.75rem;
 }
 
 .page-body ol li {
-  list-style: outside decimal;
-  margin-left: 1.75rem;
+	list-style: outside decimal;
+	margin-left: 1.75rem;
 }
 
 .page-body img {
-  @apply my-10;
+	@apply my-10;
 }
 
 .page-body p {
-  @apply max-w-prose;
+	@apply max-w-prose;
 }
 
 .page-body hr {
-  @apply bg-border;
-  height: 1px;
-  border: none;
+	@apply bg-border;
+	height: 1px;
+	border: none;
 }

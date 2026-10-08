@@ -1,9 +1,10 @@
-import { track } from '@vercel/analytics';
+import { track } from "@vercel/analytics";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import Link from "./Link";
 
 import styles from "./Navigation.module.css";
+
+import Link from "./Link";
 
 const Navigation = () => {
 	const router = useRouter();
@@ -40,7 +41,7 @@ const Navigation = () => {
 					isSelected("/big-ideas-little-pictures") ? "page" : undefined
 				}
 				onClick={() => {
-					track('Book-page-link', { location: 'header' });
+					track("Book-page-link", { location: "header" });
 				}}
 			>
 				Book!
@@ -49,7 +50,7 @@ const Navigation = () => {
 				href="/subscribe"
 				className={classNames(styles.item, styles["item--mobile-only"])}
 				onClick={() => {
-					track('Subscribe', { location: 'header' });
+					track("Subscribe", { location: "header" });
 				}}
 			>
 				<span className="inline-flex items-center gap-2">
@@ -62,7 +63,7 @@ const Navigation = () => {
 				rel="noreferrer"
 				className={styles.item}
 				onClick={() => {
-					track('Podcast-site-link', { location: 'header' });
+					track("Podcast-site-link", { location: "header" });
 				}}
 			>
 				Podcast
@@ -73,7 +74,7 @@ const Navigation = () => {
 				rel="noreferrer"
 				className={styles.item}
 				onClick={() => {
-					track('Shop', { location: 'header' });
+					track("Shop", { location: "header" });
 				}}
 			>
 				Shop

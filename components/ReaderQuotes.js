@@ -2,9 +2,10 @@ import { track } from "@vercel/analytics";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import styles from "./ReaderQuotes.module.css";
+
 import { arrangeReaderQuotes, seededRandom } from "helpers/pickReaderQuotes";
 import { READER_QUOTES } from "helpers/readerQuotes";
-import styles from "./ReaderQuotes.module.css";
 
 // The columns are rendered three times so scrolling can loop: whenever the
 // view drifts more than half a set from the middle copy, it jumps back by
@@ -71,8 +72,7 @@ const ReaderQuotes = ({
 	const centreOnStart = useCallback(() => {
 		const set = measureSet();
 		if (!set) return;
-		set.el.scrollLeft =
-			set.start - (set.el.clientWidth - set.firstWidth) / 2;
+		set.el.scrollLeft = set.start - (set.el.clientWidth - set.firstWidth) / 2;
 	}, [measureSet]);
 
 	useEffect(() => {
@@ -160,18 +160,13 @@ const ReaderQuotes = ({
 				>
 					{COPIES.map((copy) =>
 						columns.map((column, index) => (
-							<div
-								key={`${copy}-${column[0].id}`}
-								className={styles.column}
-							>
+							<div key={`${copy}-${column[0].id}`} className={styles.column}>
 								{column.map((quote, row) => (
 									<blockquote
 										key={quote.id}
 										className={styles.card}
 										aria-hidden={copy !== 1 || undefined}
-										data-set-start={
-											index === 0 && row === 0 ? copy : undefined
-										}
+										data-set-start={index === 0 && row === 0 ? copy : undefined}
 									>
 										<p>{quote.quote}</p>
 										{quote.source && (

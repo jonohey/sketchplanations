@@ -1,4 +1,5 @@
 import Head from "next/head";
+
 import styles from "./search.module.css";
 
 import SearchForm from "components/SearchForm";
@@ -20,9 +21,7 @@ const Search = () => {
 					name="description"
 					content="Search and explore hundreds of simple, clear explanations on science, creativity, psychology, and more. Find your favourite Sketchplanations in seconds."
 				/>
-				{queryIsPresent && (
-					<meta name="robots" content="noindex, nofollow" />
-				)}
+				{queryIsPresent && <meta name="robots" content="noindex, nofollow" />}
 				<link rel="canonical" href="https://sketchplanations.com/search" />
 			</Head>
 			<header className="pt-6 px-4">

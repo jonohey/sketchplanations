@@ -1,7 +1,9 @@
-import useDraggable from "hooks/useDraggable";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+
 import styles from "styles/landing.module.css";
+
+import useDraggable from "hooks/useDraggable";
 
 const BASE_SIZE = 68;
 const PADDING = 16;
@@ -83,10 +85,8 @@ const DraggableIconsCanvas = ({ icons }) => {
 	}, [initPositions]);
 
 	return (
-		<div className={`${styles['lp-card-primary']} rounded-2xl p-8 mt-8`}>
-			<h3 className="text-xl font-semibold mb-4 text-center">
-				And tons more…
-			</h3>
+		<div className={`${styles["lp-card-primary"]} rounded-2xl p-8 mt-8`}>
+			<h3 className="text-xl font-semibold mb-4 text-center">And tons more…</h3>
 			<div
 				ref={containerRef}
 				className="relative w-full rounded-xl overflow-hidden"

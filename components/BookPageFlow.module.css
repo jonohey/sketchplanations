@@ -68,8 +68,8 @@
 		0 0 0 1px hsla(240, 30%, 28%, 0.05),
 		0 2px 4px hsla(240, 30%, 28%, 0.05),
 		0 8px 20px -6px hsla(240, 30%, 28%, 0.14),
-		/* The page casts a little shade onto the next one along */
-		10px 0 16px -6px hsla(240, 30%, 28%, 0.26);
+		/* The page casts a little shade onto the next one along */ 10px 0 16px -6px
+			hsla(240, 30%, 28%, 0.26);
 	transition: transform 0.2s ease-out;
 }
 

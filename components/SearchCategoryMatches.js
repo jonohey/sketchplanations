@@ -13,11 +13,7 @@ const SearchCategoryMatches = ({ categories }) => {
 				Categories
 			</p>
 			{categories.map(({ id, slugs, data: { identifier, count } }) => (
-				<Link
-					key={id}
-					href={`/categories/${slugs[0]}`}
-					className={styles.pill}
-				>
+				<Link key={id} href={`/categories/${slugs[0]}`} className={styles.pill}>
 					{identifier}
 					{count > 0 && <span className={styles.count}>({count})</span>}
 				</Link>

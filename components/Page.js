@@ -1,13 +1,11 @@
+import { PrismicNextImage } from "@prismicio/next";
 import classNames from "classnames";
 import dynamic from "next/dynamic";
-
 import { createElement } from "react";
 
 import styles from "./Page.module.css";
 
 import RichText from "./RichText";
-
-import { PrismicNextImage } from "@prismicio/next";
 
 const TextHeader = dynamic(() => import("./TextHeader"));
 

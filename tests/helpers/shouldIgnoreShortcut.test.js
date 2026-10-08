@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import shouldIgnoreShortcut from "../../helpers/shouldIgnoreShortcut";
 
 const makeEvent = (overrides = {}) => ({

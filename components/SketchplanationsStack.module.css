@@ -1,9 +1,9 @@
 .root {
-  @apply max-w-md mx-auto;
+	@apply max-w-md mx-auto;
 }
 
 .swiper {
-  /* &::after {
+	/* &::after {
     content: '';
     @apply absolute z-50 bottom-0 left-[-2rem] h-8 bg-gradient-to-t to-transparent from-bg pointer-events-none;
     width: calc(100% + 4rem);
@@ -11,9 +11,9 @@
 }
 
 .slide {
-  @apply pt-1 pb-5;
+	@apply pt-1 pb-5;
 
-  /* @apply relative;
+	/* @apply relative;
 
   box-shadow:
     5px 0 2px -4px rgba(0, 0, 0, 0.1),
@@ -30,20 +30,20 @@
 }
 
 :global(.swiper-slide-shadow) {
-  top: 0.25rem !important;
-  height: auto !important;
-  bottom: 1.25rem !important;
-  background: rgba(0, 0, 0, 0.1) !important;
-  backdrop-filter: saturate(80%);
-  filter: blur(1px);
-  mask-image: var(--mask-image);
+	top: 0.25rem !important;
+	height: auto !important;
+	bottom: 1.25rem !important;
+	background: rgba(0, 0, 0, 0.1) !important;
+	backdrop-filter: saturate(80%);
+	filter: blur(1px);
+	mask-image: var(--mask-image);
 
-  @screen dark {
-    background: rgba(0, 0, 0, 0.3) !important;
-  }
+	@screen dark {
+		background: rgba(0, 0, 0, 0.3) !important;
+	}
 }
 
 .image {
-  @apply relative aspect-[5/3] overflow-hidden bg-paper;
-  /* mask-image: var(--mask-image); */
+	@apply relative aspect-[5/3] overflow-hidden bg-paper;
+	/* mask-image: var(--mask-image); */
 }

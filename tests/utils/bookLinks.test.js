@@ -20,9 +20,9 @@ describe("isBookAffiliateUrl", () => {
 
 	it("rejects unrelated links", () => {
 		expect(isBookAffiliateUrl("https://example.com/book")).toBe(false);
-		expect(isBookAffiliateUrl("https://sketchplanations.com/atomic-habits")).toBe(
-			false,
-		);
+		expect(
+			isBookAffiliateUrl("https://sketchplanations.com/atomic-habits"),
+		).toBe(false);
 	});
 });
 
@@ -73,7 +73,8 @@ describe("parseBookLinkText", () => {
 				"Chris Anderson\u2019s The Long Tail: Why the Future of Business is Selling Less of More",
 			),
 		).toEqual({
-			title: "The Long Tail: Why the Future of Business is Selling Less of More",
+			title:
+				"The Long Tail: Why the Future of Business is Selling Less of More",
 			author: "Chris Anderson",
 		});
 		expect(parseBookLinkText("Novak Djokovic\u2019s Serve to Win")).toEqual({
@@ -276,11 +277,7 @@ describe("buildBooksIndex", () => {
 			},
 		]);
 
-		expect(books.map((book) => book.title)).toEqual([
-			"Gamma",
-			"Beta",
-			"Alpha",
-		]);
+		expect(books.map((book) => book.title)).toEqual(["Gamma", "Beta", "Alpha"]);
 	});
 
 	it("applies overrides and exclusions", () => {

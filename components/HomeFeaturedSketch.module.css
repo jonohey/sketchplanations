@@ -1,60 +1,60 @@
 .root {
-  @apply block mx-auto w-full mb-6 sm:mb-8 no-underline text-text;
+	@apply block mx-auto w-full mb-6 sm:mb-8 no-underline text-text;
 }
 
 @screen md {
-  .root {
-    max-width: 33.6rem;
-  }
+	.root {
+		max-width: 33.6rem;
+	}
 
-  .image {
-    max-height: 28.8rem;
-    width: auto;
-  }
+	.image {
+		max-height: 28.8rem;
+		width: auto;
+	}
 }
 
 .imageWrap {
-  @apply relative block w-fit max-w-full mx-auto rounded-lg overflow-hidden bg-paper;
+	@apply relative block w-fit max-w-full mx-auto rounded-lg overflow-hidden bg-paper;
 
-  box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow);
+	box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow);
 
-  &::before {
-    content: '';
-    @apply absolute inset-0 pointer-events-none z-10 rounded-lg;
+	&::before {
+		content: "";
+		@apply absolute inset-0 pointer-events-none z-10 rounded-lg;
 
-    box-shadow: inset 0 0 0 1px hsla(0, 0%, 0%, 0.06);
-    mix-blend-mode: multiply;
-  }
+		box-shadow: inset 0 0 0 1px hsla(0, 0%, 0%, 0.06);
+		mix-blend-mode: multiply;
+	}
 }
 
 @media (pointer: fine) {
-  .imageWrap {
-    @apply transition-transform duration-200;
+	.imageWrap {
+		@apply transition-transform duration-200;
 
-    transform-origin: center top;
-  }
+		transform-origin: center top;
+	}
 
-  .root:hover .imageWrap {
-    transform: translateY(-2px) scale(1.02);
+	.root:hover .imageWrap {
+		transform: translateY(-2px) scale(1.02);
 
-    box-shadow: 0 2.8rem 1rem -2.25rem var(--color-sketchShadowHover);
-  }
+		box-shadow: 0 2.8rem 1rem -2.25rem var(--color-sketchShadowHover);
+	}
 }
 
 .image {
-  @apply block w-full h-auto max-w-full object-contain;
+	@apply block w-full h-auto max-w-full object-contain;
 }
 
 .title {
-  /* Match carousel titles, but a touch larger to balance the date */
-  @apply block mt-3 text-base font-semibold leading-snug text-text line-clamp-2 transition-colors;
+	/* Match carousel titles, but a touch larger to balance the date */
+	@apply block mt-3 text-base font-semibold leading-snug text-text line-clamp-2 transition-colors;
 }
 
 .root:hover .title {
-  @apply text-blue;
+	@apply text-blue;
 }
 
 .date {
-  /* Slightly larger than carousel dates for readability */
-  @apply block mt-1 text-sm font-medium text-textSubdued;
+	/* Slightly larger than carousel dates for readability */
+	@apply block mt-1 text-sm font-medium text-textSubdued;
 }

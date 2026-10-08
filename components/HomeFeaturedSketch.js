@@ -1,13 +1,13 @@
-import { track } from "@vercel/analytics";
 import { PrismicNextImage } from "@prismicio/next";
+import { track } from "@vercel/analytics";
 import Link from "next/link";
+
+import styles from "./HomeFeaturedSketch.module.css";
 
 import { humanizePublishedDate } from "helpers";
 import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
-import styles from "./HomeFeaturedSketch.module.css";
 
-const FEATURED_IMAGE_SIZES =
-	"(max-width: 768px) calc(100vw - 2rem), 32rem";
+const FEATURED_IMAGE_SIZES = "(max-width: 768px) calc(100vw - 2rem), 32rem";
 
 export default function HomeFeaturedSketch({ sketch }) {
 	const sketchHref = `/${sketch.uid}`;

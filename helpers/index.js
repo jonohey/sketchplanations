@@ -1,7 +1,8 @@
 import humanizeString from "humanize-string";
 import { complement, either, isEmpty, isNil } from "ramda";
 
-const defaultPageTitle = "Sketchplanations - Simplifying complex ideas in sketches";
+const defaultPageTitle =
+	"Sketchplanations - Simplifying complex ideas in sketches";
 
 export const pageTitle = (title) => {
 	if (!title) return defaultPageTitle;

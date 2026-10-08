@@ -57,7 +57,10 @@ export function newestSketchplanations(
 	sketchplanations,
 	count = INITIAL_SEARCH_RESULT_COUNT,
 ) {
-	return sortSketchplanationsByPublishedAtDesc(sketchplanations).slice(0, count);
+	return sortSketchplanationsByPublishedAtDesc(sketchplanations).slice(
+		0,
+		count,
+	);
 }
 
 export function newerSketchplanationUids(

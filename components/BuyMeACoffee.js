@@ -1,8 +1,8 @@
 import classNames from "classnames";
-import { useContext, useEffect, useState } from "react";
-import styles from "./BuyMeACoffee.module.css";
-
 import Context from "context";
+import { useContext, useEffect, useState } from "react";
+
+import styles from "./BuyMeACoffee.module.css";
 
 const BuyMeACoffee = () => {
 	const { decorationHidden } = useContext(Context);
@@ -14,8 +14,10 @@ const BuyMeACoffee = () => {
 		const update = () => {
 			ticking = false;
 			const scrollingElement = document.documentElement;
-			const scrollable = scrollingElement.scrollHeight - scrollingElement.clientHeight;
-			const progress = scrollable > 0 ? scrollingElement.scrollTop / scrollable : 0;
+			const scrollable =
+				scrollingElement.scrollHeight - scrollingElement.clientHeight;
+			const progress =
+				scrollable > 0 ? scrollingElement.scrollTop / scrollable : 0;
 			setIsShown(progress > 0.5);
 		};
 

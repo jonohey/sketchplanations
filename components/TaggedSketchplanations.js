@@ -1,5 +1,3 @@
-import { humanizeTag, isPresent } from "helpers";
-import { loadSwiperStyles } from "helpers/loadSwiperStyles";
 import { useEffect, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-aria-components";
 import { useInView } from "react-intersection-observer";
@@ -7,9 +5,13 @@ import { RoughNotation } from "react-rough-notation";
 import { FreeMode, Mousewheel } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import styles from "./TaggedSketchplanations.module.css";
+
+import { humanizeTag, isPresent } from "helpers";
+import { loadSwiperStyles } from "helpers/loadSwiperStyles";
+
 import FancyLink from "./FancyLink";
 import SketchplanationCard from "./SketchplanationCard";
-import styles from "./TaggedSketchplanations.module.css";
 
 const TaggedSketchplanations = ({ tags, excludeUid }) => {
 	const [taggedSketchplanations, setTaggedSketchplanations] = useState([]);
@@ -51,7 +53,9 @@ const TaggedSketchplanations = ({ tags, excludeUid }) => {
 	return (
 		<div ref={ref} className="overflow-hidden">
 			<div className={styles.header}>
-				<div className="mb-3 text-xl font-semibold">More sketches on these topics</div>
+				<div className="mb-3 text-xl font-semibold">
+					More sketches on these topics
+				</div>
 			</div>
 			<Tabs>
 				<div className={styles.tabsList}>

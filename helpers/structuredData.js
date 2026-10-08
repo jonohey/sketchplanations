@@ -23,8 +23,7 @@ export const ORGANIZATION_SAME_AS = [
 	"https://sketchplanations.substack.com",
 ];
 
-export const LICENSE_URL =
-	"https://creativecommons.org/licenses/by-nc/4.0/";
+export const LICENSE_URL = "https://creativecommons.org/licenses/by-nc/4.0/";
 
 export const COPYRIGHT_NOTICE =
 	"Creative Commons Attribution-NonCommercial 4.0 International License";
@@ -172,7 +171,9 @@ export const buildSketchCreativeWork = ({
 	tags = [],
 }) => {
 	const pageUrl = absoluteUrl(`/${uid}`);
-	const keywords = resolveSketchTagDocs(tags).map(tagLabelFromDoc).filter(Boolean);
+	const keywords = resolveSketchTagDocs(tags)
+		.map(tagLabelFromDoc)
+		.filter(Boolean);
 
 	return {
 		"@type": ["CreativeWork", "Article"],

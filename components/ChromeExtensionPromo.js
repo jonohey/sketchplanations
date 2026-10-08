@@ -1,7 +1,8 @@
 import { track } from "@vercel/analytics";
+import Image from "next/image";
+
 import useIsChromeDesktop from "hooks/useIsChromeDesktop";
 import chromeWebStoreBadge from "images/chrome-web-store-badge.png";
-import Image from "next/image";
 
 const ChromeExtensionPromo = () => {
 	const isChromeDesktop = useIsChromeDesktop();

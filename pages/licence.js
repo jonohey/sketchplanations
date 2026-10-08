@@ -1,6 +1,7 @@
+import Head from "next/head";
+
 import LicenceContent from "components/LicenceContent";
 import { pageTitle } from "helpers";
-import Head from "next/head";
 
 const Licence = () => (
 	<>

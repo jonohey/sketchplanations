@@ -1,6 +1,7 @@
 import { PrismicNextImage } from "@prismicio/next";
 import dynamic from "next/dynamic";
 import { createElement } from "react";
+
 import RichText from "./RichText";
 
 const TextHeader = dynamic(() => import("./TextHeader"));

@@ -76,7 +76,13 @@ const SketchplanationLightboxDesktop = ({
 		};
 	}, [isOpen, isLoading, handleClose]);
 
-	const thumbOpacity = isOpen ? (isLoading ? 1 : 0) : isOpening || isClosing ? 0 : 1;
+	const thumbOpacity = isOpen
+		? isLoading
+			? 1
+			: 0
+		: isOpening || isClosing
+			? 0
+			: 1;
 
 	if (!isActive) {
 		return null;
@@ -151,7 +157,11 @@ const SketchplanationLightboxDesktop = ({
 						initialScale={1}
 						centerOnInit
 						limitToBounds
-						doubleClick={{ mode: "toggle", step: 2, animationTime: zoomAnimationTime }}
+						doubleClick={{
+							mode: "toggle",
+							step: 2,
+							animationTime: zoomAnimationTime,
+						}}
 						wheel={{ step: 0.08, smoothStep: 0.003 }}
 						onTransform={(_ref, state) => {
 							setIsZoomed(state.scale > 1.001);
