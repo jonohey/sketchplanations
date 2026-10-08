@@ -1,7 +1,6 @@
+import Fuse from "fuse.js";
 import fs from "node:fs";
 import path from "node:path";
-
-import Fuse from "fuse.js";
 
 import {
 	categoryToTagResult,
@@ -30,7 +29,9 @@ const loadSearchIndex = () => {
 export const searchSketchplanations = (query, { limit = 100 } = {}) => {
 	const index = loadSearchIndex();
 
-	const { items } = searchSketches(sketchFuse, index.sketches, query, { limit });
+	const { items } = searchSketches(sketchFuse, index.sketches, query, {
+		limit,
+	});
 
 	return items.map(sketchToGridResult);
 };

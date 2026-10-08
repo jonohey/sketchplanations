@@ -60,23 +60,19 @@ describe("rude search presentation", () => {
 		const showRudeSearchEasterEgg = isRudeSearch(query);
 
 		expect(showRudeSearchEasterEgg).toBe(true);
-		expect(
-			shouldShowStretchMissMessage(true, showRudeSearchEasterEgg),
-		).toBe(false);
-		expect(shouldShowSuggestMissingSketch(showRudeSearchEasterEgg)).toBe(
+		expect(shouldShowStretchMissMessage(true, showRudeSearchEasterEgg)).toBe(
 			false,
 		);
+		expect(shouldShowSuggestMissingSketch(showRudeSearchEasterEgg)).toBe(false);
 	});
 
 	it("shows miss feedback for normal stretch matches", () => {
 		const showRudeSearchEasterEgg = isRudeSearch("dunning");
 
 		expect(showRudeSearchEasterEgg).toBe(false);
-		expect(
-			shouldShowStretchMissMessage(true, showRudeSearchEasterEgg),
-		).toBe(true);
-		expect(shouldShowSuggestMissingSketch(showRudeSearchEasterEgg)).toBe(
+		expect(shouldShowStretchMissMessage(true, showRudeSearchEasterEgg)).toBe(
 			true,
 		);
+		expect(shouldShowSuggestMissingSketch(showRudeSearchEasterEgg)).toBe(true);
 	});
 });

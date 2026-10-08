@@ -1,5 +1,5 @@
-import { defineConfig } from "vitest/config";
 import path from "path";
+import { defineConfig } from "vitest/config";
 
 const rootDir = import.meta.dirname;
 
@@ -15,4 +15,3 @@ export default defineConfig({
 		},
 	},
 });
-

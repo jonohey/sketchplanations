@@ -10,10 +10,7 @@ import {
 	searchSketches,
 } from "helpers/search/fuseSearch.js";
 
-const indexPath = path.join(
-	process.cwd(),
-	"tests/fixtures/search-index.json",
-);
+const indexPath = path.join(process.cwd(), "tests/fixtures/search-index.json");
 const index = JSON.parse(fs.readFileSync(indexPath, "utf8"));
 const sketchFuse = createSketchFuse(Fuse, index.sketches);
 const categoryFuse = createCategoryFuse(Fuse, index.categories);
@@ -45,9 +42,9 @@ describe("search index integration", () => {
 
 	it("finds typo-tolerant matches", () => {
 		const dopler = search("dopler");
-		expect(dopler.items.some((result) => result.uid === "the-doppler-effect")).toBe(
-			true,
-		);
+		expect(
+			dopler.items.some((result) => result.uid === "the-doppler-effect"),
+		).toBe(true);
 		expect(dopler.matchQuality).toBe("corrected");
 		expect(dopler.correctedLabel).toBe("Doppler");
 
@@ -144,9 +141,9 @@ describe("search index integration", () => {
 		const iq = search("iq");
 		expect(iq.matchQuality).toBe("good");
 		expect(iq.items[0]?.uid).toBe("common-distributions-normal-skewed-pareto");
-		expect(
-			iq.items.some((result) => result.uid === "urinal-etiquette"),
-		).toBe(false);
+		expect(iq.items.some((result) => result.uid === "urinal-etiquette")).toBe(
+			false,
+		);
 	});
 
 	it("filters very poor sketch matches", () => {

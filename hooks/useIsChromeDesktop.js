@@ -33,8 +33,9 @@ const useIsChromeDesktop = () => {
 		const isEdge = userAgent.includes("Edg");
 
 		// Check for other known Chromium browsers
-		const isOtherChromium =
-			/Opera|OPR|Vivaldi|Yandex|Chromium/i.test(userAgent);
+		const isOtherChromium = /Opera|OPR|Vivaldi|Yandex|Chromium/i.test(
+			userAgent,
+		);
 
 		// Exclude these browsers immediately
 		if (isBrave || isAtlas || isEdge || isOtherChromium) {
@@ -71,9 +72,10 @@ const useIsChromeDesktop = () => {
 		if (hasClientHints) {
 			// Check for "Google Chrome" brand specifically
 			// This is the most reliable way to detect actual Google Chrome
-			isChrome = navigator.userAgentData.brands?.some(
-				(brand) => brand.brand === "Google Chrome",
-			) ?? false;
+			isChrome =
+				navigator.userAgentData.brands?.some(
+					(brand) => brand.brand === "Google Chrome",
+				) ?? false;
 			// If Client Hints are available but don't identify as Chrome, it's not Chrome
 			// Don't fall back to user-agent string in this case
 		} else {

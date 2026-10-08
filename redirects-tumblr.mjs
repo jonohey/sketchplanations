@@ -724,7 +724,8 @@ export default [
 		permanent: true,
 	},
 	{
-		source: "/post/145680217621/seasons-are-caused-by-the-earths-tilt-update/amp",
+		source:
+			"/post/145680217621/seasons-are-caused-by-the-earths-tilt-update/amp",
 		destination: "/seasons",
 		permanent: true,
 	},
@@ -1184,7 +1185,8 @@ export default [
 		permanent: true,
 	},
 	{
-		source: "/post/146720668266/respect-sleep-one-of-the-best-virtuous-circles/amp",
+		source:
+			"/post/146720668266/respect-sleep-one-of-the-best-virtuous-circles/amp",
 		destination: "/exercise-and-sleep",
 		permanent: true,
 	},
@@ -1857,7 +1859,8 @@ export default [
 		permanent: true,
 	},
 	{
-		source: "/post/79603172723/travel-and-new-foods-a-pattern-i-have-observed/amp",
+		source:
+			"/post/79603172723/travel-and-new-foods-a-pattern-i-have-observed/amp",
 		destination: "/travel-and-new-foods",
 		permanent: true,
 	},
@@ -1920,7 +1923,8 @@ export default [
 		permanent: true,
 	},
 	{
-		source: "/post/78492318323/london-running-kit-this-lot-will-have-you-set/amp",
+		source:
+			"/post/78492318323/london-running-kit-this-lot-will-have-you-set/amp",
 		destination: "/london-running-kit",
 		permanent: true,
 	},
@@ -3549,7 +3553,8 @@ export default [
 		permanent: true,
 	},
 	{
-		source: "/post/53020915297/poach-an-egg-in-the-microwave-taught-to-me-by/amp",
+		source:
+			"/post/53020915297/poach-an-egg-in-the-microwave-taught-to-me-by/amp",
 		destination: "/poach-an-egg-in-the-microwave",
 		permanent: true,
 	},
@@ -3615,7 +3620,8 @@ export default [
 		permanent: true,
 	},
 	{
-		source: "/post/53018718378/how-to-get-off-at-russell-square-because-theres/amp",
+		source:
+			"/post/53018718378/how-to-get-off-at-russell-square-because-theres/amp",
 		destination: "/how-to-get-off-at-russell-square",
 		permanent: true,
 	},

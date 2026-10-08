@@ -48,7 +48,9 @@ const useSearch = () => {
 		isSearchableQuery(query) ? cachedSearchFor(query) : null,
 	);
 	const [results, setResults] = useState(cachedSearch?.results ?? null);
-	const [tagResults, setTagResults] = useState(cachedSearch?.tagResults ?? null);
+	const [tagResults, setTagResults] = useState(
+		cachedSearch?.tagResults ?? null,
+	);
 	const [matchQuality, setMatchQuality] = useState(
 		cachedSearch?.matchQuality ?? null,
 	);
@@ -77,7 +79,10 @@ const useSearch = () => {
 			});
 		};
 
-		if (typeof window !== "undefined" && typeof window.requestIdleCallback === "function") {
+		if (
+			typeof window !== "undefined" &&
+			typeof window.requestIdleCallback === "function"
+		) {
 			idleHandle = window.requestIdleCallback(load, { timeout: 3000 });
 		} else {
 			timeoutHandle = window.setTimeout(load, 1000);
@@ -85,7 +90,10 @@ const useSearch = () => {
 
 		return () => {
 			cancelled = true;
-			if (idleHandle != null && typeof window.cancelIdleCallback === "function") {
+			if (
+				idleHandle != null &&
+				typeof window.cancelIdleCallback === "function"
+			) {
 				window.cancelIdleCallback(idleHandle);
 			}
 			if (timeoutHandle != null) window.clearTimeout(timeoutHandle);

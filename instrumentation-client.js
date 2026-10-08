@@ -1,4 +1,5 @@
 import * as Sentry from "@sentry/nextjs";
+
 import { sentryDataCollection } from "./sentryDataCollection";
 
 Sentry.init({

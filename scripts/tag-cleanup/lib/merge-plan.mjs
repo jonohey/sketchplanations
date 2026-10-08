@@ -51,7 +51,10 @@ export const getPendingChangeRows = (rows) =>
 			(r.action === "merge" || r.action === "remove") && r.status === "pending",
 	);
 
-export const matchesPlanFilter = (row, { pendingOnly = false, batchId = null } = {}) => {
+export const matchesPlanFilter = (
+	row,
+	{ pendingOnly = false, batchId = null } = {},
+) => {
 	if (pendingOnly && row.status !== "pending") return false;
 	if (batchId != null && String(row.batch_id) !== String(batchId)) return false;
 	return true;

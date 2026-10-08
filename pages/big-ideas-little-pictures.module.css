@@ -1,62 +1,62 @@
 .tocGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem 2rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  counter-reset: toc-counter;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1.5rem 2rem;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	counter-reset: toc-counter;
 }
 
 @media (min-width: 1024px) {
-  .tocGrid {
-    grid-template-columns: 1fr 1fr;
-  }
+	.tocGrid {
+		grid-template-columns: 1fr 1fr;
+	}
 }
 
 .tocSection {
-  counter-increment: toc-counter;
-  display: list-item;
-  list-style: none;
-  position: relative;
-  padding-left: 3rem;
+	counter-increment: toc-counter;
+	display: list-item;
+	list-style: none;
+	position: relative;
+	padding-left: 3rem;
 }
 
 .tocSection::before {
-  content: counter(toc-counter);
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  background-color: #fbbf24;
-  border-radius: 50%;
-  font-weight: 600;
-  font-size: 0.875rem;
+	content: counter(toc-counter);
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2rem;
+	height: 2rem;
+	background-color: #fbbf24;
+	border-radius: 50%;
+	font-weight: 600;
+	font-size: 0.875rem;
 }
 
 @media (prefers-color-scheme: dark) {
-  .tocSection::before {
-    background-color: #d97706;
-  }
+	.tocSection::before {
+		background-color: #d97706;
+	}
 }
 
 .tocTitle {
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin: 0;
+	font-size: 1.125rem;
+	font-weight: 600;
+	margin: 0;
 }
 
 .tocDescription {
-  margin: 0;
-  margin-top: 0.5rem;
+	margin: 0;
+	margin-top: 0.5rem;
 }
 
 .tocDescription i {
-  color: var(--color-textSubdued);
+	color: var(--color-textSubdued);
 }
 
 .heroQuote {
@@ -104,7 +104,11 @@
 	font-size: 1.75rem;
 	line-height: 1;
 	letter-spacing: 0.1em;
-	background: linear-gradient(90deg, #fbbf24 var(--rating), #d1d5db var(--rating));
+	background: linear-gradient(
+		90deg,
+		#fbbf24 var(--rating),
+		#d1d5db var(--rating)
+	);
 	-webkit-background-clip: text;
 	background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -113,7 +117,11 @@
 
 @media (prefers-color-scheme: dark) {
 	.stars {
-		background: linear-gradient(90deg, #fbbf24 var(--rating), #4b5563 var(--rating));
+		background: linear-gradient(
+			90deg,
+			#fbbf24 var(--rating),
+			#4b5563 var(--rating)
+		);
 		-webkit-background-clip: text;
 		background-clip: text;
 	}

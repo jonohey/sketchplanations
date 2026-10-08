@@ -1,3 +1,7 @@
+import { LoaderCircle } from "lucide-react";
+import Head from "next/head";
+import { useState } from "react";
+
 import FancyLink from "components/FancyLink";
 import SketchplanationsGrid from "components/SketchplanationsGrid";
 import TextHeader from "components/TextHeader";
@@ -6,9 +10,6 @@ import {
 	getHistoryEntryCache,
 	setHistoryEntryCache,
 } from "helpers/historyEntryCache";
-import { LoaderCircle } from "lucide-react";
-import Head from "next/head";
-import { useState } from "react";
 import { client } from "services/prismic";
 
 const ITEMS_PER_PAGE = 40;
@@ -59,7 +60,9 @@ const Archive = ({ initialSketchplanations }) => {
 			<div className="pt-6 px-6 text-center">
 				<TextHeader>Archive</TextHeader>
 				<p className="prose mx-auto mt-4 mb-8 max-w-2xl text-textSubdued">
-					Explore the full visual archive of over a decade of Sketchplanations and discover sketches that interest and inspire you. Use them to have great conversations about ideas.
+					Explore the full visual archive of over a decade of Sketchplanations
+					and discover sketches that interest and inspire you. Use them to have
+					great conversations about ideas.
 				</p>
 			</div>
 			<div className="text-center mt-8 mb-8">
@@ -105,10 +108,7 @@ async function fetchSketchplanations(page = 1) {
 				direction: "desc",
 			},
 		],
-		fetch: [
-			'sketchplanation.title',
-			'sketchplanation.image',
-		],
+		fetch: ["sketchplanation.title", "sketchplanation.image"],
 		pageSize: ITEMS_PER_PAGE,
 		page,
 	});

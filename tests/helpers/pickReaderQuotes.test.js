@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
+
+import { BOOK_REVIEWS } from "../../helpers/bookReviews";
 import {
 	arrangeReaderQuotes,
 	seededRandom,
 } from "../../helpers/pickReaderQuotes";
-import { BOOK_REVIEWS } from "../../helpers/bookReviews";
 import { READER_QUOTES } from "../../helpers/readerQuotes";
 
 describe("READER_QUOTES", () => {
@@ -63,9 +64,7 @@ describe("arrangeReaderQuotes", () => {
 
 	it("pairs long quotes with short ones", () => {
 		const columns = arrangeReaderQuotes(quotes, seededRandom(3));
-		const longest = columns.find((column) =>
-			column.some((q) => q.id === "f2"),
-		);
+		const longest = columns.find((column) => column.some((q) => q.id === "f2"));
 		expect(longest.map((q) => q.id)).toContain("a");
 	});
 

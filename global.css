@@ -4,142 +4,142 @@
 
 /* Tailwind layer system */
 @layer components {
-  .debug {
-    outline: solid thin red;
-    outline-offset: -1px;
-  }
+	.debug {
+		outline: solid thin red;
+		outline-offset: -1px;
+	}
 
-  .link-primary {
-    @apply text-blue font-semibold underline;
-  }
+	.link-primary {
+		@apply text-blue font-semibold underline;
+	}
 
-  .btn-primary {
-    @apply bg-bgButton text-white px-4 py-2 rounded flex flex-row items-center justify-center gap-x-2 shadow-sm;
-  }
+	.btn-primary {
+		@apply bg-bgButton text-white px-4 py-2 rounded flex flex-row items-center justify-center gap-x-2 shadow-sm;
+	}
 
-  .btn-secondary {
-    @apply bg-bg text-blue px-4 py-2 rounded flex flex-row items-center justify-center gap-x-2 border border-border shadow-sm;
+	.btn-secondary {
+		@apply bg-bg text-blue px-4 py-2 rounded flex flex-row items-center justify-center gap-x-2 border border-border shadow-sm;
 
-    & > * {
-      @apply flex-shrink-0;
-    }
-  }
+		& > * {
+			@apply flex-shrink-0;
+		}
+	}
 
-  .btn-outline {
-    @apply inline-block px-6 py-2 rounded-full border border-blue dark:border-white text-blue dark:text-white hover:bg-blueLight dark:hover:bg-white/10 transition-colors;
-  }
+	.btn-outline {
+		@apply inline-block px-6 py-2 rounded-full border border-blue dark:border-white text-blue dark:text-white hover:bg-blueLight dark:hover:bg-white/10 transition-colors;
+	}
 
-  .masked-image {
-    mask-image: var(--mask-image);
-  }
+	.masked-image {
+		mask-image: var(--mask-image);
+	}
 }
 
 :root {
-  /* Bad name? */
-  --color-black: hsl(0, 0%, 13.3%);
+	/* Bad name? */
+	--color-black: hsl(0, 0%, 13.3%);
 
-  --color-paper: hsl(53.8, 78.4%, 92.7%);
-  --color-paperDarker: hsl(47.6, 33.3%, 82.9%);
-  --color-paperTracing: hsla(0, 0%, 100%, 0.75);
-  --color-paperTransparent: hsla(53.8, 78.4%, 92.7%, 0.8);
+	--color-paper: hsl(53.8, 78.4%, 92.7%);
+	--color-paperDarker: hsl(47.6, 33.3%, 82.9%);
+	--color-paperTracing: hsla(0, 0%, 100%, 0.75);
+	--color-paperTransparent: hsla(53.8, 78.4%, 92.7%, 0.8);
 
-  --color-sketchShadow: hsl(47.6, 33.3%, 82.9%);
-  --color-sketchShadowHover: hsla(47.6, 33.3%, 82.9%, 0.75);
+	--color-sketchShadow: hsl(47.6, 33.3%, 82.9%);
+	--color-sketchShadowHover: hsla(47.6, 33.3%, 82.9%, 0.75);
 
-  --color-red: hsl(359, 51.2%, 48.2%);
-  --color-brightRed: hsl(9.4, 98.1%, 58%);
-  --color-blue: hsl(216.1, 81.9%, 39%);
-  --color-blueLight: hsl(197.65, 100%, 90%);
+	--color-red: hsl(359, 51.2%, 48.2%);
+	--color-brightRed: hsl(9.4, 98.1%, 58%);
+	--color-blue: hsl(216.1, 81.9%, 39%);
+	--color-blueLight: hsl(197.65, 100%, 90%);
 
-  --color-bg: hsl(0, 0%, 100%);
-  --color-bgButton: hsl(216.1, 81.9%, 39%);
-  --color-bgDarker: hsl(0, 0%, 98.1%);
-  --color-bgFooter: hsl(0, 0%, 96%);
-  --color-bgHighlight: hsl(0, 0%, 96.1%);
-  --color-bgHsl: 0, 0%, 100%;
-  --color-bgInput: hsl(0, 0%, 98%);
-  --color-bgKeyboardShortcut: hsl(0, 0%, 98%);
-  --color-bgTransparent: hsla(0, 0%, 100%, 0.9);
+	--color-bg: hsl(0, 0%, 100%);
+	--color-bgButton: hsl(216.1, 81.9%, 39%);
+	--color-bgDarker: hsl(0, 0%, 98.1%);
+	--color-bgFooter: hsl(0, 0%, 96%);
+	--color-bgHighlight: hsl(0, 0%, 96.1%);
+	--color-bgHsl: 0, 0%, 100%;
+	--color-bgInput: hsl(0, 0%, 98%);
+	--color-bgKeyboardShortcut: hsl(0, 0%, 98%);
+	--color-bgTransparent: hsla(0, 0%, 100%, 0.9);
 
-  --color-border: hsl(220, 13%, 91%);
-  --color-borderFooter: hsl(220, 13%, 91%);
-  --color-borderInput: hsl(220, 13%, 89%);
-  --color-borderKeyboardShortcut: hsl(0, 0%, 88%);
+	--color-border: hsl(220, 13%, 91%);
+	--color-borderFooter: hsl(220, 13%, 91%);
+	--color-borderInput: hsl(220, 13%, 89%);
+	--color-borderKeyboardShortcut: hsl(0, 0%, 88%);
 
-  --color-text: hsl(0, 0%, 13.3%);
-  --color-textSubdued: hsl(0, 0%, 44.9%);
-  --color-textSubduedMore: hsl(0, 0%, 70%);
+	--color-text: hsl(0, 0%, 13.3%);
+	--color-textSubdued: hsl(0, 0%, 44.9%);
+	--color-textSubduedMore: hsl(0, 0%, 70%);
 
-  --color-overlay: hsla(0, 0%, 0%, 0.9);
+	--color-overlay: hsla(0, 0%, 0%, 0.9);
 
-  --mask-image: linear-gradient(
-    to bottom,
-    hsl(0, 0%, 0%) 0%,
-    hsla(0, 0%, 0%, 0.987) 18.4%,
-    hsla(0, 0%, 0%, 0.951) 33.7%,
-    hsla(0, 0%, 0%, 0.896) 46.3%,
-    hsla(0, 0%, 0%, 0.825) 56.5%,
-    hsla(0, 0%, 0%, 0.741) 64.6%,
-    hsla(0, 0%, 0%, 0.648) 70.9%,
-    hsla(0, 0%, 0%, 0.55) 75.8%,
-    hsla(0, 0%, 0%, 0.45) 79.5%,
-    hsla(0, 0%, 0%, 0.352) 82.4%,
-    hsla(0, 0%, 0%, 0.259) 84.7%,
-    hsla(0, 0%, 0%, 0.175) 86.9%,
-    hsla(0, 0%, 0%, 0.104) 89.2%,
-    hsla(0, 0%, 0%, 0.049) 92%,
-    hsla(0, 0%, 0%, 0.013) 95.4%,
-    hsla(0, 0%, 0%, 0) 100%
-  );
+	--mask-image: linear-gradient(
+		to bottom,
+		hsl(0, 0%, 0%) 0%,
+		hsla(0, 0%, 0%, 0.987) 18.4%,
+		hsla(0, 0%, 0%, 0.951) 33.7%,
+		hsla(0, 0%, 0%, 0.896) 46.3%,
+		hsla(0, 0%, 0%, 0.825) 56.5%,
+		hsla(0, 0%, 0%, 0.741) 64.6%,
+		hsla(0, 0%, 0%, 0.648) 70.9%,
+		hsla(0, 0%, 0%, 0.55) 75.8%,
+		hsla(0, 0%, 0%, 0.45) 79.5%,
+		hsla(0, 0%, 0%, 0.352) 82.4%,
+		hsla(0, 0%, 0%, 0.259) 84.7%,
+		hsla(0, 0%, 0%, 0.175) 86.9%,
+		hsla(0, 0%, 0%, 0.104) 89.2%,
+		hsla(0, 0%, 0%, 0.049) 92%,
+		hsla(0, 0%, 0%, 0.013) 95.4%,
+		hsla(0, 0%, 0%, 0) 100%
+	);
 }
 
 @screen dark {
-  :root {
-    --color-black: hsl(0, 0%, 98.8%);
+	:root {
+		--color-black: hsl(0, 0%, 98.8%);
 
-    --color-paper: hsl(53.8, 78.4%, 92.7%);
-    --color-paperDarker: hsl(47.6, 33.3%, 82.9%);
-    --color-paperTransparent: hsla(53.8, 78.4%, 92.7%, 0.8);
+		--color-paper: hsl(53.8, 78.4%, 92.7%);
+		--color-paperDarker: hsl(47.6, 33.3%, 82.9%);
+		--color-paperTransparent: hsla(53.8, 78.4%, 92.7%, 0.8);
 
-    --color-sketchShadow: hsl(225, 4.9%, 16.1%);
-    --color-sketchShadowHover: hsla(225, 4.9%, 16.1%, 0.75);
+		--color-sketchShadow: hsl(225, 4.9%, 16.1%);
+		--color-sketchShadowHover: hsla(225, 4.9%, 16.1%, 0.75);
 
-    --color-red: hsl(359, 51.2%, 48.2%);
-    --color-brightRed: hsl(9.4, 98.1%, 58%);
-    --color-blue: hsl(215.8, 81.7%, 67.8%);
-    --color-blueLight: hsl(197.65, 100%, 90%);
+		--color-red: hsl(359, 51.2%, 48.2%);
+		--color-brightRed: hsl(9.4, 98.1%, 58%);
+		--color-blue: hsl(215.8, 81.7%, 67.8%);
+		--color-blueLight: hsl(197.65, 100%, 90%);
 
-    --color-bg: hsl(228, 4.5%, 21.8%);
-    --color-bgButton: hsl(216.1, 81.9%, 39%);
-    --color-bgDarker: hsl(225, 5.9%, 13.3%);
-    --color-bgFooter: hsl(228, 4.5%, 19.8%);
-    --color-bgHighlight: hsl(231.4, 4.9%, 28%);
-    --color-bgHsl: 228, 4.5%, 21.8%;
-    --color-bgInput: hsl(225, 5.9%, 13.3%);
-    --color-bgKeyboardShortcut: hsl(228, 4.5%, 21.8%);
-    --color-bgTransparent: rgba(53, 54, 58, 0.9);
+		--color-bg: hsl(228, 4.5%, 21.8%);
+		--color-bgButton: hsl(216.1, 81.9%, 39%);
+		--color-bgDarker: hsl(225, 5.9%, 13.3%);
+		--color-bgFooter: hsl(228, 4.5%, 19.8%);
+		--color-bgHighlight: hsl(231.4, 4.9%, 28%);
+		--color-bgHsl: 228, 4.5%, 21.8%;
+		--color-bgInput: hsl(225, 5.9%, 13.3%);
+		--color-bgKeyboardShortcut: hsl(228, 4.5%, 21.8%);
+		--color-bgTransparent: rgba(53, 54, 58, 0.9);
 
-    --color-border: hsl(225, 5.1%, 30.6%);
-    --color-borderFooter: hsl(225, 5.1%, 23.6%);
-    --color-borderInput: hsl(228, 4.5%, 12.8%);
-    --color-borderKeyboardShortcut: hsl(228, 4.5%, 27.8%);
+		--color-border: hsl(225, 5.1%, 30.6%);
+		--color-borderFooter: hsl(225, 5.1%, 23.6%);
+		--color-borderInput: hsl(228, 4.5%, 12.8%);
+		--color-borderKeyboardShortcut: hsl(228, 4.5%, 27.8%);
 
-    --color-text: hsl(0, 0%, 98.8%);
-    --color-textSubdued: hsl(0, 0%, 77.6%);
-    --color-textSubduedMore: hsl(0, 0%, 40%);
+		--color-text: hsl(0, 0%, 98.8%);
+		--color-textSubdued: hsl(0, 0%, 77.6%);
+		--color-textSubduedMore: hsl(0, 0%, 40%);
 
-    --color-overlay: hsla(0, 0%, 7%, 0.9);
-  }
+		--color-overlay: hsla(0, 0%, 7%, 0.9);
+	}
 }
 
 html {
-  @apply bg-bg text-text font-light;
-  font-optical-sizing: auto;
-  overflow-x: hidden;
+	@apply bg-bg text-text font-light;
+	font-optical-sizing: auto;
+	overflow-x: hidden;
 }
 
 body {
-  overflow-x: hidden;
+	overflow-x: hidden;
 }
 
 h1,
@@ -148,20 +148,20 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-semibold;
+	@apply font-semibold;
 }
 
 pre {
-  padding: 1rem;
-  font-family:
-    SFMono-Regular,
-    Consolas,
-    Liberation Mono,
-    Menlo,
-    monospace;
-  font-size: 10px;
-  white-space: pre-wrap;
-  color: #8ae8fc;
-  background-color: #282a36;
-  line-height: 1.4;
+	padding: 1rem;
+	font-family:
+		SFMono-Regular,
+		Consolas,
+		Liberation Mono,
+		Menlo,
+		monospace;
+	font-size: 10px;
+	white-space: pre-wrap;
+	color: #8ae8fc;
+	background-color: #282a36;
+	line-height: 1.4;
 }

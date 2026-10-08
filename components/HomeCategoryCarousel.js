@@ -1,9 +1,11 @@
-import { track } from "@vercel/analytics";
 import { PrismicNextImage } from "@prismicio/next";
+import { track } from "@vercel/analytics";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useRef, useState } from "react";
+
+import styles from "./HomeCategoryCarousel.module.css";
 
 import FancyLink from "components/FancyLink";
 import HomeFeaturedSketch from "components/HomeFeaturedSketch";
@@ -13,7 +15,6 @@ import {
 	setHistoryEntryCache,
 } from "helpers/historyEntryCache";
 import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
-import styles from "./HomeCategoryCarousel.module.css";
 
 const SCROLL_DEBOUNCE_MS = 220;
 const SCROLL_POSITIONS_CACHE_KEY = "home-carousel-scroll";
@@ -90,7 +91,9 @@ function CarouselRowSkeleton({
 					{Array.from({ length: SKELETON_CARD_COUNT }).map((_, i) => (
 						// biome-ignore lint/suspicious/noArrayIndexKey: placeholder cards are static
 						<div key={i} className={styles.card}>
-							<span className={`${styles.imageWrap} ${styles.skeletonShimmer}`} />
+							<span
+								className={`${styles.imageWrap} ${styles.skeletonShimmer}`}
+							/>
 							<span className={styles.skeletonTitle} />
 						</div>
 					))}
@@ -266,118 +269,121 @@ function HomeCategoryCarouselRow({
 	) : null;
 
 	const trackBlock = (
-			<div className={styles.trackOuter}>
-				{canNavigate && canScrollLeft && (
-					<span className={`${styles.fade} ${styles.fadeLeft}`} aria-hidden="true" />
-				)}
-				{canNavigate && canScrollRight && (
-					<span className={`${styles.fade} ${styles.fadeRight}`} aria-hidden="true" />
-				)}
-				{canNavigate && canScrollLeft && (
-					<button
-						type="button"
-						className={`${styles.arrow} ${styles.arrowLeft}`}
-						aria-label="Scroll left"
-						onClick={() => scrollByDirection(-1)}
-					>
-						<ChevronLeft size={20} strokeWidth={2} />
-					</button>
-				)}
-				<div
-					ref={scrollRef}
-					className={styles.track}
-					onScroll={() => {
-						onScroll();
-						scheduleUpdateScrollState();
-						rememberScrollPosition();
-					}}
+		<div className={styles.trackOuter}>
+			{canNavigate && canScrollLeft && (
+				<span
+					className={`${styles.fade} ${styles.fadeLeft}`}
+					aria-hidden="true"
+				/>
+			)}
+			{canNavigate && canScrollRight && (
+				<span
+					className={`${styles.fade} ${styles.fadeRight}`}
+					aria-hidden="true"
+				/>
+			)}
+			{canNavigate && canScrollLeft && (
+				<button
+					type="button"
+					className={`${styles.arrow} ${styles.arrowLeft}`}
+					aria-label="Scroll left"
+					onClick={() => scrollByDirection(-1)}
 				>
-					{sketches.map((sketch, index) => {
-						const sketchHref = `/${sketch.uid}`;
-						const { imgixParams, quality } = getPrismicImageOptimisation(
-							sketch.image,
-							CAROUSEL_THUMB_IMGIX_PARAMS,
-						);
-						const prefetchOnIntent = prefetchCards
-							? undefined
-							: () => router.prefetch(sketchHref);
-						return (
-							<Link
-								key={sketch.uid}
-								href={sketchHref}
-								className={styles.card}
-								prefetch={prefetchCards ? undefined : false}
-								onMouseEnter={prefetchOnIntent}
-								onFocus={prefetchOnIntent}
-								onTouchStart={prefetchOnIntent}
-								onClick={() =>
-									track("homepage_carousel_sketch_click", {
-										category: categoryLabel,
-										sketch: sketch.title,
-									})
-								}
-							>
-								<span className={styles.imageWrap}>
-									<PrismicNextImage
-										field={sketch.image}
-										className={styles.image}
-										fill
-										sizes="(max-width: 639px) min(15rem, calc(100vw - 4.5rem)), (max-width: 767px) 11rem, (max-width: 1023px) 12rem, 13rem"
-										priority={priorityImage && index === 0}
-										loading={
-											priorityImage && index === 0
-												? undefined
-												: deferMount
-													? "eager"
-													: "lazy"
-										}
-										fetchPriority={deferMount ? "low" : undefined}
-										imgixParams={imgixParams}
-										quality={quality}
-										fallbackAlt=""
-									/>
-								</span>
-								<span className={styles.cardTitle}>{sketch.title}</span>
-								{showPublishedDate && sketch.publishedAt && (
-									<time
-										className={styles.cardDate}
-										dateTime={sketch.publishedAt}
-									>
-										{humanizePublishedDate(sketch.publishedAt)}
-									</time>
-								)}
-							</Link>
-						);
-					})}
-					<Link
-						href={viewAllHref}
-						className={styles.viewAllCard}
-						onClick={() =>
-							track("homepage_carousel_view_all_click", {
-								category: categoryLabel,
-							})
-						}
-					>
-						<span className={styles.viewAllCardInner}>
-							<span className={styles.viewAllCardLabel}>
-								View all
-								<ChevronRight size={16} strokeWidth={2} />
+					<ChevronLeft size={20} strokeWidth={2} />
+				</button>
+			)}
+			<div
+				ref={scrollRef}
+				className={styles.track}
+				onScroll={() => {
+					onScroll();
+					scheduleUpdateScrollState();
+					rememberScrollPosition();
+				}}
+			>
+				{sketches.map((sketch, index) => {
+					const sketchHref = `/${sketch.uid}`;
+					const { imgixParams, quality } = getPrismicImageOptimisation(
+						sketch.image,
+						CAROUSEL_THUMB_IMGIX_PARAMS,
+					);
+					const prefetchOnIntent = prefetchCards
+						? undefined
+						: () => router.prefetch(sketchHref);
+					return (
+						<Link
+							key={sketch.uid}
+							href={sketchHref}
+							className={styles.card}
+							prefetch={prefetchCards ? undefined : false}
+							onMouseEnter={prefetchOnIntent}
+							onFocus={prefetchOnIntent}
+							onTouchStart={prefetchOnIntent}
+							onClick={() =>
+								track("homepage_carousel_sketch_click", {
+									category: categoryLabel,
+									sketch: sketch.title,
+								})
+							}
+						>
+							<span className={styles.imageWrap}>
+								<PrismicNextImage
+									field={sketch.image}
+									className={styles.image}
+									fill
+									sizes="(max-width: 639px) min(15rem, calc(100vw - 4.5rem)), (max-width: 767px) 11rem, (max-width: 1023px) 12rem, 13rem"
+									priority={priorityImage && index === 0}
+									loading={
+										priorityImage && index === 0
+											? undefined
+											: deferMount
+												? "eager"
+												: "lazy"
+									}
+									fetchPriority={deferMount ? "low" : undefined}
+									imgixParams={imgixParams}
+									quality={quality}
+									fallbackAlt=""
+								/>
 							</span>
+							<span className={styles.cardTitle}>{sketch.title}</span>
+							{showPublishedDate && sketch.publishedAt && (
+								<time className={styles.cardDate} dateTime={sketch.publishedAt}>
+									{humanizePublishedDate(sketch.publishedAt)}
+								</time>
+							)}
+						</Link>
+					);
+				})}
+				<Link
+					href={viewAllHref}
+					className={styles.viewAllCard}
+					onClick={() =>
+						track("homepage_carousel_view_all_click", {
+							category: categoryLabel,
+						})
+					}
+				>
+					<span className={styles.viewAllCardInner}>
+						<span className={styles.viewAllCardLabel}>
+							View all
+							<ChevronRight size={16} strokeWidth={2} />
 						</span>
-					</Link>
-				</div>
-				{canNavigate && (
-					<button
-						type="button"
-						className={`${styles.arrow} ${styles.arrowRight}`}
-						aria-label="Scroll right"
-						disabled={!canScrollRight}
-						onClick={() => scrollByDirection(1)}
-					>
-						<ChevronRight size={20} strokeWidth={2} />
-					</button>
-				)}
+					</span>
+				</Link>
 			</div>
+			{canNavigate && (
+				<button
+					type="button"
+					className={`${styles.arrow} ${styles.arrowRight}`}
+					aria-label="Scroll right"
+					disabled={!canScrollRight}
+					onClick={() => scrollByDirection(1)}
+				>
+					<ChevronRight size={20} strokeWidth={2} />
+				</button>
+			)}
+		</div>
 	);
 
 	if (!wrapSection) {
@@ -429,9 +435,7 @@ export default function HomeCategoryCarousels({ rows, interlude = null }) {
 									{row.label}
 								</Link>
 							</h2>
-							{row.tagline && (
-								<p className={styles.tagline}>{row.tagline}</p>
-							)}
+							{row.tagline && <p className={styles.tagline}>{row.tagline}</p>}
 						</div>
 						{row.featuredSketch && (
 							<HomeFeaturedSketch sketch={row.featuredSketch} />
@@ -479,13 +483,13 @@ export default function HomeCategoryCarousels({ rows, interlude = null }) {
 							deferMount
 						/>
 					))}
-					<div className={`container mx-auto px-4 sm:px-6 lg:px-8 ${styles.andMoreWrap}`}>
+					<div
+						className={`container mx-auto px-4 sm:px-6 lg:px-8 ${styles.andMoreWrap}`}
+					>
 						<FancyLink
 							href="/search"
 							className={styles.andMoreLink}
-							onClick={() =>
-								track("homepage_carousel_and_more_click")
-							}
+							onClick={() => track("homepage_carousel_and_more_click")}
 						>
 							…and many more
 						</FancyLink>

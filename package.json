@@ -19,6 +19,8 @@
 		"build": "next build || (rm -rf .next && next build)",
 		"start": "next start",
 		"test": "vitest run",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
 		"build:books": "node utils/buildBooksIndex.mjs",
 		"check:books-duplicates": "node scripts/check-book-duplicates.mjs",
 		"check:broken-tags": "node scripts/check-broken-tags.mjs",

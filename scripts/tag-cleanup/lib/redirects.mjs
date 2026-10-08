@@ -46,7 +46,9 @@ ${snippets.join("\n\n")}
 	const outPath = path.join(DATA_DIR, `tag-redirects-${dateStamp()}.mjs`);
 	fs.writeFileSync(outPath, output);
 
-	console.log(`\n[tag-cleanup] Redirect snippets written to:\n  ${path.resolve(outPath)}\n`);
+	console.log(
+		`\n[tag-cleanup] Redirect snippets written to:\n  ${path.resolve(outPath)}\n`,
+	);
 	console.log("Review and append worthwhile entries to redirects.mjs\n");
 	for (const r of completed) {
 		console.log(`  /categories/${r.from_slug} → /categories/${r.to_slug}`);

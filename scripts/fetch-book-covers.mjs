@@ -1,10 +1,12 @@
+import dotenv from "dotenv";
+import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
-import { createHash } from "node:crypto";
 
-import dotenv from "dotenv";
-
-import { normalizeBookTitle, normalizeParsedTitle } from "../utils/bookLinks.mjs";
+import {
+	normalizeBookTitle,
+	normalizeParsedTitle,
+} from "../utils/bookLinks.mjs";
 
 dotenv.config({ path: path.join(process.cwd(), ".env") });
 dotenv.config({ path: path.join(process.cwd(), ".env.local"), override: true });
@@ -173,9 +175,12 @@ async function fetchOpenLibraryCoverByTitle(title, author) {
 	});
 	if (author) params.set("author", author.split(",")[0].trim());
 
-	const response = await fetch(`https://openlibrary.org/search.json?${params}`, {
-		headers: { "User-Agent": USER_AGENT },
-	});
+	const response = await fetch(
+		`https://openlibrary.org/search.json?${params}`,
+		{
+			headers: { "User-Agent": USER_AGENT },
+		},
+	);
 
 	if (!response.ok) return null;
 
@@ -193,7 +198,9 @@ async function fetchOpenLibraryCoverByTitle(title, author) {
 		if (!titleMatch) continue;
 
 		// Avoid near-misses like "Art of Statistics" for "Art of Uncertainty"
-		const expectedTokens = normalizedTitle.split(/\s+/).filter((t) => t.length > 3);
+		const expectedTokens = normalizedTitle
+			.split(/\s+/)
+			.filter((t) => t.length > 3);
 		const matchedTokens = expectedTokens.filter((t) => docTitle.includes(t));
 		if (
 			expectedTokens.length >= 2 &&
@@ -270,9 +277,7 @@ async function fetchGoogleBooksCover({ isbn, title, author }) {
 		);
 
 		if (response.status === 429) {
-			console.log(
-				"  (Google Books rate-limited — falling back / try later)",
-			);
+			console.log("  (Google Books rate-limited — falling back / try later)");
 			return null;
 		}
 
@@ -285,10 +290,12 @@ async function fetchGoogleBooksCover({ isbn, title, author }) {
 			);
 			if (!retry.ok) continue;
 			const retryData = await retry.json();
-			const downloaded = await pickCoverFromGoogleItems(
-				retryData.items ?? [],
-				{ isbn, title, author, apiKey },
-			);
+			const downloaded = await pickCoverFromGoogleItems(retryData.items ?? [], {
+				isbn,
+				title,
+				author,
+				apiKey,
+			});
 			if (downloaded) return downloaded;
 			continue;
 		}
@@ -308,7 +315,10 @@ async function fetchGoogleBooksCover({ isbn, title, author }) {
 	return null;
 }
 
-async function pickCoverFromGoogleItems(items, { isbn, title, author, apiKey }) {
+async function pickCoverFromGoogleItems(
+	items,
+	{ isbn, title, author, apiKey },
+) {
 	for (const item of items) {
 		const language = item.volumeInfo?.language;
 		if (language && language !== "en") continue;

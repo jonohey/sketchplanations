@@ -1,53 +1,53 @@
 .root {
-  @apply relative flex justify-center font-normal self-stretch;
-  @apply flex-col;
+	@apply relative flex justify-center font-normal self-stretch;
+	@apply flex-col;
 }
 
 @screen md {
-  .root {
-    @apply -mx-2 flex-row;
-  }
+	.root {
+		@apply -mx-2 flex-row;
+	}
 }
 
 @screen lg {
-  .root {
-    @apply -mx-3;
-  }
+	.root {
+		@apply -mx-3;
+	}
 }
 
 .item {
-  @apply relative flex items-center px-5 py-3 hover:text-blue text-xl;
+	@apply relative flex items-center px-5 py-3 hover:text-blue text-xl;
 }
 
 @screen md {
-  .item {
-    @apply px-2 py-0 text-sm;
-  }
+	.item {
+		@apply px-2 py-0 text-sm;
+	}
 }
 
 @screen lg {
-  .item {
-    @apply px-3 text-base;
-  }
+	.item {
+		@apply px-3 text-base;
+	}
 }
 
 .item {
-  @apply flex gap-x-2 items-center justify-start;
+	@apply flex gap-x-2 items-center justify-start;
 }
 
-.item[aria-current='page'] {
-  @apply text-blue;
-  box-shadow: inset 0 -2px 0 currentColor;
+.item[aria-current="page"] {
+	@apply text-blue;
+	box-shadow: inset 0 -2px 0 currentColor;
 }
 
 .item--home {
-  @apply md:hidden;
+	@apply md:hidden;
 }
 
 .external-link-icon {
-  @apply text-textSubdued;
+	@apply text-textSubdued;
 }
 
 .item--mobile-only {
-  @apply md:hidden;
+	@apply md:hidden;
 }

@@ -1,6 +1,7 @@
+import Head from "next/head";
+
 import Page from "components/Page";
 import { pageTitle } from "helpers";
-import Head from "next/head";
 import { client } from "services/prismic";
 
 const Thanks = ({ document }) => {

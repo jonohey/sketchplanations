@@ -1,5 +1,6 @@
 import { PrismicNextImage } from "@prismicio/next";
 import { track } from "@vercel/analytics";
+import Context from "context";
 import { LoaderCircle } from "lucide-react";
 import dynamic from "next/dynamic";
 import {
@@ -11,10 +12,10 @@ import {
 	useState,
 } from "react";
 
-import Context from "context";
+import styles from "./SketchplanationImage.module.css";
+
 import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
 import runWhenIdle from "helpers/runWhenIdle";
-import styles from "./SketchplanationImage.module.css";
 
 const SketchplanationLightbox = dynamic(
 	() => import("components/SketchplanationLightbox"),

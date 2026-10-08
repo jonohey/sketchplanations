@@ -2,15 +2,32 @@ import * as prismic from "@prismicio/client";
 import * as prismicH from "@prismicio/helpers";
 import { PrismicNextImage } from "@prismicio/next";
 import classNames from "classnames";
+import {
+	ArrowLeft,
+	ArrowRight,
+	ArrowUp,
+	ChevronLeft,
+	ChevronRight,
+} from "lucide-react";
+import dynamic from "next/dynamic";
+import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { Fragment, useState } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
+
+import styles from "./[uid].module.css";
+
 import Cards from "components/Cards";
 import DownloadModal from "components/DownloadModal";
 import FancyLink from "components/FancyLink";
+import JsonLd from "components/JsonLd";
 import KeyboardShortcut from "components/KeyboardShortcut";
+import LicenceContent from "components/LicenceContent";
 import RichText from "components/RichText";
 import SketchplanationCtas from "components/SketchplanationCtas";
 import SketchplanationImage from "components/SketchplanationImage";
 import SubscribeInline from "components/SubscribeInline";
-import JsonLd from "components/JsonLd";
 import {
 	fastScrollToTop,
 	humanizePublishedDate,
@@ -25,26 +42,22 @@ import {
 	resolveSketchTagDocs,
 } from "helpers/structuredData";
 import { useRandomHandle } from "hooks/useRandomHandle";
-import { ArrowLeft, ArrowRight, ArrowUp, ChevronLeft, ChevronRight } from "lucide-react";
-import dynamic from "next/dynamic";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { Fragment, useState } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
 import { client } from "services/prismic";
 
 const TextHeader = dynamic(() => import("components/TextHeader"));
 const Modal = dynamic(() => import("components/Modal"));
-const SketchplanationsStack = dynamic(() => import("components/SketchplanationsStack"), {
-	ssr: false,
-});
-const TaggedSketchplanations = dynamic(() => import("components/TaggedSketchplanations"), {
-	ssr: false,
-});
-
-import LicenceContent from "components/LicenceContent";
-import styles from "./[uid].module.css";
+const SketchplanationsStack = dynamic(
+	() => import("components/SketchplanationsStack"),
+	{
+		ssr: false,
+	},
+);
+const TaggedSketchplanations = dynamic(
+	() => import("components/TaggedSketchplanations"),
+	{
+		ssr: false,
+	},
+);
 
 const truncate = (string, limit) => {
 	if (string.length <= limit) return string;
@@ -94,7 +107,7 @@ const SketchplanationPage = ({
 	// This checks for ref= query param in the url and sets the noindex meta tag if it's present
 	// On recommendation from SEO expert.
 	const shouldNoIndex = router.query.ref !== undefined;
-	const robotsContent = `max-image-preview:large${shouldNoIndex ? ', noindex, nofollow' : ''}`;
+	const robotsContent = `max-image-preview:large${shouldNoIndex ? ", noindex, nofollow" : ""}`;
 
 	const {
 		data: {
@@ -203,11 +216,11 @@ const SketchplanationPage = ({
 
 			<JsonLd data={structuredData} />
 
-			<Modal isOpen={downloadModalOpen} onClose={() => setDownloadModalOpen(false)}>
-				<DownloadModal
-					sketchplanationTitle={title}
-					sketchplanationUid={uid}
-				/>
+			<Modal
+				isOpen={downloadModalOpen}
+				onClose={() => setDownloadModalOpen(false)}
+			>
+				<DownloadModal sketchplanationTitle={title} sketchplanationUid={uid} />
 			</Modal>
 
 			<Modal
@@ -262,12 +275,7 @@ const SketchplanationPage = ({
 							<div className="my-6">
 								<SubscribeInline />
 							</div>
-							<div
-								className={classNames(
-									styles.body,
-									"prose lg:prose-lg",
-								)}
-							>
+							<div className={classNames(styles.body, "prose lg:prose-lg")}>
 								<RichText field={body} />
 							</div>
 							{isPresent(topicTags) && (
@@ -328,7 +336,6 @@ const SketchplanationPage = ({
 										/>
 									</div>
 								)}
-
 
 								<div className="mt-10">
 									<div className="flex gap-4">
@@ -400,7 +407,9 @@ const SketchplanationPage = ({
 										</div>
 									</div>
 									<div className="text-center text-sm mt-12">
-										When you buy through links on sketchplanations.com, I may earn an affiliate commission. Thanks for supporting the site!
+										When you buy through links on sketchplanations.com, I may
+										earn an affiliate commission. Thanks for supporting the
+										site!
 										<br />
 										<FancyLink href="/books">Browse all books</FancyLink>
 									</div>

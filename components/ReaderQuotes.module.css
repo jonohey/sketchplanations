@@ -1,148 +1,148 @@
 .section {
-  @apply mt-8 sm:mt-10;
+	@apply mt-8 sm:mt-10;
 }
 
 .header {
-  @apply flex items-end justify-center gap-2 mb-3 sm:mb-4 px-4;
+	@apply flex items-end justify-center gap-2 mb-3 sm:mb-4 px-4;
 }
 
 .icon {
-  @apply h-16 sm:h-20 w-auto;
+	@apply h-16 sm:h-20 w-auto;
 }
 
 .heading {
-  @apply text-xs sm:text-sm font-semibold uppercase tracking-widest text-textSubdued m-0 pb-1;
+	@apply text-xs sm:text-sm font-semibold uppercase tracking-widest text-textSubdued m-0 pb-1;
 }
 
 .trackOuter {
-  @apply relative;
+	@apply relative;
 }
 
 /* Cards fade out at both edges to suggest there are plenty more. */
 .track {
-  @apply relative flex items-stretch gap-4 overflow-x-auto px-4 pt-2 pb-6;
+	@apply relative flex items-stretch gap-4 overflow-x-auto px-4 pt-2 pb-6;
 
-  scroll-snap-type: x proximity;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-  mask-image: linear-gradient(
-    to right,
-    transparent 0,
-    #000 2.5rem,
-    #000 calc(100% - 2.5rem),
-    transparent 100%
-  );
+	scroll-snap-type: x proximity;
+	scrollbar-width: none;
+	-webkit-overflow-scrolling: touch;
+	mask-image: linear-gradient(
+		to right,
+		transparent 0,
+		#000 2.5rem,
+		#000 calc(100% - 2.5rem),
+		transparent 100%
+	);
 }
 
 .track::-webkit-scrollbar {
-  display: none;
+	display: none;
 }
 
 /* Two rows: long quotes are paired with short ones so columns even out. */
 .column {
-  @apply flex flex-none flex-col gap-4 snap-center w-[min(16rem,72vw)] md:w-72;
+	@apply flex flex-none flex-col gap-4 snap-center w-[min(16rem,72vw)] md:w-72;
 }
 
 .card {
-  @apply m-0 flex flex-col rounded-2xl bg-bg px-5 py-4 text-sm leading-relaxed text-text;
+	@apply m-0 flex flex-col rounded-2xl bg-bg px-5 py-4 text-sm leading-relaxed text-text;
 
-  /* Soft, slightly blue-tinted lift, after Stripe's cards. */
-  box-shadow:
-    0 0 0 1px hsla(240, 30%, 28%, 0.05),
-    0 2px 4px hsla(240, 30%, 28%, 0.05),
-    0 8px 20px -6px hsla(240, 30%, 28%, 0.14);
+	/* Soft, slightly blue-tinted lift, after Stripe's cards. */
+	box-shadow:
+		0 0 0 1px hsla(240, 30%, 28%, 0.05),
+		0 2px 4px hsla(240, 30%, 28%, 0.05),
+		0 8px 20px -6px hsla(240, 30%, 28%, 0.14);
 
-  & p {
-    @apply m-0;
+	& p {
+		@apply m-0;
 
-    /* Hang the opening quote mark so the text edge stays clean. */
-    text-indent: -0.4em;
-  }
+		/* Hang the opening quote mark so the text edge stays clean. */
+		text-indent: -0.4em;
+	}
 
-  & p::before {
-    content: "\201C";
-  }
+	& p::before {
+		content: "\201C";
+	}
 
-  & p::after {
-    content: "\201D";
-  }
+	& p::after {
+		content: "\201D";
+	}
 }
 
 .credit {
-  @apply flex flex-wrap items-center gap-x-2 mt-auto pt-2 text-xs text-textSubdued;
+	@apply flex flex-wrap items-center gap-x-2 mt-auto pt-2 text-xs text-textSubdued;
 }
 
 .credit a {
-  @apply text-inherit no-underline hover:underline;
+	@apply text-inherit no-underline hover:underline;
 }
 
 .stars {
-  @apply tracking-wider text-red;
+	@apply tracking-wider text-red;
 }
 
 .card:last-child {
-  @apply flex-1;
+	@apply flex-1;
 }
 
 @screen md {
-  .track {
-    mask-image: linear-gradient(
-      to right,
-      transparent 0,
-      #000 12%,
-      #000 88%,
-      transparent 100%
-    );
-  }
+	.track {
+		mask-image: linear-gradient(
+			to right,
+			transparent 0,
+			#000 12%,
+			#000 88%,
+			transparent 100%
+		);
+	}
 }
 
 .invite {
-  @apply m-0 mt-1 px-4 text-center text-xs sm:text-sm text-textSubdued;
+	@apply m-0 mt-1 px-4 text-center text-xs sm:text-sm text-textSubdued;
 
-  & a {
-    @apply text-inherit no-underline hover:underline hover:text-text;
-  }
+	& a {
+		@apply text-inherit no-underline hover:underline hover:text-text;
+	}
 }
 
 .arrow {
-  @apply hidden md:flex absolute z-10 items-center justify-center w-8 h-8 rounded-full border border-border bg-bg text-text shadow-sm hover:bg-bgHighlight transition-opacity duration-200;
+	@apply hidden md:flex absolute z-10 items-center justify-center w-8 h-8 rounded-full border border-border bg-bg text-text shadow-sm hover:bg-bgHighlight transition-opacity duration-200;
 
-  top: 50%;
-  transform: translateY(-50%);
-  opacity: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	opacity: 0;
 }
 
 .trackOuter:hover .arrow,
 .arrow:focus-visible {
-  opacity: 1;
+	opacity: 1;
 }
 
 .arrowLeft {
-  left: 1rem;
+	left: 1rem;
 }
 
 .arrowRight {
-  right: 1rem;
+	right: 1rem;
 }
 
 /* The line drawing needs a lighter backdrop in dark mode, so the whole strip
    gets one and the cards sit on it in the page colour. */
 @screen dark {
-  .section {
-    @apply py-8 sm:py-10;
+	.section {
+		@apply py-8 sm:py-10;
 
-    background: hsl(0, 0%, 41%);
-  }
+		background: hsl(0, 0%, 41%);
+	}
 
-  .heading,
-  .invite {
-    @apply text-white;
-  }
+	.heading,
+	.invite {
+		@apply text-white;
+	}
 
-  .card {
-    box-shadow:
-      0 0 0 1px hsla(0, 0%, 100%, 0.04),
-      0 2px 4px hsla(0, 0%, 0%, 0.12),
-      0 8px 20px -6px hsla(0, 0%, 0%, 0.35);
-  }
+	.card {
+		box-shadow:
+			0 0 0 1px hsla(0, 0%, 100%, 0.04),
+			0 2px 4px hsla(0, 0%, 0%, 0.12),
+			0 8px 20px -6px hsla(0, 0%, 0%, 0.35);
+	}
 }

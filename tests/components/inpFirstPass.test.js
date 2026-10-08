@@ -10,13 +10,17 @@ describe("mobile INP first-pass changes", () => {
 
 		expect(app).toContain("runWhenIdle");
 		expect(app).toContain("loadCookieConsent");
-		expect(app).toContain('import("vanilla-cookieconsent/dist/cookieconsent.css")');
-		expect(app).toContain('import("vanilla-cookieconsent.css")');
-		expect(app.indexOf('import("vanilla-cookieconsent/dist/cookieconsent.css")')).toBeLessThan(
-			app.indexOf('import("vanilla-cookieconsent.css")'),
+		expect(app).toContain(
+			'import("vanilla-cookieconsent/dist/cookieconsent.css")',
 		);
+		expect(app).toContain('import("vanilla-cookieconsent.css")');
+		expect(
+			app.indexOf('import("vanilla-cookieconsent/dist/cookieconsent.css")'),
+		).toBeLessThan(app.indexOf('import("vanilla-cookieconsent.css")'));
 		expect(app).toContain("ssr: false");
-		expect(app).not.toMatch(/import \* as CookieConsent from ["']vanilla-cookieconsent["']/);
+		expect(app).not.toMatch(
+			/import \* as CookieConsent from ["']vanilla-cookieconsent["']/,
+		);
 		expect(app).not.toMatch(/^import ["']vanilla-cookieconsent/);
 	});
 
@@ -53,10 +57,16 @@ describe("mobile INP first-pass changes", () => {
 	});
 
 	it("does not load rough-notation in the global header, footer, sketch CTAs, or title", () => {
-		expect(read("components/Navigation.js")).not.toContain("react-rough-notation");
+		expect(read("components/Navigation.js")).not.toContain(
+			"react-rough-notation",
+		);
 		expect(read("components/Footer.js")).not.toContain("react-rough-notation");
-		expect(read("components/SketchplanationCtas.js")).not.toContain("react-rough-notation");
-		expect(read("components/TextHeader.js")).not.toContain("react-rough-notation");
+		expect(read("components/SketchplanationCtas.js")).not.toContain(
+			"react-rough-notation",
+		);
+		expect(read("components/TextHeader.js")).not.toContain(
+			"react-rough-notation",
+		);
 		expect(read("components/Footer.js")).toContain("styles.feedbackLink");
 		expect(read("components/SketchplanationCtas.js")).toContain("ctaListen");
 	});
@@ -74,7 +84,7 @@ describe("mobile INP first-pass changes", () => {
 		const subscribe = read("components/SubscribeInline.js");
 
 		expect(subscribe).toContain("useInView");
-		expect(subscribe).toContain("loading=\"lazy\"");
+		expect(subscribe).toContain('loading="lazy"');
 		expect(subscribe).toContain("inView");
 		expect(subscribe).toContain("placeholder");
 	});
@@ -83,12 +93,12 @@ describe("mobile INP first-pass changes", () => {
 		const image = read("components/SketchplanationImage.js");
 		const lightbox = read("components/SketchplanationLightbox.js");
 
-		expect(image).not.toContain("addEventListener(\"scroll\"");
+		expect(image).not.toContain('addEventListener("scroll"');
 		expect(image).not.toContain("willChange");
 		expect(image).not.toContain("framer-motion");
 		expect(image).toContain("ResizeObserver");
 		expect(image).toContain('import("components/SketchplanationLightbox")');
-		expect(image).toContain("runWhenIdle(() => track(\"lightbox_open\"");
+		expect(image).toContain('runWhenIdle(() => track("lightbox_open"');
 		expect(lightbox).toContain("max-width: 767px");
 		expect(lightbox).toContain("styles.mobileRoot");
 		expect(lightbox).not.toContain("framer-motion");
@@ -97,8 +107,12 @@ describe("mobile INP first-pass changes", () => {
 	it("code-splits below-the-fold sketch carousels", () => {
 		const page = read("pages/[uid].js");
 
-		expect(page).toContain('dynamic(() => import("components/SketchplanationsStack")');
-		expect(page).toContain('dynamic(() => import("components/TaggedSketchplanations")');
+		expect(page).toMatch(
+			/dynamic\(\s*\(\) => import\("components\/SketchplanationsStack"\)/,
+		);
+		expect(page).toMatch(
+			/dynamic\(\s*\(\) => import\("components\/TaggedSketchplanations"\)/,
+		);
 		expect(page.match(/ssr:\s*false/g)?.length).toBeGreaterThanOrEqual(2);
 	});
 });

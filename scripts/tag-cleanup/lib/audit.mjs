@@ -239,7 +239,9 @@ export const runAudit = async () => {
 		`  Broken tag links:  ${snapshot.summary.broken_tag_link_count} across ${snapshot.summary.sketches_with_broken_tags} sketch(es)`,
 	);
 	console.log(`  Suggested merges:  ${snapshot.summary.suggested_merge_count}`);
-	console.log(`  Archive candidates: ${snapshot.summary.archive_candidate_count}`);
+	console.log(
+		`  Archive candidates: ${snapshot.summary.archive_candidate_count}`,
+	);
 	console.log(`\n  JSON: ${jsonPath}`);
 	console.log(`  CSV:  ${csvPath}`);
 

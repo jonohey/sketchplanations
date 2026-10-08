@@ -1,18 +1,18 @@
 .root {
-  @apply w-full px-0;
-  max-width: 38rem;
+	@apply w-full px-0;
+	max-width: 38rem;
 }
 
 .image {
-  @apply block bg-paper mb-3;
-  /* box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow); */
-  box-shadow: 0 2.3rem 1rem -2rem hsla(0, 0%, 0%, 0.1);
+	@apply block bg-paper mb-3;
+	/* box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow); */
+	box-shadow: 0 2.3rem 1rem -2rem hsla(0, 0%, 0%, 0.1);
 }
 
 .content {
-  @apply mx-auto px-3;
+	@apply mx-auto px-3;
 }
 
 .published-at {
-  @apply block mt-5 text-sm text-textSubdued;
+	@apply block mt-5 text-sm text-textSubdued;
 }

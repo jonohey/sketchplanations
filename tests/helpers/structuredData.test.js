@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import {
 	buildPerson,
 	buildSiteGraph,
@@ -8,12 +9,12 @@ import {
 
 describe("imageDimensionsForWidth", () => {
 	it("scales height to match a width-constrained derivative", () => {
-		expect(imageDimensionsForWidth({ width: 2400, height: 1800 }, 1200)).toEqual(
-			{
-				width: 1200,
-				height: 900,
-			},
-		);
+		expect(
+			imageDimensionsForWidth({ width: 2400, height: 1800 }, 1200),
+		).toEqual({
+			width: 1200,
+			height: 900,
+		});
 	});
 
 	it("does not upscale beyond the original width", () => {
@@ -40,7 +41,16 @@ describe("buildSketchStructuredData", () => {
 	it("includes ImageObject, CreativeWork, and BreadcrumbList", () => {
 		const data = buildSketchStructuredData({
 			...baseSketch,
-			tags: [{ tag: { id: "creativity-id", slug: "creativity", uid: "creativity", isBroken: false } }],
+			tags: [
+				{
+					tag: {
+						id: "creativity-id",
+						slug: "creativity",
+						uid: "creativity",
+						isBroken: false,
+					},
+				},
+			],
 		});
 
 		expect(data["@graph"]).toHaveLength(3);
@@ -50,7 +60,9 @@ describe("buildSketchStructuredData", () => {
 		expect(data["@graph"][0].height).toBe(900);
 		expect(data["@graph"][0].license).toContain("creativecommons.org");
 		expect(data["@graph"][1]["@type"]).toEqual(["CreativeWork", "Article"]);
-		expect(data["@graph"][1].headline).toBe("The first draft is always perfect");
+		expect(data["@graph"][1].headline).toBe(
+			"The first draft is always perfect",
+		);
 		expect(data["@graph"][2]["@type"]).toBe("BreadcrumbList");
 		expect(data["@graph"][2].itemListElement).toHaveLength(3);
 		expect(data["@graph"][2].itemListElement[1]).toMatchObject({
@@ -93,8 +105,12 @@ describe("buildSketchStructuredData", () => {
 		const data = buildSketchStructuredData({
 			...baseSketch,
 			tags: [
-				{ tag: { id: "broken", type: "broken_type", slug: "-", isBroken: true } },
-				{ tag: { id: "games-id", slug: "games", uid: "games", isBroken: false } },
+				{
+					tag: { id: "broken", type: "broken_type", slug: "-", isBroken: true },
+				},
+				{
+					tag: { id: "games-id", slug: "games", uid: "games", isBroken: false },
+				},
 			],
 		});
 

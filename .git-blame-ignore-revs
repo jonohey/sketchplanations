@@ -1,0 +1,4 @@
+# Apply Prettier formatting across the codebase
+ec12a9bfad418ef061c7abedf03a1ef91ebbb18f
+# Reformat files changed by the scroll restoration PR (after merging main)
+9078221a12c3750d2dc28a64ea28df5dac913f53

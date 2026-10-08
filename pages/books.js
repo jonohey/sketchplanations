@@ -1,14 +1,15 @@
 import { track } from "@vercel/analytics";
-import FancyLink from "components/FancyLink";
-import TextHeader from "components/TextHeader";
+import classNames from "classnames";
 import booksIndex from "data/books-index.json";
-import { fastScrollToTop, pageTitle } from "helpers";
+import { ChevronDown } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
-import classNames from "classnames";
-import { ChevronDown } from "lucide-react";
 
 import styles from "./books.module.css";
+
+import FancyLink from "components/FancyLink";
+import TextHeader from "components/TextHeader";
+import { fastScrollToTop, pageTitle } from "helpers";
 
 const trackBooksBuyLink = (book, location) => {
 	track("Books-buy-link", {
@@ -248,9 +249,8 @@ const Books = ({ books }) => {
 					</>
 				) : (
 					<p className="prose max-w-none text-center text-textSubdued py-12">
-						No books found yet. Run{" "}
-						<code>npm run build:books</code> after adding book links to sketch
-						articles.
+						No books found yet. Run <code>npm run build:books</code> after
+						adding book links to sketch articles.
 					</p>
 				)}
 			</div>

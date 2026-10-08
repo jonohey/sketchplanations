@@ -1,3 +1,4 @@
+import { Lightbulb, Shuffle } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -10,7 +11,6 @@ import {
 } from "helpers/search/rudeSearch";
 import useSearch from "hooks/useSearch";
 
-import { Lightbulb, Shuffle } from "lucide-react";
 import FancyLink from "./FancyLink";
 import RudeSearchEasterEgg from "./RudeSearchEasterEgg";
 import SearchCategoryMatches from "./SearchCategoryMatches";
@@ -52,7 +52,11 @@ const SUGGEST_IDEA_URL = "https://forms.gle/c6LymLW5vLx9FUeW6";
 
 const SuggestMissingSketch = () => (
 	<p>
-		<FancyLink href={SUGGEST_IDEA_URL} target="_blank" rel="noopener noreferrer">
+		<FancyLink
+			href={SUGGEST_IDEA_URL}
+			target="_blank"
+			rel="noopener noreferrer"
+		>
 			<span className="inline-flex items-center gap-2">
 				<Lightbulb size={16} />
 				Let me know what I&apos;m missing
@@ -81,15 +85,15 @@ const SearchResults = () => {
 	useEffect(() => {
 		let timer;
 		if (busy) {
-		setShowLoading(true);
-		setLoadingMessage(randomLoadingMessage());
-		timer = setTimeout(() => {
-			if (!busy) setShowLoading(false);
-		}, MIN_LOADING_TIME);
+			setShowLoading(true);
+			setLoadingMessage(randomLoadingMessage());
+			timer = setTimeout(() => {
+				if (!busy) setShowLoading(false);
+			}, MIN_LOADING_TIME);
 		} else {
-		timer = setTimeout(() => {
-			setShowLoading(false);
-		}, MIN_LOADING_TIME);
+			timer = setTimeout(() => {
+				setShowLoading(false);
+			}, MIN_LOADING_TIME);
 		}
 		return () => clearTimeout(timer);
 	}, [busy]);
@@ -118,7 +122,7 @@ const SearchResults = () => {
 					<span className="mx-2">·</span>
 					<FancyLink href="/list">List</FancyLink>
 				</div>
-				<div className={styles["search-results"]}>				
+				<div className={styles["search-results"]}>
 					<SketchplanationsGrid prismicDocs={initialResults} />
 				</div>
 			</>
@@ -134,8 +138,9 @@ const SearchResults = () => {
 		isStretchMatch,
 		showRudeSearchEasterEgg,
 	);
-	const showSuggestMissingSketch =
-		shouldShowSuggestMissingSketch(showRudeSearchEasterEgg);
+	const showSuggestMissingSketch = shouldShowSuggestMissingSketch(
+		showRudeSearchEasterEgg,
+	);
 
 	return (
 		<div className={styles["search-results"]}>
@@ -154,9 +159,7 @@ const SearchResults = () => {
 			) : (
 				<>
 					{showRudeSearchEasterEgg && <RudeSearchEasterEgg />}
-					{hasCategories && (
-						<SearchCategoryMatches categories={tagResults} />
-					)}
+					{hasCategories && <SearchCategoryMatches categories={tagResults} />}
 					{isEmpty ? (
 						<div className={styles["search-results__empty"]}>
 							<p>No sketches found</p>

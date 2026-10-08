@@ -1,4 +1,6 @@
+import { track } from "@vercel/analytics";
 import classNames from "classnames";
+import Context from "context";
 import { Menu, Search } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -7,14 +9,11 @@ import { useContext, useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { RemoveScroll } from "react-remove-scroll";
 
-import { track } from "@vercel/analytics";
-
 import styles from "./Header.module.css";
 
 import Navigation from "components/Navigation";
 import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
 
-import Context from "context";
 import Cards from "./Cards";
 import KeyboardShortcut from "./KeyboardShortcut";
 
@@ -32,23 +31,35 @@ const Header = () => {
 		router.push("/search", undefined, { shallow: true });
 	};
 
-	useHotkeys("/", (e) => {
-		if (shouldIgnoreShortcut(e)) return;
-		e.preventDefault();
-		enterSearch();
-	}, { useKey: true });
+	useHotkeys(
+		"/",
+		(e) => {
+			if (shouldIgnoreShortcut(e)) return;
+			e.preventDefault();
+			enterSearch();
+		},
+		{ useKey: true },
+	);
 
-	useHotkeys("f", (e) => {
-		if (shouldIgnoreShortcut(e)) return;
-		e.preventDefault();
-		enterSearch();
-	}, { useKey: true });
+	useHotkeys(
+		"f",
+		(e) => {
+			if (shouldIgnoreShortcut(e)) return;
+			e.preventDefault();
+			enterSearch();
+		},
+		{ useKey: true },
+	);
 
-	useHotkeys("s", (e) => {
-		if (shouldIgnoreShortcut(e)) return;
-		e.preventDefault();
-		enterSearch();
-	}, { useKey: true });
+	useHotkeys(
+		"s",
+		(e) => {
+			if (shouldIgnoreShortcut(e)) return;
+			e.preventDefault();
+			enterSearch();
+		},
+		{ useKey: true },
+	);
 
 	useEffect(() => {
 		const handleRouteChange = () => setIsOpen(false);
