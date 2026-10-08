@@ -1,31 +1,49 @@
-import { LoaderCircle } from "lucide-react";
-import Head from "next/head";
-import { useState } from "react";
-
 import FancyLink from "components/FancyLink";
 import SketchplanationsGrid from "components/SketchplanationsGrid";
 import TextHeader from "components/TextHeader";
 import { pageTitle } from "helpers";
+import {
+	getHistoryEntryCache,
+	setHistoryEntryCache,
+} from "helpers/historyEntryCache";
+import { LoaderCircle } from "lucide-react";
+import Head from "next/head";
+import { useState } from "react";
 import { client } from "services/prismic";
 
 const ITEMS_PER_PAGE = 40;
+const HISTORY_CACHE_KEY = "archive";
 
 const Archive = ({ initialSketchplanations }) => {
+	// Going Back restores the sketches loaded so far, so scroll restoration has
+	// the page height it needs; a fresh visit starts from the first page.
+	const [restored] = useState(() => getHistoryEntryCache(HISTORY_CACHE_KEY));
 	const [sketchplanations, setSketchplanations] = useState(
-		initialSketchplanations.results,
+		restored?.sketchplanations ?? initialSketchplanations.results,
 	);
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState(restored?.page ?? 1);
 	const [loading, setLoading] = useState(false);
-	const [hasMore, setHasMore] = useState(initialSketchplanations.next_page);
+	const [hasMore, setHasMore] = useState(
+		restored ? restored.hasMore : initialSketchplanations.next_page,
+	);
 
 	const loadMore = async () => {
 		setLoading(true);
 		const nextPage = page + 1;
 		const newSketchplanations = await fetchSketchplanations(nextPage);
-		setSketchplanations([...sketchplanations, ...newSketchplanations.results]);
+		const allSketchplanations = [
+			...sketchplanations,
+			...newSketchplanations.results,
+		];
+		setSketchplanations(allSketchplanations);
 		setPage(nextPage);
 		setLoading(false);
 		setHasMore(newSketchplanations.next_page);
+		setHistoryEntryCache(HISTORY_CACHE_KEY, {
+			sketchplanations: allSketchplanations,
+			page: nextPage,
+			hasMore: newSketchplanations.next_page,
+		});
 	};
 
 	return (
@@ -41,9 +59,7 @@ const Archive = ({ initialSketchplanations }) => {
 			<div className="pt-6 px-6 text-center">
 				<TextHeader>Archive</TextHeader>
 				<p className="prose mx-auto mt-4 mb-8 max-w-2xl text-textSubdued">
-					Explore the full visual archive of over a decade of Sketchplanations
-					and discover sketches that interest and inspire you. Use them to have
-					great conversations about ideas.
+					Explore the full visual archive of over a decade of Sketchplanations and discover sketches that interest and inspire you. Use them to have great conversations about ideas.
 				</p>
 			</div>
 			<div className="text-center mt-8 mb-8">
@@ -89,7 +105,10 @@ async function fetchSketchplanations(page = 1) {
 				direction: "desc",
 			},
 		],
-		fetch: ["sketchplanation.title", "sketchplanation.image"],
+		fetch: [
+			'sketchplanation.title',
+			'sketchplanation.image',
+		],
 		pageSize: ITEMS_PER_PAGE,
 		page,
 	});

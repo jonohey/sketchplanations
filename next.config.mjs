@@ -5,6 +5,7 @@ import redirects from "./redirects.mjs";
 const nextConfig = {
 	allowedDevOrigins: ["*.trycloudflare.com"],
 	experimental: {
+		scrollRestoration: true, // return to the previous scroll position on Back/Forward
 		largePageDataBytes: 256 * 1000, // 128KB by default
 	},
 	images: {

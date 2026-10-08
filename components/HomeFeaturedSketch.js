@@ -15,6 +15,9 @@ export default function HomeFeaturedSketch({ sketch }) {
 		? sketch.image
 		: { ...sketch.image, alt: sketch.title };
 	const { width, height } = sketch.image?.dimensions ?? {};
+	// Reserve the image's space before it loads (it is lazy), so the page height
+	// doesn't change when it arrives, which would shift scroll restoration.
+	const ratio = width && height ? width / height : 1;
 	const { imgixParams, quality } = getPrismicImageOptimisation(sketch.image);
 
 	return (
@@ -28,7 +31,7 @@ export default function HomeFeaturedSketch({ sketch }) {
 					})
 				}
 			>
-				<span className={styles.imageWrap}>
+				<span className={styles.imageWrap} style={{ "--ratio": ratio }}>
 					<PrismicNextImage
 						field={imageField}
 						className={styles.image}

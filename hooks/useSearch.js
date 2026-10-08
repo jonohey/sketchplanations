@@ -21,6 +21,14 @@ const isSearchableQuery = (value) =>
 // analytics fires once per settled query, not once per hook instance.
 const lastTrackedAnalyticsQuery = { current: null };
 
+// The last settled search, kept so going Back to /search?q=… can show results
+// straight away instead of waiting on the search index. Without them the page is
+// short while loading, so the browser has nowhere to restore the scroll to.
+let lastSearch = null;
+
+const cachedSearchFor = (query) =>
+	lastSearch && lastSearch.query === query ? lastSearch : null;
+
 const fetchIntialResults = async () => {
 	const response = await fetch("/api/initial-search-results");
 	const results = await response.json();
@@ -36,15 +44,26 @@ const useSearch = () => {
 
 	const [originalRoute, setOriginalRoute] = useState(null);
 	const [initialResults, setInitialResults] = useState(null);
-	const [results, setResults] = useState(null);
-	const [tagResults, setTagResults] = useState(null);
-	const [matchQuality, setMatchQuality] = useState(null);
-	const [correctedLabel, setCorrectedLabel] = useState(null);
-	const [hasExactCategoryMatch, setHasExactCategoryMatch] = useState(false);
+	const [cachedSearch] = useState(() =>
+		isSearchableQuery(query) ? cachedSearchFor(query) : null,
+	);
+	const [results, setResults] = useState(cachedSearch?.results ?? null);
+	const [tagResults, setTagResults] = useState(
+		cachedSearch?.tagResults ?? null,
+	);
+	const [matchQuality, setMatchQuality] = useState(
+		cachedSearch?.matchQuality ?? null,
+	);
+	const [correctedLabel, setCorrectedLabel] = useState(
+		cachedSearch?.correctedLabel ?? null,
+	);
+	const [hasExactCategoryMatch, setHasExactCategoryMatch] = useState(
+		cachedSearch?.hasExactCategoryMatch ?? false,
+	);
 
 	const { ready: indexReady, search } = useSearchIndex();
 
-	const prevSearchQuery = useRef(null);
+	const prevSearchQuery = useRef(cachedSearch?.query ?? null);
 	const debouncedSearchQuery = useDebouncedValue(query, SEARCH_DEBOUNCE_MS);
 	const analyticsSearchQuery = useDebouncedValue(query, ANALYTICS_DEBOUNCE_MS);
 
@@ -160,6 +179,15 @@ const useSearch = () => {
 			setMatchQuality(quality);
 			setCorrectedLabel(label);
 			setHasExactCategoryMatch(exactCategory);
+
+			lastSearch = {
+				query: searchQuery,
+				results: sketches,
+				tagResults: categories,
+				matchQuality: quality,
+				correctedLabel: label,
+				hasExactCategoryMatch: exactCategory,
+			};
 		},
 		[search],
 	);
@@ -221,8 +249,9 @@ const useSearch = () => {
 
 	const called = isSearchableQuery(debouncedSearchQuery);
 	// Show loading while a query is waiting on the index, including the idle
-	// callback delay before indexLoading becomes true.
-	const busy = called && !indexReady;
+	// callback delay before indexLoading becomes true. Restored results count as
+	// already loaded.
+	const busy = called && !indexReady && results === null;
 	const showRudeSearchEasterEgg =
 		called && !busy && isRudeSearch(debouncedSearchQuery);
 
