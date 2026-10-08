@@ -1,11 +1,12 @@
 .root {
 	/* Room above the pages for a popped-up page: a scrolling container clips whatever pokes
-	   out of it, so the room has to be inside. Only devices with hover can pop a page up, so
-	   only they need it. The top margin pulls the container back up by the same amount, so
-	   the room costs no space at rest and a popped-up page simply sits in front of the
-	   content above. Both the headroom and the lift are proportions of the page height
-	   (--spread-height is set by the component), so a smaller stack pops up proportionally less. */
-	--headroom: 24px;
+	   out of it, so the room has to be inside. It covers the lift (0.56), amplified a little by
+	   the lean on the near edge, plus the lean making that edge taller. The top margin pulls
+	   the container back up by the same amount, so the room costs no space at rest and a
+	   popped-up page simply sits in front of the content above. Both the headroom and the
+	   lift are proportions of the page height (--spread-height is set by the component), so a
+	   smaller stack pops up proportionally less. */
+	--headroom: calc(var(--spread-height) * 0.85);
 	position: relative;
 	margin-top: calc(24px - var(--headroom));
 	overflow-x: auto;
@@ -72,17 +73,16 @@
 	transition: transform 0.2s ease-out;
 }
 
-/* Pop up so the page's header clears the page covering it */
+/* Pop up so the page's header clears the page covering it: on hover where there is a
+   pointer, and on tap (.slotLifted) on touchscreens */
 @media (hover: hover) {
-	.root {
-		/* The lift (0.56), amplified a little by the lean on the near edge, plus the lean making
-		   that edge taller */
-		--headroom: calc(var(--spread-height) * 0.85);
-	}
-
 	.slot:hover .page {
 		transform: translateY(calc(var(--spread-height) * -0.56));
 	}
+}
+
+.slotLifted .page {
+	transform: translateY(calc(var(--spread-height) * -0.56));
 }
 
 @media (prefers-reduced-motion: reduce) {

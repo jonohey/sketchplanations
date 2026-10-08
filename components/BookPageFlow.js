@@ -19,6 +19,9 @@ const BookPageFlow = ({ images, onOpen }) => {
   const [vw, setVw] = useState(1200)
   const [measured, setMeasured] = useState(false)
   const [near, setNear] = useState(false)
+  const [lifted, setLifted] = useState(null)
+  // Touchscreens have no hover, so a tap pops a page up instead of opening the gallery
+  const [touch, setTouch] = useState(false)
   const placed = useRef(false)
 
   const n = images.length
@@ -71,6 +74,10 @@ const BookPageFlow = ({ images, onOpen }) => {
     return () => observer.disconnect()
   }, [])
 
+  useEffect(() => {
+    setTouch(window.matchMedia('(hover: none)').matches)
+  }, [])
+
   // Once the real width is known, start scrolled so the first page's text side is off-screen
   useEffect(() => {
     if (placed.current || !measured) return
@@ -93,7 +100,7 @@ const BookPageFlow = ({ images, onOpen }) => {
           // while the page inside it pops up
           <div
             key={image.filename}
-            className={styles.slot}
+            className={`${styles.slot} ${lifted === index ? styles.slotLifted : ''}`}
             style={{
               width,
               height,
@@ -106,8 +113,11 @@ const BookPageFlow = ({ images, onOpen }) => {
               className={styles.page}
               // The gallery has its own arrow-key navigation, so the pages needn't all be tab stops
               tabIndex={-1}
-              aria-label={`View ${image.conceptName} in gallery`}
-              onClick={() => onOpen(index)}
+              // On touchscreens a tap pops the page up (a second tap puts it back); the gallery is too
+              // small to be worth opening on a phone
+              aria-label={touch ? image.conceptName : `View ${image.conceptName} in gallery`}
+              aria-pressed={touch ? lifted === index : undefined}
+              onClick={() => (touch ? setLifted(lifted === index ? null : index) : onOpen(index))}
             >
               {/* The size attributes are fixed (CSS sizes the picture to its slot) so the image source
                   never changes when the real screen width is measured after the page loads; a source

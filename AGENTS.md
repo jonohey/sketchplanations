@@ -84,6 +84,19 @@ Pinning pnpm via `"packageManager": "pnpm@9.15.9"` keeps versions consistent acr
 
 The overrides are deliberate pins. If removing or changing them, verify why each was added and run `pnpm install` to refresh the lockfile on `main`, not only on a Dependabot branch.
 
+## Before committing or opening a PR — pre-commit review
+
+**Always** run the pre-commit review before committing, pushing or opening a PR for any change to the site. The checklist lives in `.cursor/rules/github-workflow.mdc` under **"Pre-commit review (required)"**: read it from there at the time (it is the single source of truth; do not work from memory) and go through every item — necessity, simplicity, dependencies, performance, build, SEO, broken tags, tests, removals, best practice, and CSS/dark mode/mobile.
+
+Then run the same checks CI runs (`.github/workflows/ci.yml`): `pnpm test`, `pnpm build`, `pnpm run check:books-duplicates` and `pnpm run check:broken-tags`.
+
+Finish by summarising to the user what was checked, what was fixed, and anything flagged. Do not skip the review because the change looks small.
+
+Practical notes:
+
+- **Do not run `pnpm build` while a dev server is running in the same folder.** It corrupts the dev server's `.next` cache (every page then returns 500). Stop the server first, build, then `rm -rf .next` and restart the dev server.
+- Mid-session, while the user is still iterating on a page, leave changes uncommitted and unpushed (each push to a PR branch triggers a deploy). Commit and push once, when the user says the work is finished or asks for the PR.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know
