@@ -1,19 +1,9 @@
-.bookList {
-	@apply list-none p-0 m-0 flex flex-col;
+.sectionHeading {
+	@apply text-xl font-semibold text-text mt-10 mb-1;
 }
 
-.bookRow {
-	@apply py-7 border-b border-border last:border-b-0 last:pb-0;
-}
-
-.bookRowWithCover {
-	@apply flex flex-col gap-2;
-}
-
-@media (min-width: 640px) {
-	.bookRowWithCover {
-		@apply flex-row gap-6 items-start;
-	}
+.sectionIntro {
+	@apply text-textSubdued mt-0 mb-5;
 }
 
 .coverLink {
@@ -21,7 +11,7 @@
 }
 
 .coverImage {
-	@apply w-24 h-36 sm:w-28 sm:h-[10.5rem] object-cover block;
+	@apply w-20 h-[7.5rem] object-cover block;
 	/* Soft lift, related to sketch card shadows but a touch lighter for small covers */
 	box-shadow:
 		0 1px 2px rgba(0, 0, 0, 0.06),
@@ -40,31 +30,95 @@
 	}
 }
 
+.bookHeading {
+	@apply min-w-0;
+}
+
+.bookTitle {
+	@apply text-base font-semibold leading-snug m-0;
+}
+
+.bookAuthor {
+	@apply text-sm text-textSubdued mt-0.5 mb-0;
+}
+
+/* More books: compact two-column cards on wider screens */
+.bookList {
+	@apply list-none p-0 m-0 grid grid-cols-1 gap-x-8 md:grid-cols-2;
+}
+
+.bookRow {
+	@apply flex gap-4 items-start py-5 border-b border-border;
+}
+
+.bookRowFeatured {
+	@apply gap-5;
+}
+
+.bookRowFeatured .coverImage {
+	@apply w-28 h-[10.5rem];
+}
+
+.bookRowFeatured .bookTitle {
+	@apply text-lg;
+}
+
 .bookContent {
 	@apply flex flex-col gap-2 min-w-0;
 }
 
-.bookHeading :global(h2) {
-	margin-top: 0;
+.bookNote {
+	@apply text-sm m-0;
+}
+
+.referencedLabel {
+	@apply text-xs uppercase tracking-wide text-textSubdued m-0 mb-1;
+}
+
+.sketchItem {
+	@apply truncate;
+}
+
+.sketchLink {
+	@apply text-text underline decoration-border underline-offset-2 hover:text-blue hover:decoration-blue;
+}
+
+.referencedSection ul {
+	@apply list-none p-0 m-0 text-sm flex flex-col gap-0.5;
+}
+
+.moreSketches {
+	@apply text-sm mt-0.5;
+}
+
+.moreSketches summary {
+	@apply inline-flex items-center gap-1 cursor-pointer list-none text-textSubdued hover:text-blue;
+}
+
+.moreSketches summary::-webkit-details-marker {
+	display: none;
+}
+
+.moreSketches[open] summary svg {
+	transform: rotate(180deg);
+}
+
+.moreSketches ul {
+	@apply mt-0.5;
 }
 
 .buyAction {
-	@apply mt-2;
-}
-
-.backToTop {
-	@apply mt-4;
-}
-
-.referencedSection {
 	@apply mt-1;
 }
 
-.referencedSection :global(p) {
-	margin-top: 0;
+.pageFooter {
+	@apply mt-12 pt-6 border-t border-border text-sm text-textSubdued flex flex-col gap-3 items-start;
 }
 
-.referencedSection :global(ul) {
-	margin-top: 0;
-	margin-bottom: 0;
+.pageFooter p {
+	@apply m-0;
+}
+
+.bookList > li {
+	@apply min-w-0;
 }

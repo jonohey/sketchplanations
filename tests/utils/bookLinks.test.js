@@ -139,6 +139,28 @@ describe("parseBookLinkText", () => {
 		expect(books[0].title).toBe("Greenlights");
 		expect(books[0].sketches).toHaveLength(2);
 	});
+
+	it("lists a book's sketches newest first without exposing dates", () => {
+		const link = (uid, publishedAt) => ({
+			url: "https://geni.us/greenlights",
+			text: "Greenlights",
+			uid,
+			sketchTitle: `Sketch ${uid}`,
+			publishedAt,
+		});
+
+		const books = buildBooksIndex([
+			link("old", "2020-01-01T00:00:00+0000"),
+			link("newest", "2024-05-01T00:00:00+0000"),
+			link("middle", "2022-03-01T00:00:00+0000"),
+		]);
+
+		expect(books[0].sketches).toEqual([
+			{ uid: "newest", title: "Sketch newest" },
+			{ uid: "middle", title: "Sketch middle" },
+			{ uid: "old", title: "Sketch old" },
+		]);
+	});
 });
 
 describe("extractBookLinksFromBody", () => {
