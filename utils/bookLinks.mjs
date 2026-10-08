@@ -275,8 +275,16 @@ export function buildBooksIndex(linkInstances, overridesByTitle = {}) {
 			book.sketches.push({
 				uid: instance.uid,
 				title: instance.sketchTitle,
+				publishedAt: instance.publishedAt ?? "",
 			});
 		}
+	}
+
+	for (const book of booksByTitle.values()) {
+		// Most recently published sketch first; the date is only needed for ordering.
+		book.sketches = book.sketches
+			.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
+			.map(({ uid, title }) => ({ uid, title }));
 	}
 
 	return [...booksByTitle.values()].sort((a, b) => {
@@ -374,6 +382,7 @@ export function booksFromSketchplanations(
 				...link,
 				uid: sketch.uid,
 				sketchTitle: sketch.data.title,
+				publishedAt: sketch.data.published_at,
 			});
 		}
 	}
