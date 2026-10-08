@@ -233,6 +233,8 @@
 .skeletonTitle {
   @apply block mt-3 rounded-sm bg-bgHighlight animate-pulse;
 
-  height: 2.25rem;
+  /* Sized so a skeleton row is as tall as a typical loaded row (title lines
+     included), keeping the page height steady when rows mount. */
+  height: 3.625rem;
   width: 85%;
 }

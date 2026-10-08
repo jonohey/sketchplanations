@@ -6,15 +6,10 @@
   .root {
     max-width: 33.6rem;
   }
-
-  .image {
-    max-height: 28.8rem;
-    width: auto;
-  }
 }
 
 .imageWrap {
-  @apply relative block w-fit max-w-full mx-auto rounded-lg overflow-hidden bg-paper;
+  @apply relative block w-full max-w-full mx-auto rounded-lg overflow-hidden bg-paper;
 
   box-shadow: 0 2.3rem 1rem -2rem var(--color-sketchShadow);
 
@@ -24,6 +19,13 @@
 
     box-shadow: inset 0 0 0 1px hsla(0, 0%, 0%, 0.06);
     mix-blend-mode: multiply;
+  }
+}
+
+@screen md {
+  .imageWrap {
+    /* As wide as the image would be at its max height, capped to the column */
+    width: min(100%, calc(28.8rem * var(--ratio)));
   }
 }
 

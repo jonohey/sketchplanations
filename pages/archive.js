@@ -2,29 +2,48 @@ import FancyLink from "components/FancyLink";
 import SketchplanationsGrid from "components/SketchplanationsGrid";
 import TextHeader from "components/TextHeader";
 import { pageTitle } from "helpers";
+import {
+	getHistoryEntryCache,
+	setHistoryEntryCache,
+} from "helpers/historyEntryCache";
 import { LoaderCircle } from "lucide-react";
 import Head from "next/head";
 import { useState } from "react";
 import { client } from "services/prismic";
 
 const ITEMS_PER_PAGE = 40;
+const HISTORY_CACHE_KEY = "archive";
 
 const Archive = ({ initialSketchplanations }) => {
+	// Going Back restores the sketches loaded so far, so scroll restoration has
+	// the page height it needs; a fresh visit starts from the first page.
+	const [restored] = useState(() => getHistoryEntryCache(HISTORY_CACHE_KEY));
 	const [sketchplanations, setSketchplanations] = useState(
-		initialSketchplanations.results,
+		restored?.sketchplanations ?? initialSketchplanations.results,
 	);
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState(restored?.page ?? 1);
 	const [loading, setLoading] = useState(false);
-	const [hasMore, setHasMore] = useState(initialSketchplanations.next_page);
+	const [hasMore, setHasMore] = useState(
+		restored ? restored.hasMore : initialSketchplanations.next_page,
+	);
 
 	const loadMore = async () => {
 		setLoading(true);
 		const nextPage = page + 1;
 		const newSketchplanations = await fetchSketchplanations(nextPage);
-		setSketchplanations([...sketchplanations, ...newSketchplanations.results]);
+		const allSketchplanations = [
+			...sketchplanations,
+			...newSketchplanations.results,
+		];
+		setSketchplanations(allSketchplanations);
 		setPage(nextPage);
 		setLoading(false);
 		setHasMore(newSketchplanations.next_page);
+		setHistoryEntryCache(HISTORY_CACHE_KEY, {
+			sketchplanations: allSketchplanations,
+			page: nextPage,
+			hasMore: newSketchplanations.next_page,
+		});
 	};
 
 	return (

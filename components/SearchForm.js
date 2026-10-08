@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { Search } from "lucide-react";
 import { useRouter } from "next/router";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
 import styles from "./SearchForm.module.css";
@@ -15,10 +15,17 @@ const SearchForm = ({
 	isBusy = false,
 	onChange = () => {},
 	onClear = () => {},
+	autoFocus = false,
 	...props
 }) => {
 	const router = useRouter();
 	const inputRef = useRef(null);
+
+	// The autoFocus attribute scrolls the input into view, which undoes the
+	// restored scroll position when coming Back to search results.
+	useEffect(() => {
+		if (autoFocus) inputRef.current?.focus({ preventScroll: true });
+	}, [autoFocus]);
 
 	const handleClear = () => {
 		onClear();
