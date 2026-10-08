@@ -6,6 +6,7 @@ import { fastScrollToTop, pageTitle } from "helpers";
 import Head from "next/head";
 import Link from "next/link";
 import classNames from "classnames";
+import { ChevronDown } from "lucide-react";
 
 import styles from "./books.module.css";
 
@@ -20,7 +21,7 @@ const BookBuyLink = ({ book, className, children, location, ...props }) => (
 	<a
 		href={book.url}
 		target="_blank"
-		rel="noopener noreferrer"
+		rel="sponsored noopener noreferrer"
 		className={className}
 		onClick={() => trackBooksBuyLink(book, location)}
 		{...props}
@@ -28,6 +29,9 @@ const BookBuyLink = ({ book, className, children, location, ...props }) => (
 		{children}
 	</a>
 );
+
+const FEATURED_COUNT = 8;
+const VISIBLE_SKETCHES = 2;
 
 const BookCover = ({ book }) => {
 	const coverClassName = classNames(styles.coverImage, "rounded");
@@ -56,47 +60,78 @@ const BookCover = ({ book }) => {
 	);
 };
 
-const BookRow = ({ book }) => {
+const BookTitle = ({ book }) => (
+	<div className={styles.bookHeading}>
+		<h3 className={styles.bookTitle}>
+			<BookBuyLink
+				book={book}
+				className="text-text no-underline hover:text-blue"
+				location="title"
+			>
+				{book.title}
+			</BookBuyLink>
+		</h3>
+		{book.author ? (
+			<p className={styles.bookAuthor}>
+				by{" "}
+				<BookBuyLink
+					book={book}
+					className="text-textSubdued no-underline"
+					location="author"
+				>
+					{book.author}
+				</BookBuyLink>
+			</p>
+		) : null}
+	</div>
+);
+
+const SketchLink = ({ sketch }) => (
+	<li className={styles.sketchItem} title={sketch.title}>
+		<Link href={`/${sketch.uid}`} className={styles.sketchLink}>
+			{sketch.title}
+		</Link>
+	</li>
+);
+
+const BookRow = ({ book, featured = false }) => {
+	const hasMore = book.sketches.length > VISIBLE_SKETCHES + 1;
+	const visible = hasMore
+		? book.sketches.slice(0, VISIBLE_SKETCHES)
+		: book.sketches;
+	const rest = hasMore ? book.sketches.slice(VISIBLE_SKETCHES) : [];
+
 	return (
-		<article className={classNames(styles.bookRow, styles.bookRowWithCover)}>
+		<article
+			className={classNames(styles.bookRow, featured && styles.bookRowFeatured)}
+		>
 			<BookCover book={book} />
 
-			<div className={`${styles.bookContent} prose max-w-none`}>
-				<div className={styles.bookHeading}>
-					<h2 className="mb-0">
-						<BookBuyLink
-							book={book}
-							className="text-text no-underline font-semibold hover:text-blue"
-							location="title"
-						>
-							{book.title}
-						</BookBuyLink>
-					</h2>
-					{book.author ? (
-						<p className="text-textSubdued mt-1 mb-0">
-							by{" "}
-							<BookBuyLink
-								book={book}
-								className="text-textSubdued no-underline hover:text-blue"
-								location="author"
-							>
-								{book.author}
-							</BookBuyLink>
-						</p>
-					) : null}
-				</div>
+			<div className={styles.bookContent}>
+				<BookTitle book={book} />
 
-				{book.note ? <p className="my-0">{book.note}</p> : null}
+				{book.note ? <p className={styles.bookNote}>{book.note}</p> : null}
 
 				<div className={styles.referencedSection}>
-					<p className="mb-2 mt-0">Referenced in</p>
-					<ul className="mt-0 mb-0">
-						{book.sketches.map((sketch) => (
-							<li key={sketch.uid}>
-								<FancyLink href={`/${sketch.uid}`}>{sketch.title}</FancyLink>
-							</li>
+					<p className={styles.referencedLabel}>Sketches</p>
+					<ul>
+						{visible.map((sketch) => (
+							<SketchLink key={sketch.uid} sketch={sketch} />
 						))}
 					</ul>
+					{hasMore ? (
+						<details className={styles.moreSketches}>
+							<summary>
+								+{rest.length} more
+								<ChevronDown size={14} aria-hidden="true" />
+							</summary>
+							<ul>
+								{rest.map((sketch) => (
+									<SketchLink key={sketch.uid} sketch={sketch} />
+								))}
+							</ul>
+						</details>
+					) : null}
 				</div>
 
 				<div className={`not-prose ${styles.buyAction}`}>
@@ -108,25 +143,15 @@ const BookRow = ({ book }) => {
 						Buy
 					</BookBuyLink>
 				</div>
-
-				<div className={`not-prose ${styles.backToTop}`}>
-					<Link
-						href="#top"
-						className="inline-block text-sm text-blue hover:underline"
-						onClick={(e) => {
-							e.preventDefault();
-							fastScrollToTop();
-						}}
-					>
-						Back to top ↑
-					</Link>
-				</div>
 			</div>
 		</article>
 	);
 };
 
 const Books = ({ books }) => {
+	const featured = books.slice(0, FEATURED_COUNT);
+	const rest = books.slice(FEATURED_COUNT);
+
 	return (
 		<>
 			<Head>
@@ -144,40 +169,83 @@ const Books = ({ books }) => {
 				<meta property="og:url" content="https://sketchplanations.com/books" />
 				<meta name="twitter:card" content="summary" />
 			</Head>
-			<div id="top" className="max-w-3xl mx-auto px-5 pb-16 scroll-mt-24">
+			<div id="top" className="max-w-5xl mx-auto px-5 pb-16 scroll-mt-24">
 				<div className="prose max-w-none text-center pt-12 pb-6">
 					<div className="not-prose">
 						<TextHeader>Books</TextHeader>
 					</div>
-					<p className="lead mx-auto max-w-2xl mb-0">
-						Many sketches are of ideas I learned from reading books. Here are
-						the books that taught me the content in Sketchplanations.
+					<p className="lead mx-auto max-w-2xl mb-3">
+						Looking for books to expand your mind and change how you think about
+						the world? Many of my sketches explain ideas I learned from books.
+						Here are those books.
+					</p>
+					<p className="mx-auto max-w-2xl mb-3">
+						At the top are the books behind the most sketches, a great place to
+						start. Further down are more books I&apos;ve drawn on, from
+						psychology and science to creativity and business.
+					</p>
+					<p className="mx-auto max-w-2xl text-sm text-textSubdued my-0">
+						Links are affiliate links, so I may earn a commission at no extra
+						cost to you.
+						<br />
+						Thanks for supporting the site!
 					</p>
 				</div>
 
-				<p className="prose max-w-none text-sm mb-4">
-					This list is automatically generated from book links in my sketch
-					articles. If something looks wrong, please{" "}
-					<FancyLink href="mailto:jono.hey@gmail.com?subject=Books%20page%20correction">
-						let me know
-					</FancyLink>
-					.
-				</p>
-
-				<p className="prose max-w-none text-sm mb-6">
-					When you buy through links on this page, I may earn an affiliate
-					commission at no extra cost to you. I use Amazon as it enables useful
-					links for the most people possible. Thanks for supporting the site!
-				</p>
-
 				{books.length > 0 ? (
-					<ul className={styles.bookList}>
-						{books.map((book) => (
-							<li key={book.title}>
-								<BookRow book={book} />
-							</li>
-						))}
-					</ul>
+					<>
+						<section aria-labelledby="start-here">
+							<h2 id="start-here" className={styles.sectionHeading}>
+								Start here
+							</h2>
+							<p className={styles.sectionIntro}>
+								The books behind the most sketches.
+							</p>
+							<ul className={styles.bookList}>
+								{featured.map((book) => (
+									<li key={book.title}>
+										<BookRow book={book} featured />
+									</li>
+								))}
+							</ul>
+						</section>
+
+						{rest.length > 0 ? (
+							<section aria-labelledby="more-books">
+								<h2 id="more-books" className={styles.sectionHeading}>
+									More books
+								</h2>
+								<ul className={styles.bookList}>
+									{rest.map((book) => (
+										<li key={book.title}>
+											<BookRow book={book} />
+										</li>
+									))}
+								</ul>
+							</section>
+						) : null}
+
+						<div className={styles.pageFooter}>
+							<p>
+								This list is automatically generated from book links in my
+								sketch articles. If something looks wrong, please{" "}
+								<FancyLink href="mailto:jono.hey@gmail.com?subject=Books%20page%20correction">
+									let me know
+								</FancyLink>
+								.
+							</p>
+							<Link
+								href="#top"
+								className="inline-block text-sm text-blue hover:underline"
+								onClick={(e) => {
+									e.preventDefault();
+									fastScrollToTop();
+								}}
+							>
+								Back to top ↑
+							</Link>
+						</div>
+					</>
 				) : (
 					<p className="prose max-w-none text-center text-textSubdued py-12">
 						No books found yet. Run{" "}
