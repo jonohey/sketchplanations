@@ -13,6 +13,8 @@ const IMAGE_CONSENT_FORM_URL =
 const TRANSLATIONS_FOLDER_URL =
 	"https://drive.google.com/drive/folders/1gGCCObciyjjd-3KHOUv-jm8PJAs2QuFy?usp=drive_link";
 const ATTRIBUTION_EXAMPLE_URL = "https://sketchplanations.com/the-overview-effect";
+const HELPING_HAND_ICON_SRC =
+	"/images/explainer-kit/sketch-icons/helping-hand.svg";
 
 const FaqQuestion = ({ id, children }) => (
 	<h3 id={id} className="scroll-mt-24">
@@ -123,12 +125,24 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 	<div
 		id="top"
 		className={classNames(
-			inline ? "px-6 pb-0" : "mx-auto max-w-3xl px-5 pb-16",
+			inline ? "px-0 pb-0" : "mx-auto max-w-3xl px-5 pb-16",
 		)}
 	>
 		<div className="prose max-w-none">
-			<div className={classNames("mb-4", inline ? "mt-4" : "mt-12")}>
+			<div className={classNames("mb-4", inline ? "mt-0" : "mt-12")}>
 				<h1 className="text-center">Licence</h1>
+			</div>
+
+			<div className="not-prose mx-auto mb-6 flex justify-center">
+				<img
+					src={HELPING_HAND_ICON_SRC}
+					alt="Helping hand — one figure reaching down to help another up"
+					className="h-auto w-full max-w-[12rem] sm:max-w-[16rem]"
+					width={1089}
+					height={1020}
+					loading="lazy"
+					decoding="async"
+				/>
 			</div>
 
 			<CreativeCommonsBadge />
@@ -326,7 +340,10 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 					className="inline-block text-sm text-blue hover:underline"
 					onClick={(event) => {
 						event.preventDefault();
-						fastScrollToTop();
+						const scrollContainer = inline
+							? event.currentTarget.closest("[data-modal-scroll-area]")
+							: null;
+						fastScrollToTop({ scrollContainer });
 					}}
 				>
 					Back to top ↑
