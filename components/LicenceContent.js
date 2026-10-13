@@ -326,7 +326,10 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 					className="inline-block text-sm text-blue hover:underline"
 					onClick={(event) => {
 						event.preventDefault();
-						fastScrollToTop();
+						const scrollContainer = inline
+							? event.currentTarget.closest("[data-modal-scroll-area]")
+							: null;
+						fastScrollToTop({ scrollContainer });
 					}}
 				>
 					Back to top ↑
