@@ -123,11 +123,11 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 	<div
 		id="top"
 		className={classNames(
-			inline ? "px-6 pb-0" : "mx-auto max-w-3xl px-5 pb-16",
+			inline ? "px-0 pb-0" : "mx-auto max-w-3xl px-5 pb-16",
 		)}
 	>
 		<div className="prose max-w-none">
-			<div className={classNames("mb-4", inline ? "mt-4" : "mt-12")}>
+			<div className={classNames("mb-4", inline ? "mt-0" : "mt-12")}>
 				<h1 className="text-center">Licence</h1>
 			</div>
 

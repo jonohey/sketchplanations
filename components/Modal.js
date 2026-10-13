@@ -97,7 +97,7 @@ const Modal = ({ isOpen: isOpenProp, onClose, children, ...props }) => {
 						Done
 						<X />
 					</button>
-					<div className="w-full  max-h-[calc(var(--visual-viewport-height)-4rem)] overflow-auto py-8 px-10">
+					<div className="w-full max-h-[calc(var(--visual-viewport-height)-4rem)] overflow-auto py-5 px-4 sm:py-8 sm:px-8">
 						{children}
 					</div>
 				</Dialog>
