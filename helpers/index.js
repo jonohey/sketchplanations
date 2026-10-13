@@ -37,19 +37,35 @@ export const getCookie = (name) => {
 	return null;
 };
 
-export const fastScrollToTop = ({ durationMs = 250 } = {}) => {
+export const fastScrollToTop = ({
+	durationMs = 250,
+	scrollContainer = null,
+} = {}) => {
 	if (typeof window === "undefined") return;
 
 	const prefersReducedMotion =
 		typeof window.matchMedia === "function" &&
 		window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+	const getScrollTop = () =>
+		scrollContainer
+			? scrollContainer.scrollTop
+			: (window.scrollY ?? window.pageYOffset ?? 0);
+
+	const setScrollTop = (y) => {
+		if (scrollContainer) {
+			scrollContainer.scrollTop = y;
+		} else {
+			window.scrollTo(0, y);
+		}
+	};
+
 	if (prefersReducedMotion) {
-		window.scrollTo(0, 0);
+		setScrollTop(0);
 		return;
 	}
 
-	const startY = window.scrollY ?? window.pageYOffset ?? 0;
+	const startY = getScrollTop();
 	if (startY <= 0) return;
 
 	const startTime = window.performance?.now?.() ?? Date.now();
@@ -59,7 +75,7 @@ export const fastScrollToTop = ({ durationMs = 250 } = {}) => {
 		const elapsed = now - startTime;
 		const t = Math.min(1, elapsed / durationMs);
 		const y = Math.round(startY * (1 - easeOutCubic(t)));
-		window.scrollTo(0, y);
+		setScrollTop(y);
 		if (t < 1) window.requestAnimationFrame(step);
 	};
 
