@@ -1,5 +1,4 @@
 import * as prismicH from "@prismicio/helpers";
-import { loadSwiperStyles } from "helpers/loadSwiperStyles";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import Shiitake from "shiitake";
@@ -9,6 +8,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./SketchplanationsStack.module.css";
 
 import { isBlank } from "helpers";
+import { loadSwiperStyles } from "helpers/loadSwiperStyles";
+
 import SketchplanationCard from "./SketchplanationCard";
 
 const SketchplanationsStack = ({

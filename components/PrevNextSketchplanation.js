@@ -1,11 +1,12 @@
 import classNames from "classnames";
-import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useHotkeys } from "react-hotkeys-hook";
 
 import styles from "./PrevNextSketchplanation.module.css";
+
+import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
 
 const PrevNextSketchplanation = ({ sketchplanation, kind }) => {
 	const keyboardKey = kind === "next" ? "j" : "k";

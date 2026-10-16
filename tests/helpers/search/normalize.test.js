@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { expandQueryVariants, normalizeForSearch } from "helpers/search/normalize.js";
+import {
+	expandQueryVariants,
+	normalizeForSearch,
+} from "helpers/search/normalize.js";
 
 describe("normalizeForSearch", () => {
 	it("lowercases and collapses whitespace", () => {

@@ -1,3 +1,4 @@
+// sort-imports-ignore: keep global.css after the component imports so the CSS cascade order is unchanged
 import { PrismicPreview } from "@prismicio/next/pages";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -28,14 +29,16 @@ const Sketchplanations = ({ Component, pageProps }) => {
 
 	// Pages can define their own layout via Component.getLayout
 	// Default layout includes Header, BuyMeACoffee, and Footer
-	const getLayout = Component.getLayout ?? ((page) => (
-		<>
-			<Header />
-			{page}
-			<BuyMeACoffee />
-			<Footer />
-		</>
-	));
+	const getLayout =
+		Component.getLayout ??
+		((page) => (
+			<>
+				<Header />
+				{page}
+				<BuyMeACoffee />
+				<Footer />
+			</>
+		));
 
 	useEffect(() => {
 		return runWhenIdle(async () => {

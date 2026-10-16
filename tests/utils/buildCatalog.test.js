@@ -14,7 +14,10 @@ import {
 	sortSketchplanationsByPublishedAtDesc,
 	sortTagsByIdentifier,
 } from "../../utils/fetchBuildCatalog.mjs";
-import { buildCatalog, buildCatalogSketches } from "../fixtures/build-catalog.js";
+import {
+	buildCatalog,
+	buildCatalogSketches,
+} from "../fixtures/build-catalog.js";
 
 describe("catalog sorting", () => {
 	it("orders sketches by published_at descending", () => {
@@ -52,10 +55,9 @@ describe("catalog sorting", () => {
 
 describe("catalog derivatives", () => {
 	it("takes the newest sketches for RSS and initial search", () => {
-		expect(newestSketchplanations(buildCatalogSketches, 2).map(({ uid }) => uid)).toEqual([
-			"newest-sketch",
-			"middle-sketch",
-		]);
+		expect(
+			newestSketchplanations(buildCatalogSketches, 2).map(({ uid }) => uid),
+		).toEqual(["newest-sketch", "middle-sketch"]);
 	});
 
 	it("drops the oldest sketches from the newer set", () => {
@@ -89,7 +91,9 @@ describe("searchIndexFromCatalog", () => {
 		expect(index.sketches[1].body).toContain("Factfulness");
 		expect(index.sketches[1].categories).toBe("science psychology");
 
-		expect(index.categories.map(({ slug, count }) => ({ slug, count }))).toEqual([
+		expect(
+			index.categories.map(({ slug, count }) => ({ slug, count })),
+		).toEqual([
 			{ slug: "psychology", count: 2 },
 			{ slug: "science", count: 2 },
 		]);
@@ -123,7 +127,9 @@ describe("sitemapDocumentUrls", () => {
 			loc: "https://sketchplanations.com/",
 			priority: "1.00",
 		});
-		expect(home.lastmod).toBe(new Date("2025-09-01T00:00:00+0000").toISOString());
+		expect(home.lastmod).toBe(
+			new Date("2025-09-01T00:00:00+0000").toISOString(),
+		);
 
 		expect(sketchUrls.map(({ loc }) => loc)).toEqual([
 			"https://sketchplanations.com/oldest-sketch",

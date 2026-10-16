@@ -3,7 +3,11 @@ import fetch from "node-fetch";
 import { client } from "services/prismic";
 
 const sanitizeSlug = (slug) =>
-	slug.replace(/[^a-z0-9-]/gi, "-").replace(/-+/g, "-").replace(/^-|-$/g, "").toLowerCase();
+	slug
+		.replace(/[^a-z0-9-]/gi, "-")
+		.replace(/-+/g, "-")
+		.replace(/^-|-$/g, "")
+		.toLowerCase();
 
 export default async (req, res) => {
 	const uid = req.query.uid;

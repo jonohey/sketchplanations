@@ -1,10 +1,16 @@
 import { describe, expect, it } from "vitest";
-import { allBookPageImages, stackBookPageImages } from "../../utils/bookImages.mjs";
+
+import {
+	allBookPageImages,
+	stackBookPageImages,
+} from "../../utils/bookImages.mjs";
 
 describe("stackBookPageImages", () => {
 	it("leaves out the table-of-contents photos", () => {
 		const names = stackBookPageImages.map((image) => image.filename);
-		expect(names.some((name) => name.includes("table-of-contents"))).toBe(false);
+		expect(names.some((name) => name.includes("table-of-contents"))).toBe(
+			false,
+		);
 	});
 
 	it("has no duplicates or gaps", () => {

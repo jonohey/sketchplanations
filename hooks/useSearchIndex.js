@@ -96,7 +96,11 @@ const useSearchIndex = () => {
 				};
 			}
 
-			const { items: sketchItems, matchQuality, correctedLabel } = searchSketches(
+			const {
+				items: sketchItems,
+				matchQuality,
+				correctedLabel,
+			} = searchSketches(
 				searchIndex.sketchFuse,
 				searchIndex.index.sketches,
 				query,

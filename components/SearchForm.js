@@ -8,6 +8,7 @@ import styles from "./SearchForm.module.css";
 
 import { isPresent } from "helpers";
 import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
+
 import KeyboardShortcut from "./KeyboardShortcut";
 
 const SearchForm = ({

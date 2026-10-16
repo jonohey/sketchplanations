@@ -1,37 +1,42 @@
 .root {
-  --edgeInset: 1.5em;
-  --footer-cream: rgb(250, 236, 203);
-  --footer-light: hsl(54, 60%, 98%);
-  --color-bg: var(--footer-cream);
-  --color-bgFooter: var(--footer-cream);
-  --color-blue: hsl(216.1, 81.9%, 36%);
-  --color-border: hsla(35, 20%, 28%, 0.18);
-  --color-borderFooter: hsla(35, 20%, 28%, 0.18);
-  --color-text: hsl(0, 0%, 13.3%);
-  --color-textSubdued: hsl(0, 0%, 38%);
+	--edgeInset: 1.5em;
+	--footer-cream: rgb(250, 236, 203);
+	--footer-light: hsl(54, 60%, 98%);
+	--color-bg: var(--footer-cream);
+	--color-bgFooter: var(--footer-cream);
+	--color-blue: hsl(216.1, 81.9%, 36%);
+	--color-border: hsla(35, 20%, 28%, 0.18);
+	--color-borderFooter: hsla(35, 20%, 28%, 0.18);
+	--color-text: hsl(0, 0%, 13.3%);
+	--color-textSubdued: hsl(0, 0%, 38%);
 
-  @screen md {
-    --edgeInset: 2em;
-  }
+	@screen md {
+		--edgeInset: 2em;
+	}
 
-  @screen lg {
-    --edgeInset: 3em;
-  }
+	@screen lg {
+		--edgeInset: 3em;
+	}
 
-  color: var(--color-text);
-  background: var(--footer-cream);
-  border-top: 1px solid var(--color-border);
+	color: var(--color-text);
+	background: var(--footer-cream);
+	border-top: 1px solid var(--color-border);
 }
 
 .content {
-  @apply grid gap-y-12;
+	@apply grid gap-y-12;
 
-  background: linear-gradient(to bottom, var(--footer-light), var(--color-paper) 45%, var(--footer-cream));
+	background: linear-gradient(
+		to bottom,
+		var(--footer-light),
+		var(--color-paper) 45%,
+		var(--footer-cream)
+	);
 }
 
 .feedbackLink {
-  @apply text-blue;
-  background: var(--color-paper);
-  box-decoration-break: clone;
-  padding: 0.1em 0.25em;
+	@apply text-blue;
+	background: var(--color-paper);
+	box-decoration-break: clone;
+	padding: 0.1em 0.25em;
 }

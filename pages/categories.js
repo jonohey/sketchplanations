@@ -1,11 +1,12 @@
-import FancyLink from "components/FancyLink";
 import { sort } from "fast-sort";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import useCookie from "react-use-cookie";
+
 import styles from "./categories.module.css";
 
+import FancyLink from "components/FancyLink";
 import SortButtons from "components/SortButtons";
 import TextHeader from "components/TextHeader";
 import { humanizeTag, pageTitle } from "helpers";
@@ -29,10 +30,10 @@ const BarItem = ({ tag, slug, count, maxCount }) => (
 						width: `${Math.round((count / maxCount) * 90)}%`,
 					}}
 				/>
-				<span 
+				<span
 					className="absolute top-1/2 -translate-y-1/2 text-sm text-textSubduedMore group-hover:text-text transition-all duration-300 group-hover:translate-x-2 ml-2"
 					style={{
-						left: `${Math.round((count / maxCount) * 90)}%`
+						left: `${Math.round((count / maxCount) * 90)}%`,
 					}}
 				>
 					{count}
@@ -45,7 +46,7 @@ const BarItem = ({ tag, slug, count, maxCount }) => (
 const Categories = ({ tagsByName, tagsByCount }) => {
 	const [sort, setSort] = useState("chart");
 	const [cookieSort, setCookieSort] = useCookie("tagsSort", "chart");
-	const maxCount = Math.max(...tagsByCount.map(tag => tag.count));
+	const maxCount = Math.max(...tagsByCount.map((tag) => tag.count));
 
 	useEffect(() => {
 		if (cookieSort) {
@@ -66,7 +67,9 @@ const Categories = ({ tagsByName, tagsByCount }) => {
 			<div className="pt-6 px-6 text-center">
 				<TextHeader>Categories</TextHeader>
 				<p className="prose mx-auto mt-4 mb-8 max-w-2xl text-textSubdued">
-					Browse topics to find clear, simple explanations through sketches and illustrations, covering a wide range of subjects from everyday concepts to complex ideas.
+					Browse topics to find clear, simple explanations through sketches and
+					illustrations, covering a wide range of subjects from everyday
+					concepts to complex ideas.
 				</p>
 			</div>
 			<div className="text-center mt-8 mb-8">

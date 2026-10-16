@@ -1,4 +1,5 @@
 import * as prismic from "@prismicio/client";
+
 import { shuffle } from "helpers";
 import { client } from "services/prismic";
 

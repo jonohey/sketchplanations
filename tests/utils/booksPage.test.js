@@ -1,6 +1,5 @@
 import fs from "node:fs";
 import path from "node:path";
-
 import { describe, expect, it } from "vitest";
 
 import {
@@ -26,7 +25,11 @@ function loadBooksCovers() {
 	return JSON.parse(fs.readFileSync(COVERS_PATH, "utf8")).covers ?? {};
 }
 
-function mergeMetadataOverrides(overridesByTitle, authorsByTitle, coversByTitle = {}) {
+function mergeMetadataOverrides(
+	overridesByTitle,
+	authorsByTitle,
+	coversByTitle = {},
+) {
 	const merged = { ...overridesByTitle };
 
 	for (const [titleKey, author] of Object.entries(authorsByTitle)) {
@@ -119,12 +122,13 @@ describe("books page index quality", () => {
 			expect(book.note).toBeNull();
 		}
 
-		expect(books.find((book) => book.title === "Greenlights")?.sketches).toHaveLength(
-			2,
-		);
 		expect(
-			books.find((book) => normalizeBookTitle(book.title) === "the pyramid principle")
-				?.author,
+			books.find((book) => book.title === "Greenlights")?.sketches,
+		).toHaveLength(2);
+		expect(
+			books.find(
+				(book) => normalizeBookTitle(book.title) === "the pyramid principle",
+			)?.author,
 		).toBe("Barbara Minto");
 	});
 
@@ -138,10 +142,7 @@ describe("books page index quality", () => {
 		expect(
 			duplicates,
 			duplicates
-				.map(
-					({ a, b, reason }) =>
-						`"${a.title}" / "${b.title}" (${reason})`,
-				)
+				.map(({ a, b, reason }) => `"${a.title}" / "${b.title}" (${reason})`)
 				.join("\n"),
 		).toEqual([]);
 	});

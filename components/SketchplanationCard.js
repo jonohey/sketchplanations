@@ -2,8 +2,10 @@ import { PrismicNextImage } from "@prismicio/next";
 import classNames from "classnames";
 import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
-import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
+
 import styles from "./SketchplanationCard.module.css";
+
+import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
 
 const CARD_THUMB_IMGIX_PARAMS = {
 	fit: "crop",

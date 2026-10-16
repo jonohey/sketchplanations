@@ -26,10 +26,13 @@ const describeEdit = (sketch, edit, tagIdsBySlug) => {
 		edit.removeSlugs.map((slug) => tagIdsBySlug.get(slug)),
 	);
 	const addIds = edit.addSlugs.map((slug) => tagIdsBySlug.get(slug));
-	const before = (sketch.data?.tags ?? []).map(({ tag }) => tag?.id).filter(Boolean);
-	const after = applySketchTagEdits(sketch.data?.tags, { removeIds, addIds }).map(
-		({ tag }) => tag.id,
-	);
+	const before = (sketch.data?.tags ?? [])
+		.map(({ tag }) => tag?.id)
+		.filter(Boolean);
+	const after = applySketchTagEdits(sketch.data?.tags, {
+		removeIds,
+		addIds,
+	}).map(({ tag }) => tag.id);
 	return {
 		removeIds,
 		addIds,
@@ -41,7 +44,9 @@ const describeEdit = (sketch, edit, tagIdsBySlug) => {
 
 export const runSketchEdits = async ({ edits, batchId, dryRun }) => {
 	const slugs = [
-		...new Set(edits.flatMap((edit) => [...edit.removeSlugs, ...edit.addSlugs])),
+		...new Set(
+			edits.flatMap((edit) => [...edit.removeSlugs, ...edit.addSlugs]),
+		),
 	];
 	const tagIdsBySlug = await resolveTagIdsBySlug(slugs);
 
@@ -104,6 +109,8 @@ export const runSketchEdits = async ({ edits, batchId, dryRun }) => {
 	);
 	fs.appendFileSync(logPath, `${logLines.join("\n")}\n`);
 
-	console.log(`\n[tag-cleanup] Sketch edits submitted. Review Migration Release in Prismic and publish.`);
+	console.log(
+		`\n[tag-cleanup] Sketch edits submitted. Review Migration Release in Prismic and publish.`,
+	);
 	console.log(`  Log: ${logPath}`);
 };

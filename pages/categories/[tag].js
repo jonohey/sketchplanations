@@ -1,15 +1,16 @@
 import * as prismic from "@prismicio/client";
-import FancyLink from "components/FancyLink";
-import SketchplanationsGrid from "components/SketchplanationsGrid";
-import TextHeader from "components/TextHeader";
-import { humanizeTag, pageTitle } from "helpers";
 import { ChevronRight, Lightbulb } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { client } from "services/prismic";
 
 import styles from "./[tag].module.css";
+
+import FancyLink from "components/FancyLink";
+import SketchplanationsGrid from "components/SketchplanationsGrid";
+import TextHeader from "components/TextHeader";
+import { humanizeTag, pageTitle } from "helpers";
+import { client } from "services/prismic";
 
 const Tag = ({ tag, sketchplanations }) => {
 	const router = useRouter();
@@ -26,30 +27,34 @@ const Tag = ({ tag, sketchplanations }) => {
 					name="description"
 					content={`Practical ideas, frameworks and techniques related to ${tag}, explained simply with visual examples. Browse the collection and find concepts to learn, use and share.`}
 				/>
-				<link rel="canonical" href={`https://sketchplanations.com/categories/${router.query.tag}`} />
+				<link
+					rel="canonical"
+					href={`https://sketchplanations.com/categories/${router.query.tag}`}
+				/>
 				<script
 					type="application/ld+json"
 					dangerouslySetInnerHTML={{
 						__html: JSON.stringify({
 							"@context": "https://schema.org",
 							"@type": "BreadcrumbList",
-							"itemListElement": [
+							itemListElement: [
 								{
 									"@type": "ListItem",
-									"position": 1,
-									"name": "Home",
-									"item": "https://sketchplanations.com/"
+									position: 1,
+									name: "Home",
+									item: "https://sketchplanations.com/",
 								},
 								{
 									"@type": "ListItem",
-									"position": 2,
-									"name": "Categories",
-									"item": "https://sketchplanations.com/categories"
-								},{
+									position: 2,
+									name: "Categories",
+									item: "https://sketchplanations.com/categories",
+								},
+								{
 									"@type": "ListItem",
-									"position": 3,
-									"name": `${tag}`,
-									"item": `https://sketchplanations.com/categories/${router.query.tag}`
+									position: 3,
+									name: `${tag}`,
+									item: `https://sketchplanations.com/categories/${router.query.tag}`,
 								},
 							],
 						}),
@@ -59,19 +64,28 @@ const Tag = ({ tag, sketchplanations }) => {
 			<div className={styles.root} key={tag}>
 				<nav className="text-sm mb-4 px-6">
 					<div className="flex items-center">
-						<Link href="/" className="text-blue-600 hover:underline">Home</Link>
+						<Link href="/" className="text-blue-600 hover:underline">
+							Home
+						</Link>
 						<ChevronRight className="mx-1" size={16} />
-						<Link href="/categories" className="text-blue-600 hover:underline">Categories</Link>
+						<Link href="/categories" className="text-blue-600 hover:underline">
+							Categories
+						</Link>
 						<ChevronRight className="mx-1" size={16} />
 						<span className="text-gray-600 dark:text-gray-300">{tag}</span>
 					</div>
 				</nav>
 				<div className="pt-2 px-6 text-center">
-					<TextHeader className={styles.header}>{tag}: ideas and frameworks explained</TextHeader>
+					<TextHeader className={styles.header}>
+						{tag}: ideas and frameworks explained
+					</TextHeader>
 					<p className="prose mx-auto mt-2 sm:mt-3 mb-8 max-w-2xl text-textSubdued">
-						A collection of ideas, frameworks and techniques related to {tag}, explained clearly so they are easy to understand and share.
+						A collection of ideas, frameworks and techniques related to {tag},
+						explained clearly so they are easy to understand and share.
 						<span className="hidden md:inline">
-							{" "}Browse practical concepts, principles and tips, with visual examples to make them memorable.
+							{" "}
+							Browse practical concepts, principles and tips, with visual
+							examples to make them memorable.
 						</span>
 					</p>
 				</div>
@@ -135,24 +149,21 @@ export async function getStaticProps({ params: { tag } }) {
 				direction: "desc",
 			},
 		],
-		fetch: [
-			'sketchplanation.title',
-			'sketchplanation.image',
-		]
+		fetch: ["sketchplanation.title", "sketchplanation.image"],
 	});
 
-	return { 
-		props: { 
-			tag: humanizeTag(tagDoc.uid), 
+	return {
+		props: {
+			tag: humanizeTag(tagDoc.uid),
 			sketchplanations: sketchplanations.map(({ id, uid, data }) => ({
 				id,
 				uid,
 				data: {
 					title: data.title,
-					image: data.image
-				}
-			}))
-		} 
+					image: data.image,
+				},
+			})),
+		},
 	};
 }
 

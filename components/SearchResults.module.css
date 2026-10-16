@@ -1,61 +1,61 @@
 .search-results {
-  @apply grid grid-cols-1 gap-y-6;
+	@apply grid grid-cols-1 gap-y-6;
 }
 
 .search-results__sketches-header {
-  @apply flex items-baseline justify-between gap-4 mb-4 px-5;
+	@apply flex items-baseline justify-between gap-4 mb-4 px-5;
 }
 
 .search-results__sketches-header--bordered {
-  @apply pt-4 border-t border-border;
+	@apply pt-4 border-t border-border;
 }
 
 .search-results__sketches-title {
-  @apply text-base font-semibold m-0;
+	@apply text-base font-semibold m-0;
 }
 
 .search-results__sketches-count {
-  @apply text-sm text-textSubdued m-0 shrink-0;
+	@apply text-sm text-textSubdued m-0 shrink-0;
 }
 
 .search-results__weak-heading,
 .search-results__corrected-heading {
-  @apply text-center text-textSubdued text-sm mb-4 px-5;
+	@apply text-center text-textSubdued text-sm mb-4 px-5;
 }
 
 .search-results__empty {
-  @apply flex items-center justify-center flex-col gap-2;
+	@apply flex items-center justify-center flex-col gap-2;
 }
 
 .search-results__empty a {
-  @apply text-blue;
+	@apply text-blue;
 }
 
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
 
 .loading-indicator {
-  @apply flex flex-row items-center justify-center h-full text-center px-6 pointer-events-none text-textSubdued;
-  gap: 0.5rem;
+	@apply flex flex-row items-center justify-center h-full text-center px-6 pointer-events-none text-textSubdued;
+	gap: 0.5rem;
 }
 
 .loading-indicator svg {
-  width: 18px;
-  height: 18px;
-  fill: #aaa;
-  animation: spin 1s linear infinite;
+	width: 18px;
+	height: 18px;
+	fill: #aaa;
+	animation: spin 1s linear infinite;
 }
 
 .links {
-  @apply grid grid-flow-col-dense gap-x-6 justify-center px-6;
+	@apply grid grid-flow-col-dense gap-x-6 justify-center px-6;
 }
 
 .link {
-  @apply text-blue;
+	@apply text-blue;
 }

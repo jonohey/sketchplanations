@@ -19,9 +19,17 @@ import { applyTagChangesToSketchTags } from "./tag-utils.mjs";
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const fetchSketchesNeedingUpdate = async (mergeMap, removeIds, { pairSlug, limit }) => {
+const fetchSketchesNeedingUpdate = async (
+	mergeMap,
+	removeIds,
+	{ pairSlug, limit },
+) => {
 	const sketchplanations = await client.getAllByType("sketchplanation", {
-		fetch: ["sketchplanation.tags", "sketchplanation.uid", "sketchplanation.title"],
+		fetch: [
+			"sketchplanation.tags",
+			"sketchplanation.uid",
+			"sketchplanation.title",
+		],
 	});
 
 	const loserIds = new Set([...mergeMap.keys(), ...removeIds]);
@@ -32,7 +40,9 @@ const fetchSketchesNeedingUpdate = async (mergeMap, removeIds, { pairSlug, limit
 	if (pairSlug) {
 		const plan = loadMergePlan();
 		const row = plan.rows.find(
-			(r) => r.from_slug === pairSlug && (r.action === "merge" || r.action === "remove"),
+			(r) =>
+				r.from_slug === pairSlug &&
+				(r.action === "merge" || r.action === "remove"),
 		);
 		if (!row) {
 			throw new Error(`No merge plan row for from_slug="${pairSlug}"`);
@@ -50,10 +60,13 @@ const fetchSketchesNeedingUpdate = async (mergeMap, removeIds, { pairSlug, limit
 };
 
 const describeSketchChange = (sketch, mergeMap, removeIds) => {
-	const before = (sketch.data?.tags ?? []).map(({ tag }) => tag?.id).filter(Boolean);
-	const after = applyTagChangesToSketchTags(sketch.data?.tags, { mergeMap, removeIds }).map(
-		({ tag }) => tag.id,
-	);
+	const before = (sketch.data?.tags ?? [])
+		.map(({ tag }) => tag?.id)
+		.filter(Boolean);
+	const after = applyTagChangesToSketchTags(sketch.data?.tags, {
+		mergeMap,
+		removeIds,
+	}).map(({ tag }) => tag.id);
 	return { before, after, changed: before.join(",") !== after.join(",") };
 };
 
@@ -83,11 +96,16 @@ export const runMigrate = async (options) => {
 	});
 
 	const totalNeedingUpdate = (
-		await fetchSketchesNeedingUpdate(mergeMap, removeIds, { pairSlug, limit: 0 })
+		await fetchSketchesNeedingUpdate(mergeMap, removeIds, {
+			pairSlug,
+			limit: 0,
+		})
 	).length;
 
 	if (sketches.length === 0) {
-		console.log("[tag-cleanup] No sketches need updating for current merge plan.");
+		console.log(
+			"[tag-cleanup] No sketches need updating for current merge plan.",
+		);
 		return;
 	}
 
@@ -105,7 +123,11 @@ export const runMigrate = async (options) => {
 	);
 
 	for (const sketch of sketches) {
-		const { before, after, changed } = describeSketchChange(sketch, mergeMap, removeIds);
+		const { before, after, changed } = describeSketchChange(
+			sketch,
+			mergeMap,
+			removeIds,
+		);
 		if (!changed) continue;
 		console.log(`  ${sketch.uid}`);
 		console.log(`    tags: ${before.join(", ")} → ${after.join(", ")}`);
@@ -125,7 +147,10 @@ export const runMigrate = async (options) => {
 		if (!changed) continue;
 
 		const doc = await writeClient.getByUID("sketchplanation", sketch.uid);
-		doc.data.tags = applyTagChangesToSketchTags(doc.data.tags, { mergeMap, removeIds });
+		doc.data.tags = applyTagChangesToSketchTags(doc.data.tags, {
+			mergeMap,
+			removeIds,
+		});
 		migration.updateDocument(doc);
 
 		logLines.push(
@@ -171,6 +196,8 @@ export const runMigrate = async (options) => {
 	}
 	saveMergePlan(rows);
 
-	console.log(`\n[tag-cleanup] Migration submitted. Review Migration Release in Prismic and publish.`);
+	console.log(
+		`\n[tag-cleanup] Migration submitted. Review Migration Release in Prismic and publish.`,
+	);
 	console.log(`  Log: ${logPath}`);
 };

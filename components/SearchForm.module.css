@@ -1,97 +1,97 @@
 .root {
-  /* @apply relative mx-auto px-4 mb-4 sm:mb-4 md:mb-6 flex flex-row; */
-  @apply relative flex flex-row;
-  /* max-width: 42rem; */
+	/* @apply relative mx-auto px-4 mb-4 sm:mb-4 md:mb-6 flex flex-row; */
+	@apply relative flex flex-row;
+	/* max-width: 42rem; */
 }
 
 @screen sm {
-  .root {
-    @apply px-0;
-  }
+	.root {
+		@apply px-0;
+	}
 }
 
 .icon {
-  @apply absolute top-0 left-3 sm:left-5 h-full flex items-center pointer-events-none text-textSubdued;
+	@apply absolute top-0 left-3 sm:left-5 h-full flex items-center pointer-events-none text-textSubdued;
 }
 
 .input {
-  @apply block py-2 pr-10 pl-10 w-full bg-bgInput border border-borderInput border-r-0 outline-none grow rounded-lg rounded-r-none placeholder-textSubdued;
+	@apply block py-2 pr-10 pl-10 w-full bg-bgInput border border-borderInput border-r-0 outline-none grow rounded-lg rounded-r-none placeholder-textSubdued;
 }
 
 @screen sm {
-  .input {
-    @apply py-3 pr-12 pl-12 text-lg rounded-full rounded-r-none;
-  }
+	.input {
+		@apply py-3 pr-12 pl-12 text-lg rounded-full rounded-r-none;
+	}
 }
 
 .input:focus,
 .input:focus ~ .reset-button {
-  @apply border-blue;
+	@apply border-blue;
 }
 
 .input:focus-visible {
-  @apply outline-none;
+	@apply outline-none;
 }
 
 .reset-button {
-  @apply px-4 bg-bgInput border border-borderInput border-l-0 rounded-lg rounded-l-none pointer-events-none;
+	@apply px-4 bg-bgInput border border-borderInput border-l-0 rounded-lg rounded-l-none pointer-events-none;
 }
 
 @screen sm {
-  .reset-button {
-    @apply px-6 rounded-full rounded-l-none;
-  }
+	.reset-button {
+		@apply px-6 rounded-full rounded-l-none;
+	}
 }
 
 .reset-button-active {
-  @apply pointer-events-auto;
-  color: #777;
+	@apply pointer-events-auto;
+	color: #777;
 }
 
 .reset-button svg {
-  width: 14px;
-  height: 14px;
-  fill: currentColor;
-  opacity: 0;
-  transition: opacity 0.2s;
+	width: 14px;
+	height: 14px;
+	fill: currentColor;
+	opacity: 0;
+	transition: opacity 0.2s;
 }
 
 .reset-button-active svg {
-  opacity: 1;
+	opacity: 1;
 }
 
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
 
 .shortcut-indicator {
-  @apply absolute top-0 right-3 h-full flex items-center pointer-events-none;
+	@apply absolute top-0 right-3 h-full flex items-center pointer-events-none;
 }
 
 @screen sm {
-  .shortcut-indicator {
-    @apply right-5;
-  }
+	.shortcut-indicator {
+		@apply right-5;
+	}
 }
 
 .loading-indicator {
-  @apply absolute top-0 right-14 md:right-12 h-full flex items-center pointer-events-none;
+	@apply absolute top-0 right-14 md:right-12 h-full flex items-center pointer-events-none;
 }
 
 @screen sm {
-  .loading-indicator {
-    @apply right-14;
-  }
+	.loading-indicator {
+		@apply right-14;
+	}
 }
 
 .loading-indicator svg {
-  width: 18px;
-  height: 18px;
-  fill: #aaa;
-  animation: spin 1s linear infinite;
+	width: 18px;
+	height: 18px;
+	fill: #aaa;
+	animation: spin 1s linear infinite;
 }

@@ -116,7 +116,11 @@ const categoryFuse = createCategoryFuse(Fuse, categories);
 
 describe("searchSketches", () => {
 	it("ranks exact title matches first", () => {
-		const { items } = searchSketches(sketchFuse, sketches, "the doppler effect");
+		const { items } = searchSketches(
+			sketchFuse,
+			sketches,
+			"the doppler effect",
+		);
 		expect(items[0]?.uid).toBe("doppler-effect");
 		expect(items).toHaveLength(1);
 	});

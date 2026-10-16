@@ -32,7 +32,10 @@ export const buildCatalogSketches = [
 		data: {
 			title: "Oldest Sketch",
 			published_at: "2018-01-01",
-			image: { url: "https://images.example.com/oldest.png?foo=1&bar=2", alt: "Oldest" },
+			image: {
+				url: "https://images.example.com/oldest.png?foo=1&bar=2",
+				alt: "Oldest",
+			},
 			tags: [psychologyTagRef],
 			body: [paragraph("An old idea about habits.")],
 		},

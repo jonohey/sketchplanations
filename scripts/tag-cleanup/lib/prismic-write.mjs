@@ -1,9 +1,9 @@
 /**
  * Prismic Migration API write client (requires PRISMIC_WRITE_TOKEN).
  */
+import * as prismic from "@prismicio/client";
 import dotenv from "dotenv";
 import path from "node:path";
-import * as prismic from "@prismicio/client";
 
 import { REPO_ROOT } from "./paths.mjs";
 

@@ -11,12 +11,12 @@ import {
 	useInteractions,
 	useTransitionStyles,
 } from "@floating-ui/react";
+import { PrismicNextImage } from "@prismicio/next";
+import sketchTooltipsData from "data/sketch-tooltips-data.json";
 import { AnimatePresence, motion } from "framer-motion";
 import { LoaderCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import { PrismicNextImage } from "@prismicio/next";
-import sketchTooltipsData from "data/sketch-tooltips-data.json";
 import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
 
 const SketchTooltip = ({ uid, children }) => {
@@ -31,8 +31,7 @@ const SketchTooltip = ({ uid, children }) => {
 		fit: "crop",
 		crop: "top",
 		ar: "5:3",
-		dpr:
-			typeof window !== "undefined" ? window.devicePixelRatio || 2 : 2,
+		dpr: typeof window !== "undefined" ? window.devicePixelRatio || 2 : 2,
 	});
 
 	const { refs, context, floatingStyles } = useFloating({

@@ -1,18 +1,18 @@
 .sort-buttons {
-  @apply flex justify-center p-2 rounded-lg;
-  border-color: var(--color-bgInput);
-  background-color: var(--color-bgInput);
+	@apply flex justify-center p-2 rounded-lg;
+	border-color: var(--color-bgInput);
+	background-color: var(--color-bgInput);
 }
 
 .sort-button {
-  @apply relative py-1 px-4 text-sm basis-1/2 rounded;
-  border-color: var(--color-bgInput);
-  background-color: var(--color-bgInput);
+	@apply relative py-1 px-4 text-sm basis-1/2 rounded;
+	border-color: var(--color-bgInput);
+	background-color: var(--color-bgInput);
 }
 
 .sort-button-active {
-  @apply shadow font-normal;
-  color: var(--color-black);
-  border-color: var(--color-bg);
-  background-color: var(--color-bg);
+	@apply shadow font-normal;
+	color: var(--color-black);
+	border-color: var(--color-bg);
+	background-color: var(--color-bg);
 }

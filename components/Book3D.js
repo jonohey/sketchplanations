@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import styles from "./Book3D.module.css";
 
 // A square book rendered with CSS 3D transforms: cover on the front, spine on

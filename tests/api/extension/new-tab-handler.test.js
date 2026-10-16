@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
 import createNewTabHandler from "../../../pages/api/extension/_shared/new-tab-handler";
 
 const { trackMock, kvMock, prismicClientMock } = vi.hoisted(() => ({
@@ -252,4 +253,3 @@ describe("createNewTabHandler", () => {
 		expect(res.body.podcastUrl).toBeNull();
 	});
 });
-

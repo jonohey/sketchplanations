@@ -1,28 +1,28 @@
 .cards {
-  @apply grid gap-y-8;
+	@apply grid gap-y-8;
 }
 
 .card {
-  @apply grid items-center gap-6;
-  grid-template-columns: 6rem 1fr;
+	@apply grid items-center gap-6;
+	grid-template-columns: 6rem 1fr;
 }
 
 .card img {
-  @apply shadow-md;
+	@apply shadow-md;
 }
 
 .card > *:only-child {
-  @apply col-span-2;
+	@apply col-span-2;
 }
 
 .supportCard {
-  @apply bg-bgHighlight rounded-lg p-6 text-center;
+	@apply bg-bgHighlight rounded-lg p-6 text-center;
 }
 
 .supportCard b {
-  @apply block;
+	@apply block;
 }
 
 .supportCard a {
-  @apply inline-flex items-center gap-2 mt-2;
+	@apply inline-flex items-center gap-2 mt-2;
 }

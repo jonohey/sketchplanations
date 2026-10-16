@@ -1,7 +1,7 @@
 import { PrismicNextImage } from "@prismicio/next";
 import classNames from "classnames";
-import dynamic from "next/dynamic";
 import { X } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 

@@ -33,11 +33,7 @@ export const VAGUE_IDENTIFIERS = new Set([
 ]);
 
 export const normalizeIdentifier = (value) =>
-	(value ?? "")
-		.toLowerCase()
-		.trim()
-		.replace(/\s+/g, " ")
-		.replace(/-/g, " ");
+	(value ?? "").toLowerCase().trim().replace(/\s+/g, " ").replace(/-/g, " ");
 
 export const normalizeSlug = (value) =>
 	(value ?? "").toLowerCase().trim().replace(/\s+/g, "-");
@@ -105,7 +101,10 @@ export const applyTagChangesToSketchTags = (tags, { mergeMap, removeIds }) => {
 };
 
 /** Remove tag IDs and add new ones without duplicates. */
-export const applySketchTagEdits = (tags, { removeIds = new Set(), addIds = [] }) => {
+export const applySketchTagEdits = (
+	tags,
+	{ removeIds = new Set(), addIds = [] },
+) => {
 	const result = (tags ?? []).filter((item) => !removeIds.has(item?.tag?.id));
 	const seen = new Set(result.map((item) => item?.tag?.id).filter(Boolean));
 

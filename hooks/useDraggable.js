@@ -59,7 +59,13 @@ const useDraggable = (containerRef, positions, setPositions) => {
 				cursor: draggingIndex === index ? "grabbing" : "grab",
 			},
 		}),
-		[positions, containerRef, handlePointerMove, handlePointerUp, draggingIndex],
+		[
+			positions,
+			containerRef,
+			handlePointerMove,
+			handlePointerUp,
+			draggingIndex,
+		],
 	);
 
 	useEffect(() => {

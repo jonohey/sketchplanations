@@ -4,7 +4,9 @@ import sketchTooltipsData from "data/sketch-tooltips-data.json";
 import { ExternalLink } from "lucide-react";
 import { compile, match } from "path-to-regexp";
 import redirects from "redirects.mjs";
+
 import { linkResolver } from "services/prismic.mjs";
+
 import FancyLink from "./FancyLink";
 import SketchTooltip from "./SketchTooltip";
 

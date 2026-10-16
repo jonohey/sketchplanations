@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
+
 import {
+	JPEG_PRISMIC_IMAGE_QUALITY,
 	getPrismicImageOptimisation,
 	isJpegPrismicImage,
-	JPEG_PRISMIC_IMAGE_QUALITY,
 } from "../../helpers/prismicImageOptimisation";
 
 describe("isJpegPrismicImage", () => {

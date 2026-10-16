@@ -31,7 +31,11 @@ export const createSketchFuse = (Fuse, sketches) =>
 	new Fuse(sketches, { ...FUSE_OPTIONS, keys: SKETCH_KEYS });
 
 export const createCategoryFuse = (Fuse, categories) =>
-	new Fuse(categories, { ...FUSE_OPTIONS, keys: CATEGORY_KEYS, threshold: 0.25 });
+	new Fuse(categories, {
+		...FUSE_OPTIONS,
+		keys: CATEGORY_KEYS,
+		threshold: 0.25,
+	});
 
 const isExactCategoryMatch = (category, normalizedQuery) =>
 	category.identifierNormalized === normalizedQuery ||
@@ -80,7 +84,9 @@ const LITERAL_MATCH_SCORE = 0.2;
 const SHORT_QUERY_LENGTH = 3;
 
 const wordTokens = (normalizedText) =>
-	normalizedText ? normalizedText.split(" ").filter((token) => token.length >= 2) : [];
+	normalizedText
+		? normalizedText.split(" ").filter((token) => token.length >= 2)
+		: [];
 
 // Per-sketch word list + stem set for everything searchable. Walking the full
 // body text is the expensive part, so it is memoized per loaded index.
@@ -118,7 +124,9 @@ const getDocIndex = (sketches) => {
 // query (reduced to its stem, so "whale" finds "whaling") appears somewhere in
 // the sketch. Stemming keeps "whale" distinct from "while"/"whole".
 const findLiteralMatches = (sketches, query) => {
-	const queryStems = [...new Set(wordTokens(normalizeForSearch(query)).map(stemmer))];
+	const queryStems = [
+		...new Set(wordTokens(normalizeForSearch(query)).map(stemmer)),
+	];
 
 	if (queryStems.length === 0) return [];
 
@@ -156,7 +164,8 @@ const rankSketchResults = (results, query) => {
 	const normalizedQuery = normalizeForSearch(query);
 
 	return [...results].sort((a, b) => {
-		const titleDelta = titleMatchScore(a.item, normalizedQuery) -
+		const titleDelta =
+			titleMatchScore(a.item, normalizedQuery) -
 			titleMatchScore(b.item, normalizedQuery);
 
 		if (titleDelta !== 0) return titleDelta;
@@ -170,7 +179,8 @@ const rankSketchResults = (results, query) => {
 const isGoodMatch = (result) =>
 	(result.score ?? 1) <= GOOD_MATCH_SCORE && result.wordMatch !== false;
 
-const isEligibleFuseResult = (result) => (result.score ?? 1) <= WEAK_MATCH_SCORE;
+const isEligibleFuseResult = (result) =>
+	(result.score ?? 1) <= WEAK_MATCH_SCORE;
 
 const levenshteinDistance = (a, b) => {
 	if (a === b) return 0;
@@ -327,7 +337,9 @@ const isTypoTokenMatch = (queryToken, titleToken) => {
 };
 
 const queryTokens = (query) =>
-	normalizeForSearch(query).split(" ").filter((token) => token.length >= 3);
+	normalizeForSearch(query)
+		.split(" ")
+		.filter((token) => token.length >= 3);
 
 export const isLikelyTypoCorrection = (entry, query) => {
 	const normalizedQuery = normalizeForSearch(query);
@@ -335,7 +347,8 @@ export const isLikelyTypoCorrection = (entry, query) => {
 
 	if (title === normalizedQuery) return true;
 	if (title.startsWith(normalizedQuery)) return true;
-	if (normalizedQuery.length >= 3 && title.includes(normalizedQuery)) return true;
+	if (normalizedQuery.length >= 3 && title.includes(normalizedQuery))
+		return true;
 
 	const tokens = queryTokens(query);
 
@@ -435,7 +448,12 @@ const classifySketchResults = (scoredResults, query) => {
 	return { items: [], matchQuality: "none" };
 };
 
-export const searchSketches = (sketchFuse, sketches, query, { limit = 100 } = {}) => {
+export const searchSketches = (
+	sketchFuse,
+	sketches,
+	query,
+	{ limit = 100 } = {},
+) => {
 	if (!query?.trim()) {
 		return { items: [], matchQuality: "none" };
 	}
@@ -450,9 +468,8 @@ export const searchSketches = (sketchFuse, sketches, query, { limit = 100 } = {}
 	const variantResults = expandQueryVariants(query).flatMap((variant) =>
 		sketchFuse.search(variant, { limit }),
 	);
-	const fuzzyMatches = dedupeByBestScore(variantResults).filter(
-		isEligibleFuseResult,
-	);
+	const fuzzyMatches =
+		dedupeByBestScore(variantResults).filter(isEligibleFuseResult);
 
 	// dedupeByBestScore keeps the lowest score per id, so exact title matches
 	// (0) win over literal matches (0.2), which win over weaker fuzzy hits.
@@ -471,13 +488,19 @@ export const searchSketches = (sketchFuse, sketches, query, { limit = 100 } = {}
 
 	const tagged = ranked.map((result) => ({
 		...result,
-		wordMatch: !isShortQuery || isWordRelevant(result.item, queryWords, docIndex),
+		wordMatch:
+			!isShortQuery || isWordRelevant(result.item, queryWords, docIndex),
 	}));
 
 	return classifySketchResults(tagged.slice(0, limit), query);
 };
 
-export const searchCategories = (categoryFuse, categories, query, { limit = 20 } = {}) => {
+export const searchCategories = (
+	categoryFuse,
+	categories,
+	query,
+	{ limit = 20 } = {},
+) => {
 	if (!query?.trim()) {
 		return { items: [], hasExactMatch: false };
 	}

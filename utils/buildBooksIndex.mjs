@@ -32,7 +32,11 @@ function loadCoversByTitle() {
 	return data.covers ?? {};
 }
 
-function mergeMetadataOverrides(overridesByTitle, authorsByTitle, coversByTitle) {
+function mergeMetadataOverrides(
+	overridesByTitle,
+	authorsByTitle,
+	coversByTitle,
+) {
 	const merged = { ...overridesByTitle };
 
 	for (const [titleKey, author] of Object.entries(authorsByTitle)) {

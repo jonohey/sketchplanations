@@ -45,6 +45,7 @@ Keep issue titles concise enough to slug cleanly (under ~40 characters of slug t
 
 - Stay on the issue branch unless the user asks otherwise.
 - Do not commit until the user asks to complete or finish the work.
+- Format changed JavaScript and CSS with Prettier (`pnpm exec prettier --write <files>`). Do not format those files with Biome. CI runs `pnpm format:check`.
 - Improvements to this workflow doc (e.g. tooling, conventions) may be committed alongside other work on the same branch when they come up.
 
 ## UI patterns
@@ -70,6 +71,7 @@ Review all changes before staging or committing. Fix issues found; do not commit
 - **Broken tags**: Run `npm run check:broken-tags` (also runs in CI). If any fail, fix them in the Prismic UI before opening the PR.
 - **Tests**: Add Vitest coverage where appropriate — meaningful cases, not exhaustive edge-case sprawl. Run `npm test` (Vitest) and ensure tests pass.
 - **Removals**: Confirm deleted code only removes deliberately abandoned functionality. If a feature appears unused and removal wasn't in the brief, ask before removing it.
+- **Formatting**: Run `pnpm format` (Prettier) before committing; CI runs `pnpm format:check`.
 - **Best practice**: Check accessibility, error handling, security, and consistency with surrounding code.
 - **CSS & styling**: New or changed CSS should be mobile-first, with behaviour checked on small viewports. Consider dark mode (`prefers-color-scheme`) for any colours, borders, or backgrounds. Typography should meet accessible contrast (WCAG AA) unless a deliberate subdued treatment is intended.
 

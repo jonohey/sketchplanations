@@ -46,7 +46,8 @@ export default [
 	},
 	{
 		source: "/browser-extension",
-		destination: "https://climbing-error-fa3.notion.site/New-Tab-Chrome-Extension-Sketchplanations-27ebf3f5521a80b797f3cffb0a8ec2f1?pvs=143",
+		destination:
+			"https://climbing-error-fa3.notion.site/New-Tab-Chrome-Extension-Sketchplanations-27ebf3f5521a80b797f3cffb0a8ec2f1?pvs=143",
 		permanent: false,
 	},
 	{
@@ -71,7 +72,8 @@ export default [
 	},
 	{
 		source: "/sheet-music",
-		destination: "https://shop.spotify.com/en/artist/729QwZLCsOw3JtZmbQSFTj/store",
+		destination:
+			"https://shop.spotify.com/en/artist/729QwZLCsOw3JtZmbQSFTj/store",
 		permanent: false,
 	},
 
@@ -90,7 +92,8 @@ export default [
 	},
 	{
 		source: "/bigthink",
-		destination: "https://bigthink.com/business/better-leadership-in-3-sketchplanations/",
+		destination:
+			"https://bigthink.com/business/better-leadership-in-3-sketchplanations/",
 		permanent: false,
 	},
 

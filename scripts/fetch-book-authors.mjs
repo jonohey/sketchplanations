@@ -1,13 +1,17 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { normalizeBookTitle, normalizeParsedTitle } from "../utils/bookLinks.mjs";
+import {
+	normalizeBookTitle,
+	normalizeParsedTitle,
+} from "../utils/bookLinks.mjs";
 
 const BOOKS_INDEX_PATH = path.join(process.cwd(), "data/books-index.json");
 const AUTHORS_PATH = path.join(process.cwd(), "data/books-authors.json");
 const OVERRIDES_PATH = path.join(process.cwd(), "data/books-overrides.json");
 
-const USER_AGENT = "SketchplanationsBooksBot/1.0 (author lookup; jonohey@sketchplanations.com)";
+const USER_AGENT =
+	"SketchplanationsBooksBot/1.0 (author lookup; jonohey@sketchplanations.com)";
 
 function loadJson(filePath, fallback) {
 	try {
@@ -51,9 +55,12 @@ async function fetchAuthorNames(authorRefs) {
 	const names = [];
 
 	for (const authorRef of authorRefs.slice(0, 2)) {
-		const response = await fetch(`https://openlibrary.org${authorRef.key}.json`, {
-			headers: { "User-Agent": USER_AGENT },
-		});
+		const response = await fetch(
+			`https://openlibrary.org${authorRef.key}.json`,
+			{
+				headers: { "User-Agent": USER_AGENT },
+			},
+		);
 
 		if (!response.ok) continue;
 
@@ -65,9 +72,12 @@ async function fetchAuthorNames(authorRefs) {
 }
 
 async function lookupByProductId(productId) {
-	const response = await fetch(`https://openlibrary.org/isbn/${productId}.json`, {
-		headers: { "User-Agent": USER_AGENT },
-	});
+	const response = await fetch(
+		`https://openlibrary.org/isbn/${productId}.json`,
+		{
+			headers: { "User-Agent": USER_AGENT },
+		},
+	);
 
 	if (!response.ok) return null;
 

@@ -1,7 +1,7 @@
 import { track } from "@vercel/analytics";
 import classNames from "classnames";
 import { ChevronDown, Download, Smile, SquareCheckBig } from "lucide-react";
-import Link from 'next/link';
+import Link from "next/link";
 import { useState } from "react";
 
 import styles from "./DownloadModal.module.css";
@@ -21,7 +21,9 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 			</h2>
 			<div className={styles.main}>
 				<div className="space-y-6">
-					<p>A sharing-ready image is downloading. Check your downloads folder.</p>
+					<p>
+						A sharing-ready image is downloading. Check your downloads folder.
+					</p>
 
 					<div className={styles.highResWrapper}>
 						<button
@@ -31,7 +33,7 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 							aria-controls="high-res-content"
 							onClick={() => {
 								if (!highResOpen) {
-									track('expand_high_res', { sketch: sketchplanationTitle });
+									track("expand_high_res", { sketch: sketchplanationTitle });
 								}
 								setHighResOpen(!highResOpen);
 							}}
@@ -41,7 +43,7 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 								size={18}
 								className={classNames(
 									styles.highResTriggerIcon,
-									highResOpen && styles.highResTriggerIconOpen
+									highResOpen && styles.highResTriggerIconOpen,
 								)}
 							/>
 						</button>
@@ -49,8 +51,12 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 						{highResOpen && (
 							<div id="high-res-content" className={styles.highResSection}>
 								<p>
-									<strong>High-resolution file for slides, articles, or print.</strong> <br/>
-									If this helps you explain an idea, consider supporting Sketchplanations.
+									<strong>
+										High-resolution file for slides, articles, or print.
+									</strong>{" "}
+									<br />
+									If this helps you explain an idea, consider supporting
+									Sketchplanations.
 								</p>
 								<div className={styles.supportButtons}>
 									<a
@@ -60,7 +66,10 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 										className="btn-primary"
 										aria-label="Support with £10"
 										onClick={() => {
-											track('support_10', { sketch: sketchplanationTitle, location: 'download-modal' });
+											track("support_10", {
+												sketch: sketchplanationTitle,
+												location: "download-modal",
+											});
 										}}
 									>
 										£10
@@ -72,7 +81,10 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 										className="btn-primary"
 										aria-label="Support with £20"
 										onClick={() => {
-											track('support_20', { sketch: sketchplanationTitle, location: 'download-modal' });
+											track("support_20", {
+												sketch: sketchplanationTitle,
+												location: "download-modal",
+											});
 										}}
 									>
 										£20
@@ -84,7 +96,10 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 										className="btn-primary"
 										aria-label="Support with a custom amount"
 										onClick={() => {
-											track('support_other', { sketch: sketchplanationTitle, location: 'download-modal' });
+											track("support_other", {
+												sketch: sketchplanationTitle,
+												location: "download-modal",
+											});
 										}}
 									>
 										Other
@@ -96,7 +111,9 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 									download
 									className={styles.highResCta}
 									onClick={() => {
-										track('download_high_res', { sketch: sketchplanationTitle });
+										track("download_high_res", {
+											sketch: sketchplanationTitle,
+										});
 									}}
 								>
 									<Download size={16} />
@@ -118,7 +135,10 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 									target="_blank"
 									rel="noreferrer noopener"
 									onClick={() => {
-										track('Buy-me-a-coffee', { location: 'download-modal', sketch: sketchplanationTitle });
+										track("Buy-me-a-coffee", {
+											location: "download-modal",
+											sketch: sketchplanationTitle,
+										});
 									}}
 								>
 									Buy Me a Coffee
@@ -129,7 +149,10 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 									href="/big-ideas-little-pictures"
 									target="_blank"
 									onClick={() => {
-										track('Book-page-link', { location: 'download-modal', sketch: sketchplanationTitle });
+										track("Book-page-link", {
+											location: "download-modal",
+											sketch: sketchplanationTitle,
+										});
 									}}
 								>
 									Get the book
@@ -141,7 +164,10 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 									target="_blank"
 									rel="noreferrer noopener"
 									onClick={() => {
-										track('Subscribe', { location: 'download-modal', sketch: sketchplanationTitle });
+										track("Subscribe", {
+											location: "download-modal",
+											sketch: sketchplanationTitle,
+										});
 									}}
 								>
 									Consider a paid subscription
@@ -157,7 +183,10 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 							target="_blank"
 							rel="noreferrer"
 							onClick={() => {
-								track('Licence-page-link', { location: 'download-modal', sketch: sketchplanationTitle });
+								track("Licence-page-link", {
+									location: "download-modal",
+									sketch: sketchplanationTitle,
+								});
 							}}
 						>
 							licence page
@@ -168,7 +197,10 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 							target="_blank"
 							rel="noreferrer"
 							onClick={() => {
-								track('Licence-page-link', { location: 'download-modal-books', sketch: sketchplanationTitle });
+								track("Licence-page-link", {
+									location: "download-modal-books",
+									sketch: sketchplanationTitle,
+								});
 							}}
 						>
 							using sketches in your book

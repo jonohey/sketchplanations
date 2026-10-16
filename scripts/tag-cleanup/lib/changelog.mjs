@@ -58,7 +58,10 @@ ${pending.length === 0 ? "None." : pending.map((r) => `- ${r.from_slug} → ${r.
 
 	const examples = completed
 		.slice(0, 5)
-		.map((r) => `${r.from_identifier || r.from_slug} → ${r.to_identifier || r.to_slug}`)
+		.map(
+			(r) =>
+				`${r.from_identifier || r.from_slug} → ${r.to_identifier || r.to_slug}`,
+		)
 		.join(", ");
 
 	const newsletterDoc = `I've been tidying the categories on Sketchplanations so it's easier to browse related sketches. Duplicate and near-duplicate tags were splitting sketches that belong together — for example ${examples || "sport and sports"}.

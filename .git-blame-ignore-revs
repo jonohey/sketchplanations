@@ -1,0 +1,10 @@
+# Apply Prettier formatting across the codebase
+ec12a9bfad418ef061c7abedf03a1ef91ebbb18f
+# Reformat files changed by the scroll restoration PR (after merging main)
+9078221a12c3750d2dc28a64ea28df5dac913f53
+# Reformat files changed by the licence modal PR (after merging main)
+b63a67c9b931900346f8944ebccb90dd51c672b0
+# Reformat files changed by the list page PR (after merging main)
+7a7eb01058262c66dda7ef84abc331ba1c56f123
+# Reformat files changed by the explainer kit icons PR (after merging main)
+64fe0722e2966847b027f51fae6f01aed6dc36be

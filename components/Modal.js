@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import {
 	Modal as AriaModal,
@@ -6,8 +7,8 @@ import {
 	ModalOverlay,
 } from "react-aria-components";
 
-import { X } from "lucide-react";
 import styles from "./Modal.module.css";
+
 const MotionModal = motion.create(AriaModal);
 
 const Modal = ({ isOpen: isOpenProp, onClose, children, ...props }) => {

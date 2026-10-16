@@ -1,5 +1,6 @@
-import SketchplanationCard from "./SketchplanationCard";
 import styles from "./SketchplanationsGrid.module.css";
+
+import SketchplanationCard from "./SketchplanationCard";
 
 const SketchplanationsGrid = ({ prismicDocs: sketchplanations = [] }) => {
 	return (

@@ -58,10 +58,7 @@ export function cleanLinkText(text) {
 	return text
 		.replace(/^see\s+/i, "")
 		.replace(/^read\s+/i, "")
-		.replace(
-			/^(?:audiobook|audio book|kindle edition|ebook)\s+of\s+/i,
-			"",
-		)
+		.replace(/^(?:audiobook|audio book|kindle edition|ebook)\s+of\s+/i, "")
 		.replace(/\s+book$/i, "")
 		.replace(/[.,;:]+$/, "")
 		.trim();
@@ -72,10 +69,7 @@ export function cleanLinkText(text) {
  */
 export function normalizeParsedTitle(title) {
 	return title
-		.replace(
-			/^(?:audiobook|audio book|kindle edition|ebook)\s+of\s+/i,
-			"",
-		)
+		.replace(/^(?:audiobook|audio book|kindle edition|ebook)\s+of\s+/i, "")
 		.replace(/^(?:her|his|their|my)\s+book\s+/i, "")
 		.trim();
 }
@@ -177,8 +171,7 @@ export function normalizeBookTitle(title) {
 
 	const colonMatch = withoutTrailingAuthor.match(/^(.+?):\s*.+$/);
 	const mainTitle =
-		colonMatch &&
-		colonMatch[1].replace(/[^\w\s]/g, "").trim().length >= 15
+		colonMatch && colonMatch[1].replace(/[^\w\s]/g, "").trim().length >= 15
 			? colonMatch[1]
 			: withoutTrailingAuthor;
 

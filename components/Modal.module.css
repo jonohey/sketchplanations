@@ -1,8 +1,8 @@
 .close {
-  @apply absolute top-0 right-0 z-10 flex gap-x-1 items-center justify-center pt-1 pr-1 text-sm text-textSubdued hover:text-blue;
+	@apply absolute top-0 right-0 z-10 flex gap-x-1 items-center justify-center pt-1 pr-1 text-sm text-textSubdued hover:text-blue;
 
-  &::before {
-    content: '';
-    @apply block w-full h-full absolute top-2 right-2 z-[-1] blur-[4px] bg-bg;
-  }
+	&::before {
+		content: "";
+		@apply block w-full h-full absolute top-2 right-2 z-[-1] blur-[4px] bg-bg;
+	}
 }
