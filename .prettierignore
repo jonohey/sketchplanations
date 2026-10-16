@@ -4,6 +4,7 @@ public
 data
 pnpm-lock.yaml
 *.md
+*.mdc
 *.json
 *.yml
 .claude

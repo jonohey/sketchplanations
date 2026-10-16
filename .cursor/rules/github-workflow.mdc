@@ -45,6 +45,7 @@ Keep issue titles concise enough to slug cleanly (under ~40 characters of slug t
 
 - Stay on the issue branch unless the user asks otherwise.
 - Do not commit until the user asks to complete or finish the work.
+- Format changed JavaScript and CSS with Prettier (`pnpm exec prettier --write <files>`). Do not format those files with Biome. CI runs `pnpm format:check`.
 - Improvements to this workflow doc (e.g. tooling, conventions) may be committed alongside other work on the same branch when they come up.
 
 ## UI patterns

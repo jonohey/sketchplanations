@@ -84,11 +84,17 @@ Pinning pnpm via `"packageManager": "pnpm@9.15.9"` keeps versions consistent acr
 
 The overrides are deliberate pins. If removing or changing them, verify why each was added and run `pnpm install` to refresh the lockfile on `main`, not only on a Dependabot branch.
 
+## Formatting
+
+Prettier formats this repo. When you change JavaScript, CSS, or any other file Prettier covers, write it with Prettier (`pnpm exec prettier --write <files>`, or `pnpm format` before committing). Do not format those files with Biome. Biome stays as a linter only.
+
+CI runs `pnpm format:check` on pull requests and on pushes to `main`, and the check fails if formatting has drifted.
+
 ## Before committing or opening a PR — pre-commit review
 
-**Always** run the pre-commit review before committing, pushing or opening a PR for any change to the site. The checklist lives in `.cursor/rules/github-workflow.mdc` under **"Pre-commit review (required)"**: read it from there at the time (it is the single source of truth; do not work from memory) and go through every item — necessity, simplicity, dependencies, performance, build, SEO, broken tags, tests, removals, best practice, and CSS/dark mode/mobile.
+**Always** run the pre-commit review before committing, pushing or opening a PR for any change to the site. The checklist lives in `.cursor/rules/github-workflow.mdc` under **"Pre-commit review (required)"**: read it from there at the time (it is the single source of truth; do not work from memory) and go through every item — necessity, simplicity, dependencies, performance, build, SEO, broken tags, tests, removals, formatting, best practice, and CSS/dark mode/mobile.
 
-Then run the same checks CI runs (`.github/workflows/ci.yml`): `pnpm test`, `pnpm build`, `pnpm run check:books-duplicates` and `pnpm run check:broken-tags`.
+Then run the same checks CI runs (`.github/workflows/ci.yml`): `pnpm run format:check`, `pnpm test`, `pnpm build`, `pnpm run check:books-duplicates` and `pnpm run check:broken-tags`.
 
 Finish by summarising to the user what was checked, what was fixed, and anything flagged. Do not skip the review because the change looks small.
 
@@ -99,7 +105,7 @@ Practical notes:
 
 <!-- BEGIN:nextjs-agent-rules -->
 
-# This is NOT the Next.js you know
+## This is NOT the Next.js you know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
 
