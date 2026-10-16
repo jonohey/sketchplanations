@@ -65,7 +65,7 @@ Review all changes before staging or committing. Fix issues found; do not commit
 - **Necessity**: Every changed line should be needed and used. Remove dead code, unused imports, and leftover debug code.
 - **Simplicity**: Refactor where it clearly improves readability, but avoid excessive abstraction — prefer understandable code over clever or over-optimised code.
 - **Dependencies**: New imports and packages must be trusted, reliable, and justified. Avoid adding dependencies when a simple existing solution works.
-- **Performance**: Consider impact on page load, bundle size, images, fonts, and runtime work — roughly what a Chrome Lighthouse audit would flag. Flag regressions and fix or justify them.
+- **Performance**: Consider impact on page load, bundle size, images, fonts, and runtime work — roughly what a Chrome Lighthouse audit would flag. Flag regressions and fix or justify them. For every `next/image` that is not full width, set `sizes` to its real rendered width (e.g. `sizes="(min-width: 640px) 96px, 64px"`); without it Next assumes the `width` prop and serves a larger file than the display needs.
 - **Build**: Consider whether build time will increase substantially (`npm run build` when in doubt). If it does, ensure the trade-off is worthwhile.
 - **SEO**: Check titles, meta descriptions, headings, structured data, canonical URLs, and link behaviour. Ensure nothing is negatively affected.
 - **Broken tags**: Run `npm run check:broken-tags` (also runs in CI). If any fail, fix them in the Prismic UI before opening the PR.

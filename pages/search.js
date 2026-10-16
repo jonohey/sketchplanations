@@ -32,6 +32,7 @@ const Search = () => {
 						width={238}
 						height={173}
 						alt=""
+						sizes="(min-width: 640px) 80px, 64px"
 						priority
 						className="not-prose h-auto w-16 sm:w-20 dark:rounded-lg dark:bg-[#f1f1f1] dark:p-1"
 					/>

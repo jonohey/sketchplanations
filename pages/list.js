@@ -79,6 +79,7 @@ const SketchList = ({ initialSketches }) => {
 						width={239}
 						height={239}
 						alt=""
+						sizes="(min-width: 640px) 96px, 64px"
 						priority
 						className="mx-auto mb-4 h-16 w-auto sm:h-24 dark:rounded-xl dark:bg-[#f1f1f1] dark:p-2 sm:dark:p-3"
 					/>
