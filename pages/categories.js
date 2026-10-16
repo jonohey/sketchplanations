@@ -1,5 +1,6 @@
 import { sort } from "fast-sort";
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import useCookie from "react-use-cookie";
@@ -65,6 +66,14 @@ const Categories = ({ tagsByName, tagsByCount }) => {
 				<link rel="canonical" href="https://sketchplanations.com/categories" />
 			</Head>
 			<div className="pt-6 px-6 text-center">
+				<Image
+					src="/images/explainer-kit/sketch-icons/person-looking-at-a-map@0.5x.png"
+					width={214}
+					height={268}
+					alt=""
+					priority
+					className="mx-auto mb-4 h-16 w-auto sm:h-24 dark:rounded-xl dark:bg-[#f1f1f1] dark:p-2 sm:dark:p-3"
+				/>
 				<TextHeader>Categories</TextHeader>
 				<p className="prose mx-auto mt-4 mb-8 max-w-2xl text-textSubdued">
 					Browse topics to find clear, simple explanations through sketches and
