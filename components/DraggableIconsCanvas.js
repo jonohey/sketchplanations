@@ -107,7 +107,6 @@ const DraggableIconsCanvas = ({ icons }) => {
 								alt=""
 								width={pos.size}
 								height={pos.size}
-								unoptimized
 								draggable={false}
 								{...itemProps}
 								style={{
