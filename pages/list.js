@@ -3,6 +3,7 @@ import SortButtons from "components/SortButtons";
 import TextHeader from "components/TextHeader";
 import { fastScrollToTop, pageTitle } from "helpers";
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from 'react';
 import { client } from "services/prismic";
@@ -72,6 +73,14 @@ const SketchList = ({ initialSketches }) => {
 			</Head>
 			<div className="max-w-7xl mx-auto px-5 py-6">
 				<div className="pt-6 px-6 text-center">
+					<Image
+						src="/images/list/order@0.5x.png"
+						width={239}
+						height={239}
+						alt=""
+						priority
+						className="mx-auto mb-4 h-auto w-16 sm:w-32 dark:rounded-xl dark:bg-[#f1f1f1] dark:p-2 sm:dark:p-3"
+					/>
 					<TextHeader>List of sketchplanations</TextHeader>
           <p className="prose mx-auto mt-4 mb-8 max-w-2xl text-textSubdued">
             Explore the complete list of all Sketchplanations, organized by title or date.
