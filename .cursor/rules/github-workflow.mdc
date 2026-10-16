@@ -32,7 +32,7 @@ Full steps and comment structure: `AGENTS.md` → “Dependabot major version bu
 When the user wants to start new work (e.g. "Start work on …", "New ticket for …", "Let's do …"), bootstrap the ticket before coding — **except** for Dependabot PRs covered above.
 
 1. Run `./scripts/start-work.sh "Title" ["optional body"]` from the repo root.
-   - The script syncs latest `main` (fetch + checkout + pull) **before** creating the branch.
+   - The script fetches latest `origin/main` **before** creating the branch. It never checks out `main`, so it works in a git worktree where `main` is checked out elsewhere.
 2. If `gh` is not authenticated, tell the user to run `gh auth login` and stop.
    - Project board access needs `gh auth refresh -s project,read:project`.
 3. Confirm issue number, URL, and branch to the user, then implement on that branch.
