@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { fastScrollToTop } from "helpers";
+import Image from "next/image";
 import Link from "next/link";
 import FancyLink from "./FancyLink";
 import {
@@ -14,7 +15,7 @@ const TRANSLATIONS_FOLDER_URL =
 	"https://drive.google.com/drive/folders/1gGCCObciyjjd-3KHOUv-jm8PJAs2QuFy?usp=drive_link";
 const ATTRIBUTION_EXAMPLE_URL = "https://sketchplanations.com/the-overview-effect";
 const HELPING_HAND_ICON_SRC =
-	"/images/explainer-kit/sketch-icons/helping-hand.svg";
+	"/images/explainer-kit/sketch-icons/helping-hand@0.5x.png";
 
 const FaqQuestion = ({ id, children }) => (
 	<h3 id={id} className="scroll-mt-24">
@@ -134,14 +135,13 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 			</div>
 
 			<div className="not-prose mx-auto mb-6 flex justify-center">
-				<img
+				<Image
 					src={HELPING_HAND_ICON_SRC}
 					alt="Helping hand — one figure reaching down to help another up"
 					className="h-auto w-full max-w-[12rem] sm:max-w-[16rem]"
-					width={1089}
-					height={1020}
-					loading="lazy"
-					decoding="async"
+					width={545}
+					height={510}
+					sizes="(min-width: 640px) 256px, 192px"
 				/>
 			</div>
 

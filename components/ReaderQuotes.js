@@ -1,5 +1,6 @@
 import { track } from "@vercel/analytics";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { arrangeReaderQuotes, seededRandom } from "helpers/pickReaderQuotes";
@@ -14,9 +15,9 @@ const LOOP_SETTLE_MS = 120;
 const SHARE_FORM_URL = "https://forms.gle/eozBb25xsRnd6jDx7";
 
 const DEFAULT_ICON = {
-	src: "/images/explainer-kit/sketch-icons/Singing.svg",
-	width: 348,
-	height: 575,
+	src: "/images/explainer-kit/sketch-icons/singing@0.5x.png",
+	width: 174,
+	height: 288,
 };
 const DEFAULT_INVITE = {
 	href: SHARE_FORM_URL,
@@ -130,12 +131,11 @@ const ReaderQuotes = ({
 			id={id}
 		>
 			<div className={styles.header}>
-				<img
+				<Image
 					src={icon.src}
 					alt=""
 					width={icon.width}
 					height={icon.height}
-					loading="lazy"
 					className={styles.icon}
 				/>
 				<h2 id={`${id}-heading`} className={styles.heading}>

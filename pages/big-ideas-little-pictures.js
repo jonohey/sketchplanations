@@ -22,9 +22,9 @@ const AMAZON_LINK = 'https://geni.us/big-ideas-book'
 const GOODREADS_LINK = 'https://www.goodreads.com/book/show/127280527-big-ideas-little-pictures'
 
 const BOOK_REVIEWS_ICON = {
-  src: '/images/explainer-kit/sketch-icons/Book stack.svg',
-  width: 385,
-  height: 432,
+  src: '/images/explainer-kit/sketch-icons/3-book-stack@0.5x.png',
+  width: 193,
+  height: 216,
 }
 
 // Non-Amazon retailers by region, sorted by click volume within each region
@@ -132,9 +132,9 @@ const StoreLinks = ({ stores }) => (
 const ICON_DIR = '/images/explainer-kit/sketch-icons'
 
 const FACTS = [
-  { icon: `${ICON_DIR}/Book stack.svg`, value: '130+', label: 'sketches, old and new' },
-  { icon: `${ICON_DIR}/Puzzling.svg`, value: '10', label: 'sections, from nature to thinking' },
-  { icon: `${ICON_DIR}/Lightbulb partial.svg`, value: '1', label: 'new idea on every page' },
+  { icon: `${ICON_DIR}/3-book-stack@0.5x.png`, value: '130+', label: 'sketches, old and new' },
+  { icon: `${ICON_DIR}/puzzling@0.5x.png`, value: '10', label: 'sections, from nature to thinking' },
+  { icon: `${ICON_DIR}/lightbulb-partial@0.5x.png`, value: '1', label: 'new idea on every page' },
 ]
 
 const AMAZON_RATING = 4.8
@@ -379,7 +379,7 @@ const Book = ({ country }) => {
           <ul className='not-prose list-none p-0 mt-12 max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6'>
             {FACTS.map((fact) => (
               <li key={fact.label} className='flex sm:flex-col items-center gap-4 sm:gap-2 text-left sm:text-center'>
-                <Image src={fact.icon} alt='' width={64} height={64} className='h-16 w-16 object-contain shrink-0' unoptimized />
+                <Image src={fact.icon} alt='' width={64} height={64} className='h-16 w-16 object-contain shrink-0' />
                 <span>
                   <span className='block text-2xl font-bold leading-tight'>{fact.value}</span>
                   <span className='block text-gray-600 dark:text-gray-300' style={{ textWrap: 'balance' }}>{fact.label}</span>
@@ -398,7 +398,7 @@ const Book = ({ country }) => {
 
           <div id='order' className='mt-24 max-w-3xl mx-auto scroll-mt-24'>
             <div className='flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 mb-8'>
-              <Image src={`${ICON_DIR}/Shopper with bags.svg`} alt='' width={523} height={496} className='h-20 w-auto m-0' unoptimized />
+              <Image src={`${ICON_DIR}/shopper-with-bags@0.5x.png`} alt='' width={262} height={248} className='h-20 w-auto m-0' />
               <h2 className='text-3xl font-bold m-0 text-center'>Order Big Ideas Little Pictures</h2>
             </div>
 
@@ -794,7 +794,7 @@ const Book = ({ country }) => {
 
           <div id='why' className='mt-24 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8'>
             <div className='flex items-center gap-4 mb-8'>
-              <Image src={`${ICON_DIR}/Writing.svg`} alt='' width={72} height={72} className='h-16 w-16 object-contain m-0' unoptimized />
+              <Image src={`${ICON_DIR}/writing@0.5x.png`} alt='' width={165} height={204} className='h-16 w-16 object-contain m-0' />
               <h2 className='text-3xl font-bold m-0'>Why a book?</h2>
             </div>
             <div className='space-y-6'>
