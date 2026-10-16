@@ -72,15 +72,16 @@ const SketchList = ({ initialSketches }) => {
 				/>
 				<link rel="canonical" href="https://sketchplanations.com/list" />
 			</Head>
-			<div className="max-w-7xl mx-auto px-5 py-6">
+			<div className="max-w-7xl mx-auto px-5 pb-6">
 				<div className="pt-6 px-6 text-center">
 					<Image
 						src="/images/list/order@0.5x.png"
 						width={239}
 						height={239}
 						alt=""
+						sizes="(min-width: 640px) 96px, 64px"
 						priority
-						className="mx-auto mb-4 h-auto w-16 sm:w-32 dark:rounded-xl dark:bg-[#f1f1f1] dark:p-2 sm:dark:p-3"
+						className="mx-auto mb-4 h-16 w-auto sm:h-24 dark:rounded-xl dark:bg-[#f1f1f1] dark:p-2 sm:dark:p-3"
 					/>
 					<TextHeader>List of sketchplanations</TextHeader>
 					<p className="prose mx-auto mt-4 mb-8 max-w-2xl text-textSubdued">
