@@ -44,10 +44,10 @@ slugify() {
   echo "${truncated%-*}"
 }
 
-echo "Syncing latest $DEFAULT_BRANCH..."
+# Only fetch: never check out the default branch. It may already be checked out in
+# another worktree (e.g. the main checkout), where git refuses a second checkout.
+echo "Fetching latest $DEFAULT_BRANCH..."
 git fetch origin "$DEFAULT_BRANCH"
-git checkout "$DEFAULT_BRANCH"
-git pull --ff-only origin "$DEFAULT_BRANCH"
 
 SLUG="$(slugify "$TITLE")"
 ISSUE_URL="$(gh issue create --repo "$REPO" --title "$TITLE" --body "$BODY")"
@@ -60,7 +60,10 @@ if ! gh project item-add "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$ISSU
   echo "  gh project item-add $PROJECT_NUMBER --owner $PROJECT_OWNER --url $ISSUE_URL" >&2
 fi
 
-gh issue develop "$ISSUE_NUMBER" --repo "$REPO" --checkout --name "$BRANCH_NAME" >/dev/null
+# Create the linked branch on GitHub (from the default branch), then check it out here.
+gh issue develop "$ISSUE_NUMBER" --repo "$REPO" --name "$BRANCH_NAME" >/dev/null
+git fetch origin "$BRANCH_NAME"
+git checkout -b "$BRANCH_NAME" --track "origin/$BRANCH_NAME"
 
 echo "Issue: #$ISSUE_NUMBER"
 echo "URL: $ISSUE_URL"
