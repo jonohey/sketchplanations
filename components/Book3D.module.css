@@ -16,6 +16,20 @@
 	}
 }
 
+.root.small {
+	--book-w: 80px;
+	--book-t: 12px;
+	perspective: 500px;
+	margin: 0;
+}
+
+.root.small .shadow {
+	bottom: -0.25rem;
+	height: 0.6rem;
+	filter: blur(5px);
+	background: rgba(0, 0, 0, 0.35);
+}
+
 .body {
 	position: absolute;
 	top: 0;
