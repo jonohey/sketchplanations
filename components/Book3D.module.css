@@ -54,7 +54,8 @@
 	transform: translateZ(calc(var(--book-t) / 2));
 }
 
-.cover {
+/* Nested so it outranks `.prose img` margins whatever the stylesheet order */
+.front .cover {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
