@@ -55,7 +55,7 @@
 }
 
 .bookImage {
-	@apply relative w-full h-auto max-w-[400px];
+	@apply relative w-fit;
 
 	/* Small screens - offset from left */
 	@apply ml-[1.5rem];

@@ -7,7 +7,14 @@ import styles from "./Book3D.module.css";
 // on hover/focus (see Book3D.module.css). Size is driven by --book-w / --book-t.
 // `small` is for cards and banners: a thumbnail-sized cover that loads lazily
 // and skips the spine lettering, which would be unreadable at that size.
-const Book3D = ({ cover, alt, spineTitle, spineAuthor, small = false }) => (
+const Book3D = ({
+	cover,
+	alt,
+	spineTitle,
+	spineAuthor,
+	small = false,
+	priority = !small,
+}) => (
 	<div className={small ? `${styles.root} ${styles.small}` : styles.root}>
 		<div className={styles.body}>
 			<div className={styles.front}>
