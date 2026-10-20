@@ -42,6 +42,7 @@ export const Cards = () => (
 		<Card
 			href="/big-ideas-little-pictures"
 			imageSrc={bigIdeasLittlePicturesImage}
+			book3D
 			alt="Big Ideas Little Pictures"
 			onImageClick={() => {
 				track("Book-page-link", { location: "card-image" });
