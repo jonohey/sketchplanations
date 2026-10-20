@@ -21,17 +21,21 @@ const Book3D = ({
 				<Image
 					src={cover}
 					alt={alt}
-					priority
+					priority={priority}
 					placeholder="blur"
-					sizes="(max-width: 768px) 280px, 340px"
-					quality={85}
+					sizes={small ? "96px" : "(max-width: 768px) 280px, 340px"}
+					quality={small ? 75 : 85}
 					className={styles.cover}
 				/>
 				<div className={styles.sheen} />
 			</div>
 			<div className={styles.spine} aria-hidden="true">
-				<span className={styles.spineTitle}>{spineTitle}</span>
-				<span>{spineAuthor}</span>
+				{small ? null : (
+					<>
+						<span className={styles.spineTitle}>{spineTitle}</span>
+						<span>{spineAuthor}</span>
+					</>
+				)}
 			</div>
 			<div className={styles.pages} />
 			<div className={styles.back} />
