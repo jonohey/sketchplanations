@@ -5,8 +5,10 @@ import styles from "./Book3D.module.css";
 // A square book rendered with CSS 3D transforms: cover on the front, spine on
 // the left and page edges on the right. It turns slightly towards the viewer
 // on hover/focus (see Book3D.module.css). Size is driven by --book-w / --book-t.
-const Book3D = ({ cover, alt, spineTitle, spineAuthor }) => (
-	<div className={styles.root}>
+// `small` is for cards and banners: a thumbnail-sized cover that loads lazily
+// and skips the spine lettering, which would be unreadable at that size.
+const Book3D = ({ cover, alt, spineTitle, spineAuthor, small = false }) => (
+	<div className={small ? `${styles.root} ${styles.small}` : styles.root}>
 		<div className={styles.body}>
 			<div className={styles.front}>
 				<Image

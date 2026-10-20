@@ -4,19 +4,33 @@ import Link from "next/link";
 
 import styles from "./Cards.module.css";
 
-import bigIdeasLittlePicturesImage from "images/bigideaslittlepictures.jpg";
+import bigIdeasLittlePicturesImage from "images/big-ideas-little-pictures-book-cover.jpg";
 import podcastImage from "images/podcast.jpg";
 
+import Book3D from "./Book3D";
 import FancyLink from "./FancyLink";
 
 const SUBSTACK_SUBSCRIBE_URL =
 	"https://sketchplanations.substack.com/subscribe";
 
-const Card = ({ href, imageSrc, alt, content, onImageClick, target, rel }) => (
+const Card = ({
+	href,
+	imageSrc,
+	alt,
+	content,
+	onImageClick,
+	target,
+	rel,
+	book3D = false,
+}) => (
 	<div className={styles.card}>
 		{imageSrc && (
 			<Link href={href} onClick={onImageClick} target={target} rel={rel}>
-				<Image src={imageSrc} alt={alt} sizes="6rem" className="w-full" />
+				{book3D ? (
+					<Book3D cover={imageSrc} alt={alt} small />
+				) : (
+					<Image src={imageSrc} alt={alt} sizes="6rem" className="w-full" />
+				)}
 			</Link>
 		)}
 		<div className="prose">{content}</div>
