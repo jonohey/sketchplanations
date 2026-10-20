@@ -17,4 +17,10 @@ describe("Book3D", () => {
 		expect(readFile("components/Cards.js")).toMatch(/<Book3D[^>]*\bsmall\b/);
 		expect(readFile("pages/index.js")).toMatch(/<Book3D/);
 	});
+
+	it("keeps the cover margin reset specific enough to beat `.prose img`", () => {
+		const css = readFile("components/Book3D.module.css");
+
+		expect(css).toMatch(/\.front \.cover\s*\{[^}]*margin:\s*0/);
+	});
 });
