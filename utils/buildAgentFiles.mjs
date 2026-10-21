@@ -15,7 +15,7 @@ const LICENCE_NAME = "CC BY-NC 4.0";
 const SUMMARY_LENGTH = 200;
 
 const SITE_DESCRIPTION =
-	"Sketchplanations explains the world one sketch at a time: simple hand-drawn sketches, each with a short explanation, covering ideas from science, creativity, psychology, business and everyday life. Made by Jono Hey.";
+	"Sketchplanations explains the world one sketch at a time, turning complex ideas into simple sketches. Each hand-drawn sketch comes with a short explanation, covering ideas from science, creativity, psychology, business and everyday life. Made by Jono Hey.";
 
 const oneLine = (text) => text.replace(/\s+/g, " ").trim();
 
