@@ -6,6 +6,7 @@ import {
 	sortDocsByLastPublicationDateAsc,
 	sortTagsByIdentifier,
 } from "./fetchBuildCatalog.mjs";
+import { sketchImageUrl } from "./sketchImage.mjs";
 
 export function sitemapDocumentUrls({ sketchplanations, tags }) {
 	const orderedSketches = sortDocsByLastPublicationDateAsc(sketchplanations);
@@ -23,10 +24,13 @@ export function sitemapDocumentUrls({ sketchplanations, tags }) {
 	});
 
 	for (const sketchplanation of orderedSketches) {
+		const imageUrl = sketchImageUrl(sketchplanation.data?.image);
+
 		urls.push({
 			loc: `https://sketchplanations.com/${sketchplanation.uid}`,
 			lastmod: new Date(sketchplanation.last_publication_date).toISOString(),
 			priority: "0.80",
+			...(imageUrl && { "image:image": { "image:loc": imageUrl } }),
 		});
 	}
 
@@ -94,6 +98,7 @@ async function buildSitemap(catalog) {
 	const obj = {
 		urlset: {
 			"@xmlns": "http://www.sitemaps.org/schemas/sitemap/0.9",
+			"@xmlns:image": "http://www.google.com/schemas/sitemap-image/1.1",
 			url: urls,
 		},
 	};

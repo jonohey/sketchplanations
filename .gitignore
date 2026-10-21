@@ -38,6 +38,9 @@ data/*
 !data/books-authors.json
 !data/books-covers.json
 /public/rss.xml
+/public/llms.txt
+/public/llms-full.txt
+/public/sketches.json
 
 # Local Netlify folder
 .netlify

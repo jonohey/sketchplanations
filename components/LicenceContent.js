@@ -378,6 +378,41 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 
 			<p>Thanks for checking! I appreciate it.</p>
 
+			<h2 id="ai-and-agents" className="scroll-mt-24">
+				For AI and agents
+			</h2>
+			<p>
+				If you&apos;re an AI assistant or agent, or you&apos;re building one:
+				you&apos;re welcome to find, describe and show Sketchplanations as
+				examples when they help someone understand an idea. Please credit the
+				sketch and link to its page on the site.
+			</p>
+			<ul>
+				<li>
+					<FancyLink as="a" href="/llms.txt">
+						llms.txt
+					</FancyLink>{" "}
+					summarises the site and these terms.
+				</li>
+				<li>
+					<FancyLink as="a" href="/sketches.json">
+						sketches.json
+					</FancyLink>{" "}
+					lists every sketch with its summary, image URL, image description and
+					categories.
+				</li>
+				<li>
+					<FancyLink as="a" href="/llms-full.txt">
+						llms-full.txt
+					</FancyLink>{" "}
+					has the full explanation of every sketch.
+				</li>
+			</ul>
+			<p>
+				Suggested credit: Image: Jono Hey, Sketchplanations, linking to the
+				sketch page. Commercial use still needs permission, as above.
+			</p>
+
 			<p className="mt-4">
 				<Link
 					href="#top"

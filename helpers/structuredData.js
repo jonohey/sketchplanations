@@ -163,11 +163,24 @@ export const tagLabelFromDoc = (tag) => {
 	return slug.replace(/-/g, " ").trim();
 };
 
+/**
+ * Last CMS publish date, unless it is missing or earlier than the sketch's
+ * own publish date (which can be set by hand in the CMS).
+ */
+export const resolveModifiedAt = (publishedAt, modifiedAt) => {
+	if (!modifiedAt) return publishedAt;
+	if (!publishedAt) return modifiedAt;
+	return new Date(modifiedAt) >= new Date(publishedAt)
+		? modifiedAt
+		: publishedAt;
+};
+
 export const buildSketchCreativeWork = ({
 	uid,
 	title,
 	description,
 	publishedAt,
+	modifiedAt,
 	tags = [],
 }) => {
 	const pageUrl = absoluteUrl(`/${uid}`);
@@ -195,7 +208,7 @@ export const buildSketchCreativeWork = ({
 		isFamilyFriendly: true,
 		...(publishedAt && {
 			datePublished: publishedAt,
-			dateModified: publishedAt,
+			dateModified: resolveModifiedAt(publishedAt, modifiedAt),
 		}),
 		...(keywords.length > 0 && {
 			keywords: keywords.join(", "),
@@ -254,6 +267,7 @@ export const buildSketchStructuredData = ({
 	description,
 	image,
 	publishedAt,
+	modifiedAt,
 	tags = [],
 }) => {
 	const validTags = resolveSketchTagDocs(tags);
@@ -280,9 +294,71 @@ export const buildSketchStructuredData = ({
 				title,
 				description,
 				publishedAt,
+				modifiedAt,
 				tags,
 			}),
 			buildSketchBreadcrumbs({ uid, title, primaryTag }),
+		],
+	};
+};
+
+const CATEGORY_ITEM_LIMIT = 100;
+
+export const buildCategoryStructuredData = ({
+	slug,
+	name,
+	description,
+	sketches = [],
+}) => {
+	const pageUrl = absoluteUrl(`/categories/${slug}`);
+
+	return {
+		"@context": "https://schema.org",
+		"@graph": [
+			{
+				"@type": "CollectionPage",
+				"@id": `${pageUrl}#collection`,
+				url: pageUrl,
+				name: `${name}: ideas and frameworks explained`,
+				description,
+				isPartOf: { "@id": `${SITE_URL}/#website` },
+				mainEntity: {
+					"@type": "ItemList",
+					numberOfItems: sketches.length,
+					itemListOrder: "https://schema.org/ItemListOrderDescending",
+					itemListElement: sketches
+						.slice(0, CATEGORY_ITEM_LIMIT)
+						.map(({ uid, data }, index) => ({
+							"@type": "ListItem",
+							position: index + 1,
+							url: absoluteUrl(`/${uid}`),
+							name: data.title,
+						})),
+				},
+			},
+			{
+				"@type": "BreadcrumbList",
+				itemListElement: [
+					{
+						"@type": "ListItem",
+						position: 1,
+						name: "Home",
+						item: `${SITE_URL}/`,
+					},
+					{
+						"@type": "ListItem",
+						position: 2,
+						name: "Categories",
+						item: absoluteUrl("/categories"),
+					},
+					{
+						"@type": "ListItem",
+						position: 3,
+						name,
+						item: pageUrl,
+					},
+				],
+			},
 		],
 	};
 };

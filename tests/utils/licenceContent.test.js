@@ -23,6 +23,7 @@ describe("licenceContent", () => {
 			"translations",
 			"licence-faq",
 			"how-should-i-attribute-sketches",
+			"ai-and-agents",
 		]);
 	});
 });
