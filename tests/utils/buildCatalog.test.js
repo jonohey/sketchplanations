@@ -137,6 +137,9 @@ describe("sitemapDocumentUrls", () => {
 			"https://sketchplanations.com/newest-sketch",
 			"https://sketchplanations.com/edited-recently",
 		]);
+		expect(sketchUrls[0]["image:image"]).toEqual({
+			"image:loc": "https://images.example.com/oldest.png?foo=1&bar=2&w=1200",
+		});
 		expect(tagUrls.map(({ loc }) => loc)).toEqual([
 			"https://sketchplanations.com/categories/psychology",
 			"https://sketchplanations.com/categories/science",

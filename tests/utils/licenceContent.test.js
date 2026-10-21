@@ -20,6 +20,7 @@ describe("licenceContent", () => {
 		expect(LICENCE_SECTIONS.map(({ id }) => id)).toEqual([
 			"using-sketches-in-books",
 			"ai-adaptations",
+			"ai-and-agents",
 			"translations",
 			"licence-faq",
 			"how-should-i-attribute-sketches",

@@ -30,6 +30,12 @@ class MyDocument extends Document {
 						href="/favicon-16x16.png"
 					/>
 					<link rel="manifest" href="/site.webmanifest" />
+					<link
+						rel="alternate"
+						type="application/rss+xml"
+						title="Sketchplanations"
+						href="/rss.xml"
+					/>
 					<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
 					<meta name="msapplication-TileColor" content="#fbf8de" />
 					<meta

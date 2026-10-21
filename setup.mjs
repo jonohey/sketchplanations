@@ -1,3 +1,4 @@
+import buildAgentFiles from "./utils/buildAgentFiles.mjs";
 import buildBooksIndex from "./utils/buildBooksIndex.mjs";
 import buildInitialSearchResults from "./utils/buildInitialSearchResults.mjs";
 import buildNewerSketchplanations from "./utils/buildNewerSketchplanations.mjs";
@@ -17,6 +18,7 @@ const setup = async () => {
 		buildInitialSearchResults(catalog),
 		buildSearchIndex(catalog),
 		buildRss(catalog),
+		buildAgentFiles(catalog),
 		buildSitemap(catalog),
 		prismicToKV(catalog),
 		buildNewerSketchplanations(catalog),

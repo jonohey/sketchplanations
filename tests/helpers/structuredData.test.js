@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+	buildCategoryStructuredData,
 	buildPerson,
 	buildSiteGraph,
 	buildSketchStructuredData,
@@ -135,5 +136,87 @@ describe("buildPerson", () => {
 	it("includes LinkedIn in sameAs", () => {
 		const person = buildPerson();
 		expect(person.sameAs).toEqual(["https://uk.linkedin.com/in/jonohey"]);
+	});
+});
+
+describe("dateModified", () => {
+	const sketch = {
+		uid: "first-draft",
+		title: "The first draft",
+		description: "Short.",
+		publishedAt: "2024-01-01",
+		image: {
+			url: "https://images.prismic.io/sketchplanations/example.png?",
+			alt: "Alt",
+			dimensions: { width: 2400, height: 1800 },
+		},
+	};
+	const creativeWork = (data) =>
+		data["@graph"].find(({ "@type": type }) => Array.isArray(type));
+
+	it("uses the last CMS publish date when it is later", () => {
+		const data = buildSketchStructuredData({
+			...sketch,
+			modifiedAt: "2025-03-01T00:00:00+0000",
+		});
+		expect(creativeWork(data).dateModified).toBe("2025-03-01T00:00:00+0000");
+	});
+
+	it("falls back to the publish date when the CMS date is missing or earlier", () => {
+		expect(creativeWork(buildSketchStructuredData(sketch)).dateModified).toBe(
+			"2024-01-01",
+		);
+		expect(
+			creativeWork(
+				buildSketchStructuredData({
+					...sketch,
+					modifiedAt: "2023-01-01T00:00:00+0000",
+				}),
+			).dateModified,
+		).toBe("2024-01-01");
+	});
+});
+
+describe("buildCategoryStructuredData", () => {
+	it("describes the category as a collection of its sketches", () => {
+		const data = buildCategoryStructuredData({
+			slug: "psychology",
+			name: "psychology",
+			description: "About psychology.",
+			sketches: [
+				{ uid: "a", data: { title: "A" } },
+				{ uid: "b", data: { title: "B" } },
+			],
+		});
+		const [collection, breadcrumbs] = data["@graph"];
+
+		expect(collection["@type"]).toBe("CollectionPage");
+		expect(collection.url).toBe(
+			"https://sketchplanations.com/categories/psychology",
+		);
+		expect(collection.mainEntity.numberOfItems).toBe(2);
+		expect(collection.mainEntity.itemListElement[1]).toEqual({
+			"@type": "ListItem",
+			position: 2,
+			url: "https://sketchplanations.com/b",
+			name: "B",
+		});
+		expect(breadcrumbs.itemListElement).toHaveLength(3);
+	});
+
+	it("caps the list but reports the full count", () => {
+		const sketches = Array.from({ length: 150 }, (_, i) => ({
+			uid: `s${i}`,
+			data: { title: `S${i}` },
+		}));
+		const [collection] = buildCategoryStructuredData({
+			slug: "x",
+			name: "x",
+			description: "",
+			sketches,
+		})["@graph"];
+
+		expect(collection.mainEntity.numberOfItems).toBe(150);
+		expect(collection.mainEntity.itemListElement).toHaveLength(100);
 	});
 });

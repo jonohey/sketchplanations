@@ -22,6 +22,7 @@
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
 		"build:books": "node utils/buildBooksIndex.mjs",
+		"report:alt-text": "node scripts/report-weak-alt-text.mjs",
 		"check:books-duplicates": "node scripts/check-book-duplicates.mjs",
 		"check:broken-tags": "node scripts/check-broken-tags.mjs",
 		"fetch:book-authors": "node scripts/fetch-book-authors.mjs",

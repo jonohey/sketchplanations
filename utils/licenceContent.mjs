@@ -4,6 +4,7 @@ export const BOOKS_SECTION_ID = "using-sketches-in-books";
 export const LICENCE_SECTIONS = [
 	{ id: BOOKS_SECTION_ID, label: BOOKS_SECTION_TITLE },
 	{ id: "ai-adaptations", label: "AI adaptations" },
+	{ id: "ai-and-agents", label: "For AI and agents" },
 	{ id: "translations", label: "Translations" },
 	{ id: "licence-faq", label: "Licence FAQ" },
 	{
