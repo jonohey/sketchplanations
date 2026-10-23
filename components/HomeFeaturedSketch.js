@@ -1,5 +1,6 @@
 import { PrismicNextImage } from "@prismicio/next";
 import { track } from "@vercel/analytics";
+import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./HomeFeaturedSketch.module.css";
@@ -22,6 +23,21 @@ export default function HomeFeaturedSketch({ sketch }) {
 
 	return (
 		<article>
+			{sketch.milestone && (
+				<p className={styles.milestone}>
+					<Image
+						src="/images/explainer-kit/highlight-rays-up@0.5x.png"
+						alt=""
+						width={238}
+						height={69}
+						sizes="112px"
+						className={styles.milestoneRays}
+					/>
+					<span className={styles.milestoneText}>
+						Sketch number {sketch.milestone}!
+					</span>
+				</p>
+			)}
 			<Link
 				href={sketchHref}
 				className={styles.root}

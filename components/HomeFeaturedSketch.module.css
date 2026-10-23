@@ -60,3 +60,41 @@
 	/* Slightly larger than carousel dates for readability */
 	@apply block mt-1 text-sm font-medium text-textSubdued;
 }
+
+.milestone {
+	@apply mx-auto mb-4 mt-0 w-fit text-center;
+}
+
+.milestoneRays {
+	@apply mx-auto block h-auto w-28;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.milestoneRays {
+		/* Flash by jumping between the image and its mirror, with no tween */
+		animation: flash 0.8s step-end infinite;
+	}
+}
+
+@keyframes flash {
+	0% {
+		transform: scaleX(1);
+	}
+	50% {
+		transform: scaleX(-1);
+	}
+}
+
+.milestoneText {
+	/* Plain tilted text, no fill, so it doesn't read as a button */
+	@apply inline-block -mt-1 text-lg font-semibold text-blue;
+
+	transform: rotate(-2deg);
+}
+
+@media (prefers-color-scheme: dark) {
+	/* The rays are dark line art, so lighten them on the dark page */
+	.milestoneRays {
+		filter: invert(1);
+	}
+}
