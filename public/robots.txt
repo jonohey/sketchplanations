@@ -2,4 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
+# For AI agents: https://sketchplanations.com/llms.txt
+
 Sitemap: https://sketchplanations.com/sitemap.xml

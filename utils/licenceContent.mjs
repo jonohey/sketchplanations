@@ -10,4 +10,5 @@ export const LICENCE_SECTIONS = [
 		id: "how-should-i-attribute-sketches",
 		label: "How to attribute sketches",
 	},
+	{ id: "ai-and-agents", label: "For AI and agents" },
 ];

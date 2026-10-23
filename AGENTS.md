@@ -90,6 +90,19 @@ Prettier formats this repo. When you change JavaScript, CSS, or any other file P
 
 CI runs `pnpm format:check` on pull requests and on pushes to `main`, and the check fails if formatting has drifted.
 
+## Finishing work — "finish", "complete" or "ship it" means open a PR
+
+When the user says to finish, complete, wrap up, ship, commit or create a PR, that **is** the explicit request to open a pull request. Do not stop at the commit, and do not ask whether they want a PR. The full steps are in `.cursor/rules/github-workflow.mdc` under **"Complete work"**; in short:
+
+1. Run the pre-commit review (next section) and fix what it finds.
+2. Commit and push the branch.
+3. Open a PR with a title and body drawn from the actual diff. The body must include `Closes #<issue-number>`, how to verify (concrete URLs on the Vercel preview), and any review notes.
+4. Return the PR URL, then offer to watch it for CI and review comments.
+
+Until the user says to finish, leave changes uncommitted and unpushed (see the practical notes below). If a hook or tool prompt asks for a commit earlier than that, say so and ask rather than committing.
+
+Cloud sessions have no `gh` CLI or `scripts/start-work.sh`. Use the GitHub MCP tools instead: create the issue first (if there is none), then the PR. The branch pattern is `{issue-number}-{slug}`; if the session was started on another branch name, say so in the PR rather than renaming it.
+
 ## Before committing or opening a PR — pre-commit review
 
 **Always** run the pre-commit review before committing, pushing or opening a PR for any change to the site. The checklist lives in `.cursor/rules/github-workflow.mdc` under **"Pre-commit review (required)"**: read it from there at the time (it is the single source of truth; do not work from memory) and go through every item — necessity, simplicity, dependencies, performance, build, SEO, broken tags, tests, removals, formatting, best practice, and CSS/dark mode/mobile.

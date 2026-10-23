@@ -7,6 +7,7 @@ import Link from "next/link";
 
 import styles from "./index.module.css";
 
+import Book3D from "components/Book3D";
 import FancyLink from "components/FancyLink";
 import HomeCategoryCarousels from "components/HomeCategoryCarousel";
 import ReaderQuotes from "components/ReaderQuotes";
@@ -14,7 +15,7 @@ import { getTagDocumentBySlug } from "helpers/getTagDocumentBySlug";
 import { HOME_CAROUSEL_CATEGORIES } from "helpers/homeCarouselCategories";
 import { client } from "services/prismic";
 
-import bigIdeasLittlePicturesCoverTransparentImage from "../images/big-ideas-little-pictures-cover-transparent.png";
+import bigIdeasLittlePicturesCoverImage from "../images/big-ideas-little-pictures-book-cover.jpg";
 
 const SubscribeFullPlaceholder = () => (
 	<div
@@ -70,12 +71,15 @@ const Home = ({ carouselRows }) => {
 							}}
 							aria-label="View Big Ideas Little Pictures book details - 5-star rated on Amazon"
 						>
-							<Image
-								src={bigIdeasLittlePicturesCoverTransparentImage}
-								alt="Big Ideas Little Pictures Book"
-								className={styles.bookImage}
-								placeholder="blur"
-							/>
+							<div className={styles.bookImage}>
+								<Book3D
+									cover={bigIdeasLittlePicturesCoverImage}
+									alt="Big Ideas Little Pictures Book"
+									spineTitle="Big Ideas Little Pictures"
+									spineAuthor="Jono Hey"
+									priority={false}
+								/>
+							</div>
 							<div className={styles.quoteCircle}>
 								<div className={styles.quoteText}>
 									<p className="font-semibold">

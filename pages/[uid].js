@@ -137,6 +137,7 @@ const SketchplanationPage = ({
 		description: prismicH.asText(body),
 		image,
 		publishedAt,
+		modifiedAt: sketchplanation.last_publication_date,
 		tags,
 	});
 

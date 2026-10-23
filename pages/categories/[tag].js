@@ -7,9 +7,11 @@ import { useRouter } from "next/router";
 import styles from "./[tag].module.css";
 
 import FancyLink from "components/FancyLink";
+import JsonLd from "components/JsonLd";
 import SketchplanationsGrid from "components/SketchplanationsGrid";
 import TextHeader from "components/TextHeader";
 import { humanizeTag, pageTitle } from "helpers";
+import { buildCategoryStructuredData } from "helpers/structuredData";
 import { client } from "services/prismic";
 
 const Tag = ({ tag, sketchplanations }) => {
@@ -19,48 +21,26 @@ const Tag = ({ tag, sketchplanations }) => {
 		return <div>Loading…</div>;
 	}
 
+	const description = `Practical ideas, frameworks and techniques related to ${tag}, explained simply with visual examples. Browse the collection and find concepts to learn, use and share.`;
+
 	return (
 		<>
 			<Head>
 				<title>{pageTitle(`${tag}: ideas, frameworks and examples`)}</title>
-				<meta
-					name="description"
-					content={`Practical ideas, frameworks and techniques related to ${tag}, explained simply with visual examples. Browse the collection and find concepts to learn, use and share.`}
-				/>
+				<meta name="description" content={description} />
 				<link
 					rel="canonical"
 					href={`https://sketchplanations.com/categories/${router.query.tag}`}
 				/>
-				<script
-					type="application/ld+json"
-					dangerouslySetInnerHTML={{
-						__html: JSON.stringify({
-							"@context": "https://schema.org",
-							"@type": "BreadcrumbList",
-							itemListElement: [
-								{
-									"@type": "ListItem",
-									position: 1,
-									name: "Home",
-									item: "https://sketchplanations.com/",
-								},
-								{
-									"@type": "ListItem",
-									position: 2,
-									name: "Categories",
-									item: "https://sketchplanations.com/categories",
-								},
-								{
-									"@type": "ListItem",
-									position: 3,
-									name: `${tag}`,
-									item: `https://sketchplanations.com/categories/${router.query.tag}`,
-								},
-							],
-						}),
-					}}
-				/>
 			</Head>
+			<JsonLd
+				data={buildCategoryStructuredData({
+					slug: router.query.tag,
+					name: tag,
+					description,
+					sketches: sketchplanations,
+				})}
+			/>
 			<div className={styles.root} key={tag}>
 				<nav className="text-sm mb-4 px-6">
 					<div className="flex items-center">
