@@ -232,6 +232,8 @@ const Home = ({ carouselRows }) => {
 	);
 };
 
+const SKETCH_1000_UID = "notice-collect-process-share";
+
 export const getStaticProps = async () => {
 	const recent = await client.getByType("sketchplanation", {
 		orderings: [
@@ -270,15 +272,23 @@ export const getStaticProps = async () => {
 		}),
 	);
 
+	// Sketch numbering doesn't match the Prismic document count, so key the
+	// callout to the sketch itself. It only shows while that sketch is the
+	// latest, so it switches itself off once the next one is published.
+	const isSketch1000 = recent.results[0]?.uid === SKETCH_1000_UID;
+
 	const carouselRows = [];
 	if (recent.results.length > 0) {
 		carouselRows.push({
 			kind: "recent",
 			label: "Recent",
-			tagline: "A new sketch every week since 2013 🚀",
+			tagline: "A new sketch every week since 2013. Now 1,000! 🎉",
 			slug: null,
 			viewAllHref: "/archive",
-			featuredSketch: mapSketchForCarousel(recent.results[0]),
+			featuredSketch: {
+				...mapSketchForCarousel(recent.results[0]),
+				...(isSketch1000 && { milestone: "1,000" }),
+			},
 			sketches: recent.results.slice(1).map(mapSketchForCarousel),
 		});
 	}
