@@ -63,7 +63,7 @@ Pinning pnpm via `"packageManager": "pnpm@9.15.9"` keeps versions consistent acr
 ### Automation already in place
 
 - **`.github/workflows/dependabot-lockfile-sync.yml`** — on Dependabot PRs, runs `pnpm install --no-frozen-lockfile` and commits the lockfile if overrides were stripped.
-- **`.github/workflows/dependabot-rebase-nudge.yml`** — when `main` moves or a Dependabot PR opens with lockfile merge conflicts, comments `@dependabot rebase` once per PR so CI and auto-merge can run.
+- **`.github/workflows/dependabot-lockfile-conflicts.yml`** — when `main` moves, or on the Monday/Tuesday follow-up, merges `main` into Dependabot PRs whose only conflict is `pnpm-lock.yaml`. It keeps that PR’s lockfile pins, runs `pnpm install`, and pushes so CI and auto-merge can run. `pull_request` workflows do not run while a PR is conflicted, and Dependabot rejects `@dependabot rebase` from GitHub Actions, so this job replaces that nudge.
 - **`.github/workflows/ci.yml`** — `dependabot-auto-merge` merges patch/minor Dependabot PRs after CI passes. It keys off `github.event.pull_request.user.login == 'dependabot[bot]'`, not `github.actor`, so it still runs after the lockfile-sync workflow pushes a fix.
 
 ### If a Dependabot PR fails to deploy

@@ -1,0 +1,62 @@
+name: Resolve Dependabot lockfile conflicts
+
+# pull_request workflows do not run while a PR has merge conflicts, and
+# Dependabot rejects @dependabot rebase from github-actions. When main moves,
+# or on the weekly Dependabot follow-up, merge main into Dependabot PRs whose
+# only conflict is pnpm-lock.yaml so CI and auto-merge can run.
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # After the usual Monday ~18:00 UTC Dependabot batch (and Tuesday follow-up).
+    - cron: '0 20 * * 1'
+    - cron: '0 10 * * 2'
+  workflow_dispatch:
+
+jobs:
+  resolve-lockfile-conflicts:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Check for open Dependabot PRs
+        id: dependabot
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          count="$(gh pr list --author "app/dependabot" --state open --json number --jq 'length')"
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          if [ "$count" = "0" ]; then
+            echo "No open Dependabot pull requests"
+            echo "needed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "needed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Fetch history for the merge
+        if: steps.dependabot.outputs.needed == 'true'
+        run: |
+          if [ "$(git rev-parse --is-shallow-repository)" = "true" ]; then
+            git fetch --unshallow origin
+          fi
+
+      - uses: pnpm/action-setup@v6
+        if: steps.dependabot.outputs.needed == 'true'
+
+      - uses: actions/setup-node@v5
+        if: steps.dependabot.outputs.needed == 'true'
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Resolve lockfile-only conflicts
+        if: steps.dependabot.outputs.needed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: bash .github/scripts/resolve-dependabot-lockfile-conflicts.sh
