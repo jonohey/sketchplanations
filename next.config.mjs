@@ -34,6 +34,25 @@ const nextConfig = {
 					},
 				],
 			},
+			{
+				// Ad landing alias of the book page; keep it out of search results.
+				source: "/big-ideas-gift",
+				headers: [
+					{
+						key: "X-Robots-Tag",
+						value: "noindex",
+					},
+				],
+			},
+		];
+	},
+	async rewrites() {
+		return [
+			// Separate path so Vercel Web Analytics can filter ad traffic by page.
+			{
+				source: "/big-ideas-gift",
+				destination: "/big-ideas-little-pictures",
+			},
 		];
 	},
 	async redirects() {
