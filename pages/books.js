@@ -1,7 +1,6 @@
 import { track } from "@vercel/analytics";
 import classNames from "classnames";
 import booksIndex from "data/books-index.json";
-import { ChevronDown } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
 
@@ -30,9 +29,6 @@ const BookBuyLink = ({ book, className, children, location, ...props }) => (
 		{children}
 	</a>
 );
-
-const FEATURED_COUNT = 8;
-const VISIBLE_SKETCHES = 2;
 
 const BookCover = ({ book }) => {
 	const coverClassName = classNames(styles.coverImage, "rounded");
@@ -95,54 +91,66 @@ const SketchLink = ({ sketch }) => (
 	</li>
 );
 
-const BookRow = ({ book, featured = false }) => {
-	const hasMore = book.sketches.length > VISIBLE_SKETCHES + 1;
-	const visible = hasMore
-		? book.sketches.slice(0, VISIBLE_SKETCHES)
-		: book.sketches;
-	const rest = hasMore ? book.sketches.slice(VISIBLE_SKETCHES) : [];
+const NOTE_LINK = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g;
+
+// Notes are plain prose; `[text](https://url)` becomes an external link.
+const NoteText = ({ text }) => {
+	const parts = text.split(NOTE_LINK);
+
+	return parts.map((part, i) => {
+		if (i % 3 === 0) return part;
+		if (i % 3 === 2) return null;
+		return (
+			<FancyLink
+				key={i}
+				as="a"
+				href={parts[i + 1]}
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				{part}
+			</FancyLink>
+		);
+	});
+};
+
+const BookRow = ({ book }) => {
+	const hasNote = Boolean(book.note);
 
 	return (
 		<article
-			className={classNames(styles.bookRow, featured && styles.bookRowFeatured)}
+			className={classNames(styles.bookRow, hasNote && styles.bookRowNoted)}
 		>
 			<BookCover book={book} />
 
 			<div className={styles.bookContent}>
 				<BookTitle book={book} />
 
-				{book.note ? <p className={styles.bookNote}>{book.note}</p> : null}
+				{hasNote ? (
+					<p className={styles.bookNote}>
+						<NoteText text={book.note} />
+					</p>
+				) : null}
 
-				<div className={styles.referencedSection}>
-					<p className={styles.referencedLabel}>Sketches</p>
-					<ul>
-						{visible.map((sketch) => (
-							<SketchLink key={sketch.uid} sketch={sketch} />
-						))}
-					</ul>
-					{hasMore ? (
-						<details className={styles.moreSketches}>
-							<summary>
-								+{rest.length} more
-								<ChevronDown size={14} aria-hidden="true" />
-							</summary>
-							<ul>
-								{rest.map((sketch) => (
-									<SketchLink key={sketch.uid} sketch={sketch} />
-								))}
-							</ul>
-						</details>
-					) : null}
-				</div>
+				<div className={styles.bookMeta}>
+					<div className={styles.referencedSection}>
+						<p className={styles.referencedLabel}>Mentioned in</p>
+						<ul className={styles.sketchList}>
+							{book.sketches.map((sketch) => (
+								<SketchLink key={sketch.uid} sketch={sketch} />
+							))}
+						</ul>
+					</div>
 
-				<div className={`not-prose ${styles.buyAction}`}>
-					<BookBuyLink
-						book={book}
-						className="btn-outline inline-block no-underline"
-						location="button"
-					>
-						Buy
-					</BookBuyLink>
+					<div className={`not-prose ${styles.buyAction}`}>
+						<BookBuyLink
+							book={book}
+							className="btn-outline inline-block no-underline"
+							location="button"
+						>
+							Buy
+						</BookBuyLink>
+					</div>
 				</div>
 			</div>
 		</article>
@@ -150,8 +158,8 @@ const BookRow = ({ book, featured = false }) => {
 };
 
 const Books = ({ books }) => {
-	const featured = books.slice(0, FEATURED_COUNT);
-	const rest = books.slice(FEATURED_COUNT);
+	const withNotes = books.filter((book) => book.note);
+	const rest = books.filter((book) => !book.note);
 
 	return (
 		<>
@@ -181,8 +189,8 @@ const Books = ({ books }) => {
 						Here are those books.
 					</p>
 					<p className="mx-auto max-w-2xl mb-3">
-						At the top are the books behind the most sketches, a great place to
-						start. Further down are more books I&apos;ve drawn on, from
+						At the top are favourites, with a few words from me about some of
+						them. Further down are more books I&apos;ve drawn on, from
 						psychology and science to creativity and business.
 					</p>
 					<p className="mx-auto max-w-2xl text-sm text-textSubdued my-0">
@@ -195,21 +203,23 @@ const Books = ({ books }) => {
 
 				{books.length > 0 ? (
 					<>
-						<section aria-labelledby="start-here">
-							<h2 id="start-here" className={styles.sectionHeading}>
-								Start here
-							</h2>
-							<p className={styles.sectionIntro}>
-								The books behind the most sketches.
-							</p>
-							<ul className={styles.bookList}>
-								{featured.map((book) => (
-									<li key={book.title}>
-										<BookRow book={book} featured />
-									</li>
-								))}
-							</ul>
-						</section>
+						{withNotes.length > 0 ? (
+							<section aria-labelledby="start-here">
+								<h2 id="start-here" className={styles.sectionHeading}>
+									Start here
+								</h2>
+								<p className={styles.sectionIntro}>
+									Favourites from the sketches, and why I love them.
+								</p>
+								<ul className={styles.noteList}>
+									{withNotes.map((book) => (
+										<li key={book.title}>
+											<BookRow book={book} />
+										</li>
+									))}
+								</ul>
+							</section>
+						) : null}
 
 						{rest.length > 0 ? (
 							<section aria-labelledby="more-books">
