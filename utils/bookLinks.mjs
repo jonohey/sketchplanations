@@ -263,6 +263,11 @@ export function buildBooksIndex(linkInstances, overridesByTitle = {}) {
 		if (override?.author) book.author = override.author;
 		if (override?.note) book.note = override.note;
 		if (override?.thumbnail) book.thumbnail = override.thumbnail;
+		// Covers are keyed by the canonical title, which differs from the link-text
+		// key when an override renames the book.
+		if (!book.thumbnail && overridesByTitle[titleKey]?.thumbnail) {
+			book.thumbnail = overridesByTitle[titleKey].thumbnail;
+		}
 
 		if (!book.sketches.some((s) => s.uid === instance.uid)) {
 			book.sketches.push({

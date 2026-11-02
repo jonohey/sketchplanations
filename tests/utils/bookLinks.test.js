@@ -310,6 +310,28 @@ describe("buildBooksIndex", () => {
 		expect(books[0].author).toBe("Hans Rosling");
 		expect(books[0].note).toBe("Quietly hopeful.");
 	});
+
+	it("uses the cover stored under the canonical title when an override renames the book", () => {
+		const books = buildBooksIndex(
+			[
+				{
+					url: "https://geni.us/art-cure",
+					text: "art cure",
+					uid: "a",
+					sketchTitle: "A",
+				},
+			],
+			{
+				"art cure": { title: "The Art Cure" },
+				"the art cure": {
+					title: "The Art Cure",
+					thumbnail: "/books/the-art-cure.jpg",
+				},
+			},
+		);
+
+		expect(books[0].thumbnail).toBe("/books/the-art-cure.jpg");
+	});
 });
 
 describe("normalizeBookTitle", () => {

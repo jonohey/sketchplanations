@@ -47,68 +47,131 @@
 	@apply list-none p-0 m-0 grid grid-cols-1 gap-x-8 md:grid-cols-2;
 }
 
+/* Books with a note: one full-width column so the prose has room */
+.noteList {
+	@apply list-none p-0 m-0;
+}
+
+.bookList > li,
+.noteList > li {
+	@apply min-w-0;
+}
+
 .bookRow {
 	@apply flex gap-4 items-start py-5 border-b border-border;
-}
-
-.bookRowFeatured {
-	@apply gap-5;
-}
-
-.bookRowFeatured .coverImage {
-	@apply w-28 h-[10.5rem];
-}
-
-.bookRowFeatured .bookTitle {
-	@apply text-lg;
 }
 
 .bookContent {
 	@apply flex flex-col gap-2 min-w-0;
 }
 
+.bookMeta {
+	@apply flex flex-col gap-2;
+}
+
 .bookNote {
-	@apply text-sm m-0;
+	@apply text-base leading-relaxed m-0 max-w-prose;
 }
 
 .referencedLabel {
-	@apply text-xs uppercase tracking-wide text-textSubdued m-0 mb-1;
+	@apply text-sm text-textSubdued m-0 mb-0.5;
 }
 
 .sketchItem {
-	@apply truncate;
+	@apply min-w-0;
 }
 
 .sketchLink {
 	@apply text-text underline decoration-border underline-offset-2 hover:text-blue hover:decoration-blue;
 }
 
-.referencedSection ul {
-	@apply list-none p-0 m-0 text-sm flex flex-col gap-0.5;
-}
-
-.moreSketches {
-	@apply text-sm mt-0.5;
-}
-
-.moreSketches summary {
-	@apply inline-flex items-center gap-1 cursor-pointer list-none text-textSubdued hover:text-blue;
-}
-
-.moreSketches summary::-webkit-details-marker {
-	display: none;
-}
-
-.moreSketches[open] summary svg {
-	transform: rotate(180deg);
-}
-
-.moreSketches ul {
-	@apply mt-0.5;
+.sketchList {
+	@apply list-disc pl-5 m-0 text-sm flex flex-col gap-0.5 marker:text-textSubdued;
 }
 
 .buyAction {
 	@apply mt-1;
+}
+
+/* Quieter than the global button: this page has one per book */
+.buyAction a {
+	@apply text-sm py-1.5 px-5;
+}
+
+/* Noted rows: cover beside the heading on mobile, note spans the full width */
+.bookRowNoted {
+	@apply grid gap-x-4 gap-y-3 py-8;
+	grid-template-columns: 5rem minmax(0, 1fr);
+}
+
+.bookRowNoted .coverLink {
+	@apply col-start-1 row-start-1;
+}
+
+.bookRowNoted .coverImage {
+	@apply w-20 h-[7.5rem];
+}
+
+.bookRowNoted .bookContent {
+	display: contents;
+}
+
+.bookRowNoted .bookHeading {
+	@apply col-start-2 row-start-1 self-center;
+}
+
+.bookRowNoted .bookTitle {
+	@apply text-lg;
+}
+
+.bookRowNoted .bookNote,
+.bookRowNoted .bookMeta {
+	@apply col-span-2;
+}
+
+.bookRowNoted .bookMeta {
+	@apply flex-row flex-wrap items-end justify-between gap-x-6 gap-y-3;
+}
+
+.bookRowNoted .sketchList {
+	@apply text-base;
+}
+
+.bookRowNoted .referencedSection {
+	@apply flex-1 min-w-[12rem];
+}
+
+@media (min-width: 640px) {
+	.bookRowNoted {
+		@apply gap-x-6 gap-y-0;
+		grid-template-columns: 8rem minmax(0, 1fr);
+	}
+
+	.bookRowNoted .coverLink {
+		@apply row-span-3;
+	}
+
+	.bookRowNoted .coverImage {
+		@apply w-32 h-48;
+	}
+
+	.bookRowNoted .bookHeading,
+	.bookRowNoted .bookNote,
+	.bookRowNoted .bookMeta {
+		@apply col-start-2 col-span-1 self-start;
+	}
+
+	.bookRowNoted .bookHeading {
+		@apply row-start-1;
+	}
+
+	.bookRowNoted .bookNote {
+		@apply row-start-2 mt-3;
+	}
+
+	.bookRowNoted .bookMeta {
+		@apply row-start-3 mt-4;
+	}
 }
 
 .pageFooter {
@@ -117,8 +180,4 @@
 
 .pageFooter p {
 	@apply m-0;
-}
-
-.bookList > li {
-	@apply min-w-0;
 }

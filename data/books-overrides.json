@@ -2,7 +2,8 @@
 	"books": {
 		"factfulness": {
 			"title": "Factfulness",
-			"author": "Hans Rosling"
+			"author": "Hans Rosling",
+			"note": "I just love Factfulness. There's no way you can read this book and not learn fascinating things that change your view of the world. It's packed with fundamental but surprising facts, including a quiz that I guarantee you won't score too well on. Too few people have a good grasp of the data about what's actually happening in the world, and Factfulness helps correct that."
 		},
 		"adjustable pliers": {
 			"exclude": true
@@ -90,7 +91,8 @@
 		},
 		"einsteins mirror": {
 			"title": "Einstein's Mirror",
-			"author": "Tony Hey, Patrick Walters"
+			"author": "Tony Hey and Patrick Walters",
+			"note": "OK, I'm biased. This book's by my dad. Nonetheless, it's a brilliant, readable and interesting account of Einstein, relativity, the development of the atomic bomb and so much more, packed with history, photos and clear explanations. It's a wonderful book."
 		},
 		"broken and how to fix it": {
 			"title": "The Failure of Risk Management: Why It's Broken and How to Fix It",
@@ -114,7 +116,8 @@
 		},
 		"the art of doing science and engineering": {
 			"title": "The Art of Doing Science and Engineering",
-			"author": "Richard Hamming"
+			"author": "Richard Hamming",
+			"note": "Richard Hamming gave one of my favourite talks, \"[You and Your Research](https://paulgraham.com/hamming.html)\", at Bell Labs. This book brings together much of his insightful thinking about how science works, the importance of knowing your stuff and what you can do when you do. It mixes technical content with ideas that can help you re-examine your own work."
 		},
 		"the long tail why the future of business is selling less of more": {
 			"title": "The Long Tail: Why the Future of Business is Selling Less of More",
@@ -167,6 +170,60 @@
 		"ultrasomething": {
 			"title": "Ultra-Something",
 			"author": "Brendan Leonard"
+		},
+		"atomic habits": {
+			"note": "James Clear's mega-bestseller Atomic Habits has tons of insights and actionable tools to put to work. I know James from his early newsletter days, when he wrote some brilliantly researched essays. Lots of those ideas make it into this book."
+		},
+		"if you want to write": {
+			"note": "The book is nominally about writing, but when I read it, I found it was really about any creative expression. It's about finding what you can uniquely bring to the world and encouraging you to make that happen. Brenda writes with a joyful clarity and directness, and I took many deep lessons from this book."
+		},
+		"metaphors we live by": {
+			"note": "This remains one of the few substantial books I've read in one sitting. I got it on a Friday and read through until eleven in the evening at the lab at UC Berkeley. It fundamentally changes how you look at thought and language, with so many wonderful examples of the language that shapes our thinking, hidden in plain sight. The authors have since written more in-depth works, but Metaphors We Live By is still a very readable introduction and a fascinating read.",
+			"author": "George Lakoff and Mark Johnson"
+		},
+		"scale": {
+			"note": "No question, this is my favourite popular science book. Geoffrey West uses simple mathematical laws to tie together incredible facts and insights about how animals differ, from the ant to the blue whale, and how those same principles might apply to scaling cities and creative output. There's just so much in this book: basic science to learn, but also ideas that make you look at the world differently all the way through."
+		},
+		"the art of uncertainty": {
+			"note": "This book is relentlessly fun and fascinating, examining all sorts of phenomena we encounter every day: lotteries, coincidences, the chances of accidents, the dangers of smoking versus skydiving, how to do good magic tricks, win at casinos and interpret newspaper headlines about data. It's really valuable material to help you interpret the numbers we're always encountering in the world."
+		},
+		"the elements of eloquence": {
+			"note": "Mark Forsyth is an incredibly knowledgeable and entertaining writer. Here he takes you through many of the figures of speech and rhetoric that help make writing engaging. The terminology can be complicated, but the reading is always fun and filled with brilliant examples."
+		},
+		"the elements of style": {
+			"note": "I was recommended Strunk and White when preparing my PhD thesis and told that a colleague always kept a copy handy. It's opinionated and detailed, with tons of useful ideas to improve and correct your language and writing. But it's not just grammar and subtleties of words: the personalities of the authors come through in their insistence on how best to get your message across without hiding behind your words. A brilliant little reference book.",
+			"author": "William Strunk Jr. and E. B. White"
+		},
+		"brain training for runners": {
+			"note": "I haven't read too many books specifically about running, but this has the best chapter I know on thinking about your stride. It includes a number of exercises you can do while running to check your form, posture and gait, and make sure you're running as well as you can."
+		},
+		"dare to lead": {
+			"note": "Brené Brown made her name tackling difficult subjects such as courage and shame. This book picks out many qualities that have helped me question my own leadership and become a better leader, without hiding and by being more open."
+		},
+		"dont make me think": {
+			"note": "Perhaps the only other book I've come close to reading in one sitting. I found it in a room at home and sat and read it all afternoon. It's still one of the best books when you're designing anything. It's written for the web, and some examples will be dated, but the ideas about the importance of doing your research with other people, and understanding that they won't necessarily think like you do, mean I still recommend it to anyone building software."
+		},
+		"drive": {
+			"note": "Drive includes one of my favourite frameworks, which has helped me enormously at work: autonomy, mastery and purpose. Pink has written many books, but this one covers much of what motivates us. There's a famous illustrated TED talk he did that I highly recommend, and the autonomy, mastery and purpose framework alone makes the book worth reading."
+		},
+		"how to lie with statistics": {
+			"note": "This is a fun little book that teaches you to question the data you see. It digs into the ways people misrepresent figures you think you understand, like averages, and distort charts and graphs. Most of all, it encourages you to question who's behind the data you're seeing and what they want you to learn from it."
+		},
+		"improv wisdom": {
+			"note": "I think improv has a lot to teach us about living full lives. Improv Wisdom is a fun account that mixes life lessons and exercises from improv with Patricia's personal improv story. If you're intrigued by improv, it's a nice, easy way in, with plenty to learn."
+		},
+		"local": {
+			"note": "Al Humphreys is a wonderful British author and adventurer. Local is just one of his books exploring how we can have adventures without needing to trek to the ends of the Earth. His other books, including Microadventures and the tales of his bicycle travels around the world, are all good reads."
+		},
+		"my first summer in the sierra": {
+			"note": "John Muir has undergone a re-evaluation in recent times, but I loved this first-hand account of his summer in California's Sierra Nevada mountains, often alone in the wilderness. His joy in nature and what it can teach us were wonderful to read."
+		},
+		"philosophy in the flesh": {
+			"note": "This is a deeper companion to Lakoff and Johnson's Metaphors We Live By. It goes into detail about so many of the metaphors that shape our thought. It's a big read, but it's also easy to dip into the sections where the authors lay out the structures of the metaphors that shape our thinking.",
+			"author": "George Lakoff and Mark Johnson"
+		},
+		"the amazing generation": {
+			"note": "It's impossible to be a parent and not consider the impact technology will have on our children. The Amazing Generation is a valuable and approachable read that can help steer both you and them."
 		}
 	}
 }
