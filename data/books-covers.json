@@ -303,6 +303,11 @@
 			"isbn": "0465047327",
 			"source": "openlibrary"
 		},
+		"mountains beyond mountains": {
+			"path": "/books/mountains-beyond-mountains.jpg",
+			"isbn": "0812980557",
+			"source": "openlibrary"
+		},
 		"my first summer in the sierra": {
 			"path": "/books/my-first-summer-in-the-sierra.jpg",
 			"isbn": null,
@@ -563,6 +568,11 @@
 			"isbn": null,
 			"source": "openlibrary-search"
 		},
+		"the skies above": {
+			"path": "/books/the-skies-above.jpg",
+			"isbn": "1680515551",
+			"source": "google"
+		},
 		"the tao of pooh": {
 			"path": "/books/the-tao-of-pooh.jpg",
 			"isbn": null,
@@ -594,10 +604,9 @@
 			"source": "openlibrary-search"
 		},
 		"ultrasomething": {
-			"path": null,
-			"isbn": null,
-			"source": null,
-			"status": "missing"
+			"path": "/books/ultrasomething.jpg",
+			"isbn": "B0CZ4CR8GX",
+			"source": "amazon"
 		},
 		"unconditional parenting": {
 			"path": "/books/unconditional-parenting.jpg",
