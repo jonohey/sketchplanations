@@ -54,6 +54,12 @@ jobs:
           node-version: 24
           cache: pnpm
 
+      - name: Set git identity for merge commits
+        if: steps.dependabot.outputs.needed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
       - name: Resolve lockfile-only conflicts
         if: steps.dependabot.outputs.needed == 'true'
         env:
