@@ -52,7 +52,6 @@ jobs:
         if: steps.dependabot.outputs.needed == 'true'
         with:
           node-version: 24
-          cache: pnpm
 
       - name: Set git identity for merge commits
         if: steps.dependabot.outputs.needed == 'true'
