@@ -13,6 +13,9 @@ if (
 		capture_exceptions: true,
 		// Stay off until the visitor accepts analytics in the cookie banner.
 		opt_out_capturing_by_default: true,
+		// Only record session replays on production, not Vercel previews or localhost.
+		disable_session_recording:
+			window.location.hostname !== "sketchplanations.com",
 	});
 }
 
