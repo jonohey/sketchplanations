@@ -52,6 +52,10 @@ jobs:
         if: steps.dependabot.outputs.needed == 'true'
         with:
           node-version: 24
+          # v5 auto-caches pnpm because package.json sets packageManager. Most
+          # runs never install, so the post-job cache save fails and marks the
+          # run failed. This job doesn't need a cache.
+          package-manager-cache: false
 
       - name: Set git identity for merge commits
         if: steps.dependabot.outputs.needed == 'true'
