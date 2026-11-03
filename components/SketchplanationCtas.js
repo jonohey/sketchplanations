@@ -13,6 +13,8 @@ import { useState } from "react";
 
 import styles from "./SketchplanationCtas.module.css";
 
+import { capturePostHogEvent } from "helpers/posthog";
+
 const SketchplanationCtas = ({
 	title,
 	podcastLinkUrl,
@@ -44,6 +46,10 @@ const SketchplanationCtas = ({
 						title={`Listen to ${title} in the podcast`}
 						onClick={() => {
 							track("Sketch-link-podcast-episode", { sketch: `${title}` });
+							capturePostHogEvent("podcast_episode_opened", {
+								sketch_uid: sketchplanationUid,
+								surface: variant,
+							});
 						}}
 					>
 						<span className="flex items-center gap-x-1">
@@ -65,6 +71,11 @@ const SketchplanationCtas = ({
 					download
 					onClick={() => {
 						track("Sketch-link-download", { sketch: `${title}` });
+						capturePostHogEvent("sketch_download_requested", {
+							download_format: "medium",
+							sketch_uid: sketchplanationUid,
+							surface: variant,
+						});
 						onDownload();
 					}}
 				>
@@ -90,6 +101,10 @@ const SketchplanationCtas = ({
 						rel="noreferrer"
 						onClick={() => {
 							track("Sketch-link-prints", { sketch: `${title}` });
+							capturePostHogEvent("sketch_prints_opened", {
+								sketch_uid: sketchplanationUid,
+								surface: variant,
+							});
 						}}
 					>
 						<span className="flex items-center gap-x-1">
@@ -110,6 +125,10 @@ const SketchplanationCtas = ({
 					type="button"
 					onClick={() => {
 						track("Sketch-link-licence", { sketch: `${title}` });
+						capturePostHogEvent("sketch_licence_viewed", {
+							sketch_uid: sketchplanationUid,
+							surface: variant,
+						});
 						onViewLicence();
 					}}
 				>
@@ -147,6 +166,10 @@ const SketchplanationCtas = ({
 						navigator.clipboard.writeText(url).then(() => {
 							setCopied(true);
 							track("Sketch-link-copy", { sketch: `${title}` });
+							capturePostHogEvent("sketch_link_copied", {
+								sketch_uid: sketchplanationUid,
+								surface: variant,
+							});
 
 							setTimeout(() => {
 								setCopied(false);

@@ -52,3 +52,4 @@ data/*
 
 # Reference files (not part of codebase)
 _reference/
+!.env.example
