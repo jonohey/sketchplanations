@@ -1,9 +1,17 @@
+import { setPostHogConsent } from "helpers/posthog";
+
 /**
  * All config. options available here:
  * https://cookieconsent.orestbida.com/reference/configuration-reference.html
  */
 
+const syncPostHogConsent = ({ cookie }) =>
+	setPostHogConsent(cookie.categories.includes("analytics"));
+
 export default {
+	onFirstConsent: syncPostHogConsent,
+	onConsent: syncPostHogConsent,
+	onChange: syncPostHogConsent,
 	guiOptions: {
 		consentModal: {
 			layout: "box",
@@ -30,6 +38,9 @@ export default {
 					},
 					{
 						name: "_hj",
+					},
+					{
+						name: /^ph_.*_posthog$/,
 					},
 				],
 			},

@@ -6,6 +6,8 @@ import { useState } from "react";
 
 import styles from "./DownloadModal.module.css";
 
+import { capturePostHogEvent } from "helpers/posthog";
+
 const STRIPE_SUPPORT_10 = "https://buy.stripe.com/5kQ7sL1yZaA6dbX57x1Fe02";
 const STRIPE_SUPPORT_20 = "https://buy.stripe.com/8x27sLcdDaA67RD57x1Fe03";
 const STRIPE_SUPPORT_OTHER = "https://buy.stripe.com/4gMcN57XngYu3Bn6bB1Fe04";
@@ -34,6 +36,9 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 							onClick={() => {
 								if (!highResOpen) {
 									track("expand_high_res", { sketch: sketchplanationTitle });
+									capturePostHogEvent("high_resolution_option_expanded", {
+										sketch_uid: sketchplanationUid,
+									});
 								}
 								setHighResOpen(!highResOpen);
 							}}
@@ -70,6 +75,11 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 												sketch: sketchplanationTitle,
 												location: "download-modal",
 											});
+											capturePostHogEvent("support_checkout_started", {
+												amount_option: "10",
+												currency: "GBP",
+												sketch_uid: sketchplanationUid,
+											});
 										}}
 									>
 										£10
@@ -84,6 +94,11 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 											track("support_20", {
 												sketch: sketchplanationTitle,
 												location: "download-modal",
+											});
+											capturePostHogEvent("support_checkout_started", {
+												amount_option: "20",
+												currency: "GBP",
+												sketch_uid: sketchplanationUid,
 											});
 										}}
 									>
@@ -100,6 +115,11 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 												sketch: sketchplanationTitle,
 												location: "download-modal",
 											});
+											capturePostHogEvent("support_checkout_started", {
+												amount_option: "other",
+												currency: "GBP",
+												sketch_uid: sketchplanationUid,
+											});
 										}}
 									>
 										Other
@@ -113,6 +133,9 @@ const DownloadModal = ({ sketchplanationTitle, sketchplanationUid }) => {
 									onClick={() => {
 										track("download_high_res", {
 											sketch: sketchplanationTitle,
+										});
+										capturePostHogEvent("high_resolution_download_requested", {
+											sketch_uid: sketchplanationUid,
 										});
 									}}
 								>
