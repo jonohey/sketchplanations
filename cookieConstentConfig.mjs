@@ -39,6 +39,9 @@ export default {
 					{
 						name: "_hj",
 					},
+					{
+						name: /^ph_.*_posthog$/,
+					},
 				],
 			},
 		},
