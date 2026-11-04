@@ -240,6 +240,7 @@ export function buildBooksIndex(linkInstances, overridesByTitle = {}) {
 				author: override?.author ?? parsed.author ?? null,
 				url: instance.url,
 				note: override?.note ?? null,
+				favourite: override?.favourite !== false,
 				thumbnail: override?.thumbnail ?? null,
 				sketches: [],
 			};
@@ -262,6 +263,7 @@ export function buildBooksIndex(linkInstances, overridesByTitle = {}) {
 		if (override?.title) book.title = override.title;
 		if (override?.author) book.author = override.author;
 		if (override?.note) book.note = override.note;
+		if (override?.favourite === false) book.favourite = false;
 		if (override?.thumbnail) book.thumbnail = override.thumbnail;
 		// Covers are keyed by the canonical title, which differs from the link-text
 		// key when an override renames the book.

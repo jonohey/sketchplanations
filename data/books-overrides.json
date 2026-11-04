@@ -117,7 +117,8 @@
 		"the art of doing science and engineering": {
 			"title": "The Art of Doing Science and Engineering",
 			"author": "Richard Hamming",
-			"note": "Richard Hamming gave one of my favourite talks, \"[You and Your Research](https://paulgraham.com/hamming.html)\", at Bell Labs. This book brings together much of his insightful thinking about how science works, the importance of knowing your stuff and what you can do when you do. It mixes technical content with ideas that can help you re-examine your own work."
+			"note": "Richard Hamming gave one of my favourite talks, \"[You and Your Research](https://paulgraham.com/hamming.html)\", at Bell Labs. This book brings together much of his insightful thinking about how science works, the importance of knowing your stuff and what you can do when you do. It mixes technical content with ideas that can help you re-examine your own work.",
+			"favourite": false
 		},
 		"the long tail why the future of business is selling less of more": {
 			"title": "The Long Tail: Why the Future of Business is Selling Less of More",
@@ -169,7 +170,8 @@
 		},
 		"ultrasomething": {
 			"title": "Ultra-Something",
-			"author": "Brendan Leonard"
+			"author": "Brendan Leonard",
+			"note": "Brendan Leonard is an ultra-runner and creative and funny writer. He dives into what makes us take on crazy challenges, not just in running, sharing hilarious and insightful stories along the way."
 		},
 		"atomic habits": {
 			"note": "James Clear's mega-bestseller Atomic Habits has tons of insights and actionable tools to put to work. I know James from his early newsletter days, when he wrote some brilliantly researched essays. Lots of those ideas make it into this book."
@@ -195,7 +197,8 @@
 			"author": "William Strunk Jr. and E. B. White"
 		},
 		"brain training for runners": {
-			"note": "I haven't read too many books specifically about running, but this has the best chapter I know on thinking about your stride. It includes a number of exercises you can do while running to check your form, posture and gait, and make sure you're running as well as you can."
+			"note": "I haven't read too many books specifically about running, but this has the best chapter I know on thinking about your stride. It includes a number of exercises you can do while running to check your form, posture and gait, and make sure you're running as well as you can.",
+			"favourite": false
 		},
 		"dare to lead": {
 			"note": "Brené Brown made her name tackling difficult subjects such as courage and shame. This book picks out many qualities that have helped me question my own leadership and become a better leader, without hiding and by being more open."
@@ -210,20 +213,69 @@
 			"note": "This is a fun little book that teaches you to question the data you see. It digs into the ways people misrepresent figures you think you understand, like averages, and distort charts and graphs. Most of all, it encourages you to question who's behind the data you're seeing and what they want you to learn from it."
 		},
 		"improv wisdom": {
-			"note": "I think improv has a lot to teach us about living full lives. Improv Wisdom is a fun account that mixes life lessons and exercises from improv with Patricia's personal improv story. If you're intrigued by improv, it's a nice, easy way in, with plenty to learn."
+			"note": "I think improv has a lot to teach us about living full lives. Improv Wisdom is a fun account that mixes life lessons and exercises from improv with Patricia's personal improv story. If you're intrigued by improv, it's a nice, easy way in, with plenty to learn.",
+			"favourite": false
 		},
 		"local": {
-			"note": "Al Humphreys is a wonderful British author and adventurer. Local is just one of his books exploring how we can have adventures without needing to trek to the ends of the Earth. His other books, including Microadventures and the tales of his bicycle travels around the world, are all good reads."
+			"note": "Al Humphreys is a wonderful British author and adventurer. Local is just one of his books exploring how we can have adventures without needing to trek to the ends of the Earth. His other books, including Microadventures and the tales of his bicycle travels around the world, are all good reads.",
+			"favourite": false
 		},
 		"my first summer in the sierra": {
 			"note": "John Muir has undergone a re-evaluation in recent times, but I loved this first-hand account of his summer in California's Sierra Nevada mountains, often alone in the wilderness. His joy in nature and what it can teach us were wonderful to read."
 		},
 		"philosophy in the flesh": {
 			"note": "This is a deeper companion to Lakoff and Johnson's Metaphors We Live By. It goes into detail about so many of the metaphors that shape our thought. It's a big read, but it's also easy to dip into the sections where the authors lay out the structures of the metaphors that shape our thinking.",
-			"author": "George Lakoff and Mark Johnson"
+			"author": "George Lakoff and Mark Johnson",
+			"favourite": false
 		},
 		"the amazing generation": {
-			"note": "It's impossible to be a parent and not consider the impact technology will have on our children. The Amazing Generation is a valuable and approachable read that can help steer both you and them."
+			"note": "It's impossible to be a parent and not consider the impact technology will have on our children. The Amazing Generation is a valuable and approachable read that can help steer both you and them.",
+			"favourite": false
+		},
+		"the book you wish your parents had read": {
+			"note": "Philippa Perry's books are full of insights into your own behaviour and that of others. They always get me thinking and help me reflect on myself and my relationships."
+		},
+		"the computing universe": {
+			"note": "I'm biased because this is by my Dad. But if you've ever been intrigued by how all the tiny components somehow make a computer, this book is a brilliant tour from the basics through the ideas and history behind modern computing."
+		},
+		"the prophet": {
+			"note": "Kahlil Gibran's books are full of beauty and wisdom and this one is no exception. We chose a passage from this book as a reading at our wedding."
+		},
+		"thinking fast and slow": {
+			"note": "A dense book, but what a privilege to read the summary of an entire career of research by one of the founders of behavioural science."
+		},
+		"12 elements of great managing": {
+			"note": "I had a printout of the twelve elements that I kept stuck in my work notebooks at all times. Whenever I wondered why somebody (including me) might not be happy at work, or how I could be a better leader, the twelve elements gave me something helpful and practical to try."
+		},
+		"a short history of nearly everything": {
+			"note": "I knew Bill Bryson as a hilarious travel writer. Here he took on an almighty topic and taught me a whole lot of fascinating things.",
+			"favourite": false
+		},
+		"all the winniethepooh books": {
+			"note": "Yes, they're children's stories, but they're full of surprising, joyful wisdom throughout. Beautifully illustrated, and a joy to listen to as an adult or a child."
+		},
+		"an exaltation of larks": {
+			"note": "If you want the canonical reference for collective nouns, this is it.",
+			"favourite": false
+		},
+		"autobiography of a yogi": {
+			"note": "I listened to the audiobook read by Ben Kingsley. A long but intriguing and genuinely remarkable story. It came recommended by Steve Jobs.",
+			"favourite": false
+		},
+		"born to run": {
+			"note": "It's almost impossible to read this book and not be tempted to go out for a run."
+		},
+		"creativity flow and the psychology of discovery and invention": {
+			"note": "Few people knew more about happiness and creativity than Mihaly Csikszentmihalyi. One idea I particularly loved from this book was the contradictory traits of creative personalities. Plenty of inspiration throughout."
+		},
+		"envisioning information": {
+			"note": "All of Edward Tufte's books are beautiful objects, and this one is no exception. Tufte strongly influenced my ideas about presenting information visually, many of which I hope I've put into practice with Sketchplanations."
+		},
+		"greenlights": {
+			"note": "I strongly recommend the audiobook, read by Matthew himself. It's like no other audiobook I've encountered."
+		},
+		"how to win friends and influence people": {
+			"note": "I can understand why some people might read this book as manipulative or insincere. But I found it gave me lots to think about in my interactions with others, and helped me reflect on how I approach them."
 		}
 	}
 }

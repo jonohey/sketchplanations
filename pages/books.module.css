@@ -7,15 +7,22 @@
 }
 
 .coverLink {
-	@apply flex-shrink-0 self-start;
+	@apply relative flex-shrink-0 self-start justify-self-start;
+}
+
+/* Hairline edge drawn over the image, so pale covers don't dissolve into the page */
+.coverLink::after {
+	content: "";
+	@apply absolute inset-0 rounded pointer-events-none;
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.14);
 }
 
 .coverImage {
 	@apply w-20 h-[7.5rem] object-cover block;
-	/* Soft lift, related to sketch card shadows but a touch lighter for small covers */
+	/* Neutral contact shadow plus a short soft drop, so the cover sits on the page */
 	box-shadow:
-		0 1px 2px rgba(0, 0, 0, 0.06),
-		0 0.65rem 1.1rem -0.55rem var(--color-sketchShadow);
+		0 1px 2px rgba(0, 0, 0, 0.16),
+		0 0.5rem 0.9rem -0.4rem rgba(0, 0, 0, 0.28);
 }
 
 .coverPlaceholder {
@@ -23,10 +30,14 @@
 }
 
 @media (prefers-color-scheme: dark) {
+	.coverLink::after {
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+	}
+
 	.coverImage {
 		box-shadow:
-			0 1px 2px rgba(0, 0, 0, 0.35),
-			0 0.65rem 1.1rem -0.55rem var(--color-sketchShadow);
+			0 1px 2px rgba(0, 0, 0, 0.5),
+			0 0.5rem 0.9rem -0.4rem rgba(0, 0, 0, 0.7);
 	}
 }
 
@@ -104,8 +115,14 @@
 	grid-template-columns: 5rem minmax(0, 1fr);
 }
 
-.bookRowNoted .coverLink {
-	@apply col-start-1 row-start-1;
+/* Cover plus, from 640px, its Buy button underneath */
+.bookRowNoted .coverColumn {
+	@apply col-start-1 row-start-1 flex flex-col items-start gap-3;
+}
+
+/* Below 640px the Buy button stays at the end of the row instead */
+.coverBuy {
+	@apply hidden;
 }
 
 .bookRowNoted .coverImage {
@@ -147,12 +164,24 @@
 		grid-template-columns: 8rem minmax(0, 1fr);
 	}
 
-	.bookRowNoted .coverLink {
+	.bookRowNoted .coverColumn {
 		@apply row-span-3;
 	}
 
 	.bookRowNoted .coverImage {
 		@apply w-32 h-48;
+	}
+
+	.coverBuy {
+		@apply block w-32;
+	}
+
+	.coverBuy a {
+		@apply block text-center;
+	}
+
+	.bookRowNoted .bookMeta .buyAction {
+		@apply hidden;
 	}
 
 	.bookRowNoted .bookHeading,

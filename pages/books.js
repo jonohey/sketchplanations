@@ -2,10 +2,12 @@ import { track } from "@vercel/analytics";
 import classNames from "classnames";
 import booksIndex from "data/books-index.json";
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./books.module.css";
 
+import BackToTopButton from "components/BackToTopButton";
 import FancyLink from "components/FancyLink";
 import TextHeader from "components/TextHeader";
 import { fastScrollToTop, pageTitle } from "helpers";
@@ -30,7 +32,10 @@ const BookBuyLink = ({ book, className, children, location, ...props }) => (
 	</a>
 );
 
-const BookCover = ({ book }) => {
+// Covers display at 80x120 (128x192 for noted rows from 640px up). Next's
+// optimiser resizes them to the 2x size and serves WebP/AVIF, which is crisper
+// and lighter than letting the browser downscale the ~300px source.
+const BookCover = ({ book, noted, priority }) => {
 	const coverClassName = classNames(styles.coverImage, "rounded");
 
 	return (
@@ -41,13 +46,15 @@ const BookCover = ({ book }) => {
 			aria-label={`Buy ${book.title}`}
 		>
 			{book.thumbnail ? (
-				<img
+				<Image
 					src={book.thumbnail}
 					alt=""
-					width={112}
-					height={168}
-					loading="lazy"
-					decoding="async"
+					width={128}
+					height={192}
+					sizes={noted ? "(min-width: 640px) 128px, 80px" : "80px"}
+					quality={90}
+					loading={priority ? "eager" : "lazy"}
+					fetchPriority={priority ? "high" : "auto"}
 					className={coverClassName}
 				/>
 			) : (
@@ -114,14 +121,34 @@ const NoteText = ({ text }) => {
 	});
 };
 
-const BookRow = ({ book }) => {
+const BuyButton = ({ book }) => (
+	<BookBuyLink
+		book={book}
+		className="btn-outline inline-block no-underline"
+		location="button"
+	>
+		Buy
+	</BookBuyLink>
+);
+
+const BookRow = ({ book, priority = false }) => {
 	const hasNote = Boolean(book.note);
+	const cover = <BookCover book={book} noted={hasNote} priority={priority} />;
 
 	return (
 		<article
 			className={classNames(styles.bookRow, hasNote && styles.bookRowNoted)}
 		>
-			<BookCover book={book} />
+			{hasNote ? (
+				<div className={styles.coverColumn}>
+					{cover}
+					<div className={`not-prose ${styles.buyAction} ${styles.coverBuy}`}>
+						<BuyButton book={book} />
+					</div>
+				</div>
+			) : (
+				cover
+			)}
 
 			<div className={styles.bookContent}>
 				<BookTitle book={book} />
@@ -143,13 +170,7 @@ const BookRow = ({ book }) => {
 					</div>
 
 					<div className={`not-prose ${styles.buyAction}`}>
-						<BookBuyLink
-							book={book}
-							className="btn-outline inline-block no-underline"
-							location="button"
-						>
-							Buy
-						</BookBuyLink>
+						<BuyButton book={book} />
 					</div>
 				</div>
 			</div>
@@ -157,9 +178,32 @@ const BookRow = ({ book }) => {
 	);
 };
 
+// Alphabetical order ignores a leading "The", "A" or "An".
+const sortKey = (title) => title.replace(/^(the|an|a)\s+/i, "");
+
 const Books = ({ books }) => {
-	const withNotes = books.filter((book) => book.note);
-	const rest = books.filter((book) => !book.note);
+	// Favourites get the "Start here" section; noted books marked
+	// `favourite: false` sit in "More books" as full-width rows.
+	const withNotes = books.filter(
+		(book) => book.note && book.favourite !== false,
+	);
+	const rest = books
+		.filter((book) => !(book.note && book.favourite !== false))
+		.sort((a, b) => sortKey(a.title).localeCompare(sortKey(b.title)));
+
+	// Alphabetical runs of compact books share the two-column grid; a book with
+	// a note breaks it into a full-width row, so the order reads straight through.
+	const moreBooks = [];
+	for (const book of rest) {
+		const last = moreBooks[moreBooks.length - 1];
+		if (book.note) {
+			moreBooks.push({ noted: true, books: [book] });
+		} else if (last && !last.noted) {
+			last.books.push(book);
+		} else {
+			moreBooks.push({ noted: false, books: [book] });
+		}
+	}
 
 	return (
 		<>
@@ -178,6 +222,7 @@ const Books = ({ books }) => {
 				<meta property="og:url" content="https://sketchplanations.com/books" />
 				<meta name="twitter:card" content="summary" />
 			</Head>
+			<BackToTopButton />
 			<div id="top" className="max-w-5xl mx-auto px-5 pb-16 scroll-mt-24">
 				<div className="prose max-w-none text-center pt-12 pb-6">
 					<div className="not-prose">
@@ -212,9 +257,10 @@ const Books = ({ books }) => {
 									Favourites from the sketches, and why I love them.
 								</p>
 								<ul className={styles.noteList}>
-									{withNotes.map((book) => (
+									{withNotes.map((book, index) => (
 										<li key={book.title}>
-											<BookRow book={book} />
+											{/* The first covers are above the fold: load them eagerly */}
+											<BookRow book={book} priority={index < 2} />
 										</li>
 									))}
 								</ul>
@@ -226,13 +272,18 @@ const Books = ({ books }) => {
 								<h2 id="more-books" className={styles.sectionHeading}>
 									More books
 								</h2>
-								<ul className={styles.bookList}>
-									{rest.map((book) => (
-										<li key={book.title}>
-											<BookRow book={book} />
-										</li>
-									))}
-								</ul>
+								{moreBooks.map((group) => (
+									<ul
+										key={group.books[0].title}
+										className={group.noted ? styles.noteList : styles.bookList}
+									>
+										{group.books.map((book) => (
+											<li key={book.title}>
+												<BookRow book={book} />
+											</li>
+										))}
+									</ul>
+								))}
 							</section>
 						) : null}
 

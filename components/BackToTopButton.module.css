@@ -1,0 +1,11 @@
+.button {
+	@apply fixed bottom-5 right-5 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-bg text-lg leading-none text-blue shadow-md hover:bg-bgDarker dark:text-blueLight;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 200ms;
+}
+
+.visible {
+	opacity: 1;
+	pointer-events: auto;
+}
