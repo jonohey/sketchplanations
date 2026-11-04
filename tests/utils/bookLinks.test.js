@@ -332,6 +332,22 @@ describe("buildBooksIndex", () => {
 
 		expect(books[0].thumbnail).toBe("/books/the-art-cure.jpg");
 	});
+
+	it("treats books as favourites unless an override says otherwise", () => {
+		const books = buildBooksIndex(
+			[
+				{ url: "https://geni.us/a", text: "Alpha", uid: "a", sketchTitle: "A" },
+				{ url: "https://geni.us/b", text: "Beta", uid: "b", sketchTitle: "B" },
+			],
+			{
+				alpha: { note: "Loved it." },
+				beta: { note: "Worth a look.", favourite: false },
+			},
+		);
+
+		expect(books.find((book) => book.title === "Alpha").favourite).toBe(true);
+		expect(books.find((book) => book.title === "Beta").favourite).toBe(false);
+	});
 });
 
 describe("normalizeBookTitle", () => {

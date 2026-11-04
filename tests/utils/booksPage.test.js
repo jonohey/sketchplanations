@@ -119,7 +119,6 @@ describe("books page index quality", () => {
 
 		for (const book of books) {
 			expect(badTitlePattern.test(book.title)).toBe(false);
-			expect(book.note).toBeNull();
 		}
 
 		expect(

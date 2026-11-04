@@ -63,12 +63,12 @@
 		"brain training for runners": {
 			"path": "/books/brain-training-for-runners.jpg",
 			"isbn": "0451222326",
-			"source": "openlibrary"
+			"source": "google"
 		},
 		"cognitive surplus": {
 			"path": "/books/cognitive-surplus.jpg",
-			"isbn": null,
-			"source": "openlibrary-search"
+			"isbn": "0141041609",
+			"source": "amazon"
 		},
 		"conduct risk management": {
 			"path": "/books/conduct-risk-management.png",
@@ -78,7 +78,7 @@
 		"creativity flow and the psychology of discovery and invention": {
 			"path": "/books/creativity-flow-and-the-psychology-of-discovery-and-invention.jpg",
 			"isbn": "0062283251",
-			"source": "google"
+			"source": "amazon"
 		},
 		"cubed the puzzle of us all": {
 			"path": "/books/cubed-the-puzzle-of-us-all.jpg",
@@ -162,10 +162,14 @@
 			"source": "openlibrary-search"
 		},
 		"good to go decarbonising travel after the pandemic": {
-			"path": null,
-			"isbn": null,
-			"source": null,
-			"status": "missing"
+			"path": "/books/good-to-go-decarbonising-travel-after-the-pandemic.jpg",
+			"isbn": "B0B4F5TT5T",
+			"source": "amazon"
+		},
+		"governing the commons": {
+			"path": "/books/governing-the-commons.jpg",
+			"isbn": "1107569788",
+			"source": "google"
 		},
 		"greenlights": {
 			"path": "/books/greenlights.jpg",
@@ -190,7 +194,7 @@
 		"how to win friends and influence people": {
 			"path": "/books/how-to-win-friends-and-influence-people.jpg",
 			"isbn": "0671027034",
-			"source": "openlibrary"
+			"source": "amazon"
 		},
 		"human kind a hopeful history": {
 			"path": "/books/human-kind-a-hopeful-history.jpg",
@@ -230,7 +234,7 @@
 		"justice": {
 			"path": "/books/justice.jpg",
 			"isbn": "0374532508",
-			"source": "openlibrary"
+			"source": "amazon"
 		},
 		"lateral thinking": {
 			"path": "/books/lateral-thinking.jpg",
@@ -273,10 +277,9 @@
 			"source": "google"
 		},
 		"marvellous maps": {
-			"path": null,
-			"isbn": null,
-			"source": null,
-			"status": "missing"
+			"path": "/books/marvellous-maps.jpg",
+			"isbn": "1803380233",
+			"source": "amazon"
 		},
 		"measure what matters": {
 			"path": "/books/measure-what-matters.jpg",
@@ -310,8 +313,8 @@
 		},
 		"my first summer in the sierra": {
 			"path": "/books/my-first-summer-in-the-sierra.jpg",
-			"isbn": null,
-			"source": "openlibrary-search"
+			"isbn": "1782114432",
+			"source": "google"
 		},
 		"my name is charles saatchi and i am an artoholic": {
 			"path": "/books/my-name-is-charles-saatchi-and-i-am-an-artoholic.jpg",
@@ -332,6 +335,11 @@
 			"path": "/books/one-man-and-his-bike.jpg",
 			"isbn": "0091940567",
 			"source": "openlibrary"
+		},
+		"oneminute wisdom": {
+			"path": "/books/oneminute-wisdom.jpg",
+			"isbn": "0385242905",
+			"source": "amazon"
 		},
 		"philosophy in the flesh": {
 			"path": "/books/philosophy-in-the-flesh.jpg",
@@ -401,7 +409,7 @@
 		"technotrends": {
 			"path": "/books/technotrends.jpg",
 			"isbn": "0887307000",
-			"source": "openlibrary"
+			"source": "amazon"
 		},
 		"the 7 habits of highly effective people": {
 			"path": "/books/the-7-habits-of-highly-effective-people.jpg",
@@ -416,7 +424,7 @@
 		"the amazing teenage brain": {
 			"path": "/books/the-amazing-teenage-brain.jpg",
 			"isbn": "1406346934",
-			"source": "openlibrary"
+			"source": "amazon"
 		},
 		"the art cure": {
 			"path": "/books/the-art-cure.jpg",
@@ -456,7 +464,7 @@
 		"the art of war": {
 			"path": "/books/the-art-of-war.jpg",
 			"isbn": "1509827951",
-			"source": "openlibrary"
+			"source": "amazon"
 		},
 		"the baby whisperer": {
 			"path": "/books/the-baby-whisperer.jpg",
@@ -530,8 +538,8 @@
 		},
 		"the peter principle": {
 			"path": "/books/the-peter-principle.jpg",
-			"isbn": null,
-			"source": "openlibrary-search"
+			"isbn": "1788166051",
+			"source": "amazon"
 		},
 		"the practice of creativity": {
 			"path": "/books/the-practice-of-creativity.jpg",
