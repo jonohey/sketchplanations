@@ -1,10 +1,12 @@
 import {
 	Check,
 	CircleAlert,
+	Download,
 	FileText,
 	Layers,
 	Lightbulb,
 	Palette,
+	Search,
 	Shield,
 	Target,
 } from "lucide-react";
@@ -18,9 +20,7 @@ import styles from "styles/landing.module.css";
 import DraggableIconsCanvas from "components/DraggableIconsCanvas";
 import { pageTitle } from "helpers";
 import explainerKitCopyPasteImage from "images/explainer-kit/explainer-kit-copy-paste.png";
-import explainerKitFolderImage from "images/explainer-kit/explainer-kit-folder.png";
-import explainerKitHeroImage from "images/explainer-kit/explainer-kit-hero.png";
-import explainerKitPowerpointImage from "images/explainer-kit/explainer-kit-powerpoint.png";
+import explainerKitHeroImage from "images/explainer-kit/explainer-kit-hero-flying.png";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -102,22 +102,30 @@ const sketchIcons = [
 	{ src: "/images/explainer-kit/sketch-icons/writing@0.5x.png", scale: 1.1 },
 ];
 
-const ExplainerKit = () => {
-	const checkoutUrl =
-		"https://pzpzck-rt.myshopify.com/products/sketchplanations-explainer-kit-pre-order?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web";
-	const fullPriceCheckoutUrl =
-		"https://pzpzck-rt.myshopify.com/products/sketchplanations-explainer-kit-pre-order-full-price";
+const checkoutUrl =
+	"https://pzpzck-rt.myshopify.com/products/sketchplanations-explainer-kit?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web";
 
+const description =
+	"267 hand-drawn people, icons, metaphors, frameworks and backgrounds to copy or download into your slides, docs and talks. Browse and search the web library. Commercial use included.";
+
+const scrollToId = (id) => (e) => {
+	e.preventDefault();
+	const reduceMotion = window.matchMedia(
+		"(prefers-reduced-motion: reduce)",
+	).matches;
+	document
+		.getElementById(id)
+		?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+};
+
+const ExplainerKit = () => {
 	return (
 		<div
 			className={`${styles["landing-page"]} min-h-screen flex flex-col ${inter.variable} ${libreBaskerville.variable}`}
 		>
 			<Head>
 				<title>{pageTitle("Sketchplanations Explainer Kit")}</title>
-				<meta
-					name="description"
-					content="Unlock reputation and career growth by getting your message across effectively, using plug-and-play visuals, frameworks, and examples to elevate your content."
-				/>
+				<meta name="description" content={description} />
 				<link
 					rel="canonical"
 					href="https://sketchplanations.com/explainer-kit"
@@ -125,24 +133,26 @@ const ExplainerKit = () => {
 
 				{/* Open Graph Meta Tags */}
 				<meta property="og:title" content="Sketchplanations Explainer Kit" />
-				<meta
-					property="og:description"
-					content="Unlock reputation and career growth by getting your message across effectively, using plug-and-play visuals, frameworks, and examples to elevate your content."
-				/>
+				<meta property="og:description" content={description} />
 				<meta
 					property="og:url"
 					content="https://sketchplanations.com/explainer-kit"
 				/>
 				<meta property="og:site_name" content="Sketchplanations" />
 				<meta property="og:type" content="product" />
+				<meta
+					property="og:image"
+					content="https://sketchplanations.com/kit/thumbs/person-flying-page.webp"
+				/>
 
 				{/* Twitter Card Meta Tags */}
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta name="twitter:site" content="@sketchplanator" />
 				<meta name="twitter:title" content="Sketchplanations Explainer Kit" />
+				<meta name="twitter:description" content={description} />
 				<meta
-					name="twitter:description"
-					content="Unlock reputation and career growth by getting your message across effectively, using plug-and-play visuals, frameworks, and examples to elevate your content."
+					name="twitter:image"
+					content="https://sketchplanations.com/kit/thumbs/person-flying-page.webp"
 				/>
 			</Head>
 
@@ -160,10 +170,11 @@ const ExplainerKit = () => {
 						/>
 					</Link>
 					<a
-						href="#pre-order"
+						href="#buy"
+						onClick={scrollToId("buy")}
 						className={`${styles["lp-btn-cta"]} text-sm px-4 py-2`}
 					>
-						Pre-order
+						Get the kit
 					</a>
 				</div>
 			</header>
@@ -181,7 +192,7 @@ const ExplainerKit = () => {
 								<p
 									className={`text-sm font-semibold uppercase tracking-wider mb-4 ${styles["lp-text-accent"]}`}
 								>
-									Pre-order now open
+									Version 1 now available
 								</p>
 								<h1 className={`${styles["lp-heading-xl"]} mb-4`}>
 									Visual tools to explain ideas clearly
@@ -189,8 +200,8 @@ const ExplainerKit = () => {
 								<p
 									className={`text-lg md:text-xl ${styles["lp-text-muted"]} leading-relaxed mb-4`}
 								>
-									A growing library of Sketchplanations visuals you can drop
-									into your work.
+									A growing web library of hand-drawn Sketchplanations visuals
+									you can copy or download straight into your work.
 								</p>
 								<p className={`text-lg ${styles["lp-prose"]} mb-5 max-w-xl`}>
 									Make complex ideas easier to explain and easier to remember.
@@ -200,17 +211,18 @@ const ExplainerKit = () => {
 										href={checkoutUrl}
 										className={`${styles["lp-btn-cta"]} ${styles["lp-btn-cta-lg"]}`}
 									>
-										Pre-order for £19
+										Get the kit for £39
 									</a>
 									<a
 										href="#whats-included"
+										onClick={scrollToId("whats-included")}
 										className={styles["lp-btn-outline"]}
 									>
 										See what&apos;s included
 									</a>
 								</div>
 								<p className={`text-sm ${styles["lp-text-muted"]} mt-4`}>
-									50% off &middot; Limited to 30 early supporters
+									267 visuals &middot; One-time purchase &middot; Free updates
 								</p>
 								<p
 									className={`text-sm ${styles["lp-text-muted"]} mt-2 flex items-center gap-1`}
@@ -218,30 +230,17 @@ const ExplainerKit = () => {
 									<Check className={`w-4 h-4 ${styles["lp-text-accent"]}`} />
 									30-day money-back guarantee
 								</p>
-								<p className={`text-sm ${styles["lp-text-muted"]} mt-2`}>
-									Or{" "}
-									<a
-										href={fullPriceCheckoutUrl}
-										className={`${styles["lp-text-accent"]} underline`}
-									>
-										support further with a pre-order at full price
-									</a>
-								</p>
 							</div>
 
 							{/* Hero image */}
-							<div className="relative">
-								<div className="relative z-10 rounded-2xl overflow-hidden shadow-lg">
-									<Image
-										src={explainerKitHeroImage}
-										alt="Sketchplanations Explainer Kit - Ready to get your message across?"
-										className="w-full h-auto"
-										priority
-										placeholder="blur"
-									/>
-								</div>
-								<div
-									className={`absolute -bottom-2 -right-2 w-full h-full rounded-2xl -z-10 ${styles["lp-bg-accent-soft"]}`}
+							<div className="flex justify-center">
+								<Image
+									src={explainerKitHeroImage}
+									alt="A hand-drawn person flying with jet engines on a wing, leaving trails behind"
+									className="w-full max-w-xs lg:max-w-sm h-auto"
+									sizes="(min-width: 1024px) 384px, 320px"
+									priority
+									placeholder="blur"
 								/>
 							</div>
 						</div>
@@ -264,7 +263,7 @@ const ExplainerKit = () => {
 								className={`text-lg ${styles["lp-text-muted"]} max-w-2xl mx-auto mb-2`}
 							>
 								You know what you want to say. But getting it to land is harder,
-								and can be more work, than you'd like it to be.
+								and can be more work, than you&apos;d like it to be.
 							</p>
 							<p
 								className={`text-lg ${styles["lp-text-muted"]} max-w-2xl mx-auto`}
@@ -308,7 +307,8 @@ const ExplainerKit = () => {
 
 						<div className={`text-center ${styles["lp-prose"]}`}>
 							<p>
-								Sometimes the hard part isn't the idea—it's explaining it well.
+								Sometimes the hard part isn&apos;t the idea—it&apos;s explaining
+								it well.
 							</p>
 						</div>
 					</div>
@@ -325,10 +325,10 @@ const ExplainerKit = () => {
 									What this kit is
 								</h2>
 								<p className={`text-lg ${styles["lp-prose"]} mb-6`}>
-									The Sketchplanations Explainer Kit is a growing library of{" "}
+									The Sketchplanations Explainer Kit is a growing web library of{" "}
 									<strong>clear, approachable, reusable visuals</strong> you can
-									drop straight into your slides or articles to help your ideas
-									land.
+									copy or download straight into your slides, documents or
+									articles to help your ideas land.
 								</p>
 								<p className={`text-lg ${styles["lp-prose"]} mb-8`}>
 									It is designed for people who already know what they want to
@@ -367,36 +367,30 @@ const ExplainerKit = () => {
 							<div
 								className={`rounded-2xl p-8 md:p-12 ${styles["lp-gradient-warm"]}`}
 							>
-								<div className="space-y-4">
-									<div className={`${styles["lp-card"]} p-4`}>
+								<div className="grid grid-cols-2 gap-4">
+									{[
+										{
+											name: "thinking-hard-person",
+											alt: "Person thinking hard",
+										},
+										{ name: "lightbulb-partial", alt: "Lightbulb half lit" },
+										{ name: "puzzling", alt: "Person puzzling over something" },
+										{ name: "up-down-chart", alt: "Chart going up and down" },
+									].map((icon) => (
 										<div
-											className={`h-3 w-24 rounded mb-2 ${styles["lp-bg-skeleton-dark"]}`}
-										/>
-										<div
-											className={`h-2 w-full rounded ${styles["lp-bg-skeleton"]}`}
-										/>
-										<div
-											className={`h-2 w-3/4 rounded mt-1 ${styles["lp-bg-skeleton"]}`}
-										/>
-									</div>
-									<div className="grid grid-cols-2 gap-4">
-										<div className={`${styles["lp-card"]} p-4`}>
-											<div
-												className={`w-12 h-12 rounded-lg mb-2 ${styles["lp-bg-accent-muted"]}`}
-											/>
-											<div
-												className={`h-2 w-full rounded ${styles["lp-bg-skeleton"]}`}
+											key={icon.name}
+											className={`${styles["lp-card"]} p-4 flex items-center justify-center aspect-square`}
+										>
+											<Image
+												src={`/images/explainer-kit/sketch-icons/${icon.name}@0.5x.png`}
+												alt={icon.alt}
+												width={120}
+												height={120}
+												sizes="120px"
+												className="w-auto h-full max-h-28 object-contain"
 											/>
 										</div>
-										<div className={`${styles["lp-card"]} p-4`}>
-											<div
-												className={`w-12 h-12 rounded-lg mb-2 ${styles["lp-bg-highlight-soft"]}`}
-											/>
-											<div
-												className={`h-2 w-full rounded ${styles["lp-bg-skeleton"]}`}
-											/>
-										</div>
-									</div>
+									))}
 								</div>
 							</div>
 						</div>
@@ -406,7 +400,7 @@ const ExplainerKit = () => {
 				{/* What's included */}
 				<section
 					id="whats-included"
-					className={`${styles["lp-section"]} ${styles["lp-bg-primary"]}`}
+					className={`${styles["lp-section"]} ${styles["lp-bg-primary"]} scroll-mt-16`}
 				>
 					<div className={`${styles["lp-container"]} max-w-4xl`}>
 						<div className="text-center mb-12">
@@ -425,15 +419,27 @@ const ExplainerKit = () => {
 							{[
 								{
 									icon: Layers,
-									title: "Over 200 visuals",
+									title: "267 visuals and growing",
 									description:
-										"Hundreds of visuals you can use to support your ideas",
+										"People, icons, metaphors, frameworks and backgrounds, with new visuals added over time at no extra cost",
+								},
+								{
+									icon: Search,
+									title: "A searchable web library",
+									description:
+										"Browse by category or search by what you want to say, and see the latest additions",
+								},
+								{
+									icon: Download,
+									title: "Copy or download",
+									description:
+										"Transparent PNGs in full and half size, ready for PowerPoint, Google Slides, Keynote, Figma or Canva",
 								},
 								{
 									icon: FileText,
-									title: "Multiple formats",
+									title: "Commercial licence",
 									description:
-										"Paste directly from PowerPoint, Google Slides, Keynote, or an image library",
+										"Use them in client work, presentations, courses, books and websites, and edit them to fit",
 								},
 							].map((item, index) => (
 								<div key={index} className={`${styles["lp-card-primary"]} p-6`}>
@@ -467,11 +473,11 @@ const ExplainerKit = () => {
 							</h3>
 							<div className="flex flex-wrap justify-center gap-3">
 								{[
-									"People and characters",
-									"Icons and symbols",
-									"Metaphors and analogies",
-									"Frameworks and diagrams",
-									"Simple backgrounds",
+									"People and characters (95)",
+									"Icons and objects (86)",
+									"Metaphors (38)",
+									"Frameworks and diagrams (33)",
+									"Simple backgrounds (15)",
 								].map((format, index) => (
 									<span key={index} className={styles["lp-badge"]}>
 										<Check
@@ -507,36 +513,49 @@ const ExplainerKit = () => {
 							</p>
 						</div>
 
-						<div className="flex flex-col items-center gap-10 max-w-lg mx-auto">
-							{[
-								{
-									image: explainerKitPowerpointImage,
-									caption:
-										"Choose what you want direct from PowerPoint, Slides or Keynote",
-								},
-								{
-									image: explainerKitCopyPasteImage,
-									caption: "Copy/paste or drag into your work",
-								},
-								{
-									image: explainerKitFolderImage,
-									caption: "An organised library to pull from",
-								},
-							].map((item, index) => (
-								<div key={index} className="text-center w-full">
-									<div className="rounded-xl overflow-hidden shadow-md mb-4">
-										<Image
-											src={item.image}
-											alt={item.caption}
-											className="w-full h-auto"
-											placeholder="blur"
-										/>
-									</div>
-									<p className={`text-base ${styles["lp-text-muted"]}`}>
-										{item.caption}
-									</p>
-								</div>
-							))}
+						<div className="flex flex-col items-center gap-8 max-w-lg mx-auto">
+							<div className="rounded-xl overflow-hidden shadow-md w-full">
+								<Image
+									src={explainerKitCopyPasteImage}
+									alt="A visual being copied from the library and pasted into a slide"
+									className="w-full h-auto"
+									sizes="(min-width: 512px) 512px, 100vw"
+									placeholder="blur"
+								/>
+							</div>
+							<ol className="space-y-5 w-full">
+								{[
+									{
+										icon: Search,
+										title: "Browse or search the web library",
+										text: "Find people, icons, metaphors, frameworks and backgrounds by category, or search for what you want to say.",
+									},
+									{
+										icon: Download,
+										title: "Copy or download",
+										text: "Copy a visual straight to your clipboard or download it as a transparent PNG.",
+									},
+									{
+										icon: Layers,
+										title: "Drop it into your work",
+										text: "Paste or drag it into your slides, docs or articles, then mix and resize to suit.",
+									},
+								].map((step, index) => (
+									<li key={index} className="flex gap-4">
+										<div className={styles["lp-icon-container"]}>
+											<step.icon />
+										</div>
+										<div>
+											<p
+												className={`font-semibold ${styles["lp-text-primary"]}`}
+											>
+												{step.title}
+											</p>
+											<p className={styles["lp-text-muted"]}>{step.text}</p>
+										</div>
+									</li>
+								))}
+							</ol>
 						</div>
 					</div>
 				</section>
@@ -671,61 +690,75 @@ const ExplainerKit = () => {
 							FAQ
 						</h2>
 						<dl className="space-y-6">
-							<div>
-								<dt
-									className={`font-semibold ${styles["lp-text-primary"]} text-lg mb-1`}
-								>
-									How is this different from the website?
-								</dt>
-								<dd
-									className={`${styles["lp-prose"]} ${styles["lp-text-muted"]}`}
-								>
-									The Explainer Kit includes high-resolution, presentation-ready
-									elements with transparent backgrounds that you can combine to
-									explain ideas clearly. You can still find individual concept
-									sketches on the website.
-								</dd>
-							</div>
-							<div>
-								<dt
-									className={`font-semibold ${styles["lp-text-primary"]} text-lg mb-1`}
-								>
-									Can I use it commercially?
-								</dt>
-								<dd
-									className={`${styles["lp-prose"]} ${styles["lp-text-muted"]}`}
-								>
-									Yes. For client decks, internal and external presentations,
-									and workshops, go wild.
-								</dd>
-							</div>
-							<div>
-								<dt
-									className={`font-semibold ${styles["lp-text-primary"]} text-lg mb-1`}
-								>
-									Can I customise the visuals?
-								</dt>
-								<dd
-									className={`${styles["lp-prose"]} ${styles["lp-text-muted"]}`}
-								>
-									The first version focuses on ready-to-use visuals that work
-									out of the box. Customisable versions may come later based on
-									feedback.
-								</dd>
-							</div>
-							<div>
-								<dt
-									className={`font-semibold ${styles["lp-text-primary"]} text-lg mb-1`}
-								>
-									What format do the visuals come in?
-								</dt>
-								<dd
-									className={`${styles["lp-prose"]} ${styles["lp-text-muted"]}`}
-								>
-									PowerPoint-ready assets with transparent backgrounds, designed
-									to drop straight into slides.
-								</dd>
-							</div>
+							{[
+								{
+									q: "How do I get access?",
+									a: "After you buy, I'll email you the link and password for the web library.",
+								},
+								{
+									q: "How is this different from the website?",
+									a: "The Explainer Kit is a library of high-resolution, presentation-ready elements with transparent backgrounds that you can combine to explain ideas clearly. You can still find individual concept sketches on the website.",
+								},
+								{
+									q: "What format do the visuals come in?",
+									a: "Transparent PNGs, in full and half size. Copy them from the web library or download them, then drop them into slides, documents or design tools.",
+								},
+								{
+									q: "Are updates included?",
+									a: "Yes. New visuals are added to the library regularly at no extra cost.",
+								},
+								{
+									q: "Can I use it commercially?",
+									a: (
+										<>
+											Yes. Use the visuals in client decks, presentations,
+											courses, books, websites and marketing, and edit them to
+											fit. You can&apos;t resell or share the files, use them in
+											logos, or use them to train AI. See the{" "}
+											<a
+												href="/kit/licence"
+												className={`${styles["lp-text-accent"]} underline`}
+											>
+												full kit licence
+											</a>
+											.
+										</>
+									),
+								},
+								{
+									q: "Can my team use it?",
+									a: (
+										<>
+											Each licence is for one named person. For colleagues or a
+											team licence, email{" "}
+											<a
+												href="mailto:jono.hey@gmail.com"
+												className={`${styles["lp-text-accent"]} underline`}
+											>
+												jono.hey@gmail.com
+											</a>
+											.
+										</>
+									),
+								},
+								{
+									q: "Can I customise the visuals?",
+									a: "The kit focuses on ready-to-use PNG visuals that work out of the box. Editable versions may come later based on feedback.",
+								},
+							].map((item) => (
+								<div key={item.q}>
+									<dt
+										className={`font-semibold ${styles["lp-text-primary"]} text-lg mb-1`}
+									>
+										{item.q}
+									</dt>
+									<dd
+										className={`${styles["lp-prose"]} ${styles["lp-text-muted"]}`}
+									>
+										{item.a}
+									</dd>
+								</div>
+							))}
 						</dl>
 						<p className={`text-center ${styles["lp-text-muted"]} mt-8`}>
 							What am I missing? Let me know:{" "}
@@ -739,30 +772,27 @@ const ExplainerKit = () => {
 					</div>
 				</section>
 
-				{/* Pre-order */}
-				<section id="pre-order" className={styles["lp-section"]}>
+				{/* Buy */}
+				<section id="buy" className={`${styles["lp-section"]} scroll-mt-16`}>
 					<div className={`${styles["lp-container"]} max-w-md`}>
 						<div className={`${styles["lp-card"]} rounded-3xl overflow-hidden`}>
 							<div className={`p-8 text-center ${styles["lp-bg-primary"]}`}>
 								<p className="text-sm font-semibold uppercase tracking-wider opacity-90 mb-2">
-									Pre-order pricing
+									Explainer Kit
 								</p>
 								<div className="flex items-baseline justify-center gap-2 mb-2">
-									<span className={styles["lp-price-original"]}>£39</span>
-									<span className={styles["lp-price-current"]}>£19</span>
+									<span className={styles["lp-price-current"]}>£39</span>
 								</div>
 								<p className="text-sm opacity-90">One-time purchase</p>
 							</div>
 
 							<div className="p-8">
-								<p className={`text-lg ${styles["lp-prose"]} mb-4`}>
-									This is a limited pre-order.
-								</p>
 								<ul className="space-y-3 mb-6">
 									{[
-										"£19 pre-order price (future price £39)",
-										"Limited to 30 early supporters",
-										"Early supporters help shape what goes into the kit",
+										"Access to the web library of 267 visuals",
+										"Search, browse, copy or download transparent PNGs",
+										"Free updates as new visuals are added",
+										"Commercial-use licence for one named person",
 									].map((perk, index) => (
 										<li key={index} className={styles["lp-check-item"]}>
 											<div className={styles["lp-check-icon"]}>
@@ -774,13 +804,13 @@ const ExplainerKit = () => {
 								</ul>
 
 								<p className={`text-sm ${styles["lp-text-muted"]} mb-6`}>
-									If demand isn't sufficient to complete the project, all
-									pre-orders will be refunded.
+									After you buy, I&apos;ll email you the link and password for
+									the web library.
 								</p>
 
 								<div className="text-center mb-4">
 									<a href={checkoutUrl} className={styles["lp-btn-cta"]}>
-										Pre-order now for £19
+										Get the kit for £39
 									</a>
 								</div>
 
@@ -790,17 +820,6 @@ const ExplainerKit = () => {
 									<Shield className="w-4 h-4" />
 									<span>Secure checkout</span>
 								</div>
-								<p
-									className={`text-sm ${styles["lp-text-muted"]} mt-4 text-center`}
-								>
-									Or{" "}
-									<a
-										href={fullPriceCheckoutUrl}
-										className={`${styles["lp-text-accent"]} underline`}
-									>
-										support further with a pre-order at full price
-									</a>
-								</p>
 							</div>
 						</div>
 					</div>
@@ -839,24 +858,15 @@ const ExplainerKit = () => {
 							Important ideas deserve clear visuals
 						</h2>
 						<p className="text-lg opacity-90 mb-8 max-w-xl mx-auto">
-							Don't let complexity hide your best thinking. Start creating
+							Don&apos;t let complexity hide your best thinking. Start creating
 							explanations that stick with the Sketchplanations Explainer Kit.
 						</p>
 						<a
 							href={checkoutUrl}
 							className={`${styles["lp-btn-highlight"]} ${styles["lp-btn-cta-lg"]}`}
 						>
-							Get the Explainer Kit for £19
+							Get the Explainer Kit for £39
 						</a>
-						<p className="mt-4 text-sm opacity-80">
-							Limited early access to pre-order
-						</p>
-						<p className="mt-2 text-sm opacity-80">
-							Or{" "}
-							<a href={fullPriceCheckoutUrl} className="underline">
-								support further with a pre-order at full price
-							</a>
-						</p>
 					</div>
 				</section>
 			</main>
@@ -870,6 +880,8 @@ const ExplainerKit = () => {
 					</p>
 					<div className="flex justify-center gap-4 mt-2">
 						<Link href="/">Main site</Link>
+						<span>&middot;</span>
+						<a href="/kit/licence">Kit licence</a>
 						<span>&middot;</span>
 						<Link href="/privacy">Privacy</Link>
 					</div>
