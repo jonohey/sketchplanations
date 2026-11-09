@@ -25,8 +25,15 @@ const pubDate = (date) => {
 	return parts.join(" ");
 };
 
-export function rssItemsFromCatalog({ sketchplanations }) {
-	return newestSketchplanations(sketchplanations, RSS_ITEM_COUNT).map(
+// Sketches are often published in Prismic ahead of time with a future
+// `published_at` (so the URL can be shared). Keep them out of the feed until
+// that moment, otherwise readers see an item dated in the future.
+export function rssItemsFromCatalog({ sketchplanations }, now = new Date()) {
+	const published = sketchplanations.filter(
+		({ data }) => new Date(data?.published_at) <= now,
+	);
+
+	return newestSketchplanations(published, RSS_ITEM_COUNT).map(
 		({
 			uid,
 			data: {
