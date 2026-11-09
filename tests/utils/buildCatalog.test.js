@@ -116,6 +116,28 @@ describe("rssItemsFromCatalog", () => {
 	});
 });
 
+describe("rssItemsFromCatalog scheduled sketches", () => {
+	it("leaves out sketches whose published_at is still in the future", () => {
+		const scheduled = {
+			...buildCatalogSketches[0],
+			uid: "scheduled-sketch",
+			data: {
+				...buildCatalogSketches[0].data,
+				published_at: "2999-01-01T12:00:00+0000",
+			},
+		};
+
+		const items = rssItemsFromCatalog({
+			sketchplanations: [scheduled, ...buildCatalogSketches],
+		});
+
+		expect(items.map(({ guid }) => guid)).not.toContain(
+			"https://sketchplanations.com/scheduled-sketch",
+		);
+		expect(items).toHaveLength(buildCatalogSketches.length);
+	});
+});
+
 describe("sitemapDocumentUrls", () => {
 	it("uses the latest CMS publication date for the homepage lastmod", () => {
 		const urls = sitemapDocumentUrls(buildCatalog);

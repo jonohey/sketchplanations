@@ -1,0 +1,29 @@
+name: Rebuild for scheduled posts
+
+# Sketches are published in Prismic ahead of time with a future `published_at`
+# (usually midday UTC on a Sunday). The RSS feed leaves them out until that time
+# has passed, so rebuild just after to get them into the feed.
+#
+# Requires the VERCEL_DEPLOY_HOOK_URL repository secret: the URL of a Vercel
+# Deploy Hook for the `main` branch (the production branch), created with
+# `vercel deploy-hooks create scheduled-posts --git-branch main` or in the
+# project's Git settings in the Vercel dashboard.
+on:
+  schedule:
+    - cron: '1 14 * * 0'
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel production deploy
+        env:
+          DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          set -euo pipefail
+          if [ -z "$DEPLOY_HOOK_URL" ]; then
+            echo "VERCEL_DEPLOY_HOOK_URL secret is not set" >&2
+            exit 1
+          fi
+          curl --fail --silent --show-error -X POST "$DEPLOY_HOOK_URL"
