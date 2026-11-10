@@ -1068,7 +1068,7 @@ const About = ({ siteUrl }) => {
 						<p>
 							Do you play piano? You can{" "}
 							<FancyLink
-								href="https://pzpzck-rt.myshopify.com/"
+								href="https://shop.spotify.com/en/artist/729QwZLCsOw3JtZmbQSFTj/store"
 								target="_blank"
 								rel="noopener noreferrer"
 							>

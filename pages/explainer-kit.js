@@ -102,8 +102,7 @@ const sketchIcons = [
 	{ src: "/images/explainer-kit/sketch-icons/writing@0.5x.png", scale: 1.1 },
 ];
 
-const checkoutUrl =
-	"https://pzpzck-rt.myshopify.com/products/sketchplanations-explainer-kit?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web";
+const checkoutUrl = "https://buy.stripe.com/6oU00j1yZ9w2go90Rh1Fe0a";
 
 const description =
 	"267 hand-drawn people, icons, metaphors, frameworks and backgrounds to copy or download into your slides, docs and talks. Browse and search the web library. Commercial use included.";
@@ -170,8 +169,7 @@ const ExplainerKit = () => {
 						/>
 					</Link>
 					<a
-						href="#buy"
-						onClick={scrollToId("buy")}
+						href={checkoutUrl}
 						className={`${styles["lp-btn-cta"]} text-sm px-4 py-2`}
 					>
 						Get the kit
