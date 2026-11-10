@@ -54,7 +54,7 @@
 		"lucide-react": "^1.65.0",
 		"next": "^16.4.3",
 		"node-fetch": "^3.3.2",
-		"path-to-regexp": "^8.4.2",
+		"path-to-regexp": "^9.0.0",
 		"polished": "^4.3.1",
 		"postcss-flexbugs-fixes": "^5.0.2",
 		"postgres": "^3.4.9",
@@ -116,7 +116,7 @@
 			"minimatch@9": "^11.0.4",
 			"minimatch@10": "^11.0.4",
 			"yaml": "^2.8.3",
-			"path-to-regexp": "^8.4.2",
+			"path-to-regexp": "^9.0.0",
 			"path-match>path-to-regexp": "^1.0.0"
 		}
 	}
