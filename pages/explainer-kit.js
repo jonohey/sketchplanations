@@ -19,6 +19,7 @@ import styles from "styles/landing.module.css";
 
 import DraggableIconsCanvas from "components/DraggableIconsCanvas";
 import { pageTitle } from "helpers";
+import explainerKitAssetPageImage from "images/explainer-kit/explainer-kit-asset-page.png";
 import explainerKitCopyPasteImage from "images/explainer-kit/explainer-kit-copy-paste.png";
 import explainerKitHeroImage from "images/explainer-kit/explainer-kit-hero-flying.png";
 
@@ -35,77 +36,113 @@ const libreBaskerville = Libre_Baskerville({
 	variable: "--lp-font-serif",
 });
 
+const sketchIconPath = (folder, id) =>
+	`/images/explainer-kit/${folder}/${id}@0.5x.png`;
+
+// The canvas shuffles these and shows as many as fit, so the pool can be larger
+// than what is visible at once.
 const sketchIcons = [
-	{ src: "/images/explainer-kit/sketch-icons/angry@0.5x.png", scale: 1.3 },
-	{ src: "/images/explainer-kit/sketch-icons/anxious@0.5x.png", scale: 1.3 },
+	...[
+		["angry", 1.3],
+		["anxious", 1.3],
+		["bored-on-phone", 1.3],
+		["calendar-plan", 1.15],
+		["cogs-2", 0.85],
+		["impatient", 1.3],
+		["knotty-thought-2", 0.85],
+		["lightbulb-partial", 0.9],
+		["metal-detecting", 1.5],
+		["puzzling", 1.3],
+		["sad", 1],
+		["singing", 1],
+		["slot-machine", 1.2],
+		["thinking-hard-person", 1.3],
+		["up-down-chart", 1.1],
+		["writing", 1.1],
+	].map(([id, scale]) => ({
+		src: sketchIconPath("sketch-icons", id),
+		scale,
+	})),
+	...[
+		["artist-painting-at-easel", 1.5],
+		["backpacker-walking", 1.4],
+		["brain", 1],
+		["burned-out", 1.4],
+		["chest", 1],
+		["choir-singing", 1.4],
+		["choose-path", 1.2],
+		["compass-modern-up", 1],
+		["exclaiming", 1.5],
+		["helping-hand", 1.4],
+		["iceberg", 1.5],
+		["juggling-8-repetition", 1.3],
+		["magnifying-glass", 1],
+		["maze", 1.3],
+		["obstacle", 1.4],
+		["person-designing-at-whiteboard", 1.5],
+		["person-holding-scale", 1.2],
+		["puzzle-three", 1],
+		["pyramid-three", 1.2],
+		["rocket-launch", 1.3],
+		["runner-headband", 1.2],
+		["s-curve-chart", 1.6],
+		["speech", 1.4],
+		["target-and-bullseye", 1.1],
+		["team-table", 1.4],
+		["thumbs-up", 1.3],
+		["tipping-dominoes", 1.1],
+	].map(([id, scale]) => ({ src: sketchIconPath("library", id), scale })),
+];
+
+const libraryImage = (id) => `/images/explainer-kit/library/${id}@0.5x.png`;
+
+// A taste of the People category, labelled as in the web library.
+const libraryPeople = [
+	{ id: "angry", label: "Angry" },
+	{ id: "anxious", label: "Anxious" },
+	{ id: "artist-painting-at-easel", label: "Artist painting at an easel" },
+	{ id: "backpacker-walking", label: "Backpacker — walking" },
+	{ id: "bored-computer", label: "Bored at computer" },
+	{ id: "burned-out", label: "Burned out" },
+	{ id: "choir-singing", label: "Choir singing" },
+	{ id: "giving-collecting-feedback", label: "Giving and collecting feedback" },
+	{ id: "team-table", label: "Team — at a table" },
+	{ id: "speech", label: "Speech — presentation" },
+	{ id: "helping-hand", label: "Helping hand" },
+	{ id: "person-designing-at-whiteboard", label: "Person — whiteboard" },
+];
+
+const libraryCategories = [
 	{
-		src: "/images/explainer-kit/sketch-icons/blue-check-2@0.5x.png",
-		scale: 0.7,
+		title: "Icons and objects",
+		count: "80+",
+		text: "Lightbulbs, calendars, arrows and checkmarks for when only an icon will do.",
+		ids: ["lightbulb-full", "brain", "calendar"],
 	},
 	{
-		src: "/images/explainer-kit/sketch-icons/bored-on-phone@0.5x.png",
-		scale: 1.3,
+		title: "Metaphors",
+		count: "35+",
+		text: "Forks in the road, obstacles and launches for progress, choices and risk.",
+		ids: ["choose-path", "obstacle", "rocket-launch"],
 	},
 	{
-		src: "/images/explainer-kit/sketch-icons/calendar-plan@0.5x.png",
-		scale: 1.15,
+		title: "Frameworks and diagrams",
+		count: "30+",
+		text: "Pyramids, S-curves, icebergs and loops, ready to label your own way.",
+		ids: ["pyramid-three", "s-curve-chart", "iceberg"],
 	},
 	{
-		src: "/images/explainer-kit/sketch-icons/checkbox-red@0.5x.png",
-		scale: 0.75,
+		title: "Simple backgrounds",
+		count: "15+",
+		text: "Subtle scenes to give a slide a little extra warmth.",
+		ids: ["bookcase-md", "desert-island"],
 	},
-	{ src: "/images/explainer-kit/sketch-icons/cogs-2@0.5x.png", scale: 0.85 },
-	{ src: "/images/explainer-kit/sketch-icons/impatient@0.5x.png", scale: 1.3 },
-	{
-		src: "/images/explainer-kit/sketch-icons/knotty-thought-2@0.5x.png",
-		scale: 0.85,
-	},
-	{
-		src: "/images/explainer-kit/sketch-icons/lightbulb-partial@0.5x.png",
-		scale: 0.9,
-	},
-	{
-		src: "/images/explainer-kit/sketch-icons/metal-detecting@0.5x.png",
-		scale: 1.5,
-	},
-	{ src: "/images/explainer-kit/sketch-icons/puzzling@0.5x.png", scale: 1.3 },
-	{
-		src: "/images/explainer-kit/sketch-icons/red-check-1@0.5x.png",
-		scale: 0.65,
-	},
-	{ src: "/images/explainer-kit/sketch-icons/sad@0.5x.png", scale: 1 },
-	{ src: "/images/explainer-kit/sketch-icons/singing@0.5x.png", scale: 1 },
-	{
-		src: "/images/explainer-kit/sketch-icons/slot-machine@0.5x.png",
-		scale: 1.2,
-	},
-	{
-		src: "/images/explainer-kit/sketch-icons/thinking-bubble@0.5x.png",
-		scale: 0.9,
-	},
-	{
-		src: "/images/explainer-kit/sketch-icons/thinking-hard-person@0.5x.png",
-		scale: 1.3,
-	},
-	{
-		src: "/images/explainer-kit/sketch-icons/thought-bubble-3@0.5x.png",
-		scale: 0.85,
-	},
-	{
-		src: "/images/explainer-kit/sketch-icons/up-down-chart@0.5x.png",
-		scale: 1.1,
-	},
-	{
-		src: "/images/explainer-kit/sketch-icons/wide-end-arrow@0.5x.png",
-		scale: 1,
-	},
-	{ src: "/images/explainer-kit/sketch-icons/writing@0.5x.png", scale: 1.1 },
 ];
 
 const checkoutUrl = "https://buy.stripe.com/6oU00j1yZ9w2go90Rh1Fe0a";
 
 const description =
-	"267 hand-drawn people, icons, metaphors, frameworks and backgrounds to copy or download into your slides, docs and talks. Browse and search the web library. Commercial use included.";
+	"250+ hand-drawn people, icons, metaphors, frameworks and backgrounds to copy or download into your slides, docs and talks. Browse and search the web library. Commercial use included.";
 
 const scrollToId = (id) => (e) => {
 	e.preventDefault();
@@ -220,7 +257,7 @@ const ExplainerKit = () => {
 									</a>
 								</div>
 								<p className={`text-sm ${styles["lp-text-muted"]} mt-4`}>
-									267 visuals &middot; One-time purchase &middot; Free updates
+									250+ visuals &middot; One-time purchase &middot; Free updates
 								</p>
 								<p
 									className={`text-sm ${styles["lp-text-muted"]} mt-2 flex items-center gap-1`}
@@ -363,9 +400,9 @@ const ExplainerKit = () => {
 							</div>
 
 							<div
-								className={`rounded-2xl p-8 md:p-12 ${styles["lp-gradient-warm"]}`}
+								className={`rounded-2xl p-4 sm:p-6 lg:p-8 ${styles["lp-gradient-warm"]}`}
 							>
-								<div className="grid grid-cols-2 gap-4">
+								<div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-3 md:gap-4">
 									{[
 										{
 											name: "thinking-hard-person",
@@ -377,19 +414,135 @@ const ExplainerKit = () => {
 									].map((icon) => (
 										<div
 											key={icon.name}
-											className={`${styles["lp-card"]} p-4 flex items-center justify-center aspect-square`}
+											className={`${styles["lp-card"]} p-3 relative aspect-square`}
 										>
 											<Image
 												src={`/images/explainer-kit/sketch-icons/${icon.name}@0.5x.png`}
 												alt={icon.alt}
-												width={120}
-												height={120}
-												sizes="120px"
-												className="w-auto h-full max-h-28 object-contain"
+												fill
+												sizes="(min-width: 1024px) 160px, (min-width: 640px) 20vw, 40vw"
+												className="object-contain p-3"
 											/>
 										</div>
 									))}
 								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				{/* A look inside the library */}
+				<section
+					id="inside-the-library"
+					className={`${styles["lp-section"]} ${styles["lp-bg-secondary"]}`}
+				>
+					<div className={`${styles["lp-container"]} max-w-5xl`}>
+						<div className="text-center mb-10">
+							<h2
+								className={`${styles["lp-heading"]} text-3xl md:text-4xl mb-4`}
+							>
+								A look inside the library
+							</h2>
+							<p
+								className={`text-lg ${styles["lp-text-muted"]} max-w-2xl mx-auto`}
+							>
+								People for every mood and moment, plus icons, metaphors and
+								frameworks to build your story around.
+							</p>
+						</div>
+
+						<h3
+							className={`text-sm font-semibold uppercase tracking-wider mb-4 ${styles["lp-text-accent"]}`}
+						>
+							People (90+)
+						</h3>
+						<p className={`${styles["lp-prose"]} mb-6 max-w-2xl`}>
+							Friendly hand-drawn figures for teams, audiences, customers and
+							characters in your story. A few of them:
+						</p>
+						<ul className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 sm:gap-3 md:gap-4 mb-12">
+							{libraryPeople.map((person) => (
+								<li
+									key={person.id}
+									className={`${styles["lp-card"]} p-3 flex flex-col items-center`}
+								>
+									<div className="relative w-full aspect-square">
+										<Image
+											src={libraryImage(person.id)}
+											alt=""
+											fill
+											sizes="(min-width: 1024px) 140px, (min-width: 768px) 15vw, (min-width: 640px) 22vw, 30vw"
+											className="object-contain"
+										/>
+									</div>
+									<span
+										className={`text-xs text-center mt-2 ${styles["lp-text-muted"]}`}
+									>
+										{person.label}
+									</span>
+								</li>
+							))}
+						</ul>
+
+						<div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+							{libraryCategories.map((category) => (
+								<div
+									key={category.title}
+									className={`${styles["lp-card"]} p-5`}
+								>
+									<div className="flex items-center justify-center gap-2 h-24 mb-4">
+										{category.ids.map((id) => (
+											<div key={id} className="relative h-full flex-1">
+												<Image
+													src={libraryImage(id)}
+													alt=""
+													fill
+													sizes="96px"
+													className="object-contain"
+												/>
+											</div>
+										))}
+									</div>
+									<h3
+										className={`font-semibold ${styles["lp-text-primary"]} mb-1`}
+									>
+										{category.title}{" "}
+										<span className={styles["lp-text-muted"]}>
+											({category.count})
+										</span>
+									</h3>
+									<p className={`text-sm ${styles["lp-text-muted"]}`}>
+										{category.text}
+									</p>
+								</div>
+							))}
+						</div>
+
+						<div className="grid md:grid-cols-2 gap-8 items-center">
+							<div className="rounded-xl overflow-hidden shadow-md">
+								<Image
+									src={explainerKitAssetPageImage}
+									alt="A visual in the web library, with its description, tags, and buttons to copy it to the clipboard or download it as a PNG"
+									className="w-full h-auto"
+									sizes="(min-width: 768px) 480px, 100vw"
+									placeholder="blur"
+								/>
+							</div>
+							<div>
+								<h3
+									className={`${styles["lp-heading"]} text-2xl md:text-3xl mb-4`}
+								>
+									Find it, copy it, drop it in
+								</h3>
+								<p className={`text-lg ${styles["lp-prose"]} mb-4`}>
+									Every visual has its own page with a description and tags, so
+									you can search by what you want to say, not just by
+									what&apos;s drawn.
+								</p>
+								<p className={`text-lg ${styles["lp-prose"]}`}>
+									Copy it straight to your clipboard, or download a transparent
+									PNG in full or half size.
+								</p>
 							</div>
 						</div>
 					</div>
@@ -417,7 +570,7 @@ const ExplainerKit = () => {
 							{[
 								{
 									icon: Layers,
-									title: "267 visuals and growing",
+									title: "250+ visuals and growing",
 									description:
 										"People, icons, metaphors, frameworks and backgrounds, with new visuals added over time at no extra cost",
 								},
@@ -471,11 +624,11 @@ const ExplainerKit = () => {
 							</h3>
 							<div className="flex flex-wrap justify-center gap-3">
 								{[
-									"People and characters (95)",
-									"Icons and objects (86)",
-									"Metaphors (38)",
-									"Frameworks and diagrams (33)",
-									"Simple backgrounds (15)",
+									"People and characters (90+)",
+									"Icons and objects (80+)",
+									"Metaphors (35+)",
+									"Frameworks and diagrams (30+)",
+									"Simple backgrounds (15+)",
 								].map((format, index) => (
 									<span key={index} className={styles["lp-badge"]}>
 										<Check
@@ -787,7 +940,7 @@ const ExplainerKit = () => {
 							<div className="p-8">
 								<ul className="space-y-3 mb-6">
 									{[
-										"Access to the web library of 267 visuals",
+										"Access to the web library of 250+ visuals",
 										"Search, browse, copy or download transparent PNGs",
 										"Free updates as new visuals are added",
 										"Commercial-use licence for one named person",
