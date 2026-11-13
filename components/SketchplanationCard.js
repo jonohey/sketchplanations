@@ -17,6 +17,7 @@ const SketchplanationCard = ({
 	sketchplanation,
 	imageProps = {},
 	isLoading = false,
+	shortcutKey,
 }) => {
 	const rootClassName = classNames(styles.root, "group");
 	const { imgixParams, quality } = isLoading
@@ -56,6 +57,11 @@ const SketchplanationCard = ({
 						fallbackAlt=""
 						{...imageProps}
 					/>
+				)}
+				{shortcutKey && (
+					<kbd className={styles.shortcut} aria-hidden="true">
+						{shortcutKey}
+					</kbd>
 				)}
 			</span>
 			<span className={styles.title}>
