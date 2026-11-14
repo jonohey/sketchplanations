@@ -95,8 +95,8 @@ importers:
         specifier: ^5.0.2
         version: 5.0.2(postcss@8.5.32)
       postgres:
-        specifier: ^3.4.9
-        version: 3.4.9
+        specifier: ^4.1.0
+        version: 4.1.0
       posthog-js:
         specifier: ^1.444.4
         version: 1.444.4(@types/react@19.2.17)(react@19.3.1)
@@ -3866,9 +3866,9 @@ packages:
     resolution: {integrity: sha512-LJlKCCAUFKOuZxipUdYw1NzIITEsPcgyOG9LkvRJvuKj/bRzbuRY0ARXvL0pWGpsZvn8jku+LMep2eU0seHp8g==}
     engines: {node: ^10 || ^12 || >=14}
 
-  postgres@3.4.9:
-    resolution: {integrity: sha512-GD3qdB0x1z9xgFI6cdRD6xu2Sp2WCOEoe3mtnyB5Ee0XrrL5Pe+e4CCnJrRMnL1zYtRDZmQQVbvOttLnKDLnaw==}
-    engines: {node: '>=12'}
+  postgres@4.1.0:
+    resolution: {integrity: sha512-s+0WH67YAyLdBQUb6XczbziBhY+C9uiQsg9S8R5RHdZhk6sdyK6202E+T2tXpiInSEEjDLRSJ3OpYBe3PN6MsQ==}
+    engines: {node: '>=18'}
 
   posthog-js@1.444.4:
     resolution: {integrity: sha512-oZgy3ETGhygPewB+UNbdu9htO0u2b3EmTdGSdyc+jCpFyuhOW+Yd+3ZccifkhwouUchMAk1ps9R3vZd1iCB/wA==}
@@ -8197,7 +8197,7 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.2
 
-  postgres@3.4.9: {}
+  postgres@4.1.0: {}
 
   posthog-js@1.444.4(@types/react@19.2.17)(react@19.3.1):
     dependencies:
