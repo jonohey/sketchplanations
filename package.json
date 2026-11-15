@@ -56,7 +56,7 @@
 		"path-to-regexp": "^9.0.0",
 		"polished": "^4.3.1",
 		"postcss-flexbugs-fixes": "^5.0.2",
-		"postgres": "^3.4.9",
+		"postgres": "^4.1.1",
 		"posthog-js": "^1.447.3",
 		"ramda": "^0.32.0",
 		"react": "^19.3.1",
