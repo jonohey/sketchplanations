@@ -65,6 +65,20 @@ Pinning pnpm via `"packageManager": "pnpm@9.15.9"` keeps versions consistent acr
 - **`.github/workflows/dependabot-lockfile-sync.yml`** — on Dependabot PRs, runs `pnpm install --no-frozen-lockfile` and commits the lockfile if overrides were stripped.
 - **`.github/workflows/dependabot-lockfile-conflicts.yml`** — when `main` moves, or on the Monday/Tuesday follow-up, merges `main` into Dependabot PRs whose only conflict is `pnpm-lock.yaml`. It keeps that PR’s lockfile pins, runs `pnpm install`, and pushes so CI and auto-merge can run. `pull_request` workflows do not run while a PR is conflicted, and Dependabot rejects `@dependabot rebase` from GitHub Actions, so this job replaces that nudge.
 - **`.github/workflows/ci.yml`** — `dependabot-auto-merge` merges patch/minor Dependabot PRs after CI passes. It keys off `github.event.pull_request.user.login == 'dependabot[bot]'`, not `github.actor`, so it still runs after the lockfile-sync workflow pushes a fix.
+- **`.github/workflows/dependabot-pr-health.yml`** — Monday/Tuesday safety net that re-dispatches CI for Dependabot PRs with no `test` check. A dispatched run adds the check but does not auto-merge (that job only runs on `pull_request` events), so it is a backstop, not the main path.
+
+### Workflows must push with `DEPENDABOT_PUSH_TOKEN`
+
+Pushes, branch updates and merges made with the default `GITHUB_TOKEN` do **not** trigger other workflows (GitHub's loop protection). A lockfile-sync or conflict-resolution commit pushed that way never gets a CI run, so the PR has no `test` check and auto-merge never fires. The sync workflow, the conflicts workflow and `dependabot-auto-merge` therefore use `secrets.DEPENDABOT_PUSH_TOKEN` and fall back to `GITHUB_TOKEN` with a warning if it is missing.
+
+Setup (one-off, maintainer):
+
+1. Create a fine-grained personal access token (or GitHub App token) limited to this repository with **Contents: read/write**, **Pull requests: read/write** and **Workflows: read/write** (merging `main` into a Dependabot branch can include `.github/workflows` changes, which needs the workflows permission). Note the expiry date and renew it before then.
+2. Add it as secret `DEPENDABOT_PUSH_TOKEN` in **both** Settings → Secrets and variables → **Actions** and → **Dependabot**. Workflows triggered by Dependabot PRs read only Dependabot secrets.
+
+If PRs stall with no `test` check, look for the `DEPENDABOT_PUSH_TOKEN is not set` warning in the workflow run, or an expired token.
+
+The lockfile workflows install with `--ignore-scripts` and (for the sync workflow) do not persist git credentials, because they run `pnpm install` on dependency code while holding a token that can push.
 
 ### If a Dependabot PR fails to deploy
 
