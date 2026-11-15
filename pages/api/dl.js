@@ -1,3 +1,4 @@
+import * as prismic from "@prismicio/client";
 import fetch from "node-fetch";
 
 import { client } from "services/prismic";
@@ -12,9 +13,24 @@ const sanitizeSlug = (slug) =>
 export default async (req, res) => {
 	const uid = req.query.uid;
 	const format = req.query.format;
-	const sketchplanation = await client.getByUID("sketchplanation", uid, {
-		fetch: "sketchplanation.image",
-	});
+
+	if (typeof uid !== "string" || !uid) {
+		res.status(400).send("Missing uid");
+		return;
+	}
+
+	let sketchplanation;
+	try {
+		sketchplanation = await client.getByUID("sketchplanation", uid, {
+			fetch: "sketchplanation.image",
+		});
+	} catch (e) {
+		if (e instanceof prismic.NotFoundError) {
+			res.status(404).send("Sketchplanation not found");
+			return;
+		}
+		throw e;
+	}
 
 	const baseUrl = sketchplanation.data.image.url.split("?")[0];
 	const extension = baseUrl.split(".").pop().toLowerCase();

@@ -136,7 +136,7 @@ Cloud sessions have no `gh` CLI. Use the GitHub MCP tools to open the PR. There 
 - **Best practice**: Check accessibility, error handling, security, and consistency with surrounding code.
 - **CSS & styling**: New or changed CSS should be mobile-first, with behaviour checked on small viewports. Consider dark mode (`prefers-color-scheme`) for any colours, borders, or backgrounds. Typography should meet accessible contrast (WCAG AA) unless a deliberate subdued treatment is intended.
 
-Briefly summarise the review outcome to the user (what you checked, what you fixed, anything flagged).
+**Always report the review to the user in chat, before committing**, so they can see it happened. Never skip this, even when the review found nothing. Briefly cover each checklist item (what you checked), **what you changed as a result**, and anything flagged. If the review led to no changes, say so explicitly (e.g. "Review: no changes needed").
 
 ### Local checks — run what the change can affect
 

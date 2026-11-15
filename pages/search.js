@@ -47,8 +47,9 @@ const Search = () => {
 						onChange={setQuery}
 						onClear={clear}
 						onKeyDown={(e) => {
-							if (e.key === "Escape") {
-								clear();
+							// Leave the input so the number keys can open results.
+							if (e.key === "Escape" || e.key === "Enter") {
+								e.currentTarget.blur();
 							}
 						}}
 						autoFocus

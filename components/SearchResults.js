@@ -1,6 +1,8 @@
 import { Lightbulb, Shuffle } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 
 import styles from "./SearchResults.module.css";
 
@@ -9,6 +11,7 @@ import {
 	shouldShowStretchMissMessage,
 	shouldShowSuggestMissingSketch,
 } from "helpers/search/rudeSearch";
+import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
 import useSearch from "hooks/useSearch";
 
 import FancyLink from "./FancyLink";
@@ -50,6 +53,9 @@ const MIN_LOADING_TIME = 1000;
 
 const SUGGEST_IDEA_URL = "https://forms.gle/c6LymLW5vLx9FUeW6";
 
+// Number keys jump to the first ten results: 1–9, then 0 for the tenth.
+const RESULT_SHORTCUT_KEYS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+
 const SuggestMissingSketch = () => (
 	<p>
 		<FancyLink
@@ -78,6 +84,7 @@ const SearchResults = () => {
 		showRudeSearchEasterEgg,
 	} = useSearch();
 
+	const router = useRouter();
 	const [randomHandle, setRandomHandle] = useState(null);
 	const [loadingMessage, setLoadingMessage] = useState(randomLoadingMessage());
 	const [showLoading, setShowLoading] = useState(false);
@@ -111,6 +118,20 @@ const SearchResults = () => {
 
 		fetchRandomHandle();
 	}, []);
+	const shortcutsActive = called && !showLoading && isPresent(results);
+	useHotkeys(
+		RESULT_SHORTCUT_KEYS,
+		(e) => {
+			if (shouldIgnoreShortcut(e)) return;
+			const sketch = results[RESULT_SHORTCUT_KEYS.indexOf(e.key)];
+			if (!sketch) return;
+			e.preventDefault();
+			router.push(`/${sketch.uid}`);
+		},
+		{ useKey: true, enabled: shortcutsActive },
+		[results, router],
+	);
+
 	if (!called) {
 		return (
 			<>
@@ -209,7 +230,10 @@ const SearchResults = () => {
 											Could these be what you were looking for?
 										</p>
 									)}
-									<SketchplanationsGrid prismicDocs={results} />
+									<SketchplanationsGrid
+										prismicDocs={results}
+										shortcutKeys={RESULT_SHORTCUT_KEYS}
+									/>
 								</div>
 							)}
 						</>

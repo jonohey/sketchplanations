@@ -51,3 +51,13 @@
 		mix-blend-mode: multiply;
 	}
 }
+
+.shortcut {
+	@apply absolute z-20 top-2 right-2 inline-flex items-center justify-center w-5 h-5 text-xs font-sans bg-bgKeyboardShortcut border border-borderKeyboardShortcut rounded text-textSubdued opacity-60;
+}
+
+@media (pointer: coarse) {
+	.shortcut {
+		@apply hidden;
+	}
+}
