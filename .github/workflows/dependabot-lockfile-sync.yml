@@ -15,10 +15,13 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+      # Credentials are not persisted: pnpm install runs dependency code, so the
+      # push token is only handed to the final push step.
       - uses: actions/checkout@v5
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
+          persist-credentials: false
 
       - uses: pnpm/action-setup@v6
 
@@ -28,16 +31,25 @@ jobs:
           cache: pnpm
 
       - name: Restore pnpm overrides in lockfile
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --no-frozen-lockfile --ignore-scripts
 
       - name: Commit lockfile fix
+        env:
+          # Pushes made with GITHUB_TOKEN deliberately do not trigger other workflows,
+          # so use DEPENDABOT_PUSH_TOKEN. On Dependabot-triggered runs the secret must
+          # exist as a Dependabot secret; otherwise this falls back to GITHUB_TOKEN.
+          PUSH_TOKEN: ${{ secrets.DEPENDABOT_PUSH_TOKEN || secrets.GITHUB_TOKEN }}
+          HAS_PUSH_TOKEN: ${{ secrets.DEPENDABOT_PUSH_TOKEN != '' }}
         run: |
           if git diff --quiet pnpm-lock.yaml; then
             echo "Lockfile already in sync"
             exit 0
           fi
+          if [ "$HAS_PUSH_TOKEN" != "true" ]; then
+            echo "::warning::DEPENDABOT_PUSH_TOKEN is not available to this run (add it as a Dependabot secret). This push will not trigger CI."
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add pnpm-lock.yaml
           git commit -m "Sync pnpm lockfile overrides"
-          git push
+          git push "https://x-access-token:${PUSH_TOKEN}@github.com/${{ github.repository }}.git" "HEAD:${{ github.head_ref }}"

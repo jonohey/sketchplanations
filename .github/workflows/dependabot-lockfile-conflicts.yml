@@ -20,13 +20,23 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+    env:
+      # A token other than GITHUB_TOKEN, so pushes to Dependabot branches trigger CI.
+      PUSH_TOKEN: ${{ secrets.DEPENDABOT_PUSH_TOKEN || secrets.GITHUB_TOKEN }}
+      HAS_PUSH_TOKEN: ${{ secrets.DEPENDABOT_PUSH_TOKEN != '' }}
     steps:
+      - name: Warn when pushes will not trigger CI
+        if: env.HAS_PUSH_TOKEN != 'true'
+        run: echo "::warning::DEPENDABOT_PUSH_TOKEN is not set. Pushes from this workflow use GITHUB_TOKEN and will not trigger CI or auto-merge."
+
       - uses: actions/checkout@v5
+        with:
+          token: ${{ env.PUSH_TOKEN }}
 
       - name: Check for open Dependabot PRs
         id: dependabot
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ env.PUSH_TOKEN }}
           GH_REPO: ${{ github.repository }}
         run: |
           count="$(gh pr list --author "app/dependabot" --state open --json number --jq 'length')"
@@ -66,6 +76,6 @@ jobs:
       - name: Resolve lockfile-only conflicts
         if: steps.dependabot.outputs.needed == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ env.PUSH_TOKEN }}
           GH_REPO: ${{ github.repository }}
         run: bash .github/scripts/resolve-dependabot-lockfile-conflicts.sh

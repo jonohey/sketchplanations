@@ -67,7 +67,7 @@ resolve_current_branch() {
 	git checkout --ours -- pnpm-lock.yaml
 	git add pnpm-lock.yaml
 
-	if ! pnpm install --no-frozen-lockfile; then
+	if ! pnpm install --no-frozen-lockfile --ignore-scripts; then
 		echo "pnpm install failed"
 		git merge --abort
 		return 1
@@ -94,7 +94,7 @@ resolve_current_branch() {
 		return 1
 	fi
 
-	if ! pnpm install --frozen-lockfile; then
+	if ! pnpm install --frozen-lockfile --ignore-scripts; then
 		echo "lockfile does not match package.json after install"
 		git merge --abort
 		return 1

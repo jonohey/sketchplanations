@@ -36,7 +36,11 @@ jobs:
       pull-requests: write
     env:
       GH_REPO: ${{ github.repository }}
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # "Update branch" and the merge itself must not use GITHUB_TOKEN: pushes it
+      # makes do not trigger CI on the PR, and its merge does not trigger CI on
+      # main or the workflows that refresh other Dependabot PRs. On Dependabot PR
+      # runs, DEPENDABOT_PUSH_TOKEN must exist as a Dependabot secret.
+      GH_TOKEN: ${{ secrets.DEPENDABOT_PUSH_TOKEN || secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v5
 
