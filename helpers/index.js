@@ -1,4 +1,3 @@
-import humanizeString from "humanize-string";
 import { complement, either, isEmpty, isNil } from "ramda";
 
 const defaultPageTitle =
@@ -122,7 +121,16 @@ const addApostrophes = (str) => {
 		.join(" ");
 };
 
-export const humanizeTag = (tag) => addApostrophes(humanizeString(tag));
+// Tags are lowercase slugs ("big-ideas"). humanize-string v4 relies on regex
+// features (v flag, lookbehind) that throw on older Safari/iOS, so keep this plain.
+const humanizeSlug = (slug) => {
+	const text = String(slug)
+		.replace(/[-_\s]+/g, " ")
+		.trim();
+	return text.charAt(0).toUpperCase() + text.slice(1);
+};
+
+export const humanizeTag = (tag) => addApostrophes(humanizeSlug(tag));
 
 export const humanizePublishedDate = (
 	publishedAt,
