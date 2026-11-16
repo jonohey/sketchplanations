@@ -20,11 +20,13 @@ jobs:
         github.event.pull_request.user.login == 'dependabot[bot]')
     runs-on: ubuntu-latest
     permissions:
+      contents: write
       pull-requests: write
       actions: write
     env:
       GH_REPO: ${{ github.repository }}
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Not GITHUB_TOKEN: the branch update below must trigger CI on the PR.
+      GH_TOKEN: ${{ secrets.DEPENDABOT_PUSH_TOKEN || secrets.GITHUB_TOKEN }}
     steps:
       - name: Flag Dependabot PRs missing CI test check
         run: |
@@ -51,4 +53,18 @@ jobs:
               echo "PR #$pr ($branch) test failed on $sha — re-dispatching CI once"
               gh workflow run ci.yml --ref "$branch"
             fi
+          done
+
+      # Last, so the dispatch step above sees each PR's original head. A PR can be
+      # created from a base a few minutes older than main (another Dependabot PR
+      # merged in between) and then never be refreshed. Updating with a token other
+      # than GITHUB_TOKEN triggers CI, and auto-merge then completes.
+      - name: Update Dependabot PRs that are behind main
+        run: |
+          gh pr list --author "app/dependabot" --state open --json number,mergeStateStatus \
+            --jq '.[] | select(.mergeStateStatus == "BEHIND") | .number' | while read -r pr; do
+            [ -n "$pr" ] || continue
+            echo "PR #$pr is behind main — updating branch"
+            gh api -X PUT "repos/${GH_REPO}/pulls/${pr}/update-branch" ||
+              echo "::warning::Could not update PR #$pr (merge conflict?). Needs a manual fix."
           done
