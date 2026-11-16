@@ -51,6 +51,8 @@ jobs:
       # the PR opens, when mergeable_state is usually unknown, and goes stale while
       # CI runs (main often moves, e.g. another Dependabot PR merging).
       - name: Update branch if behind base
+        # Best effort: a failure here must not stop auto-merge being enabled below.
+        continue-on-error: true
         if: |
           steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
           steps.metadata.outputs.update-type == 'version-update:semver-minor'
@@ -74,7 +76,7 @@ jobs:
           steps.metadata.outputs.update-type == 'version-update:semver-minor'
         run: |
           gh pr merge --auto --squash "$PR_URL"
-          if [ "$(gh pr view "$PR_URL" --json state,autoMergeRequest --jq '.state == "MERGED" or .autoMergeRequest != null')" != "true" ]; then
+          if [ "$(gh pr view "$PR_URL" --json state,autoMergeRequest --jq '.state == "MERGED" or .autoMergeRequest != null' || echo false)" != "true" ]; then
             echo "::warning::Auto-merge is not enabled on $PR_URL. A maintainer needs to merge it."
           fi
         env:
