@@ -47,19 +47,36 @@ jobs:
       - uses: dependabot/fetch-metadata@v2
         id: metadata
 
+      # Read the live merge state: the pull_request event payload is captured when
+      # the PR opens, when mergeable_state is usually unknown, and goes stale while
+      # CI runs (main often moves, e.g. another Dependabot PR merging).
       - name: Update branch if behind base
         if: |
-          github.event.pull_request.mergeable_state == 'behind' && (
-            steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
-            steps.metadata.outputs.update-type == 'version-update:semver-minor'
-          )
-        run: gh api -X PUT "repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/update-branch"
+          steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+          steps.metadata.outputs.update-type == 'version-update:semver-minor'
+        run: |
+          state=""
+          for attempt in 1 2 3 4 5; do
+            state="$(gh pr view "$PR_URL" --json mergeStateStatus --jq .mergeStateStatus)"
+            [ "$state" != "UNKNOWN" ] && break
+            sleep 5
+          done
+          echo "Merge state: $state"
+          if [ "$state" = "BEHIND" ]; then
+            gh api -X PUT "repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/update-branch"
+          fi
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
 
       - name: Auto-merge patch and minor updates
         if: |
           steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
           steps.metadata.outputs.update-type == 'version-update:semver-minor'
-        run: gh pr merge --auto --squash "$PR_URL"
+        run: |
+          gh pr merge --auto --squash "$PR_URL"
+          if [ "$(gh pr view "$PR_URL" --json state,autoMergeRequest --jq '.state == "MERGED" or .autoMergeRequest != null')" != "true" ]; then
+            echo "::warning::Auto-merge is not enabled on $PR_URL. A maintainer needs to merge it."
+          fi
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
 
