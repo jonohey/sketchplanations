@@ -76,11 +76,11 @@
 		"vanilla-cookieconsent": "3.3.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.6.6",
+		"@biomejs/biome": "^2.6.7",
 		"@tailwindcss/typography": "^0.5.20",
 		"@trivago/prettier-plugin-sort-imports": "^6.0.2",
 		"autoprefixer": "^10.6.2",
-		"dotenv": "^18.0.9",
+		"dotenv": "^18.0.10",
 		"eslint": "^9.39.5",
 		"eslint-config-next": "^16.4.5",
 		"eslint-config-prettier": "^10.1.8",
@@ -88,7 +88,7 @@
 		"eslint-plugin-react": "^7.37.5",
 		"postcss": "^8.5.32",
 		"postcss-preset-env": "^11.6.2",
-		"prettier": "^3.9.10",
+		"prettier": "^3.10.1",
 		"puppeteer": "25",
 		"styled-jsx-plugin-postcss": "^4.0.1",
 		"tailwindcss": "^3.4.19",
