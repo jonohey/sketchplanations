@@ -2,9 +2,9 @@ import { describe, expect, it } from "vitest";
 
 import {
 	JPEG_PRISMIC_IMAGE_QUALITY,
-	getPrismicFullSizeImageOptimisation,
-	getPrismicImageCopySizes,
 	getPrismicImageOptimisation,
+	getPrismicScreenSizeImageOptimisation,
+	SKETCH_IMAGE_SCREEN_MAX_PX,
 	isJpegPrismicImage,
 } from "../../helpers/prismicImageOptimisation";
 
@@ -89,44 +89,46 @@ describe("getPrismicImageOptimisation", () => {
 	});
 });
 
-describe("getPrismicFullSizeImageOptimisation", () => {
-	it("caps at native dimensions for copy-friendly URLs", () => {
+describe("getPrismicScreenSizeImageOptimisation", () => {
+	it("leaves small uploads uncropped", () => {
 		expect(
-			getPrismicFullSizeImageOptimisation({
+			getPrismicScreenSizeImageOptimisation({
 				url: "https://images.prismic.io/sketchplanations/example.png",
-				dimensions: { width: 2000, height: 1500 },
+				dimensions: { width: 1200, height: 900 },
 			}),
 		).toEqual({
-			imgixParams: { w: 2000, h: 1500, fit: "max" },
+			imgixParams: { w: 1200, h: 900, fit: "max" },
 			quality: undefined,
 		});
 	});
 
-	it("merges JPEG re-encode params with full-size dimensions", () => {
+	it(`caps wide sketches at ${SKETCH_IMAGE_SCREEN_MAX_PX}px (download medium)`, () => {
 		expect(
-			getPrismicFullSizeImageOptimisation({
+			getPrismicScreenSizeImageOptimisation({
+				url: "https://images.prismic.io/sketchplanations/example.png",
+				dimensions: { width: 3200, height: 2400 },
+			}),
+		).toEqual({
+			imgixParams: { w: 1920, h: 1440, fit: "max" },
+			quality: undefined,
+		});
+	});
+
+	it("merges JPEG re-encode params when capping", () => {
+		expect(
+			getPrismicScreenSizeImageOptimisation({
 				url: "https://images.prismic.io/sketchplanations/example.jpg",
-				dimensions: { width: 1800, height: 1200 },
+				dimensions: { width: 2500, height: 1600 },
 			}),
 		).toEqual({
 			imgixParams: {
 				auto: "format",
 				fm: "webp",
-				w: 1800,
-				h: 1200,
+				w: 1920,
+				h: 1229,
 				fit: "max",
 			},
 			quality: JPEG_PRISMIC_IMAGE_QUALITY,
 		});
-	});
-});
-
-describe("getPrismicImageCopySizes", () => {
-	it("uses native width in sizes when dimensions are known", () => {
-		expect(
-			getPrismicImageCopySizes({
-				dimensions: { width: 2400, height: 1800 },
-			}),
-		).toBe("(min-width: 1px) 2400px");
 	});
 });

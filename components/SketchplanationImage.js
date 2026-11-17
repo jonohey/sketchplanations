@@ -15,8 +15,8 @@ import {
 import styles from "./SketchplanationImage.module.css";
 
 import {
-	getPrismicFullSizeImageOptimisation,
-	getPrismicImageCopySizes,
+	getPrismicImageOptimisation,
+	SKETCH_MAIN_IMAGE_SIZES,
 } from "helpers/prismicImageOptimisation";
 import copyStyles from "./sketchImageCopy.module.css";
 import runWhenIdle from "helpers/runWhenIdle";
@@ -109,9 +109,7 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 		return 1;
 	}, [isOpen, isOpening, isClosing, isLoading]);
 
-	const { imgixParams: fullSizeImgixParams, quality: fullSizeQuality } =
-		getPrismicFullSizeImageOptimisation(image);
-	const copySizes = getPrismicImageCopySizes(image);
+	const { imgixParams, quality } = getPrismicImageOptimisation(image);
 
 	const fallbackAlt = `${title} - Sketchplanations`;
 	const imageWithAlt = {
@@ -140,13 +138,13 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					ref={imageRef}
 					width={width}
 					height={height}
-					sizes={copySizes}
+					sizes={SKETCH_MAIN_IMAGE_SIZES}
 					priority={priority}
 					style={{
 						opacity,
 					}}
-					imgixParams={fullSizeImgixParams}
-					quality={fullSizeQuality}
+					imgixParams={imgixParams}
+					quality={quality}
 				/>
 				{(isOpening || (isOpen && isLoading)) && (
 					<div className={styles.thumbLoader}>
@@ -167,9 +165,8 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					setIsLoading={setIsLoading}
 					initialImageRect={initialImageRect}
 					imageWithAlt={imageWithAlt}
-					imgixParams={fullSizeImgixParams}
-					quality={fullSizeQuality}
-					copySizes={copySizes}
+					imgixParams={imgixParams}
+					quality={quality}
 					title={title}
 					onClose={close}
 					onOpenComplete={handleOpenComplete}
