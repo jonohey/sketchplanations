@@ -92,6 +92,12 @@ export const READER_QUOTES = [
 		lead: true,
 	},
 	{
+		id: "invariably-interesting",
+		quote: "Invariably interesting, informative and thought-provoking.",
+		theme: "simple",
+		featured: true,
+	},
+	{
 		id: "simple-but-deep",
 		quote: "Simple, but deep, illustrations.",
 		theme: "simple",
