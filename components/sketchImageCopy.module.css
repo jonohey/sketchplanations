@@ -1,4 +1,0 @@
-/* Lets iOS Safari show “Copy” / “Save image” on long-press for sketch <img>s. */
-.copyableSketchImage {
-	-webkit-touch-callout: default;
-}

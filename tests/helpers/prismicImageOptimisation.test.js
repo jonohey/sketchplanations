@@ -3,8 +3,6 @@ import { describe, expect, it } from "vitest";
 import {
 	JPEG_PRISMIC_IMAGE_QUALITY,
 	getPrismicImageOptimisation,
-	getPrismicScreenSizeImageOptimisation,
-	SKETCH_IMAGE_SCREEN_MAX_PX,
 	isJpegPrismicImage,
 } from "../../helpers/prismicImageOptimisation";
 
@@ -85,50 +83,6 @@ describe("getPrismicImageOptimisation", () => {
 		).toEqual({
 			imgixParams: { fit: "crop", crop: "top", ar: "5:3" },
 			quality: undefined,
-		});
-	});
-});
-
-describe("getPrismicScreenSizeImageOptimisation", () => {
-	it("leaves small uploads uncropped", () => {
-		expect(
-			getPrismicScreenSizeImageOptimisation({
-				url: "https://images.prismic.io/sketchplanations/example.png",
-				dimensions: { width: 1200, height: 900 },
-			}),
-		).toEqual({
-			imgixParams: { w: 1200, h: 900, fit: "max" },
-			quality: undefined,
-		});
-	});
-
-	it(`caps wide sketches at ${SKETCH_IMAGE_SCREEN_MAX_PX}px (download medium)`, () => {
-		expect(
-			getPrismicScreenSizeImageOptimisation({
-				url: "https://images.prismic.io/sketchplanations/example.png",
-				dimensions: { width: 3200, height: 2400 },
-			}),
-		).toEqual({
-			imgixParams: { w: 1920, h: 1440, fit: "max" },
-			quality: undefined,
-		});
-	});
-
-	it("merges JPEG re-encode params when capping", () => {
-		expect(
-			getPrismicScreenSizeImageOptimisation({
-				url: "https://images.prismic.io/sketchplanations/example.jpg",
-				dimensions: { width: 2500, height: 1600 },
-			}),
-		).toEqual({
-			imgixParams: {
-				auto: "format",
-				fm: "webp",
-				w: 1920,
-				h: 1229,
-				fit: "max",
-			},
-			quality: JPEG_PRISMIC_IMAGE_QUALITY,
 		});
 	});
 });

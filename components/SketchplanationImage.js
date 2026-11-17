@@ -14,11 +14,7 @@ import {
 
 import styles from "./SketchplanationImage.module.css";
 
-import {
-	getPrismicImageOptimisation,
-	SKETCH_MAIN_IMAGE_SIZES,
-} from "helpers/prismicImageOptimisation";
-import copyStyles from "./sketchImageCopy.module.css";
+import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
 import runWhenIdle from "helpers/runWhenIdle";
 
 const SketchplanationLightbox = dynamic(
@@ -119,27 +115,24 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 
 	return (
 		<>
-			<figure
-				className="relative m-0 cursor-zoom-in"
-				tabIndex={0}
-				onClick={open}
-				onKeyDown={(e) => {
-					if (e.key === "Enter" || e.key === " ") {
-						e.preventDefault();
-						open();
-					}
-				}}
-				role="group"
-				aria-label={`${title} sketch. Activate to open in lightbox.`}
-			>
+			<div className="relative">
 				<PrismicNextImage
 					field={imageWithAlt}
-					className={`bg-paper mx-auto transition-all duration-300 ease-out hover:scale-[1.02] hover:-translate-y-1 ${styles.thumb} ${copyStyles.copyableSketchImage}`}
+					className={`bg-paper cursor-zoom-in mx-auto transition-all duration-300 ease-out hover:scale-[1.02] hover:-translate-y-1 ${styles.thumb}`}
 					ref={imageRef}
 					width={width}
 					height={height}
-					sizes={SKETCH_MAIN_IMAGE_SIZES}
+					sizes="(min-width: 66rem) 645px, (min-width: 64rem) 62w, (min-width: 40rem) calc(100w - 3rem), 100w"
 					priority={priority}
+					onClick={open}
+					role="button"
+					tabIndex="0"
+					onKeyDown={(e) => {
+						if (e.key === "Enter" || e.key === " ") {
+							e.preventDefault();
+							open();
+						}
+					}}
 					style={{
 						opacity,
 					}}
@@ -155,7 +148,7 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 						/>
 					</div>
 				)}
-			</figure>
+			</div>
 			{isLightboxReady && (
 				<SketchplanationLightbox
 					isOpen={isOpen}

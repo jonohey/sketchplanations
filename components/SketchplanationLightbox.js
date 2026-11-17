@@ -5,9 +5,6 @@ import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
-import { SKETCH_LIGHTBOX_IMAGE_SIZES } from "helpers/prismicImageOptimisation";
-
-import copyStyles from "./sketchImageCopy.module.css";
 import styles from "./SketchplanationLightbox.module.css";
 
 const SketchplanationLightboxDesktop = dynamic(
@@ -173,7 +170,7 @@ const SketchplanationLightboxMobile = ({
 						contentStyle={{
 							width: "100%",
 							height: "100%",
-							touchAction: "manipulation",
+							touchAction: "none",
 						}}
 					>
 						<div
@@ -184,8 +181,8 @@ const SketchplanationLightboxMobile = ({
 							{isActive && (
 								<PrismicNextImage
 									field={imageWithAlt}
-									className={`object-contain ${copyStyles.copyableSketchImage}`}
-									sizes={SKETCH_LIGHTBOX_IMAGE_SIZES}
+									className="object-contain pointer-events-none"
+									sizes="calc(100w - 3rem)"
 									fill={true}
 									priority
 									onLoad={() => setIsLoading(false)}
