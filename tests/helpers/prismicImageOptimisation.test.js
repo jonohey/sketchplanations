@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 
 import {
 	JPEG_PRISMIC_IMAGE_QUALITY,
+	getPrismicFullSizeImageOptimisation,
+	getPrismicImageCopySizes,
 	getPrismicImageOptimisation,
 	isJpegPrismicImage,
 } from "../../helpers/prismicImageOptimisation";
@@ -84,5 +86,47 @@ describe("getPrismicImageOptimisation", () => {
 			imgixParams: { fit: "crop", crop: "top", ar: "5:3" },
 			quality: undefined,
 		});
+	});
+});
+
+describe("getPrismicFullSizeImageOptimisation", () => {
+	it("caps at native dimensions for copy-friendly URLs", () => {
+		expect(
+			getPrismicFullSizeImageOptimisation({
+				url: "https://images.prismic.io/sketchplanations/example.png",
+				dimensions: { width: 2000, height: 1500 },
+			}),
+		).toEqual({
+			imgixParams: { w: 2000, h: 1500, fit: "max" },
+			quality: undefined,
+		});
+	});
+
+	it("merges JPEG re-encode params with full-size dimensions", () => {
+		expect(
+			getPrismicFullSizeImageOptimisation({
+				url: "https://images.prismic.io/sketchplanations/example.jpg",
+				dimensions: { width: 1800, height: 1200 },
+			}),
+		).toEqual({
+			imgixParams: {
+				auto: "format",
+				fm: "webp",
+				w: 1800,
+				h: 1200,
+				fit: "max",
+			},
+			quality: JPEG_PRISMIC_IMAGE_QUALITY,
+		});
+	});
+});
+
+describe("getPrismicImageCopySizes", () => {
+	it("uses native width in sizes when dimensions are known", () => {
+		expect(
+			getPrismicImageCopySizes({
+				dimensions: { width: 2400, height: 1800 },
+			}),
+		).toBe("(min-width: 1px) 2400px");
 	});
 });

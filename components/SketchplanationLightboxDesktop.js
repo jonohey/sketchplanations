@@ -5,6 +5,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Dialog, Modal, ModalOverlay } from "react-aria-components";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
+import copyStyles from "./sketchImageCopy.module.css";
+
 const MotionModal = motion.create(Modal);
 
 const SketchplanationLightboxDesktop = ({
@@ -17,6 +19,7 @@ const SketchplanationLightboxDesktop = ({
 	imageWithAlt,
 	imgixParams,
 	quality,
+	copySizes,
 	title,
 	children,
 	onClose,
@@ -183,7 +186,7 @@ const SketchplanationLightboxDesktop = ({
 							contentStyle={{
 								width: "100%",
 								height: "100%",
-								touchAction: "none",
+								touchAction: "manipulation",
 							}}
 						>
 							<div
@@ -193,8 +196,8 @@ const SketchplanationLightboxDesktop = ({
 							>
 								<PrismicNextImage
 									field={imageWithAlt}
-									className="object-contain pointer-events-none"
-									sizes="calc(100w - 3rem)"
+									className={`object-contain ${copyStyles.copyableSketchImage}`}
+									sizes={copySizes ?? "calc(100vw - 3rem)"}
 									fill={true}
 									priority
 									onLoad={() => setIsLoading(false)}

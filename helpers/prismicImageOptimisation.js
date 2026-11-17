@@ -26,3 +26,42 @@ export function getPrismicImageOptimisation(image, baseImgixParams = {}) {
 		quality: undefined,
 	};
 }
+
+/**
+ * Imgix params sized to the uploaded image dimensions so “Copy image” on mobile
+ * and context menus paste the full sketch, not a layout-width variant.
+ */
+export function getPrismicFullSizeImageOptimisation(image, baseImgixParams = {}) {
+	const { imgixParams, quality } = getPrismicImageOptimisation(
+		image,
+		baseImgixParams,
+	);
+	const width = image?.dimensions?.width;
+	const height = image?.dimensions?.height;
+
+	if (!width || !height) {
+		return { imgixParams, quality };
+	}
+
+	return {
+		imgixParams: {
+			...(imgixParams ?? {}),
+			w: width,
+			h: height,
+			fit: "max",
+		},
+		quality,
+	};
+}
+
+/**
+ * `sizes` value that steers `srcset` toward the image’s native width for copy/paste.
+ */
+export function getPrismicImageCopySizes(image) {
+	const width = image?.dimensions?.width;
+	if (width) {
+		return `(min-width: 1px) ${width}px`;
+	}
+
+	return "100vw";
+}

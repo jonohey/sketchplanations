@@ -14,7 +14,11 @@ import {
 
 import styles from "./SketchplanationImage.module.css";
 
-import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
+import {
+	getPrismicFullSizeImageOptimisation,
+	getPrismicImageCopySizes,
+} from "helpers/prismicImageOptimisation";
+import copyStyles from "./sketchImageCopy.module.css";
 import runWhenIdle from "helpers/runWhenIdle";
 
 const SketchplanationLightbox = dynamic(
@@ -105,7 +109,9 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 		return 1;
 	}, [isOpen, isOpening, isClosing, isLoading]);
 
-	const { imgixParams, quality } = getPrismicImageOptimisation(image);
+	const { imgixParams: fullSizeImgixParams, quality: fullSizeQuality } =
+		getPrismicFullSizeImageOptimisation(image);
+	const copySizes = getPrismicImageCopySizes(image);
 
 	const fallbackAlt = `${title} - Sketchplanations`;
 	const imageWithAlt = {
@@ -115,29 +121,32 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 
 	return (
 		<>
-			<div className="relative">
+			<figure
+				className="relative m-0 cursor-zoom-in"
+				tabIndex={0}
+				onClick={open}
+				onKeyDown={(e) => {
+					if (e.key === "Enter" || e.key === " ") {
+						e.preventDefault();
+						open();
+					}
+				}}
+				role="group"
+				aria-label={`${title} sketch. Activate to open in lightbox.`}
+			>
 				<PrismicNextImage
 					field={imageWithAlt}
-					className={`bg-paper cursor-zoom-in mx-auto transition-all duration-300 ease-out hover:scale-[1.02] hover:-translate-y-1 ${styles.thumb}`}
+					className={`bg-paper mx-auto transition-all duration-300 ease-out hover:scale-[1.02] hover:-translate-y-1 ${styles.thumb} ${copyStyles.copyableSketchImage}`}
 					ref={imageRef}
 					width={width}
 					height={height}
-					sizes="(min-width: 66rem) 645px, (min-width: 64rem) 62w, (min-width: 40rem) calc(100w - 3rem), 100w"
+					sizes={copySizes}
 					priority={priority}
-					onClick={open}
-					role="button"
-					tabIndex="0"
-					onKeyDown={(e) => {
-						if (e.key === "Enter" || e.key === " ") {
-							e.preventDefault();
-							open();
-						}
-					}}
 					style={{
 						opacity,
 					}}
-					imgixParams={imgixParams}
-					quality={quality}
+					imgixParams={fullSizeImgixParams}
+					quality={fullSizeQuality}
 				/>
 				{(isOpening || (isOpen && isLoading)) && (
 					<div className={styles.thumbLoader}>
@@ -148,7 +157,7 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 						/>
 					</div>
 				)}
-			</div>
+			</figure>
 			{isLightboxReady && (
 				<SketchplanationLightbox
 					isOpen={isOpen}
@@ -158,8 +167,9 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					setIsLoading={setIsLoading}
 					initialImageRect={initialImageRect}
 					imageWithAlt={imageWithAlt}
-					imgixParams={imgixParams}
-					quality={quality}
+					imgixParams={fullSizeImgixParams}
+					quality={fullSizeQuality}
+					copySizes={copySizes}
 					title={title}
 					onClose={close}
 					onOpenComplete={handleOpenComplete}
