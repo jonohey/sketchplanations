@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { detectSwipe } from "../../helpers/swipe";
+import { detectSwipe, isViewportPinchZoomed } from "../../helpers/swipe";
 
 describe("detectSwipe", () => {
 	it("detects left and right swipes past the threshold", () => {
@@ -21,5 +21,16 @@ describe("detectSwipe", () => {
 	it("respects a custom threshold", () => {
 		expect(detectSwipe({ deltaX: 30, deltaY: 0, threshold: 25 })).toBe("right");
 		expect(detectSwipe({ deltaX: 30, deltaY: 0, threshold: 40 })).toBeNull();
+	});
+});
+
+describe("isViewportPinchZoomed", () => {
+	it("returns true when visualViewport scale exceeds 1x", () => {
+		expect(isViewportPinchZoomed({ visualViewport: { scale: 1.8 } })).toBe(
+			true,
+		);
+		expect(isViewportPinchZoomed({ visualViewport: { scale: 1 } })).toBe(false);
+		expect(isViewportPinchZoomed({})).toBe(false);
+		expect(isViewportPinchZoomed(null)).toBe(false);
 	});
 });

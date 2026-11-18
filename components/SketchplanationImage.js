@@ -179,7 +179,7 @@ const SketchplanationImage = ({
 	return (
 		<>
 			<div
-				className="relative touch-pan-y select-none"
+				className="relative touch-manipulation select-none"
 				data-testid="sketch-image-swipe-region"
 				{...pageSwipeHandlers}
 			>

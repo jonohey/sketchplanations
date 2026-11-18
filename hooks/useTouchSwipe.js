@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-import { detectSwipe } from "helpers/swipe";
+import { detectSwipe, isViewportPinchZoomed } from "helpers/swipe";
 
 const isIgnoredSwipeTarget = (target) =>
 	target instanceof Element && target.closest("[data-swipe-ignore]") !== null;
@@ -44,7 +44,14 @@ export default function useTouchSwipe({
 	const commitSwipe = (endX, endY) => {
 		const origin = startRef.current;
 		startRef.current = null;
-		if (disabled || multiTouchRef.current || !origin) return false;
+		if (
+			disabled ||
+			multiTouchRef.current ||
+			isViewportPinchZoomed() ||
+			!origin
+		) {
+			return false;
+		}
 
 		const direction = detectSwipe({
 			deltaX: endX - origin.x,
@@ -74,7 +81,14 @@ export default function useTouchSwipe({
 
 	const onTouchStartCapture = (event) => {
 		sawTouchEventRef.current = true;
-		if (disabled || isIgnoredSwipeTarget(event.target)) return;
+		if (
+			disabled ||
+			isViewportPinchZoomed() ||
+			isIgnoredSwipeTarget(event.target)
+		) {
+			startRef.current = null;
+			return;
+		}
 
 		if (event.touches.length > 1) {
 			multiTouchRef.current = true;
@@ -113,7 +127,9 @@ export default function useTouchSwipe({
 	// Pointer fallback for environments that emit touch PointerEvents without TouchEvents.
 	const onPointerDownCapture = (event) => {
 		if (sawTouchEventRef.current) return;
-		if (disabled || event.pointerType !== "touch") return;
+		if (disabled || event.pointerType !== "touch" || isViewportPinchZoomed()) {
+			return;
+		}
 		if (isIgnoredSwipeTarget(event.target)) return;
 
 		if (activePointerIdRef.current !== null) {
