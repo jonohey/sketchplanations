@@ -79,6 +79,19 @@ const Header = () => {
 		return () => mediaQuery.removeEventListener("change", update);
 	}, []);
 
+	useEffect(() => {
+		if (!isOpen) return undefined;
+		const onKeyDown = (e) => {
+			if (e.key === "Escape") {
+				e.preventDefault();
+				e.stopPropagation();
+				setIsOpen(false);
+			}
+		};
+		window.addEventListener("keydown", onKeyDown, true);
+		return () => window.removeEventListener("keydown", onKeyDown, true);
+	}, [isOpen]);
+
 	const scrollToTop = () => {
 		window.scrollTo({
 			top: 0,
@@ -87,7 +100,11 @@ const Header = () => {
 	};
 
 	return (
-		<RemoveScroll enabled={isOpen} className="sticky top-0 z-10">
+		<RemoveScroll
+			enabled={isOpen}
+			className="sticky top-0 z-10"
+			data-mobile-nav-open={isOpen || undefined}
+		>
 			<div
 				className={classNames(
 					styles.root,

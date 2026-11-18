@@ -7,11 +7,13 @@ import { useHotkeys } from "react-hotkeys-hook";
 import styles from "./SearchResults.module.css";
 
 import { isPresent } from "helpers";
+import { saveNavContext, searchNavContext } from "helpers/navContext";
 import {
 	shouldShowStretchMissMessage,
 	shouldShowSuggestMissingSketch,
 } from "helpers/search/rudeSearch";
 import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
+import useRestoreNavReturnTarget from "hooks/useRestoreNavReturnTarget";
 import useSearch from "hooks/useSearch";
 
 import FancyLink from "./FancyLink";
@@ -73,6 +75,7 @@ const SuggestMissingSketch = () => (
 
 const SearchResults = () => {
 	const {
+		query,
 		initialResults,
 		results,
 		tagResults,
@@ -118,6 +121,8 @@ const SearchResults = () => {
 
 		fetchRandomHandle();
 	}, []);
+	useRestoreNavReturnTarget([results, initialResults, showLoading, called]);
+
 	const shortcutsActive = called && !showLoading && isPresent(results);
 	useHotkeys(
 		RESULT_SHORTCUT_KEYS,
@@ -126,10 +131,19 @@ const SearchResults = () => {
 			const sketch = results[RESULT_SHORTCUT_KEYS.indexOf(e.key)];
 			if (!sketch) return;
 			e.preventDefault();
+			if (isPresent(query)) {
+				saveNavContext({
+					...searchNavContext(
+						query,
+						results.map(({ uid }) => uid),
+					),
+					lastViewedUid: sketch.uid,
+				});
+			}
 			router.push(`/${sketch.uid}`);
 		},
 		{ useKey: true, enabled: shortcutsActive },
-		[results, router],
+		[results, query, router],
 	);
 
 	if (!called) {
@@ -233,6 +247,14 @@ const SearchResults = () => {
 									<SketchplanationsGrid
 										prismicDocs={results}
 										shortcutKeys={RESULT_SHORTCUT_KEYS}
+										navContext={
+											isPresent(query)
+												? searchNavContext(
+														query,
+														results.map(({ uid }) => uid),
+													)
+												: null
+										}
 									/>
 								</div>
 							)}

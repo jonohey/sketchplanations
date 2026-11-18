@@ -1,9 +1,12 @@
 import { PrismicNextImage } from "@prismicio/next";
+import classNames from "classnames";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { X } from "lucide-react";
+import { ChevronLeft, ChevronRight, LoaderCircle, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Dialog, Modal, ModalOverlay } from "react-aria-components";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
+
+import useTouchSwipe from "hooks/useTouchSwipe";
 
 const MotionModal = motion.create(Modal);
 
@@ -18,6 +21,9 @@ const SketchplanationLightboxDesktop = ({
 	imgixParams,
 	quality,
 	title,
+	onPrevious = null,
+	onNext = null,
+	contextLabel = null,
 	children,
 	onClose,
 	onOpenComplete,
@@ -31,8 +37,25 @@ const SketchplanationLightboxDesktop = ({
 	const tapTimerRef = useRef(null);
 	const dialog = useRef(null);
 	const [isZoomed, setIsZoomed] = useState(false);
+	const [loadedUrl, setLoadedUrl] = useState(null);
 
 	const isActive = isOpen || isOpening || isClosing;
+	const isSwitchingImage =
+		isOpen &&
+		!isLoading &&
+		loadedUrl !== null &&
+		loadedUrl !== imageWithAlt.url;
+
+	const swipeHandlers = useTouchSwipe({
+		onSwipeLeft: onNext,
+		onSwipeRight: onPrevious,
+		disabled: !isOpen || isZoomed || (!onNext && !onPrevious),
+	});
+
+	useEffect(() => {
+		transformRef.current?.resetTransform(0);
+		setIsZoomed(false);
+	}, [imageWithAlt.url]);
 
 	const handleClose = useCallback(() => {
 		if (isOpening || !isOpen) return;
@@ -149,6 +172,7 @@ const SketchplanationLightboxDesktop = ({
 					ref={dialog}
 					className="w-full h-full"
 					aria-label={`${title} - zoomable image`}
+					{...swipeHandlers}
 				>
 					<TransformWrapper
 						ref={transformRef}
@@ -157,6 +181,7 @@ const SketchplanationLightboxDesktop = ({
 						initialScale={1}
 						centerOnInit
 						limitToBounds
+						panning={{ disabled: !isZoomed }}
 						doubleClick={{
 							mode: "toggle",
 							step: 2,
@@ -191,13 +216,29 @@ const SketchplanationLightboxDesktop = ({
 								className={`relative w-full h-full ${isZoomed ? "cursor-grab active:cursor-grabbing" : "cursor-zoom-out"}`}
 								onClick={handleImageTap}
 							>
+								{isSwitchingImage && (
+									<div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+										<LoaderCircle
+											className="animate-spin text-white/60"
+											strokeWidth={1.5}
+											size={36}
+										/>
+									</div>
+								)}
 								<PrismicNextImage
+									key={imageWithAlt.url}
 									field={imageWithAlt}
-									className="object-contain pointer-events-none"
+									className={classNames(
+										"object-contain pointer-events-none transition-opacity duration-150",
+										isSwitchingImage ? "opacity-0" : "opacity-100",
+									)}
 									sizes="calc(100w - 3rem)"
 									fill={true}
 									priority
-									onLoad={() => setIsLoading(false)}
+									onLoad={() => {
+										setIsLoading(false);
+										setLoadedUrl(imageWithAlt.url);
+									}}
 									imgixParams={imgixParams}
 									quality={quality}
 								/>
@@ -208,11 +249,38 @@ const SketchplanationLightboxDesktop = ({
 				{isOpen && !isLoading && (
 					<button
 						type="button"
+						data-swipe-ignore
 						onClick={handleClose}
 						aria-label="Close"
 						className="fixed z-30 top-3 right-3 flex items-center justify-center w-10 h-10 rounded-full bg-black/50 text-white backdrop-blur-sm hover:bg-black/70 transition-colors"
 					>
 						<X size={20} strokeWidth={2} />
+					</button>
+				)}
+				{isOpen && !isLoading && !isZoomed && onPrevious && (
+					<button
+						type="button"
+						data-swipe-ignore
+						onClick={onPrevious}
+						aria-label={
+							contextLabel ? `Previous in ${contextLabel}` : "Previous sketch"
+						}
+						className="fixed z-30 top-1/2 -translate-y-1/2 left-4 flex items-center justify-center w-11 h-11 rounded-full bg-black/45 text-white backdrop-blur-sm hover:bg-black/70 transition-colors"
+					>
+						<ChevronLeft size={24} strokeWidth={2} />
+					</button>
+				)}
+				{isOpen && !isLoading && !isZoomed && onNext && (
+					<button
+						type="button"
+						data-swipe-ignore
+						onClick={onNext}
+						aria-label={
+							contextLabel ? `Next in ${contextLabel}` : "Next sketch"
+						}
+						className="fixed z-30 top-1/2 -translate-y-1/2 right-4 flex items-center justify-center w-11 h-11 rounded-full bg-black/45 text-white backdrop-blur-sm hover:bg-black/70 transition-colors"
+					>
+						<ChevronRight size={24} strokeWidth={2} />
 					</button>
 				)}
 				<AnimatePresence>

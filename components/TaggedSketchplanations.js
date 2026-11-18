@@ -9,8 +9,10 @@ import styles from "./TaggedSketchplanations.module.css";
 
 import { humanizeTag, isPresent } from "helpers";
 import { loadSwiperStyles } from "helpers/loadSwiperStyles";
+import { categoryNavContext } from "helpers/navContext";
 
 import FancyLink from "./FancyLink";
+import NavContextScope from "./NavContextScope";
 import SketchplanationCard from "./SketchplanationCard";
 
 const TaggedSketchplanations = ({ tags, excludeUid }) => {
@@ -108,7 +110,13 @@ const TaggedSketchplanations = ({ tags, excludeUid }) => {
 					<>
 						{taggedSketchplanations.map(({ tag, sketchplanations }) => (
 							<TabPanel key={tag.id} id={tag.id}>
-								<div className={styles.taggedSketchplanations}>
+								<NavContextScope
+									context={categoryNavContext(
+										{ slug: tag.slug, label: humanizeTag(tag.slug) },
+										sketchplanations.map(({ uid }) => uid),
+									)}
+									className={styles.taggedSketchplanations}
+								>
 									<Swiper {...swiperProps}>
 										{sketchplanations.map((sketchplanation) => (
 											<SwiperSlide key={[tag.id, sketchplanation.id].join("-")}>
@@ -122,7 +130,7 @@ const TaggedSketchplanations = ({ tags, excludeUid }) => {
 											</SwiperSlide>
 										))}
 									</Swiper>
-								</div>
+								</NavContextScope>
 								<div className={styles.seeAllLink}>
 									<FancyLink href={`/categories/${tag.slug}`}>
 										{`All ${humanizeTag(tag.slug)} sketches »`}

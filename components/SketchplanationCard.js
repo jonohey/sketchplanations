@@ -73,7 +73,12 @@ const SketchplanationCard = ({
 	return isLoading ? (
 		<div className={rootClassName}>{content}</div>
 	) : (
-		<Link href={`/${sketchplanation.uid}`} className={rootClassName}>
+		<Link
+			href={`/${sketchplanation.uid}`}
+			data-sketch-card
+			data-sketch-uid={sketchplanation.uid}
+			className={rootClassName}
+		>
 			{content}
 		</Link>
 	);

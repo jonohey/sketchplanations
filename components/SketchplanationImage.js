@@ -16,13 +16,22 @@ import styles from "./SketchplanationImage.module.css";
 
 import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
 import runWhenIdle from "helpers/runWhenIdle";
+import useTouchSwipe from "hooks/useTouchSwipe";
 
 const SketchplanationLightbox = dynamic(
 	() => import("components/SketchplanationLightbox"),
 	{ ssr: false },
 );
 
-const SketchplanationImage = ({ image, title, priority = false, children }) => {
+const SketchplanationImage = ({
+	image,
+	title,
+	priority = false,
+	onPrevious = null,
+	onNext = null,
+	contextLabel = null,
+	children,
+}) => {
 	const { width, height } = image.dimensions
 		? image
 		: { width: undefined, height: undefined };
@@ -39,6 +48,12 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isLightboxReady, setIsLightboxReady] = useState(false);
 
+	const pageSwipeHandlers = useTouchSwipe({
+		onSwipeLeft: onNext,
+		onSwipeRight: onPrevious,
+		disabled: !onNext && !onPrevious,
+	});
+
 	useEffect(() => {
 		const imageElement = imageRef.current;
 		if (!imageElement) return;
@@ -52,7 +67,13 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 		resizeObserver.observe(imageElement);
 
 		return () => resizeObserver.disconnect();
-	}, []);
+	}, [image.url]);
+
+	useEffect(() => {
+		return () => {
+			setDecorationHidden(false);
+		};
+	}, [setDecorationHidden]);
 
 	useEffect(() => {
 		return runWhenIdle(() => {
@@ -81,6 +102,7 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 
 	const close = useCallback(() => {
 		if (isOpening || !isOpen) return;
+		setInitialImageRect({ ...cachedImageRectRef.current });
 		setIsClosing(true);
 		setIsOpen(false);
 	}, [isOpen, isOpening]);
@@ -115,8 +137,13 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 
 	return (
 		<>
-			<div className="relative">
+			<div
+				className="relative touch-manipulation select-none"
+				data-testid="sketch-image-swipe-region"
+				{...pageSwipeHandlers}
+			>
 				<PrismicNextImage
+					key={imageWithAlt.url}
 					field={imageWithAlt}
 					className={`bg-paper cursor-zoom-in mx-auto transition-all duration-300 ease-out hover:scale-[1.02] hover:-translate-y-1 ${styles.thumb}`}
 					ref={imageRef}
@@ -124,6 +151,7 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					height={height}
 					sizes="(min-width: 66rem) 645px, (min-width: 64rem) 62w, (min-width: 40rem) calc(100w - 3rem), 100w"
 					priority={priority}
+					draggable={false}
 					onClick={open}
 					role="button"
 					tabIndex="0"
@@ -144,7 +172,7 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 						<LoaderCircle
 							className="animate-spin"
 							strokeWidth={1}
-							size={((initialImageRect.width || 0) / 100) * 19}
+							size={((initialImageRect.width || 240) / 100) * 19}
 						/>
 					</div>
 				)}
@@ -161,6 +189,9 @@ const SketchplanationImage = ({ image, title, priority = false, children }) => {
 					imgixParams={imgixParams}
 					quality={quality}
 					title={title}
+					onPrevious={onPrevious}
+					onNext={onNext}
+					contextLabel={contextLabel}
 					onClose={close}
 					onOpenComplete={handleOpenComplete}
 					onCloseComplete={handleCloseComplete}

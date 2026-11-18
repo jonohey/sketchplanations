@@ -60,12 +60,19 @@
 
 .title {
 	grid-area: title;
-	@apply text-center md:text-left pb-8 sm:pb-10;
-	@apply pt-10;
+	@apply text-center md:text-left pb-6 sm:pb-8;
+	@apply pt-4 sm:pt-6;
 }
 
-.title * {
+.title h1 {
 	margin-bottom: 0 !important;
+	padding-left: var(--edgeInset);
+	padding-right: var(--edgeInset);
+
+	@screen sm {
+		padding-left: 0;
+		padding-right: 0;
+	}
 }
 
 .sidebar {

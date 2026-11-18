@@ -9,11 +9,13 @@ import styles from "./HomeCategoryCarousel.module.css";
 
 import FancyLink from "components/FancyLink";
 import HomeFeaturedSketch from "components/HomeFeaturedSketch";
-import { humanizePublishedDate } from "helpers";
+import NavContextScope from "components/NavContextScope";
+import { humanizePublishedDate, humanizeTag } from "helpers";
 import {
 	getHistoryEntryCache,
 	setHistoryEntryCache,
 } from "helpers/historyEntryCache";
+import { categoryNavContext } from "helpers/navContext";
 import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
 
 const SCROLL_DEBOUNCE_MS = 220;
@@ -108,6 +110,7 @@ function HomeCategoryCarouselRow({
 	viewAllHref,
 	sketches,
 	category: categoryLabel,
+	navContext = null,
 	headingId,
 	sectionId,
 	headingAs: HeadingTag = "h2",
@@ -269,7 +272,7 @@ function HomeCategoryCarouselRow({
 	) : null;
 
 	const trackBlock = (
-		<div className={styles.trackOuter}>
+		<NavContextScope context={navContext} className={styles.trackOuter}>
 			{canNavigate && canScrollLeft && (
 				<span
 					className={`${styles.fade} ${styles.fadeLeft}`}
@@ -314,6 +317,8 @@ function HomeCategoryCarouselRow({
 						<Link
 							key={sketch.uid}
 							href={sketchHref}
+							data-sketch-card
+							data-sketch-uid={sketch.uid}
 							className={styles.card}
 							prefetch={prefetchCards ? undefined : false}
 							onMouseEnter={prefetchOnIntent}
@@ -383,7 +388,7 @@ function HomeCategoryCarouselRow({
 					<ChevronRight size={20} strokeWidth={2} />
 				</button>
 			)}
-		</div>
+		</NavContextScope>
 	);
 
 	if (!wrapSection) {
@@ -432,7 +437,9 @@ export default function HomeCategoryCarousels({
 								{row.tagline && <p className={styles.tagline}>{row.tagline}</p>}
 							</div>
 							{row.featuredSketch && (
-								<HomeFeaturedSketch sketch={row.featuredSketch} />
+								<NavContextScope context={null}>
+									<HomeFeaturedSketch sketch={row.featuredSketch} />
+								</NavContextScope>
 							)}
 						</div>
 					</section>
@@ -470,6 +477,7 @@ export default function HomeCategoryCarousels({
 								viewAllHref={row.viewAllHref}
 								sketches={row.sketches}
 								category={row.label}
+								navContext={null}
 								headingId="carousel-heading-recent"
 								headingAs="h2"
 								priorityImage={false}
@@ -502,6 +510,10 @@ export default function HomeCategoryCarousels({
 							viewAllHref={row.viewAllHref}
 							sketches={row.sketches}
 							category={row.label}
+							navContext={categoryNavContext(
+								{ slug: row.slug, label: humanizeTag(row.slug) },
+								row.navUids ?? row.sketches.map((s) => s.uid),
+							)}
 							headingId={`carousel-heading-${row.slug}`}
 							headingAs="h3"
 							deferMount

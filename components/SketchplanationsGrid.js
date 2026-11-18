@@ -1,13 +1,15 @@
 import styles from "./SketchplanationsGrid.module.css";
 
+import NavContextScope from "./NavContextScope";
 import SketchplanationCard from "./SketchplanationCard";
 
 const SketchplanationsGrid = ({
 	prismicDocs: sketchplanations = [],
 	shortcutKeys = [],
+	navContext = null,
 }) => {
 	return (
-		<div className={styles.root}>
+		<NavContextScope context={navContext} className={styles.root}>
 			{sketchplanations?.map((sketchplanation, index) => (
 				<SketchplanationCard
 					key={sketchplanation.uid}
@@ -18,7 +20,7 @@ const SketchplanationsGrid = ({
 					}}
 				/>
 			))}
-		</div>
+		</NavContextScope>
 	);
 };
 

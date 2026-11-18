@@ -2,18 +2,13 @@ import * as prismic from "@prismicio/client";
 import * as prismicH from "@prismicio/helpers";
 import { PrismicNextImage } from "@prismicio/next";
 import classNames from "classnames";
-import {
-	ArrowLeft,
-	ArrowRight,
-	ArrowUp,
-	ChevronLeft,
-	ChevronRight,
-} from "lucide-react";
+import Context from "context";
+import { ArrowUp } from "lucide-react";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Fragment, useState } from "react";
+import { Fragment, useCallback, useContext, useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
 import styles from "./[uid].module.css";
@@ -25,6 +20,7 @@ import JsonLd from "components/JsonLd";
 import KeyboardShortcut from "components/KeyboardShortcut";
 import LicenceContent from "components/LicenceContent";
 import RichText from "components/RichText";
+import SketchNavBar from "components/SketchNavBar";
 import SketchplanationCtas from "components/SketchplanationCtas";
 import SketchplanationImage from "components/SketchplanationImage";
 import SubscribeInline from "components/SubscribeInline";
@@ -36,11 +32,14 @@ import {
 	pageTitle,
 	shuffle,
 } from "helpers";
+import { getCategoryNavData } from "helpers/categoryNavData";
+import { chronologicalNeighbours, saveNavContext } from "helpers/navContext";
 import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
 import {
 	buildSketchStructuredData,
 	resolveSketchTagDocs,
 } from "helpers/structuredData";
+import useActiveNavContext from "hooks/useActiveNavContext";
 import { useRandomHandle } from "hooks/useRandomHandle";
 import { client } from "services/prismic";
 
@@ -104,6 +103,7 @@ const SketchplanationPage = ({
 	newerUid,
 }) => {
 	const router = useRouter();
+	const { decorationHidden } = useContext(Context);
 	// This checks for ref= query param in the url and sets the noindex meta tag if it's present
 	// On recommendation from SEO expert.
 	const shouldNoIndex = router.query.ref !== undefined;
@@ -123,8 +123,40 @@ const SketchplanationPage = ({
 
 	const [downloadModalOpen, setDownloadModalOpen] = useState(false);
 	const [licenceModalOpen, setLicenceModalOpen] = useState(false);
-	// const [randomTitle, setRandomTitle] = useState("");
 	const randomHandle = useRandomHandle([uid]);
+
+	useEffect(() => {
+		setDownloadModalOpen(false);
+		setLicenceModalOpen(false);
+	}, [uid]);
+
+	const {
+		context: navContext,
+		resolution: navResolution,
+		persistStep,
+		prepareReturnToList,
+	} = useActiveNavContext(uid);
+
+	const hasContext = Boolean(navContext && navResolution);
+	const leftTargetUid = hasContext ? navResolution.previous : newerUid;
+	const rightTargetUid = hasContext ? navResolution.next : olderUid;
+	const leftLabel = hasContext ? "Previous" : "Newer";
+	const rightLabel = hasContext ? "Next" : "Older";
+
+	const stepTo = useCallback(
+		(targetUid) => {
+			if (!targetUid) return;
+			if (hasContext) persistStep(targetUid);
+			router.push(`/${targetUid}`);
+		},
+		[hasContext, persistStep, router],
+	);
+
+	useEffect(() => {
+		if (!decorationHidden) return;
+		if (leftTargetUid) router.prefetch(`/${leftTargetUid}`);
+		if (rightTargetUid) router.prefetch(`/${rightTargetUid}`);
+	}, [decorationHidden, leftTargetUid, rightTargetUid, router]);
 
 	const publishedText = humanizePublishedDate(publishedAt, { showYear: true });
 	const description = truncate(prismicH.asText(body), 160);
@@ -150,50 +182,90 @@ const SketchplanationPage = ({
 		sketchplanationUid: uid,
 	};
 
+	const hasBlockingModal = () =>
+		downloadModalOpen ||
+		licenceModalOpen ||
+		Boolean(document.querySelector("[data-mobile-nav-open]"));
+
 	useHotkeys(
 		"right, k",
 		(e) => {
-			if (shouldIgnoreShortcut(e)) return;
-			if (olderUid) {
-				router.push(`/${olderUid}`);
+			if (shouldIgnoreShortcut(e) || hasBlockingModal()) return;
+			if (rightTargetUid) {
+				stepTo(rightTargetUid);
 			}
 		},
 		{},
-		[router, olderUid],
+		[rightTargetUid, stepTo, downloadModalOpen, licenceModalOpen],
 	);
 
 	useHotkeys(
 		"left, j",
 		(e) => {
-			if (shouldIgnoreShortcut(e)) return;
-			if (newerUid) {
-				router.push(`/${newerUid}`);
+			if (shouldIgnoreShortcut(e) || hasBlockingModal()) return;
+			if (leftTargetUid) {
+				stepTo(leftTargetUid);
 			}
 		},
 		{},
-		[router, newerUid],
+		[leftTargetUid, stepTo, downloadModalOpen, licenceModalOpen],
 	);
 
 	useHotkeys(
 		"r",
 		(e) => {
-			if (shouldIgnoreShortcut(e)) return;
+			if (shouldIgnoreShortcut(e) || hasBlockingModal() || decorationHidden) {
+				return;
+			}
 			if (randomHandle) {
+				saveNavContext(null);
 				router.push(`/${randomHandle}`);
 			}
 		},
 		{},
-		[router, randomHandle],
+		[
+			router,
+			randomHandle,
+			decorationHidden,
+			downloadModalOpen,
+			licenceModalOpen,
+		],
 	);
 
-	// useEffect(() => {
-	// 	setRandomTitle(
-	// 		randomTitles[Math.floor(Math.random() * randomTitles.length)],
-	// 	);
-	// }, [uid]);
+	useEffect(() => {
+		if (!hasContext || !navContext?.href) return undefined;
+
+		const onKeyDown = (e) => {
+			if (e.key !== "Escape" || e.defaultPrevented || shouldIgnoreShortcut(e)) {
+				return;
+			}
+			if (
+				downloadModalOpen ||
+				licenceModalOpen ||
+				decorationHidden ||
+				document.querySelector('[role="dialog"], [data-mobile-nav-open]')
+			) {
+				return;
+			}
+			e.preventDefault();
+			prepareReturnToList();
+			router.push(navContext.href);
+		};
+
+		window.addEventListener("keydown", onKeyDown);
+		return () => window.removeEventListener("keydown", onKeyDown);
+	}, [
+		hasContext,
+		navContext?.href,
+		downloadModalOpen,
+		licenceModalOpen,
+		decorationHidden,
+		prepareReturnToList,
+		router,
+	]);
 
 	return (
-		<Fragment key={uid}>
+		<Fragment>
 			<Head>
 				<title>{pageTitle(title)}</title>
 				<link rel="canonical" href={pageUrl} />
@@ -235,12 +307,32 @@ const SketchplanationPage = ({
 				<div className={styles.articleWrapper}>
 					<article className={styles.article}>
 						<div id="top" className={classNames(styles.title, "scroll-mt-24")}>
+							<SketchNavBar
+								leftHref={leftTargetUid ? `/${leftTargetUid}` : null}
+								rightHref={rightTargetUid ? `/${rightTargetUid}` : null}
+								leftLabel={leftLabel}
+								rightLabel={rightLabel}
+								context={navContext}
+								resolution={navResolution}
+								onStepLeft={
+									hasContext && leftTargetUid
+										? () => persistStep(leftTargetUid)
+										: undefined
+								}
+								onStepRight={
+									hasContext && rightTargetUid
+										? () => persistStep(rightTargetUid)
+										: undefined
+								}
+								onReturnToList={prepareReturnToList}
+							/>
 							<TextHeader>{title}</TextHeader>
 						</div>
 						<div className={styles.image}>
 							{image.dimensions.width < 790 && (
 								<div className="absolute inset-0">
 									<PrismicNextImage
+										key={image.url}
 										field={image}
 										className="absolute inset-0 w-full h-full object-cover"
 										width={100}
@@ -258,14 +350,20 @@ const SketchplanationPage = ({
 								image={image}
 								title={title}
 								priority={true}
-								onDownload={() => setDownloadModalOpen(true)}
+								onPrevious={leftTargetUid ? () => stepTo(leftTargetUid) : null}
+								onNext={rightTargetUid ? () => stepTo(rightTargetUid) : null}
+								contextLabel={hasContext ? navContext.label : null}
 							>
-								<SketchplanationCtas {...commonProps} variant="lightbox" />
+								<SketchplanationCtas
+									key={uid}
+									{...commonProps}
+									variant="lightbox"
+								/>
 							</SketchplanationImage>
 						</div>
 
 						<div className={styles["ctas-area"]}>
-							<SketchplanationCtas {...commonProps} />
+							<SketchplanationCtas key={uid} {...commonProps} />
 						</div>
 
 						{/* <div className={styles["book-banner"]}>
@@ -326,6 +424,7 @@ const SketchplanationPage = ({
 								{isPresent(similarSketchplanations) && (
 									<div className={styles.related}>
 										<SketchplanationsStack
+											key={uid}
 											title="Keep exploring"
 											sketchplanations={similarSketchplanations}
 											imageProps={{
@@ -339,73 +438,20 @@ const SketchplanationPage = ({
 								)}
 
 								<div className="mt-10">
-									<div className="flex gap-4">
-										<div className="flex flex-row items-center gap-x-2">
-											<KeyboardShortcut
-												shortcut="←"
-												icon={<ArrowLeft size={14} strokeWidth={1.5} />}
-											/>
-											{newerUid ? (
-												<FancyLink href={`/${newerUid}`}>
-													<span className="flex flex-row items-center gap-x-1">
-														<ChevronLeft
-															size={16}
-															className="pointerFine:hidden"
-														/>
-														Newer
-													</span>
-												</FancyLink>
-											) : (
-												<span
-													className="flex flex-row items-center gap-x-1 text-textSubdued"
-													aria-hidden="true"
-												>
-													<ChevronLeft
-														size={16}
-														className="pointerFine:hidden"
-													/>
-													Newer
-												</span>
-											)}
-										</div>
-										<div className="flex flex-row mx-auto items-center gap-x-2">
-											<KeyboardShortcut shortcut="R" />
-											{randomHandle ? (
-												<FancyLink href={`/${randomHandle}`}>Random</FancyLink>
-											) : (
-												<span className="text-textSubdued" aria-hidden="true">
-													Random
-												</span>
-											)}
-										</div>
-										<div className="flex flex-row items-center gap-x-2">
-											{olderUid ? (
-												<FancyLink href={`/${olderUid}`}>
-													<span className="flex flex-row items-center gap-x-1">
-														Older
-														<ChevronRight
-															size={16}
-															className="pointerFine:hidden"
-														/>
-													</span>
-												</FancyLink>
-											) : (
-												<span
-													className="flex flex-row items-center gap-x-1 text-textSubdued"
-													aria-hidden="true"
-												>
-													Older
-													<ChevronRight
-														size={16}
-														className="pointerFine:hidden"
-													/>
-												</span>
-											)}
-											<KeyboardShortcut
-												shortcut="→"
-												icon={<ArrowRight size={14} strokeWidth={1.5} />}
-											/>
-										</div>
+									<div className="flex flex-row justify-center items-center gap-x-2">
+										<KeyboardShortcut shortcut="R" />
+										{randomHandle ? (
+											<FancyLink
+												href={`/${randomHandle}`}
+												onClick={() => saveNavContext(null)}
+											>
+												Random
+											</FancyLink>
+										) : (
+											<span className="text-textSubdued" aria-hidden="true">
+												Random
+											</span>
+										)}
 									</div>
 									<div className="text-center text-sm mt-12">
 										When you buy through links on sketchplanations.com, I may
@@ -421,7 +467,7 @@ const SketchplanationPage = ({
 				</div>
 
 				<div className={styles.footer}>
-					<TaggedSketchplanations tags={tags} excludeUid={uid} />
+					<TaggedSketchplanations key={uid} tags={tags} excludeUid={uid} />
 				</div>
 			</div>
 		</Fragment>
@@ -430,10 +476,16 @@ const SketchplanationPage = ({
 
 export async function getStaticProps({ params: { uid } }) {
 	const sketchplanation = await client.getByUID("sketchplanation", uid);
+	const tags = sketchplanation.data.tags;
 
-	const olderUid =
-		(
-			await client.getByType("sketchplanation", {
+	let { newerUid, olderUid, found } = chronologicalNeighbours(
+		getCategoryNavData().recentUids,
+		uid,
+	);
+
+	if (!found) {
+		const [olderRes, newerRes] = await Promise.all([
+			client.getByType("sketchplanation", {
 				pageSize: 1,
 				after: sketchplanation.id,
 				graphQuery: `{
@@ -447,12 +499,8 @@ export async function getStaticProps({ params: { uid } }) {
 						direction: "desc",
 					},
 				],
-			})
-		)?.results?.[0]?.uid || null;
-
-	const newerUid =
-		(
-			await client.getByType("sketchplanation", {
+			}),
+			client.getByType("sketchplanation", {
 				pageSize: 1,
 				after: sketchplanation.id,
 				graphQuery: `{
@@ -465,8 +513,12 @@ export async function getStaticProps({ params: { uid } }) {
 						field: "my.sketchplanation.published_at",
 					},
 				],
-			})
-		)?.results?.[0]?.uid || null;
+			}),
+		]);
+
+		olderUid = olderRes?.results?.[0]?.uid || null;
+		newerUid = newerRes?.results?.[0]?.uid || null;
+	}
 
 	const similarSketchplanations = shuffle(
 		(
@@ -476,8 +528,6 @@ export async function getStaticProps({ params: { uid } }) {
 			})
 		).results,
 	);
-
-	const tags = sketchplanation.data.tags;
 
 	return {
 		props: {

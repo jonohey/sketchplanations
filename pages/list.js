@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 
 import FancyLink from "components/FancyLink";
+import NavContextScope from "components/NavContextScope";
 import SortButtons from "components/SortButtons";
 import TextHeader from "components/TextHeader";
 import { fastScrollToTop, pageTitle } from "helpers";
@@ -129,49 +130,53 @@ const SketchList = ({ initialSketches }) => {
 					</div>
 				)}
 
-				{groupKeys.map(
-					(key) =>
-						groupedSketches[key] && (
-							<div key={key} className="mb-12">
-								<h2 id={key} className="text-5xl font-bold mb-4 scroll-mt-24">
-									{key}
-								</h2>
-								<div className="columns-1 sm:columns-2 lg:columns-3 gap-x-10">
-									{groupedSketches[key].map((sketch) => (
+				<NavContextScope context={null}>
+					{groupKeys.map(
+						(key) =>
+							groupedSketches[key] && (
+								<div key={key} className="mb-12">
+									<h2 id={key} className="text-5xl font-bold mb-4 scroll-mt-24">
+										{key}
+									</h2>
+									<div className="columns-1 sm:columns-2 lg:columns-3 gap-x-10">
+										{groupedSketches[key].map((sketch) => (
+											<Link
+												key={sketch.id}
+												href={`/${sketch.uid}`}
+												data-sketch-card
+												data-sketch-uid={sketch.uid}
+												className="block mb-3 text-textDefault hover:text-blue"
+											>
+												{sketch.data.title}
+												{sortMethod === "recent" && (
+													<>
+														<br />
+														<span className="text-sm text-gray-500">
+															{new Date(
+																sketch.data.published_at,
+															).toLocaleDateString()}
+														</span>
+													</>
+												)}
+											</Link>
+										))}
+									</div>
+									<div className="mt-4 text-left">
 										<Link
-											key={sketch.id}
-											href={`/${sketch.uid}`}
-											className="block mb-3 text-textDefault hover:text-blue"
+											href="#top"
+											className="inline-block text-sm text-blue hover:underline"
+											onClick={(e) => {
+												e.preventDefault();
+												fastScrollToTop();
+											}}
 										>
-											{sketch.data.title}
-											{sortMethod === "recent" && (
-												<>
-													<br />
-													<span className="text-sm text-gray-500">
-														{new Date(
-															sketch.data.published_at,
-														).toLocaleDateString()}
-													</span>
-												</>
-											)}
+											Back to top ↑
 										</Link>
-									))}
+									</div>
 								</div>
-								<div className="mt-4 text-left">
-									<Link
-										href="#top"
-										className="inline-block text-sm text-blue hover:underline"
-										onClick={(e) => {
-											e.preventDefault();
-											fastScrollToTop();
-										}}
-									>
-										Back to top ↑
-									</Link>
-								</div>
-							</div>
-						),
-				)}
+							),
+					)}
+				</NavContextScope>
 			</div>
 		</>
 	);
