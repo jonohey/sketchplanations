@@ -1,13 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
-	archiveNavContext,
-	buildFallbackNavContext,
 	categoryNavContext,
+	chronologicalNeighbours,
 	clearReturnToUid,
-	consumeKeepLightboxOpen,
-	listNavContext,
-	markKeepLightboxOpen,
 	markReturnToUid,
 	parseNavContext,
 	peekReturnToUid,
@@ -113,6 +109,36 @@ describe("resolveNavContext", () => {
 	});
 });
 
+describe("chronologicalNeighbours", () => {
+	const recentUids = ["newest", "middle", "oldest"];
+
+	it("resolves newer and older neighbours without wrapping", () => {
+		expect(chronologicalNeighbours(recentUids, "newest")).toEqual({
+			newerUid: null,
+			olderUid: "middle",
+			found: true,
+		});
+		expect(chronologicalNeighbours(recentUids, "middle")).toEqual({
+			newerUid: "newest",
+			olderUid: "oldest",
+			found: true,
+		});
+		expect(chronologicalNeighbours(recentUids, "oldest")).toEqual({
+			newerUid: "middle",
+			olderUid: null,
+			found: true,
+		});
+	});
+
+	it("reports found: false when the uid is missing", () => {
+		expect(chronologicalNeighbours(recentUids, "draft-sketch")).toEqual({
+			newerUid: null,
+			olderUid: null,
+			found: false,
+		});
+	});
+});
+
 describe("parseNavContext and storage helpers", () => {
 	beforeEach(() => {
 		stubBrowserWindow();
@@ -157,7 +183,7 @@ describe("parseNavContext and storage helpers", () => {
 		).toBeNull();
 	});
 
-	it("tracks and expires return-to-card targets and lightbox continuity", () => {
+	it("tracks and expires return-to-card targets", () => {
 		vi.useFakeTimers();
 		vi.setSystemTime(new Date("2026-11-18T12:00:00Z"));
 
@@ -170,72 +196,5 @@ describe("parseNavContext and storage helpers", () => {
 		markReturnToUid("coastline-paradox");
 		vi.advanceTimersByTime(20_000);
 		expect(peekReturnToUid()).toBeNull();
-
-		markKeepLightboxOpen();
-		expect(consumeKeepLightboxOpen()).toBe(true);
-		expect(consumeKeepLightboxOpen()).toBe(false);
-	});
-});
-
-describe("buildFallbackNavContext", () => {
-	const categoryNav = {
-		categories: {
-			paradox: ["the-abilene-paradox", "coastline-paradox"],
-			management: ["raci", "the-abilene-paradox"],
-		},
-		recentUids: [
-			"raci",
-			"the-abilene-paradox",
-			"untagged-sketch",
-			"coastline-paradox",
-		],
-	};
-
-	it("uses the sketch's primary valid tag as the looping fallback", () => {
-		const tags = [
-			{ tag: { id: "t1", uid: "paradox", slug: "paradox" } },
-			{ tag: { id: "t2", uid: "management", slug: "management" } },
-		];
-
-		expect(
-			buildFallbackNavContext({
-				uid: "the-abilene-paradox",
-				tags,
-				categoryNav,
-			}),
-		).toEqual({
-			label: "Paradox",
-			href: "/categories/paradox",
-			uids: ["the-abilene-paradox", "coastline-paradox"],
-			loop: true,
-		});
-	});
-
-	it("falls back to Archive when a sketch has no valid tags", () => {
-		expect(
-			buildFallbackNavContext({
-				uid: "untagged-sketch",
-				tags: [],
-				categoryNav,
-			}),
-		).toEqual({
-			label: "Archive",
-			href: "/archive",
-			uids: categoryNav.recentUids,
-			loop: false,
-		});
-	});
-
-	it("formats list and archive contexts without a capped Recent set", () => {
-		expect(listNavContext("alphabetical", ["a", "b"]).label).toBe(
-			"List (A\u2013Z)",
-		);
-		expect(listNavContext("recent", ["a", "b"]).label).toBe("List (by date)");
-		expect(archiveNavContext(["a", "b", "c"])).toEqual({
-			label: "Archive",
-			href: "/archive",
-			uids: ["a", "b", "c"],
-			loop: false,
-		});
 	});
 });

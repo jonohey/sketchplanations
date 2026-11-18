@@ -8,8 +8,6 @@ import NavContextScope from "components/NavContextScope";
 import SortButtons from "components/SortButtons";
 import TextHeader from "components/TextHeader";
 import { fastScrollToTop, pageTitle } from "helpers";
-import { listNavContext } from "helpers/navContext";
-import useRestoreNavReturnTarget from "hooks/useRestoreNavReturnTarget";
 import { client } from "services/prismic";
 
 const SketchList = ({ initialSketches }) => {
@@ -64,15 +62,6 @@ const SketchList = ({ initialSketches }) => {
 	}, [groupedSketches, sortMethod]);
 
 	const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-	const navContext = useMemo(
-		() =>
-			listNavContext(
-				sortMethod,
-				sortedSketches.map(({ uid }) => uid),
-			),
-		[sortMethod, sortedSketches],
-	);
-	useRestoreNavReturnTarget([sortedSketches]);
 
 	return (
 		<>
@@ -141,7 +130,7 @@ const SketchList = ({ initialSketches }) => {
 					</div>
 				)}
 
-				<NavContextScope context={navContext}>
+				<NavContextScope context={null}>
 					{groupKeys.map(
 						(key) =>
 							groupedSketches[key] && (

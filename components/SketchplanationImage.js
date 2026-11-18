@@ -14,10 +14,6 @@ import {
 
 import styles from "./SketchplanationImage.module.css";
 
-import {
-	consumeKeepLightboxOpen,
-	markKeepLightboxOpen,
-} from "helpers/navContext";
 import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
 import runWhenIdle from "helpers/runWhenIdle";
 import useTouchSwipe from "hooks/useTouchSwipe";
@@ -44,7 +40,6 @@ const SketchplanationImage = ({
 
 	const imageRef = useRef(null);
 	const cachedImageRectRef = useRef({});
-	const keepingLightboxRef = useRef(false);
 
 	const [isOpen, setIsOpen] = useState(false);
 	const [initialImageRect, setInitialImageRect] = useState({});
@@ -52,7 +47,6 @@ const SketchplanationImage = ({
 	const [isClosing, setIsClosing] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isLightboxReady, setIsLightboxReady] = useState(false);
-	const [skipOpenAnimation, setSkipOpenAnimation] = useState(false);
 
 	const pageSwipeHandlers = useTouchSwipe({
 		onSwipeLeft: onNext,
@@ -73,26 +67,11 @@ const SketchplanationImage = ({
 		resizeObserver.observe(imageElement);
 
 		return () => resizeObserver.disconnect();
-	}, []);
-
-	useEffect(() => {
-		if (!consumeKeepLightboxOpen()) return;
-		const rect = imageRef.current?.getBoundingClientRect?.() ?? {};
-		setInitialImageRect(rect);
-		setSkipOpenAnimation(true);
-		setIsOpen(true);
-		setIsLoading(true);
-		setDecorationHidden(true);
-		import("components/SketchplanationLightbox").then(() => {
-			setIsLightboxReady(true);
-		});
-	}, [setDecorationHidden]);
+	}, [image.url]);
 
 	useEffect(() => {
 		return () => {
-			if (!keepingLightboxRef.current) {
-				setDecorationHidden(false);
-			}
+			setDecorationHidden(false);
 		};
 	}, [setDecorationHidden]);
 
@@ -112,7 +91,6 @@ const SketchplanationImage = ({
 	}, [isLightboxReady]);
 
 	const open = () => {
-		setSkipOpenAnimation(false);
 		setInitialImageRect({ ...cachedImageRectRef.current });
 		setIsOpening(true);
 		setIsOpen(true);
@@ -135,27 +113,8 @@ const SketchplanationImage = ({
 
 	const handleCloseComplete = useCallback(() => {
 		setIsClosing(false);
-		setSkipOpenAnimation(false);
 		setDecorationHidden(false);
 	}, [setDecorationHidden]);
-
-	const handleLightboxPrevious = useMemo(() => {
-		if (!onPrevious) return null;
-		return () => {
-			keepingLightboxRef.current = true;
-			markKeepLightboxOpen();
-			onPrevious();
-		};
-	}, [onPrevious]);
-
-	const handleLightboxNext = useMemo(() => {
-		if (!onNext) return null;
-		return () => {
-			keepingLightboxRef.current = true;
-			markKeepLightboxOpen();
-			onNext();
-		};
-	}, [onNext]);
 
 	const opacity = useMemo(() => {
 		if (isOpen) {
@@ -184,6 +143,7 @@ const SketchplanationImage = ({
 				{...pageSwipeHandlers}
 			>
 				<PrismicNextImage
+					key={imageWithAlt.url}
 					field={imageWithAlt}
 					className={`bg-paper cursor-zoom-in mx-auto transition-all duration-300 ease-out hover:scale-[1.02] hover:-translate-y-1 ${styles.thumb}`}
 					ref={imageRef}
@@ -225,13 +185,12 @@ const SketchplanationImage = ({
 					isLoading={isLoading}
 					setIsLoading={setIsLoading}
 					initialImageRect={initialImageRect}
-					skipOpenAnimation={skipOpenAnimation}
 					imageWithAlt={imageWithAlt}
 					imgixParams={imgixParams}
 					quality={quality}
 					title={title}
-					onPrevious={handleLightboxPrevious}
-					onNext={handleLightboxNext}
+					onPrevious={onPrevious}
+					onNext={onNext}
 					contextLabel={contextLabel}
 					onClose={close}
 					onOpenComplete={handleOpenComplete}

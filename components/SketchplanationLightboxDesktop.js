@@ -1,6 +1,7 @@
 import { PrismicNextImage } from "@prismicio/next";
+import classNames from "classnames";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, LoaderCircle, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Dialog, Modal, ModalOverlay } from "react-aria-components";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
@@ -9,13 +10,6 @@ import useTouchSwipe from "hooks/useTouchSwipe";
 
 const MotionModal = motion.create(Modal);
 
-const OPEN_MODAL_FRAME = {
-	top: "1.5rem",
-	left: "0",
-	width: "100vw",
-	height: "calc(var(--visual-viewport-height) - 6rem)",
-};
-
 const SketchplanationLightboxDesktop = ({
 	isOpen,
 	isOpening,
@@ -23,7 +17,6 @@ const SketchplanationLightboxDesktop = ({
 	isLoading,
 	setIsLoading,
 	initialImageRect,
-	skipOpenAnimation = false,
 	imageWithAlt,
 	imgixParams,
 	quality,
@@ -44,14 +37,25 @@ const SketchplanationLightboxDesktop = ({
 	const tapTimerRef = useRef(null);
 	const dialog = useRef(null);
 	const [isZoomed, setIsZoomed] = useState(false);
+	const [loadedUrl, setLoadedUrl] = useState(null);
 
 	const isActive = isOpen || isOpening || isClosing;
-	const showBackdrop = isOpen && (!isLoading || skipOpenAnimation);
+	const isSwitchingImage =
+		isOpen &&
+		!isLoading &&
+		loadedUrl !== null &&
+		loadedUrl !== imageWithAlt.url;
+
 	const swipeHandlers = useTouchSwipe({
 		onSwipeLeft: onNext,
 		onSwipeRight: onPrevious,
 		disabled: !isOpen || isZoomed || (!onNext && !onPrevious),
 	});
+
+	useEffect(() => {
+		transformRef.current?.resetTransform(0);
+		setIsZoomed(false);
+	}, [imageWithAlt.url]);
 
 	const handleClose = useCallback(() => {
 		if (isOpening || !isOpen) return;
@@ -112,34 +116,29 @@ const SketchplanationLightboxDesktop = ({
 			<motion.div
 				className="fixed inset-0 z-10 bg-overlay"
 				initial={{
-					opacity: skipOpenAnimation ? 1 : 0,
-					backdropFilter: skipOpenAnimation ? "blur(8px)" : "blur(0px)",
-					WebkitBackdropFilter: skipOpenAnimation ? "blur(8px)" : "blur(0px)",
+					opacity: 0,
+					backdropFilter: "blur(0px)",
+					WebkitBackdropFilter: "blur(0px)",
 				}}
 				animate={{
-					opacity: showBackdrop ? 1 : 0,
-					backdropFilter: showBackdrop ? "blur(8px)" : "blur(0px)",
-					WebkitBackdropFilter: showBackdrop ? "blur(8px)" : "blur(0px)",
+					opacity: isOpen && !isLoading ? 1 : 0,
+					backdropFilter: isOpen && !isLoading ? "blur(8px)" : "blur(0px)",
+					WebkitBackdropFilter:
+						isOpen && !isLoading ? "blur(8px)" : "blur(0px)",
 				}}
 				transition={{
-					duration: skipOpenAnimation && isOpen ? 0 : 0.2,
+					duration: 0.2,
 				}}
 			/>
 			<MotionModal
 				className="fixed z-20"
-				style={{
-					opacity: thumbOpacity === 1 && !skipOpenAnimation ? 0 : 1,
+				style={{ opacity: thumbOpacity === 1 ? 0 : 1 }}
+				initial={{
+					top: initialImageRect.top,
+					left: initialImageRect.left,
+					width: initialImageRect.width,
+					height: initialImageRect.height,
 				}}
-				initial={
-					skipOpenAnimation
-						? OPEN_MODAL_FRAME
-						: {
-								top: initialImageRect.top,
-								left: initialImageRect.left,
-								width: initialImageRect.width,
-								height: initialImageRect.height,
-							}
-				}
 				onAnimationComplete={() => {
 					if (isOpen) {
 						onOpenComplete();
@@ -148,8 +147,13 @@ const SketchplanationLightboxDesktop = ({
 					}
 				}}
 				animate={
-					isOpen && (!isLoading || skipOpenAnimation)
-						? OPEN_MODAL_FRAME
+					isOpen && !isLoading
+						? {
+								top: "1.5rem",
+								left: "0",
+								width: "100vw",
+								height: "calc(var(--visual-viewport-height) - 6rem)",
+							}
 						: {
 								top: initialImageRect.top,
 								left: initialImageRect.left,
@@ -212,13 +216,29 @@ const SketchplanationLightboxDesktop = ({
 								className={`relative w-full h-full ${isZoomed ? "cursor-grab active:cursor-grabbing" : "cursor-zoom-out"}`}
 								onClick={handleImageTap}
 							>
+								{isSwitchingImage && (
+									<div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+										<LoaderCircle
+											className="animate-spin text-white/60"
+											strokeWidth={1.5}
+											size={36}
+										/>
+									</div>
+								)}
 								<PrismicNextImage
+									key={imageWithAlt.url}
 									field={imageWithAlt}
-									className="object-contain pointer-events-none"
+									className={classNames(
+										"object-contain pointer-events-none transition-opacity duration-150",
+										isSwitchingImage ? "opacity-0" : "opacity-100",
+									)}
 									sizes="calc(100w - 3rem)"
 									fill={true}
 									priority
-									onLoad={() => setIsLoading(false)}
+									onLoad={() => {
+										setIsLoading(false);
+										setLoadedUrl(imageWithAlt.url);
+									}}
 									imgixParams={imgixParams}
 									quality={quality}
 								/>

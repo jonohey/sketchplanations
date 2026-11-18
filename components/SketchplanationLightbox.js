@@ -1,6 +1,6 @@
 import { PrismicNextImage } from "@prismicio/next";
 import classNames from "classnames";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, LoaderCircle, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
@@ -51,13 +51,25 @@ const SketchplanationLightboxMobile = ({
 	const tapTimerRef = useRef(null);
 	const rootRef = useRef(null);
 	const [isZoomed, setIsZoomed] = useState(false);
+	const [loadedUrl, setLoadedUrl] = useState(null);
 
 	const isActive = isOpen || isOpening || isClosing;
+	const isSwitchingImage =
+		isOpen &&
+		!isLoading &&
+		loadedUrl !== null &&
+		loadedUrl !== imageWithAlt.url;
+
 	const swipeHandlers = useTouchSwipe({
 		onSwipeLeft: onNext,
 		onSwipeRight: onPrevious,
 		disabled: !isOpen || isZoomed || (!onNext && !onPrevious),
 	});
+
+	useEffect(() => {
+		transformRef.current?.resetTransform(0);
+		setIsZoomed(false);
+	}, [imageWithAlt.url]);
 
 	const handleClose = useCallback(() => {
 		if (isOpening || !isOpen) return;
@@ -191,14 +203,30 @@ const SketchplanationLightboxMobile = ({
 							className={`relative w-full h-full ${isZoomed ? "cursor-grab active:cursor-grabbing" : "cursor-zoom-out"}`}
 							onClick={handleImageTap}
 						>
+							{isSwitchingImage && (
+								<div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+									<LoaderCircle
+										className="animate-spin text-white/60"
+										strokeWidth={1.5}
+										size={36}
+									/>
+								</div>
+							)}
 							{isActive && (
 								<PrismicNextImage
+									key={imageWithAlt.url}
 									field={imageWithAlt}
-									className="object-contain pointer-events-none"
+									className={classNames(
+										"object-contain pointer-events-none transition-opacity duration-150",
+										isSwitchingImage ? "opacity-0" : "opacity-100",
+									)}
 									sizes="calc(100w - 3rem)"
 									fill={true}
 									priority
-									onLoad={() => setIsLoading(false)}
+									onLoad={() => {
+										setIsLoading(false);
+										setLoadedUrl(imageWithAlt.url);
+									}}
 									imgixParams={imgixParams}
 									quality={quality}
 								/>

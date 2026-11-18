@@ -39,12 +39,7 @@ import {
 	shuffle,
 } from "helpers";
 import { getCategoryNavData } from "helpers/categoryNavData";
-import {
-	archiveNavContext,
-	buildFallbackNavContext,
-	markKeepLightboxOpen,
-	saveNavContext,
-} from "helpers/navContext";
+import { chronologicalNeighbours, saveNavContext } from "helpers/navContext";
 import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
 import {
 	buildSketchStructuredData,
@@ -110,7 +105,8 @@ const SketchplanationPage = ({
 	sketchplanation,
 	similarSketchplanations,
 	tags,
-	fallbackNavContext,
+	olderUid,
+	newerUid,
 }) => {
 	const router = useRouter();
 	const { decorationHidden } = useContext(Context);
@@ -135,25 +131,38 @@ const SketchplanationPage = ({
 	const [licenceModalOpen, setLicenceModalOpen] = useState(false);
 	const randomHandle = useRandomHandle([uid]);
 
+	useEffect(() => {
+		setDownloadModalOpen(false);
+		setLicenceModalOpen(false);
+	}, [uid]);
+
 	const {
 		context: navContext,
 		resolution: navResolution,
 		persistStep,
 		prepareReturnToList,
-	} = useActiveNavContext(uid, fallbackNavContext);
+	} = useActiveNavContext(uid);
 
-	const previousUid = navResolution?.previous ?? null;
-	const nextUid = navResolution?.next ?? null;
+	const hasContext = Boolean(navContext && navResolution);
+	const leftTargetUid = hasContext ? navResolution.previous : newerUid;
+	const rightTargetUid = hasContext ? navResolution.next : olderUid;
+	const leftLabel = hasContext ? "Previous" : "Newer";
+	const rightLabel = hasContext ? "Next" : "Older";
 
 	const stepTo = useCallback(
-		(targetUid, { keepLightbox = false } = {}) => {
+		(targetUid) => {
 			if (!targetUid) return;
-			persistStep(targetUid);
-			if (keepLightbox) markKeepLightboxOpen();
+			if (hasContext) persistStep(targetUid);
 			router.push(`/${targetUid}`);
 		},
-		[persistStep, router],
+		[hasContext, persistStep, router],
 	);
+
+	useEffect(() => {
+		if (!decorationHidden) return;
+		if (leftTargetUid) router.prefetch(`/${leftTargetUid}`);
+		if (rightTargetUid) router.prefetch(`/${rightTargetUid}`);
+	}, [decorationHidden, leftTargetUid, rightTargetUid, router]);
 
 	const publishedText = humanizePublishedDate(publishedAt, { showYear: true });
 	const description = truncate(prismicH.asText(body), 160);
@@ -188,30 +197,24 @@ const SketchplanationPage = ({
 		"right, k",
 		(e) => {
 			if (shouldIgnoreShortcut(e) || hasBlockingModal()) return;
-			if (nextUid) {
-				stepTo(nextUid, { keepLightbox: decorationHidden });
+			if (rightTargetUid) {
+				stepTo(rightTargetUid);
 			}
 		},
 		{},
-		[nextUid, stepTo, decorationHidden, downloadModalOpen, licenceModalOpen],
+		[rightTargetUid, stepTo, downloadModalOpen, licenceModalOpen],
 	);
 
 	useHotkeys(
 		"left, j",
 		(e) => {
 			if (shouldIgnoreShortcut(e) || hasBlockingModal()) return;
-			if (previousUid) {
-				stepTo(previousUid, { keepLightbox: decorationHidden });
+			if (leftTargetUid) {
+				stepTo(leftTargetUid);
 			}
 		},
 		{},
-		[
-			previousUid,
-			stepTo,
-			decorationHidden,
-			downloadModalOpen,
-			licenceModalOpen,
-		],
+		[leftTargetUid, stepTo, downloadModalOpen, licenceModalOpen],
 	);
 
 	useHotkeys(
@@ -236,7 +239,7 @@ const SketchplanationPage = ({
 	);
 
 	useEffect(() => {
-		if (!navContext?.href) return undefined;
+		if (!hasContext || !navContext?.href) return undefined;
 
 		const onKeyDown = (e) => {
 			if (e.key !== "Escape" || e.defaultPrevented || shouldIgnoreShortcut(e)) {
@@ -258,6 +261,7 @@ const SketchplanationPage = ({
 		window.addEventListener("keydown", onKeyDown);
 		return () => window.removeEventListener("keydown", onKeyDown);
 	}, [
+		hasContext,
 		navContext?.href,
 		downloadModalOpen,
 		licenceModalOpen,
@@ -267,7 +271,7 @@ const SketchplanationPage = ({
 	]);
 
 	return (
-		<Fragment key={uid}>
+		<Fragment>
 			<Head>
 				<title>{pageTitle(title)}</title>
 				<link rel="canonical" href={pageUrl} />
@@ -308,19 +312,29 @@ const SketchplanationPage = ({
 			<div className={styles.root}>
 				<div className={styles.articleWrapper}>
 					<article className={styles.article}>
-						<div id="top" className={classNames(styles.title, "scroll-mt-24")}>
-							<SketchNavBar
-								context={navContext}
-								resolution={navResolution}
-								onStep={persistStep}
-								onReturnToList={prepareReturnToList}
-							/>
+						<div
+							id="top"
+							className={classNames(
+								styles.title,
+								hasContext && styles.titleWithNav,
+								"scroll-mt-24",
+							)}
+						>
+							{hasContext && (
+								<SketchNavBar
+									context={navContext}
+									resolution={navResolution}
+									onStep={persistStep}
+									onReturnToList={prepareReturnToList}
+								/>
+							)}
 							<TextHeader>{title}</TextHeader>
 						</div>
 						<div className={styles.image}>
 							{image.dimensions.width < 790 && (
 								<div className="absolute inset-0">
 									<PrismicNextImage
+										key={image.url}
 										field={image}
 										className="absolute inset-0 w-full h-full object-cover"
 										width={100}
@@ -338,16 +352,20 @@ const SketchplanationPage = ({
 								image={image}
 								title={title}
 								priority={true}
-								onPrevious={previousUid ? () => stepTo(previousUid) : null}
-								onNext={nextUid ? () => stepTo(nextUid) : null}
-								contextLabel={navContext?.label ?? null}
+								onPrevious={leftTargetUid ? () => stepTo(leftTargetUid) : null}
+								onNext={rightTargetUid ? () => stepTo(rightTargetUid) : null}
+								contextLabel={hasContext ? navContext.label : null}
 							>
-								<SketchplanationCtas {...commonProps} variant="lightbox" />
+								<SketchplanationCtas
+									key={uid}
+									{...commonProps}
+									variant="lightbox"
+								/>
 							</SketchplanationImage>
 						</div>
 
 						<div className={styles["ctas-area"]}>
-							<SketchplanationCtas {...commonProps} />
+							<SketchplanationCtas key={uid} {...commonProps} />
 						</div>
 
 						{/* <div className={styles["book-banner"]}>
@@ -408,6 +426,7 @@ const SketchplanationPage = ({
 								{isPresent(similarSketchplanations) && (
 									<div className={styles.related}>
 										<SketchplanationsStack
+											key={uid}
 											title="Keep exploring"
 											sketchplanations={similarSketchplanations}
 											imageProps={{
@@ -427,17 +446,21 @@ const SketchplanationPage = ({
 												shortcut="←"
 												icon={<ArrowLeft size={14} strokeWidth={1.5} />}
 											/>
-											{previousUid ? (
+											{leftTargetUid ? (
 												<FancyLink
-													href={`/${previousUid}`}
-													onClick={() => persistStep(previousUid)}
+													href={`/${leftTargetUid}`}
+													onClick={
+														hasContext
+															? () => persistStep(leftTargetUid)
+															: undefined
+													}
 												>
 													<span className="flex flex-row items-center gap-x-1">
 														<ChevronLeft
 															size={16}
 															className="pointerFine:hidden"
 														/>
-														Previous
+														{leftLabel}
 													</span>
 												</FancyLink>
 											) : (
@@ -449,7 +472,7 @@ const SketchplanationPage = ({
 														size={16}
 														className="pointerFine:hidden"
 													/>
-													Previous
+													{leftLabel}
 												</span>
 											)}
 										</div>
@@ -469,13 +492,17 @@ const SketchplanationPage = ({
 											)}
 										</div>
 										<div className="flex flex-row items-center gap-x-2">
-											{nextUid ? (
+											{rightTargetUid ? (
 												<FancyLink
-													href={`/${nextUid}`}
-													onClick={() => persistStep(nextUid)}
+													href={`/${rightTargetUid}`}
+													onClick={
+														hasContext
+															? () => persistStep(rightTargetUid)
+															: undefined
+													}
 												>
 													<span className="flex flex-row items-center gap-x-1">
-														Next
+														{rightLabel}
 														<ChevronRight
 															size={16}
 															className="pointerFine:hidden"
@@ -487,7 +514,7 @@ const SketchplanationPage = ({
 													className="flex flex-row items-center gap-x-1 text-textSubdued"
 													aria-hidden="true"
 												>
-													Next
+													{rightLabel}
 													<ChevronRight
 														size={16}
 														className="pointerFine:hidden"
@@ -514,7 +541,7 @@ const SketchplanationPage = ({
 				</div>
 
 				<div className={styles.footer}>
-					<TaggedSketchplanations tags={tags} excludeUid={uid} />
+					<TaggedSketchplanations key={uid} tags={tags} excludeUid={uid} />
 				</div>
 			</div>
 		</Fragment>
@@ -525,13 +552,12 @@ export async function getStaticProps({ params: { uid } }) {
 	const sketchplanation = await client.getByUID("sketchplanation", uid);
 	const tags = sketchplanation.data.tags;
 
-	let fallbackNavContext = buildFallbackNavContext({
+	let { newerUid, olderUid, found } = chronologicalNeighbours(
+		getCategoryNavData().recentUids,
 		uid,
-		tags,
-		categoryNav: getCategoryNavData(),
-	});
+	);
 
-	if (!fallbackNavContext) {
+	if (!found) {
 		const [olderRes, newerRes] = await Promise.all([
 			client.getByType("sketchplanation", {
 				pageSize: 1,
@@ -564,11 +590,8 @@ export async function getStaticProps({ params: { uid } }) {
 			}),
 		]);
 
-		const olderUid = olderRes?.results?.[0]?.uid || null;
-		const newerUid = newerRes?.results?.[0]?.uid || null;
-		fallbackNavContext = archiveNavContext(
-			[newerUid, uid, olderUid].filter(Boolean),
-		);
+		olderUid = olderRes?.results?.[0]?.uid || null;
+		newerUid = newerRes?.results?.[0]?.uid || null;
 	}
 
 	const similarSketchplanations = shuffle(
@@ -585,7 +608,8 @@ export async function getStaticProps({ params: { uid } }) {
 			sketchplanation,
 			similarSketchplanations,
 			tags,
-			fallbackNavContext,
+			olderUid,
+			newerUid,
 		},
 	};
 }

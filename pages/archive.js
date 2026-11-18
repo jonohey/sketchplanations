@@ -6,19 +6,16 @@ import FancyLink from "components/FancyLink";
 import SketchplanationsGrid from "components/SketchplanationsGrid";
 import TextHeader from "components/TextHeader";
 import { pageTitle } from "helpers";
-import { getCategoryNavData } from "helpers/categoryNavData";
 import {
 	getHistoryEntryCache,
 	setHistoryEntryCache,
 } from "helpers/historyEntryCache";
-import { archiveNavContext } from "helpers/navContext";
-import useRestoreNavReturnTarget from "hooks/useRestoreNavReturnTarget";
 import { client } from "services/prismic";
 
 const ITEMS_PER_PAGE = 40;
 const HISTORY_CACHE_KEY = "archive";
 
-const Archive = ({ initialSketchplanations, allArchiveUids }) => {
+const Archive = ({ initialSketchplanations }) => {
 	// Going Back restores the sketches loaded so far, so scroll restoration has
 	// the page height it needs; a fresh visit starts from the first page.
 	const [restored] = useState(() => getHistoryEntryCache(HISTORY_CACHE_KEY));
@@ -29,13 +26,6 @@ const Archive = ({ initialSketchplanations, allArchiveUids }) => {
 	const [loading, setLoading] = useState(false);
 	const [hasMore, setHasMore] = useState(
 		restored ? restored.hasMore : initialSketchplanations.next_page,
-	);
-	useRestoreNavReturnTarget([sketchplanations]);
-
-	const navContext = archiveNavContext(
-		allArchiveUids?.length
-			? allArchiveUids
-			: sketchplanations.map(({ uid }) => uid),
 	);
 
 	const loadMore = async () => {
@@ -82,10 +72,7 @@ const Archive = ({ initialSketchplanations, allArchiveUids }) => {
 				<span className="mx-2">·</span>
 				<FancyLink href="/list">List</FancyLink>
 			</div>
-			<SketchplanationsGrid
-				prismicDocs={sketchplanations}
-				navContext={navContext}
-			/>
+			<SketchplanationsGrid prismicDocs={sketchplanations} />
 			{hasMore && (
 				<div className="pt-8 pb-12 px-6 flex flex-col gap-4 items-center justify-center">
 					<p className="text-sm text-textSubdued">
@@ -129,9 +116,8 @@ async function fetchSketchplanations(page = 1) {
 
 export async function getStaticProps() {
 	const initialSketchplanations = await fetchSketchplanations();
-	const { recentUids: allArchiveUids } = getCategoryNavData();
 
-	return { props: { initialSketchplanations, allArchiveUids } };
+	return { props: { initialSketchplanations } };
 }
 
 export default Archive;

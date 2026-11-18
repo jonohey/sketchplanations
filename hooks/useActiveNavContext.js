@@ -11,32 +11,28 @@ import {
 
 const getServerSnapshot = () => null;
 
-export default function useActiveNavContext(uid, fallbackContext) {
+export default function useActiveNavContext(uid) {
 	const raw = useSyncExternalStore(
 		subscribeNavContext,
 		readNavContextRaw,
 		getServerSnapshot,
 	);
 
-	const { context, resolution, isStored } = useMemo(() => {
+	const { context, resolution } = useMemo(() => {
 		const stored = parseNavContext(raw);
 		const storedResolution = stored && resolveNavContext(stored, uid);
 		if (stored && storedResolution) {
 			return {
 				context: stored,
 				resolution: storedResolution,
-				isStored: true,
 			};
 		}
 
 		return {
-			context: fallbackContext ?? null,
-			resolution: fallbackContext
-				? resolveNavContext(fallbackContext, uid)
-				: null,
-			isStored: false,
+			context: null,
+			resolution: null,
 		};
-	}, [raw, uid, fallbackContext]);
+	}, [raw, uid]);
 
 	const persistStep = useCallback(
 		(targetUid) => {
@@ -56,7 +52,6 @@ export default function useActiveNavContext(uid, fallbackContext) {
 	return {
 		context,
 		resolution,
-		isStored,
 		persistStep,
 		prepareReturnToList,
 	};

@@ -1,10 +1,6 @@
-import { humanizeTag } from "helpers";
-import { resolveSketchTagDocs } from "helpers/structuredData";
-
-const STORAGE_KEY = "sketchplanations:nav-context";
+export const STORAGE_KEY = "sketchplanations:nav-context";
 const CHANGE_EVENT = "sketchplanations:nav-context-change";
 const RETURN_TARGET_KEY = "sketchplanations:nav-return-target";
-const LIGHTBOX_CONTINUITY_KEY = "sketchplanations:nav-keep-lightbox";
 const TRANSIENT_TTL_MS = 15_000;
 
 export function resolveNavContext(context, uid) {
@@ -30,6 +26,23 @@ export function resolveNavContext(context, uid) {
 		next,
 		position: index + 1,
 		total,
+	};
+}
+
+export function chronologicalNeighbours(recentUids, uid) {
+	if (!Array.isArray(recentUids) || !uid) {
+		return { newerUid: null, olderUid: null, found: false };
+	}
+
+	const index = recentUids.indexOf(uid);
+	if (index === -1) {
+		return { newerUid: null, olderUid: null, found: false };
+	}
+
+	return {
+		newerUid: index > 0 ? recentUids[index - 1] : null,
+		olderUid: index < recentUids.length - 1 ? recentUids[index + 1] : null,
+		found: true,
 	};
 }
 
@@ -72,7 +85,7 @@ export function saveNavContext(context) {
 			window.sessionStorage.removeItem(STORAGE_KEY);
 		}
 	} catch {
-		// Private mode or blocked storage: navigation falls back to the sketch's category.
+		// Private mode or blocked storage: falls back to chronological Newer/Older.
 	}
 	notifyNavContextChange();
 }
@@ -129,26 +142,6 @@ export function clearReturnToUid() {
 	} catch {}
 }
 
-export function markKeepLightboxOpen() {
-	if (typeof window === "undefined") return;
-	try {
-		window.sessionStorage.setItem(LIGHTBOX_CONTINUITY_KEY, String(Date.now()));
-	} catch {}
-}
-
-export function consumeKeepLightboxOpen() {
-	if (typeof window === "undefined") return false;
-	try {
-		const raw = window.sessionStorage.getItem(LIGHTBOX_CONTINUITY_KEY);
-		if (!raw) return false;
-		window.sessionStorage.removeItem(LIGHTBOX_CONTINUITY_KEY);
-		const at = Number(raw);
-		return Number.isFinite(at) && Date.now() - at <= TRANSIENT_TTL_MS;
-	} catch {
-		return false;
-	}
-}
-
 export function categoryNavContext({ slug, label }, uids) {
 	return {
 		label,
@@ -166,47 +159,4 @@ export function searchNavContext(query, uids) {
 		uids,
 		loop: false,
 	};
-}
-
-export function archiveNavContext(uids) {
-	return {
-		label: "Archive",
-		href: "/archive",
-		uids,
-		loop: false,
-	};
-}
-
-export function listNavContext(sortMethod, uids) {
-	return {
-		label: sortMethod === "recent" ? "List (by date)" : "List (A\u2013Z)",
-		href: "/list",
-		uids,
-		loop: false,
-	};
-}
-
-export function buildFallbackNavContext({ uid, tags, categoryNav }) {
-	if (!uid || !categoryNav) return null;
-
-	const validTags = resolveSketchTagDocs(tags);
-	for (const tag of validTags) {
-		const slug = (tag.uid || tag.slug || "").trim();
-		const categoryUids = categoryNav.categories?.[slug];
-		if (Array.isArray(categoryUids) && categoryUids.includes(uid)) {
-			return categoryNavContext(
-				{ slug, label: humanizeTag(slug) },
-				categoryUids,
-			);
-		}
-	}
-
-	if (
-		Array.isArray(categoryNav.recentUids) &&
-		categoryNav.recentUids.includes(uid)
-	) {
-		return archiveNavContext(categoryNav.recentUids);
-	}
-
-	return null;
 }
