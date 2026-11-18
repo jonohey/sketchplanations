@@ -11,17 +11,25 @@ import JsonLd from "components/JsonLd";
 import SketchplanationsGrid from "components/SketchplanationsGrid";
 import TextHeader from "components/TextHeader";
 import { humanizeTag, pageTitle } from "helpers";
+import { categoryNavContext } from "helpers/navContext";
 import { buildCategoryStructuredData } from "helpers/structuredData";
+import useRestoreNavReturnTarget from "hooks/useRestoreNavReturnTarget";
 import { client } from "services/prismic";
 
-const Tag = ({ tag, sketchplanations }) => {
+const Tag = ({ tag, tagSlug, sketchplanations }) => {
 	const router = useRouter();
+	const resolvedSlug = tagSlug || router.query.tag;
+	useRestoreNavReturnTarget([resolvedSlug]);
 
 	if (router.isFallback) {
 		return <div>Loading…</div>;
 	}
 
 	const description = `Practical ideas, frameworks and techniques related to ${tag}, explained simply with visual examples. Browse the collection and find concepts to learn, use and share.`;
+	const navContext = categoryNavContext(
+		{ slug: resolvedSlug, label: tag },
+		sketchplanations.map(({ uid }) => uid),
+	);
 
 	return (
 		<>
@@ -69,7 +77,10 @@ const Tag = ({ tag, sketchplanations }) => {
 						</span>
 					</p>
 				</div>
-				<SketchplanationsGrid prismicDocs={sketchplanations} />
+				<SketchplanationsGrid
+					prismicDocs={sketchplanations}
+					navContext={navContext}
+				/>
 				<div className="text-center mt-8 mb-8">
 					<p>
 						<FancyLink
@@ -135,6 +146,7 @@ export async function getStaticProps({ params: { tag } }) {
 	return {
 		props: {
 			tag: humanizeTag(tagDoc.uid),
+			tagSlug: tagDoc.uid || tagDoc.slugs?.[0] || tag,
 			sketchplanations: sketchplanations.map(({ id, uid, data }) => ({
 				id,
 				uid,

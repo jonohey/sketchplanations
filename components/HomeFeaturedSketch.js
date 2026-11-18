@@ -24,6 +24,8 @@ export default function HomeFeaturedSketch({ sketch }) {
 		<article>
 			<Link
 				href={sketchHref}
+				data-sketch-card
+				data-sketch-uid={sketch.uid}
 				className={styles.root}
 				onClick={() =>
 					track("homepage_featured_sketch_click", {

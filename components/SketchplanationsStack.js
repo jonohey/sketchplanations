@@ -10,6 +10,7 @@ import styles from "./SketchplanationsStack.module.css";
 import { isBlank } from "helpers";
 import { loadSwiperStyles } from "helpers/loadSwiperStyles";
 
+import NavContextScope from "./NavContextScope";
 import SketchplanationCard from "./SketchplanationCard";
 
 const SketchplanationsStack = ({
@@ -60,7 +61,7 @@ const SketchplanationsStack = ({
 					</button>
 				</div>
 			</div>
-			<div className={styles.swiper}>
+			<NavContextScope context={null} className={styles.swiper}>
 				<Swiper
 					onSwiper={setSwiperRef}
 					effect="cards"
@@ -74,17 +75,6 @@ const SketchplanationsStack = ({
 				>
 					{sketchplanations.map((sketchplanation) => (
 						<SwiperSlide key={sketchplanation.id} className={styles.slide}>
-							{/* <Link href={`/${sketchplanation.uid}`} className="block bg-bg">
-								<div className={styles.image}>
-									<PrismicNextImage
-										field={sketchplanation.data.image}
-										className={styles.image}
-										fill={true}
-										imgixParams={{ fit: "crop", crop: "top", ar: "5:3" }}
-										fallbackAlt={sketchplanation.data.title}
-									/>
-								</div>
-							</Link> */}
 							<SketchplanationCard
 								sketchplanation={sketchplanation}
 								imageProps={imageProps}
@@ -92,7 +82,7 @@ const SketchplanationsStack = ({
 						</SwiperSlide>
 					))}
 				</Swiper>
-			</div>
+			</NavContextScope>
 			{/* <div className="font-semibold mb-1 mt-4">
 				{currentSketchplanation.data.title}
 			</div> */}

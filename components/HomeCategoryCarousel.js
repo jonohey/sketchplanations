@@ -9,11 +9,13 @@ import styles from "./HomeCategoryCarousel.module.css";
 
 import FancyLink from "components/FancyLink";
 import HomeFeaturedSketch from "components/HomeFeaturedSketch";
-import { humanizePublishedDate } from "helpers";
+import NavContextScope from "components/NavContextScope";
+import { humanizePublishedDate, humanizeTag } from "helpers";
 import {
 	getHistoryEntryCache,
 	setHistoryEntryCache,
 } from "helpers/historyEntryCache";
+import { categoryNavContext, recentNavContext } from "helpers/navContext";
 import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
 
 const SCROLL_DEBOUNCE_MS = 220;
@@ -108,6 +110,7 @@ function HomeCategoryCarouselRow({
 	viewAllHref,
 	sketches,
 	category: categoryLabel,
+	navContext = null,
 	headingId,
 	sectionId,
 	headingAs: HeadingTag = "h2",
@@ -269,7 +272,7 @@ function HomeCategoryCarouselRow({
 	) : null;
 
 	const trackBlock = (
-		<div className={styles.trackOuter}>
+		<NavContextScope context={navContext} className={styles.trackOuter}>
 			{canNavigate && canScrollLeft && (
 				<span
 					className={`${styles.fade} ${styles.fadeLeft}`}
@@ -314,6 +317,8 @@ function HomeCategoryCarouselRow({
 						<Link
 							key={sketch.uid}
 							href={sketchHref}
+							data-sketch-card
+							data-sketch-uid={sketch.uid}
 							className={styles.card}
 							prefetch={prefetchCards ? undefined : false}
 							onMouseEnter={prefetchOnIntent}
@@ -383,7 +388,7 @@ function HomeCategoryCarouselRow({
 					<ChevronRight size={20} strokeWidth={2} />
 				</button>
 			)}
-		</div>
+		</NavContextScope>
 	);
 
 	if (!wrapSection) {
@@ -414,74 +419,90 @@ export default function HomeCategoryCarousels({
 
 	return (
 		<div id="home-category-carousels">
-			{recentRows.map((row) => (
-				<Fragment key="recent">
-					<section
-						className={styles.section}
-						aria-labelledby="carousel-heading-latest"
-						id="latest-sketch"
-					>
-						<div className="container mx-auto px-4 sm:px-6 lg:px-8">
-							<div className={styles.headerCentered}>
-								<h2
-									className={`${styles.title} ${styles.titleHome}`}
-									id="carousel-heading-latest"
-								>
-									Latest
-								</h2>
-								{row.tagline && <p className={styles.tagline}>{row.tagline}</p>}
-							</div>
-							{row.featuredSketch && (
-								<HomeFeaturedSketch sketch={row.featuredSketch} />
-							)}
-						</div>
-					</section>
+			{recentRows.map((row) => {
+				const recentUids = [
+					row.featuredSketch?.uid,
+					...row.sketches.map((s) => s.uid),
+				].filter(Boolean);
+				const recentContext = recentNavContext(recentUids, {
+					label: "Recent",
+					href: "/archive",
+				});
 
-					{afterLatest}
-
-					{row.sketches.length > 0 && (
+				return (
+					<Fragment key="recent">
 						<section
 							className={styles.section}
-							aria-labelledby="carousel-heading-recent"
-							id="recent-sketches"
+							aria-labelledby="carousel-heading-latest"
+							id="latest-sketch"
 						>
 							<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 								<div className={styles.headerCentered}>
 									<h2
 										className={`${styles.title} ${styles.titleHome}`}
-										id="carousel-heading-recent"
+										id="carousel-heading-latest"
 									>
-										<Link
-											href={row.viewAllHref}
-											className={styles.titleLink}
-											onClick={() =>
-												track("homepage_carousel_view_all_click", {
-													category: row.label,
-												})
-											}
-										>
-											Recent sketches
-										</Link>
+										Latest
 									</h2>
+									{row.tagline && (
+										<p className={styles.tagline}>{row.tagline}</p>
+									)}
 								</div>
+								{row.featuredSketch && (
+									<NavContextScope context={recentContext}>
+										<HomeFeaturedSketch sketch={row.featuredSketch} />
+									</NavContextScope>
+								)}
 							</div>
-							<HomeCategoryCarouselRow
-								label="Recent sketches"
-								viewAllHref={row.viewAllHref}
-								sketches={row.sketches}
-								category={row.label}
-								headingId="carousel-heading-recent"
-								headingAs="h2"
-								priorityImage={false}
-								showPublishedDate
-								prefetchCards
-								hideHeader
-								wrapSection={false}
-							/>
 						</section>
-					)}
-				</Fragment>
-			))}
+
+						{afterLatest}
+
+						{row.sketches.length > 0 && (
+							<section
+								className={styles.section}
+								aria-labelledby="carousel-heading-recent"
+								id="recent-sketches"
+							>
+								<div className="container mx-auto px-4 sm:px-6 lg:px-8">
+									<div className={styles.headerCentered}>
+										<h2
+											className={`${styles.title} ${styles.titleHome}`}
+											id="carousel-heading-recent"
+										>
+											<Link
+												href={row.viewAllHref}
+												className={styles.titleLink}
+												onClick={() =>
+													track("homepage_carousel_view_all_click", {
+														category: row.label,
+													})
+												}
+											>
+												Recent sketches
+											</Link>
+										</h2>
+									</div>
+								</div>
+								<HomeCategoryCarouselRow
+									label="Recent sketches"
+									viewAllHref={row.viewAllHref}
+									sketches={row.sketches}
+									category={row.label}
+									navContext={recentContext}
+									headingId="carousel-heading-recent"
+									headingAs="h2"
+									priorityImage={false}
+									showPublishedDate
+									prefetchCards
+									hideHeader
+									wrapSection={false}
+								/>
+							</section>
+						)}
+					</Fragment>
+				);
+			})}
 
 			{afterRecent}
 
@@ -502,6 +523,10 @@ export default function HomeCategoryCarousels({
 							viewAllHref={row.viewAllHref}
 							sketches={row.sketches}
 							category={row.label}
+							navContext={categoryNavContext(
+								{ slug: row.slug, label: humanizeTag(row.slug) },
+								row.navUids ?? row.sketches.map((s) => s.uid),
+							)}
 							headingId={`carousel-heading-${row.slug}`}
 							headingAs="h3"
 							deferMount

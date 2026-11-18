@@ -12,8 +12,10 @@ import ExplainerKitStrip from "components/ExplainerKitStrip";
 import FancyLink from "components/FancyLink";
 import HomeCategoryCarousels from "components/HomeCategoryCarousel";
 import ReaderQuotes from "components/ReaderQuotes";
+import { getCategoryNavData } from "helpers/categoryNavData";
 import { getTagDocumentBySlug } from "helpers/getTagDocumentBySlug";
 import { HOME_CAROUSEL_CATEGORIES } from "helpers/homeCarouselCategories";
+import useRestoreNavReturnTarget from "hooks/useRestoreNavReturnTarget";
 import { client } from "services/prismic";
 
 import bigIdeasLittlePicturesCoverImage from "../images/big-ideas-little-pictures-book-cover.jpg";
@@ -55,6 +57,8 @@ const mapSketchForCarousel = (doc) => ({
 });
 
 const Home = ({ carouselRows }) => {
+	useRestoreNavReturnTarget();
+
 	const bookSection = (
 		<section
 			className={styles.section}
@@ -244,6 +248,7 @@ const Home = ({ carouselRows }) => {
 };
 
 export const getStaticProps = async () => {
+	const categoryNav = getCategoryNavData();
 	const recent = await client.getByType("sketchplanation", {
 		orderings: [
 			{ field: "my.sketchplanation.published_at", direction: "desc" },
@@ -271,12 +276,16 @@ export const getStaticProps = async () => {
 
 			if (result.results.length === 0) return null;
 
+			const mappedSketches = result.results.map(mapSketchForCarousel);
 			return {
 				kind: "category",
 				label,
 				slug,
 				viewAllHref: `/categories/${slug}`,
-				sketches: result.results.map(mapSketchForCarousel),
+				sketches: mappedSketches,
+				navUids:
+					categoryNav.categories?.[slug] ??
+					mappedSketches.map(({ uid }) => uid),
 			};
 		}),
 	);

@@ -60,6 +60,34 @@
 	background-color: rgba(0, 0, 0, 0.7);
 }
 
+.mobileNav {
+	position: fixed;
+	z-index: 30;
+	top: 50%;
+	transform: translateY(-50%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 9999px;
+	background-color: rgba(0, 0, 0, 0.45);
+	color: white;
+	transition: background-color 0.15s ease-out;
+}
+
+.mobileNav:hover {
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+.mobileNavPrev {
+	left: 0.75rem;
+}
+
+.mobileNavNext {
+	right: 0.75rem;
+}
+
 .mobileFooter {
 	position: fixed;
 	z-index: 20;

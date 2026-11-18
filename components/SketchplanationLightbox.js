@@ -1,11 +1,13 @@
 import { PrismicNextImage } from "@prismicio/next";
 import classNames from "classnames";
-import { X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 import styles from "./SketchplanationLightbox.module.css";
+
+import useTouchSwipe from "hooks/useTouchSwipe";
 
 const SketchplanationLightboxDesktop = dynamic(
 	() => import("components/SketchplanationLightboxDesktop"),
@@ -36,6 +38,9 @@ const SketchplanationLightboxMobile = ({
 	imgixParams,
 	quality,
 	title,
+	onPrevious = null,
+	onNext = null,
+	contextLabel = null,
 	children,
 	onClose,
 	onOpenComplete,
@@ -48,6 +53,11 @@ const SketchplanationLightboxMobile = ({
 	const [isZoomed, setIsZoomed] = useState(false);
 
 	const isActive = isOpen || isOpening || isClosing;
+	const swipeHandlers = useTouchSwipe({
+		onSwipeLeft: onNext,
+		onSwipeRight: onPrevious,
+		disabled: !isOpen || isZoomed || (!onNext && !onPrevious),
+	});
 
 	const handleClose = useCallback(() => {
 		if (isOpening || !isOpen) return;
@@ -81,6 +91,8 @@ const SketchplanationLightboxMobile = ({
 				handleClose();
 			}
 			if (isActive && e.key === "Escape") {
+				e.preventDefault();
+				e.stopPropagation();
 				handleClose();
 			}
 		};
@@ -139,7 +151,7 @@ const SketchplanationLightboxMobile = ({
 				onClick={isActive ? handleClose : undefined}
 				role="presentation"
 			/>
-			<div className={styles.mobileModal}>
+			<div className={styles.mobileModal} {...swipeHandlers}>
 				<TransformWrapper
 					ref={transformRef}
 					minScale={1}
@@ -148,6 +160,7 @@ const SketchplanationLightboxMobile = ({
 					centerOnInit
 					limitToBounds
 					disabled={!isActive}
+					panning={{ disabled: !isZoomed }}
 					doubleClick={{ mode: "toggle", step: 2, animationTime: 200 }}
 					wheel={{ step: 0.08, smoothStep: 0.003 }}
 					onTransform={(_ref, state) => {
@@ -197,11 +210,36 @@ const SketchplanationLightboxMobile = ({
 			{isActive && isOpen && !isLoading && (
 				<button
 					type="button"
+					data-swipe-ignore
 					onClick={handleClose}
 					aria-label="Close"
 					className={styles.mobileClose}
 				>
 					<X size={20} strokeWidth={2} />
+				</button>
+			)}
+			{isActive && isOpen && !isLoading && !isZoomed && onPrevious && (
+				<button
+					type="button"
+					data-swipe-ignore
+					onClick={onPrevious}
+					aria-label={
+						contextLabel ? `Previous in ${contextLabel}` : "Previous sketch"
+					}
+					className={classNames(styles.mobileNav, styles.mobileNavPrev)}
+				>
+					<ChevronLeft size={22} strokeWidth={2} />
+				</button>
+			)}
+			{isActive && isOpen && !isLoading && !isZoomed && onNext && (
+				<button
+					type="button"
+					data-swipe-ignore
+					onClick={onNext}
+					aria-label={contextLabel ? `Next in ${contextLabel}` : "Next sketch"}
+					className={classNames(styles.mobileNav, styles.mobileNavNext)}
+				>
+					<ChevronRight size={22} strokeWidth={2} />
 				</button>
 			)}
 			{isActive && isOpen && !isLoading && !isZoomed && children && (

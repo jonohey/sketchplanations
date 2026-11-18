@@ -1,5 +1,6 @@
 import buildAgentFiles from "./utils/buildAgentFiles.mjs";
 import buildBooksIndex from "./utils/buildBooksIndex.mjs";
+import buildCategoryNav from "./utils/buildCategoryNav.mjs";
 import buildInitialSearchResults from "./utils/buildInitialSearchResults.mjs";
 import buildNewerSketchplanations from "./utils/buildNewerSketchplanations.mjs";
 import buildPagesData from "./utils/buildPagesData.mjs";
@@ -15,6 +16,7 @@ const setup = async () => {
 
 	await Promise.all([
 		buildBooksIndex(catalog),
+		buildCategoryNav(catalog),
 		buildInitialSearchResults(catalog),
 		buildSearchIndex(catalog),
 		buildRss(catalog),

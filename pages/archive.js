@@ -10,6 +10,8 @@ import {
 	getHistoryEntryCache,
 	setHistoryEntryCache,
 } from "helpers/historyEntryCache";
+import { recentNavContext } from "helpers/navContext";
+import useRestoreNavReturnTarget from "hooks/useRestoreNavReturnTarget";
 import { client } from "services/prismic";
 
 const ITEMS_PER_PAGE = 40;
@@ -26,6 +28,12 @@ const Archive = ({ initialSketchplanations }) => {
 	const [loading, setLoading] = useState(false);
 	const [hasMore, setHasMore] = useState(
 		restored ? restored.hasMore : initialSketchplanations.next_page,
+	);
+	useRestoreNavReturnTarget([sketchplanations]);
+
+	const navContext = recentNavContext(
+		sketchplanations.map(({ uid }) => uid),
+		{ label: "Archive", href: "/archive" },
 	);
 
 	const loadMore = async () => {
@@ -72,7 +80,10 @@ const Archive = ({ initialSketchplanations }) => {
 				<span className="mx-2">·</span>
 				<FancyLink href="/list">List</FancyLink>
 			</div>
-			<SketchplanationsGrid prismicDocs={sketchplanations} />
+			<SketchplanationsGrid
+				prismicDocs={sketchplanations}
+				navContext={navContext}
+			/>
 			{hasMore && (
 				<div className="pt-8 pb-12 px-6 flex flex-col gap-4 items-center justify-center">
 					<p className="text-sm text-textSubdued">

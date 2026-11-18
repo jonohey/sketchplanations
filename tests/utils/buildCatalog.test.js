@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { booksFromSketchplanations } from "../../utils/bookLinks.mjs";
+import { categoryNavFromCatalog } from "../../utils/buildCategoryNav.mjs";
 import { initialSearchResultsFromCatalog } from "../../utils/buildInitialSearchResults.mjs";
 import { rssItemsFromCatalog } from "../../utils/buildRss.mjs";
 import { searchIndexFromCatalog } from "../../utils/buildSearchIndex.mjs";
@@ -208,5 +209,20 @@ describe("other catalog consumers", () => {
 		expect(books).toHaveLength(1);
 		expect(books[0].title).toBe("Factfulness");
 		expect(books[0].sketches[0].uid).toBe("middle-sketch");
+	});
+
+	it("builds newest-first category UID lists and recentUids", () => {
+		expect(categoryNavFromCatalog(buildCatalog)).toEqual({
+			categories: {
+				psychology: ["middle-sketch", "oldest-sketch"],
+				science: ["newest-sketch", "middle-sketch"],
+			},
+			recentUids: [
+				"newest-sketch",
+				"middle-sketch",
+				"edited-recently",
+				"oldest-sketch",
+			],
+		});
 	});
 });

@@ -1,11 +1,20 @@
 import { PrismicNextImage } from "@prismicio/next";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Dialog, Modal, ModalOverlay } from "react-aria-components";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
+import useTouchSwipe from "hooks/useTouchSwipe";
+
 const MotionModal = motion.create(Modal);
+
+const OPEN_MODAL_FRAME = {
+	top: "1.5rem",
+	left: "0",
+	width: "100vw",
+	height: "calc(var(--visual-viewport-height) - 6rem)",
+};
 
 const SketchplanationLightboxDesktop = ({
 	isOpen,
@@ -14,10 +23,14 @@ const SketchplanationLightboxDesktop = ({
 	isLoading,
 	setIsLoading,
 	initialImageRect,
+	skipOpenAnimation = false,
 	imageWithAlt,
 	imgixParams,
 	quality,
 	title,
+	onPrevious = null,
+	onNext = null,
+	contextLabel = null,
 	children,
 	onClose,
 	onOpenComplete,
@@ -33,6 +46,12 @@ const SketchplanationLightboxDesktop = ({
 	const [isZoomed, setIsZoomed] = useState(false);
 
 	const isActive = isOpen || isOpening || isClosing;
+	const showBackdrop = isOpen && (!isLoading || skipOpenAnimation);
+	const swipeHandlers = useTouchSwipe({
+		onSwipeLeft: onNext,
+		onSwipeRight: onPrevious,
+		disabled: !isOpen || isZoomed || (!onNext && !onPrevious),
+	});
 
 	const handleClose = useCallback(() => {
 		if (isOpening || !isOpen) return;
@@ -93,29 +112,34 @@ const SketchplanationLightboxDesktop = ({
 			<motion.div
 				className="fixed inset-0 z-10 bg-overlay"
 				initial={{
-					opacity: 0,
-					backdropFilter: "blur(0px)",
-					WebkitBackdropFilter: "blur(0px)",
+					opacity: skipOpenAnimation ? 1 : 0,
+					backdropFilter: skipOpenAnimation ? "blur(8px)" : "blur(0px)",
+					WebkitBackdropFilter: skipOpenAnimation ? "blur(8px)" : "blur(0px)",
 				}}
 				animate={{
-					opacity: isOpen && !isLoading ? 1 : 0,
-					backdropFilter: isOpen && !isLoading ? "blur(8px)" : "blur(0px)",
-					WebkitBackdropFilter:
-						isOpen && !isLoading ? "blur(8px)" : "blur(0px)",
+					opacity: showBackdrop ? 1 : 0,
+					backdropFilter: showBackdrop ? "blur(8px)" : "blur(0px)",
+					WebkitBackdropFilter: showBackdrop ? "blur(8px)" : "blur(0px)",
 				}}
 				transition={{
-					duration: 0.2,
+					duration: skipOpenAnimation && isOpen ? 0 : 0.2,
 				}}
 			/>
 			<MotionModal
 				className="fixed z-20"
-				style={{ opacity: thumbOpacity === 1 ? 0 : 1 }}
-				initial={{
-					top: initialImageRect.top,
-					left: initialImageRect.left,
-					width: initialImageRect.width,
-					height: initialImageRect.height,
+				style={{
+					opacity: thumbOpacity === 1 && !skipOpenAnimation ? 0 : 1,
 				}}
+				initial={
+					skipOpenAnimation
+						? OPEN_MODAL_FRAME
+						: {
+								top: initialImageRect.top,
+								left: initialImageRect.left,
+								width: initialImageRect.width,
+								height: initialImageRect.height,
+							}
+				}
 				onAnimationComplete={() => {
 					if (isOpen) {
 						onOpenComplete();
@@ -124,13 +148,8 @@ const SketchplanationLightboxDesktop = ({
 					}
 				}}
 				animate={
-					isOpen && !isLoading
-						? {
-								top: "1.5rem",
-								left: "0",
-								width: "100vw",
-								height: "calc(var(--visual-viewport-height) - 6rem)",
-							}
+					isOpen && (!isLoading || skipOpenAnimation)
+						? OPEN_MODAL_FRAME
 						: {
 								top: initialImageRect.top,
 								left: initialImageRect.left,
@@ -149,6 +168,7 @@ const SketchplanationLightboxDesktop = ({
 					ref={dialog}
 					className="w-full h-full"
 					aria-label={`${title} - zoomable image`}
+					{...swipeHandlers}
 				>
 					<TransformWrapper
 						ref={transformRef}
@@ -157,6 +177,7 @@ const SketchplanationLightboxDesktop = ({
 						initialScale={1}
 						centerOnInit
 						limitToBounds
+						panning={{ disabled: !isZoomed }}
 						doubleClick={{
 							mode: "toggle",
 							step: 2,
@@ -208,11 +229,38 @@ const SketchplanationLightboxDesktop = ({
 				{isOpen && !isLoading && (
 					<button
 						type="button"
+						data-swipe-ignore
 						onClick={handleClose}
 						aria-label="Close"
 						className="fixed z-30 top-3 right-3 flex items-center justify-center w-10 h-10 rounded-full bg-black/50 text-white backdrop-blur-sm hover:bg-black/70 transition-colors"
 					>
 						<X size={20} strokeWidth={2} />
+					</button>
+				)}
+				{isOpen && !isLoading && !isZoomed && onPrevious && (
+					<button
+						type="button"
+						data-swipe-ignore
+						onClick={onPrevious}
+						aria-label={
+							contextLabel ? `Previous in ${contextLabel}` : "Previous sketch"
+						}
+						className="fixed z-30 top-1/2 -translate-y-1/2 left-4 flex items-center justify-center w-11 h-11 rounded-full bg-black/45 text-white backdrop-blur-sm hover:bg-black/70 transition-colors"
+					>
+						<ChevronLeft size={24} strokeWidth={2} />
+					</button>
+				)}
+				{isOpen && !isLoading && !isZoomed && onNext && (
+					<button
+						type="button"
+						data-swipe-ignore
+						onClick={onNext}
+						aria-label={
+							contextLabel ? `Next in ${contextLabel}` : "Next sketch"
+						}
+						className="fixed z-30 top-1/2 -translate-y-1/2 right-4 flex items-center justify-center w-11 h-11 rounded-full bg-black/45 text-white backdrop-blur-sm hover:bg-black/70 transition-colors"
+					>
+						<ChevronRight size={24} strokeWidth={2} />
 					</button>
 				)}
 				<AnimatePresence>
