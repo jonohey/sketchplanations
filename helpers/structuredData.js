@@ -443,7 +443,7 @@ export const buildBookProductGraph = () => ({
 
 export const EXPLAINER_KIT_URL = `${SITE_URL}/explainer-kit`;
 
-export const EXPLAINER_KIT_IMAGE = `${SITE_URL}/images/explainer-kit/explainer-kit-og-1200x630.png`;
+export const EXPLAINER_KIT_IMAGE = `${SITE_URL}/images/explainer-kit/explainer-kit-og-v2-1200x630.png`;
 
 export const EXPLAINER_KIT_PRICES = [
 	{ currency: "GBP", amount: "39" },
