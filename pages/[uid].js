@@ -3,13 +3,7 @@ import * as prismicH from "@prismicio/helpers";
 import { PrismicNextImage } from "@prismicio/next";
 import classNames from "classnames";
 import Context from "context";
-import {
-	ArrowLeft,
-	ArrowRight,
-	ArrowUp,
-	ChevronLeft,
-	ChevronRight,
-} from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import Link from "next/link";
@@ -312,22 +306,26 @@ const SketchplanationPage = ({
 			<div className={styles.root}>
 				<div className={styles.articleWrapper}>
 					<article className={styles.article}>
-						<div
-							id="top"
-							className={classNames(
-								styles.title,
-								hasContext && styles.titleWithNav,
-								"scroll-mt-24",
-							)}
-						>
-							{hasContext && (
-								<SketchNavBar
-									context={navContext}
-									resolution={navResolution}
-									onStep={persistStep}
-									onReturnToList={prepareReturnToList}
-								/>
-							)}
+						<div id="top" className={classNames(styles.title, "scroll-mt-24")}>
+							<SketchNavBar
+								leftHref={leftTargetUid ? `/${leftTargetUid}` : null}
+								rightHref={rightTargetUid ? `/${rightTargetUid}` : null}
+								leftLabel={leftLabel}
+								rightLabel={rightLabel}
+								context={navContext}
+								resolution={navResolution}
+								onStepLeft={
+									hasContext && leftTargetUid
+										? () => persistStep(leftTargetUid)
+										: undefined
+								}
+								onStepRight={
+									hasContext && rightTargetUid
+										? () => persistStep(rightTargetUid)
+										: undefined
+								}
+								onReturnToList={prepareReturnToList}
+							/>
 							<TextHeader>{title}</TextHeader>
 						</div>
 						<div className={styles.image}>
@@ -440,92 +438,20 @@ const SketchplanationPage = ({
 								)}
 
 								<div className="mt-10">
-									<div className="flex gap-4">
-										<div className="flex flex-row items-center gap-x-2">
-											<KeyboardShortcut
-												shortcut="←"
-												icon={<ArrowLeft size={14} strokeWidth={1.5} />}
-											/>
-											{leftTargetUid ? (
-												<FancyLink
-													href={`/${leftTargetUid}`}
-													onClick={
-														hasContext
-															? () => persistStep(leftTargetUid)
-															: undefined
-													}
-												>
-													<span className="flex flex-row items-center gap-x-1">
-														<ChevronLeft
-															size={16}
-															className="pointerFine:hidden"
-														/>
-														{leftLabel}
-													</span>
-												</FancyLink>
-											) : (
-												<span
-													className="flex flex-row items-center gap-x-1 text-textSubdued"
-													aria-hidden="true"
-												>
-													<ChevronLeft
-														size={16}
-														className="pointerFine:hidden"
-													/>
-													{leftLabel}
-												</span>
-											)}
-										</div>
-										<div className="flex flex-row mx-auto items-center gap-x-2">
-											<KeyboardShortcut shortcut="R" />
-											{randomHandle ? (
-												<FancyLink
-													href={`/${randomHandle}`}
-													onClick={() => saveNavContext(null)}
-												>
-													Random
-												</FancyLink>
-											) : (
-												<span className="text-textSubdued" aria-hidden="true">
-													Random
-												</span>
-											)}
-										</div>
-										<div className="flex flex-row items-center gap-x-2">
-											{rightTargetUid ? (
-												<FancyLink
-													href={`/${rightTargetUid}`}
-													onClick={
-														hasContext
-															? () => persistStep(rightTargetUid)
-															: undefined
-													}
-												>
-													<span className="flex flex-row items-center gap-x-1">
-														{rightLabel}
-														<ChevronRight
-															size={16}
-															className="pointerFine:hidden"
-														/>
-													</span>
-												</FancyLink>
-											) : (
-												<span
-													className="flex flex-row items-center gap-x-1 text-textSubdued"
-													aria-hidden="true"
-												>
-													{rightLabel}
-													<ChevronRight
-														size={16}
-														className="pointerFine:hidden"
-													/>
-												</span>
-											)}
-											<KeyboardShortcut
-												shortcut="→"
-												icon={<ArrowRight size={14} strokeWidth={1.5} />}
-											/>
-										</div>
+									<div className="flex flex-row justify-center items-center gap-x-2">
+										<KeyboardShortcut shortcut="R" />
+										{randomHandle ? (
+											<FancyLink
+												href={`/${randomHandle}`}
+												onClick={() => saveNavContext(null)}
+											>
+												Random
+											</FancyLink>
+										) : (
+											<span className="text-textSubdued" aria-hidden="true">
+												Random
+											</span>
+										)}
 									</div>
 									<div className="text-center text-sm mt-12">
 										When you buy through links on sketchplanations.com, I may

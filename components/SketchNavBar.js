@@ -1,34 +1,53 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 import styles from "./SketchNavBar.module.css";
 
+import KeyboardShortcut from "./KeyboardShortcut";
+
 export default function SketchNavBar({
-	context,
-	resolution,
-	onStep,
+	leftHref = null,
+	rightHref = null,
+	leftLabel = "Newer",
+	rightLabel = "Older",
+	context = null,
+	resolution = null,
+	onStepLeft,
+	onStepRight,
 	onReturnToList,
 }) {
-	if (!context || !resolution) return null;
-
-	const { previous, next, position, total } = resolution;
+	const hasContext = Boolean(context && resolution);
+	const position = resolution?.position;
+	const total = resolution?.total;
 
 	return (
 		<nav
-			aria-label="Collection navigation"
+			aria-label={hasContext ? "Collection navigation" : "Sketch navigation"}
 			className={styles.root}
 			data-testid="sketch-nav-bar"
 		>
-			{previous ? (
+			{leftHref ? (
 				<Link
-					href={`/${previous}`}
-					onClick={() => onStep?.(previous)}
+					href={leftHref}
+					onClick={onStepLeft}
 					className={styles.stepLink}
-					aria-label={`Previous in ${context.label}`}
+					aria-label={
+						hasContext ? `${leftLabel} in ${context.label}` : leftLabel
+					}
 					data-testid="sketch-nav-previous"
 				>
-					<ChevronLeft size={16} strokeWidth={2} aria-hidden="true" />
-					<span>Prev</span>
+					<KeyboardShortcut
+						shortcut="←"
+						icon={<ArrowLeft size={14} strokeWidth={1.5} />}
+					/>
+					<span className={styles.stepLabel}>
+						<ChevronLeft
+							size={16}
+							className={styles.touchChevron}
+							aria-hidden="true"
+						/>
+						{leftLabel}
+					</span>
 				</Link>
 			) : (
 				<span
@@ -36,45 +55,71 @@ export default function SketchNavBar({
 					aria-disabled="true"
 					data-testid="sketch-nav-previous-disabled"
 				>
-					<ChevronLeft size={16} strokeWidth={2} aria-hidden="true" />
-					<span>Prev</span>
+					<KeyboardShortcut
+						shortcut="←"
+						icon={<ArrowLeft size={14} strokeWidth={1.5} />}
+					/>
+					<span className={styles.stepLabelDisabled}>
+						<ChevronLeft
+							size={16}
+							className={styles.touchChevron}
+							aria-hidden="true"
+						/>
+						{leftLabel}
+					</span>
 				</span>
 			)}
 
 			<div className={styles.context} data-testid="sketch-nav-context">
-				<Link
-					href={context.href}
-					onClick={onReturnToList}
-					className={styles.contextLink}
-					title={context.label}
-				>
-					<span className={styles.contextLabel}>{context.label}</span>
-				</Link>
-				{total > 1 && (
-					<span
-						className={styles.position}
-						aria-label={`Sketch ${position} of ${total}`}
-					>
-						<span aria-hidden="true" className={styles.dot}>
-							·
-						</span>
-						<span>
-							{position} of {total}
-						</span>
-					</span>
+				{hasContext && (
+					<>
+						<Link
+							href={context.href}
+							onClick={onReturnToList}
+							className={styles.contextLink}
+							title={context.label}
+						>
+							<span className={styles.contextLabel}>{context.label}</span>
+						</Link>
+						{total > 1 && (
+							<span
+								className={styles.position}
+								aria-label={`Sketch ${position} of ${total}`}
+							>
+								<span aria-hidden="true" className={styles.dot}>
+									·
+								</span>
+								<span>
+									{position} of {total}
+								</span>
+							</span>
+						)}
+					</>
 				)}
 			</div>
 
-			{next ? (
+			{rightHref ? (
 				<Link
-					href={`/${next}`}
-					onClick={() => onStep?.(next)}
+					href={rightHref}
+					onClick={onStepRight}
 					className={styles.stepLink}
-					aria-label={`Next in ${context.label}`}
+					aria-label={
+						hasContext ? `${rightLabel} in ${context.label}` : rightLabel
+					}
 					data-testid="sketch-nav-next"
 				>
-					<span>Next</span>
-					<ChevronRight size={16} strokeWidth={2} aria-hidden="true" />
+					<span className={styles.stepLabel}>
+						{rightLabel}
+						<ChevronRight
+							size={16}
+							className={styles.touchChevron}
+							aria-hidden="true"
+						/>
+					</span>
+					<KeyboardShortcut
+						shortcut="→"
+						icon={<ArrowRight size={14} strokeWidth={1.5} />}
+					/>
 				</Link>
 			) : (
 				<span
@@ -82,8 +127,18 @@ export default function SketchNavBar({
 					aria-disabled="true"
 					data-testid="sketch-nav-next-disabled"
 				>
-					<span>Next</span>
-					<ChevronRight size={16} strokeWidth={2} aria-hidden="true" />
+					<span className={styles.stepLabelDisabled}>
+						{rightLabel}
+						<ChevronRight
+							size={16}
+							className={styles.touchChevron}
+							aria-hidden="true"
+						/>
+					</span>
+					<KeyboardShortcut
+						shortcut="→"
+						icon={<ArrowRight size={14} strokeWidth={1.5} />}
+					/>
 				</span>
 			)}
 		</nav>
