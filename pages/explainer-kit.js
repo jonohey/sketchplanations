@@ -216,7 +216,7 @@ const imageAlt =
 const faqItems = [
 	{
 		q: "How do I get access?",
-		a: "After you buy, I'll email you the link and password for the web library.",
+		a: "After you buy, you'll get an email with a sign-in link to the web library. You can sign back in any time with the email you paid with.",
 	},
 	{
 		q: "How is this different from the website?",
@@ -1042,8 +1042,9 @@ const ExplainerKit = () => {
 								</ul>
 
 								<p className={`text-sm ${styles["lp-text-muted"]} mb-6`}>
-									After you buy, I&apos;ll email you the link and password for
-									the web library.
+									After you buy, you&apos;ll get an email with a sign-in link to
+									the web library. You can sign back in any time with the email
+									you paid with.
 								</p>
 
 								<div className="text-center mb-4">
