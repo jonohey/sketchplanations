@@ -4,8 +4,13 @@ import { useRouter } from "next/router";
 
 import styles from "./Footer.module.css";
 
-import { Cards } from "./Cards";
+import {
+	EXPLAINER_KIT_PATH,
+	trackExplainerKitClick,
+} from "helpers/explainerKit";
+
 import FancyLink from "./FancyLink";
+import FooterProducts from "./FooterProducts";
 import FooterScene from "./FooterScene";
 import SubscribeInline from "./SubscribeInline";
 
@@ -23,7 +28,13 @@ const Nav = () => (
 				track("Book-page-link", { location: "footer" });
 			}}
 		>
-			Book!
+			Book
+		</FancyLink>
+		<FancyLink
+			href={EXPLAINER_KIT_PATH}
+			onClick={() => trackExplainerKitClick("footer")}
+		>
+			Explainer Kit
 		</FancyLink>
 		<FancyLink href="/books">Books</FancyLink>
 		<FancyLink
@@ -61,21 +72,13 @@ const Nav = () => (
 			}}
 		>
 			<span className="inline-flex items-center gap-2">
-				<span>Shop</span>
+				<span>Prints</span>
 				<ExternalLink size={16} className="inline" />
 			</span>
 		</FancyLink>
 		<FancyLink href="/about">About</FancyLink>
 		<FancyLink href="/archive">Archive</FancyLink>
 		<FancyLink href="/list">List</FancyLink>
-		<FancyLink
-			href="/explainer-kit"
-			onClick={() => {
-				track("Explainer-kit-link", { location: "footer" });
-			}}
-		>
-			Explainer Kit
-		</FancyLink>
 		<FancyLink href="/licence">Licence</FancyLink>
 	</nav>
 );
@@ -175,17 +178,26 @@ const Footer = () => {
 
 				<div
 					id="footer-subscribe-inline"
-					className={`${isHome ? "" : "border-t border-borderFooter "}pt-6 sm:pt-10 px-[var(--edgeInset)]`}
+					className={`${isHome ? "" : "border-t border-borderFooter "}pt-8 sm:pt-12 px-[var(--edgeInset)]`}
 				>
-					<div className="grid sm:grid-cols-2 gap-12 max-w-screen-xl mx-auto items-center">
-						<Cards />
-						<div className="grid gap-y-8 items-start">
-							<SubscribeInline />
+					<div className="max-w-lg mx-auto text-center">
+						<h2 className="m-0 text-2xl sm:text-3xl font-bold text-balance">
+							Get a new sketch every week
+						</h2>
+						<div className="mt-6">
+							<SubscribeInline label={null} full />
 						</div>
 					</div>
 				</div>
 
-				<div className="text-center text-sm px-[var(--edgeInset)] py-4">
+				<div
+					id="footer-products"
+					className="px-[var(--edgeInset)] max-w-screen-xl mx-auto w-full"
+				>
+					<FooterProducts />
+				</div>
+
+				<div className="text-center text-sm text-textSubdued px-[var(--edgeInset)]">
 					When you buy through links on sketchplanations.com, I may earn an
 					affiliate commission. Thanks for supporting the site!
 				</div>

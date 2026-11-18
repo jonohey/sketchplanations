@@ -4,9 +4,14 @@ import { useRouter } from "next/router";
 
 import styles from "./Navigation.module.css";
 
+import {
+	EXPLAINER_KIT_PATH,
+	trackExplainerKitClick,
+} from "helpers/explainerKit";
+
 import Link from "./Link";
 
-const Navigation = () => {
+const Navigation = ({ kitPlacement = "desktop_nav" }) => {
 	const router = useRouter();
 
 	const isSelected = (path) => router.pathname === path;
@@ -44,7 +49,15 @@ const Navigation = () => {
 					track("Book-page-link", { location: "header" });
 				}}
 			>
-				Book!
+				Book
+			</Link>
+			<Link
+				href={EXPLAINER_KIT_PATH}
+				className={styles.item}
+				aria-current={isSelected(EXPLAINER_KIT_PATH) ? "page" : undefined}
+				onClick={() => trackExplainerKitClick(kitPlacement)}
+			>
+				Explainer Kit
 			</Link>
 			<a
 				href="/subscribe"
@@ -77,7 +90,7 @@ const Navigation = () => {
 					track("Shop", { location: "header" });
 				}}
 			>
-				Shop
+				Prints
 			</a>
 			<Link
 				href="/about"

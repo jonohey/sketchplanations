@@ -162,9 +162,9 @@ const Header = () => {
 						isOpen && styles["navigation--is-open"],
 					)}
 				>
-					<Navigation />
+					<Navigation kitPlacement={isDesktop ? "desktop_nav" : "mobile_nav"} />
 					<div className={styles.cards}>
-						<Cards />
+						<Cards location="menu" />
 					</div>
 				</div>
 				<div className={styles.divider} />

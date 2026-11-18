@@ -4,7 +4,12 @@ import Link from "next/link";
 
 import styles from "./Cards.module.css";
 
+import {
+	EXPLAINER_KIT_PATH,
+	trackExplainerKitClick,
+} from "helpers/explainerKit";
 import bigIdeasLittlePicturesImage from "images/big-ideas-little-pictures-book-cover.jpg";
+import explainerKitSlideImage from "images/explainer-kit/explainer-kit-copy-paste.png";
 import podcastImage from "images/podcast.jpg";
 
 import Book3D from "./Book3D";
@@ -37,7 +42,9 @@ const Card = ({
 	</div>
 );
 
-export const Cards = () => (
+// `location` (sidebar or menu) becomes the kit link's analytics
+// placement, e.g. card_sidebar.
+export const Cards = ({ location = "sidebar" }) => (
 	<div className={styles.cards}>
 		<Card
 			href="/big-ideas-little-pictures"
@@ -58,6 +65,25 @@ export const Cards = () => (
 							}}
 						>
 							Big Ideas Little Pictures
+						</FancyLink>
+					</div>
+				</>
+			}
+		/>
+		<Card
+			href={EXPLAINER_KIT_PATH}
+			imageSrc={explainerKitSlideImage}
+			alt="A slide with a hand-drawn Explainer Kit visual pasted in"
+			onImageClick={() => trackExplainerKitClick(`card_${location}`)}
+			content={
+				<>
+					<div>Presenting something?</div>
+					<div>
+						<FancyLink
+							href={EXPLAINER_KIT_PATH}
+							onClick={() => trackExplainerKitClick(`card_${location}`)}
+						>
+							Explore the Explainer Kit
 						</FancyLink>
 					</div>
 				</>

@@ -1,0 +1,47 @@
+.heading {
+	@apply m-0 mb-6 text-center text-xl font-semibold;
+}
+
+/* Compact image-left rows on phones, stacked cards from sm up */
+.tile {
+	@apply grid h-full grid-cols-[5rem_1fr] gap-x-4 rounded-xl p-4 transition-shadow sm:flex sm:flex-col sm:p-5;
+	background: hsl(0 0% 100% / 0.75);
+	border: 1px solid var(--color-border);
+}
+
+.tile:hover {
+	@apply shadow-md;
+}
+
+.tile:focus-visible {
+	@apply outline outline-2 outline-offset-2 outline-blue;
+}
+
+.imageWrap {
+	@apply row-span-4 flex h-20 items-center justify-center sm:mb-4 sm:h-36;
+}
+
+.image {
+	@apply h-full w-auto max-w-full object-contain shadow-md;
+}
+
+/* Larger than Book3D's small size where the tile has room; the doubled
+   class outranks Book3D's .root.small */
+@screen sm {
+	.imageWrap .book.book {
+		--book-w: 7.5rem;
+		--book-t: 1.125rem;
+	}
+}
+
+.title {
+	@apply font-semibold;
+}
+
+.text {
+	@apply mt-1 text-sm sm:flex-1;
+}
+
+.cta {
+	@apply mt-3 inline-flex items-center gap-1 text-sm font-medium text-blue;
+}

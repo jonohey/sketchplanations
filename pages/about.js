@@ -4,8 +4,11 @@ import Image from "next/image";
 import ChromeExtensionPromo from "components/ChromeExtensionPromo";
 import FancyLink from "components/FancyLink";
 import JsonLd from "components/JsonLd";
-import SubscribeFull from "components/SubscribeFull";
 import { pageTitle } from "helpers";
+import {
+	EXPLAINER_KIT_PATH,
+	trackExplainerKitClick,
+} from "helpers/explainerKit";
 import { buildPerson } from "helpers/structuredData";
 
 const About = ({ siteUrl }) => {
@@ -154,7 +157,10 @@ const About = ({ siteUrl }) => {
 								</a>
 							</li>
 							<li>
-								<a href="#subscribe" className="text-blue dark:text-blueLight">
+								<a
+									href="#footer-subscribe-inline"
+									className="text-blue dark:text-blueLight"
+								>
 									Subscribe here
 								</a>
 							</li>
@@ -163,7 +169,7 @@ const About = ({ siteUrl }) => {
 
 					<div className="py-4">
 						<p>
-							<strong>Sketchplanations is now a book!</strong> I think
+							<strong>Sketchplanations is also a book!</strong> I think
 							you&apos;ll love{" "}
 							<FancyLink href="/big-ideas-little-pictures">
 								Big Ideas Little Pictures
@@ -187,6 +193,18 @@ const About = ({ siteUrl }) => {
 							<FancyLink href="/podcast" className="text-blue">
 								Listen to the podcast
 							</FancyLink>
+						</p>
+
+						<p>
+							<strong>And now there&apos;s a kit for your slides.</strong> The{" "}
+							<FancyLink
+								href={EXPLAINER_KIT_PATH}
+								onClick={() => trackExplainerKitClick("about_intro")}
+							>
+								Explainer Kit
+							</FancyLink>{" "}
+							is a searchable library of 250+ hand-drawn visuals to help explain
+							your own ideas in presentations, lessons and workshops.
 						</p>
 
 						<p>
@@ -585,6 +603,19 @@ const About = ({ siteUrl }) => {
 							non-commercial purposes, please go ahead. If you have a moment to
 							email me where you used one, it makes me very happy. Check out the{" "}
 							<FancyLink href="/licence">licence</FancyLink> page for details.
+						</p>
+						<p>
+							I made the{" "}
+							<FancyLink
+								href={EXPLAINER_KIT_PATH}
+								onClick={() => trackExplainerKitClick("about")}
+							>
+								Explainer Kit
+							</FancyLink>{" "}
+							for people who use Sketchplanations in slides, classes and
+							workshops. It&apos;s a searchable library of 250+ hand-drawn
+							visuals you can use to explain your own ideas, with a commercial
+							licence.
 						</p>
 						<p>
 							Want to include a sketch in a book? That&apos;s often possible too
@@ -1092,22 +1123,6 @@ const About = ({ siteUrl }) => {
 							</a>
 						</p>
 					</div>
-
-					<hr />
-
-					<div id="subscribe">
-						<h2>Subscribe here</h2>
-					</div>
-
-					<SubscribeFull />
-					<p className="mt-4">
-						<a
-							href="#top"
-							className="inline-block text-sm text-blue hover:underline"
-						>
-							Back to top ↑
-						</a>
-					</p>
 				</div>
 			</div>
 		</>

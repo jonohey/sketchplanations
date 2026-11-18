@@ -42,7 +42,10 @@
 }
 
 .root:hover .body,
-.root:focus-within .body {
+.root:focus-within .body,
+/* Lets a whole card that contains the book (e.g. a footer tile) turn it */
+:global(.book3d-turn):hover .body,
+:global(.book3d-turn):focus-visible .body {
 	transform: rotateY(20deg);
 }
 
