@@ -1,0 +1,76 @@
+.body {
+	@apply mt-2 mb-0 max-w-2xl;
+}
+
+.homeHeading {
+	@apply m-0 text-2xl font-bold sm:text-3xl;
+}
+
+.eyebrow {
+	@apply m-0 mb-2 text-xs font-semibold uppercase tracking-wide text-blue dark:text-blueLight;
+}
+
+.features {
+	@apply m-0 mt-4 grid list-none gap-x-6 gap-y-2 p-0 text-sm sm:grid-cols-2;
+}
+
+.feature {
+	@apply flex items-start gap-2;
+}
+
+.check {
+	@apply mt-0.5 shrink-0 text-blue dark:text-blueLight;
+}
+
+/* Homepage feature: mirrors the book strip layout */
+.home {
+	@apply flex flex-col md:flex-row items-center gap-8 md:gap-12 mb-12;
+}
+
+.slides {
+	@apply relative w-full md:w-1/2 mx-auto max-w-md md:max-w-none;
+	aspect-ratio: 4 / 3;
+}
+
+.blob {
+	@apply absolute rounded-full bg-bgHighlight;
+	inset: 4% 8% 2% 4%;
+	border-radius: 58% 42% 55% 45% / 48% 56% 44% 52%;
+}
+
+.slide {
+	@apply absolute flex flex-col rounded-xl bg-white p-4 shadow-xl;
+	aspect-ratio: 16 / 9;
+	color: #1a1a1a;
+}
+
+.slideBack {
+	width: 62%;
+	top: 4%;
+	right: 4%;
+	transform: rotate(3deg);
+	background: #fbf6d9;
+}
+
+.slideFront {
+	width: 72%;
+	bottom: 6%;
+	left: 4%;
+	transform: rotate(-3deg);
+}
+
+.slideTitle {
+	@apply m-0 text-sm font-semibold sm:text-base;
+}
+
+.slideArt {
+	@apply flex flex-1 items-end justify-around gap-2 min-h-0;
+}
+
+.artTall {
+	@apply h-full w-auto max-w-[30%] object-contain;
+}
+
+.artWide {
+	@apply h-auto w-1/4 max-h-full object-contain;
+}

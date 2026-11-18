@@ -8,6 +8,10 @@ import {
 } from "utils/licenceContent.mjs";
 
 import { fastScrollToTop } from "helpers";
+import {
+	EXPLAINER_KIT_PATH,
+	trackExplainerKitClick,
+} from "helpers/explainerKit";
 
 import FancyLink from "./FancyLink";
 
@@ -182,6 +186,17 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 				<li>a magazine or newspaper article</li>
 				<li>your email newsletter or the like...</li>
 			</ul>
+			<p>
+				If you&apos;d like a ready-to-use collection for your slides, take a
+				look at the{" "}
+				<FancyLink
+					href={EXPLAINER_KIT_PATH}
+					onClick={() => trackExplainerKitClick("licence")}
+				>
+					Explainer Kit
+				</FancyLink>
+				.
+			</p>
 			<p>
 				...as long as you give credit. In fact, I&apos;d <em>love</em> you to
 				use them to make a point, help explain something for others, further

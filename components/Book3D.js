@@ -14,8 +14,9 @@ const Book3D = ({
 	spineAuthor,
 	small = false,
 	priority = !small,
+	className = "",
 }) => (
-	<div className={small ? `${styles.root} ${styles.small}` : styles.root}>
+	<div className={`${styles.root} ${small ? styles.small : ""} ${className}`}>
 		<div className={styles.body}>
 			<div className={styles.front}>
 				<Image

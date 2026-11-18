@@ -39,6 +39,11 @@
 	@apply text-xl sm:text-2xl;
 }
 
+/* Matches .groupHeading so the homepage section headings are one size */
+.titleHome {
+	@apply text-2xl sm:text-3xl;
+}
+
 .titleH3 {
 	@apply text-lg sm:text-xl;
 }

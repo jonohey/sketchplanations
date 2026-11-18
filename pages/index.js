@@ -8,6 +8,7 @@ import Link from "next/link";
 import styles from "./index.module.css";
 
 import Book3D from "components/Book3D";
+import ExplainerKitStrip from "components/ExplainerKitStrip";
 import FancyLink from "components/FancyLink";
 import HomeCategoryCarousels from "components/HomeCategoryCarousel";
 import ReaderQuotes from "components/ReaderQuotes";
@@ -133,6 +134,12 @@ const Home = ({ carouselRows }) => {
 		</section>
 	);
 
+	const kitSection = (
+		<div className={styles.section} id="explainer-kit-strip">
+			<ExplainerKitStrip />
+		</div>
+	);
+
 	return (
 		<>
 			<Head>
@@ -193,7 +200,11 @@ const Home = ({ carouselRows }) => {
 			</section>
 
 			<div className="mt-4 sm:mt-8">
-				<HomeCategoryCarousels rows={carouselRows} interlude={bookSection} />
+				<HomeCategoryCarousels
+					rows={carouselRows}
+					afterLatest={kitSection}
+					afterRecent={bookSection}
+				/>
 			</div>
 
 			<div

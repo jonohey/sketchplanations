@@ -3,7 +3,7 @@ import { track } from "@vercel/analytics";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 
 import styles from "./HomeCategoryCarousel.module.css";
 
@@ -402,7 +402,11 @@ function HomeCategoryCarouselRow({
 	);
 }
 
-export default function HomeCategoryCarousels({ rows, interlude = null }) {
+export default function HomeCategoryCarousels({
+	rows,
+	afterLatest = null,
+	afterRecent = null,
+}) {
 	if (!rows?.length) return null;
 
 	const recentRows = rows.filter((row) => row.kind === "recent");
@@ -411,55 +415,75 @@ export default function HomeCategoryCarousels({ rows, interlude = null }) {
 	return (
 		<div id="home-category-carousels">
 			{recentRows.map((row) => (
-				<section
-					key="recent"
-					className={styles.section}
-					aria-labelledby="carousel-heading-recent"
-					id="recent-sketches"
-				>
-					<div className="container mx-auto px-4 sm:px-6 lg:px-8">
-						<div className={styles.headerCentered}>
-							<h2
-								className={`${styles.title} ${styles.titleH2}`}
-								id="carousel-heading-recent"
-							>
-								<Link
-									href={row.viewAllHref}
-									className={styles.titleLink}
-									onClick={() =>
-										track("homepage_carousel_view_all_click", {
-											category: row.label,
-										})
-									}
+				<Fragment key="recent">
+					<section
+						className={styles.section}
+						aria-labelledby="carousel-heading-latest"
+						id="latest-sketch"
+					>
+						<div className="container mx-auto px-4 sm:px-6 lg:px-8">
+							<div className={styles.headerCentered}>
+								<h2
+									className={`${styles.title} ${styles.titleHome}`}
+									id="carousel-heading-latest"
 								>
-									{row.label}
-								</Link>
-							</h2>
-							{row.tagline && <p className={styles.tagline}>{row.tagline}</p>}
+									Latest
+								</h2>
+								{row.tagline && <p className={styles.tagline}>{row.tagline}</p>}
+							</div>
+							{row.featuredSketch && (
+								<HomeFeaturedSketch sketch={row.featuredSketch} />
+							)}
 						</div>
-						{row.featuredSketch && (
-							<HomeFeaturedSketch sketch={row.featuredSketch} />
-						)}
-					</div>
+					</section>
+
+					{afterLatest}
+
 					{row.sketches.length > 0 && (
-						<HomeCategoryCarouselRow
-							label={row.label}
-							viewAllHref={row.viewAllHref}
-							sketches={row.sketches}
-							category={row.label}
-							headingId="carousel-heading-recent"
-							headingAs="h2"
-							priorityImage={false}
-							showPublishedDate
-							prefetchCards
-							hideHeader
-							wrapSection={false}
-						/>
+						<section
+							className={styles.section}
+							aria-labelledby="carousel-heading-recent"
+							id="recent-sketches"
+						>
+							<div className="container mx-auto px-4 sm:px-6 lg:px-8">
+								<div className={styles.headerCentered}>
+									<h2
+										className={`${styles.title} ${styles.titleHome}`}
+										id="carousel-heading-recent"
+									>
+										<Link
+											href={row.viewAllHref}
+											className={styles.titleLink}
+											onClick={() =>
+												track("homepage_carousel_view_all_click", {
+													category: row.label,
+												})
+											}
+										>
+											Recent sketches
+										</Link>
+									</h2>
+								</div>
+							</div>
+							<HomeCategoryCarouselRow
+								label="Recent sketches"
+								viewAllHref={row.viewAllHref}
+								sketches={row.sketches}
+								category={row.label}
+								headingId="carousel-heading-recent"
+								headingAs="h2"
+								priorityImage={false}
+								showPublishedDate
+								prefetchCards
+								hideHeader
+								wrapSection={false}
+							/>
+						</section>
 					)}
-				</section>
+				</Fragment>
 			))}
 
-			{interlude}
+			{afterRecent}
 
 			{categoryRows.length > 0 && (
 				<section
@@ -468,7 +492,7 @@ export default function HomeCategoryCarousels({ rows, interlude = null }) {
 				>
 					<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 						<h2 id="carousel-group-explore" className={styles.groupHeading}>
-							Explore visuals for
+							Explore visuals for…
 						</h2>
 					</div>
 					{categoryRows.map((row) => (
