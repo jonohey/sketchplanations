@@ -214,7 +214,7 @@ const Books = ({ books }) => {
 					content="Books that taught the ideas behind Sketchplanations — a reading list from the sketches."
 				/>
 				<link rel="canonical" href="https://sketchplanations.com/books" />
-				<meta property="og:title" content="Books" />
+				<meta key="og:title" property="og:title" content="Books" />
 				<meta
 					property="og:description"
 					content="Books that taught the ideas behind Sketchplanations — a reading list from the sketches."

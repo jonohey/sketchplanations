@@ -1,3 +1,4 @@
+import { track } from "@vercel/analytics";
 import {
 	Check,
 	CircleAlert,
@@ -18,7 +19,13 @@ import Link from "next/link";
 import styles from "styles/landing.module.css";
 
 import DraggableIconsCanvas from "components/DraggableIconsCanvas";
-import { pageTitle } from "helpers";
+import JsonLd from "components/JsonLd";
+import {
+	EXPLAINER_KIT_IMAGE,
+	EXPLAINER_KIT_PRICES,
+	EXPLAINER_KIT_URL,
+	buildExplainerKitGraph,
+} from "helpers/structuredData";
 import explainerKitAssetPageImage from "images/explainer-kit/explainer-kit-asset-page.png";
 import explainerKitCopyPasteImage from "images/explainer-kit/explainer-kit-copy-paste.png";
 import explainerKitHeroImage from "images/explainer-kit/explainer-kit-hero-flying.png";
@@ -98,18 +105,54 @@ const libraryImage = (id) => `/images/explainer-kit/library/${id}@0.5x.png`;
 
 // A taste of the People category, labelled as in the web library.
 const libraryPeople = [
-	{ id: "angry", label: "Angry" },
-	{ id: "anxious", label: "Anxious" },
-	{ id: "artist-painting-at-easel", label: "Artist painting at an easel" },
-	{ id: "backpacker-walking", label: "Backpacker — walking" },
-	{ id: "bored-computer", label: "Bored at computer" },
-	{ id: "burned-out", label: "Burned out" },
-	{ id: "choir-singing", label: "Choir singing" },
-	{ id: "giving-collecting-feedback", label: "Giving and collecting feedback" },
-	{ id: "team-table", label: "Team — at a table" },
-	{ id: "speech", label: "Speech — presentation" },
-	{ id: "helping-hand", label: "Helping hand" },
-	{ id: "person-designing-at-whiteboard", label: "Person — whiteboard" },
+	{ id: "angry", label: "Angry", alt: "Hand-drawn angry person" },
+	{ id: "anxious", label: "Anxious", alt: "Hand-drawn anxious person" },
+	{
+		id: "artist-painting-at-easel",
+		label: "Artist painting at an easel",
+		alt: "Hand-drawn artist painting at an easel",
+	},
+	{
+		id: "backpacker-walking",
+		label: "Backpacker — walking",
+		alt: "Hand-drawn backpacker walking",
+	},
+	{
+		id: "bored-computer",
+		label: "Bored at computer",
+		alt: "Hand-drawn person bored at a computer",
+	},
+	{
+		id: "burned-out",
+		label: "Burned out",
+		alt: "Hand-drawn burned-out person",
+	},
+	{
+		id: "choir-singing",
+		label: "Choir singing",
+		alt: "Hand-drawn choir singing",
+	},
+	{
+		id: "giving-collecting-feedback",
+		label: "Giving and collecting feedback",
+		alt: "Hand-drawn people giving and collecting feedback",
+	},
+	{
+		id: "team-table",
+		label: "Team — at a table",
+		alt: "Hand-drawn team sitting at a table",
+	},
+	{
+		id: "speech",
+		label: "Speech — presentation",
+		alt: "Hand-drawn person giving a presentation",
+	},
+	{ id: "helping-hand", label: "Helping hand", alt: "Hand-drawn helping hand" },
+	{
+		id: "person-designing-at-whiteboard",
+		label: "Person — whiteboard",
+		alt: "Hand-drawn person designing at a whiteboard",
+	},
 ];
 
 const libraryCategories = [
@@ -117,25 +160,46 @@ const libraryCategories = [
 		title: "Icons and objects",
 		count: "80+",
 		text: "Lightbulbs, calendars, arrows and checkmarks for when only an icon will do.",
-		ids: ["lightbulb-full", "brain", "calendar"],
+		images: [
+			{ id: "lightbulb-full", alt: "Glowing yellow lightbulb" },
+			{ id: "brain", alt: "Hand-drawn brain" },
+			{ id: "calendar", alt: "Wall calendar" },
+		],
 	},
 	{
 		title: "Metaphors",
 		count: "35+",
 		text: "Forks in the road, obstacles and launches for progress, choices and risk.",
-		ids: ["choose-path", "obstacle", "rocket-launch"],
+		images: [
+			{
+				id: "choose-path",
+				alt: "Tangled line leading to a choice of three outcomes",
+			},
+			{ id: "obstacle", alt: "Person facing a tall wall" },
+			{ id: "rocket-launch", alt: "Red rocket launching" },
+		],
 	},
 	{
 		title: "Frameworks and diagrams",
 		count: "30+",
 		text: "Pyramids, S-curves, icebergs and loops, ready to label your own way.",
-		ids: ["pyramid-three", "s-curve-chart", "iceberg"],
+		images: [
+			{ id: "pyramid-three", alt: "Pyramid with three layers" },
+			{
+				id: "s-curve-chart",
+				alt: "S-curve chart with a second curve beginning",
+			},
+			{ id: "iceberg", alt: "Iceberg" },
+		],
 	},
 	{
 		title: "Simple backgrounds",
 		count: "15+",
 		text: "Subtle scenes to give a slide a little extra warmth.",
-		ids: ["bookcase-md", "desert-island"],
+		images: [
+			{ id: "bookcase-md", alt: "Bookcase full of books" },
+			{ id: "desert-island", alt: "Palm tree on a desert island" },
+		],
 	},
 ];
 
@@ -143,6 +207,53 @@ const checkoutUrl = "https://buy.stripe.com/6oU00j1yZ9w2go90Rh1Fe0a";
 
 const description =
 	"250+ hand-drawn people, icons, metaphors, frameworks and backgrounds to copy or download into your slides, docs and talks. Browse and search the web library. Commercial use included.";
+
+const title = "Explainer Kit: hand-drawn visuals to get your message across";
+
+const imageAlt =
+	"A hand-drawn red rocket launching beside the words Sketchplanations Explainer Kit";
+
+const faqItems = [
+	{
+		q: "How do I get access?",
+		a: "After you buy, you'll get an email with a sign-in link to the web library. You can sign back in any time with the email you paid with.",
+	},
+	{
+		q: "How is this different from the website?",
+		a: "The Explainer Kit is a library of high-resolution, presentation-ready elements with transparent backgrounds that you can combine to explain ideas clearly. You can still find individual concept sketches on the website.",
+	},
+	{
+		q: "What format do the visuals come in?",
+		a: "Transparent PNGs, in full and half size. Copy them from the web library or download them, then drop them into slides, documents or design tools.",
+	},
+	{
+		q: "Are updates included?",
+		a: "Yes. New visuals are added to the library regularly at no extra cost.",
+	},
+	{
+		q: "Can I use it commercially?",
+		a: "Yes. Use the visuals in client decks, presentations, courses, books, websites and marketing, and edit them to fit. You can't resell or share the files, use them in logos, or use them to train AI. See the full kit licence.",
+		link: { href: "/kit/licence", text: "full kit licence" },
+	},
+	{
+		q: "Can I use it with my coding agent?",
+		a: "Yes. The kit has an agent skill for Claude Code and similar tools, so your agent can find and use the visuals. See how to use it with your coding agent.",
+		link: { href: "/kit/skill", text: "use it with your coding agent" },
+	},
+	{
+		q: "Can my team use it?",
+		a: "Each licence is for one named person. For colleagues or a team licence, email jono.hey@gmail.com.",
+		email: "jono.hey@gmail.com",
+	},
+	{
+		q: "Can I customise the visuals?",
+		a: "The kit focuses on ready-to-use PNG visuals that work out of the box. Editable versions may come later based on feedback.",
+	},
+];
+
+const trackCheckout = (location) => () => {
+	track("Explainer-kit-checkout", { location });
+};
 
 const scrollToId = (id) => (e) => {
 	e.preventDefault();
@@ -154,43 +265,71 @@ const scrollToId = (id) => (e) => {
 		?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
 };
 
+// Renders the plain-text answer, turning the licence phrase or email address
+// into a link. The same text feeds the FAQPage structured data.
+const FaqAnswer = ({ item: { a, link, email } }) => {
+	const linked = link?.text ?? email;
+	if (!linked) return a;
+
+	const [before, after] = a.split(linked);
+	return (
+		<>
+			{before}
+			<a
+				href={link ? link.href : `mailto:${email}`}
+				className={`${styles["lp-text-accent"]} underline`}
+			>
+				{linked}
+			</a>
+			{after}
+		</>
+	);
+};
+
 const ExplainerKit = () => {
 	return (
 		<div
 			className={`${styles["landing-page"]} min-h-screen flex flex-col ${inter.variable} ${libreBaskerville.variable}`}
 		>
 			<Head>
-				<title>{pageTitle("Sketchplanations Explainer Kit")}</title>
+				<title>{title}</title>
 				<meta name="description" content={description} />
-				<link
-					rel="canonical"
-					href="https://sketchplanations.com/explainer-kit"
-				/>
+				<link rel="canonical" href={EXPLAINER_KIT_URL} />
 
 				{/* Open Graph Meta Tags */}
-				<meta property="og:title" content="Sketchplanations Explainer Kit" />
+				<meta key="og:title" property="og:title" content={title} />
 				<meta property="og:description" content={description} />
-				<meta
-					property="og:url"
-					content="https://sketchplanations.com/explainer-kit"
-				/>
-				<meta property="og:site_name" content="Sketchplanations" />
+				<meta property="og:url" content={EXPLAINER_KIT_URL} />
+				<meta property="og:locale" content="en_GB" />
 				<meta property="og:type" content="product" />
-				<meta
-					property="og:image"
-					content="https://sketchplanations.com/kit/thumbs/person-flying-page.webp"
-				/>
+				<meta property="og:image" content={EXPLAINER_KIT_IMAGE} />
+				<meta property="og:image:type" content="image/png" />
+				<meta property="og:image:width" content="1200" />
+				<meta property="og:image:height" content="630" />
+				<meta property="og:image:alt" content={imageAlt} />
+				<meta property="product:availability" content="in stock" />
+				{EXPLAINER_KIT_PRICES.flatMap(({ amount, currency }) => [
+					<meta
+						key={`amount-${currency}`}
+						property="product:price:amount"
+						content={amount}
+					/>,
+					<meta
+						key={`currency-${currency}`}
+						property="product:price:currency"
+						content={currency}
+					/>,
+				])}
 
 				{/* Twitter Card Meta Tags */}
 				<meta name="twitter:card" content="summary_large_image" />
-				<meta name="twitter:site" content="@sketchplanator" />
-				<meta name="twitter:title" content="Sketchplanations Explainer Kit" />
+				<meta name="twitter:title" content={title} />
 				<meta name="twitter:description" content={description} />
-				<meta
-					name="twitter:image"
-					content="https://sketchplanations.com/kit/thumbs/person-flying-page.webp"
-				/>
+				<meta name="twitter:image" content={EXPLAINER_KIT_IMAGE} />
+				<meta name="twitter:image:alt" content={imageAlt} />
 			</Head>
+
+			<JsonLd data={buildExplainerKitGraph({ description, faq: faqItems })} />
 
 			{/* Landing Page Header */}
 			<header className={styles["lp-header"]}>
@@ -207,6 +346,7 @@ const ExplainerKit = () => {
 					</Link>
 					<a
 						href={checkoutUrl}
+						onClick={trackCheckout("header")}
 						className={`${styles["lp-btn-cta"]} text-sm px-4 py-2`}
 					>
 						Get the kit
@@ -235,8 +375,9 @@ const ExplainerKit = () => {
 								<p
 									className={`text-lg md:text-xl ${styles["lp-text-muted"]} leading-relaxed mb-4`}
 								>
-									A growing web library of hand-drawn Sketchplanations visuals
-									you can copy or download straight into your work.
+									The Sketchplanations Explainer Kit is a growing web library of
+									hand-drawn visuals you can copy or download straight into your
+									work.
 								</p>
 								<p className={`text-lg ${styles["lp-prose"]} mb-5 max-w-xl`}>
 									Make complex ideas easier to explain and easier to remember.
@@ -244,6 +385,7 @@ const ExplainerKit = () => {
 								<div className="flex flex-col sm:flex-row gap-4">
 									<a
 										href={checkoutUrl}
+										onClick={trackCheckout("hero")}
 										className={`${styles["lp-btn-cta"]} ${styles["lp-btn-cta-lg"]}`}
 									>
 										Get the kit for £39
@@ -469,7 +611,7 @@ const ExplainerKit = () => {
 									<div className="relative w-full aspect-square">
 										<Image
 											src={libraryImage(person.id)}
-											alt=""
+											alt={person.alt}
 											fill
 											sizes="(min-width: 1024px) 140px, (min-width: 768px) 15vw, (min-width: 640px) 22vw, 30vw"
 											className="object-contain"
@@ -491,11 +633,11 @@ const ExplainerKit = () => {
 									className={`${styles["lp-card"]} p-5`}
 								>
 									<div className="flex items-center justify-center gap-2 h-24 mb-4">
-										{category.ids.map((id) => (
+										{category.images.map(({ id, alt }) => (
 											<div key={id} className="relative h-full flex-1">
 												<Image
 													src={libraryImage(id)}
-													alt=""
+													alt={alt}
 													fill
 													sizes="96px"
 													className="object-contain"
@@ -841,62 +983,7 @@ const ExplainerKit = () => {
 							FAQ
 						</h2>
 						<dl className="space-y-6">
-							{[
-								{
-									q: "How do I get access?",
-									a: "After you buy, I'll email you the link and password for the web library.",
-								},
-								{
-									q: "How is this different from the website?",
-									a: "The Explainer Kit is a library of high-resolution, presentation-ready elements with transparent backgrounds that you can combine to explain ideas clearly. You can still find individual concept sketches on the website.",
-								},
-								{
-									q: "What format do the visuals come in?",
-									a: "Transparent PNGs, in full and half size. Copy them from the web library or download them, then drop them into slides, documents or design tools.",
-								},
-								{
-									q: "Are updates included?",
-									a: "Yes. New visuals are added to the library regularly at no extra cost.",
-								},
-								{
-									q: "Can I use it commercially?",
-									a: (
-										<>
-											Yes. Use the visuals in client decks, presentations,
-											courses, books, websites and marketing, and edit them to
-											fit. You can&apos;t resell or share the files, use them in
-											logos, or use them to train AI. See the{" "}
-											<a
-												href="/kit/licence"
-												className={`${styles["lp-text-accent"]} underline`}
-											>
-												full kit licence
-											</a>
-											.
-										</>
-									),
-								},
-								{
-									q: "Can my team use it?",
-									a: (
-										<>
-											Each licence is for one named person. For colleagues or a
-											team licence, email{" "}
-											<a
-												href="mailto:jono.hey@gmail.com"
-												className={`${styles["lp-text-accent"]} underline`}
-											>
-												jono.hey@gmail.com
-											</a>
-											.
-										</>
-									),
-								},
-								{
-									q: "Can I customise the visuals?",
-									a: "The kit focuses on ready-to-use PNG visuals that work out of the box. Editable versions may come later based on feedback.",
-								},
-							].map((item) => (
+							{faqItems.map((item) => (
 								<div key={item.q}>
 									<dt
 										className={`font-semibold ${styles["lp-text-primary"]} text-lg mb-1`}
@@ -906,7 +993,7 @@ const ExplainerKit = () => {
 									<dd
 										className={`${styles["lp-prose"]} ${styles["lp-text-muted"]}`}
 									>
-										{item.a}
+										<FaqAnswer item={item} />
 									</dd>
 								</div>
 							))}
@@ -929,7 +1016,7 @@ const ExplainerKit = () => {
 						<div className={`${styles["lp-card"]} rounded-3xl overflow-hidden`}>
 							<div className={`p-8 text-center ${styles["lp-bg-primary"]}`}>
 								<p className="text-sm font-semibold uppercase tracking-wider opacity-90 mb-2">
-									Explainer Kit
+									Sketchplanations Explainer Kit
 								</p>
 								<div className="flex items-baseline justify-center gap-2 mb-2">
 									<span className={styles["lp-price-current"]}>£39</span>
@@ -955,12 +1042,17 @@ const ExplainerKit = () => {
 								</ul>
 
 								<p className={`text-sm ${styles["lp-text-muted"]} mb-6`}>
-									After you buy, I&apos;ll email you the link and password for
-									the web library.
+									After you buy, you&apos;ll get an email with a sign-in link to
+									the web library. You can sign back in any time with the email
+									you paid with.
 								</p>
 
 								<div className="text-center mb-4">
-									<a href={checkoutUrl} className={styles["lp-btn-cta"]}>
+									<a
+										href={checkoutUrl}
+										onClick={trackCheckout("buy-card")}
+										className={styles["lp-btn-cta"]}
+									>
 										Get the kit for £39
 									</a>
 								</div>
@@ -1014,6 +1106,7 @@ const ExplainerKit = () => {
 						</p>
 						<a
 							href={checkoutUrl}
+							onClick={trackCheckout("final-cta")}
 							className={`${styles["lp-btn-highlight"]} ${styles["lp-btn-cta-lg"]}`}
 						>
 							Get the Explainer Kit for £39

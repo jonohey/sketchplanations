@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import {
+	EXPLAINER_KIT_IMAGE,
 	buildCategoryStructuredData,
+	buildExplainerKitGraph,
 	buildPerson,
 	buildSiteGraph,
 	buildSketchStructuredData,
@@ -218,5 +220,42 @@ describe("buildCategoryStructuredData", () => {
 
 		expect(collection.mainEntity.numberOfItems).toBe(150);
 		expect(collection.mainEntity.itemListElement).toHaveLength(100);
+	});
+});
+
+describe("buildExplainerKitGraph", () => {
+	const graph = buildExplainerKitGraph({
+		description: "A kit.",
+		faq: [{ q: "Is it good?", a: "Yes." }],
+	})["@graph"];
+	const byType = (type) => graph.find((node) => node["@type"] === type);
+
+	it("describes the kit as a Product with GBP and USD offers", () => {
+		const offers = byType("Product").offers;
+
+		expect(byType("Product").name).toBe("Sketchplanations Explainer Kit");
+		expect(
+			offers.map(({ price, priceCurrency }) => [price, priceCurrency]),
+		).toEqual([
+			["39", "GBP"],
+			["48", "USD"],
+		]);
+	});
+
+	it("builds FAQPage questions from the faq list", () => {
+		expect(byType("FAQPage").mainEntity).toEqual([
+			{
+				"@type": "Question",
+				name: "Is it good?",
+				acceptedAnswer: { "@type": "Answer", text: "Yes." },
+			},
+		]);
+	});
+
+	it("only points at assets on sketchplanations.com, never /kit", () => {
+		expect(EXPLAINER_KIT_IMAGE).toMatch(
+			/^https:\/\/sketchplanations\.com\/images\//,
+		);
+		expect(JSON.stringify(graph)).not.toContain("/kit/");
 	});
 });

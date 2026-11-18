@@ -377,6 +377,7 @@ const Book = ({ country }) => {
 
 				{/* Open Graph Meta Tags */}
 				<meta
+					key="og:title"
 					property="og:title"
 					content="Big Ideas Little Pictures by Jono Hey"
 				/>
@@ -392,7 +393,6 @@ const Book = ({ country }) => {
 					property="og:url"
 					content="https://sketchplanations.com/big-ideas-little-pictures"
 				/>
-				<meta property="og:site_name" content="Sketchplanations" />
 				<meta property="og:type" content="product" />
 
 				{/* Additional Open Graph properties */}
@@ -414,7 +414,6 @@ const Book = ({ country }) => {
 
 				{/* Twitter Card Meta Tags */}
 				<meta name="twitter:card" content="summary_large_image" />
-				<meta name="twitter:site" content="@sketchplanator" />
 				<meta
 					name="twitter:title"
 					content="Big Ideas Little Pictures by Jono Hey"

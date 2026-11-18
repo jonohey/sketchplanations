@@ -1,7 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
 
-import { pageTitle } from "helpers";
-
 class MyDocument extends Document {
 	static async getInitialProps(ctx) {
 		const initialProps = await Document.getInitialProps(ctx);
@@ -48,9 +46,6 @@ class MyDocument extends Document {
 						content="#35363a"
 						media="(prefers-color-scheme: dark)"
 					/>
-					<meta key="og:title" property="og:title" content={pageTitle()} />
-					<meta property="og:site_name" content="Sketchplanations" />
-					<meta name="twitter:site" content="@sketchplanator" />
 					<link rel="preconnect" href="https://images.prismic.io" />
 				</Head>
 				<body>

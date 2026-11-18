@@ -73,6 +73,8 @@ async function buildSitemap(catalog) {
 			priority = "0.8";
 		} else if (path === "/big-ideas-little-pictures") {
 			priority = "0.8";
+		} else if (path === "/explainer-kit") {
+			priority = "0.8";
 		} else if (path === "/categories") {
 			priority = "0.8";
 		} else if (path === "/search") {
@@ -92,6 +94,15 @@ async function buildSitemap(catalog) {
 		urls.push({
 			loc: `https://sketchplanations.com${path}`,
 			priority: priority,
+		});
+	}
+
+	// Public pages of the separate kit app, served at /kit by a proxy. Not in
+	// pages/, so they are listed here. The members' library at /kit is noindex.
+	for (const path of ["/kit/licence", "/kit/skill"]) {
+		urls.push({
+			loc: `https://sketchplanations.com${path}`,
+			priority: "0.5",
 		});
 	}
 
