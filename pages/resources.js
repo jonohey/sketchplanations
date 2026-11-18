@@ -16,7 +16,7 @@ const Resources = () => {
 					content="Recommended gear, products and podcast tools that I use for Sketchplanations."
 				/>
 				<link rel="canonical" href="https://sketchplanations.com/resources" />
-				<meta property="og:title" content="Resources" />
+				<meta key="og:title" property="og:title" content="Resources" />
 				<meta
 					property="og:description"
 					content="Recommended gear, products and podcast tools that I use for Sketchplanations."

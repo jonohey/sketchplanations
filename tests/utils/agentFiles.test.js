@@ -96,6 +96,7 @@ describe("agent files", () => {
 
 		expect(text.startsWith("# Sketchplanations\n")).toBe(true);
 		expect(text).toContain("CC BY-NC 4.0");
+		expect(text).toContain("https://sketchplanations.com/explainer-kit");
 		expect(text).toContain(
 			"- [Newest Sketch](https://sketchplanations.com/newest-sketch): image https://images.example.com/newest.png?w=1200",
 		);

@@ -305,6 +305,19 @@ const LicenceContent = ({ inline = false, showSectionNav = true }) => (
 				</FancyLink>
 				, and we can find a price or arrangement that works for us both.
 			</p>
+			<p>
+				For everyday commercial use, such as slides, client decks, courses and
+				marketing, the{" "}
+				<FancyLink href="/explainer-kit">
+					Sketchplanations Explainer Kit
+				</FancyLink>{" "}
+				is a library of hand-drawn visuals that comes with a commercial licence.
+				Its terms are on the{" "}
+				<FancyLink as="a" href="/kit/licence">
+					Explainer Kit licence
+				</FancyLink>{" "}
+				page.
+			</p>
 
 			<FaqQuestion id="do-you-have-high-resolution-versions-i-can-use">
 				Do you have high-resolution versions I can use?

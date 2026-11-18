@@ -151,6 +151,10 @@ Each sketch has its own page at ${SITE_URL}/{slug} with the drawing, a written e
 
 ${latest.join("\n")}
 
+## Explainer Kit
+
+- [Sketchplanations Explainer Kit](${SITE_URL}/explainer-kit): 250+ hand-drawn people, icons, metaphors, frameworks and backgrounds as transparent PNGs, with a searchable web library, to copy or download into slides, docs and talks. £39 or $48, one-time purchase, with a commercial licence for one named person.
+
 ## About
 
 - [About Jono Hey and Sketchplanations](${SITE_URL}/about)
@@ -185,6 +189,8 @@ export function llmsFullTxtFromCatalog(catalog) {
 > ${SITE_DESCRIPTION}
 
 Licence: ${LICENCE_NAME} (${LICENCE_URL}). Credit the sketch and link to its page when you show or quote it. Terms: ${SITE_URL}/licence
+
+Also from Sketchplanations: the Explainer Kit, a paid library of 250+ hand-drawn visuals for slides, docs and talks (${SITE_URL}/explainer-kit).
 
 ${entries.join("\n\n")}
 `;

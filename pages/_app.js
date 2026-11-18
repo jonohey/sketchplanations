@@ -63,6 +63,14 @@ const Sketchplanations = ({ Component, pageProps }) => {
 						name="viewport"
 						content="width=device-width, initial-scale=1, minimum-scale=1"
 					/>
+					{/* Defaults; pages override og:title by using the same key. */}
+					<meta key="og:title" property="og:title" content={pageTitle()} />
+					<meta
+						key="og:site_name"
+						property="og:site_name"
+						content="Sketchplanations"
+					/>
+					<meta name="twitter:site" content="@sketchplanator" />
 				</Head>
 				<JsonLd data={buildSiteGraph()} />
 				<div className={inter.className}>

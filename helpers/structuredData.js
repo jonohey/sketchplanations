@@ -440,3 +440,87 @@ export const buildBookProductGraph = () => ({
 		},
 	],
 });
+
+export const EXPLAINER_KIT_URL = `${SITE_URL}/explainer-kit`;
+
+export const EXPLAINER_KIT_IMAGE = `${SITE_URL}/images/explainer-kit/explainer-kit-og-1200x630.png`;
+
+export const EXPLAINER_KIT_PRICES = [
+	{ currency: "GBP", amount: "39" },
+	{ currency: "USD", amount: "48" },
+];
+
+export const buildExplainerKitGraph = ({ description, faq = [] }) => ({
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "WebPage",
+			"@id": `${EXPLAINER_KIT_URL}#webpage`,
+			url: EXPLAINER_KIT_URL,
+			name: "Sketchplanations Explainer Kit",
+			description,
+			isPartOf: { "@id": `${SITE_URL}/#website` },
+			primaryImageOfPage: { "@id": `${EXPLAINER_KIT_URL}#image` },
+			breadcrumb: { "@id": `${EXPLAINER_KIT_URL}#breadcrumb` },
+			mainEntity: { "@id": `${EXPLAINER_KIT_URL}#product` },
+		},
+		{
+			"@type": "ImageObject",
+			"@id": `${EXPLAINER_KIT_URL}#image`,
+			url: EXPLAINER_KIT_IMAGE,
+			contentUrl: EXPLAINER_KIT_IMAGE,
+			width: 1200,
+			height: 630,
+			caption:
+				"A hand-drawn red rocket launching beside the words Sketchplanations Explainer Kit",
+		},
+		{
+			"@type": "BreadcrumbList",
+			"@id": `${EXPLAINER_KIT_URL}#breadcrumb`,
+			itemListElement: [
+				{
+					"@type": "ListItem",
+					position: 1,
+					name: "Home",
+					item: `${SITE_URL}/`,
+				},
+				{
+					"@type": "ListItem",
+					position: 2,
+					name: "Explainer Kit",
+					item: EXPLAINER_KIT_URL,
+				},
+			],
+		},
+		{
+			"@type": "Product",
+			"@id": `${EXPLAINER_KIT_URL}#product`,
+			name: "Sketchplanations Explainer Kit",
+			url: EXPLAINER_KIT_URL,
+			description,
+			image: EXPLAINER_KIT_IMAGE,
+			category: "Digital illustrations",
+			brand: { "@type": "Brand", name: SITE_NAME },
+			manufacturer: { "@id": `${SITE_URL}/#organization` },
+			creator: CREATOR,
+			offers: EXPLAINER_KIT_PRICES.map(({ currency, amount }) => ({
+				"@type": "Offer",
+				url: EXPLAINER_KIT_URL,
+				price: amount,
+				priceCurrency: currency,
+				availability: "https://schema.org/InStock",
+				itemCondition: "https://schema.org/NewCondition",
+				seller: { "@id": `${SITE_URL}/#organization` },
+			})),
+		},
+		{
+			"@type": "FAQPage",
+			"@id": `${EXPLAINER_KIT_URL}#faq`,
+			mainEntity: faq.map(({ q, a }) => ({
+				"@type": "Question",
+				name: q,
+				acceptedAnswer: { "@type": "Answer", text: a },
+			})),
+		},
+	],
+});

@@ -28,7 +28,7 @@ const About = ({ siteUrl }) => {
 				<meta name="description" content={aboutDescription} />
 				<link rel="canonical" href={aboutUrl} />
 				<meta property="og:type" content="profile" />
-				<meta property="og:title" content={aboutSocialTitle} />
+				<meta key="og:title" property="og:title" content={aboutSocialTitle} />
 				<meta property="og:description" content={aboutDescription} />
 				<meta property="og:url" content={aboutUrl} />
 				<meta property="og:image" content={aboutImageUrl} />
@@ -594,6 +594,14 @@ const About = ({ siteUrl }) => {
 							</FancyLink>{" "}
 							on the licence page for pricing, permission, and the image consent
 							form.
+						</p>
+						<p>
+							Need hand-drawn visuals for commercial work, like slides, client
+							decks or courses? The{" "}
+							<FancyLink href="/explainer-kit">
+								Sketchplanations Explainer Kit
+							</FancyLink>{" "}
+							is a library of 250+ visuals with a commercial licence.
 						</p>
 						<p className="mt-4">
 							<a

@@ -68,6 +68,14 @@ const Nav = () => (
 		<FancyLink href="/about">About</FancyLink>
 		<FancyLink href="/archive">Archive</FancyLink>
 		<FancyLink href="/list">List</FancyLink>
+		<FancyLink
+			href="/explainer-kit"
+			onClick={() => {
+				track("Explainer-kit-link", { location: "footer" });
+			}}
+		>
+			Explainer Kit
+		</FancyLink>
 		<FancyLink href="/licence">Licence</FancyLink>
 	</nav>
 );
