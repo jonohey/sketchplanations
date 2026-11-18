@@ -7,11 +7,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 import styles from "./SearchResults.module.css";
 
 import { isPresent } from "helpers";
-import {
-	recentNavContext,
-	saveNavContext,
-	searchNavContext,
-} from "helpers/navContext";
+import { saveNavContext, searchNavContext } from "helpers/navContext";
 import {
 	shouldShowStretchMissMessage,
 	shouldShowSuggestMissingSketch,
@@ -151,13 +147,6 @@ const SearchResults = () => {
 	);
 
 	if (!called) {
-		const initialNavContext = isPresent(initialResults)
-			? recentNavContext(
-					initialResults.map(({ uid }) => uid),
-					{ label: "Recent", href: "/search" },
-				)
-			: null;
-
 		return (
 			<>
 				<div className="text-center mt-8 mb-8">
@@ -169,10 +158,7 @@ const SearchResults = () => {
 					<FancyLink href="/list">List</FancyLink>
 				</div>
 				<div className={styles["search-results"]}>
-					<SketchplanationsGrid
-						prismicDocs={initialResults}
-						navContext={initialNavContext}
-					/>
+					<SketchplanationsGrid prismicDocs={initialResults} />
 				</div>
 			</>
 		);

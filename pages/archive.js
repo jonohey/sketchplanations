@@ -6,18 +6,19 @@ import FancyLink from "components/FancyLink";
 import SketchplanationsGrid from "components/SketchplanationsGrid";
 import TextHeader from "components/TextHeader";
 import { pageTitle } from "helpers";
+import { getCategoryNavData } from "helpers/categoryNavData";
 import {
 	getHistoryEntryCache,
 	setHistoryEntryCache,
 } from "helpers/historyEntryCache";
-import { recentNavContext } from "helpers/navContext";
+import { archiveNavContext } from "helpers/navContext";
 import useRestoreNavReturnTarget from "hooks/useRestoreNavReturnTarget";
 import { client } from "services/prismic";
 
 const ITEMS_PER_PAGE = 40;
 const HISTORY_CACHE_KEY = "archive";
 
-const Archive = ({ initialSketchplanations }) => {
+const Archive = ({ initialSketchplanations, allArchiveUids }) => {
 	// Going Back restores the sketches loaded so far, so scroll restoration has
 	// the page height it needs; a fresh visit starts from the first page.
 	const [restored] = useState(() => getHistoryEntryCache(HISTORY_CACHE_KEY));
@@ -31,9 +32,10 @@ const Archive = ({ initialSketchplanations }) => {
 	);
 	useRestoreNavReturnTarget([sketchplanations]);
 
-	const navContext = recentNavContext(
-		sketchplanations.map(({ uid }) => uid),
-		{ label: "Archive", href: "/archive" },
+	const navContext = archiveNavContext(
+		allArchiveUids?.length
+			? allArchiveUids
+			: sketchplanations.map(({ uid }) => uid),
 	);
 
 	const loadMore = async () => {
@@ -127,8 +129,9 @@ async function fetchSketchplanations(page = 1) {
 
 export async function getStaticProps() {
 	const initialSketchplanations = await fetchSketchplanations();
+	const { recentUids: allArchiveUids } = getCategoryNavData();
 
-	return { props: { initialSketchplanations } };
+	return { props: { initialSketchplanations, allArchiveUids } };
 }
 
 export default Archive;

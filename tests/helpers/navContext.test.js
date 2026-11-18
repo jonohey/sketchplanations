@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
+	archiveNavContext,
 	buildFallbackNavContext,
 	categoryNavContext,
 	clearReturnToUid,
@@ -225,10 +226,16 @@ describe("buildFallbackNavContext", () => {
 		});
 	});
 
-	it("formats list contexts for alphabetical and date sorts", () => {
+	it("formats list and archive contexts without a capped Recent set", () => {
 		expect(listNavContext("alphabetical", ["a", "b"]).label).toBe(
 			"List (A\u2013Z)",
 		);
 		expect(listNavContext("recent", ["a", "b"]).label).toBe("List (by date)");
+		expect(archiveNavContext(["a", "b", "c"])).toEqual({
+			label: "Archive",
+			href: "/archive",
+			uids: ["a", "b", "c"],
+			loop: false,
+		});
 	});
 });

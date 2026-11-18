@@ -15,7 +15,7 @@ import {
 	getHistoryEntryCache,
 	setHistoryEntryCache,
 } from "helpers/historyEntryCache";
-import { categoryNavContext, recentNavContext } from "helpers/navContext";
+import { categoryNavContext } from "helpers/navContext";
 import { getPrismicImageOptimisation } from "helpers/prismicImageOptimisation";
 
 const SCROLL_DEBOUNCE_MS = 220;
@@ -419,90 +419,77 @@ export default function HomeCategoryCarousels({
 
 	return (
 		<div id="home-category-carousels">
-			{recentRows.map((row) => {
-				const recentUids = [
-					row.featuredSketch?.uid,
-					...row.sketches.map((s) => s.uid),
-				].filter(Boolean);
-				const recentContext = recentNavContext(recentUids, {
-					label: "Recent",
-					href: "/archive",
-				});
+			{recentRows.map((row) => (
+				<Fragment key="recent">
+					<section
+						className={styles.section}
+						aria-labelledby="carousel-heading-latest"
+						id="latest-sketch"
+					>
+						<div className="container mx-auto px-4 sm:px-6 lg:px-8">
+							<div className={styles.headerCentered}>
+								<h2
+									className={`${styles.title} ${styles.titleHome}`}
+									id="carousel-heading-latest"
+								>
+									Latest
+								</h2>
+								{row.tagline && <p className={styles.tagline}>{row.tagline}</p>}
+							</div>
+							{row.featuredSketch && (
+								<NavContextScope context={null}>
+									<HomeFeaturedSketch sketch={row.featuredSketch} />
+								</NavContextScope>
+							)}
+						</div>
+					</section>
 
-				return (
-					<Fragment key="recent">
+					{afterLatest}
+
+					{row.sketches.length > 0 && (
 						<section
 							className={styles.section}
-							aria-labelledby="carousel-heading-latest"
-							id="latest-sketch"
+							aria-labelledby="carousel-heading-recent"
+							id="recent-sketches"
 						>
 							<div className="container mx-auto px-4 sm:px-6 lg:px-8">
 								<div className={styles.headerCentered}>
 									<h2
 										className={`${styles.title} ${styles.titleHome}`}
-										id="carousel-heading-latest"
+										id="carousel-heading-recent"
 									>
-										Latest
-									</h2>
-									{row.tagline && (
-										<p className={styles.tagline}>{row.tagline}</p>
-									)}
-								</div>
-								{row.featuredSketch && (
-									<NavContextScope context={recentContext}>
-										<HomeFeaturedSketch sketch={row.featuredSketch} />
-									</NavContextScope>
-								)}
-							</div>
-						</section>
-
-						{afterLatest}
-
-						{row.sketches.length > 0 && (
-							<section
-								className={styles.section}
-								aria-labelledby="carousel-heading-recent"
-								id="recent-sketches"
-							>
-								<div className="container mx-auto px-4 sm:px-6 lg:px-8">
-									<div className={styles.headerCentered}>
-										<h2
-											className={`${styles.title} ${styles.titleHome}`}
-											id="carousel-heading-recent"
+										<Link
+											href={row.viewAllHref}
+											className={styles.titleLink}
+											onClick={() =>
+												track("homepage_carousel_view_all_click", {
+													category: row.label,
+												})
+											}
 										>
-											<Link
-												href={row.viewAllHref}
-												className={styles.titleLink}
-												onClick={() =>
-													track("homepage_carousel_view_all_click", {
-														category: row.label,
-													})
-												}
-											>
-												Recent sketches
-											</Link>
-										</h2>
-									</div>
+											Recent sketches
+										</Link>
+									</h2>
 								</div>
-								<HomeCategoryCarouselRow
-									label="Recent sketches"
-									viewAllHref={row.viewAllHref}
-									sketches={row.sketches}
-									category={row.label}
-									navContext={recentContext}
-									headingId="carousel-heading-recent"
-									headingAs="h2"
-									priorityImage={false}
-									showPublishedDate
-									prefetchCards
-									hideHeader
-									wrapSection={false}
-								/>
-							</section>
-						)}
-					</Fragment>
-				);
-			})}
+							</div>
+							<HomeCategoryCarouselRow
+								label="Recent sketches"
+								viewAllHref={row.viewAllHref}
+								sketches={row.sketches}
+								category={row.label}
+								navContext={null}
+								headingId="carousel-heading-recent"
+								headingAs="h2"
+								priorityImage={false}
+								showPublishedDate
+								prefetchCards
+								hideHeader
+								wrapSection={false}
+							/>
+						</section>
+					)}
+				</Fragment>
+			))}
 
 			{afterRecent}
 

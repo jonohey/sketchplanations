@@ -168,13 +168,10 @@ export function searchNavContext(query, uids) {
 	};
 }
 
-export function recentNavContext(
-	uids,
-	{ label = "Recent", href = "/archive" } = {},
-) {
+export function archiveNavContext(uids) {
 	return {
-		label,
-		href,
+		label: "Archive",
+		href: "/archive",
 		uids,
 		loop: false,
 	};
@@ -208,10 +205,7 @@ export function buildFallbackNavContext({ uid, tags, categoryNav }) {
 		Array.isArray(categoryNav.recentUids) &&
 		categoryNav.recentUids.includes(uid)
 	) {
-		return recentNavContext(categoryNav.recentUids, {
-			label: "Archive",
-			href: "/archive",
-		});
+		return archiveNavContext(categoryNav.recentUids);
 	}
 
 	return null;

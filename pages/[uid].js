@@ -40,9 +40,9 @@ import {
 } from "helpers";
 import { getCategoryNavData } from "helpers/categoryNavData";
 import {
+	archiveNavContext,
 	buildFallbackNavContext,
 	markKeepLightboxOpen,
-	recentNavContext,
 	saveNavContext,
 } from "helpers/navContext";
 import shouldIgnoreShortcut from "helpers/shouldIgnoreShortcut";
@@ -566,12 +566,8 @@ export async function getStaticProps({ params: { uid } }) {
 
 		const olderUid = olderRes?.results?.[0]?.uid || null;
 		const newerUid = newerRes?.results?.[0]?.uid || null;
-		fallbackNavContext = recentNavContext(
+		fallbackNavContext = archiveNavContext(
 			[newerUid, uid, olderUid].filter(Boolean),
-			{
-				label: "Archive",
-				href: "/archive",
-			},
 		);
 	}
 
