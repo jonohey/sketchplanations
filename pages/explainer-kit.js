@@ -255,6 +255,14 @@ const trackCheckout = (location) => () => {
 	track("Explainer-kit-checkout", { location });
 };
 
+// The members' library is a separate app served at /kit by a proxy, so link
+// with a plain <a> rather than next/link.
+const KIT_LIBRARY_PATH = "/kit";
+
+const trackSignIn = (location) => () => {
+	track("Explainer-kit-sign-in", { location });
+};
+
 const scrollToId = (id) => (e) => {
 	e.preventDefault();
 	const reduceMotion = window.matchMedia(
@@ -344,13 +352,22 @@ const ExplainerKit = () => {
 							className={styles["lp-header-logo"]}
 						/>
 					</Link>
-					<a
-						href={checkoutUrl}
-						onClick={trackCheckout("header")}
-						className={`${styles["lp-btn-cta"]} text-sm px-4 py-2`}
-					>
-						Get the kit
-					</a>
+					<div className="flex items-center gap-4">
+						<a
+							href={KIT_LIBRARY_PATH}
+							onClick={trackSignIn("header")}
+							className={`${styles["lp-link"]} text-sm font-semibold`}
+						>
+							Sign in
+						</a>
+						<a
+							href={checkoutUrl}
+							onClick={trackCheckout("header")}
+							className={`${styles["lp-btn-cta"]} text-sm px-4 py-2`}
+						>
+							Get the kit
+						</a>
+					</div>
 				</div>
 			</header>
 
@@ -1063,6 +1080,19 @@ const ExplainerKit = () => {
 									<Shield className="w-4 h-4" />
 									<span>Secure checkout</span>
 								</div>
+
+								<p
+									className={`text-sm text-center ${styles["lp-text-muted"]} mt-4`}
+								>
+									Already bought it?{" "}
+									<a
+										href={KIT_LIBRARY_PATH}
+										onClick={trackSignIn("buy-card")}
+										className={styles["lp-link"]}
+									>
+										Sign in
+									</a>
+								</p>
 							</div>
 						</div>
 					</div>
