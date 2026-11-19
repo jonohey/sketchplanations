@@ -462,6 +462,17 @@
 	color: var(--lp-accent);
 }
 
+/* Plain text link, e.g. "Sign in" */
+.lp-link {
+	color: var(--lp-foreground);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.lp-link:hover {
+	color: var(--lp-accent);
+}
+
 /* ===================================
    COLOR UTILITIES
    =================================== */
